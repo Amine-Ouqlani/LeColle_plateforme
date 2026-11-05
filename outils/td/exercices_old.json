@@ -1,0 +1,960 @@
+[
+ {
+  "id": "td-d1",
+  "chapitre": "determinants",
+  "num": "1.5",
+  "titre": "Alignement de trois points",
+  "origine": "td",
+  "td": 1,
+  "difficulte": 2,
+  "niveau": 1,
+  "fiche": "1.4",
+  "notions": [
+   "déterminant 3×3",
+   "transvections",
+   "alignement"
+  ],
+  "prerequis": [
+   "Règles de calcul sur les colonnes",
+   "Déterminant de deux vecteurs"
+  ],
+  "objectifs": "Traduire une propriété géométrique par un déterminant et faire apparaître des différences de coordonnées.",
+  "indication": "Retrancher la première colonne aux deux autres : on voit apparaître les coordonnées de $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 9
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 27
+  }
+ },
+ {
+  "id": "td-d2",
+  "chapitre": "determinants",
+  "num": "1.6",
+  "titre": "Distance de deux droites de l'espace",
+  "origine": "td",
+  "td": 2,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.4",
+  "incontournable": true,
+  "notions": [
+   "produit mixte",
+   "perpendiculaire commune",
+   "distance"
+  ],
+  "prerequis": [
+   "Produit vectoriel",
+   "Projection orthogonale"
+  ],
+  "objectifs": "Établir $d=\\frac{|\\det(\\overrightarrow{AC},\\vec u,\\vec v)|}{\\|\\vec u\\wedge\\vec v\\|}$ et l'interpréter comme volume divisé par aire de base.",
+  "indication": "Chercher $H\\in\\mathcal D_1$, $K\\in\\mathcal D_2$ avec $\\overrightarrow{HK}$ orthogonal aux deux droites, puis décomposer $\\overrightarrow{AC}$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 9
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 27
+  }
+ },
+ {
+  "id": "td-d3",
+  "chapitre": "determinants",
+  "num": "1.13",
+  "titre": "Suite récurrente linéaire d'ordre 2",
+  "origine": "td",
+  "td": 3,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.6",
+  "incontournable": true,
+  "notions": [
+   "tridiagonal",
+   "récurrence d'ordre 2",
+   "équation caractéristique"
+  ],
+  "prerequis": [
+   "Développement selon une ligne",
+   "Suites récurrentes linéaires"
+  ],
+  "objectifs": "Reconnaître un tridiagonal derrière des symboles de Kronecker, établir $T_n=aT_{n-1}-bcT_{n-2}$ et la résoudre.",
+  "indication": "Dessiner la matrice. Développer selon la première ligne, puis le second mineur selon sa première colonne.",
+  "enonce": {
+   "doc": "livre",
+   "page": 12
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 31
+  }
+ },
+ {
+  "id": "td-d4",
+  "chapitre": "determinants",
+  "num": "1.10",
+  "titre": "Déterminant en forme de X",
+  "origine": "td",
+  "td": 4,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.6",
+  "notions": [
+   "déterminant creux",
+   "récurrence",
+   "permutation des lignes et des colonnes"
+  ],
+  "prerequis": [
+   "Développement",
+   "Signe $(-1)^{i+j}$"
+  ],
+  "objectifs": "Obtenir $(a^2-b^2)^n$ de deux façons : récurrence, ou regroupement en blocs.",
+  "indication": "La première ligne n'a que deux coefficients non nuls ; en les supprimant, on retrouve un X plus petit.",
+  "enonce": {
+   "doc": "livre",
+   "page": 10
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 29
+  }
+ },
+ {
+  "id": "td-d5",
+  "chapitre": "determinants",
+  "num": "1.12",
+  "titre": "Déterminant de Vandermonde",
+  "origine": "td",
+  "td": 5,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "incontournable": true,
+  "notions": [
+   "Vandermonde",
+   "déterminant vu comme polynôme"
+  ],
+  "prerequis": [
+   "Polynômes : degré, racines, factorisation"
+  ],
+  "objectifs": "Calculer sans développer : degré, coefficient dominant, racines évidentes.",
+  "indication": "$x$ n'apparaît que dans la dernière colonne : le déterminant est un polynôme en $x$ ; quelles valeurs rendent deux colonnes égales ?",
+  "enonce": {
+   "doc": "livre",
+   "page": 11
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 30
+  }
+ },
+ {
+  "id": "td-d6",
+  "chapitre": "determinants",
+  "num": "1.7",
+  "titre": "Base et déterminant (somme constante)",
+  "origine": "td",
+  "td": 6,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.6",
+  "notions": [
+   "base",
+   "somme constante",
+   "$D_n(a,b)$"
+  ],
+  "prerequis": [
+   "Caractérisation des bases par le déterminant"
+  ],
+  "objectifs": "Retrouver $D_n(a,b)=(a+(n-1)b)(a-b)^{n-1}$ et en déduire une condition de base.",
+  "indication": "Toutes les lignes ont la même somme : $C_1\\leftarrow C_1+\\dots+C_n$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 9
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 28
+  }
+ },
+ {
+  "id": "td-d7",
+  "chapitre": "determinants",
+  "num": "1.14",
+  "titre": "Suite récurrente, racines complexes",
+  "origine": "td",
+  "td": 7,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "notions": [
+   "tridiagonal",
+   "trigonométrie",
+   "récurrence"
+  ],
+  "prerequis": [
+   "Formules d'addition",
+   "Récurrence"
+  ],
+  "objectifs": "Montrer que le tridiagonal de diagonale $2\\cos\\theta$ vaut $\\frac{\\sin(n+1)\\theta}{\\sin\\theta}$.",
+  "indication": "Le résultat est donné : une récurrence avec $\\sin(n+1)\\theta+\\sin(n-1)\\theta=2\\sin n\\theta\\cos\\theta$ est plus courte qu'une résolution.",
+  "enonce": {
+   "doc": "livre",
+   "page": 12
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 32
+  }
+ },
+ {
+  "id": "td-d8",
+  "chapitre": "determinants",
+  "num": "1.1",
+  "titre": "Similitude : $z\\mapsto az$ vue comme application linéaire",
+  "origine": "td",
+  "td": 8,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.3",
+  "notions": [
+   "déterminant d'un endomorphisme",
+   "nombres complexes",
+   "orientation"
+  ],
+  "prerequis": [
+   "$\\C$ comme $\\R$-espace vectoriel de base $(1,i)$"
+  ],
+  "objectifs": "Lire trace, déterminant et nature géométrique sur la matrice dans la base $(1,i)$.",
+  "indication": "Calculer $f(1)$ et $f(i)$ : ce sont les colonnes de la matrice.",
+  "enonce": {
+   "doc": "livre",
+   "page": 8
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 25
+  }
+ },
+ {
+  "id": "td-d9",
+  "chapitre": "determinants",
+  "num": "1.11",
+  "titre": "Déterminant en forme de Z",
+  "origine": "td",
+  "td": 9,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "notions": [
+   "déterminant creux",
+   "pivot",
+   "nombre d'échanges"
+  ],
+  "prerequis": [
+   "Développement",
+   "Permutations simples"
+  ],
+  "objectifs": "Exploiter les lignes à un seul coefficient comme pivots ; compter les échanges $\\lfloor m/2\\rfloor$.",
+  "indication": "Sortir les coefficients des lignes 2 à $n-1$, puis s'en servir pour nettoyer les lignes 1 et $n$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 11
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 30
+  }
+ },
+ {
+  "id": "td-d10",
+  "chapitre": "determinants",
+  "num": "1.15",
+  "titre": "Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous",
+  "origine": "td",
+  "td": 10,
+  "difficulte": 5,
+  "niveau": 3,
+  "fiche": "1.6",
+  "incontournable": true,
+  "notions": [
+   "fonction affine",
+   "matrice triangulaire",
+   "prolongement par continuité"
+  ],
+  "prerequis": [
+   "Linéarité par rapport aux colonnes",
+   "Dérivée et taux d'accroissement"
+  ],
+  "objectifs": "Établir $\\det A_n=\\frac{bQ(a)-aQ(b)}{b-a}$, puis le cas $a=b$ par passage à la limite.",
+  "indication": "Retrancher $x$ à tous les coefficients : $P(x)$ est affine, et pour $x=a$ ou $x=b$ la matrice est triangulaire.",
+  "enonce": {
+   "doc": "livre",
+   "page": 12
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 32
+  }
+ },
+ {
+  "id": "g-carre",
+  "chapitre": "determinants",
+  "num": "1.2",
+  "titre": "Multiplicativité, propriété globale",
+  "origine": "lecolle",
+  "difficulte": 3,
+  "niveau": 1,
+  "fiche": "1.3",
+  "notions": [
+   "$\\det(AB)$",
+   "$\\det(\\lambda A)$",
+   "question sans coefficients"
+  ],
+  "prerequis": [
+   "Théorème fondamental"
+  ],
+  "objectifs": "Appliquer le déterminant aux deux membres d'une relation matricielle.",
+  "indication": "On ne connaît aucun coefficient : prendre le déterminant de chaque membre.",
+  "enonce": {
+   "doc": "livre",
+   "page": 8
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 26
+  }
+ },
+ {
+  "id": "b-endo",
+  "chapitre": "determinants",
+  "num": "1.3",
+  "titre": "Déterminant de $M\\mapsto AM$",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.3",
+  "notions": [
+   "endomorphisme de matrices",
+   "base adaptée",
+   "matrice par blocs"
+  ],
+  "prerequis": [
+   "Matrice d'un endomorphisme",
+   "Base canonique de $\\mathcal M_2(\\R)$"
+  ],
+  "objectifs": "Choisir l'ordre de la base pour obtenir $\\mathrm{diag}(A,A)$ et $\\det f=(\\det A)^2$.",
+  "indication": "$AM$ agit sur chaque colonne de $M$ : ordonner la base colonne par colonne.",
+  "enonce": {
+   "doc": "livre",
+   "page": 8
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 26
+  }
+ },
+ {
+  "id": "hp-com",
+  "chapitre": "determinants",
+  "num": "1.4",
+  "titre": "Comatrice, coefficients entiers",
+  "origine": "lecolle",
+  "hp": true,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "1.3",
+  "notions": [
+   "comatrice",
+   "inverse",
+   "matrices à coefficients entiers"
+  ],
+  "prerequis": [
+   "Développement",
+   "Cofacteurs"
+  ],
+  "objectifs": "Utiliser $A\\,\\mathrm{com}(A)^T=\\det(A)I_n$.",
+  "indication": "Pour la réciproque, prendre le déterminant de $AA^{-1}=I_n$ : deux entiers dont le produit vaut 1.",
+  "enonce": {
+   "doc": "livre",
+   "page": 8
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 26
+  }
+ },
+ {
+  "id": "f-absij",
+  "chapitre": "determinants",
+  "num": "1.8",
+  "titre": "Différences de colonnes puis de lignes : $|i-j|$",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "notions": [
+   "différences successives",
+   "matrice définie par une formule"
+  ],
+  "prerequis": [
+   "Exemple $\\max(i,j)$ du cours"
+  ],
+  "objectifs": "Enchaîner deux vagues de différences pour obtenir $(-1)^{n-1}(n-1)2^{n-2}$.",
+  "indication": "Comme pour $\\max(i,j)$ : $C_k\\leftarrow C_k-C_{k-1}$ de $k=n$ à $2$, puis une seconde vague sur les lignes.",
+  "enonce": {
+   "doc": "livre",
+   "page": 10
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 28
+  }
+ },
+ {
+  "id": "f-ka",
+  "chapitre": "determinants",
+  "num": "1.9",
+  "titre": "Différences pondérées : $a^{|i-j|}$",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "notions": [
+   "différences successives pondérées"
+  ],
+  "prerequis": [
+   "Différences successives"
+  ],
+  "objectifs": "Adapter le coefficient de la différence ($C_k-aC_{k-1}$) à la structure.",
+  "indication": "Au-dessus de la diagonale, la colonne $k$ vaut $a$ fois la colonne $k-1$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 10
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 29
+  }
+ },
+ {
+  "id": "det-pb",
+  "chapitre": "determinants",
+  "num": "1.16",
+  "titre": "Fonction affine, parité, antisymétrie",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "1.6",
+  "notions": [
+   "fonction affine",
+   "matrice antisymétrique",
+   "parité de $n$"
+  ],
+  "prerequis": [
+   "TD 10 (polynôme de degré 1)"
+  ],
+  "objectifs": "Réinvestir la méthode du TD 10 et retrouver qu'une antisymétrique d'ordre impair est singulière.",
+  "indication": "C'est la situation du TD 10 avec $\\lambda_i=x$, $a=1$, $b=-1$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 13
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 33
+  }
+ },
+ {
+  "id": "td-c1",
+  "chapitre": "courbes",
+  "num": "2.1",
+  "titre": "Tracé à partir d'un tableau",
+  "origine": "td",
+  "td": 1,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "2.3",
+  "incontournable": true,
+  "notions": [
+   "tableau conjoint",
+   "tangente",
+   "point double",
+   "TVI"
+  ],
+  "prerequis": [
+   "Lecture d'un tableau de variations"
+  ],
+  "objectifs": "Tracer à partir du seul tableau, puis prouver une non-injectivité par le théorème des valeurs intermédiaires.",
+  "indication": "Chaque colonne du tableau est un point avec sa tangente ; chaque intervalle, un arc dont la direction est donnée par les signes de $(x',y')$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 16
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 33
+  }
+ },
+ {
+  "id": "td-c2",
+  "chapitre": "courbes",
+  "num": "2.2",
+  "titre": "Ellipse et échelle",
+  "origine": "td",
+  "td": 2,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "2.2",
+  "notions": [
+   "lieu géométrique",
+   "tangence",
+   "déterminant"
+  ],
+  "prerequis": [
+   "Paramétrage de l'ellipse"
+  ],
+  "objectifs": "Choisir repère et paramètre naturels ; traduire une tangence par un déterminant nul.",
+  "indication": "« Tangente » se traduit par une colinéarité : $\\det(\\text{vitesse},\\text{direction})=0$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 17
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 35
+  }
+ },
+ {
+  "id": "td-c3",
+  "chapitre": "courbes",
+  "num": "2.6",
+  "titre": "Cissoïde de Dioclès",
+  "origine": "td",
+  "td": 3,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "2.5",
+  "notions": [
+   "rebroussement",
+   "asymptote",
+   "lieu géométrique"
+  ],
+  "prerequis": [
+   "Plan d'étude",
+   "Développements limités"
+  ],
+  "objectifs": "Enchaîner étude locale (ordre 3), asymptote horizontale et construction géométrique.",
+  "indication": "Paramétrer la droite $(OQ)$ par son angle, qui est le $\\theta$ de l'énoncé.",
+  "enonce": {
+   "doc": "livre",
+   "page": 21
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 39
+  }
+ },
+ {
+  "id": "td-c4",
+  "chapitre": "courbes",
+  "num": "2.3",
+  "titre": "Cardioïde",
+  "origine": "td",
+  "td": 4,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "2.1",
+  "notions": [
+   "angle moitié",
+   "point stationnaire",
+   "symétrie"
+  ],
+  "prerequis": [
+   "Formules trigonométriques"
+  ],
+  "objectifs": "Factoriser des dérivées trigonométriques par l'angle moitié pour en lire le signe.",
+  "indication": "$e^{ia}\\pm e^{ib}=e^{i\\frac{a+b}2}\\big(e^{i\\frac{a-b}2}\\pm e^{-i\\frac{a-b}2}\\big)$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 19
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 35
+  }
+ },
+ {
+  "id": "td-c5",
+  "chapitre": "courbes",
+  "num": "2.7",
+  "titre": "Lemniscate de Bernoulli",
+  "origine": "td",
+  "td": 5,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "2.3",
+  "notions": [
+   "symétrie $t\\mapsto\\frac1t$",
+   "point double",
+   "coordonnées polaires"
+  ],
+  "prerequis": [
+   "Plan d'étude"
+  ],
+  "objectifs": "Réduire l'étude à $[0,1]$ par deux symétries ; passer à l'équation polaire.",
+  "indication": "Tester $t\\mapsto\\frac1t$ : il échange $x$ et $y$.",
+  "enonce": {
+   "doc": "livre",
+   "page": 21
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 40
+  }
+ },
+ {
+  "id": "td-c6",
+  "chapitre": "courbes",
+  "num": "2.4",
+  "titre": "Points d'inflexion",
+  "origine": "td",
+  "td": 6,
+  "difficulte": 3,
+  "niveau": 2,
+  "fiche": "2.4",
+  "incontournable": true,
+  "notions": [
+   "inflexion",
+   "$\\det(f',f'')$",
+   "branches paraboliques"
+  ],
+  "prerequis": [
+   "Déterminant 2×2",
+   "Signe d'un polynôme"
+  ],
+  "objectifs": "Montrer « exactement deux inflexions » : condition nécessaire puis changement de signe.",
+  "indication": "Factoriser $\\det(f',f'')$ puis étudier son signe.",
+  "enonce": {
+   "doc": "livre",
+   "page": 19
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 37
+  }
+ },
+ {
+  "id": "td-c7",
+  "chapitre": "courbes",
+  "num": "2.5",
+  "titre": "Bicorne : rebroussement de seconde espèce",
+  "origine": "td",
+  "td": 7,
+  "difficulte": 5,
+  "niveau": 3,
+  "fiche": "2.4",
+  "notions": [
+   "développement limité d'ordre 5",
+   "théorème $(p,q)$"
+  ],
+  "prerequis": [
+   "DL de $\\sin$, $\\cos$"
+  ],
+  "objectifs": "Aller jusqu'au premier vecteur non colinéaire, même quand un terme intermédiaire est nul.",
+  "indication": "Poser $t=\\frac\\pi2+h$ ; le terme en $h^3$ est nul, il faut aller à l'ordre 4 ou 5.",
+  "enonce": {
+   "doc": "livre",
+   "page": 19
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 38
+  }
+ },
+ {
+  "id": "td-c8",
+  "chapitre": "courbes",
+  "num": "2.8",
+  "titre": "Cubique de Descartes",
+  "origine": "td",
+  "td": 8,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "2.5",
+  "incontournable": true,
+  "notions": [
+   "asymptote oblique",
+   "position",
+   "symétrie $t\\mapsto\\frac1t$"
+  ],
+  "prerequis": [
+   "Factorisation de $1+t^3$"
+  ],
+  "objectifs": "Établir l'asymptote $y=-x-\\frac13$ et la position de la courbe.",
+  "indication": "Factoriser $1+t^3=(1+t)(1-t+t^2)$ dès le départ.",
+  "enonce": {
+   "doc": "livre",
+   "page": 21
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 40
+  }
+ },
+ {
+  "id": "td-c9",
+  "chapitre": "courbes",
+  "num": "2.9",
+  "titre": "Axe de symétrie oblique, parabole asymptote",
+  "origine": "td",
+  "td": 9,
+  "hp": true,
+  "difficulte": 5,
+  "niveau": 3,
+  "fiche": "2.5",
+  "notions": [
+   "symétrie $y=x$",
+   "point stationnaire",
+   "courbe asymptote"
+  ],
+  "prerequis": [
+   "Branches infinies"
+  ],
+  "objectifs": "Exploiter une symétrie oblique et comparer la branche à une parabole.",
+  "indication": "Traiter la question 4 en premier : elle réduit le travail.",
+  "enonce": {
+   "doc": "livre",
+   "page": 21
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 41
+  }
+ },
+ {
+  "id": "td-c10",
+  "chapitre": "courbes",
+  "num": "2.10",
+  "titre": "Asymptote et prolongement",
+  "origine": "td",
+  "td": 10,
+  "difficulte": 4,
+  "niveau": 3,
+  "fiche": "2.5",
+  "incontournable": true,
+  "notions": [
+   "asymptote",
+   "point limite",
+   "développement asymptotique"
+  ],
+  "prerequis": [
+   "DL de $e^t$, de $\\frac1{1+u}$"
+  ],
+  "objectifs": "À chaque borne, limites de $x$ et $y$ ; asymptote et position par développement ; points limites et leurs tangentes.",
+  "indication": "Écrire $e^t-1=t(1+u)$ pour développer l'inverse.",
+  "enonce": {
+   "doc": "livre",
+   "page": 22
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 42
+  }
+ },
+ {
+  "id": "ds-pb",
+  "chapitre": "courbes",
+  "num": "2.11",
+  "titre": "Problème type devoir surveillé",
+  "origine": "devoir",
+  "difficulte": 5,
+  "niveau": 4,
+  "fiche": "2.7",
+  "incontournable": true,
+  "duree": "1 h 30",
+  "notions": [
+   "étude complète",
+   "point stationnaire",
+   "position globale",
+   "asymptotes",
+   "inflexion"
+  ],
+  "prerequis": [
+   "Tout le chapitre 2"
+  ],
+  "objectifs": "Enchaîner tous les blocs d'un devoir, en temps limité, sans le livre.",
+  "indication": "Noter dès le début les valeurs interdites ($-3$ et $0$) ; factoriser $x'$ et $y'$ sur le même dénominateur.",
+  "enonce": {
+   "doc": "livre",
+   "page": 23
+  },
+  "corrige": {
+   "doc": "livre",
+   "page": 43
+  }
+ },
+ {
+  "id": "m-cycl",
+  "chapitre": "metrique",
+  "num": "1.1",
+  "titre": "Longueur d'une arche de cycloïde",
+  "origine": "lecolle",
+  "difficulte": 2,
+  "niveau": 1,
+  "notions": [
+   "longueur",
+   "abscisse curviligne",
+   "angle moitié"
+  ],
+  "prerequis": [
+   "$1-\\cos t=2\\sin^2\\frac t2$"
+  ],
+  "objectifs": "Calculer $\\|f'\\|$ de façon que la racine carrée tombe exactement.",
+  "indication": "Factoriser par l'angle moitié avant de prendre la racine.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 4
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 10
+  }
+ },
+ {
+  "id": "m-astro",
+  "chapitre": "metrique",
+  "num": "1.2",
+  "titre": "Longueur totale de l'astroïde",
+  "origine": "lecolle",
+  "difficulte": 3,
+  "niveau": 2,
+  "notions": [
+   "longueur",
+   "symétries"
+  ],
+  "prerequis": [
+   "Plan d'étude"
+  ],
+  "objectifs": "Découper en arcs symétriques sur lesquels le signe sous la valeur absolue est connu.",
+  "indication": "Calculer la longueur d'un arc où $\\|f'\\|$ s'écrit sans valeur absolue, puis multiplier.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 5
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 10
+  }
+ },
+ {
+  "id": "m-ellipse",
+  "chapitre": "metrique",
+  "num": "1.3",
+  "titre": "Courbure de l'ellipse aux sommets",
+  "origine": "lecolle",
+  "difficulte": 3,
+  "niveau": 2,
+  "notions": [
+   "courbure",
+   "rayon de courbure"
+  ],
+  "prerequis": [
+   "$\\det(f',f'')$"
+  ],
+  "objectifs": "Établir $\\gamma=\\frac{\\det(f',f'')}{\\|f'\\|^3}$ et trouver $R=\\frac{b^2}a$, $\\frac{a^2}b$.",
+  "indication": "Calculer $\\alpha'$ directement à partir de $\\tan\\alpha=\\frac{y'}{x'}$.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 7
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 11
+  }
+ },
+ {
+  "id": "m-cycl-dev",
+  "chapitre": "metrique",
+  "num": "1.4",
+  "titre": "Repère de Frenet et développée de la cycloïde",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "incontournable": true,
+  "notions": [
+   "Frenet",
+   "centre de courbure",
+   "développée"
+  ],
+  "prerequis": [
+   "Exercice 1.1"
+  ],
+  "objectifs": "Écrire $f'=v(\\cos\\alpha,\\sin\\alpha)$ et obtenir tout d'un coup $\\vec T$, $\\vec N$, $\\gamma$, $I$.",
+  "indication": "L'angle moitié donne $v$ et $\\alpha$ simultanément.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 7
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 11
+  }
+ },
+ {
+  "id": "e-segment",
+  "chapitre": "metrique",
+  "num": "2.1",
+  "titre": "Enveloppe d'un segment glissant",
+  "origine": "lecolle",
+  "difficulte": 3,
+  "niveau": 2,
+  "notions": [
+   "enveloppe",
+   "système $2\\times2$"
+  ],
+  "prerequis": [
+   "Équation de droite"
+  ],
+  "objectifs": "Résoudre le système formé de l'équation de la droite et de sa dérivée par rapport au paramètre.",
+  "indication": "Écrire la droite sous la forme $a(t)x+b(t)y=c(t)$, dériver en $t$.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 9
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 12
+  }
+ },
+ {
+  "id": "e-ellipse",
+  "chapitre": "metrique",
+  "num": "2.2",
+  "titre": "Développée de l'ellipse comme enveloppe des normales",
+  "origine": "lecolle",
+  "difficulte": 4,
+  "niveau": 3,
+  "incontournable": true,
+  "notions": [
+   "développée",
+   "normales",
+   "enveloppe"
+  ],
+  "prerequis": [
+   "Exercice 2.1"
+  ],
+  "objectifs": "Obtenir la développée par un système linéaire plutôt que par $R$ et $\\vec N$.",
+  "indication": "Équation de la normale, dérivée par rapport au paramètre, système $2\\times2$.",
+  "enonce": {
+   "doc": "volume2",
+   "page": 9
+  },
+  "corrige": {
+   "doc": "volume2",
+   "page": 13
+  }
+ }
+]

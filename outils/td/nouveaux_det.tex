@@ -1,0 +1,361 @@
+% =====================================================================
+%  TD Déterminants — exemples du livre mis en exercice, et exercices ajoutés
+%  Format identique aux fichiers d'exercices du livre.
+% =====================================================================
+
+% ------------------------------------------------ exemples du livre
+\begin{exo}{ex-160}{2}{choisir la méthode}
+Calculer
+\[D=\dt{1&2&3&4\\4&1&2&3\\3&4&1&2\\2&3&4&1}.\]
+Avant tout calcul, observer les lignes de la matrice.
+\end{exo}
+
+\begin{corrige}{ex-160}
+\choix{le pivot de Gauss aboutit, mais au prix de calculs où l'on se trompe facilement. On remarque que chaque ligne a pour somme $10$ : on regroupe les colonnes dans la première.}
+$C_1\leftarrow C_1+C_2+C_3+C_4$, puis on sort le facteur $10$ ; ensuite $L_i\leftarrow L_i-L_1$ pour $i=2,3,4$ :
+\[D=10\dt{1&2&3&4\\1&1&2&3\\1&4&1&2\\1&3&4&1}=10\dt{1&2&3&4\\0&-1&-1&-1\\0&2&-2&-2\\0&1&1&-3}=10\dt{-1&-1&-1\\2&-2&-2\\1&1&-3}.\]
+Dans le $3\times3$, $C_2\leftarrow C_2-C_1$ et $C_3\leftarrow C_3-C_1$ donnent $\dt{-1&0&0\\2&-4&-4\\1&0&-4}=-1\times16=-16$. Donc $D=-160$.
+\retenir{regarder la structure avant de calculer : une somme constante sur les lignes se « sort » en une opération.}
+\end{corrige}
+
+\begin{exo}{ex-max}{3}{matrice définie par une formule}
+Pour $n\geq2$, on note $A_n=\big(\max(i,j)\big)_{1\leq i,j\leq n}$. Calculer $\det A_n$.
+\end{exo}
+
+\begin{corrige}{ex-max}
+\choix{deux colonnes voisines se ressemblent : différences successives $C_k\leftarrow C_k-C_{k-1}$, en commençant par $k=n$ pour que chaque opération utilise une colonne encore intacte.}
+Après $C_k\leftarrow C_k-C_{k-1}$ pour $k=n,n-1,\dots,2$, le coefficient $(i,k)$ ($k\geq2$) vaut
+$\max(i,k)-\max(i,k-1)=1$ si $i<k$ et $0$ si $i\geq k$ ; la première colonne reste $(1,2,\dots,n)^T$. Par exemple pour $n=4$ :
+\[\begin{pmatrix}1&2&3&4\\2&2&3&4\\3&3&3&4\\4&4&4&4\end{pmatrix}\longrightarrow\begin{pmatrix}1&1&1&1\\2&0&1&1\\3&0&0&1\\4&0&0&0\end{pmatrix}.\]
+La dernière ligne devient $(n,0,\dots,0)$ : en développant selon elle, $\det A_n=(-1)^{n+1}n\,\Delta_{n,1}$, où $\Delta_{n,1}$ est triangulaire supérieur à diagonale de $1$. Donc $\det A_n=(-1)^{n+1}n$.
+\retenir{différences successives depuis la fin ; calculer le nouveau coefficient en distinguant $i<k$ et $i\geq k$.}
+\end{corrige}
+
+\begin{exo}{ex-base}{1}{bases de $\R_n[X]$ et déterminant d'un endomorphisme}
+\begin{enumerate}
+\item Montrer que $\mathcal C=(1,\ 1+X,\ 1+X+X^2,\ \dots,\ 1+X+\dots+X^n)$ est une base de $\R_n[X]$.
+\item Soit $D:P\mapsto P'$ la dérivation de $\R_n[X]$. Calculer $\det D$. $D$ est-elle bijective ?
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-base}
+\q{1.} La matrice des coordonnées de $\mathcal C$ dans la base canonique $(1,X,\dots,X^n)$ est triangulaire supérieure (le $k$-ième vecteur ne fait intervenir que $1,\dots,X^k$) à diagonale de $1$ : son déterminant vaut $1\neq0$, donc $\mathcal C$ est une base.
+
+\q{2.} $D(X^k)=kX^{k-1}$ : la matrice de $D$ dans la base canonique est triangulaire supérieure (strictement) à diagonale nulle, donc $\det D=0$ et $D$ n'est pas bijective (en effet, $D(1)=0$).
+\retenir{une famille de $n$ vecteurs en dimension $n$ est une base si et seulement si le déterminant de ses coordonnées est non nul ; une matrice triangulaire se lit sur sa diagonale.}
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés : partie I
+\begin{exo}{n-calc3}{1}{un déterminant $3\times3$ de deux façons}
+Calculer $D=\dt{1&0&2\\2&1&0\\0&3&1}$ en développant selon la première colonne, puis par la règle de Sarrus.
+\end{exo}
+
+\begin{corrige}{n-calc3}
+Développement selon la première colonne (signes $+,-,+$) :
+\[D=1\dt{1&0\\3&1}-2\dt{0&2\\3&1}+0=1-2(0-6)=13.\]
+Sarrus : on ajoute les produits des trois « diagonales descendantes » et l'on retranche ceux des trois « diagonales montantes » :
+$D=(1\cdot1\cdot1+0\cdot0\cdot0+2\cdot2\cdot3)-(2\cdot1\cdot0+1\cdot0\cdot3+0\cdot2\cdot1)=13$.
+\piege{la règle de Sarrus ne vaut qu'en taille $3$.}
+\end{corrige}
+
+\begin{exo}{n-param}{2}{inversibilité selon un paramètre}
+Pour $m\in\R$, on pose $A_m=\begin{pmatrix}m&1&1\\1&m&1\\1&1&m\end{pmatrix}$. Calculer $\det A_m$ sous forme factorisée et déterminer les valeurs de $m$ pour lesquelles $A_m$ est inversible.
+\end{exo}
+
+\begin{corrige}{n-param}
+\choix{les lignes ont la même somme $m+2$ : on la sort, sans jamais développer.}
+$C_1\leftarrow C_1+C_2+C_3$ puis on sort $m+2$ ; $L_2\leftarrow L_2-L_1$, $L_3\leftarrow L_3-L_1$ :
+\[\det A_m=(m+2)\dt{1&1&1\\1&m&1\\1&1&m}=(m+2)\dt{1&1&1\\0&m-1&0\\0&0&m-1}=(m+2)(m-1)^2.\]
+$A_m$ est inversible si et seulement si $m\notin\{1,-2\}$. (C'est $D_3(m,1)$ du cours.)
+\piege{développer d'abord donne $m^3-3m+2$, qu'il faut ensuite refactoriser : garder les facteurs dès qu'ils apparaissent.}
+\end{corrige}
+
+\begin{exo}{n-ops}{1}{effet des opérations sur les colonnes}
+Soient $C_1,C_2,C_3\in\R^3$ avec $\det(C_1,C_2,C_3)=5$. Calculer, en justifiant chaque étape :
+\[\text{(a) }\det(C_1+2C_2,\ C_2,\ 3C_3-C_1)\qquad\text{(b) }\det(C_1+C_2,\ C_2+C_3,\ C_3+C_1)\qquad\text{(c) }\det(-2A)\]
+où $A$ est la matrice de colonnes $C_1,C_2,C_3$.
+\end{exo}
+
+\begin{corrige}{n-ops}
+(a) $C_1'\leftarrow C_1'-2C_2$ (transvection) donne la colonne $C_1$ ; puis la troisième colonne $3C_3-C_1$, à laquelle on ajoute la première, devient $3C_3$ : $\det=3\times5=15$.
+
+(b) Par linéarité par rapport à la première colonne, puis en éliminant les déterminants à deux colonnes égales :
+$\det(C_1+C_2,C_2+C_3,C_3+C_1)=\det(C_1,C_2+C_3,C_3+C_1)+\det(C_2,C_2+C_3,C_3+C_1)$. Le premier vaut $\det(C_1,C_2+C_3,C_3)=\det(C_1,C_2,C_3)$ (retrancher $C_1$, puis $C_3$) ; le second vaut $\det(C_2,C_3,C_3+C_1)=\det(C_2,C_3,C_1)=\det(C_1,C_2,C_3)$ (permutation circulaire, deux échanges). Total : $2\times5=10$.
+
+(c) $\det(-2A)=(-2)^3\det A=-40$.
+\piege{$\det(\lambda A)=\lambda^n\det A$, et non $\lambda\det A$ ; une transvection garde le coefficient $1$ sur la colonne modifiée.}
+\end{corrige}
+
+\begin{exo}{n-alignes}{1}{alignement avec paramètre}
+Pour quelles valeurs de $m\in\R$ les points $A(1,2)$, $B(3,m)$, $C(m,8)$ sont-ils alignés ?
+\end{exo}
+
+\begin{corrige}{n-alignes}
+$A,B,C$ alignés $\iff\det(\vv{AB},\vv{AC})=0$, avec $\vv{AB}=(2,m-2)$ et $\vv{AC}=(m-1,6)$ :
+\[\dt{2&m-1\\m-2&6}=12-(m-2)(m-1)=-m^2+3m+10=-(m-5)(m+2).\]
+Les points sont alignés si et seulement si $m=5$ ou $m=-2$.
+\end{corrige}
+
+\begin{exo}{n-tetra}{1}{aire, volume, équation de plan}
+On considère $A(1,0,0)$, $B(0,2,0)$, $C(0,0,3)$ et $D(1,1,1)$ dans un repère orthonormé de l'espace.
+\begin{enumerate}
+\item Calculer le volume du tétraèdre $ABCD$.
+\item Donner une équation du plan $(ABC)$ sous la forme $\det(\vv{AM},\vv{AB},\vv{AC})=0$, puis développée.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-tetra}
+\q{1.} $\vv{AB}=(-1,2,0)$, $\vv{AC}=(-1,0,3)$, $\vv{AD}=(0,1,1)$ :
+\[\det(\vv{AB},\vv{AC},\vv{AD})=\dt{-1&-1&0\\2&0&1\\0&3&1}=-1(0-3)-(-1)(2-0)+0=5,\qquad V=\tfrac16|5|=\tfrac56.\]
+\q{2.} Pour $M(x,y,z)$ :
+\[\dt{x-1&-1&-1\\y&2&0\\z&0&3}=(x-1)\cdot6-y\cdot(-3)+z\cdot2=0,\]
+soit $6x+3y+2z=6$, c'est-à-dire $\frac x1+\frac y2+\frac z3=1$ (on reconnaît les points d'intersection avec les axes).
+\end{corrige}
+
+\begin{exo}{n-nul}{2}{déterminants nuls sans calcul}
+Soit $n\geq3$. Montrer sans calcul que les déterminants des matrices $\big(i+j\big)_{1\leq i,j\leq n}$ et $\big(\sin(i+j)\big)_{1\leq i,j\leq n}$ sont nuls.
+\end{exo}
+
+\begin{corrige}{n-nul}
+\choix{montrer que les colonnes sont liées : elles vivent dans un sous-espace de dimension $2$.}
+La colonne $j$ de $(i+j)$ est $U+jV$ avec $U=(1,2,\dots,n)^T$ et $V=(1,\dots,1)^T$. Toutes les colonnes sont dans $\vect(U,V)$, de dimension $\leq2<n$ : elles sont liées, le déterminant est nul.
+
+Pour la seconde, $\sin(i+j)=\cos j\,\sin i+\sin j\,\cos i$ : la colonne $j$ vaut $\cos j\,S+\sin j\,K$ avec $S=(\sin i)_i$ et $K=(\cos i)_i$. Même conclusion.
+\retenir{colonnes combinaisons d'au plus deux vecteurs fixes $\Rightarrow\det=0$ dès que $n\geq3$.}
+\end{corrige}
+
+\begin{exo}{n-zero}{1}{application de la formule à somme constante}
+Calculer le déterminant d'ordre $n\geq2$ dont la diagonale est nulle et tous les autres coefficients valent $1$.
+\end{exo}
+
+\begin{corrige}{n-zero}
+C'est $D_n(0,1)$, avec $D_n(a,b)=\big(a+(n-1)b\big)(a-b)^{n-1}$ (somme constante sur les lignes) : $D_n(0,1)=(n-1)(-1)^{n-1}$. Contrôle : $n=2$ donne $\dt{0&1\\1&0}=-1$.
+\end{corrige}
+
+\begin{exo}{n-dist}{1}{distance de deux droites : un calcul}
+Calculer la distance entre les droites $\mathcal D_1$ passant par $O$ dirigée par $\ve u=(1,1,0)$ et $\mathcal D_2$ passant par $C(0,0,1)$ dirigée par $\ve v=(1,-1,0)$.
+\end{exo}
+
+\begin{corrige}{n-dist}
+$\ve u\wedge\ve v=(0,0,-2)$, $\|\ve u\wedge\ve v\|=2$, et $\det(\vv{OC},\ve u,\ve v)=\vv{OC}\cdot(\ve u\wedge\ve v)=-2$. Donc
+\[d(\mathcal D_1,\mathcal D_2)=\frac{|\det(\vv{OC},\ve u,\ve v)|}{\|\ve u\wedge\ve v\|}=\frac22=1.\]
+Géométriquement : $\mathcal D_1$ est dans le plan $z=0$, $\mathcal D_2$ dans le plan $z=1$, et les deux droites ne sont pas parallèles.
+\end{corrige}
+
+\begin{exo}{n-endo}{2}{déterminants d'endomorphismes de $\R_n[X]$}
+Calculer le déterminant des endomorphismes suivants de $\R_n[X]$ : $f:P\mapsto P(X+1)$, $\ g:P\mapsto XP'$, $\ h:P\mapsto P+P'$. Lesquels sont bijectifs ?
+\end{exo}
+
+\begin{corrige}{n-endo}
+Dans la base canonique $(1,X,\dots,X^n)$ :
+\begin{itemize}
+\item $f(X^k)=(X+1)^k=X^k+(\text{degré}<k)$ : matrice triangulaire supérieure à diagonale de $1$, $\det f=1$ ;
+\item $g(X^k)=kX^k$ : matrice diagonale $\mathrm{diag}(0,1,\dots,n)$, $\det g=0$ ;
+\item $h(X^k)=X^k+kX^{k-1}$ : triangulaire à diagonale de $1$, $\det h=1$.
+\end{itemize}
+$f$ et $h$ sont bijectifs, $g$ ne l'est pas ($g(1)=0$).
+\retenir{un endomorphisme qui ne fait pas augmenter le degré a une matrice triangulaire dans la base canonique.}
+\end{corrige}
+
+% ------------------------------------------------ partie II
+\begin{exo}{n-min}{3}{la matrice $\min(i,j)$}
+Calculer $\det\big(\min(i,j)\big)_{1\leq i,j\leq n}$.
+\end{exo}
+
+\begin{corrige}{n-min}
+\choix{même idée que pour $\max(i,j)$ : différences successives, mais sur les lignes cette fois.}
+$L_k\leftarrow L_k-L_{k-1}$ pour $k=n,\dots,2$ : le coefficient $(k,j)$ devient $\min(k,j)-\min(k-1,j)$, qui vaut $1$ si $j\geq k$ et $0$ si $j<k$. La première ligne reste $(1,\dots,1)$. On obtient une matrice triangulaire supérieure à diagonale de $1$ : $\det=1$.
+\end{corrige}
+
+\begin{exo}{n-circ}{3}{déterminant circulant}
+Montrer que $\dt{a&b&c\\c&a&b\\b&c&a}=(a+b+c)(a^2+b^2+c^2-ab-bc-ca)$.
+\end{exo}
+
+\begin{corrige}{n-circ}
+\choix{somme constante $a+b+c$ sur chaque ligne.}
+$C_1\leftarrow C_1+C_2+C_3$, on sort $a+b+c$ ; $L_2\leftarrow L_2-L_1$, $L_3\leftarrow L_3-L_1$ :
+\[(a+b+c)\dt{1&b&c\\0&a-b&b-c\\0&c-b&a-c}=(a+b+c)\big[(a-b)(a-c)-(b-c)(c-b)\big].\]
+Or $(a-b)(a-c)+(b-c)^2=a^2-ab-ac+bc+b^2-2bc+c^2=a^2+b^2+c^2-ab-bc-ca$.
+\gain{$a^2+b^2+c^2-ab-bc-ca=\frac12\big[(a-b)^2+(b-c)^2+(c-a)^2\big]$ : le déterminant est nul si et seulement si $a+b+c=0$ ou $a=b=c$.}
+\end{corrige}
+
+\begin{exo}{n-tri}{3}{un tridiagonal à paramètre}
+Soit $x\in\R$. On note $T_n$ le déterminant d'ordre $n$ tridiagonal de diagonale $1+x^2$, dont les coefficients juste au-dessus et juste au-dessous de la diagonale valent $x$, les autres étant nuls.
+\begin{enumerate}
+\item Établir une relation entre $T_n$, $T_{n-1}$ et $T_{n-2}$.
+\item En déduire $T_n=1+x^2+x^4+\dots+x^{2n}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-tri}
+\q{1.} En développant selon la première ligne puis le second mineur selon sa première colonne : $T_n=(1+x^2)T_{n-1}-x^2T_{n-2}$ ($n\geq3$), avec $T_1=1+x^2$, $T_2=(1+x^2)^2-x^2=1+x^2+x^4$.
+
+\q{2.} On pose $S_n=\sum_{k=0}^nx^{2k}$ ; alors $S_1=T_1$, $S_2=T_2$ et
+$(1+x^2)S_{n-1}-x^2S_{n-2}=S_{n-1}+x^2(S_{n-1}-S_{n-2})=S_{n-1}+x^{2n}=S_n$. Par récurrence (double), $T_n=S_n$.
+\gain{l'équation caractéristique $r^2-(1+x^2)r+x^2=0$ a pour racines $1$ et $x^2$ : on retrouve $T_n=\frac{x^{2n+2}-1}{x^2-1}$ si $x^2\neq1$.}
+\end{corrige}
+
+% ------------------------------------------------ partie III
+\begin{exo}{n-transp}{3}{déterminant de la transposition}
+Soit $\tau:\mathcal M_n(\R)\to\mathcal M_n(\R)$, $M\mapsto M^T$. Montrer que $\tau$ est une symétrie et calculer $\det\tau$.
+\end{exo}
+
+\begin{corrige}{n-transp}
+$\tau$ est linéaire et $\tau\circ\tau=\Id$ : c'est une symétrie, par rapport à $\mathcal S_n=\mathrm{Ker}(\tau-\Id)$ (matrices symétriques, dimension $\frac{n(n+1)}2$) parallèlement à $\mathcal A_n=\mathrm{Ker}(\tau+\Id)$ (antisymétriques, dimension $\frac{n(n-1)}2$).
+
+Dans une base adaptée à $\mathcal M_n(\R)=\mathcal S_n\oplus\mathcal A_n$, la matrice est $\mathrm{diag}(I,-I)$, donc
+\[\det\tau=(-1)^{\dim\mathcal A_n}=(-1)^{n(n-1)/2}.\]
+Par exemple $\det\tau=-1$ pour $n=2$ et $n=3$, $+1$ pour $n=4$.
+\retenir{endomorphisme géométrique : base adaptée ; pour une symétrie, $\det=(-1)^{\dim\mathrm{Ker}(s+\Id)}$.}
+\end{corrige}
+
+\begin{exo}{n-vdmlac}{4}{un Vandermonde lacunaire}
+Soient $a,b,c,d$ réels. Calculer, sous forme factorisée,
+\[\Delta=\dt{1&1&1&1\\a&b&c&d\\a^2&b^2&c^2&d^2\\a^4&b^4&c^4&d^4}.\]
+\end{exo}
+
+\begin{corrige}{n-vdmlac}
+\choix{remplacer $d$ par une variable $x$ et voir $\Delta$ comme un polynôme $P(x)$ (méthode du polynôme). Supposons d'abord $a,b,c$ distincts.}
+En développant selon la dernière colonne, $P$ est de degré $\leq4$ et son coefficient en $x^4$ est $V(a,b,c)=(b-a)(c-a)(c-b)$. $P(a)=P(b)=P(c)=0$ (deux colonnes égales), donc $P(x)=V(a,b,c)(x-a)(x-b)(x-c)(x-r)$ pour un certain réel $r$.
+
+Le coefficient de $x^3$ dans $P$ est nul (la colonne de $x$ ne contient pas $x^3$). Dans le produit, il vaut $-V(a,b,c)(a+b+c+r)$, donc $r=-(a+b+c)$ et
+\[\Delta=(b-a)(c-a)(c-b)(d-a)(d-b)(d-c)\,(a+b+c+d).\]
+Si deux des réels $a,b,c$ sont égaux, les deux membres sont nuls (deux colonnes égales) : la formule reste vraie.
+\piege{il manque une puissance : le degré ne baisse pas, il apparaît une racine de plus à identifier, ici par le coefficient de $x^3$.}
+\end{corrige}
+
+\begin{exo}{n-lagrange}{4}{Vandermonde et interpolation}
+Soient $x_0,\dots,x_n$ des réels deux à deux distincts et $y_0,\dots,y_n$ des réels quelconques. Montrer qu'il existe un unique polynôme $P\in\R_n[X]$ tel que $P(x_i)=y_i$ pour tout $i$.
+\end{exo}
+
+\begin{corrige}{n-lagrange}
+On cherche $P=a_0+a_1X+\dots+a_nX^n$. Les conditions $P(x_i)=y_i$ forment le système linéaire de $n+1$ équations à $n+1$ inconnues
+\[\begin{pmatrix}1&x_0&\cdots&x_0^n\\\vdots&&&\vdots\\1&x_n&\cdots&x_n^n\end{pmatrix}\begin{pmatrix}a_0\\\vdots\\a_n\end{pmatrix}=\begin{pmatrix}y_0\\\vdots\\y_n\end{pmatrix}.\]
+Sa matrice est la transposée d'une matrice de Vandermonde, de déterminant $\prod_{i<j}(x_j-x_i)\neq0$ puisque les $x_i$ sont distincts. Elle est donc inversible : le système a une unique solution, d'où l'existence et l'unicité de $P$.
+\retenir{« existence et unicité » d'une solution d'un système carré $\iff$ déterminant non nul.}
+\end{corrige}
+
+% ------------------------------------------------ partie IV
+\begin{exo}{n-diag1}{5}{diagonale quelconque, des $1$ ailleurs}
+Soient $\lambda_1,\dots,\lambda_n$ des réels, tous différents de $1$. On note $A$ la matrice de diagonale $(\lambda_1,\dots,\lambda_n)$ dont tous les autres coefficients valent $1$. Montrer que
+\[\det A=\prod_{i=1}^n(\lambda_i-1)\left(1+\sum_{i=1}^n\frac1{\lambda_i-1}\right).\]
+\end{exo}
+
+\begin{corrige}{n-diag1}
+\choix{c'est la situation du TD~10 (« $a$ au-dessus, $b$ au-dessous ») avec $a=b=1$, cas où l'on passe par la dérivée.}
+Notons $Q(x)=\prod_{i}(\lambda_i-x)$. Le TD~10 donne, pour $a=b$ : $\det A=Q(a)-aQ'(a)$, ici avec $a=1$. Or
+\[Q'(x)=-\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-x),\quad\text{donc}\quad Q(1)-Q'(1)=\prod_i(\lambda_i-1)+\sum_j\prod_{i\neq j}(\lambda_i-1).\]
+Comme les $\lambda_i-1$ sont non nuls, $\prod_{i\neq j}(\lambda_i-1)=\frac{\prod_i(\lambda_i-1)}{\lambda_j-1}$, d'où la formule.
+
+\emph{Variante directe.} Retrancher $1$ à tous les coefficients donne la matrice diagonale $\mathrm{diag}(\lambda_i-1)$ ; par la méthode de la fonction affine, $x\mapsto\det(A-xU)$ ($U$ : que des $1$) est affine, vaut $\prod(\lambda_i-1)$ en $x=1$, et l'on calcule sa pente par linéarité (une seule colonne de $U$ à la fois).
+Contrôle : pour $n=1$, $\lambda_1-1+1=\lambda_1$.
+\end{corrige}
+
+\begin{exo}{n-blocs}{4}{déterminant par blocs}
+Soient $A\in\mathcal M_p(\R)$, $B\in\mathcal M_{p,q}(\R)$, $D\in\mathcal M_q(\R)$ et $M=\begin{pmatrix}A&B\\0&D\end{pmatrix}\in\mathcal M_{p+q}(\R)$.
+\begin{enumerate}
+\item Montrer par récurrence sur $p$ que $\det M=\det A\,\det D$.
+\item Application : calculer $\dt{2&1&5&7\\1&3&-1&2\\0&0&4&1\\0&0&2&3}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-blocs}
+\q{1.} Pour $p=1$, $A=(a_{11})$ et la première colonne de $M$ est $(a_{11},0,\dots,0)^T$ : en développant selon elle, $\det M=a_{11}\det D$.
+
+Supposons le résultat vrai au rang $p-1$. On développe $\det M$ selon la première colonne, dont seuls les $p$ premiers coefficients $a_{i1}$ peuvent être non nuls :
+$\det M=\sum_{i=1}^p(-1)^{i+1}a_{i1}\,\det M_{i,1}$. Le mineur $M_{i,1}$ (ligne $i$ et colonne $1$ supprimées) est de la forme $\begin{pmatrix}A_{i,1}&B_i\\0&D\end{pmatrix}$ avec $A_{i,1}$ d'ordre $p-1$ ; par hypothèse de récurrence, $\det M_{i,1}=\det A_{i,1}\det D$. Donc
+$\det M=\Big(\sum_{i=1}^p(-1)^{i+1}a_{i1}\det A_{i,1}\Big)\det D=\det A\,\det D$ (développement de $\det A$ selon sa première colonne).
+
+\q{2.} $\dt{2&1\\1&3}\times\dt{4&1\\2&3}=5\times10=50$.
+\retenir{le bloc $B$ n'intervient pas : seule compte la structure triangulaire par blocs.}
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés (deuxième série)
+\begin{exo}{n-trigo}{2}{un Vandermonde déguisé}
+Soient $a,b,c$ des réels. Calculer, sous forme factorisée,
+\[D=\dt{1&\cos a&\cos2a\\1&\cos b&\cos2b\\1&\cos c&\cos2c}.\]
+À quelle condition sur $a,b,c$ ce déterminant est-il nul ?
+\end{exo}
+
+\begin{corrige}{n-trigo}
+\choix{$\cos2x=2\cos^2x-1$ : la troisième colonne est, à la première près, le carré de la deuxième. On se ramène à un Vandermonde.}
+$C_3\leftarrow C_3+C_1$ remplace $\cos2x$ par $2\cos^2x$ ; on sort le facteur $2$ :
+\[D=2\dt{1&\cos a&\cos^2a\\1&\cos b&\cos^2b\\1&\cos c&\cos^2c}=2(\cos b-\cos a)(\cos c-\cos a)(\cos c-\cos b),\]
+par la formule de Vandermonde $\dt{1&u&u^2\\1&v&v^2\\1&w&w^2}=(v-u)(w-u)(w-v)$.
+$D=0$ si et seulement si deux des réels $\cos a,\cos b,\cos c$ sont égaux.
+\retenir{une colonne qui s'exprime comme un polynôme d'une autre colonne (à des colonnes près) : penser à Vandermonde.}
+\end{corrige}
+
+\begin{exo}{n-valp}{2}{quand $A-\lambda I_3$ n'est-elle pas inversible ?}
+Soit $A=\begin{pmatrix}1&2&0\\2&1&0\\0&0&3\end{pmatrix}$.
+\begin{enumerate}
+\item Calculer $\det(A-\lambda I_3)$ sous forme factorisée, pour $\lambda\in\R$.
+\item En déduire les réels $\lambda$ pour lesquels il existe une colonne $X\neq0$ telle que $AX=\lambda X$, et donner de telles colonnes.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-valp}
+\q{1.} La matrice $A-\lambda I_3$ est diagonale par blocs ; en développant selon la dernière ligne,
+\[\det(A-\lambda I_3)=(3-\lambda)\dt{1-\lambda&2\\2&1-\lambda}=(3-\lambda)\big((1-\lambda)^2-4\big)=(3-\lambda)(-1-\lambda)(3-\lambda),\]
+soit $\det(A-\lambda I_3)=-(\lambda-3)^2(\lambda+1)$.
+\q{2.} $AX=\lambda X$ avec $X\neq0$ signifie que $(A-\lambda I_3)X=0$ a une solution non nulle, c'est-à-dire que $A-\lambda I_3$ n'est pas inversible : $\det(A-\lambda I_3)=0$, soit $\lambda\in\{3,-1\}$.
+\begin{itemize}
+\item $\lambda=3$ : $(A-3I_3)X=0\iff-2x+2y=0$, soit $x=y$, $z$ quelconque : par exemple $X=(1,1,0)^T$ ou $(0,0,1)^T$.
+\item $\lambda=-1$ : $(A+I_3)X=0\iff x+y=0$ et $4z=0$ : par exemple $X=(1,-1,0)^T$.
+\end{itemize}
+\gain{ces $\lambda$ sont les \emph{valeurs propres} de $A$ (chapitre de réduction) ; le déterminant $\det(A-\lambda I_n)$ est l'outil qui les fait apparaître.}
+\end{corrige}
+
+\begin{exo}{n-carre}{2}{propriétés globales}
+Soit $n\geq1$ et $A\in\mathcal M_n(\R)$.
+\begin{enumerate}
+\item Montrer que si $n$ est impair, il n'existe pas de matrice $A$ telle que $A^2=-I_n$. Donner une telle matrice pour $n=2$.
+\item Montrer que si $A^TA=I_n$, alors $\det A\in\{-1,1\}$.
+\item Montrer que s'il existe $k\geq1$ tel que $A^k=0$, alors $A$ n'est pas inversible.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-carre}
+\choix{aucun coefficient n'est connu : on prend le déterminant des deux membres de chaque relation.}
+\q{1.} Si $A^2=-I_n$, alors $(\det A)^2=\det(-I_n)=(-1)^n=-1$ pour $n$ impair : impossible pour un réel. Pour $n=2$, $A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ (rotation d'angle $\frac\pi2$) convient : $A^2=-I_2$.
+
+\q{2.} $\det(A^T)\det A=1$ et $\det(A^T)=\det A$, donc $(\det A)^2=1$.
+
+\q{3.} $(\det A)^k=\det(A^k)=0$, donc $\det A=0$.
+\piege{$\det(-I_n)=(-1)^n$ et non $-1$.}
+\end{corrige}
+
+\begin{exo}{n-expo}{3}{familles d'exponentielles}
+Soient $a_1<a_2<\dots<a_n$ des réels et $f_k:x\mapsto e^{a_kx}$. Montrer que la famille $(f_1,\dots,f_n)$ est libre dans l'espace des fonctions de $\R$ dans $\R$.
+\end{exo}
+
+\begin{corrige}{n-expo}
+\choix{une relation $\sum c_kf_k=0$ est une infinité d'équations ; on en extrait un système carré en dérivant et en évaluant en $0$. Son déterminant est un Vandermonde.}
+Supposons $\sum_{k=1}^nc_ke^{a_kx}=0$ pour tout réel $x$. En dérivant $j$ fois ($0\leq j\leq n-1$) puis en prenant $x=0$ :
+\[\sum_{k=1}^nc_k\,a_k^j=0\qquad(0\leq j\leq n-1).\]
+C'est un système linéaire en $(c_1,\dots,c_n)$ dont la matrice $\big(a_k^j\big)_{0\leq j\leq n-1,\ 1\leq k\leq n}$ est une matrice de Vandermonde, de déterminant $\prod_{k<l}(a_l-a_k)\neq0$ car les $a_k$ sont distincts. Le système n'a que la solution nulle : $c_1=\dots=c_n=0$, la famille est libre.
+\retenir{montrer qu'une famille de fonctions est libre : extraire un système carré (valeurs, dérivées) de déterminant non nul.}
+\end{corrige}
+
+\begin{exo}{n-cauchy}{5}{le déterminant de Cauchy}
+Soient $a_1,\dots,a_n,b_1,\dots,b_n$ des réels tels que $a_i+b_j\neq0$ pour tous $i,j$. On note $C_n=\det\left(\dfrac1{a_i+b_j}\right)_{1\leq i,j\leq n}$.
+\begin{enumerate}
+\item Retrancher la dernière colonne à chacune des autres, puis factoriser autant que possible.
+\item Retrancher ensuite la dernière ligne à chacune des autres. En déduire une relation entre $C_n$ et $C_{n-1}$.
+\item Montrer que
+\[C_n=\frac{\prod_{1\leq i<j\leq n}(a_j-a_i)(b_j-b_i)}{\prod_{1\leq i,j\leq n}(a_i+b_j)}.\]
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{n-cauchy}
+\choix{pas de formule de récurrence évidente par développement : on fait apparaître des zéros par différences, en factorisant chaque fois les facteurs communs aux lignes et aux colonnes.}
+\q{1.} Pour $j<n$ : $\dfrac1{a_i+b_j}-\dfrac1{a_i+b_n}=\dfrac{b_n-b_j}{(a_i+b_j)(a_i+b_n)}$. On sort $b_n-b_j$ de la colonne $j$ ($j<n$) et $\frac1{a_i+b_n}$ de la ligne $i$ (tous les coefficients de la ligne $i$, y compris le dernier, $\frac1{a_i+b_n}$, le contiennent) :
+\[C_n=\frac{\prod_{j<n}(b_n-b_j)}{\prod_{i=1}^n(a_i+b_n)}\,\det M,\]
+où $M$ a pour coefficients $\frac1{a_i+b_j}$ dans les colonnes $j<n$, et des $1$ dans la dernière colonne.
+
+\q{2.} Dans $M$, $L_i\leftarrow L_i-L_n$ ($i<n$) : la dernière colonne devient $(0,\dots,0,1)^T$ et, pour $j<n$, $\dfrac1{a_i+b_j}-\dfrac1{a_n+b_j}=\dfrac{a_n-a_i}{(a_i+b_j)(a_n+b_j)}$. On sort $a_n-a_i$ de la ligne $i$ ($i<n$) et $\frac1{a_n+b_j}$ de la colonne $j$ ($j<n$) ; en développant selon la dernière colonne, il reste $C_{n-1}$ (construit sur $a_1,\dots,a_{n-1}$, $b_1,\dots,b_{n-1}$) :
+\[C_n=\frac{\prod_{j<n}(b_n-b_j)\prod_{i<n}(a_n-a_i)}{\prod_{i\leq n}(a_i+b_n)\prod_{j<n}(a_n+b_j)}\,C_{n-1}.\]
+
+\q{3.} Récurrence sur $n$ : $C_1=\frac1{a_1+b_1}$ convient. Le facteur obtenu en 2 contient exactement, au numérateur, les facteurs $(a_n-a_i)(b_n-b_i)$ pour $i<n$, et au dénominateur, les facteurs $(a_i+b_j)$ pour lesquels $i=n$ ou $j=n$. Avec l'hypothèse de récurrence pour $C_{n-1}$, on obtient la formule au rang $n$.
+\gain{conséquence : si les $a_i$ sont distincts et les $b_j$ distincts, la matrice de Cauchy est inversible. Pour $a_i=i$, $b_j=j-1$, on obtient la matrice de Hilbert $\left(\frac1{i+j-1}\right)$, dont le déterminant est l'inverse d'un entier.}
+\end{corrige}

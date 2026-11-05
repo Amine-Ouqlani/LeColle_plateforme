@@ -14,6 +14,7 @@ LC.chapitres = [
     titre: "Déterminants",
     accroche: "Une famille de n vecteurs est-elle une base ? Le déterminant répond par un nombre : un volume orienté, nul exactement quand les vecteurs sont liés.",
     statut: "complet",
+    td: { doc: "td-determinants", corrections: "td-determinants-corrections" },
     prerequis: [
       "Calcul matriciel : produit, transposée, inverse d'une matrice 2×2.",
       "Familles libres, bases, dimension ; matrice d'un endomorphisme dans une base.",
@@ -80,6 +81,7 @@ LC.chapitres = [
     titre: "Courbes paramétrées planes",
     accroche: "Décrire une courbe par un point mobile M(t) : tangentes, points stationnaires, branches infinies, inflexions, tracé complet.",
     statut: "complet",
+    td: { doc: "td-courbes", corrections: "td-courbes-corrections" },
     prerequis: [
       "Dérivation, limites et développements limités usuels (rappelés dans la fiche §2.1).",
       "Trigonométrie : formules d'addition, de duplication, angle moitié.",
@@ -166,6 +168,7 @@ LC.chapitres = [
     titre: "Propriétés métriques et enveloppes",
     accroche: "Longueur, abscisse curviligne, repère de Frenet, courbure, développée, et enveloppe d'une famille de droites.",
     statut: "partiel",
+    td: { doc: "td-metrique", corrections: "td-metrique-corrections" },
     manque: "Pas encore de fiche de référence ni de présentation pour ce chapitre : le volume 2 en tient lieu.",
     prerequis: [
       "Tout le chapitre 2 (tangente, $\\det(f',f'')$, factorisation par l'angle moitié).",

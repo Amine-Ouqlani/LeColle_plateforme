@@ -1,0 +1,415 @@
+% =====================================================================
+%  TD Courbes paramétrées — exemples du livre mis en exercice, et exercices ajoutés
+% =====================================================================
+
+% ------------------------------------------------ exemples du livre
+\begin{exo}{ex-ellipse}{1}{réduction de l'intervalle d'étude}
+On considère $f(\theta)=(2\cos\theta,\sin\theta)$. Réduire l'intervalle d'étude à l'aide des symétries, étudier la courbe sur cet intervalle (variations, tangentes horizontales et verticales), puis reconnaître la courbe.
+\end{exo}
+
+\begin{corrige}{ex-ellipse}
+$f$ est $2\pi$-périodique ; $x$ est paire et $y$ impaire : $f(-\theta)=(x,-y)$, symétrie d'axe $(Ox)$, étude sur $[0,\pi]$. Puis $f(\pi-\theta)=(-x,y)$ : symétrie d'axe $(Oy)$, étude sur $\left[0,\frac\pi2\right]$.
+
+Sur $\left[0,\frac\pi2\right]$ : $x'=-2\sin\theta\leq0$, $y'=\cos\theta\geq0$ ; $x$ décroît de $2$ à $0$, $y$ croît de $0$ à $1$. Tangente verticale en $(2,0)$ ($f'(0)=(0,1)$), horizontale en $(0,1)$ ($f'(\frac\pi2)=(-2,0)$). Tous les points sont réguliers ($f'$ ne s'annule pas). On complète par la symétrie d'axe $(Oy)$, puis par celle d'axe $(Ox)$.
+
+Enfin $\frac{x^2}4+y^2=\cos^2\theta+\sin^2\theta=1$ : c'est l'ellipse de demi-axes $2$ et $1$.
+\retenir{un point situé sur un axe de symétrie a une tangente perpendiculaire à l'axe (sauf point stationnaire ou double).}
+\end{corrige}
+
+\begin{exo}{ex-dl}{2}{point stationnaire par développement limité}
+On considère $f(t)=\big(t-2\sqrt{1+t},\ t\ln(1-t)\big)$ au voisinage de $t=0$. Montrer que $M(0)$ est stationnaire, puis déterminer sa nature et la tangente en ce point.
+\end{exo}
+
+\begin{corrige}{ex-dl}
+Avec $\sqrt{1+t}=1+\frac t2-\frac{t^2}8+\frac{t^3}{16}+o(t^3)$ et $\ln(1-t)=-t-\frac{t^2}2+o(t^2)$ :
+\[x(t)=-2+\frac{t^2}4-\frac{t^3}8+o(t^3),\qquad y(t)=-t^2-\frac{t^3}2+o(t^3),\]
+donc $f(t)=(-2,0)+\frac{t^2}4(1,-4)+\frac{t^3}8(-1,-4)+o(t^3)$. Il n'y a pas de terme en $t$ : $f'(0)=\ve0$, le point est stationnaire. Avec $\ve a=(1,-4)$ et $\ve b=(-1,-4)$, $\det(\ve a,\ve b)=-4-4=-8\neq0$ : $p=2$, $q=3$, \emph{rebroussement de première espèce} en $(-2,0)$, de tangente dirigée par $(1,-4)$, soit $y=-4(x+2)$.
+\retenir{s'arrêter au premier vecteur non colinéaire au premier, et pas avant.}
+\end{corrige}
+
+\begin{exo}{ex-infl}{2}{inflexion : colinéarité, pas annulation}
+\begin{enumerate}
+\item Montrer que $f(t)=(t+t^2,\ t^3)$ a un point d'inflexion en $t=0$, bien que $f''(0)\neq\ve0$.
+\item Montrer que $g(t)=(t,\ t^4)$ n'a pas de point d'inflexion en $t=0$, bien que $g''(0)=\ve0$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-infl}
+\q{1.} $f'=(1+2t,3t^2)$, $f''=(2,6t)$, $f''(0)=(2,0)\neq\ve0$. $\det(f',f'')=6t(1+2t)-6t^2=6t(t+1)$, qui change de signe en $0$ : $M(0)$ (régulier, $f'(0)=(1,0)$) est un point d'inflexion.
+
+\q{2.} $g'=(1,4t^3)$, $g''=(0,12t^2)$, $g''(0)=\ve0$. $\det(g',g'')=12t^2\geq0$ ne change pas de signe : la courbe (graphe de $x\mapsto x^4$) reste au-dessus de sa tangente, pas d'inflexion.
+\retenir{l'inflexion se lit sur le \emph{changement de signe} de $\det(f',f'')$, c'est-à-dire sur la colinéarité de $f'$ et $f''$.}
+\end{corrige}
+
+\begin{exo}{ex-liss}{4}{une courbe de Lissajous : synthèse}
+On considère $f(t)=(\cos3t,\ 2\sin t)$, $t\in\R$.
+\begin{enumerate}
+\item Réduire l'intervalle d'étude, puis étudier la courbe et la tracer.
+\item Montrer que $J=(0,1)$ est un point double et donner les équations des tangentes $T_1$ et $T_2$ en $J$.
+\item Déterminer les autres points communs à la courbe et à la tangente $T_2:y=\frac x{\sqrt3}+1$.
+\item Déterminer les points d'inflexion.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-liss}
+%%LISS%%
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés : partie I
+\begin{exo}{c-param}{1}{paramétrer des courbes usuelles}
+Donner une représentation paramétrique de :
+(a) la droite passant par $A(1,-1)$ et $B(3,2)$ ;
+(b) le cercle de centre $\Omega(2,-1)$ et de rayon $3$ ;
+(c) l'ellipse $\frac{x^2}9+\frac{y^2}4=1$ ;
+(d) la branche $x>0$ de l'hyperbole $x^2-y^2=1$ ;
+(e) la courbe d'équation $y=\ln x$.
+\end{exo}
+
+\begin{corrige}{c-param}
+(a) $t\mapsto A+t\vv{AB}=(1+2t,\,-1+3t)$, $t\in\R$.
+(b) $\theta\mapsto(2+3\cos\theta,\,-1+3\sin\theta)$, $\theta\in[0,2\pi[$.
+(c) $\theta\mapsto(3\cos\theta,\,2\sin\theta)$, $\theta\in[0,2\pi[$.
+(d) $t\mapsto(\ch t,\,\sh t)$, $t\in\R$ : $\ch^2t-\sh^2t=1$ et $\ch t>0$ ; réciproquement, si $x^2-y^2=1$ et $x>0$, on pose $t=\operatorname{argsh}y$, alors $x=\sqrt{1+y^2}=\ch t$.
+(e) $t\mapsto(t,\ln t)$, $t>0$ (tout graphe $y=g(x)$ se paramètre par $x=t$).
+\end{corrige}
+
+\begin{exo}{c-cercle}{2}{un paramétrage rationnel du cercle}
+On pose $f(t)=\left(\dfrac{2t}{1+t^2},\ \dfrac{1-t^2}{1+t^2}\right)$, $t\in\R$.
+\begin{enumerate}
+\item Montrer que tous les points $M(t)$ sont sur le cercle unité $\mathcal C$. Quel point de $\mathcal C$ n'est pas atteint ?
+\item Déterminer la tangente en $M(1)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-cercle}
+\q{1.} $(2t)^2+(1-t^2)^2=1+2t^2+t^4=(1+t^2)^2$, donc $x^2+y^2=1$. Avec $t=\tan\frac\theta2$ ($\theta\in\,]-\pi,\pi[$), $x=\sin\theta$ et $y=\cos\theta$ : on obtient tous les points de $\mathcal C$ sauf celui qui correspondrait à $\theta=\pi$, c'est-à-dire $(0,-1)$ (limite de $M(t)$ quand $t\to\pm\infty$). D'ailleurs $y=-1$ imposerait $1-t^2=-1-t^2$, impossible.
+
+\q{2.} $x'(t)=\frac{2(1-t^2)}{(1+t^2)^2}$, $y'(t)=\frac{-4t}{(1+t^2)^2}$, donc $f'(1)=(0,-1)\neq\ve0$. $M(1)=(1,0)$ et la tangente est verticale : $x=1$.
+\end{corrige}
+
+\begin{exo}{c-cusp}{2}{nature d'un point stationnaire}
+On pose $f(t)=(\sin t-t,\ 1-\cos t)$. Montrer que $M(0)$ est stationnaire et préciser sa nature et la tangente.
+\end{exo}
+
+\begin{corrige}{c-cusp}
+$f'(t)=(\cos t-1,\sin t)$, nul en $0$. Développements : $x=-\frac{t^3}6+o(t^3)$, $y=\frac{t^2}2+o(t^3)$, donc
+\[f(t)=t^2\left(0,\tfrac12\right)+t^3\left(-\tfrac16,0\right)+o(t^3).\]
+$\ve a=(0,\frac12)$ et $\ve b=(-\frac16,0)$ ne sont pas colinéaires : $p=2$, $q=3$, rebroussement de première espèce en $O$, tangente $(Oy)$.
+\gain{c'est (au signe près) l'arche de cycloïde au voisinage d'un point de contact avec l'axe.}
+\end{corrige}
+
+\begin{exo}{c-asym}{2}{deux asymptotes}
+On pose $x(t)=\dfrac t{t-1}$, $y(t)=\dfrac{t^2}{t-1}$, $t\neq1$. Étudier les branches infinies (pour $t\to1$ et $t\to\pm\infty$) et la position de la courbe par rapport à ses asymptotes.
+\end{exo}
+
+\begin{corrige}{c-asym}
+\q{$t\to1$.} $x$ et $y$ sont infinis ; $\frac yx=t\to1$ et $y-x=\frac{t^2-t}{t-1}=t\to1$ : asymptote $\mathcal D:y=x+1$. Position : $y-x-1=t-1$, positif si $t\to1^+$ (courbe au-dessus, $x\to+\infty$), négatif si $t\to1^-$ (au-dessous, $x\to-\infty$).
+
+\q{$t\to\pm\infty$.} $x\to1$ et $y\to\pm\infty$ : asymptote verticale $x=1$. $x-1=\frac1{t-1}$ : la courbe est à droite quand $t\to+\infty$ ($y\to+\infty$), à gauche quand $t\to-\infty$ ($y\to-\infty$).
+
+\emph{Contrôle.} $t=\frac x{x-1}$ et $y=tx$ : la courbe est le graphe de $y=\frac{x^2}{x-1}=x+1+\frac1{x-1}$, où l'on relit les deux asymptotes.
+\end{corrige}
+
+% ------------------------------------------------ partie II
+\begin{exo}{c-sym}{2}{symétries d'une courbe de Lissajous}
+On pose $f(t)=(\sin2t,\ \sin3t)$. Montrer qu'on peut réduire l'étude à $\left[0,\frac\pi2\right]$ et expliquer comment obtenir la courbe entière.
+\end{exo}
+
+\begin{corrige}{c-sym}
+$f$ est $2\pi$-périodique : on peut se limiter à $[-\pi,\pi]$. $f(-t)=(-\sin2t,-\sin3t)=-f(t)$ : $M(-t)$ est le symétrique de $M(t)$ par rapport à $O$ ; étude sur $[0,\pi]$. Puis $f(\pi-t)=(\sin(2\pi-2t),\sin(3\pi-3t))=(-\sin2t,\sin3t)$ : symétrie d'axe $(Oy)$ ; étude sur $\left[0,\frac\pi2\right]$.
+
+Reconstruction, dans l'ordre inverse : l'arc $\left[0,\frac\pi2\right]$, son symétrique par rapport à $(Oy)$ (arc $\left[\frac\pi2,\pi\right]$), puis le symétrique de l'ensemble par rapport à $O$ (arc $[-\pi,0]$). On remarque au passage $f(t+\pi)=(x,-y)$ : la courbe est aussi symétrique par rapport à $(Ox)$, ce qui est cohérent (centre $O$ et axe $(Oy)$ donnent l'axe $(Ox)$).
+\end{corrige}
+
+\begin{exo}{c-pos}{2}{position par rapport à une tangente}
+On considère $f(t)=(t^2,t^3)$.
+\begin{enumerate}
+\item Donner l'équation de la tangente $T$ en $M(1)$.
+\item Étudier la position de la courbe par rapport à $T$ et déterminer l'autre point d'intersection.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-pos}
+\q{1.} $f'(1)=(2,3)$ et $M(1)=(1,1)$ : $3(x-1)-2(y-1)=0$, soit $T:3x-2y-1=0$.
+
+\q{2.} On pose $\varphi(t)=3x(t)-2y(t)-1=3t^2-2t^3-1$. Comme $t=1$ est racine double (contact), on factorise : $\varphi(t)=-(t-1)^2(2t+1)$. La courbe recoupe $T$ en $t=-\frac12$, au point $\left(\frac14,-\frac18\right)$. Pour $t>-\frac12$, $\varphi(t)\leq0$ : comme $\varphi$ est du signe de $3x-2y-1$, la courbe est du côté où $3x-2y-1<0$, c'est-à-dire au-dessus de $T$ ($y>\frac{3x-1}2$) ; pour $t<-\frac12$, elle est au-dessous.
+\retenir{position globale : signe de $\varphi(t)=ax(t)+by(t)+c$ ; au point de tangence, racine au moins double.}
+\end{corrige}
+
+\begin{exo}{c-tschirn}{3}{étude complète avec point double}
+On considère la courbe $x(t)=t^2$, $y(t)=t^3-3t$, $t\in\R$.
+\begin{enumerate}
+\item Montrer que la courbe est symétrique par rapport à $(Ox)$.
+\item Dresser le tableau de variations sur $\R_+$ ; préciser les tangentes horizontales et verticales.
+\item Montrer que la courbe a un point double et donner l'angle de ses deux tangentes en ce point.
+\item Étudier la branche infinie. La courbe a-t-elle des points d'inflexion ?
+\item Tracer la courbe.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-tschirn}
+\q{1.} $x(-t)=x(t)$, $y(-t)=-y(t)$ : $M(-t)$ est le symétrique de $M(t)$ par rapport à $(Ox)$. On étudie sur $\R_+$.
+
+\q{2.} $x'=2t\geq0$, $y'=3(t^2-1)$. $x$ croît de $0$ à $+\infty$ ; $y$ décroît de $0$ à $-2$ sur $[0,1]$, puis croît vers $+\infty$. En $t=0$ : $f'(0)=(0,-3)$, tangente verticale en $O$. En $t=1$ : $f'(1)=(2,0)$, tangente horizontale en $(1,-2)$.
+
+\q{3.} $x(t)=x(s)$ avec $t\neq s$ impose $s=-t$ ; puis $y(t)=y(-t)$ donne $t^3-3t=0$, soit $t=\pm\sqrt3$. Le point double est $M(\sqrt3)=M(-\sqrt3)=(3,0)$. $f'(\pm\sqrt3)=(\pm2\sqrt3,6)$ : pentes $\pm\sqrt3$, droites inclinées de $\pm\frac\pi3$ sur $(Ox)$. Les tangentes font donc un angle de $\frac\pi3$ (ou $\frac{2\pi}3$).
+
+\q{4.} Quand $t\to+\infty$ : $\frac yx\sim t\to+\infty$, branche parabolique de direction $(Oy)$. $\det(f',f'')=2t\cdot6t-3(t^2-1)\cdot2=6(t^2+1)>0$ : pas d'inflexion, la concavité ne change pas.
+
+\q{5.} Boucle pour $t\in[-\sqrt3,\sqrt3]$, passant par $O$ (tangente verticale) et par $(1,\pm2)$ (tangentes horizontales), qui se referme en $(3,0)$ ; puis deux branches paraboliques vers le haut et vers le bas.
+\end{corrige}
+
+% ------------------------------------------------ partie III
+\begin{exo}{c-astro}{3}{l'astroïde}
+On considère $f(t)=(\cos^3t,\sin^3t)$, $t\in[0,2\pi]$.
+\begin{enumerate}
+\item Déterminer les symétries de la courbe et réduire l'intervalle d'étude.
+\item Déterminer les points stationnaires et leur nature.
+\item Donner l'équation de la tangente en un point régulier $M(t)$. Elle coupe les axes en $P$ et $Q$ : calculer $PQ$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-astro}
+\q{1.} $f(-t)=(x,-y)$ : axe $(Ox)$ ; $f(\pi-t)=(-x,y)$ : axe $(Oy)$ ; $f\left(\frac\pi2-t\right)=(y,x)$ : axe $y=x$. Étude sur $\left[0,\frac\pi4\right]$, puis symétries par rapport à $y=x$, $(Oy)$ et $(Ox)$.
+
+\q{2.} $f'(t)=3\sin t\cos t\,(-\cos t,\ \sin t)$, nul pour $t\in\frac\pi2\Z$ : quatre points stationnaires $(\pm1,0)$, $(0,\pm1)$. En $0$ : $x=1-\frac32t^2+o(t^2)$, $y=t^3+o(t^3)$, donc $f(t)=(1,0)+t^2\left(-\frac32,0\right)+t^3(0,1)+o(t^3)$ : $p=2$, $q=3$, rebroussement de première espèce, tangente $(Ox)$. Par symétrie, même nature aux trois autres.
+
+\q{3.} Pour $t\notin\frac\pi2\Z$, la tangente est dirigée par $(-\cos t,\sin t)$ :
+\[\sin t\,(x-\cos^3t)+\cos t\,(y-\sin^3t)=0\iff x\sin t+y\cos t=\sin t\cos t.\]
+$P=(\cos t,0)$, $Q=(0,\sin t)$, d'où $PQ=\sqrt{\cos^2t+\sin^2t}=1$ : le segment de tangente compris entre les axes a une longueur constante.
+\gain{factoriser la vitesse ($f'=\lambda\ve g$) simplifie l'équation de la tangente. Le volume 2 montre la réciproque : l'astroïde est l'enveloppe d'une échelle de longueur $1$ qui glisse.}
+\end{corrige}
+
+\begin{exo}{c-stroph}{3}{la strophoïde}
+On considère $x(t)=\dfrac{t^2-1}{t^2+1}$, $y(t)=\dfrac{t(t^2-1)}{t^2+1}$, $t\in\R$.
+\begin{enumerate}
+\item Étudier les symétries.
+\item Montrer que $O$ est un point double et que les tangentes en $O$ sont perpendiculaires.
+\item Étudier les branches infinies et la position par rapport à l'asymptote.
+\item Déterminer les tangentes horizontales et verticales, puis tracer la courbe.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-stroph}
+\q{1.} $x$ est paire et $y$ impaire : symétrie d'axe $(Ox)$, étude sur $\R_+$.
+
+\q{2.} $M(1)=M(-1)=O$. $x'=\frac{4t}{(t^2+1)^2}$, $y'=\frac{t^4+4t^2-1}{(t^2+1)^2}$ : $f'(1)=(1,1)$, $f'(-1)=(-1,1)$. Les tangentes en $O$ sont $y=x$ et $y=-x$, perpendiculaires.
+
+\q{3.} Quand $t\to\pm\infty$ : $x\to1$ et $y\to\pm\infty$ : asymptote verticale $x=1$. $x-1=-\frac2{t^2+1}<0$ : la courbe est à gauche de l'asymptote.
+
+\q{4.} $x'=0\iff t=0$ : tangente verticale en $M(0)=(-1,0)$ (on a $y'(0)=-1\neq0$). $y'=0\iff t^4+4t^2-1=0\iff t^2=\sqrt5-2$ : tangentes horizontales aux points $\left(\frac{1-\sqrt5}2,\ \mp0{,}30\right)$ environ. Tracé : une boucle passant par $(-1,0)$, refermée en $O$, et deux branches qui longent $x=1$ par la gauche.
+\end{corrige}
+
+% ------------------------------------------------ partie IV
+\begin{exo}{c-concours}{5}{étude complète (type concours)}
+On considère la courbe $\mathcal C$ définie par $x(t)=\dfrac{t^2}{t-1}$, $y(t)=\dfrac{t^2}{t+1}$, $t\in\R\setminus\{-1,1\}$.
+\begin{enumerate}
+\item Comparer $M(-t)$ et $M(t)$. En déduire une symétrie de $\mathcal C$ et un intervalle d'étude.
+\item Factoriser $x'(t)$ et $y'(t)$ ; dresser le tableau de variations conjoint sur $[0,1[\,\cup\,]1,+\infty[$.
+\item Étudier le point $M(0)$ : nature et tangente.
+\item Étudier les branches infinies ; préciser la position de $\mathcal C$ par rapport à ses asymptotes.
+\item Calculer $\det(f',f'')$. La courbe a-t-elle des points d'inflexion ?
+\item Tracer $\mathcal C$ avec ses asymptotes et ses tangentes remarquables.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-concours}
+\q{1.} $x(-t)=\frac{t^2}{-t-1}=-y(t)$ et $y(-t)=\frac{t^2}{1-t}=-x(t)$ : $M(-t)=(-y,-x)$ est le symétrique de $M(t)$ par rapport à la droite $\Delta:y=-x$. On étudie sur $[0,1[\,\cup\,]1,+\infty[$.
+
+\q{2.} $x'(t)=\frac{2t(t-1)-t^2}{(t-1)^2}=\frac{t(t-2)}{(t-1)^2}$ et $y'(t)=\frac{t(t+2)}{(t+1)^2}$. Sur $]0,1[$ et $]1,2[$ : $x'<0$ ; sur $]2,+\infty[$ : $x'>0$ ; $y'>0$ pour $t>0$.
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|ccccccccc}
+$t$ & $0$ & & $1^-$ & $\|$ & $1^+$ & & $2$ & & $+\infty$\\\hline
+$x$ & $0$ & $\searrow$ & $-\infty$ & $\|$ & $+\infty$ & $\searrow$ & $4$ & $\nearrow$ & $+\infty$\\
+$y$ & $0$ & $\nearrow$ & $\frac12$ & $\|$ & $\frac12$ & $\nearrow$ & $\frac43$ & $\nearrow$ & $+\infty$
+\end{tabular}
+\end{center}
+Tangente verticale en $M(2)=\left(4,\frac43\right)$ ; par symétrie, tangente horizontale en $M(-2)=\left(-\frac43,-4\right)$.
+
+\q{3.} $f'(0)=\ve0$. $x=-\frac{t^2}{1-t}=-t^2-t^3+o(t^3)$, $y=\frac{t^2}{1+t}=t^2-t^3+o(t^3)$ :
+$f(t)=t^2(-1,1)+t^3(-1,-1)+o(t^3)$, avec $\det\big((-1,1),(-1,-1)\big)=2\neq0$. Rebroussement de première espèce en $O$, tangente $y=-x$ (c'est l'axe de symétrie, ce qui est cohérent).
+
+\q{4.} \emph{$t\to1$} : $x\to\pm\infty$, $y\to\frac12$ : asymptote horizontale $y=\frac12$. $y-\frac12=\frac{2t^2-t-1}{2(t+1)}=\frac{(t-1)(2t+1)}{2(t+1)}$ : au-dessus pour $t\to1^+$, au-dessous pour $t\to1^-$. Par symétrie, $x=-\frac12$ est asymptote verticale ($t\to-1$).
+
+\emph{$t\to\pm\infty$} : $\frac yx=\frac{t-1}{t+1}\to1$ et $y-x=t^2\frac{(t-1)-(t+1)}{t^2-1}=\frac{-2t^2}{t^2-1}\to-2$ : asymptote $\mathcal D:y=x-2$. $y-x+2=\frac{-2}{t^2-1}<0$ pour $|t|>1$ : la courbe est au-dessous de $\mathcal D$ (à ses deux extrémités). $\mathcal D$ est invariante par la symétrie, ce qui est cohérent.
+
+\q{5.} Le calcul donne $\det(f',f'')=-\dfrac{12t^2}{(t-1)^3(t+1)^3}=-\dfrac{12t^2}{(t^2-1)^3}$. Il ne change de signe qu'en $t=\pm1$, valeurs exclues ; il s'annule en $0$, point stationnaire déjà étudié. Pas de point d'inflexion : sur chacun des intervalles $]-\infty,-1[$, $]-1,1[$, $]1,+\infty[$, la concavité est constante.
+
+\q{6.} Trois arcs : pour $t\in\,]-1,1[$, un arc qui part de l'asymptote $x=-\frac12$ (vers le bas), passe par le rebroussement $O$ et rejoint l'asymptote $y=\frac12$ vers la gauche ; pour $t>1$, un arc venant de la droite le long de $y=\frac12$ (par-dessus), avec tangente verticale en $\left(4,\frac43\right)$, qui longe ensuite $\mathcal D$ par-dessous ; son symétrique pour $t<-1$.
+\retenir{l'ordre d'un sujet de concours : symétries, dérivées factorisées et tableau, points stationnaires par DL, branches infinies avec position, concavité.}
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés (deuxième série)
+\begin{exo}{c-pq}{2}{les quatre allures d'un point stationnaire}
+Pour chacune des courbes suivantes, montrer que $M(0)=O$ est stationnaire, déterminer les entiers $p$ et $q$ du cours, en déduire la nature du point et la tangente, et dessiner l'allure de la courbe au voisinage de $O$.
+\[\text{(a) }(t^2,\ t^3)\qquad\text{(b) }(t^3,\ t^4)\qquad\text{(c) }(t^3,\ t^5)\qquad\text{(d) }(t^2,\ t^4+t^5)\]
+\end{exo}
+
+\begin{corrige}{c-pq}
+\choix{les coordonnées sont des polynômes : le développement est exact, on lit directement les vecteurs $\ve a_p$ et $\ve a_q$.}
+\begin{itemize}
+\item (a) $f(t)=t^2(1,0)+t^3(0,1)$ : $p=2$ pair, $q=3$ impair, \emph{rebroussement de première espèce}, tangente $(Ox)$.
+\item (b) $f(t)=t^3(1,0)+t^4(0,1)$ : $p=3$ impair, $q=4$ pair, \emph{point d'allure ordinaire} : la courbe ne rebrousse pas ($x=t^3$ change de signe avec $t$) et reste du même côté de sa tangente $(Ox)$ ($y=t^4\geq0$), comme en un point régulier qui n'est pas d'inflexion ; c'est le graphe de $y=|x|^{4/3}$.
+\item (c) $f(t)=t^3(1,0)+t^5(0,1)$ : $p=3$, $q=5$ impairs, \emph{point d'inflexion} : graphe de $y=x^{5/3}$, la courbe traverse sa tangente $(Ox)$.
+\item (d) $f(t)=t^2(1,0)+t^4(0,1)+t^5(0,1)$ : le premier vecteur non colinéaire à $(1,0)$ est celui de $t^4$, donc $p=2$, $q=4$ pairs, \emph{rebroussement de seconde espèce} : les deux branches ($t>0$ et $t<0$) partent dans la même direction, du même côté de la tangente $(Ox)$ ($y\approx t^4>0$), et se séparent grâce au terme $t^5$.
+\end{itemize}
+\retenir{$p$ = premier exposant à vecteur non nul (direction de la tangente) ; $q$ = premier exposant à vecteur non colinéaire au premier. $p$ impair : la courbe continue ; $p$ pair : elle rebrousse. $q$ impair : elle traverse sa tangente ; $q$ pair : elle reste du même côté.}
+\end{corrige}
+
+\begin{exo}{c-cubique}{2}{paramétrer une cubique par les droites issues de $O$}
+On considère la courbe $\Gamma$ d'équation $y^2=x^2(x+1)$.
+\begin{enumerate}
+\item En coupant $\Gamma$ par la droite $y=tx$, montrer que $\Gamma$ est l'ensemble des points $f(t)=\big(t^2-1,\ t^3-t\big)$, $t\in\R$.
+\item Étudier les symétries de $\Gamma$, puis montrer que $O$ est un point double et donner les tangentes en $O$.
+\item Préciser la tangente en $M(0)$ et la nature des branches infinies. La courbe a-t-elle des points d'inflexion ? La tracer.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-cubique}
+\q{1.} Si $(x,y)\in\Gamma$ et $x\neq0$, on pose $t=\frac yx$ : $t^2x^2=x^2(x+1)$, d'où $x=t^2-1$ et $y=tx=t^3-t$. Si $x=0$, alors $y=0$ : c'est $O=f(1)$. Réciproquement, $(t^3-t)^2=t^2(t^2-1)^2=x^2(x+1)$ avec $x=t^2-1$ : $f(t)\in\Gamma$. Donc $\Gamma=f(\R)$.
+
+\q{2.} $x(-t)=x(t)$ et $y(-t)=-y(t)$ : symétrie d'axe $(Ox)$. $f(1)=f(-1)=O$ ; $f'(t)=(2t,\ 3t^2-1)$, $f'(1)=(2,2)$ et $f'(-1)=(-2,2)$ : les tangentes en $O$ sont $y=x$ et $y=-x$ (perpendiculaires).
+
+\q{3.} $f'(0)=(0,-1)$ : tangente verticale en $M(0)=(-1,0)$. Quand $t\to\pm\infty$, $\frac yx=t\to\pm\infty$ : branches paraboliques de direction $(Oy)$. $\det(f',f'')=\dt{2t&2\\3t^2-1&6t}=12t^2-2(3t^2-1)=2(3t^2+1)>0$ : pas d'inflexion. Tracé : une boucle ($t\in[-1,1]$) d'abscisses comprises entre $-1$ et $0$, qui part de $O$, passe par $(-1,0)$ avec une tangente verticale et revient en $O$ ; puis deux branches qui s'éloignent vers la droite, l'une vers le haut, l'autre vers le bas.
+\gain{une courbe algébrique ayant un point double en $O$ se paramètre en la coupant par les droites $y=tx$ : chaque droite ne la recoupe qu'en un point.}
+\end{corrige}
+
+\begin{exo}{c-branches}{2}{branches infinies : asymptote et branche parabolique}
+On considère $x(t)=t+\dfrac1t$, $y(t)=t^2+\dfrac1t$, $t\in\R^*$.
+\begin{enumerate}
+\item Étudier la branche infinie quand $t\to0$ et la position de la courbe par rapport à l'asymptote $\Delta$ obtenue.
+\item Étudier les branches infinies quand $t\to\pm\infty$.
+\item Déterminer, pour tout $t$, la position de $M(t)$ par rapport à $\Delta$ et les points communs à la courbe et à $\Delta$.
+\item Déterminer les points à tangente verticale.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-branches}
+\q{1.} Quand $t\to0$, $|x|$ et $|y|$ tendent vers $+\infty$. $\frac yx=\frac{t^3+1}{t^2+1}\to1$, puis $y-x=t^2-t\to0$ : asymptote $\Delta:y=x$. Comme $y-x=t(t-1)$ : pour $t\to0^+$ (alors $x\to+\infty$), $y-x<0$, la courbe est au-dessous de $\Delta$ ; pour $t\to0^-$ ($x\to-\infty$), au-dessus.
+
+\q{2.} Quand $t\to\pm\infty$, $x\sim t$ et $y\sim t^2$, donc $\frac yx\to\pm\infty$ : branches paraboliques de direction $(Oy)$.
+
+\q{3.} $y-x=t(t-1)$ : la courbe est au-dessous de $\Delta$ pour $t\in\,]0,1[$, au-dessus pour $t<0$ ou $t>1$, et elle coupe $\Delta$ en un seul point, $M(1)=(2,2)$.
+
+\q{4.} $x'(t)=\frac{t^2-1}{t^2}$ et $y'(t)=\frac{2t^3-1}{t^2}$. $x'=0$ pour $t=\pm1$, où $y'\neq0$ : tangentes verticales en $M(1)=(2,2)$ et $M(-1)=(-2,0)$.
+\piege{$\lim\frac yx=1$ ne suffit pas : c'est $\lim(y-x)$ qui donne l'asymptote, et le signe de $y-x$ la position.}
+\end{corrige}
+
+\begin{exo}{c-cycloide}{3}{la cycloïde}
+Un cercle de rayon $1$ roule sans glisser sur l'axe $(Ox)$ ; un point $M$ du cercle, initialement en $O$, décrit la cycloïde
+\[f(t)=(t-\sin t,\ 1-\cos t),\qquad t\in\R,\]
+où $t$ est l'angle dont le cercle a tourné ; le centre du cercle est alors $\Omega(t)=(t,1)$.
+\begin{enumerate}
+\item Comparer $f(t+2\pi)$ et $f(-t)$ à $f(t)$. En déduire un intervalle d'étude et la construction de la courbe entière.
+\item Montrer que $f'(t)=2\sin\frac t2\left(\sin\frac t2,\ \cos\frac t2\right)$. Étudier les variations sur $[0,\pi]$ et déterminer les points stationnaires (on pourra utiliser l'exercice~\ref{e:c-cusp} pour leur nature).
+\item Soient $H(t)=(t,2)$ et $K(t)=(t,0)$ le point le plus haut et le point de contact du cercle. Montrer que, en un point régulier, la tangente en $M(t)$ passe par $H(t)$ et la normale par $K(t)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-cycloide}
+\q{1.} $f(t+2\pi)=f(t)+(2\pi,0)$ : la courbe est invariante par la translation de vecteur $(2\pi,0)$ ; on étudie un intervalle de longueur $2\pi$, par exemple $[-\pi,\pi]$. $f(-t)=(-x,y)$ : symétrie d'axe $(Oy)$, étude sur $[0,\pi]$. On complète par la symétrie d'axe $(Oy)$ (arche $[-\pi,\pi]$), puis par les translations de vecteurs $(2k\pi,0)$.
+
+\q{2.} $1-\cos t=2\sin^2\frac t2$ et $\sin t=2\sin\frac t2\cos\frac t2$, d'où la factorisation. Sur $[0,\pi]$, $x'\geq0$ et $y'=\sin t\geq0$ : $x$ croît de $0$ à $\pi$, $y$ de $0$ à $2$. En $t=\pi$, $f'(\pi)=(2,0)$ : tangente horizontale au sommet $(\pi,2)$. Les points stationnaires sont les $f(2k\pi)=(2k\pi,0)$ ; la courbe $(\sin t-t,1-\cos t)$ de l'exercice~\ref{e:c-cusp} est la symétrique de la cycloïde par rapport à $(Oy)$ : ce sont des \emph{rebroussements de première espèce}, de tangente verticale.
+
+\q{3.} Pour $t\notin2\pi\Z$, la tangente est dirigée par $\ve u=\left(\sin\frac t2,\cos\frac t2\right)$. Or
+\[\vv{MH}=(\sin t,\ 1+\cos t)=2\cos\tfrac t2\left(\sin\tfrac t2,\ \cos\tfrac t2\right),\]
+\[\vv{MK}=(\sin t,\ \cos t-1)=2\sin\tfrac t2\left(\cos\tfrac t2,\ -\sin\tfrac t2\right).\]
+$\vv{MH}$ est colinéaire à $\ve u$ : $H$ est sur la tangente. $\vv{MK}$ est orthogonal à $\ve u$ : $K$ est sur la normale.
+\gain{mécaniquement : le point de contact $K$ est immobile à l'instant considéré (roulement sans glissement), donc la vitesse de $M$ est orthogonale à $\vv{KM}$ ; c'est la construction de la tangente par le « centre instantané de rotation ».}
+\end{corrige}
+
+\begin{exo}{c-develop}{3}{la développante du cercle}
+On considère $f(t)=(\cos t+t\sin t,\ \sin t-t\cos t)$, $t\geq0$, et $P(t)=(\cos t,\sin t)$ sur le cercle unité $\mathcal C$.
+\begin{enumerate}
+\item Calculer $f'(t)$. Quels sont les points stationnaires ?
+\item Montrer que $\vv{P(t)M(t)}=t\,(\sin t,\ -\cos t)$. En déduire que la droite $(PM)$ est tangente à $\mathcal C$ en $P$ et que $PM$ est égal à la longueur de l'arc de $\mathcal C$ allant de $(1,0)$ à $P$ (« fil que l'on déroule »).
+\item Montrer que la normale à la courbe en $M(t)$ ($t>0$) est la droite $(PM)$.
+\item Étudier le point $M(0)$ par un développement limité. La courbe a-t-elle des points d'inflexion ?
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-develop}
+\q{1.} $x'=-\sin t+\sin t+t\cos t=t\cos t$ et $y'=\cos t-\cos t+t\sin t=t\sin t$ : $f'(t)=t(\cos t,\sin t)$, qui ne s'annule que pour $t=0$. Seul $M(0)=(1,0)$ est stationnaire.
+
+\q{2.} $f(t)-P(t)=(t\sin t,\ -t\cos t)$. Ce vecteur est orthogonal à $\vv{OP}=(\cos t,\sin t)$ : la droite $(PM)$ est orthogonale au rayon $[OP]$, donc tangente à $\mathcal C$ en $P$. Et $PM=t$, longueur de l'arc de cercle de rayon $1$ et d'angle $t$.
+
+\q{3.} Pour $t>0$, la tangente en $M$ est dirigée par $(\cos t,\sin t)$, donc la normale par $(-\sin t,\cos t)$, colinéaire à $\vv{PM}$ : la normale en $M$ est la droite $(PM)$. Toutes les normales sont tangentes au cercle $\mathcal C$ : $\mathcal C$ est l'enveloppe des normales, c'est-à-dire la \emph{développée} de la courbe (volume~2).
+
+\q{4.} $x=1-\frac{t^2}2+t^2+o(t^3)=1+\frac{t^2}2+o(t^3)$ et $y=t-\frac{t^3}6-t+\frac{t^3}2+o(t^3)=\frac{t^3}3+o(t^3)$ : $f(t)=(1,0)+t^2\left(\tfrac12,0\right)+t^3\left(0,\tfrac13\right)+o(t^3)$, avec $p=2$, $q=3$ : rebroussement de première espèce de tangente $(Ox)$ (en considérant aussi $t<0$). Enfin, avec $\ve u=(\cos t,\sin t)$ et $\ve u\,'=(-\sin t,\cos t)$ : $f'=t\ve u$, $f''=\ve u+t\ve u\,'$, donc $\det(f',f'')=\det(t\ve u,\ \ve u+t\ve u\,')=t^2\det(\ve u,\ve u\,')=t^2>0$ pour $t>0$ : pas d'inflexion.
+\end{corrige}
+
+\begin{exo}{c-limacon}{4}{le limaçon de Pascal}
+On considère $f(t)=\big((1+2\cos t)\cos t,\ (1+2\cos t)\sin t\big)$, $t\in\R$.
+\begin{enumerate}
+\item Réduire l'intervalle d'étude à $[0,\pi]$.
+\item Montrer que $x'(t)=-\sin t\,(1+4\cos t)$ et $y'(t)=4\cos^2t+\cos t-2$. Dresser le tableau de variations conjoint sur $[0,\pi]$ ; préciser les tangentes horizontales et verticales.
+\item Montrer que $O$ est un point double et déterminer l'angle des deux tangentes en $O$.
+\item Montrer que $\det(f',f'')=3(3+2\cos t)$. Conclure sur les points d'inflexion, puis tracer la courbe.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-limacon}
+\q{1.} $f$ est $2\pi$-périodique, $x$ paire et $y$ impaire : symétrie d'axe $(Ox)$, étude sur $[0,\pi]$.
+
+\q{2.} $x=\cos t+2\cos^2t$, donc $x'=-\sin t-4\sin t\cos t=-\sin t(1+4\cos t)$ ; $y=\sin t+\sin2t$, donc $y'=\cos t+2\cos2t=4\cos^2t+\cos t-2$. Les racines de $4X^2+X-2$ sont $c_\pm=\frac{-1\pm\sqrt{33}}8$ ; on note $t_1=\arccos c_+\approx0{,}94$, $t_2=\arccos\left(-\frac14\right)\approx1{,}82$ et $t_3=\arccos c_-\approx2{,}57$.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c|ccccccccccc}
+$t$ & $0$ & & $t_1$ & & $t_2$ & & $\frac{2\pi}3$ & & $t_3$ & & $\pi$\\\hline
+$x'$ & $0$ & $-$ & & $-$ & $0$ & $+$ & & $+$ & & $+$ & $0$\\
+$x$ & $3$ & $\searrow$ & $\approx1{,}30$ & $\searrow$ & $-\frac18$ & $\nearrow$ & $0$ & $\nearrow$ & $\approx0{,}58$ & $\nearrow$ & $1$\\
+$y'$ & $3$ & $+$ & $0$ & $-$ & & $-$ & & $-$ & $0$ & $+$ & $1$\\
+$y$ & $0$ & $\nearrow$ & $\approx1{,}76$ & $\searrow$ & $\frac{\sqrt{15}}8$ & $\searrow$ & $0$ & $\searrow$ & $\approx-0{,}37$ & $\nearrow$ & $0$
+\end{tabular}
+\end{center}
+Tangentes verticales en $(3,0)$, $\left(-\frac18,\frac{\sqrt{15}}8\right)$ et $(1,0)$ ; horizontales en $M(t_1)\approx(1{,}30\,;1{,}76)$ et $M(t_3)\approx(0{,}58\,;-0{,}37)$. La courbe est régulière ($x'$ et $y'$ ne s'annulent jamais ensemble).
+
+\q{3.} $M(t)=O\iff1+2\cos t=0\iff t=\pm\frac{2\pi}3$ ($[2\pi]$). $f'\left(\frac{2\pi}3\right)=\left(\frac{\sqrt3}2,-\frac32\right)$, de pente $-\sqrt3$ ; par symétrie, $f'\left(-\frac{2\pi}3\right)=\left(\frac{\sqrt3}2,\frac32\right)$, de pente $\sqrt3$. Les tangentes en $O$ font avec $(Ox)$ les angles $\mp\frac\pi3$ : elles forment un angle de $\frac\pi3$.
+
+\q{4.} Le calcul (utiliser $\cos^2+\sin^2=1$) donne $\det(f',f'')=9+6\cos t=3(3+2\cos t)>0$ : la courbe n'a pas de point d'inflexion. Tracé : une grande boucle extérieure ($t\in\left[-\frac{2\pi}3,\frac{2\pi}3\right]$) passant par $(3,0)$, et une petite boucle intérieure ($t\in\left[\frac{2\pi}3,\frac{4\pi}3\right]$) passant par $(1,0)$, toutes deux issues de $O$.
+\gain{en notant $r(t)=1+2\cos t$, $f(t)=r(t)(\cos t,\sin t)$ : $O$ est atteint exactement quand $r$ s'annule.}
+\end{corrige}
+
+\begin{exo}{c-concours2}{5}{une cubique à rebroussement (type concours)}
+On considère la courbe $\mathcal C$ définie par $x(t)=\dfrac{t^2}{1+t}$, $y(t)=\dfrac{t^3}{1+t}$, $t\in\R\setminus\{-1\}$.
+\begin{enumerate}
+\item Montrer que $\mathcal C$ est contenue dans la courbe d'équation $x^2(x+y)=y^2$.
+\item Factoriser $x'(t)$ et $y'(t)$ et dresser le tableau de variations conjoint. Préciser les tangentes horizontales et verticales.
+\item Étudier le point $M(0)$.
+\item Étudier les branches infinies et la position de $\mathcal C$ par rapport à son asymptote.
+\item Calculer $\det(f',f'')$ et déterminer les points d'inflexion.
+\item Tracer $\mathcal C$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{c-concours2}
+\q{1.} $y=tx$ et $x+y=\frac{t^2+t^3}{1+t}=t^2$. Donc $x^2(x+y)=t^2x^2=y^2$.
+
+\q{2.} $x'(t)=\dfrac{2t(1+t)-t^2}{(1+t)^2}=\dfrac{t(t+2)}{(1+t)^2}$ et $y'(t)=\dfrac{3t^2(1+t)-t^3}{(1+t)^2}=\dfrac{t^2(2t+3)}{(1+t)^2}$.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c|ccccccccccccc}
+$t$ & $-\infty$ & & $-2$ & & $-\frac32$ & & $-1$ & & $0$ & & $+\infty$\\\hline
+$x'$ & & $+$ & $0$ & $-$ & & $-$ & $\|$ & $-$ & $0$ & $+$ & \\
+$x$ & $-\infty$ & $\nearrow$ & $-4$ & $\searrow$ & $-\frac92$ & $\searrow$ & $-\infty\,\|\,+\infty$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$\\
+$y'$ & & $-$ & & $-$ & $0$ & $+$ & $\|$ & $+$ & $0$ & $+$ & \\
+$y$ & $+\infty$ & $\searrow$ & $8$ & $\searrow$ & $\frac{27}4$ & $\nearrow$ & $+\infty\,\|\,-\infty$ & $\nearrow$ & $0$ & $\nearrow$ & $+\infty$
+\end{tabular}
+\end{center}
+Tangente verticale en $M(-2)=(-4,8)$ ($y'(-2)=-4\neq0$), horizontale en $M\left(-\frac32\right)=\left(-\frac92,\frac{27}4\right)$ ($x'\left(-\frac32\right)=-3\neq0$).
+
+\q{3.} $f'(0)=\ve0$. $\frac1{1+t}=1-t+o(t)$ donne $x=t^2-t^3+o(t^3)$ et $y=t^3+o(t^3)$ :
+$f(t)=t^2(1,0)+t^3(-1,1)+o(t^3)$, $\det\big((1,0),(-1,1)\big)=1\neq0$ : $p=2$, $q=3$, rebroussement de première espèce en $O$, tangente $(Ox)$.
+
+\q{4.} \emph{$t\to-1$.} $x\to\pm\infty$ et $y\to\mp\infty$ ; $\frac yx=t\to-1$ et $y+x=t^2\to1$ : asymptote $\mathcal D:y=-x+1$. Position : $y-(-x+1)=t^2-1=(t-1)(t+1)$ ; pour $t\to-1^+$, c'est négatif : courbe au-dessous de $\mathcal D$ (côté $x\to+\infty$) ; pour $t\to-1^-$, positif : au-dessus (côté $x\to-\infty$).
+
+\emph{$t\to\pm\infty$.} $x\sim t$ et $y\sim t^2$ : $\frac yx=t\to\pm\infty$, branches paraboliques de direction $(Oy)$.
+
+\q{5.} En dérivant $x'$ et $y'$ (ou à partir de $y=tx$ : $y'=x+tx'$, $y''=2x'+tx''$, d'où $\det(f',f'')=x'y''-y'x''=2x'^2-xx''$) on obtient
+\[\det(f',f'')=\frac{2t^2(t+3)}{(1+t)^3}.\]
+Il change de signe en $t=-3$ (et seulement là, $t=-1$ étant exclu, $t=0$ étant le point stationnaire) : $M(-3)=\left(-\frac92,\frac{27}2\right)$ est le seul point d'inflexion.
+
+\q{6.} Pour $t<-1$ : l'arc vient d'en haut à gauche (branche parabolique), passe par l'inflexion $M(-3)=\left(-\frac92,\frac{27}2\right)$, par la tangente verticale en $M(-2)=(-4,8)$ et la tangente horizontale en $M\left(-\frac32\right)=\left(-\frac92,\frac{27}4\right)$, puis longe $\mathcal D$ par-dessus en remontant vers la gauche. Pour $t>-1$ : arc venant d'en bas à droite le long de $\mathcal D$ (par-dessous), rebroussement en $O$ avec tangente $(Ox)$, puis branche parabolique vers le haut à droite.
+\retenir{trouver une équation cartésienne $y=tx$ simplifie la recherche de l'asymptote : $x+y$ s'exprime directement en $t$.}
+\end{corrige}

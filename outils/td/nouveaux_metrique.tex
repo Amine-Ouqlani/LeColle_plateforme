@@ -1,0 +1,315 @@
+% =====================================================================
+%  TD Propriétés métriques — exemples du livre (volume 2) mis en exercice, et exercices ajoutés
+% =====================================================================
+
+% ------------------------------------------------ exemples du livre
+\begin{exo}{ex-cardio}{1}{longueur de la cardioïde}
+On considère $f(t)=\big((1-\cos t)\cos t,\ (1-\cos t)\sin t\big)$.
+\begin{enumerate}
+\item Calculer $\|f'(t)\|^2$ et l'écrire à l'aide de $\sin\frac t2$.
+\item En déduire la longueur de la cardioïde ($t\in[0,2\pi]$).
+\item Que donnerait le même calcul sur $[0,4\pi]$ ? Commenter.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-cardio}
+\q{1.} $x'=\sin t\cos t-(1-\cos t)\sin t=\sin2t-\sin t$ et $y'=\sin^2t+(1-\cos t)\cos t=\cos t-\cos2t$. Donc
+\[x'^2+y'^2=(\sin^2 2t+\cos^2 2t)+(\sin^2t+\cos^2t)-2(\sin2t\sin t+\cos2t\cos t),\]
+c'est-à-dire $x'^2+y'^2=2-2\cos t=4\sin^2\frac t2$.
+
+\q{2.} Sur $[0,2\pi]$, $\sin\frac t2\geq0$, donc $\|f'(t)\|=2\sin\frac t2$ (sans valeur absolue) et
+\[L=\int_0^{2\pi}2\sin\tfrac t2\,dt=\left[-4\cos\tfrac t2\right]_0^{2\pi}=8.\]
+
+\q{3.} On trouverait $16$ : la courbe est parcourue deux fois. Une longueur mesure le chemin \emph{parcouru} ; on intègre sur un intervalle où chaque arc n'est décrit qu'une fois.
+\piege{oublier la valeur absolue : $\sqrt{4\sin^2\frac t2}=2\left|\sin\frac t2\right|$.}
+\end{corrige}
+
+\begin{exo}{ex-devparab}{3}{repère de Frenet et développée de la parabole}
+On considère la parabole $f(t)=\left(t,\frac{t^2}2\right)$, $t\in\R$.
+\begin{enumerate}
+\item Déterminer le repère de Frenet $(M,\ve T,\ve N)$ en $M(t)$, la courbure $\gamma(t)$ et le rayon de courbure $R(t)$.
+\item Déterminer le centre de courbure $I(t)$, puis la développée. Quelle particularité présente-t-elle au point qui correspond au sommet de la parabole ?
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-devparab}
+\q{1.} $f'=(1,t)$, $v=\|f'\|=\sqrt{1+t^2}$, $\ve T=\frac{(1,t)}{\sqrt{1+t^2}}$ et $\ve N=\frac{(-t,1)}{\sqrt{1+t^2}}$ (rotation de $+\frac\pi2$). Avec $f''=(0,1)$ :
+\[\gamma=\frac{\det(f',f'')}{v^3}=\frac1{(1+t^2)^{3/2}},\qquad R=(1+t^2)^{3/2}.\]
+
+\q{2.} $I=M+R\ve N=\left(t,\frac{t^2}2\right)+(1+t^2)(-t,1)=\left(-t^3,\ 1+\frac32t^2\right)$. La développée est une parabole semi-cubique ($x^2=\frac8{27}(y-1)^3$) ; elle a un point de rebroussement en $(0,1)$, centre de courbure au sommet $O$ de la parabole, où $R=1$.
+\retenir{au sommet d'une courbe (point sur un axe de symétrie), la courbure est extrémale et la développée présente en général un rebroussement.}
+\end{corrige}
+
+\begin{exo}{ex-echelle}{3}{l'échelle qui glisse}
+Une échelle de longueur $L>0$ glisse, son pied sur l'axe $(Ox)$ et son sommet sur l'axe $(Oy)$. On note $\theta\in\left]0,\frac\pi2\right[$ l'angle qu'elle fait avec le sol.
+\begin{enumerate}
+\item Montrer que la droite qui porte l'échelle a pour équation $x\sin\theta+y\cos\theta=L\sin\theta\cos\theta$.
+\item Déterminer l'enveloppe des positions de l'échelle et la reconnaître.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{ex-echelle}
+\q{1.} Le pied est $A(L\cos\theta,0)$, le sommet $B(0,L\sin\theta)$. L'équation $\frac x{L\cos\theta}+\frac y{L\sin\theta}=1$, multipliée par $L\sin\theta\cos\theta$, donne $x\sin\theta+y\cos\theta=L\sin\theta\cos\theta$.
+
+\q{2.} On dérive par rapport à $\theta$, $x$ et $y$ fixés : $x\cos\theta-y\sin\theta=L\cos2\theta$. Le système
+\[\begin{cases}x\sin\theta+y\cos\theta=L\sin\theta\cos\theta\\ x\cos\theta-y\sin\theta=L(\cos^2\theta-\sin^2\theta)\end{cases}\]
+a pour déterminant $-\sin^2\theta-\cos^2\theta=-1$. On obtient $x=L\cos^3\theta$, $y=L\sin^3\theta$ : l'enveloppe est l'arc d'\emph{astroïde} $x^{2/3}+y^{2/3}=L^{2/3}$ situé dans le premier quadrant.
+
+\emph{Vérification.} $M'(\theta)=3L\sin\theta\cos\theta\,(-\cos\theta,\sin\theta)$ est bien colinéaire à la direction de l'échelle, $(-\cos\theta,\sin\theta)$.
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés : partie I
+\begin{exo}{met-cercle}{1}{courbure d'un cercle, d'une droite}
+\begin{enumerate}
+\item Pour le cercle $f(t)=(a+r\cos t,\ b+r\sin t)$, $r>0$, déterminer l'abscisse curviligne d'origine $t=0$, le repère de Frenet, la courbure et le centre de courbure.
+\item Même question pour une droite $f(t)=A+t\ve u$, $\|\ve u\|=1$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-cercle}
+\q{1.} $f'(t)=r(-\sin t,\cos t)$, $\|f'\|=r$, donc $s=rt$. $\ve T=(-\sin t,\cos t)$, $\ve N=(-\cos t,-\sin t)$ : la normale est dirigée vers le centre $\Omega(a,b)$. $f''=-r(\cos t,\sin t)$ et $\det(f',f'')=r^2(\sin^2t+\cos^2t)=r^2$, d'où $\gamma=\frac{r^2}{r^3}=\frac1r$, $R=r$ et $I=M+r\ve N=\Omega$ : le cercle est son propre cercle de courbure ; sa développée est réduite au point $\Omega$.
+
+\q{2.} $f'=\ve u$, $f''=\ve0$ : $\gamma=0$ en tout point. La courbure est nulle, il n'y a pas de centre de courbure (on dit parfois « rayon infini »).
+\retenir{courbure constante $\frac1r$ pour un cercle de rayon $r$ parcouru dans le sens direct (elle vaut $-\frac1r$ dans le sens indirect) ; nulle pour une droite.}
+\end{corrige}
+
+\begin{exo}{met-parab}{2}{longueur d'un arc de parabole}
+Calculer la longueur de l'arc de la parabole $y=\frac{x^2}2$ compris entre les points d'abscisses $0$ et $1$.
+\end{exo}
+
+\begin{corrige}{met-parab}
+On paramètre par $f(x)=\left(x,\frac{x^2}2\right)$ : $\|f'(x)\|=\sqrt{1+x^2}$ et $L=\int_0^1\sqrt{1+x^2}\,dx$.
+On pose $x=\sh u$, $dx=\ch u\,du$, $\sqrt{1+x^2}=\ch u$ :
+\[L=\int_0^{\argsh1}\ch^2u\,du=\left[\frac u2+\frac{\sh2u}4\right]_0^{\argsh1}=\left[\frac u2+\frac{\sh u\ch u}2\right]_0^{\argsh1}.\]
+Avec $\argsh1=\ln(1+\sqrt2)$, $\sh u=1$ et $\ch u=\sqrt2$ : $L=\dfrac{\sqrt2+\ln(1+\sqrt2)}2\approx1{,}148$.
+\gain{pour $\sqrt{1+x^2}$, le changement $x=\sh u$ fait disparaître la racine ; pour $\sqrt{1-x^2}$, c'est $x=\sin u$.}
+\end{corrige}
+
+\begin{exo}{met-chain}{1}{longueur sur la chaînette}
+Soit la chaînette $y=\ch x$. Calculer la longueur de l'arc d'extrémités $A(0,1)$ et $M(a,\ch a)$, $a>0$, puis l'abscisse curviligne d'origine $A$.
+\end{exo}
+
+\begin{corrige}{met-chain}
+$f(x)=(x,\ch x)$, $\|f'\|=\sqrt{1+\sh^2x}=\ch x$ (positif). Donc $L=\int_0^a\ch x\,dx=\sh a$. L'abscisse curviligne d'origine $A$, orientée dans le sens des $x$ croissants, est $s(x)=\sh x$ (valable pour tout $x\in\R$).
+\end{corrige}
+
+\begin{exo}{met-graphe}{2}{courbure d'un graphe}
+Soit $g$ une fonction de classe $\mathcal C^2$ sur un intervalle $I$ et $\Gamma$ son graphe, paramétré par $f(x)=(x,g(x))$.
+\begin{enumerate}
+\item Montrer que la courbure au point d'abscisse $x$ vaut $\gamma(x)=\dfrac{g''(x)}{\big(1+g'(x)^2\big)^{3/2}}$.
+\item Application : rayon de courbure de $y=x^2$ en $O$, et de $y=\ln x$ au point d'abscisse $1$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-graphe}
+\q{1.} $f'=(1,g')$, $f''=(0,g'')$, $\det(f',f'')=g''$ et $\|f'\|=\sqrt{1+g'^2}$, d'où $\gamma=\frac{\det(f',f'')}{\|f'\|^3}=\frac{g''}{(1+g'^2)^{3/2}}$.
+
+\q{2.} Pour $g(x)=x^2$ : $g'(0)=0$, $g''(0)=2$, $\gamma(0)=2$, $R=\frac12$. Pour $g=\ln$ : $g'(1)=1$, $g''(1)=-1$, $\gamma(1)=\frac{-1}{2^{3/2}}$, donc $|R|=2\sqrt2$ (le signe négatif indique que la courbe tourne dans le sens indirect, vers sa droite).
+\end{corrige}
+
+\begin{exo}{met-env-cercle}{1}{une première enveloppe}
+Déterminer l'enveloppe de la famille de droites $\mathcal D_t:x\cos t+y\sin t=1$, $t\in\R$. Interpréter.
+\end{exo}
+
+\begin{corrige}{met-env-cercle}
+On résout le système formé de l'équation et de sa dérivée par rapport à $t$ :
+\[\begin{cases}x\cos t+y\sin t=1\\-x\sin t+y\cos t=0\end{cases}\]
+de déterminant $1$ : $x=\cos t$, $y=\sin t$. L'enveloppe est le cercle unité ; $\mathcal D_t$ est sa tangente au point $(\cos t,\sin t)$ (elle est orthogonale au rayon et à distance $1$ de $O$).
+\end{corrige}
+
+% ------------------------------------------------ partie II
+\begin{exo}{met-spirale}{3}{la spirale logarithmique}
+On considère $f(t)=(e^t\cos t,\ e^t\sin t)$, $t\in\R$.
+\begin{enumerate}
+\item Calculer $\|f'(t)\|$, puis l'abscisse curviligne $s(t)$ d'origine « $t=-\infty$ » (justifier la convergence). Comparer $s(t)$ et la distance $OM(t)$.
+\item Montrer que l'angle entre $\vv{OM}$ et la tangente est constant.
+\item Calculer la courbure et le centre de courbure. Reconnaître la développée.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-spirale}
+\q{1.} $f'(t)=e^t(\cos t-\sin t,\ \sin t+\cos t)$ et $\|f'\|^2=e^{2t}\big((\cos t-\sin t)^2+(\sin t+\cos t)^2\big)=2e^{2t}$, donc $\|f'\|=\sqrt2\,e^t$. L'intégrale $\int_{-\infty}^t\sqrt2e^u\,du$ converge et vaut $s(t)=\sqrt2\,e^t$. Comme $OM(t)=e^t$ : $s=\sqrt2\,OM$. La spirale fait une infinité de tours autour de $O$, mais avec une longueur finie.
+
+\q{2.} $\vv{OM}\cdot f'=e^{2t}\big(\cos t(\cos t-\sin t)+\sin t(\sin t+\cos t)\big)=e^{2t}$, d'où $\cos\big(\vv{OM},f'\big)=\frac{e^{2t}}{e^t\cdot\sqrt2e^t}=\frac1{\sqrt2}$ : l'angle vaut constamment $\frac\pi4$.
+
+\q{3.} $f''=e^t(-2\sin t,\ 2\cos t)$ et $\det(f',f'')=e^{2t}\big(2\cos t(\cos t-\sin t)+2\sin t(\sin t+\cos t)\big)=2e^{2t}$. Donc $\gamma=\frac{2e^{2t}}{2\sqrt2e^{3t}}=\frac{1}{\sqrt2\,e^t}$ et $R=\sqrt2\,e^t$. Avec $\ve N=\frac1{\sqrt2}(-\sin t-\cos t,\ \cos t-\sin t)$ :
+\[I=M+R\ve N=e^t(\cos t,\sin t)+e^t(-\sin t-\cos t,\ \cos t-\sin t)=e^t(-\sin t,\ \cos t).\]
+$I(t)$ est l'image de $M(t)$ par la rotation de centre $O$ et d'angle $\frac\pi2$ : la développée est une spirale logarithmique, image de la courbe par cette rotation.
+\end{corrige}
+
+\begin{exo}{met-env-hyp}{2}{l'hyperbole comme enveloppe}
+Pour $t\neq0$, on considère la droite $\mathcal D_t:x+t^2y=2t$.
+\begin{enumerate}
+\item Déterminer l'enveloppe de la famille $(\mathcal D_t)$.
+\item Vérifier que $\mathcal D_t$ est tangente à l'hyperbole $xy=1$. En quel point ?
+\item Interprétation : montrer que le point de contact est le milieu du segment de $\mathcal D_t$ découpé par les axes.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-env-hyp}
+\q{1.} En dérivant par rapport à $t$ : $2ty=2$, d'où $y=\frac1t$, puis $x=2t-t^2\cdot\frac1t=t$. L'enveloppe est paramétrée par $\left(t,\frac1t\right)$, $t\neq0$ : c'est l'hyperbole $xy=1$.
+
+\q{2.} La tangente à $xy=1$ en $\left(t,\frac1t\right)$ a pour pente $-\frac1{t^2}$ (dérivée de $x\mapsto\frac1x$ en $t$) : $y-\frac1t=-\frac{x-t}{t^2}$, soit $t^2y-t=-x+t$, c'est-à-dire $x+t^2y=2t$ : c'est bien $\mathcal D_t$, tangente au point $\left(t,\frac1t\right)$.
+
+\q{3.} $\mathcal D_t$ coupe les axes en $P(2t,0)$ et $Q\left(0,\frac2t\right)$ ; le milieu de $[PQ]$ est $\left(t,\frac1t\right)$. Conséquence : l'aire du triangle $OPQ$ vaut $\frac12\cdot2|t|\cdot\frac2{|t|}=2$, indépendante de $t$.
+\end{corrige}
+
+\begin{exo}{met-cardio-courb}{3}{courbure de la cardioïde}
+On reprend la cardioïde $f(t)=\big((1-\cos t)\cos t,\ (1-\cos t)\sin t\big)$, $t\in\,]0,2\pi[$.
+\begin{enumerate}
+\item Calculer $\det(f',f'')$.
+\item En déduire la courbure et le rayon de courbure en $M(t)$. Où le rayon de courbure est-il maximal ? Que se passe-t-il quand $t\to0$ ?
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-cardio-courb}
+\q{1.} Avec $x'=\sin2t-\sin t$, $y'=\cos t-\cos2t$ (exercice~\ref{e:ex-cardio}) : $x''=2\cos2t-\cos t$, $y''=-\sin t+2\sin2t$. Alors
+\[\det(f',f'')=(\sin2t-\sin t)(2\sin2t-\sin t)-(\cos t-\cos2t)(2\cos2t-\cos t).\]
+En développant : $2(\sin^22t+\cos^22t)+(\sin^2t+\cos^2t)-3(\sin2t\sin t+\cos2t\cos t)=3-3\cos t$.
+
+\q{2.} $\|f'\|=2\sin\frac t2$ sur $]0,2\pi[$ et $3-3\cos t=6\sin^2\frac t2$, donc
+\[\gamma=\frac{6\sin^2\frac t2}{8\sin^3\frac t2}=\frac3{4\sin\frac t2},\qquad R=\frac43\sin\frac t2.\]
+$R$ est maximal pour $t=\pi$, au point $(-2,0)$, où $R=\frac43$. Quand $t\to0$, $R\to0$ : la courbure devient infinie à l'approche du point de rebroussement $O$.
+\end{corrige}
+
+% ------------------------------------------------ partie III
+\begin{exo}{met-astro-dev}{4}{développée de l'astroïde}
+On considère l'astroïde $f(t)=(\cos^3t,\sin^3t)$, $t\in\left]0,\frac\pi2\right[$.
+\begin{enumerate}
+\item Déterminer le repère de Frenet et le rayon de courbure en $M(t)$.
+\item Montrer que le centre de courbure est $I(t)=\big((2-\cos2t)\cos t,\ (2+\cos2t)\sin t\big)$, ou encore $I(t)=\big(\cos^3t+3\cos t\sin^2t,\ \sin^3t+3\sin t\cos^2t\big)$.
+\item On pose $u=x+y$ et $v=y-x$. Montrer que $u=(\cos t+\sin t)^3$ et $v=(\sin t-\cos t)^3$. En déduire que la développée est l'image de l'astroïde par une similitude dont on donnera l'angle et le rapport.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-astro-dev}
+\q{1.} $f'(t)=3\sin t\cos t\,(-\cos t,\ \sin t)$ avec $3\sin t\cos t>0$ sur $\left]0,\frac\pi2\right[$. Donc $v=3\sin t\cos t$, $\ve T=(-\cos t,\sin t)$, $\ve N=(-\sin t,-\cos t)$. L'angle $\alpha$ de la tangente vérifie $\ve T=(\cos\alpha,\sin\alpha)$ avec $\alpha=\pi-t$, donc $\frac{d\alpha}{dt}=-1$ et
+\[\gamma=\frac{d\alpha}{ds}=\frac{-1}{3\sin t\cos t},\qquad R=-3\sin t\cos t.\]
+(Le signe négatif : la courbe tourne dans le sens indirect pour ce sens de parcours.)
+
+\q{2.} $I=M+R\ve N=(\cos^3t,\sin^3t)+3\sin t\cos t\,(\sin t,\cos t)=\big(\cos^3t+3\cos t\sin^2t,\ \sin^3t+3\sin t\cos^2t\big)$. Avec $\sin^2t=\frac{1-\cos2t}2$ : $\cos^3t+3\cos t\sin^2t=\cos t\,(\cos^2t+3\sin^2t)=\cos t\,(2-\cos2t)$, et de même $\sin t\,(\sin^2t+3\cos^2t)=\sin t\,(2+\cos2t)$.
+
+\q{3.} Avec $c=\cos t$, $s=\sin t$ : $u=c^3+3cs^2+3c^2s+s^3=(c+s)^3$ et $v=s^3+3sc^2-c^3-3cs^2=(s-c)^3$. Or $c+s=\sqrt2\cos\left(t-\frac\pi4\right)$ et $s-c=\sqrt2\sin\left(t-\frac\pi4\right)$, donc avec $\tau=t-\frac\pi4$ :
+\[u=2\sqrt2\cos^3\tau,\qquad v=2\sqrt2\sin^3\tau.\]
+Les coordonnées $(u,v)$ sont celles de $I$, au facteur $\sqrt2$ près, dans le repère orthonormé tourné de $\frac\pi4$ : $\left(\frac u{\sqrt2},\frac v{\sqrt2}\right)=2(\cos^3\tau,\sin^3\tau)$. La développée est donc l'image de l'astroïde par la similitude de centre $O$, de rapport $2$ et d'angle $\frac\pi4$.
+\end{corrige}
+
+\begin{exo}{met-chain-dev}{3}{courbure et développée de la chaînette}
+Soit la chaînette $f(x)=(x,\ch x)$.
+\begin{enumerate}
+\item Montrer que le rayon de courbure vaut $R=\ch^2x$.
+\item Déterminer le centre de courbure $I(x)$.
+\item Soit $N$ le point où la normale en $M$ coupe l'axe $(Ox)$. Montrer que $MI=MN$ et que $I$ est le symétrique de $N$ par rapport à $M$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-chain-dev}
+\q{1.} Formule du graphe (exercice~\ref{e:met-graphe}) : $\gamma=\frac{\ch x}{(1+\sh^2x)^{3/2}}=\frac{\ch x}{\ch^3x}=\frac1{\ch^2x}$, donc $R=\ch^2x$.
+
+\q{2.} $f'=(1,\sh x)$, $\|f'\|=\ch x$, $\ve T=\frac{(1,\sh x)}{\ch x}$, $\ve N=\frac{(-\sh x,1)}{\ch x}$. Donc
+\[I=M+R\ve N=(x,\ch x)+\ch x\,(-\sh x,1)=\big(x-\sh x\ch x,\ 2\ch x\big).\]
+
+\q{3.} La normale est $M+\lambda\ve N$ ; elle coupe $(Ox)$ quand $\ch x+\frac{\lambda}{\ch x}=0$, c'est-à-dire $\lambda=-\ch^2x$ : $N=M-\ch^2x\,\ve N$. Comme $I=M+\ch^2x\,\ve N$, on a $\vv{MI}=-\vv{MN}$ : $M$ est le milieu de $[IN]$, et $MI=MN=\ch^2x$.
+\end{corrige}
+
+% ------------------------------------------------ partie IV
+\begin{exo}{met-tractrice}{5}{tractrice et chaînette (type concours)}
+On considère la courbe $\mathcal T$ (tractrice) définie pour $t>0$ par
+\[x(t)=t-\th t,\qquad y(t)=\frac1{\ch t}.\]
+\begin{enumerate}
+\item Calculer $f'(t)$ et montrer que $\|f'(t)\|=\th t$. En déduire l'abscisse curviligne $s(t)$ d'origine $t=0$ ($M(0)=(0,1)$).
+\item Montrer que la tangente en $M(t)$ coupe l'axe $(Ox)$ en $P(t,0)$ et que $MP=1$. Interpréter mécaniquement (« courbe du chien »).
+\item Déterminer le repère de Frenet, puis montrer que le centre de courbure est $I(t)=(t,\ch t)$. Reconnaître la développée de la tractrice.
+\item Exprimer $y$ en fonction de $s$ et retrouver le rayon de courbure à partir de la relation $R=\frac{ds}{d\alpha}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-tractrice}
+\q{1.} $x'=1-\frac1{\ch^2t}=\th^2t$ et $y'=-\frac{\sh t}{\ch^2t}=-\frac{\th t}{\ch t}$. Donc
+\[f'(t)=\th t\left(\th t,\ -\frac1{\ch t}\right),\qquad\|f'\|^2=\th^2t\left(\th^2t+\frac1{\ch^2t}\right)=\th^2t,\]
+car $\sh^2+1=\ch^2$. Pour $t>0$, $\|f'\|=\th t$ et $s(t)=\int_0^t\th u\,du=\ln\ch t$.
+
+\q{2.} La tangente en $M$ est dirigée par $\ve T=\left(\th t,-\frac1{\ch t}\right)$, \emph{unitaire}. On cherche $\lambda$ tel que $M+\lambda\ve T$ soit sur $(Ox)$ : $\frac1{\ch t}-\frac\lambda{\ch t}=0$, d'où $\lambda=1$ et $P=M+\ve T=(t-\th t+\th t,\ 0)=(t,0)$. Ainsi $MP=\|\ve T\|=1$. Interprétation : un objet $M$ tiré par une laisse de longueur $1$ dont l'extrémité $P$ avance sur $(Ox)$ décrit la tractrice ; la laisse est toujours tangente à la trajectoire.
+
+\q{3.} $\ve N$ s'obtient par rotation de $+\frac\pi2$ : $\ve N=\left(\frac1{\ch t},\ \th t\right)$. L'angle de la tangente vérifie $\cos\alpha=\th t$, $\sin\alpha=-\frac1{\ch t}$. En dérivant $\cos\alpha=\th t$ : $-\sin\alpha\,\alpha'=\frac1{\ch^2t}$, donc $\alpha'=\frac1{\ch t}$, puis
+\[\gamma=\frac{d\alpha}{ds}=\frac{\alpha'}{s'}=\frac{1/\ch t}{\th t}=\frac1{\sh t},\qquad R=\sh t.\]
+$I=M+R\ve N=\left(t-\th t+\frac{\sh t}{\ch t},\ \frac1{\ch t}+\sh t\,\th t\right)=\left(t,\ \frac{1+\sh^2t}{\ch t}\right)=(t,\ch t)$. La développée de la tractrice est la chaînette $y=\ch x$.
+
+\q{4.} $s=\ln\ch t$ donne $\ch t=e^s$, donc $y=\frac1{\ch t}=e^{-s}$. Et $R=\frac{ds}{d\alpha}=\frac{s'}{\alpha'}=\th t\,\ch t=\sh t=\sqrt{e^{2s}-1}$, ce qui confirme le résultat de la question 3.
+\retenir{une courbe dont la tangente unitaire « tombe » toujours sur une droite fixe à distance constante est une tractrice ; sa développée est une chaînette.}
+\end{corrige}
+
+% ------------------------------------------------ exercices ajoutés (deuxième série)
+\begin{exo}{met-osc-exp}{2}{cercle de courbure d'un graphe}
+On considère le graphe de la fonction exponentielle, au point $A(0,1)$.
+\begin{enumerate}
+\item Calculer la courbure et le rayon de courbure en $A$ (on pourra utiliser l'exercice~\ref{e:met-graphe}).
+\item Déterminer le centre de courbure $I$ et une équation du cercle de courbure en $A$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-osc-exp}
+\q{1.} Avec $g=\exp$ : $g'(0)=g''(0)=1$, donc $\gamma(0)=\dfrac{1}{(1+1)^{3/2}}=\dfrac1{2\sqrt2}$ et $R=2\sqrt2$.
+
+\q{2.} $f(x)=(x,e^x)$, $f'(0)=(1,1)$, $\ve T=\frac1{\sqrt2}(1,1)$ et $\ve N=\frac1{\sqrt2}(-1,1)$. Donc
+\[I=A+R\ve N=(0,1)+2\sqrt2\cdot\tfrac1{\sqrt2}(-1,1)=(-2,3).\]
+Le cercle de courbure a pour équation $(x+2)^2+(y-3)^2=8$ ; il passe bien par $A$ ($4+4=8$) et il est tangent en $A$ à la courbe (son centre est sur la normale).
+\retenir{le centre de courbure est sur la normale, du côté où la courbe tourne ($\gamma>0$ : du côté de $\ve N$).}
+\end{corrige}
+
+\begin{exo}{met-env-parab}{2}{une parabole comme enveloppe}
+Pour $t\in\,]0,1[$, on note $\mathcal D_t$ la droite passant par $P(t,0)$ et $Q(0,1-t)$.
+\begin{enumerate}
+\item Montrer que $\mathcal D_t$ a pour équation $(1-t)x+ty=t(1-t)$.
+\item Déterminer l'enveloppe de la famille $(\mathcal D_t)$, puis montrer qu'elle est contenue dans la courbe d'équation $\sqrt x+\sqrt y=1$.
+\item Vérifier que cette enveloppe est contenue dans la parabole $(x-y)^2-2(x+y)+1=0$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-env-parab}
+\q{1.} L'équation $\frac xt+\frac y{1-t}=1$ (droite qui coupe les axes en $P$ et $Q$), multipliée par $t(1-t)$, donne $(1-t)x+ty=t(1-t)$.
+
+\q{2.} On dérive par rapport à $t$, $x$ et $y$ fixés : $-x+y=1-2t$. Le système
+\[\begin{cases}(1-t)x+ty=t-t^2\\-x+y=1-2t\end{cases}\]
+a pour déterminant $(1-t)+t=1$. La seconde équation donne $y=x+1-2t$ ; en reportant : $x+t(1-2t)=t-t^2$, d'où $x=t^2$, puis $y=(1-t)^2$. L'enveloppe est $t\mapsto\big(t^2,(1-t)^2\big)$, $t\in\,]0,1[$, et $\sqrt x+\sqrt y=t+(1-t)=1$.
+
+\q{3.} $x-y=2t-1$ et $x+y=2t^2-2t+1$, donc $(x-y)^2-2(x+y)+1=4t^2-4t+1-4t^2+4t-2+1=0$. La partie quadratique $(x-y)^2$ est un carré : c'est une parabole (d'axe dirigé par $(1,1)$), tangente aux axes en $(1,0)$ et $(0,1)$.
+\gain{le point de contact $\big(t^2,(1-t)^2\big)$ est sur le segment $[PQ]$ : c'est $P+(1-t)\vv{PQ}$.}
+\end{corrige}
+
+\begin{exo}{met-boucle}{3}{longueur et courbure d'une boucle}
+On considère la courbe $f(t)=\left(t^2,\ t-\dfrac{t^3}3\right)$, $t\in\R$.
+\begin{enumerate}
+\item Montrer que la courbe a un unique point double, atteint pour $t=\pm\sqrt3$.
+\item Montrer que $\|f'(t)\|=1+t^2$ et calculer la longueur de la boucle.
+\item Calculer la courbure en $M(t)$, puis le rayon de courbure en $O$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-boucle}
+\q{1.} $x(t)=x(s)$ avec $t\neq s$ impose $s=-t$ ; puis $y(t)=y(-t)$ donne $2\left(t-\frac{t^3}3\right)=0$, soit $t=\pm\sqrt3$ ($t\neq0$). Unique point double : $M(\pm\sqrt3)=(3,0)$.
+
+\q{2.} $f'(t)=(2t,\ 1-t^2)$ et $\|f'\|^2=4t^2+1-2t^2+t^4=(1+t^2)^2$, donc $\|f'(t)\|=1+t^2$. La boucle correspond à $t\in[-\sqrt3,\sqrt3]$ :
+\[L=\int_{-\sqrt3}^{\sqrt3}(1+t^2)\,dt=2\left(\sqrt3+\frac{3\sqrt3}3\right)=4\sqrt3.\]
+
+\q{3.} $f''=(2,-2t)$, $\det(f',f'')=-4t^2-2(1-t^2)=-2(1+t^2)$, d'où
+\[\gamma(t)=\frac{-2(1+t^2)}{(1+t^2)^3}=-\frac2{(1+t^2)^2},\qquad R(t)=-\frac{(1+t^2)^2}2.\]
+En $O=M(0)$ : $|R|=\frac12$. (Le signe négatif : la courbe tourne dans le sens indirect.)
+\retenir{une longueur se calcule bien quand $\|f'\|^2$ est un carré parfait : c'est ce qu'il faut chercher avant d'intégrer.}
+\end{corrige}
+
+\begin{exo}{met-courbure-cste}{3}{les courbes à courbure constante}
+Soit $\Gamma$ une courbe de classe $\mathcal C^2$, régulière, paramétrée par son abscisse curviligne $s\mapsto M(s)$, de repère de Frenet $\big(\ve T(s),\ve N(s)\big)$ et de courbure $\gamma(s)$.
+\begin{enumerate}
+\item On suppose $\gamma$ constante et égale à $\frac1r$, $r>0$. Montrer que le point $I(s)=M(s)+r\ve N(s)$ est fixe. Conclure.
+\item On suppose $\gamma$ identiquement nulle. Montrer que $\Gamma$ est contenue dans une droite.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{met-courbure-cste}
+\choix{les formules de Frenet $\frac{d\ve T}{ds}=\gamma\ve N$ et $\frac{d\ve N}{ds}=-\gamma\ve T$ permettent de dériver tout ce qui s'écrit avec $M$, $\ve T$ et $\ve N$.}
+\q{1.} $\frac{dI}{ds}=\frac{dM}{ds}+r\frac{d\ve N}{ds}=\ve T-r\gamma\ve T=\ve T-\ve T=\ve0$. Sur l'intervalle de définition, $I$ est donc un point fixe $\Omega$. Alors $\Omega M(s)=\|{-r\ve N(s)}\|=r$ : $\Gamma$ est contenue dans le cercle de centre $\Omega$ et de rayon $r$.
+
+\q{2.} $\frac{d\ve T}{ds}=\gamma\ve N=\ve0$ : $\ve T$ est un vecteur constant $\ve T_0$. Alors $\frac{dM}{ds}=\ve T_0$, donc $M(s)=M(0)+s\,\ve T_0$ : $\Gamma$ est contenue dans la droite passant par $M(0)$ dirigée par $\ve T_0$.
+\retenir{courbure constante non nulle : arc de cercle ; courbure nulle : segment de droite. La courbure détermine la forme de la courbe.}
+\end{corrige}

@@ -82,5 +82,72 @@ LC.documents = {
     version: "v9",
     maj: "2026-11-03",
     description: "Première forme du travail : séance de deux heures découpée en étapes minutées, galerie d'exemples, séries d'entraînement. Remplacée par le livre principal, conservée pour mémoire."
+  },
+  /* ---- TD (générés par td/build_td.py) ---- */
+  "td-determinants": {
+    "titre": "TD — Déterminants",
+    "sousTitre": "Chapitre 1 · 41 exercices · énoncés",
+    "type": "td",
+    "fichier": "docs/td/TD_determinants.pdf",
+    "source": "docs/sources/td/TD_determinants.tex",
+    "pages": 14,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+  },
+  "td-determinants-corrections": {
+    "titre": "TD — Déterminants : corrections",
+    "sousTitre": "Chapitre 1 · corrections détaillées",
+    "type": "td",
+    "fichier": "docs/td/TD_determinants_corrections.pdf",
+    "source": "docs/sources/td/TD_determinants_corrections.tex",
+    "pages": 19,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Les corrections détaillées des 41 exercices du TD, dans le même ordre et avec les mêmes numéros."
+  },
+  "td-courbes": {
+    "titre": "TD — Courbes paramétrées",
+    "sousTitre": "Chapitre 2 · 32 exercices · énoncés",
+    "type": "td",
+    "fichier": "docs/td/TD_courbes.pdf",
+    "source": "docs/sources/td/TD_courbes.tex",
+    "pages": 13,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+  },
+  "td-courbes-corrections": {
+    "titre": "TD — Courbes paramétrées : corrections",
+    "sousTitre": "Chapitre 2 · corrections détaillées",
+    "type": "td",
+    "fichier": "docs/td/TD_courbes_corrections.pdf",
+    "source": "docs/sources/td/TD_courbes_corrections.tex",
+    "pages": 24,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Les corrections détaillées des 32 exercices du TD, dans le même ordre et avec les mêmes numéros."
+  },
+  "td-metrique": {
+    "titre": "TD — Propriétés métriques des courbes",
+    "sousTitre": "Chapitre 3 · 24 exercices · énoncés",
+    "type": "td",
+    "fichier": "docs/td/TD_metrique.pdf",
+    "source": "docs/sources/td/TD_metrique.tex",
+    "pages": 10,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+  },
+  "td-metrique-corrections": {
+    "titre": "TD — Propriétés métriques des courbes : corrections",
+    "sousTitre": "Chapitre 3 · corrections détaillées",
+    "type": "td",
+    "fichier": "docs/td/TD_metrique_corrections.pdf",
+    "source": "docs/sources/td/TD_metrique_corrections.tex",
+    "pages": 11,
+    "version": "v1",
+    "maj": "2026-11-05",
+    "description": "Les corrections détaillées des 24 exercices du TD, dans le même ordre et avec les mêmes numéros."
   }
 };

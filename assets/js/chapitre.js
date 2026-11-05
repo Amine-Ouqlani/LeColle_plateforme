@@ -12,25 +12,38 @@ const coursDoc = C.cours.doc;
 
 /* -------- cours */
 const cours = `<ul class="list">${C.cours.sections.map(s => `<li class="row"><div class="main"><span class="num">${s.num}</span><a href="${lecteurUrl(coursDoc, s.page)}">${s.titre}</a></div></li>`).join('')}
-  <li class="row"><div class="main"><span class="num"></span><a href="${lecteurUrl(coursDoc, C.cours.corriges.debut)}">Corrigés des exercices</a></div></li></ul>
-  <p class="muted" style="margin-top:10px">${doc(coursDoc).titre} · <a href="${doc(coursDoc).fichier}" download>télécharger le PDF</a></p>`;
+  <li class="row"><div class="main"><span class="num"></span><a href="${lecteurUrl(coursDoc, C.cours.corriges.debut)}">Corrigés des exercices du livre</a></div></li></ul>`;
 
-/* -------- fiche et présentation */
-const fichePres = C.fiche ? `
-  <p><a href="${lecteurUrl('fiche', C.fiche.debut)}">Fiche de référence</a> — pages ${C.fiche.debut} à ${C.fiche.fin} : définitions, théorèmes, formules, méthodes et pièges, à imprimer. <a href="${doc('fiche').fichier}" download>PDF</a></p>
-  <p><a href="${slidesUrl('presentation', C.presentation.debut)}">Présentation du cours</a> — diapositive par diapositive, comme en séance. Aussi <a href="${slidesUrl('presentationStatique', C.presentation.statique.debut)}">sans animations</a>.</p>`
-  : `<p class="muted">Pas encore de fiche ni de présentation pour ce chapitre : le <a href="${lecteurUrl(coursDoc, 13)}">résumé des méthodes du volume 2</a> en tient lieu.</p>`;
+/* -------- ressources du chapitre */
+const ligneRes = (titre, desc, liens) => `<li class="row"><div class="main">${titre}<br><span class="tag">${desc}</span></div><div class="side">${liens}</div></li>`;
+const lienDoc = (id, page, slides) => `<a href="${slides ? slidesUrl(id, page) : lecteurUrl(id, page)}">Lire</a><a href="${doc(id).fichier}" download>PDF</a>`;
+const T = C.td;
+const ressources = `<ul class="list">
+  ${ligneRes('Livre complet', `${doc(coursDoc).titre} : cours, exemples, exercices et corrigés · ${doc(coursDoc).pages} pages`, lienDoc(coursDoc, C.cours.debut))}
+  ${C.fiche ? ligneRes('Fiche de référence', `pages ${C.fiche.debut} à ${C.fiche.fin} : définitions, théorèmes, formules, méthodes et pièges, à imprimer`, lienDoc('fiche', C.fiche.debut))
+            : ligneRes('Fiche de référence', 'pas encore disponible : le résumé des méthodes du volume 2 en tient lieu', `<a href="${lecteurUrl(coursDoc, 13)}">Lire</a>`)}
+  ${C.presentation ? ligneRes('Présentation du cours', `diapositive par diapositive, comme en séance (<a href="${slidesUrl('presentationStatique', C.presentation.statique.debut)}">version sans animations</a>)`, lienDoc('presentation', C.presentation.debut, true))
+            : ligneRes('Présentation du cours', 'pas encore disponible pour ce chapitre', '')}
+  ${T ? ligneRes('TD complet', `${EXOS.length} exercices en quatre parties, sans les corrections · ${doc(T.doc).pages} pages`, lienDoc(T.doc, 1)) : ''}
+  ${T ? ligneRes('Corrections du TD', `corrections détaillées, mêmes numéros · ${doc(T.corrections).pages} pages`, lienDoc(T.corrections, 1)) : ''}
+  ${ligneRes('Annales et sujets supplémentaires', `${ANNS.length} extraits d'annales corrigés${SUJETS.length ? `, ${SUJETS.length} sujets chronométrés` : ''}`, `<a href="#annales">Voir</a>`)}
+</ul>`;
 
-/* -------- TD, regroupés par niveau */
+/* -------- TD, par partie ; chaque exercice ouvre le TD (et non le livre) à sa page */
+const dots = n => '●'.repeat(n) + '○'.repeat(5 - n);
+const ORIG = { lecolle: 'livre', exemple: 'exemple du cours', devoir: 'devoir type', complementaire: 'complémentaire' };
 const ligneExo = e => {
-  const origine = e.origine === 'td' ? `TD ${e.td}` : e.origine === 'devoir' ? 'devoir' : '';
-  return `<li><div class="row"><div class="main"><details><summary><span class="num">${e.num}</span>${e.titre}${origine ? ` <span class="tag">· ${origine}</span>` : ''}${e.hp ? ' <span class="tag">· hors programme</span>' : ''}</summary>
-    <div class="detail"><p><b>Objectif.</b> ${e.objectifs}</p><p><b>Notions.</b> ${e.notions.join(', ')}.</p><p><b>Prérequis.</b> ${e.prerequis.join(' ; ')}.</p><p><b>Indication.</b> ${e.indication}</p></div></details></div>
+  const origine = e.origine === 'td' ? `TD ${e.td}` : ORIG[e.origine] || '';
+  const det = [`<p><b>Objectif.</b> ${e.objectifs}</p>`, `<p><b>Notions.</b> ${e.notions.join(', ')}.</p>`,
+    e.prerequis && e.prerequis.length ? `<p><b>Prérequis.</b> ${e.prerequis.join(' ; ')}.</p>` : '',
+    `<p><b>Indication.</b> ${e.indication}</p>`, `<p class="tag">${e.provenance}</p>`].join('');
+  return `<li><div class="row"><div class="main"><details><summary><span class="num">${e.num}</span>${e.titre} <span class="tag">· ${origine}${e.hp ? ' · hors programme' : ''} · <span title="difficulté ${e.difficulte}/5" aria-label="difficulté ${e.difficulte} sur 5">${dots(e.difficulte)}</span></span></summary>
+    <div class="detail">${det}</div></details></div>
     <div class="side ex"><a href="${lecteurUrl(e.enonce.doc, e.enonce.page)}">Énoncé</a><a href="${lecteurUrl(e.corrige.doc, e.corrige.page)}">Corrigé</a></div></div></li>`;
 };
-const td = [1, 2, 3, 4].map(n => {
-  const cle = e => e.num.split('.').map(Number); const l = EXOS.filter(e => e.niveau === n).sort((a, b) => cle(a)[0] - cle(b)[0] || cle(a)[1] - cle(b)[1]);
-  return l.length ? `<h3>${LC.niveaux[n].nom}</h3><ul class="list">${l.map(ligneExo).join('')}</ul>` : '';
+const td = ['I', 'II', 'III', 'IV'].map(p => {
+  const l = EXOS.filter(e => e.partie === p).sort((a, b) => a.num - b.num);
+  return l.length ? `<h3>${p}. ${LC.parties[p].nom}</h3><ul class="list">${l.map(ligneExo).join('')}</ul>` : '';
 }).join('');
 
 /* -------- annales et entraînement */
@@ -53,12 +66,13 @@ $('#contenu').innerHTML = `
   <p class="kicker"><a href="index.html">Chapitres</a> · ${C.num}</p>
   <h1>${C.titre}</h1>
   <p class="intro">${C.accroche}</p>
-  <nav class="toc" aria-label="Sur cette page"><a href="#cours">Cours</a><a href="#fiche">Fiche et présentation</a><a href="#td">TD</a><a href="#annales">Annales</a><a href="#revision">Réviser</a></nav>
+  <nav class="toc" aria-label="Sur cette page"><a href="#ressources">Ressources</a><a href="#cours">Cours</a><a href="#td">TD</a><a href="#annales">Annales</a><a href="#revision">Réviser</a></nav>
 
-  <h2 id="cours">Cours</h2>${cours}
-  <h2 id="fiche">Fiche et présentation</h2>${fichePres}
+  <h2 id="ressources">Ressources</h2>${ressources}
+  <h2 id="cours">Cours</h2>
+  <p class="muted">Chaque partie s'ouvre dans le livre complet, à la bonne page.</p>${cours}
   <h2 id="td">TD</h2>
-  <p class="muted">Cherche l'exercice avant d'ouvrir le corrigé. Clique sur un titre pour voir l'objectif et une indication.</p>${td}
+  <p class="muted">Chaque exercice s'ouvre dans le TD, à sa page ; le corrigé, dans le livret de corrections. Cherche avant d'ouvrir le corrigé. Clique sur un titre pour l'objectif et une indication.</p>${td}
   <h2 id="annales">Annales</h2>${annales}
   ${sujets ? `<h2 id="entrainement">Sujets d'entraînement</h2>${sujets}` : ''}
   <h2 id="revision">Réviser</h2>${revision}
@@ -66,8 +80,8 @@ $('#contenu').innerHTML = `
   <nav class="pager">${prev ? `<a href="chapitre.html?id=${prev.id}">← ${prev.titre}</a>` : '<span></span>'}${next ? `<a href="chapitre.html?id=${next.id}">${next.titre} →</a>` : ''}</nav>`;
 renderMath($('#contenu'));
 
-/* ancres (y compris les anciennes : #presentation, #ressources, #ensemble) */
-const alias = { presentation: 'fiche', ressources: 'revision', ensemble: '' };
+/* ancres (y compris les anciennes : #presentation, #fiche, #ensemble) */
+const alias = { presentation: 'ressources', fiche: 'ressources', ensemble: '' };
 const h = location.hash.slice(1);
 const cible = h in alias ? alias[h] : h;
 const exo = params.get('exo');

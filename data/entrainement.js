@@ -11,7 +11,7 @@ LC.entrainement = [
     chapitres: ["courbes"], duree: 90, niveau: 4,
     origine: "Le Collé (livre, §2.8)",
     description: "Une étude complète : dérivées factorisées, tangentes, point stationnaire par développement, position globale, asymptotes, courbe asymptote, inflexion. À faire sans le livre, puis à corriger avec la fiche avant de lire le corrigé.",
-    enonce: { doc: "livre", page: 23 }, corrige: { doc: "livre", page: 43 }
+    enonce: { doc: "td-courbes", page: 12 }, corrige: { doc: "td-courbes-corrections", page: 20 }
   },
   {
     id: "ds-classe", type: "devoir", titre: "Devoir surveillé de la classe — correction et diagnostic",

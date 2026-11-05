@@ -36,9 +36,17 @@ contenu/annales/    corrections des annales (HTML + formules LaTeX rendues par K
 docs/               PDF et sources LaTeX
 assets/             interface : css/, js/, img/, vendor/ (pdf.js 3.11.174, KaTeX 0.16.9, embarqués)
 outils/verifier.js  contrôle de cohérence des données
+outils/td/          génération des TD (build_td.py) et intégration au site (integrer.py)
 ```
 
 Le contenu pédagogique est entièrement dans `data/` et `contenu/` ; le code de l'interface dans `assets/js/`.
+
+## Les TD
+
+Chaque chapitre a deux PDF dans `docs/td/` : le TD (énoncés seuls, en quatre parties : applications directes, classiques et méthodes, synthèse, difficiles et type concours) et le livret de corrections. Les livres restent inchangés.
+
+- Les énoncés et corrections des exercices du livre sont repris tels quels depuis ses sources ; les exemples du cours et les exercices complémentaires sont dans `outils/td/nouveaux_*.tex`, le plan dans `outils/td/meta.py`.
+- `python3 outils/td/build_td.py` compile les six PDF et relève la page de chaque exercice ; `python3 outils/td/integrer.py` copie les PDF dans `docs/td/` et régénère `data/exercices.js`, si bien que chaque lien « Énoncé » ou « Corrigé » du site ouvre le TD ou le livret à la bonne page. (Les chemins vers les sources des livres sont en tête de `build_td.py`.)
 
 ## Ajouter du contenu
 

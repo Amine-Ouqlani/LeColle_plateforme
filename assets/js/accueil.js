@@ -11,10 +11,11 @@ const chapitres = LC.chapitres.map(c => {
   const nTd = LC.exercices.filter(e => e.chapitre === c.id).length;
   const nAnn = LC.annales.filter(a => a.chapitres.includes(c.id)).length;
   const liens = [
-    `<a href="chapitre.html?id=${c.id}#cours">Cours</a>`,
+    `<a href="chapitre.html?id=${c.id}#cours">Livre</a>`,
     c.fiche && `<a href="${lecteurUrl('fiche', c.fiche.debut)}">Fiche</a>`,
     c.presentation && `<a href="${slidesUrl('presentation', c.presentation.debut)}">Présentation</a>`,
-    `<a href="chapitre.html?id=${c.id}#td">TD (${nTd})</a>`,
+    c.td ? `<a href="${lecteurUrl(c.td.doc, 1)}">TD (${nTd})</a>` : `<a href="chapitre.html?id=${c.id}#td">TD (${nTd})</a>`,
+    c.td && `<a href="${lecteurUrl(c.td.corrections, 1)}">Corrections</a>`,
     `<a href="chapitre.html?id=${c.id}#annales">Annales (${nAnn})</a>`
   ].filter(Boolean).join('');
   return `<li><span class="n">${c.num}</span><div>
@@ -23,7 +24,7 @@ const chapitres = LC.chapitres.map(c => {
     <p class="links">${liens}</p></div></li>`;
 }).join('');
 
-const ordre = ['livre', 'volume2', 'fiche', 'presentation', 'presentationStatique', 'revision', 'archive'];
+const ordre = ['livre', 'volume2', 'td-determinants', 'td-determinants-corrections', 'td-courbes', 'td-courbes-corrections', 'td-metrique', 'td-metrique-corrections', 'fiche', 'presentation', 'presentationStatique', 'revision', 'archive'];
 const documents = ordre.map(id => {
   const d = doc(id);
   const lire = d.type === 'presentation' ? slidesUrl(id, 1) : lecteurUrl(id, 1);
