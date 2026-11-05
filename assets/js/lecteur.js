@@ -4,14 +4,19 @@
 (async function lecteur() {
   const docId = params.get('doc') || 'livre';
   const D = LC.documents[docId] || LC.documents.livre;
+  if (!LC.documents[docId] && docId === 'fiche') location.replace(lecteurUrl('fiche-determinants', 1));
   const embed = params.get('embed') === '1';
   const slides = params.get('mode') === 'slides';
   if (embed) document.body.classList.add('embed');
-  document.title = `${D.titre} — Le Collé`;
+  document.title = `${D.titre} — Le Collé ${(D.filiere || 'pt').toUpperCase()}`;
 
   // icônes de la barre
   $('#rd-dl').href = D.fichier;
-  $('#rd-title').textContent = D.titre;
+  const fil = D.filiere || 'pt';
+  document.body.dataset.filiere = fil;
+  $('#rd-title').textContent = `${fil.toUpperCase()} · ${D.titre}`;
+  $('#rd-back').href = fil === 'mp' ? 'mp.html' : 'pt.html';
+  $('#rd-dl').setAttribute('download', nomFichier(D));
   if (document.referrer && new URL(document.referrer).origin === location.origin && !/lecteur\.html/.test(document.referrer)) $('#rd-back').href = document.referrer;
   if (slides) { $('#rd-zin').hidden = true; $('#rd-zout').hidden = true; } else { $('#rd-fs').hidden = true; }
 

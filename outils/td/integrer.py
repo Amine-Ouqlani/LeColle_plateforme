@@ -14,8 +14,8 @@ OLD = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'
 MAJ = '2026-11-05'
 LIVRE = {'determinants': 'livre', 'courbes': 'livre', 'metrique': 'volume2'}
 
-os.makedirs(f'{SITE}/docs/td', exist_ok=True)
-os.makedirs(f'{SITE}/docs/sources/td', exist_ok=True)
+os.makedirs(f'{SITE}/docs/pt/td', exist_ok=True)
+os.makedirs(f'{SITE}/docs/pt/sources/td', exist_ok=True)
 
 def npages(pdf):
     import subprocess
@@ -33,13 +33,13 @@ for cid, ch in CHAPITRES.items():
          f"Les corrections détaillées des {n} exercices du TD, dans le même ordre et avec les mêmes numéros."),
     ]:
         pdf = f'{B}/TD_{cid}{suffixe}.pdf'
-        shutil.copy(pdf, f'{SITE}/docs/td/TD_{cid}{suffixe}.pdf')
-        shutil.copy(f'{B}/TD_{cid}{suffixe}.tex', f'{SITE}/docs/sources/td/TD_{cid}{suffixe}.tex')
-        docs.append((cle, dict(titre=titre, sousTitre=sous, type='td', fichier=f'docs/td/TD_{cid}{suffixe}.pdf',
-                               source=f'docs/sources/td/TD_{cid}{suffixe}.tex', pages=npages(pdf), version='v1', maj=MAJ,
+        shutil.copy(pdf, f'{SITE}/docs/pt/td/TD_{cid}{suffixe}.pdf')
+        shutil.copy(f'{B}/TD_{cid}{suffixe}.tex', f'{SITE}/docs/pt/sources/td/TD_{cid}{suffixe}.tex')
+        docs.append((cle, dict(titre=titre, sousTitre=sous, type='td', fichier=f'docs/pt/td/TD_{cid}{suffixe}.pdf',
+                               source=f'docs/pt/sources/td/TD_{cid}{suffixe}.tex', pages=npages(pdf), version='v1', maj=MAJ,
                                description=desc)))
 
-p = f'{SITE}/data/documents.js'
+p = f'{SITE}/data/pt/documents.js'
 s = open(p, encoding='utf8').read()
 s = re.sub(r'\n  /\* ---- TD \(générés par td/build_td.py\) ---- \*/.*?(?=\n};)', '', s, flags=re.S)
 bloc = '\n  /* ---- TD (générés par td/build_td.py) ---- */'
@@ -52,7 +52,7 @@ s = avant + bloc.rstrip(',') + s[i:]
 open(p, 'w', encoding='utf8').write(s)
 
 # ------------------------------------------------------------------ chapitres : référence au TD
-p = f'{SITE}/data/chapitres.js'
+p = f'{SITE}/data/pt/chapitres.js'
 s = open(p, encoding='utf8').read()
 for cid in CHAPITRES:
     s = re.sub(rf'(\n    id: "{cid}",(?:.|\n)*?\n    statut: "[^"]*",)\n    td: \{{[^}}]*\}},', r'\1', s)
@@ -119,11 +119,11 @@ LC.niveaux = {
 };
 
 LC.exercices = ['''
-open(f'{SITE}/data/exercices.js', 'w', encoding='utf8').write(entete + '\n'.join(lignes) + '\n];\n')
+open(f'{SITE}/data/pt/exercices.js', 'w', encoding='utf8').write(entete + '\n'.join(lignes) + '\n];\n')
 
 # ------------------------------------------------------------------ entraînement : le devoir type pointe vers le TD
 ds = next(x for x in TD['courbes'] if x['id'] == 'ds-pb')
-p = f'{SITE}/data/entrainement.js'
+p = f'{SITE}/data/pt/entrainement.js'
 s = open(p, encoding='utf8').read()
 s = re.sub(r'enonce: \{ doc: "[^"]*", page: \d+ \}, corrige: \{ doc: "[^"]*", page: \d+ \}(?=\n(?:(?!\n  \{).)*?\n  \})',
            lambda m: m.group(0), s)  # (inchangé par défaut)

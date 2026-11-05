@@ -1,7 +1,7 @@
 /* Le Collé — liste des annales, par chapitre */
 'use strict';
 
-cadre('annales');
+cadre('pt', 'annales');
 
 const parChapitre = LC.chapitres.map(c => {
   const l = LC.annales.filter(a => a.chapitres[0] === c.id).sort((a, b) => b.annee - a.annee);

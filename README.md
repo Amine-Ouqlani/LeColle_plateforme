@@ -25,36 +25,41 @@ python3 -m http.server 8000   # puis ouvrir http://localhost:8000
 
 ## Organisation
 
+Deux filières totalement séparées : chacune a ses pages, ses données et ses documents, et peut évoluer seule.
+
 ```
-index.html          accueil : les chapitres et la liste des documents
-chapitre.html?id=…  tout un chapitre sur une page : cours, fiche et présentation, TD par niveau, annales, révision
-annales.html        les annales, par chapitre ; annale.html?id=… : une annale et sa correction
-entrainement.html   devoirs et examens blancs
-lecteur.html?doc=…  lecteur PDF (pdf.js) : &page=, &mode=slides, &debut=&fin= (plage)
-data/               CONTENU : documents, chapitres, exercices, annales, entraînement
-contenu/annales/    corrections des annales (HTML + formules LaTeX rendues par KaTeX)
-docs/               PDF et sources LaTeX
-assets/             interface : css/, js/, img/, vendor/ (pdf.js 3.11.174, KaTeX 0.16.9, embarqués)
-outils/verifier.js  contrôle de cohérence des données
-outils/td/          génération des TD (build_td.py) et intégration au site (integrer.py)
+index.html             accueil : choix de la filière
+pt.html                filière PT : chapitres et documents
+chapitre.html?id=…     PT : un chapitre (ressources, cours, TD, annales, révision)
+annales.html, annale.html?id=…, entrainement.html      PT
+mp.html                filière MP : les ouvrages par discipline
+ouvrage.html?id=…      MP : un ouvrage (présentation, livre complet, parties)
+lecteur.html?doc=…     lecteur PDF commun (pdf.js, chargé seulement ici) : &page=, &mode=slides
+data/pt/  docs/pt/  contenu/pt/   données, PDF et sources de la filière PT
+data/mp/  docs/mp/                données et PDF de la filière MP
+assets/                interface commune (css, js, KaTeX et pdf.js embarqués)
+outils/verifier.js     contrôle : liens, pages, séparation PT/MP
+outils/td/             génération des TD PT
 ```
 
-Le contenu pédagogique est entièrement dans `data/` et `contenu/` ; le code de l'interface dans `assets/js/`.
+Aucun PDF n'est chargé à l'ouverture d'une page : seulement dans le lecteur, ou au téléchargement. KaTeX n'est chargé que sur les pages PT qui contiennent des formules.
+
+**Ajouter un ouvrage MP** : déposer le PDF dans `docs/mp/<discipline>/`, puis ajouter une entrée dans `data/mp/ouvrages.js` (document + ouvrage) ; les « parties » sont les signets de premier niveau du PDF, avec leur page.
 
 ## Les TD
 
-Chaque chapitre a deux PDF dans `docs/td/` : le TD (énoncés seuls, en quatre parties : applications directes, classiques et méthodes, synthèse, difficiles et type concours) et le livret de corrections. Les livres restent inchangés.
+Chaque chapitre PT a deux PDF dans `docs/pt/td/` : le TD (énoncés seuls, en quatre parties : applications directes, classiques et méthodes, synthèse, difficiles et type concours) et le livret de corrections. Les livres restent inchangés.
 
 - Les énoncés et corrections des exercices du livre sont repris tels quels depuis ses sources ; les exemples du cours et les exercices complémentaires sont dans `outils/td/nouveaux_*.tex`, le plan dans `outils/td/meta.py`.
-- `python3 outils/td/build_td.py` compile les six PDF et relève la page de chaque exercice ; `python3 outils/td/integrer.py` copie les PDF dans `docs/td/` et régénère `data/exercices.js`, si bien que chaque lien « Énoncé » ou « Corrigé » du site ouvre le TD ou le livret à la bonne page. (Les chemins vers les sources des livres sont en tête de `build_td.py`.)
+- `python3 outils/td/build_td.py` compile les six PDF et relève la page de chaque exercice ; `python3 outils/td/integrer.py` copie les PDF dans `docs/td/` et régénère `data/pt/exercices.js`, si bien que chaque lien « Énoncé » ou « Corrigé » du site ouvre le TD ou le livret à la bonne page. (Les chemins vers les sources des livres sont en tête de `build_td.py`.)
 
 ## Ajouter du contenu
 
-- **Un document** : déposer le PDF (et sa source) dans `docs/`, puis ajouter une entrée dans `data/documents.js`.
-- **Un chapitre** : copier un bloc de `data/chapitres.js` (sections du cours avec leurs numéros de page PDF, fiche, présentation, erreurs fréquentes, questions flash). Il apparaît automatiquement dans le menu, l'accueil et la recherche.
-- **Un exercice** : une entrée dans `data/exercices.js` (niveau 1 à 4, notions, prérequis, objectif, indication, page de l'énoncé et du corrigé).
-- **Une annale** : une entrée dans `data/annales.js` et un fichier `contenu/annales/<id>.html` (modèle : un des fichiers existants ; formules entre `$…$` ou `\[…\]`).
-- **Un examen blanc** : une entrée dans `data/entrainement.js` (extraits d'annales, durée, barème).
+- **Un document PT** : déposer le PDF (et sa source) dans `docs/pt/`, puis ajouter une entrée dans `data/pt/documents.js`.
+- **Un chapitre** : copier un bloc de `data/pt/chapitres.js` (sections du cours avec leurs numéros de page PDF, fiche, présentation, erreurs fréquentes, questions flash). Il apparaît automatiquement dans le menu, l'accueil et la recherche.
+- **Un exercice** : une entrée dans `data/pt/exercices.js` (niveau 1 à 4, notions, prérequis, objectif, indication, page de l'énoncé et du corrigé).
+- **Une annale** : une entrée dans `data/pt/annales.js` et un fichier `contenu/pt/annales/<id>.html` (modèle : un des fichiers existants ; formules entre `$…$` ou `\[…\]`).
+- **Un examen blanc** : une entrée dans `data/pt/entrainement.js` (extraits d'annales, durée, barème).
 
 Puis vérifier : `node outils/verifier.js`.
 

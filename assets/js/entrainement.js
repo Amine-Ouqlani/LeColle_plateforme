@@ -1,7 +1,7 @@
 /* Le Collé — devoirs et examens blancs */
 'use strict';
 
-cadre('entrainement');
+cadre('pt', 'entrainement');
 
 const sujet = s => {
   const total = s.parties ? s.parties.reduce((t, p) => t + p.points, 0) : null;

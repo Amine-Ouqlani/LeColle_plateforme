@@ -2,7 +2,7 @@
 'use strict';
 
 const C = chap(params.get('id')) || LC.chapitres[0];
-cadre('chapitres');
+cadre('pt', 'chapitres');
 document.title = `${C.titre} — Le Collé`;
 
 const EXOS = LC.exercices.filter(e => e.chapitre === C.id);
@@ -16,11 +16,11 @@ const cours = `<ul class="list">${C.cours.sections.map(s => `<li class="row"><di
 
 /* -------- ressources du chapitre */
 const ligneRes = (titre, desc, liens) => `<li class="row"><div class="main">${titre}<br><span class="tag">${desc}</span></div><div class="side">${liens}</div></li>`;
-const lienDoc = (id, page, slides) => `<a href="${slides ? slidesUrl(id, page) : lecteurUrl(id, page)}">Lire</a><a href="${doc(id).fichier}" download>PDF</a>`;
+const lienDoc = (id, page, slides) => `<a href="${slides ? slidesUrl(id, page) : lecteurUrl(id, page)}">Lire</a>${lienPdf(doc(id))}`;
 const T = C.td;
 const ressources = `<ul class="list">
   ${ligneRes('Livre complet', `${doc(coursDoc).titre} : cours, exemples, exercices et corrigés · ${doc(coursDoc).pages} pages`, lienDoc(coursDoc, C.cours.debut))}
-  ${C.fiche ? ligneRes('Fiche de référence', `pages ${C.fiche.debut} à ${C.fiche.fin} : définitions, théorèmes, formules, méthodes et pièges, à imprimer`, lienDoc('fiche', C.fiche.debut))
+  ${C.fiche ? ligneRes(doc(C.fiche.doc).titre, `${doc(C.fiche.doc).description} · ${doc(C.fiche.doc).pages} pages, à imprimer`, lienDoc(C.fiche.doc, 1))
             : ligneRes('Fiche de référence', 'pas encore disponible : le résumé des méthodes du volume 2 en tient lieu', `<a href="${lecteurUrl(coursDoc, 13)}">Lire</a>`)}
   ${C.presentation ? ligneRes('Présentation du cours', `diapositive par diapositive, comme en séance (<a href="${slidesUrl('presentationStatique', C.presentation.statique.debut)}">version sans animations</a>)`, lienDoc('presentation', C.presentation.debut, true))
             : ligneRes('Présentation du cours', 'pas encore disponible pour ce chapitre', '')}
@@ -58,12 +58,12 @@ const revision = `
   <ul>${C.erreurs.map(x => `<li>${x}</li>`).join('')}</ul>
   <h3>Prérequis</h3>
   <ul>${C.prerequis.map(x => `<li>${x}</li>`).join('')}</ul>
-  ${C.revision ? `<h3>Fiche de révision du devoir</h3><p>Le devoir surveillé de courbes, question par question : ce qu'il fallait savoir, la méthode et la correction. <a href="${lecteurUrl('revision', 1)}">Lire la fiche</a> · <a href="${doc('revision').fichier}" download>PDF</a></p>` : ''}`;
+  ${C.revision ? `<h3>Fiche de révision du devoir</h3><p>Le devoir surveillé de courbes, question par question : ce qu'il fallait savoir, la méthode et la correction. <a href="${lecteurUrl('revision', 1)}">Lire la fiche</a> · ${lienPdf(doc('revision'))}</p>` : ''}`;
 
 const i = LC.chapitres.indexOf(C), prev = LC.chapitres[i - 1], next = LC.chapitres[i + 1];
 
 $('#contenu').innerHTML = `
-  <p class="kicker"><a href="index.html">Chapitres</a> · ${C.num}</p>
+  <p class="kicker"><a href="pt.html">Chapitres</a> · ${C.num}</p>
   <h1>${C.titre}</h1>
   <p class="intro">${C.accroche}</p>
   <nav class="toc" aria-label="Sur cette page"><a href="#ressources">Ressources</a><a href="#cours">Cours</a><a href="#td">TD</a><a href="#annales">Annales</a><a href="#revision">Réviser</a></nav>

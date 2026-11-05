@@ -35,9 +35,9 @@ function ficheRef(ref) {
   }
   for (const c of LC.chapitres) {
     const s = c.fiche && c.fiche.sections.find(s => s.num === num);
-    if (s) return { url: lecteurUrl('fiche', s.page), label: `fiche §${num}` };
+    if (s) return { url: lecteurUrl(c.fiche.doc, s.page), label: `fiche §${num}` };
   }
-  return { url: lecteurUrl('fiche', 1), label: `fiche §${num}` };
+  return { url: lecteurUrl('fiche-determinants', 1), label: `fiche §${num}` };
 }
 
 function dureeTexte(min) {
@@ -45,16 +45,33 @@ function dureeTexte(min) {
   return h ? `${h} h${m ? ' ' + String(m).padStart(2, '0') : ''}` : `${m} min`;
 }
 
-/* en-tête et pied de page communs */
-function cadre(courant) {
-  const nav = [['index.html', 'Chapitres', 'chapitres'], ['annales.html', 'Annales', 'annales'], ['entrainement.html', 'Entraînement', 'entrainement'], ['index.html#documents', 'Documents', 'documents']];
+/* filière d'un document, nom de fichier explicite au téléchargement */
+const filiereDoc = d => d.filiere || 'pt';
+const nomFichier = d => {
+  const base = d.fichier.split('/').pop();
+  return /^le-colle-(pt|mp)/.test(base) ? base : `le-colle-${filiereDoc(d)}-${base}`;
+};
+const lienPdf = (d, texte = 'PDF') => `<a href="${d.fichier}" download="${nomFichier(d)}">${texte}</a>`;
+
+/* en-tête et pied de page communs : filière toujours visible (repère de couleur + étiquette) */
+const FILIERES = {
+  pt: { nom: 'Filière PT', court: 'PT', accueil: 'pt.html',
+        nav: [['pt.html', 'Chapitres', 'chapitres'], ['annales.html', 'Annales', 'annales'], ['entrainement.html', 'Entraînement', 'entrainement'], ['pt.html#documents', 'Documents', 'documents']] },
+  mp: { nom: 'Filière MP', court: 'MP', accueil: 'mp.html', nav: [['mp.html', 'Ouvrages', 'ouvrages']] }
+};
+function cadre(filiere, courant) {
+  const F = FILIERES[filiere];
+  if (F) document.body.dataset.filiere = filiere;
+  const autre = filiere === 'pt' ? 'mp' : 'pt';
   const head = document.createElement('header');
   head.className = 'site-head';
   head.innerHTML = `<div class="wrap"><a class="logo" href="index.html">Le Collé</a>
-    <nav class="site-nav" aria-label="Navigation principale">${nav.map(([h, l, id]) => `<a href="${h}" ${id === courant ? 'aria-current="page"' : ''}>${l}</a>`).join('')}</nav></div>`;
+    ${F ? `<a class="filiere" href="${F.accueil}">${F.nom}</a>
+    <nav class="site-nav" aria-label="Navigation ${F.nom}">${F.nav.map(([h, l, id]) => `<a href="${h}" ${id === courant ? 'aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
+    <a class="switch" href="${FILIERES[autre].accueil}">Aller en ${FILIERES[autre].court} →</a>` : ''}</div>`;
   document.body.prepend(head);
   const foot = document.createElement('footer');
   foot.className = 'site-foot';
-  foot.innerHTML = `<div class="wrap">Le Collé — mathématiques PT · Ahmed Amine Ouqlani</div>`;
+  foot.innerHTML = `<div class="wrap">Le Collé${F ? ' · ' + F.nom : ''} · Ahmed Amine Ouqlani</div>`;
   document.body.append(foot);
 }

@@ -1,0 +1,75 @@
+<p class="ann-lead">La partie I étudie la famille de cubiques $\Gamma_A$ : $x(t)=t^3+3t^2-at$, $y(t)=t^3-3t^2-bt$, $t\in\R$, où $A(a,b)$ est un point du plan. Les questions 1 et 3(a) relèvent entièrement de notre chapitre ; la question 2 (aire de la boucle) et la question 3(b) (reconnaître une conique) sortent de nos chapitres.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2014-b-1.svg" alt="Courbe Γ_A pour a = b = 9 : boucle, point double (27, −27), axe de symétrie y = −x" loading="lazy"><figcaption>$a=b=9$ : en trait plein l'arc $t\geq0$, en clair son symétrique ; en ocre les deux tangentes au point double.</figcaption></figure>
+
+<article class="q">
+<h3>Q1(a) — Axe de symétrie <span class="q-ref">fiche §2.3</span></h3>
+<p class="q-sujet">Pour $a=b=9$ : montrer que $\Gamma_A$ admet un axe de symétrie, puis réduire l'étude à $\R_+$.</p>
+<details class="indic"><summary>Indication</summary><p>Comparer $x(-t)$ et $y(-t)$ avec $x(t)$ et $y(t)$ : on cherche une relation du tableau des symétries, éventuellement avec un échange de $x$ et $y$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>$x(-t)=-t^3+3t^2+9t=-(t^3-3t^2-9t)=-y(t)$ et de même $y(-t)=-x(t)$. Donc $M(-t)=\big(-y(t),-x(t)\big)$ : c'est l'image de $M(t)$ par la symétrie $(x,y)\mapsto(-y,-x)$, la réflexion d'axe $\Delta : y=-x$.</p>
+<p>Comme $t\mapsto -t$ échange $\R_+$ et $\R_-$, on étudie la courbe pour $t\geq0$ et l'on complète par symétrie d'axe $\Delta$.</p>
+<p class="astuce">Le tableau du cours ne contient pas cette symétrie telle quelle : elle combine $t\mapsto-t$ et l'échange de $x$ et $y$. Toujours tester $x(-t)$ contre $\pm x(t)$ <em>et</em> contre $\pm y(t)$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(b) — Variations et tangentes particulières <span class="q-ref">fiche §2.2, §2.3</span></h3>
+<p class="q-sujet">Tableau de variations conjoint sur $\R_+$, tangentes horizontales et verticales, tangente au point de paramètre $0$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>$x'(t)=3t^2+6t-9=3(t-1)(t+3)$ et $y'(t)=3t^2-6t-9=3(t-3)(t+1)$. Sur $\R_+$ : $x'<0$ sur $[0,1[$, $x'>0$ sur $]1,+\infty[$ ; $y'<0$ sur $[0,3[$, $y'>0$ sur $]3,+\infty[$. Pas de zéro commun : tous les points sont réguliers.</p>
+<table class="tab">
+<tr><th>$t$</th><td>$0$</td><td></td><td>$1$</td><td></td><td>$3$</td><td></td><td>$+\infty$</td></tr>
+<tr><th>$x$</th><td>$0$</td><td>$\searrow$</td><td>$-5$</td><td>$\nearrow$</td><td>$27$</td><td>$\nearrow$</td><td>$+\infty$</td></tr>
+<tr><th>$y$</th><td>$0$</td><td>$\searrow$</td><td>$-11$</td><td>$\searrow$</td><td>$-27$</td><td>$\nearrow$</td><td>$+\infty$</td></tr>
+</table>
+<ul>
+<li>Tangente <strong>verticale</strong> en $M(1)=(-5,-11)$ : $x'(1)=0$ et $y'(1)=-12\neq0$.</li>
+<li>Tangente <strong>horizontale</strong> en $M(3)=(27,-27)$ : $y'(3)=0$ et $x'(3)=36\neq0$.</li>
+<li>En $t=0$ : $f'(0)=(-9,-9)$, la tangente en $O$ est la droite $y=x$.</li>
+</ul>
+<p class="piege">« $x'=0$ donc tangente verticale » exige de vérifier $y'\neq0$ au même point. Ici aucun point n'est stationnaire, mais il faut le dire.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(c) — Point double et angle des tangentes <span class="q-ref">fiche §2.6</span></h3>
+<p class="q-sujet">Montrer que $\Gamma_A$ a un point double, le déterminer, et donner l'angle des deux tangentes en ce point.</p>
+<details class="indic"><summary>Indication</summary><p>Écrire $x(t)=x(s)$ et $y(t)=y(s)$ avec $t\neq s$, et diviser par $t-s$. Retrancher les deux équations obtenues.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>Pour $t\neq s$, $\frac{x(t)-x(s)}{t-s}=t^2+ts+s^2+3(t+s)-9$ et $\frac{y(t)-y(s)}{t-s}=t^2+ts+s^2-3(t+s)-9$. Les deux sont nuls si et seulement si leur différence $6(t+s)$ et l'une d'elles le sont : $s=-t$, puis $t^2-t^2+t^2-9=0$, soit $t=\pm3$.</p>
+<p>Le seul point double est donc $M(3)=M(-3)=(27,-27)$, situé sur l'axe $\Delta$ (ce qui était prévisible : $M(-t)$ est le symétrique de $M(t)$).</p>
+<p>$f'(3)=(36,0)$ : tangente horizontale ; $f'(-3)=(0,36)$ : tangente verticale. Les deux tangentes sont <strong>perpendiculaires</strong> (angle $\frac\pi2$).</p>
+<p class="astuce">Diviser par $t-s$ élimine la solution parasite $t=s$ : on travaille ensuite avec des polynômes symétriques en $t,s$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(d) — Branche infinie sur $\R_+$ <span class="q-ref">fiche §2.5</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Quand $t\to+\infty$, $x$ et $y$ tendent vers $+\infty$ et $\frac yx=\frac{t^3-3t^2-9t}{t^3+3t^2-9t}\to1$. Puis $y-x=-6t^2\to-\infty$ : <strong>branche parabolique de direction $y=x$</strong> (pas d'asymptote).</p>
+<p class="piege">$\lim\frac yx=1$ ne suffit pas : c'est $\lim(y-x)$ qui tranche entre asymptote et branche parabolique.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(e) — Tracé</h3>
+<details class="corr"><summary>Correction</summary>
+<p>Pour $t\geq0$ : départ de $O$ avec la tangente $y=x$ parcourue vers le bas et la gauche ($f'(0)=(-9,-9)$), tangente verticale en $(-5,-11)$, tangente horizontale au point double $(27,-27)$, puis branche parabolique vers le haut et la droite. On complète par la réflexion d'axe $y=-x$ : la boucle est parcourue pour $t\in[-3,3]$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3(a) — Condition d'existence d'un point stationnaire <span class="q-ref">fiche §2.2, §2.4</span></h3>
+<p class="q-sujet">Montrer que $\Gamma_A$ a un point stationnaire si et seulement si $A$ appartient à une courbe $\mathcal P$ dont on donnera une équation.</p>
+<details class="indic"><summary>Indication</summary><p>Un point stationnaire est un zéro commun de $x'$ et $y'$. Combiner les deux équations pour isoler $t$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>$M(t)$ est stationnaire si et seulement si $3t^2+6t-a=0$ et $3t^2-6t-b=0$. La différence donne $12t=a-b$, la somme $6t^2=a+b$.</p>
+<p><em>Condition nécessaire :</em> $t=\frac{a-b}{12}$ et $6\frac{(a-b)^2}{144}=a+b$, soit $(a-b)^2=24(a+b)$.</p>
+<p><em>Réciproque :</em> si $(a-b)^2=24(a+b)$, on pose $t=\frac{a-b}{12}$ ; alors $3t^2=\frac{a+b}2$ et $6t=\frac{a-b}2$, d'où $x'(t)=\frac{a+b}2+\frac{a-b}2-a=0$ et $y'(t)=\frac{a+b}2-\frac{a-b}2-b=0$.</p>
+<p>Donc $\mathcal P : (x-y)^2=24(x+y)$.</p>
+<p class="astuce">Un « si et seulement si » demande les deux sens : ici, la réciproque est une vérification de deux lignes, à ne pas oublier.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> Q2 (aire de la boucle, calcul intégral) et Q3(b) (reconnaître $\mathcal P$ comme une parabole : chapitre des coniques).</div>

@@ -2,7 +2,7 @@
 'use strict';
 
 const A = LC.annales.find(a => a.id === params.get('id')) || LC.annales[0];
-cadre('annales');
+cadre('pt', 'annales');
 document.title = `${A.concours} ${A.annee} — ${plain(A.titre)} — Le Collé`;
 
 (async function () {

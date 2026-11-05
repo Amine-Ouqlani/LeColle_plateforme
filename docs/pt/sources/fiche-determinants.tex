@@ -1,0 +1,354 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb,mathrsfs,stmaryrd}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=1.4cm,right=1.4cm,headheight=12pt,headsep=0.4cm,footskip=0.7cm]{geometry}
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}\definecolor{Fond}{HTML}{F2F4F7}\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}\definecolor{Gris}{HTML}{5E6672}\definecolor{Filet}{HTML}{C5CCD6}
+\usepackage{multicol,enumitem,booktabs,array,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.17,trig format plots=rad}
+\usetikzlibrary{arrows.meta}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.25em}
+\setlength{\columnsep}{0.55cm}\setlength{\columnseprule}{0.3pt}\renewcommand{\columnseprulecolor}{\color{Filet}}
+\setlist{itemsep=0.05em,topsep=0.15em,parsep=0pt,leftmargin=1.1em}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\scriptsize\textbullet}}
+\setlist[enumerate]{label=\textsf{\scriptsize\color{Bleu}\arabic*.},leftmargin=1.3em}
+\linespread{1.02}
+
+\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}\newcommand{\rg}{\operatorname{rg}}\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}\newcommand{\Id}{\operatorname{Id}}\newcommand{\com}{\operatorname{com}}
+\newcommand{\vv}[1]{\overrightarrow{#1}}\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\HP}{{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\livre}[1]{{\sffamily\scriptsize\color{Gris}[#1]}}
+
+% ---------- titres ----------
+\newcommand{\chapitre}[2]{\clearpage\phantomsection\pdfbookmark[0]{#1 --- #2}{chap#1}\markboth{#1 --- #2}{}%
+  \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\color{white}\sffamily\bfseries\Large\strut #1\quad
+  {\normalsize\mdseries #2}}}\par\vspace{0.4em}}
+\newcommand{\notion}[1]{\par\needspace{9\baselineskip}\vspace{0.5em}\phantomsection\pdfbookmark[1]{#1}{\detokenize{#1}}\noindent{\sffamily\bfseries\color{Bleu}\large #1}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{0.1em}}
+\newcommand{\sous}[1]{\par\needspace{6\baselineskip}\vspace{0.25em}\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1}\par\nobreak}
+
+% ---------- encadrés ----------
+\tcbset{base/.style={enhanced,arc=0pt,boxrule=0pt,left=4pt,right=3pt,top=2pt,bottom=2pt,before skip=0.35em,after skip=0.35em,
+  fontupper=\small}}
+\newtcolorbox{DEF}[1][]{base,colback=white,borderline west={1.4pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}DÉFINITION\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newtcolorbox{PROP}[1][]{base,colback=Fond,borderline west={2pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}\ifx\relax#1\relax PROPRIÉTÉ\else #1\fi}\par}}
+\newtcolorbox{FORM}[1][]{base,colback=white,colframe=BleuMoyen,boxrule=0.5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}\ifx\relax#1\relax FORMULES\else #1\fi}\par}}
+\newtcolorbox{METH}[1]{base,colback=white,borderline north={0.8pt}{0pt}{Bleu},borderline south={0.8pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\colorbox{Bleu}{\color{white}MÉTHODE}\ \color{Bleu}#1}\par\smallskip}}
+\newtcolorbox{PIEGE}{base,colback=Brique!5,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
+\newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche Déterminants}
+\fancyfoot[C]{\scriptsize\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\pgfplotsset{mini/.style={axis lines=middle,axis line style={Filet},xtick=\empty,ytick=\empty,width=3.2cm,height=3.2cm,
+  xmin=-1.15,xmax=1.15,ymin=-1.15,ymax=1.15,title style={font=\scriptsize\sffamily,yshift=-0.15cm},samples=80}}
+
+\begin{document}
+\thispagestyle{empty}
+\noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 1}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Déterminants}\par\smallskip
+{\color{white!85!Bleu}\sffamily définitions, règles de calcul, méthodes, pièges et résultats des TD}\vspace{0.4em}}}
+
+\vspace{0.6em}
+{\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Elle reprend tout le cours du chapitre, les méthodes des exemples et les résultats des TD, avec les mêmes numéros de parties et les mêmes notations que la présentation. Les renvois \livre{§1.5} désignent les sections du livre ; \HP{} signale une notion hors programme utilisée en TD ou en devoir.}
+
+\vspace{0.4em}
+{\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
+1.1 Dimensions 2 et 3 \dotfill\pageref{n11}\\
+1.2 Définition et règles de calcul \dotfill\pageref{n12}\\
+1.3 Propriétés globales, endomorphismes \dotfill\pageref{n13}\\
+1.4 Géométrie \dotfill\pageref{n14}\\
+1.5 Quelle méthode pour quel déterminant ? \dotfill\pageref{n15}\\
+1.6 Techniques d'ordre $n$ \dotfill\pageref{n16}\\
+1.7 Résultats des TD \dotfill\pageref{n17}\\
+\end{tabular}}
+
+\vspace{0.6em}
+\pdfbookmark[0]{Chapitre 1 --- Déterminants}{chap1}\markboth{Chapitre 1 --- Déterminants}{}
+\begin{multicols}{2}\raggedcolumns
+% ======================================================================
+\notion{1.1 Dimensions 2 et 3}\label{n11}
+
+\begin{FORM}[DÉTERMINANT 2×2 --- AIRE ORIENTÉE]
+$\ve u=(a,c)$, $\ve v=(b,d)$ (b.o.n. directe) :
+\[\det(\ve u,\ve v)=\dt{a&b\\c&d}=ad-bc=\|\ve u\|\|\ve v\|\sin(\ve u,\ve v).\]
+Aire du parallélogramme $=|\det|$ ; signe $+$ si l'on tourne de $\ve u$ vers $\ve v$ dans le sens direct.\\
+$\det(\ve u,\ve v)=0\iff\ve u,\ve v$ colinéaires.\\
+Inverse : $\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
+(échanger la diagonale, changer les signes du reste).
+\end{FORM}
+
+\begin{FORM}[DÉTERMINANT 3×3 --- VOLUME ORIENTÉ]
+Colonnes $\ve u=(a,b,c)$, $\ve v=(d,e,f)$, $\ve w=(g,h,i)$ :
+\[\dt{a&d&g\\b&e&h\\c&f&i}=a\dt{e&h\\f&i}-b\dt{d&g\\f&i}+c\dt{d&g\\e&h}.\]
+Sarrus : $aei+dhc+gbf-ceg-fha-ibd$.\\
+Produit mixte : $\det(\ve u,\ve v,\ve w)=(\ve u\wedge\ve v)\cdot\ve w$, invariant par permutation circulaire.\\
+$\ve u\wedge\ve v=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1)$, orthogonal à $\ve u$ et $\ve v$, de norme l'aire du
+parallélogramme.\\
+Volume $=|\det|$ = aire de base $\|\ve u\wedge\ve v\|$ $\times$ hauteur. $\det=0\iff$ coplanaires.
+\end{FORM}
+
+% ======================================================================
+\notion{1.2 Définition et règles de calcul}\label{n12}
+
+\begin{DEF}[\livre{th.~1.3}]
+$\det:\Mn{\K}\to\K$ est l'unique application (i) \emph{linéaire par rapport à chaque colonne}, (ii) \emph{antisymétrique}
+(échanger deux colonnes change le signe), (iii) telle que $\det I_n=1$.\\
+Lecture : (i) sortir un facteur d'une colonne, découper une colonne en somme ; (ii) orientation ; (iii) cube unité.
+\end{DEF}
+
+\begin{PROP}[DÉVELOPPEMENT \livre{th.~1.4}]
+Pour toute ligne $i$ ou colonne $j$ :
+\[\det A=\sum_j(-1)^{i+j}a_{i,j}\Delta_{i,j}=\sum_i(-1)^{i+j}a_{i,j}\Delta_{i,j},\]
+$\Delta_{i,j}$ (mineur) : on supprime ligne $i$ et colonne $j$. Signes en damier :
+$\left(\begin{smallmatrix}+&-&+&\cdots\\-&+&-&\\+&-&+&\\\vdots&&&\ddots\end{smallmatrix}\right)$.
+Définition équivalente par récurrence à partir de $ad-bc$. Lignes et colonnes jouent le même rôle ($\det A^T=\det A$).
+\end{PROP}
+
+\begin{PROP}[RÈGLES DE CALCUL]
+\begin{tabular}{@{}ll@{}}
+$C_i\leftrightarrow C_j$ (échange) & $\det\times(-1)$\\
+$C_i\leftarrow\lambda C_i$ (dilatation) & $\det\times\lambda$\\
+$C_i\leftarrow C_i+\lambda C_j$, $j\neq i$ (transvection) & $\det$ inchangé
+\end{tabular}\\
+Colonne nulle, deux colonnes égales ou proportionnelles : $\det=0$.\\
+$\det(\lambda A)=\lambda^n\det A$.\quad Triangulaire : produit de la diagonale.
+\end{PROP}
+
+\begin{METH}{Calculer un déterminant \livre{méth.~1.1}}
+\begin{enumerate}
+\item \emph{Regarder d'abord} la structure : tableau du §1.5.
+\item Sinon pivot : transvections pour créer des zéros (pivot $=1$ si possible), en notant échanges et facteurs sortis, jusqu'à
+      une forme triangulaire ou une ligne/colonne à un seul coefficient ; développer selon elle.
+\item Avec paramètre : sortir les facteurs dès qu'ils apparaissent ; ne jamais tout développer.
+\end{enumerate}
+\end{METH}
+
+\begin{PIEGE}
+$\det(A+B)\neq\det A+\det B$ ; $\det(\lambda A)\neq\lambda\det A$.\\
+Transvection : la colonne modifiée garde le coefficient $1$ ($C_i\leftarrow2C_i+C_j$ multiplie par $2$).\\
+Opérations successives : chacune agit sur la matrice \emph{déjà} modifiée ; faire $L_4-L_3$, $L_3-L_2$, $L_2-L_1$ dans cet ordre.\\
+Oublier le signe $(-1)^{i+j}$ du développement.
+\end{PIEGE}
+
+\begin{ASTU}
+Exemple : $\dt{1&2&3&4\\4&1&2&3\\3&4&1&2\\2&3&4&1}$ : chaque ligne a pour somme $10$ $\Rightarrow$ $C_1\leftarrow\sum C_j$, sortir
+$10$, $L_i-L_1$ : $10\dt{-1&-1&-1\\2&-2&-2\\1&1&-3}=-160$. Bien plus sûr que le pivot brut.
+\end{ASTU}
+
+% ======================================================================
+\notion{1.3 Propriétés globales, endomorphismes}\label{n13}
+
+\begin{PROP}[THÉORÈME FONDAMENTAL]
+$A$ inversible $\iff\det A\neq0\iff$ colonnes libres.\\
+$\det(AB)=\det A\det B$ ;\ $\det A^{-1}=\frac1{\det A}$ ;\ $\det A^T=\det A$ ;\ $\det(PBP^{-1})=\det B$.
+\end{PROP}
+
+\begin{PROP}[FAMILLES ET ENDOMORPHISMES]
+$\det_{\mathcal B}(u_1,\dots,u_n)$ : déterminant des coordonnées dans $\mathcal B$.\\
+$(u_1,\dots,u_n)$ base de $E$ ($\dim E=n$) $\iff\det_{\mathcal B}(u_j)\neq0$.\\
+$\det f=\det\Mat_{\mathcal B}(f)$ (indépendant de $\mathcal B$). $f$ automorphisme $\iff\det f\neq0$.\\
+$\det(f\circ g)=\det f\det g$, $\det(\lambda f)=\lambda^n\det f$, $\det f^{-1}=\frac1{\det f}$.\\
+Ex. : $(1,1+X,\dots,1+\dots+X^n)$ base de $\R_n[X]$ (triangulaire, diagonale de $1$) ; dérivation sur $\R_n[X]$ : $\det D=0$.
+\end{PROP}
+
+\begin{PROP}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.10}]
+Projecteur $p$ : $\det p=1$ si $p=\Id$, $0$ sinon.\\
+Symétrie $s$ : $\det s=(-1)^{\dim\mathrm{Ker}(s+\Id)}=(-1)^{n-\rg(s+\Id)}$.\\
+Preuve : base adaptée, $\mathrm{diag}(I_r,0)$ ou $\mathrm{diag}(I_r,-I_{n-r})$. Réflexion du plan : $\det=-1$.
+\end{PROP}
+
+\begin{METH}{Question sans coefficients}
+Relation entre matrices $\Rightarrow$ appliquer $\det$ des deux côtés.
+\begin{itemize}
+\item $A^2=-I_n$, $A$ réelle $\Rightarrow(\det A)^2=(-1)^n\Rightarrow n$ pair (faux dans $\C$ : $A=iI_n$).
+\item $A^T=-A$, $n$ impair $\Rightarrow\det A=(-1)^n\det A=-\det A=0$.
+\item $A^2=A$, $A\neq I_n\Rightarrow\det A\in\{0,1\}$, et $\det A=1$ forcerait $A=I_n$.
+\end{itemize}
+Endomorphisme géométrique $\Rightarrow$ \emph{base adaptée}, jamais la base canonique.\\
+$f:M\mapsto AM$ sur $\mathcal M_2(\R)$ : base $(E_{11},E_{21},E_{12},E_{22})$ $\Rightarrow\Mat f=\mathrm{diag}(A,A)$, $\det f=(\det A)^2$
+(en taille $n$ : $(\det A)^n$).
+\end{METH}
+
+\begin{FORM}[SIMILITUDES \HP{} \livre{TD~8}]
+$\C$ comme $\R$-e.v., base $(1,i)$, $a=\alpha+i\beta$ :\\
+$z\mapsto az$ : $\begin{pmatrix}\alpha&-\beta\\\beta&\alpha\end{pmatrix}$, $\det=|a|^2$, $\mathrm{tr}=2\,\mathrm{Re}\,a$ ; symétrie
+$\iff a=\pm1$ ; $|a|=1$ : rotation d'angle $\arg a$.\\
+$z\mapsto a\bar z$ : $\begin{pmatrix}\alpha&\beta\\\beta&-\alpha\end{pmatrix}$, $\det=-|a|^2$ ; réflexion si $|a|=1$.\\
+$\det f>0$ : orientation conservée ; $<0$ : renversée.
+\end{FORM}
+
+\begin{HPBOX}
+\textbf{Comatrice} : $\com(A)=\big((-1)^{i+j}\Delta_{i,j}\big)$. $A\,\com(A)^T=\com(A)^TA=\det(A)I_n$, donc
+$A^{-1}=\frac1{\det A}\com(A)^T$.\\
+$\det\com(A)=(\det A)^{n-1}$ ; $A$ entière : $A^{-1}$ entière $\iff\det A=\pm1$.\\
+Piège : \emph{transposer} la comatrice ; signe $(-1)^{i+j}$ sur chaque cofacteur.
+\end{HPBOX}
+
+% ======================================================================
+\notion{1.4 Géométrie}\label{n14}
+
+\begin{FORM}[TRADUCTIONS (b.o.n.)]
+$A,B,C$ alignés $\iff\det(\vv{AB},\vv{AC})=0$.\\
+$M(x,y)\in(BC)$ : $\dt{1&1&1\\x&b&c\\y&b'&c'}=0$ ($C_1-C_2$, $C_3-C_2$ : on obtient $-\det(\vv{BM},\vv{BC})$).\\
+$M\in(ABC)\iff\det(\vv{AM},\vv{AB},\vv{AC})=0$.\\
+Aire triangle $=\frac12|\det(\vv{AB},\vv{AC})|$ ; volume tétraèdre $=\frac16|\det(\vv{AB},\vv{AC},\vv{AD})|$.\\
+Droites $A+\vect\ve u$, $C+\vect\ve v$ coplanaires $\iff\det(\vv{AC},\ve u,\ve v)=0$.
+\end{FORM}
+
+\begin{FORM}[DISTANCE DE DEUX DROITES \livre{prop.~1.11, TD~2}]
+$\mathcal D_1=A+\vect\ve u$, $\mathcal D_2=C+\vect\ve v$ non parallèles :
+\[d(\mathcal D_1,\mathcal D_2)=\frac{|\det(\vv{AC},\ve u,\ve v)|}{\|\ve u\wedge\ve v\|}\quad(=\text{volume}/\text{base}).\]
+Perpendiculaire commune : $H=A+s\ve u$, $K=C+r\ve v$, $\vv{HK}\cdot\ve u=\vv{HK}\cdot\ve v=0$ (système de déterminant
+$-\|\ve u\wedge\ve v\|^2\neq0$). Sécantes $\iff d=0$.
+\end{FORM}
+
+% ======================================================================
+\notion{1.5 Quelle méthode pour quel déterminant ?}\label{n15}
+
+{\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright}p{0.43\linewidth}>{\raggedright\arraybackslash}p{0.5\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Je vois\dots} & \textsf{\scriptsize Je fais\dots}\\\midrule
+colonnes combinaisons de $\leq2$ vecteurs ($i+j$, $\cos(i+j)$) & $\det=0$ ($n\geq3$)\\
+même somme sur chaque ligne & $C_1\leftarrow\sum C_j$, sortir la somme, $L_i-L_1$\\
+$a_{i,j}$ formule ($\max$, $|i-j|$, $a^{|i-j|}$) & $C_k-C_{k-1}$ (ou $-aC_{k-1}$), $k=n\to2$\\
+ligne/colonne à 1 coefficient & développer selon elle\\
+lettres X, Z, N & développer ; permuter lignes \emph{et} colonnes\\
+puissances $1,x,x^2,\dots$ & Vandermonde / polynôme en $x$\\
+tridiagonal & récurrence d'ordre 2\\
+$a$ au-dessus, $b$ au-dessous, constante ajoutée & fonction affine ; $a=b$ par dérivée\\
+symboles $\delta_{i,j}$ & dessiner la matrice d'abord\\
+relation entre matrices & $\det(AB)$, $\det(\lambda A)$, $\det A^T$\\
+endomorphisme géométrique & base adaptée\\
+\bottomrule
+\end{tabular}}
+
+% ======================================================================
+\notion{1.6 Techniques d'ordre $n$}\label{n16}
+
+\sous{Somme constante}
+\begin{FORM}
+Diagonale $a$, autres coefficients $b$ (matrice $(a-b)I_n+bJ$) :
+\[D_n(a,b)=\big(a+(n-1)b\big)(a-b)^{n-1}.\]
+Inversible $\iff a\neq b$ et $a+(n-1)b\neq0$ ($n\geq2$).
+\end{FORM}
+
+\sous{Différences successives}
+\begin{METH}{Formule en $i,j$ \livre{méth.~1.2}}
+$C_k\leftarrow C_k-C_{k-1}$ pour $k=n,n-1,\dots,2$ (\emph{depuis la fin}). Nouveau coefficient : distinguer $i<k$ et $i\geq k$.
+Puis triangulaire, ligne creuse, ou seconde vague sur les lignes.
+\end{METH}
+\begin{FORM}[RÉSULTATS]
+$\det(\max(i,j))=(-1)^{n+1}n$ (dernière ligne $(n,0,\dots,0)$).\\
+$\det(|i-j|)=(-1)^{n-1}(n-1)2^{n-2}$ (colonnes, puis $L_i-L_{i-1}$, puis $C_1+\frac12\sum_{k\geq2}C_k$).\\
+$\det(a^{|i-j|})=(1-a^2)^{n-1}$ (avec $C_k-aC_{k-1}$).
+\end{FORM}
+
+\sous{Déterminants creux}
+\begin{ASTU}
+Permuter lignes et colonnes par la \emph{même} permutation ne change pas $\det$ ($P^{-1}AP$) : on regroupe en blocs.\\
+Inverser l'ordre de $m$ lignes : $\lfloor m/2\rfloor$ échanges.\\
+Ligne à un seul coefficient : la sortir comme facteur, puis s'en servir de pivot.
+\end{ASTU}
+\begin{FORM}[RÉSULTATS \livre{TD~4, TD~9}]
+X d'ordre $2n$ ($a$ diagonale, $b$ antidiagonale) : $(a^2-b^2)^n$ ; récurrence $D_{2n}=(a^2-b^2)D_{2n-2}$.\\
+Ordre $2n+1$ (centre $a$) : développer selon la ligne centrale, $a(a^2-b^2)^n$.\\
+Z d'ordre $n$ : $(-1)^{\lfloor\frac{n-2}2\rfloor}b_2\cdots b_{n-1}(a_1c_n-a_nc_1)$.\\
+N (les $b_j$ sur la diagonale) : $b_2\cdots b_{n-1}(a_1c_n-a_nc_1)$.\\
+Piège : signe de l'antidiagonale ($b$ en position $(1,2n)$ : $(-1)^{2n+1}=-1$) ; tester sur $n=3$ ou $4$.
+\end{FORM}
+
+\sous{Vandermonde}
+\begin{FORM}[\livre{th.~1.14}]
+$V(x_1,\dots,x_n)=\det\big(x_j^{\,i-1}\big)=\prod_{i<j}(x_j-x_i)$, non nul $\iff x_i$ distincts.\\
+$n=3$ : $(b-a)(c-a)(c-b)$. $\det(i^{j-1})=1!\,2!\cdots(n-1)!$.
+\end{FORM}
+\begin{METH}{Déterminant vu comme polynôme \livre{méth.~1.3}}
+$x$ dans une seule colonne : développer selon elle $\Rightarrow P(x)$ polynôme, degré $\leq$ nombre de lignes $-1$.
+\begin{enumerate}
+\item Coefficient dominant = cofacteur de la puissance la plus haute (barrer sa ligne et sa colonne).
+\item Racines évidentes : valeurs rendant deux colonnes égales.
+\item Autant de racines que le degré $\Rightarrow P=$ coeff.\ dominant $\times\prod(x-\text{racine})$.
+\item Cas non distincts : les deux membres sont nuls (le dire).
+\end{enumerate}
+Piège : un terme manquant (pas de $x^2$) donne une relation sur la dernière racine : $\dt{1&1&1\\a&b&c\\a^3&b^3&c^3}=(b-a)(c-a)(c-b)(a+b+c)$.
+\end{METH}
+
+\sous{Tridiagonaux}
+\begin{METH}{Récurrence \livre{méth.~1.4}}
+Diagonale $a$, sur-diagonale $b$, sous-diagonale $c$ : développer selon $L_1$, puis le 2\textsuperscript{e} mineur selon $C_1$ :
+\[T_n=aT_{n-1}-bc\,T_{n-2}\qquad(\text{seul }bc\text{ compte}).\]
+Poser $T_0=1$ (compatible) ; vérifier $T_3$ à la main.
+\end{METH}
+\begin{FORM}[SUITES RÉCURRENTES LINÉAIRES D'ORDRE 2]
+$u_n=\alpha u_{n-1}+\beta u_{n-2}$, équation $r^2=\alpha r+\beta$ :\\
+racines distinctes $r_1,r_2$ : $u_n=\lambda r_1^n+\mu r_2^n$ ;\\
+racine double $r$ : $u_n=(\lambda+\mu n)r^n$ ;\\
+racines $\rho e^{\pm i\theta}$ : $u_n=\rho^n(\lambda\cos n\theta+\mu\sin n\theta)$.
+\end{FORM}
+\begin{FORM}[RÉSULTATS]
+$(5,6,1)$ : $3^{n+1}-2^{n+1}$ \livre{TD~3}. \ $(2,-1,-1)$ : $n+1$.\\
+$(2\cos\theta,1,1)$ : $\frac{\sin(n+1)\theta}{\sin\theta}$ ; $\theta\in\pi\Z$ : $(n+1)(\pm1)^n$ \livre{TD~7} ; nul $\iff\theta=\frac{k\pi}{n+1}$.\\
+Outil : $\sin(n+1)\theta+\sin(n-1)\theta=2\sin n\theta\cos\theta$ ; $\sin3\theta=\sin\theta(4\cos^2\theta-1)$.
+\end{FORM}
+
+\sous{Constante ajoutée, polynôme de degré 1}
+\begin{METH}{Fonction affine \livre{méth.~1.5, TD~10}}
+$D(x)$ = déterminant avec $x$ ajouté (ou retranché) partout : $C_j-C_1$ chassent $x$ sauf de $C_1$ $\Rightarrow D$ \emph{affine}.
+Choisir les $x$ qui rendent la matrice triangulaire.
+\end{METH}
+\begin{FORM}[$\lambda_i$ SUR LA DIAGONALE, $a$ AU-DESSUS, $b$ AU-DESSOUS]
+$Q(x)=\prod(\lambda_i-x)$, $P(x)=\det(A_n-xU)$ : $P(a)=Q(a)$, $P(b)=Q(b)$.
+\[\det A_n=\frac{b\,Q(a)-a\,Q(b)}{b-a}\quad(a\neq b),\]\[\det A_n=Q(a)-aQ'(a)\quad(a=b).\]
+$a=b$ : continuité, puis taux d'accroissement de $\varphi(u)=uQ(a)-aQ(u)$ ($\varphi(a)=0$).\\
+Diagonale $x$, $1$ au-dessus, $-1$ au-dessous : $\frac{(x+1)^n+(x-1)^n}2$.
+\end{FORM}
+
+% ======================================================================
+\notion{1.7 Résultats des TD de déterminants}\label{n17}
+{\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
+TD1 & $C_2-C_1$, $C_3-C_1$ $\Rightarrow\det(\vv{AB},\vv{AC})$ : équivalence avec l'alignement.\\
+TD2 & $d=\frac{|\det(\vv{AB},\vv{CD},\vv{AC})|}{\|\vv{AB}\wedge\vv{CD}\|}$ ; Pythagore pour la minimalité.\\
+TD3 & 6 au-dessus, 1 au-dessous ; $u_4=211$ ; $u_n=3^{n+1}-2^{n+1}$.\\
+TD4 & $(a^2-b^2)^n$.\\
+TD5 & $P$ de degré $3$, coeff.\ $(b-a)(c-a)(c-b)$, racines $a,b,c$ ; récurrence générale.\\
+TD6 & $(a-b)I+bJ$ : base $\iff a\neq b$, $a+(n-1)b\neq0$ ($n\geq2$).\\
+TD7 & $\frac{\sin(n+1)\theta}{\sin\theta}$, par récurrence.\\
+TD8 & $f^{-1}(z)=\frac za$ ; symétrie $\iff a=\pm1$ ; $\mathrm{tr}=2\mathrm{Re}\,a$, $\det=|a|^2$ ; rotation si $|a|=1$.\\
+TD9 & $(-1)^{\lfloor\frac{n-2}2\rfloor}\prod b_k\,(a_1c_n-a_nc_1)$.\\
+TD10 & $\frac{bQ(a)-aQ(b)}{b-a}$ ; $Q(a)-aQ'(a)$ si $a=b$.
+\end{tabular}}
+
+% ======================================================================
+\end{multicols}
+\end{document}

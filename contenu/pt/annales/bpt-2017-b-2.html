@@ -1,0 +1,68 @@
+<p class="ann-lead">Le sujet est construit autour des courbes de Bézier : $\overrightarrow{OM(t)}=\sum_{k=0}^nB_{k,n}(t)\,\overrightarrow{OA_k}$, $t\in[0,1]$, avec les polynômes de Bernstein $B_{k,n}(t)=\binom nk t^k(1-t)^{n-k}$. Les parties II, III et IV sont des études de courbes paramétrées ; la partie I (produit scalaire, diagonalisation) et la partie V (surface de révolution) sortent de nos chapitres.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2017-b-2.svg" alt="Courbe de Bézier Γ1 de points de contrôle A0 à A3, son prolongement Γ2, la courbe Γ3 et le point C1" loading="lazy"><figcaption>En bleu foncé $\Gamma_1$ (arc $t\in[0,1]$), en bleu clair le reste de $\Gamma_2$, en ocre $\Gamma_3$ ; points de contrôle en gris.</figcaption></figure>
+
+<article class="q">
+<h3>II.1 — Paramétrage de $\Gamma_1$</h3>
+<p class="q-sujet">Points de contrôle $A_0(0,0)$, $A_1(2,2)$, $A_2(1,3)$, $A_3(1,-1)$ ; $n=3$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>$B_{0,3}=(1-t)^3$, $B_{1,3}=3t(1-t)^2$, $B_{2,3}=3t^2(1-t)$, $B_{3,3}=t^3$. Donc
+\[x(t)=2\cdot3t(1-t)^2+1\cdot3t^2(1-t)+t^3=6t-9t^2+4t^3,\]
+\[y(t)=2\cdot3t(1-t)^2+3\cdot3t^2(1-t)-t^3=6t-3t^2-4t^3,\qquad t\in[0,1].\]</p>
+<p>$\Gamma_2$ est donnée par les mêmes formules pour $t\in\R$ : $\Gamma_1$ est l'arc de $\Gamma_2$ correspondant à $t\in[0,1]$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>II.2(a)(b)(c) — Variations, tangentes <span class="q-ref">fiche §2.2, §2.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$x'(t)=12t^2-18t+6=6(2t-1)(t-1)$, $y'(t)=-12t^2-6t+6=-6(2t-1)(t+1)$.</p>
+<table class="tab">
+<tr><th>$t$</th><td>$-\infty$</td><td></td><td>$-1$</td><td></td><td>$\frac12$</td><td></td><td>$1$</td><td></td><td>$+\infty$</td></tr>
+<tr><th>$x$</th><td>$-\infty$</td><td>$\nearrow$</td><td>$-19$</td><td>$\nearrow$</td><td>$\frac54$</td><td>$\searrow$</td><td>$1$</td><td>$\nearrow$</td><td>$+\infty$</td></tr>
+<tr><th>$y$</th><td>$+\infty$</td><td>$\searrow$</td><td>$-5$</td><td>$\nearrow$</td><td>$\frac74$</td><td>$\searrow$</td><td>$-1$</td><td>$\searrow$</td><td>$-\infty$</td></tr>
+</table>
+<ul>
+<li>$t=\frac12$ annule $x'$ et $y'$ : point stationnaire (question d).</li>
+<li>Tangente <strong>horizontale</strong> en $M(-1)=(-19,-5)$ ($y'=0$, $x'(-1)=36\neq0$).</li>
+<li>Tangente <strong>verticale</strong> en $M(1)=(1,-1)$ ($x'=0$, $y'(1)=-12\neq0$).</li>
+<li>En $t=0$ : $f'(0)=(6,6)$, tangente $y=x$ (c'est la droite $(A_0A_1)$).</li>
+</ul>
+</details>
+</article>
+
+<article class="q">
+<h3>II.2(d) — Le point singulier <span class="q-ref">fiche §2.4</span></h3>
+<details class="indic"><summary>Indication</summary><p>Calculer $f''\big(\frac12\big)$ et $f'''\big(\frac12\big)$, puis appliquer le théorème $(p,q)$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>$M\big(\frac12\big)=\big(\frac54,\frac74\big)$. $f''(t)=(24t-18,\,-24t-6)$ donc $f''\big(\frac12\big)=(-6,-18)\neq\vec0$ : $p=2$. $f'''=(24,-24)$ et $\det\big(f'',f'''\big)=(-6)(-24)-(-18)(24)=576\neq0$ : $q=3$.</p>
+<p>$p$ pair, $q$ impair : <strong>rebroussement de première espèce</strong>, de tangente dirigée par $(1,3)$ : $y-\frac74=3\big(x-\frac54\big)$, soit $y=3x-2$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>II.2(e) — Branches infinies <span class="q-ref">fiche §2.5</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>En $\pm\infty$ : $x\sim4t^3$, $y\sim-4t^3$, $\frac yx\to-1$ et $y+x=12t-12t^2\to-\infty$. Deux <strong>branches paraboliques de direction $y=-x$</strong>.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>III.1–2 — Extrémités et tangente en $A_0$</h3>
+<details class="corr"><summary>Correction</summary>
+<p>$B_{k,n}(0)=0$ sauf $B_{0,n}(0)=1$, et $B_{k,n}(1)=0$ sauf $B_{n,n}(1)=1$ : $M(0)=A_0$ et $M(1)=A_n$.</p>
+<p>En $t=0$, seuls $B_{0,n}'(0)=-n$ et $B_{1,n}'(0)=n$ sont non nuls, donc $f'(0)=n\big(\overrightarrow{OA_1}-\overrightarrow{OA_0}\big)=n\,\overrightarrow{A_0A_1}$. Si $A_0\neq A_1$, le point est régulier et la tangente en $A_0$ est la droite $(A_0A_1)$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>IV — La courbe $\Gamma_3$</h3>
+<p class="q-sujet">Courbe de Bézier à trois points de contrôle $C_0=A_0$, $C_1$, $C_2=A_3$, qui se raccorde à $\Gamma_1$ en $A_0$ et $A_3$ avec les mêmes tangentes ; paramétrage proposé : $x_3=2t-t^2$, $y_3=2t-3t^2$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>D'après III.2, la tangente à $\Gamma_3$ en $C_0$ est $(C_0C_1)$ et doit être celle de $\Gamma_1$ en $A_0$, la droite $y=x$ ; de même en $C_2=A_3$, la tangente $(C_1C_2)$ doit être celle de $\Gamma_1$, la droite $(A_2A_3)$ : $x=1$. Donc $C_1$ est l'intersection : $C_1=(1,1)$.</p>
+<p>Vérification : $2t(1-t)\cdot(1,1)+t^2(1,-1)=(2t-t^2,\ 2t-3t^2)$.</p>
+<p>Étude sur $[0,1]$ : $x_3'=2-2t\geq0$, $y_3'=2-6t$. Tangente horizontale en $M\big(\frac13\big)=\big(\frac59,\frac13\big)$, verticale en $M(1)=(1,-1)$. C'est un arc de parabole, sans point singulier.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> partie I (produit scalaire, diagonalisation), partie III.3, partie V (surface de révolution).</div>

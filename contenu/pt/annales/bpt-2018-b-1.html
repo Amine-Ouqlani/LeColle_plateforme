@@ -1,0 +1,53 @@
+<p class="ann-lead">La partie I étudie les applications $g_{(a,b)}:z\mapsto az+b\bar z$ ($a,b\in\C$), vues comme endomorphismes de $\R^2\simeq\C$. C'est le prolongement direct du <a href="lecteur.html?doc=livre&amp;page=8">TD 8</a> (similitude $z\mapsto az$). Les questions 1 à 6 relèvent du chapitre 1 ; les questions 7 et 8 (diagonalisation) sortent de nos chapitres.</p>
+
+<article class="q">
+<h3>Q1 — Est-ce une base de $\R^2$ ? <span class="q-ref">fiche §1.1</span></h3>
+<p class="q-sujet">Quatre couples $(u_1,u_2)$ de nombres complexes : (a) $(-4i,0)$ ; (b) $(3-i,\ i(3-i))$ ; (c) $(3+i,\ i-3)$ ; (d) $\big(\frac1{1+i},\ -3e^{-i\pi/4}\big)$.</p>
+<details class="indic"><summary>Indication</summary><p>Avec $z_1=x_1+iy_1$ et $z_2=x_2+iy_2$, $\det(z_1,z_2)=x_1y_2-y_1x_2=\mathrm{Im}(\bar z_1z_2)$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<ul>
+<li>(a) $u_2=0$ : une famille contenant le vecteur nul est liée. <strong>Pas une base.</strong></li>
+<li>(b) $u_2=iu_1$ : $\det(u_1,u_2)=\mathrm{Im}(\bar u_1\,iu_1)=|u_1|^2=10\neq0$. <strong>Base</strong> ($u_2$ est $u_1$ tourné de $\frac\pi2$).</li>
+<li>(c) $u_1=(3,1)$, $u_2=(-3,1)$ : $\det=3\cdot1-1\cdot(-3)=6\neq0$. <strong>Base.</strong></li>
+<li>(d) $\frac1{1+i}=\frac{1-i}2$ et $-3e^{-i\pi/4}=-\frac{3\sqrt2}2(1-i)=-3\sqrt2\,u_1$ : colinéaires. <strong>Pas une base.</strong></li>
+</ul>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2–Q3 — $g_{(a,b)}$ est un endomorphisme ; $G=\mathcal L(\R^2)$ <span class="q-ref">fiche §1.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Pour $\lambda,\mu$ <em>réels</em>, $\overline{\lambda z+\mu z'}=\lambda\bar z+\mu\bar z'$, donc $g_{(a,b)}(\lambda z+\mu z')=\lambda g_{(a,b)}(z)+\mu g_{(a,b)}(z')$ : $g_{(a,b)}$ est $\R$-linéaire.</p>
+<p>$G$ est stable par combinaison linéaire réelle ($\lambda g_{(a,b)}+\mu g_{(a',b')}=g_{(\lambda a+\mu a',\lambda b+\mu b')}$) et contient $0$ : sous-espace de $\mathcal L(\R^2)$. Les matrices de $g_{(1,0)}$, $g_{(i,0)}$, $g_{(0,1)}$, $g_{(0,i)}$ dans la base $(1,i)$ sont
+\[\begin{pmatrix}1&0\\0&1\end{pmatrix},\ \begin{pmatrix}0&-1\\1&0\end{pmatrix},\ \begin{pmatrix}1&0\\0&-1\end{pmatrix},\ \begin{pmatrix}0&1\\1&0\end{pmatrix},\]
+quatre matrices libres (regarder les coefficients). Comme $\dim\mathcal L(\R^2)=4$, $G=\mathcal L(\R^2)$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q4 — Reconnaître des transformations <span class="q-ref">fiche §1.3 (similitudes, TD 8)</span></h3>
+<details class="corr"><summary>Correction</summary>
+<ul>
+<li>$a\in\R^*$, $b=0$ : homothétie de rapport $a$ ; $a=e^{i\theta}$, $b=0$ : rotation d'angle $\theta$ ; $(a,b)=(0,1)$ : $z\mapsto\bar z$, réflexion d'axe $(Ox)$.</li>
+<li>$g_{(e^{i\theta},0)}\circ g_{(0,1)}:z\mapsto e^{i\theta}\bar z$, de matrice $\begin{pmatrix}\cos\theta&\sin\theta\\\sin\theta&-\cos\theta\end{pmatrix}$ : orthogonale, de déterminant $-1$, c'est une isométrie <strong>indirecte</strong>, la réflexion d'axe la droite d'angle $\frac\theta2$ (elle fixe $e^{i\theta/2}$).</li>
+</ul>
+</details>
+</article>
+
+<article class="q">
+<h3>Q5 — Projection orthogonale sur la droite dirigée par $e^{i\alpha}$ <span class="q-ref">fiche §1.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Une symétrie $s$ et le projecteur $p$ associé vérifient $p=\frac12(s+\mathrm{Id})$. La réflexion d'axe dirigé par $e^{i\alpha}$ est $z\mapsto e^{2i\alpha}\bar z$ (Q4 avec $\theta=2\alpha$). Donc $p(z)=\frac12z+\frac12e^{2i\alpha}\bar z$ : $(a,b)=\big(\frac12,\frac12e^{2i\alpha}\big)$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q6 — Matrice dans la base canonique <span class="q-ref">fiche §1.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Avec $a=\alpha+i\beta$, $b=\gamma+i\delta$ : $g(1)=a+b$ et $g(i)=i(a-b)$, d'où
+\[G_{(a,b)}=\begin{pmatrix}\alpha+\gamma&\delta-\beta\\\beta+\delta&\alpha-\gamma\end{pmatrix}.\]</p>
+<p class="astuce">Prolongement (non demandé) : $\det G_{(a,b)}=\alpha^2+\beta^2-\gamma^2-\delta^2=|a|^2-|b|^2$. On retrouve $|a|^2$ pour $z\mapsto az$ (TD 8) et $-|b|^2$ pour $z\mapsto b\bar z$ : $g_{(a,b)}$ est bijective si et seulement si $|a|\neq|b|$.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> Q7–Q8 (polynôme caractéristique, diagonalisabilité), parties II et III (quadrique ; la spirale de la partie III est traitée dans une fiche séparée).</div>

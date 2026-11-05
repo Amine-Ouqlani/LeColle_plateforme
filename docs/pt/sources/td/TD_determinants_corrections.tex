@@ -1,0 +1,828 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Déterminants (corrections)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Déterminants · corrections}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 1}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Déterminants}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Corrections détaillées des 41 exercices du TD, dans le même ordre et avec les mêmes numéros.
+Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
+resservira. Les renvois « méthode~1.4 du livre », « théorème~2.3 du volume~2 »… désignent le cours.
+\textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
+
+\partie{I}{Applications directes du cours}{}
+\correction{1}{Un déterminant $3\times3$ de deux façons}{n-calc3}{énoncé : TD, p.~2}
+Développement selon la première colonne (signes $+,-,+$) :
+\[D=1\dt{1&0\\3&1}-2\dt{0&2\\3&1}+0=1-2(0-6)=13.\]
+Sarrus : on ajoute les produits des trois « diagonales descendantes » et l'on retranche ceux des trois « diagonales montantes » :
+$D=(1\cdot1\cdot1+0\cdot0\cdot0+2\cdot2\cdot3)-(2\cdot1\cdot0+1\cdot0\cdot3+0\cdot2\cdot1)=13$.
+\piege{la règle de Sarrus ne vaut qu'en taille $3$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{2}{Effet des opérations sur les colonnes}{n-ops}{énoncé : TD, p.~2}
+(a) $C_1'\leftarrow C_1'-2C_2$ (transvection) donne la colonne $C_1$ ; puis la troisième colonne $3C_3-C_1$, à laquelle on ajoute la première, devient $3C_3$ : $\det=3\times5=15$.
+
+(b) Par linéarité par rapport à la première colonne, puis en éliminant les déterminants à deux colonnes égales :
+$\det(C_1+C_2,C_2+C_3,C_3+C_1)=\det(C_1,C_2+C_3,C_3+C_1)+\det(C_2,C_2+C_3,C_3+C_1)$. Le premier vaut $\det(C_1,C_2+C_3,C_3)=\det(C_1,C_2,C_3)$ (retrancher $C_1$, puis $C_3$) ; le second vaut $\det(C_2,C_3,C_3+C_1)=\det(C_2,C_3,C_1)=\det(C_1,C_2,C_3)$ (permutation circulaire, deux échanges). Total : $2\times5=10$.
+
+(c) $\det(-2A)=(-2)^3\det A=-40$.
+\piege{$\det(\lambda A)=\lambda^n\det A$, et non $\lambda\det A$ ; une transvection garde le coefficient $1$ sur la colonne modifiée.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{3}{Alignement avec paramètre}{n-alignes}{énoncé : TD, p.~2}
+$A,B,C$ alignés $\iff\det(\vv{AB},\vv{AC})=0$, avec $\vv{AB}=(2,m-2)$ et $\vv{AC}=(m-1,6)$ :
+\[\dt{2&m-1\\m-2&6}=12-(m-2)(m-1)=-m^2+3m+10=-(m-5)(m+2).\]
+Les points sont alignés si et seulement si $m=5$ ou $m=-2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{4}{Alignement de trois points}{td-d1}{énoncé : TD, p.~3}
+\choix{l'alignement se traduit par $\det(\vv{AB},\vv{AC})=0$. Il faut donc faire apparaître les coordonnées de $\vv{AB}$
+et $\vv{AC}$, c'est-à-dire des \emph{différences} $b-a$, $c-a$ : ce sont des transvections de colonnes.}
+$C_2\leftarrow C_2-C_1$ et $C_3\leftarrow C_3-C_1$ ne changent pas le déterminant :
+\[\dt{1&1&1\\a&b&c\\a'&b'&c'}=\dt{1&0&0\\a&b-a&c-a\\a'&b'-a'&c'-a'}=\dt{b-a&c-a\\b'-a'&c'-a'}=\det(\vv{AB},\vv{AC}),\]
+en développant selon la première ligne. Le déterminant est nul si et seulement si $\vv{AB}$ et $\vv{AC}$ sont colinéaires,
+c'est-à-dire si $A$, $B$, $C$ sont alignés. On a donc l'équivalence, pas seulement l'implication demandée.
+\gain{la ligne de $1$ « absorbe » le point $A$ : retrancher la première colonne transforme des points en vecteurs. En
+remplaçant $C$ par un point courant $M(x,y)$, on obtient sans calcul l'équation de la droite $(AB)$ :
+$\dt{1&1&1\\a&b&x\\a'&b'&y}=0$.}
+\retenir{trois points $A$, $B$, $M$ du plan sont alignés si et seulement si le déterminant de la matrice dont les colonnes sont
+$(1,x,y)$ pour chacun d'eux est nul. En dimension 3, même chose avec quatre points et une ligne de $1$ : coplanarité.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{5}{Volume d'un tétraèdre, équation d'un plan}{n-tetra}{énoncé : TD, p.~3}
+\q{1.} $\vv{AB}=(-1,2,0)$, $\vv{AC}=(-1,0,3)$, $\vv{AD}=(0,1,1)$ :
+\[\det(\vv{AB},\vv{AC},\vv{AD})=\dt{-1&-1&0\\2&0&1\\0&3&1}=-1(0-3)-(-1)(2-0)+0=5,\qquad V=\tfrac16|5|=\tfrac56.\]
+\q{2.} Pour $M(x,y,z)$ :
+\[\dt{x-1&-1&-1\\y&2&0\\z&0&3}=(x-1)\cdot6-y\cdot(-3)+z\cdot2=0,\]
+soit $6x+3y+2z=6$, c'est-à-dire $\frac x1+\frac y2+\frac z3=1$ (on reconnaît les points d'intersection avec les axes).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{6}{Distance de deux droites : un calcul}{n-dist}{énoncé : TD, p.~3}
+$\ve u\wedge\ve v=(0,0,-2)$, $\|\ve u\wedge\ve v\|=2$, et $\det(\vv{OC},\ve u,\ve v)=\vv{OC}\cdot(\ve u\wedge\ve v)=-2$. Donc
+\[d(\mathcal D_1,\mathcal D_2)=\frac{|\det(\vv{OC},\ve u,\ve v)|}{\|\ve u\wedge\ve v\|}=\frac22=1.\]
+Géométriquement : $\mathcal D_1$ est dans le plan $z=0$, $\mathcal D_2$ dans le plan $z=1$, et les deux droites ne sont pas parallèles.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{7}{Une base de $\mathbb R_n[X]$, le déterminant de la dérivation}{ex-base}{énoncé : TD, p.~3}
+\q{1.} La matrice des coordonnées de $\mathcal C$ dans la base canonique $(1,X,\dots,X^n)$ est triangulaire supérieure (le $k$-ième vecteur ne fait intervenir que $1,\dots,X^k$) à diagonale de $1$ : son déterminant vaut $1\neq0$, donc $\mathcal C$ est une base.
+
+\q{2.} $D(X^k)=kX^{k-1}$ : la matrice de $D$ dans la base canonique est triangulaire supérieure (strictement) à diagonale nulle, donc $\det D=0$ et $D$ n'est pas bijective (en effet, $D(1)=0$).
+\retenir{une famille de $n$ vecteurs en dimension $n$ est une base si et seulement si le déterminant de ses coordonnées est non nul ; une matrice triangulaire se lit sur sa diagonale.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{8}{Déterminants d'endomorphismes de $\mathbb R_n[X]$}{n-endo}{énoncé : TD, p.~4}
+Dans la base canonique $(1,X,\dots,X^n)$ :
+\begin{itemize}
+\item $f(X^k)=(X+1)^k=X^k+(\text{degré}<k)$ : matrice triangulaire supérieure à diagonale de $1$, $\det f=1$ ;
+\item $g(X^k)=kX^k$ : matrice diagonale $\mathrm{diag}(0,1,\dots,n)$, $\det g=0$ ;
+\item $h(X^k)=X^k+kX^{k-1}$ : triangulaire à diagonale de $1$, $\det h=1$.
+\end{itemize}
+$f$ et $h$ sont bijectifs, $g$ ne l'est pas ($g(1)=0$).
+\retenir{un endomorphisme qui ne fait pas augmenter le degré a une matrice triangulaire dans la base canonique.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{9}{Inversibilité selon un paramètre}{n-param}{énoncé : TD, p.~4}
+\choix{les lignes ont la même somme $m+2$ : on la sort, sans jamais développer.}
+$C_1\leftarrow C_1+C_2+C_3$ puis on sort $m+2$ ; $L_2\leftarrow L_2-L_1$, $L_3\leftarrow L_3-L_1$ :
+\[\det A_m=(m+2)\dt{1&1&1\\1&m&1\\1&1&m}=(m+2)\dt{1&1&1\\0&m-1&0\\0&0&m-1}=(m+2)(m-1)^2.\]
+$A_m$ est inversible si et seulement si $m\notin\{1,-2\}$. (C'est $D_3(m,1)$ du cours.)
+\piege{développer d'abord donne $m^3-3m+2$, qu'il faut ensuite refactoriser : garder les facteurs dès qu'ils apparaissent.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{10}{Diagonale nulle, des $1$ ailleurs}{n-zero}{énoncé : TD, p.~4}
+C'est $D_n(0,1)$, avec $D_n(a,b)=\big(a+(n-1)b\big)(a-b)^{n-1}$ (somme constante sur les lignes) : $D_n(0,1)=(n-1)(-1)^{n-1}$. Contrôle : $n=2$ donne $\dt{0&1\\1&0}=-1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{11}{Déterminants nuls sans calcul}{n-nul}{énoncé : TD, p.~4}
+\choix{montrer que les colonnes sont liées : elles vivent dans un sous-espace de dimension $2$.}
+La colonne $j$ de $(i+j)$ est $U+jV$ avec $U=(1,2,\dots,n)^T$ et $V=(1,\dots,1)^T$. Toutes les colonnes sont dans $\vect(U,V)$, de dimension $\leq2<n$ : elles sont liées, le déterminant est nul.
+
+Pour la seconde, $\sin(i+j)=\cos j\,\sin i+\sin j\,\cos i$ : la colonne $j$ vaut $\cos j\,S+\sin j\,K$ avec $S=(\sin i)_i$ et $K=(\cos i)_i$. Même conclusion.
+\retenir{colonnes combinaisons d'au plus deux vecteurs fixes $\Rightarrow\det=0$ dès que $n\geq3$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{12}{Un Vandermonde déguisé}{n-trigo}{énoncé : TD, p.~5}
+\choix{$\cos2x=2\cos^2x-1$ : la troisième colonne est, à la première près, le carré de la deuxième. On se ramène à un Vandermonde.}
+$C_3\leftarrow C_3+C_1$ remplace $\cos2x$ par $2\cos^2x$ ; on sort le facteur $2$ :
+\[D=2\dt{1&\cos a&\cos^2a\\1&\cos b&\cos^2b\\1&\cos c&\cos^2c}=2(\cos b-\cos a)(\cos c-\cos a)(\cos c-\cos b),\]
+par la formule de Vandermonde $\dt{1&u&u^2\\1&v&v^2\\1&w&w^2}=(v-u)(w-u)(w-v)$.
+$D=0$ si et seulement si deux des réels $\cos a,\cos b,\cos c$ sont égaux.
+\retenir{une colonne qui s'exprime comme un polynôme d'une autre colonne (à des colonnes près) : penser à Vandermonde.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{13}{Quand $A-\lambda I_3$ n'est-elle pas inversible ?}{n-valp}{énoncé : TD, p.~5}
+\q{1.} La matrice $A-\lambda I_3$ est diagonale par blocs ; en développant selon la dernière ligne,
+\[\det(A-\lambda I_3)=(3-\lambda)\dt{1-\lambda&2\\2&1-\lambda}=(3-\lambda)\big((1-\lambda)^2-4\big)=(3-\lambda)(-1-\lambda)(3-\lambda),\]
+soit $\det(A-\lambda I_3)=-(\lambda-3)^2(\lambda+1)$.
+\q{2.} $AX=\lambda X$ avec $X\neq0$ signifie que $(A-\lambda I_3)X=0$ a une solution non nulle, c'est-à-dire que $A-\lambda I_3$ n'est pas inversible : $\det(A-\lambda I_3)=0$, soit $\lambda\in\{3,-1\}$.
+\begin{itemize}
+\item $\lambda=3$ : $(A-3I_3)X=0\iff-2x+2y=0$, soit $x=y$, $z$ quelconque : par exemple $X=(1,1,0)^T$ ou $(0,0,1)^T$.
+\item $\lambda=-1$ : $(A+I_3)X=0\iff x+y=0$ et $4z=0$ : par exemple $X=(1,-1,0)^T$.
+\end{itemize}
+\gain{ces $\lambda$ sont les \emph{valeurs propres} de $A$ (chapitre de réduction) ; le déterminant $\det(A-\lambda I_n)$ est l'outil qui les fait apparaître.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{14}{Choisir la méthode : un $4\times4$ à somme constante}{ex-160}{énoncé : TD, p.~5}
+\choix{le pivot de Gauss aboutit, mais au prix de calculs où l'on se trompe facilement. On remarque que chaque ligne a pour somme $10$ : on regroupe les colonnes dans la première.}
+$C_1\leftarrow C_1+C_2+C_3+C_4$, puis on sort le facteur $10$ ; ensuite $L_i\leftarrow L_i-L_1$ pour $i=2,3,4$ :
+\[D=10\dt{1&2&3&4\\1&1&2&3\\1&4&1&2\\1&3&4&1}=10\dt{1&2&3&4\\0&-1&-1&-1\\0&2&-2&-2\\0&1&1&-3}=10\dt{-1&-1&-1\\2&-2&-2\\1&1&-3}.\]
+Dans le $3\times3$, $C_2\leftarrow C_2-C_1$ et $C_3\leftarrow C_3-C_1$ donnent $\dt{-1&0&0\\2&-4&-4\\1&0&-4}=-1\times16=-16$. Donc $D=-160$.
+\retenir{regarder la structure avant de calculer : une somme constante sur les lignes se « sort » en une opération.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{II}{Exercices classiques et méthodes incontournables}{}
+\correction{15}{Multiplicativité, propriété globale}{g-carre}{énoncé : TD, p.~6}
+\choix{on ne connaît aucun coefficient, seulement une relation : on prend le déterminant des deux membres.}
+$\det(A)^2=\det(A^2)=\det(-I_n)=(-1)^n$. Comme $\det A$ est réel, $\det(A)^2\geq0$, donc $(-1)^n>0$ (il ne peut valoir $0$) : $n$
+est pair. Pour une matrice complexe, $A=iI_n$ convient pour tout $n$ : le résultat tombe, car $\det(A)^2$ peut être négatif.
+\retenir{relation entre matrices $\Rightarrow$ appliquer $\det$ ($\det(AB)$, $\det(\lambda A)=\lambda^n\det A$). Exemple voisin : une
+matrice antisymétrique réelle d'ordre impair n'est pas inversible ($\det A=\det A^T=\det(-A)=-\det A$).}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{16}{Propriétés globales : $A^2=-I_n$, $A^TA=I_n$, $A^k=0$}{n-carre}{énoncé : TD, p.~6}
+\choix{aucun coefficient n'est connu : on prend le déterminant des deux membres de chaque relation.}
+\q{1.} Si $A^2=-I_n$, alors $(\det A)^2=\det(-I_n)=(-1)^n=-1$ pour $n$ impair : impossible pour un réel. Pour $n=2$, $A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ (rotation d'angle $\frac\pi2$) convient : $A^2=-I_2$.
+
+\q{2.} $\det(A^T)\det A=1$ et $\det(A^T)=\det A$, donc $(\det A)^2=1$.
+
+\q{3.} $(\det A)^k=\det(A^k)=0$, donc $\det A=0$.
+\piege{$\det(-I_n)=(-1)^n$ et non $-1$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{17}{Similitude : $z\mapsto az$ vue comme application linéaire}{td-d8}{énoncé : TD, p.~6}
+\choix{on travaille dans la base $(1,i)$ du $\R$-espace vectoriel $\C$ : on calcule $f(1)$ et $f(i)$, et tout se lit sur la
+matrice.}
+Posons $a=\alpha+i\beta$. $f$ est $\R$-linéaire ($f(z+\lambda z')=f(z)+\lambda f(z')$). $f(1)=\alpha+i\beta$ et
+$f(i)=-\beta+i\alpha$ :
+\[\Mat_{(1,i)}(f)=\begin{pmatrix}\alpha&-\beta\\\beta&\alpha\end{pmatrix}.\]
+\q{1.} $f\circ g=g\circ f=\Id$ avec $g(z)=\frac za$ ($a\neq0$) : $f$ est bijective et $f^{-1}:z\mapsto a^{-1}z$.
+
+\q{2.} $f$ est une symétrie si et seulement si $f\circ f=\Id$, soit $a^2z=z$ pour tout $z$ : $a^2=1$, $a=\pm1$. Pour $a=1$,
+$f=\Id$ (symétrie triviale) ; pour $a=-1$, $f=-\Id$ est la symétrie centrale de centre $O$.
+
+\q{3.} $\mathrm{tr}(f)=2\alpha=2\,\mathrm{Re}(a)$ et $\det(f)=\alpha^2+\beta^2=|a|^2$.
+
+\q{4.} Si $|a|=1$, $a=e^{i\varphi}$ et la matrice est $\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}$ :
+$f$ est la rotation de centre $O$ et d'angle $\varphi=\arg a$.
+\gain{le déterminant tranche la question 2 sans calcul : une réflexion (symétrie par rapport à une droite) a pour
+déterminant $-1$ (proposition~1.11 du livre, $\dim\mathrm{Ker}(s+\Id)=1$), alors que $\det f=|a|^2>0$. Une similitude
+$z\mapsto az$ n'est donc jamais une réflexion ; c'est $z\mapsto a\overline z$ ($|a|=1$) qui en donne, avec
+$\det=-|a|^2$.}
+\piege{$\C$ est ici un $\R$-espace vectoriel de dimension $2$ : la trace et le déterminant se calculent sur une matrice
+$2\times2$ réelle, pas sur le « scalaire » $a$.}
+\retenir{$\det f>0$ : $f$ conserve l'orientation (rotations, similitudes directes) ; $\det f<0$ : elle la renverse (réflexions).
+Le module $|a|$ est le rapport de dilatation des longueurs, $|a|^2=\det f$ celui des aires.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{18}{Comatrice, coefficients entiers}{hp-com}{énoncé : TD, p.~7}
+\choix{on applique la formule de la comatrice (encadré du \S1.3) ; les questions 2 et 3 reposent sur
+$A\,\mathrm{com}(A)^T=\det(A)I_n$.}
+\q{1.} $\det A=1\cdot1-2\cdot(0-1)=3$. Les cofacteurs, ligne par ligne :
+$\mathrm{com}(A)=\begin{pmatrix}1&1&-1\\-2&1&2\\2&-1&1\end{pmatrix}$, d'où
+$A^{-1}=\frac13\mathrm{com}(A)^T=\frac13\begin{pmatrix}1&-2&2\\1&1&-1\\-1&2&1\end{pmatrix}$. On vérifie $AA^{-1}=I_3$.
+
+\q{2.} Si $\det A=\pm1$, $A^{-1}=\pm\mathrm{com}(A)^T$ est entière (cofacteurs entiers). Réciproquement, $\det A$ et $\det A^{-1}$
+sont des entiers de produit $1$.
+
+\q{3.} $\det A\cdot\det\mathrm{com}(A)=\det(\det(A)I_n)=(\det A)^n$, d'où $\det\mathrm{com}(A)=(\det A)^{n-1}$.
+\piege{la comatrice se \emph{transpose} avant de diviser par $\det A$ ; et chaque cofacteur porte son signe $(-1)^{i+j}$.}
+\retenir{$A^{-1}=\frac1{\det A}\mathrm{com}(A)^T$ ; en taille 2 : échanger la diagonale, changer les signes du reste.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{19}{Base et déterminant (somme constante)}{td-d6}{énoncé : TD, p.~7}
+\choix{« $n$ vecteurs en dimension $n$, base ? » : on calcule $\det_{\mathcal B}(\mathcal C)$ (théorème~1.10 du livre). La
+matrice a la même somme sur chaque ligne : proposition~1.13 du livre.}
+La matrice de $\mathcal C$ dans $\mathcal B$ a des $a$ sur la diagonale et des $b$ ailleurs. Chaque ligne a pour somme
+$a+(n-1)b$ ; $C_1\leftarrow C_1+\dots+C_n$, on sort ce facteur, puis $L_i\leftarrow L_i-L_1$ :
+\[\det_{\mathcal B}(\mathcal C)=\big(a+(n-1)b\big)\dt{1&b&\cdots&b\\0&a-b&&(0)\\\vdots&&\ddots&\\0&(0)&&a-b}=\big(a+(n-1)b\big)(a-b)^{n-1}.\]
+$\mathcal C$ est une base si et seulement si ce produit est non nul, c'est-à-dire $a+(n-1)b\neq0$ et $a\neq b$ (pour $n\geq2$).
+\piege{pour $n=1$, $\delta_1=ae_1$ et la condition est seulement $a\neq0$ : le facteur $(a-b)^{n-1}=1$ disparaît. L'énoncé
+suppose implicitement $n\geq2$.}
+\gain{la matrice s'écrit $(a-b)I_n+bJ$ ($J$ : que des $1$). Cette écriture donne aussi l'inverse et les valeurs propres ; elle
+revient souvent.}
+\retenir{$D_n(a,b)=(a+(n-1)b)(a-b)^{n-1}$ est à connaître ; la méthode « somme constante » s'applique dès que les lignes (ou
+les colonnes) ont même somme.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{20}{Un déterminant circulant d'ordre 3}{n-circ}{énoncé : TD, p.~7}
+\choix{somme constante $a+b+c$ sur chaque ligne.}
+$C_1\leftarrow C_1+C_2+C_3$, on sort $a+b+c$ ; $L_2\leftarrow L_2-L_1$, $L_3\leftarrow L_3-L_1$ :
+\[(a+b+c)\dt{1&b&c\\0&a-b&b-c\\0&c-b&a-c}=(a+b+c)\big[(a-b)(a-c)-(b-c)(c-b)\big].\]
+Or $(a-b)(a-c)+(b-c)^2=a^2-ab-ac+bc+b^2-2bc+c^2=a^2+b^2+c^2-ab-bc-ca$.
+\gain{$a^2+b^2+c^2-ab-bc-ca=\frac12\big[(a-b)^2+(b-c)^2+(c-a)^2\big]$ : le déterminant est nul si et seulement si $a+b+c=0$ ou $a=b=c$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{21}{La matrice $\max(i,j)$}{ex-max}{énoncé : TD, p.~7}
+\choix{deux colonnes voisines se ressemblent : différences successives $C_k\leftarrow C_k-C_{k-1}$, en commençant par $k=n$ pour que chaque opération utilise une colonne encore intacte.}
+Après $C_k\leftarrow C_k-C_{k-1}$ pour $k=n,n-1,\dots,2$, le coefficient $(i,k)$ ($k\geq2$) vaut
+$\max(i,k)-\max(i,k-1)=1$ si $i<k$ et $0$ si $i\geq k$ ; la première colonne reste $(1,2,\dots,n)^T$. Par exemple pour $n=4$ :
+\[\begin{pmatrix}1&2&3&4\\2&2&3&4\\3&3&3&4\\4&4&4&4\end{pmatrix}\longrightarrow\begin{pmatrix}1&1&1&1\\2&0&1&1\\3&0&0&1\\4&0&0&0\end{pmatrix}.\]
+La dernière ligne devient $(n,0,\dots,0)$ : en développant selon elle, $\det A_n=(-1)^{n+1}n\,\Delta_{n,1}$, où $\Delta_{n,1}$ est triangulaire supérieur à diagonale de $1$. Donc $\det A_n=(-1)^{n+1}n$.
+\retenir{différences successives depuis la fin ; calculer le nouveau coefficient en distinguant $i<k$ et $i\geq k$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{22}{La matrice $\min(i,j)$}{n-min}{énoncé : TD, p.~8}
+\choix{même idée que pour $\max(i,j)$ : différences successives, mais sur les lignes cette fois.}
+$L_k\leftarrow L_k-L_{k-1}$ pour $k=n,\dots,2$ : le coefficient $(k,j)$ devient $\min(k,j)-\min(k-1,j)$, qui vaut $1$ si $j\geq k$ et $0$ si $j<k$. La première ligne reste $(1,\dots,1)$. On obtient une matrice triangulaire supérieure à diagonale de $1$ : $\det=1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{23}{Déterminant en forme de X}{td-d4}{énoncé : TD, p.~8}
+\choix{la première et la dernière ligne n'ont que deux coefficients non nuls, et en les supprimant on retrouve un X plus
+petit : récurrence. Seconde méthode, plus rapide : regrouper les coefficients non nuls en blocs.}
+\q{Méthode 1 : récurrence.} Notons $D_{2n}$ ce déterminant. En développant selon la première ligne $(a,0,\dots,0,b)$ :
+$D_{2n}=a\,\Delta_{1,1}+(-1)^{1+2n}b\,\Delta_{1,2n}=a\Delta_{1,1}-b\Delta_{1,2n}$.
+\begin{itemize}
+\item Dans $\Delta_{1,1}$, la dernière ligne est $(0,\dots,0,a)$ ; on développe selon elle : $\Delta_{1,1}=a\,D_{2n-2}$ (le
+      bloc central est le X d'ordre $2n-2$).
+\item Dans $\Delta_{1,2n}$, la dernière ligne est $(b,0,\dots,0)$, en position $(2n-1,1)$, de signe $(-1)^{2n}=+1$ :
+      $\Delta_{1,2n}=b\,D_{2n-2}$.
+\end{itemize}
+D'où $D_{2n}=(a^2-b^2)D_{2n-2}$, avec $D_2=a^2-b^2$ : $\boxed{D_{2n}=(a^2-b^2)^n}$.
+
+\q{Méthode 2 : permutation.} On réordonne lignes \emph{et} colonnes selon $1,2n,2,2n-1,\dots,n,n+1$ ; le déterminant ne change
+pas. La matrice devient diagonale par blocs, de $n$ blocs $\begin{pmatrix}a&b\\b&a\end{pmatrix}$ : $(a^2-b^2)^n$ en une ligne.
+\piege{les signes du développement : le coefficient $b$ de la première ligne est en position $(1,2n)$, de signe $(-1)^{2n+1}=-1$.
+Une erreur de signe donnerait $(a^2+b^2)^n$, faux dès $n=1$.}
+\gain{en taille impaire $2n+1$, le coefficient central est seul sur sa ligne : on développe selon lui et l'on se ramène au cas
+pair, d'où $a(a^2-b^2)^n$.}
+\retenir{deux idées réutilisables : un développement qui reproduit la forme initiale donne une récurrence ; une même
+permutation des lignes et des colonnes conserve le déterminant et révèle des blocs.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{24}{Suite récurrente linéaire d'ordre 2}{td-d3}{énoncé : TD, p.~8}
+\choix{commencer par \emph{dessiner} la matrice : les symboles de Kronecker cachent un tridiagonal. Puis méthode~1.4 du livre.}
+$\delta_{i,j-1}=1$ si et seulement si $j=i+1$ : des $6$ juste au-dessus de la diagonale ; $\delta_{i-1,j}=1$ si et seulement si
+$i=j+1$ : des $1$ juste au-dessous ; des $5$ sur la diagonale.
+\[A_4=\begin{pmatrix}5&6&0&0\\1&5&6&0\\0&1&5&6\\0&0&1&5\end{pmatrix}.\]
+\q{Récurrence.} On développe $u_n$ selon la première ligne $(5,6,0,\dots,0)$ :
+$u_n=5u_{n-1}-6\Delta_{1,2}$. Le mineur $\Delta_{1,2}$ a pour première colonne $(1,0,\dots,0)^T$ ; en le développant selon
+elle, $\Delta_{1,2}=1\cdot u_{n-2}$. Donc
+\[u_n=5u_{n-1}-6u_{n-2}\quad(n\geq3),\qquad u_1=5,\ u_2=25-6=19.\]
+\q{1.} $u_3=5\cdot19-6\cdot5=65$, puis $\det(A_4)=u_4=5\cdot65-6\cdot19=211$.
+
+\q{2.} L'équation caractéristique $r^2-5r+6=0$ a pour racines $2$ et $3$ : $u_n=\alpha2^n+\beta3^n$. Avec
+$2\alpha+3\beta=5$ et $4\alpha+9\beta=19$ : $\beta=3$, $\alpha=-2$, d'où
+\[u_n=3^{n+1}-2^{n+1}.\]
+Contrôle : $u_4=243-32=211$.
+\gain{on peut poser $u_0=1$ (valeur qui rend la relation vraie pour $n=2$ : $19=5\cdot5-6u_0$) : les conditions $u_0=1$, $u_1=5$
+donnent les constantes plus vite. Et seul le produit $6\times1$ des coefficients hors diagonale compte : échanger $6$ et $1$ ne
+change rien.}
+\piege{oublier le signe $(-1)^{1+2}=-1$ du coefficient $6$, ce qui donne $u_n=5u_{n-1}+6u_{n-2}$ ; le contrôle sur $u_3$ (calculé
+par Sarrus) détecte l'erreur.}
+\retenir{tridiagonal (diagonale $a$, voisins $b$ et $c$) $\Rightarrow T_n=aT_{n-1}-bc\,T_{n-2}$ ; toujours vérifier la formule
+finale sur un petit $n$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{25}{Un tridiagonal à paramètre}{n-tri}{énoncé : TD, p.~8}
+\q{1.} En développant selon la première ligne puis le second mineur selon sa première colonne : $T_n=(1+x^2)T_{n-1}-x^2T_{n-2}$ ($n\geq3$), avec $T_1=1+x^2$, $T_2=(1+x^2)^2-x^2=1+x^2+x^4$.
+
+\q{2.} On pose $S_n=\sum_{k=0}^nx^{2k}$ ; alors $S_1=T_1$, $S_2=T_2$ et
+$(1+x^2)S_{n-1}-x^2S_{n-2}=S_{n-1}+x^2(S_{n-1}-S_{n-2})=S_{n-1}+x^{2n}=S_n$. Par récurrence (double), $T_n=S_n$.
+\gain{l'équation caractéristique $r^2-(1+x^2)r+x^2=0$ a pour racines $1$ et $x^2$ : on retrouve $T_n=\frac{x^{2n+2}-1}{x^2-1}$ si $x^2\neq1$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{26}{Déterminant de Vandermonde}{td-d5}{énoncé : TD, p.~9}
+\choix{$x$ n'apparaît que dans la dernière colonne : méthode~1.3 du livre. On ne développe surtout pas « à la main » : on
+utilise la structure (degré, coefficient dominant, racines).}
+\q{1.} En développant selon la dernière colonne $(1,x,x^2,x^3)^T$,
+$P(x)=\gamma_0+\gamma_1x+\gamma_2x^2+\gamma_3x^3$, où les $\gamma_k$ sont des cofacteurs indépendants de $x$ : $P$ est un
+polynôme de degré au plus $3$. Son coefficient de $x^3$ est le cofacteur $(-1)^{4+4}\Delta_{4,4}$,
+\[\gamma_3=\dt{1&1&1\\a&b&c\\a^2&b^2&c^2}=(b-a)(c-a)(c-b)\]
+(Vandermonde d'ordre 3 : $C_2\leftarrow C_2-C_1$, $C_3\leftarrow C_3-C_1$, puis on sort $b-a$ et $c-a$). Enfin $P(a)=P(b)=P(c)=0$
+(deux colonnes égales).
+\begin{itemize}
+\item Si $a,b,c$ sont distincts, $\gamma_3\neq0$ : $P$ est de degré $3$ et ses racines sont exactement $a$, $b$, $c$.
+\item Sinon, $A$ a deux colonnes égales pour tout $x$ : $P=0$.
+\end{itemize}
+\q{2.} Un polynôme de degré $3$ de coefficient dominant $\gamma_3$ et de racines $a,b,c$ vaut $\gamma_3(x-a)(x-b)(x-c)$ :
+\[\det A=(b-a)(c-a)(c-b)(x-a)(x-b)(x-c),\]
+formule vraie aussi lorsque $a,b,c$ ne sont pas distincts (les deux membres sont nuls).
+
+\q{3.} Notons $V_n(a_1,\dots,a_n)$ ce déterminant. La propriété est vraie pour $n=2$ : $V_2=a_2-a_1$. Supposons-la vraie au rang
+$n-1$. Remplaçons $a_n$ par $x$ : comme en 1, $Q(x)=V_n(a_1,\dots,a_{n-1},x)$ est un polynôme de degré au plus $n-1$, de
+coefficient de $x^{n-1}$ égal au cofacteur $V_{n-1}(a_1,\dots,a_{n-1})$, et s'annule en $a_1,\dots,a_{n-1}$. Si les $a_p$
+($p<n$) sont distincts, $Q(x)=V_{n-1}(a_1,\dots,a_{n-1})\prod_{p=1}^{n-1}(x-a_p)$ ; sinon les deux membres sont nuls. En
+$x=a_n$ et par hypothèse de récurrence :
+\[V_n=\prod_{k=2}^{n-1}\prod_{p=1}^{k-1}(a_k-a_p)\times\prod_{p=1}^{n-1}(a_n-a_p)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p).\]
+\gain{le coefficient dominant se lit sans calcul : c'est le mineur qui reste quand on barre la ligne et la colonne de
+$x^{n-1}$. Et les racines évidentes viennent de « deux colonnes égales ».}
+\piege{oublier le cas où les $a_p$ ne sont pas distincts (le degré chute) ; il se règle en une phrase, mais il faut l'écrire.}
+\retenir{la méthode du polynôme s'applique dès qu'une variable n'occupe qu'une ligne ou une colonne. $V\neq0\iff$ les points
+sont distincts : c'est l'outil de l'interpolation de Lagrange et de la liberté des familles $(x\mapsto e^{\alpha_ix})$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{27}{Déterminant de $M\mapsto AM$}{b-endo}{énoncé : TD, p.~9}
+\choix{choisir l'ordre des vecteurs de base pour obtenir une matrice diagonale par blocs : $(E_{1,1},E_{2,1},E_{1,2},E_{2,2})$,
+c'est-à-dire colonne par colonne, car $AM$ agit sur chaque colonne de $M$.}
+$AE_{1,1}=aE_{1,1}+cE_{2,1}$, $AE_{2,1}=bE_{1,1}+dE_{2,1}$, et de même pour la seconde colonne. Dans cette base,
+$\Mat(f)=\begin{pmatrix}A&0\\0&A\end{pmatrix}$ ; en développant (ou par le déterminant diagonal par blocs),
+$\det f=(\det A)^2$. Donc $f$ est bijectif si et seulement si $A$ est inversible, et alors $f^{-1}(M)=A^{-1}M$.
+\piege{dans l'ordre usuel $(E_{1,1},E_{1,2},E_{2,1},E_{2,2})$, la matrice n'est pas diagonale par blocs : le résultat est le
+même, mais le calcul est plus long. Le choix de la base fait la moitié du travail.}
+\retenir{en dimension $n$, $\det(M\mapsto AM)=(\det A)^n$ (une copie de $A$ par colonne).}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{III}{Exercices de synthèse et approfondissement}{}
+\correction{28}{Distance de deux droites de l'espace}{td-d2}{énoncé : TD, p.~10}
+\choix{la distance de deux droites est la plus petite distance $MN$, $M\in(AB)$, $N\in(CD)$. On cherche le couple $(H,K)$
+qui la réalise (perpendiculaire commune), puis on reconnaît dans le produit mixte un volume « base fois hauteur ».}
+Notons $\ve u=\vv{AB}$, $\ve v=\vv{CD}$, $\ve n=\ve u\wedge\ve v\neq\ve0$ (droites non parallèles).
+
+\q{1. Existence de la perpendiculaire commune.} On cherche $H=A+s\ve u$ et $K=C+r\ve v$ avec $\vv{HK}\cdot\ve u=0$ et
+$\vv{HK}\cdot\ve v=0$. Comme $\vv{HK}=\vv{AC}+r\ve v-s\ve u$, c'est le système
+\[s\|\ve u\|^2-r\,\ve u\cdot\ve v=\vv{AC}\cdot\ve u,\qquad s\,\ve u\cdot\ve v-r\|\ve v\|^2=\vv{AC}\cdot\ve v,\]
+de déterminant $-\|\ve u\|^2\|\ve v\|^2+(\ve u\cdot\ve v)^2=-\|\ve u\wedge\ve v\|^2\neq0$ : il a une unique solution.
+
+\q{2. $HK$ est la distance.} Pour $M\in(AB)$, $N\in(CD)$ : $\vv{MN}=\vv{HK}+(\vv{MH}+\vv{KN})$ avec
+$\vv{MH}+\vv{KN}\in\vect(\ve u,\ve v)$, orthogonal à $\vv{HK}$. Par Pythagore, $MN^2=HK^2+\|\vv{MH}+\vv{KN}\|^2\geq HK^2$.
+
+\q{3. La formule.} Par permutation circulaire, $\det(\ve u,\ve v,\vv{AC})=(\ve u\wedge\ve v)\cdot\vv{AC}$. On décompose
+$\vv{AC}=\vv{AH}+\vv{HK}+\vv{KC}$ : $\vv{AH}\in\vect(\ve u)$ et $\vv{KC}\in\vect(\ve v)$ sont orthogonaux à $\ve n$, d'où
+$\ve n\cdot\vv{AC}=\ve n\cdot\vv{HK}$. Comme $\vv{HK}$ est orthogonal à $\ve u$ et $\ve v$, il est colinéaire à $\ve n$ :
+$|\ve n\cdot\vv{HK}|=\|\ve n\|\,HK$. Donc $HK=\frac{|\det(\ve u,\ve v,\vv{AC})|}{\|\ve u\wedge\ve v\|}$.
+\gain{interprétation éclair (figure~1.3 du livre) : $|\det(\ve u,\ve v,\vv{AC})|$ est le volume du parallélépipède
+de base $\|\ve u\wedge\ve v\|$ ; la hauteur est la distance cherchée. Retrouver la formule par « volume / base » évite de
+l'apprendre.}
+\piege{le point de $\vv{AC}$ est arbitraire : on peut prendre n'importe quel point de chaque droite ($\vv{AD}$, $\vv{BC}$\dots),
+le résultat ne change pas. Si les droites sont parallèles, $\ve u\wedge\ve v=\ve0$ et la formule n'a pas de sens : on calcule
+alors la distance d'un point de l'une à l'autre.}
+\retenir{droites sécantes $\iff$ coplanaires et non parallèles $\iff\det(\vv{AC},\ve u,\ve v)=0$ avec $\ve u\wedge\ve v\neq\ve0$.
+Technique réutilisable : décomposer un vecteur selon une base adaptée, puis projeter sur la normale.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{29}{Déterminant de la transposition}{n-transp}{énoncé : TD, p.~10}
+$\tau$ est linéaire et $\tau\circ\tau=\Id$ : c'est une symétrie, par rapport à $\mathcal S_n=\mathrm{Ker}(\tau-\Id)$ (matrices symétriques, dimension $\frac{n(n+1)}2$) parallèlement à $\mathcal A_n=\mathrm{Ker}(\tau+\Id)$ (antisymétriques, dimension $\frac{n(n-1)}2$).
+
+Dans une base adaptée à $\mathcal M_n(\R)=\mathcal S_n\oplus\mathcal A_n$, la matrice est $\mathrm{diag}(I,-I)$, donc
+\[\det\tau=(-1)^{\dim\mathcal A_n}=(-1)^{n(n-1)/2}.\]
+Par exemple $\det\tau=-1$ pour $n=2$ et $n=3$, $+1$ pour $n=4$.
+\retenir{endomorphisme géométrique : base adaptée ; pour une symétrie, $\det=(-1)^{\dim\mathrm{Ker}(s+\Id)}$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{30}{Différences de colonnes puis de lignes : $|i-j|$}{f-absij}{énoncé : TD, p.~10}
+\choix{comme pour $\max(i,j)$ (exercice~\ref{e:ex-max}) : différences de colonnes, puis une seconde vague sur les lignes.}
+\q{Colonnes.} Pour $k$ de $n$ à $2$, $C_k\leftarrow C_k-C_{k-1}$ : le coefficient $(i,k)$ devient $|i-k|-|i-k+1|$, soit $1$ si
+$i<k$ et $-1$ si $i\geq k$. La première colonne reste $(0,1,\dots,n-1)^T$.
+
+\q{Lignes.} Pour $i$ de $n$ à $2$, $L_i\leftarrow L_i-L_{i-1}$ : la ligne $i$ devient $(1,0,\dots,0,-2,0,\dots,0)$, le $-2$ en
+colonne $i$ ; la ligne $1$ reste $(0,1,\dots,1)$.
+
+\q{Conclure.} $C_1\leftarrow C_1+\frac12(C_2+\dots+C_n)$ annule la première colonne sauf son premier coefficient,
+$\frac{n-1}2$. Matrice triangulaire de diagonale $\left(\frac{n-1}2,-2,\dots,-2\right)$ :
+\[B_n=\frac{n-1}2(-2)^{n-1}=(-1)^{n-1}(n-1)2^{n-2}.\]
+Contrôle : $B_2=-1$, $B_3=4$.
+\gain{dans la 3\textsuperscript{e} étape, on combine les colonnes pour annuler les $1$ de la première colonne : chaque $-2$
+« absorbe » un $1$ avec le coefficient $\frac12$.}
+\retenir{différences de colonnes, puis de lignes : chaque vague simplifie d'un cran. Toujours dans l'ordre $k=n,n-1,\dots,2$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{31}{Différences pondérées : $a^{|i-j|}$}{f-ka}{énoncé : TD, p.~10}
+\choix{au-dessus de la diagonale, la colonne $k$ vaut $a$ fois la colonne $k-1$ : on retranche $aC_{k-1}$ (et non $C_{k-1}$).}
+Pour $k$ de $n$ à $2$, $C_k\leftarrow C_k-aC_{k-1}$ : pour $i<k$, $a^{k-i}-a\cdot a^{k-1-i}=0$ ; pour $i\geq k$,
+$a^{i-k}-a\cdot a^{i-k+1}=a^{i-k}(1-a^2)$. Matrice triangulaire inférieure de diagonale $(1,1-a^2,\dots,1-a^2)$ :
+$\det=(1-a^2)^{n-1}$.
+\retenir{adapter le coefficient de la différence à la structure ; contrôle immédiat : pour $a=\pm1$, les colonnes sont égales ou
+opposées, le déterminant est nul.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{32}{Déterminant en forme de Z}{td-d9}{énoncé : TD, p.~11}
+\choix{les lignes $2$ à $n-1$ n'ont qu'un coefficient : on les « sort », puis on s'en sert comme pivots pour nettoyer les lignes
+$1$ et $n$.}
+\q{Factoriser.} On sort $b_{n+1-k}$ de chaque ligne $k$ ($2\leq k\leq n-1$) : facteur $b_2b_3\cdots b_{n-1}$ ; la ligne $k$ devient le
+vecteur ligne $e_{n+1-k}$ (un $1$ en colonne $n+1-k$).
+
+\q{Nettoyer.} Pour chaque colonne $j\in\ient2{n-1}$, on retranche à la ligne $1$ (resp. $n$) $a_j$ (resp. $c_j$) fois la ligne
+ayant un $1$ en colonne $j$ (transvections) : les lignes $1$ et $n$ deviennent $(a_1,0,\dots,0,a_n)$ et $(c_1,0,\dots,0,c_n)$.
+
+\q{Remettre dans l'ordre.} Les lignes $2$ à $n-1$ forment une « anti-identité » sur les colonnes $2$ à $n-1$. Inverser l'ordre
+de ces $n-2$ lignes demande $\left\lfloor\frac{n-2}2\right\rfloor$ échanges. On obtient alors une identité au centre ; en
+développant selon les lignes $2,\dots,n-1$ (un seul $1$, en position diagonale, signe $+$), il reste
+$\dt{a_1&a_n\\c_1&c_n}$. Donc
+\[\det D=(-1)^{\lfloor\frac{n-2}2\rfloor}\,b_2b_3\cdots b_{n-1}\,(a_1c_n-a_nc_1).\]
+Contrôle : $n=3$, $D=\dt{a_1&a_2&a_3\\0&b_2&0\\c_1&c_2&c_3}=b_2(a_1c_3-a_3c_1)$, en développant selon la ligne 2.
+\gain{le nombre d'échanges pour inverser $m$ objets est $\lfloor m/2\rfloor$ (on échange le premier et le dernier, etc.) ; la
+parité de $\lfloor m/2\rfloor$ est celle de $\frac{m(m-1)}2$.}
+\piege{oublier le signe de l'anti-diagonale. Le déterminant « en N » (les $b_j$ sur la diagonale au lieu de l'anti-diagonale)
+n'a pas ce signe : $b_2\cdots b_{n-1}(a_1c_n-a_nc_1)$.}
+\retenir{face à une ligne n'ayant qu'un coefficient : la sortir comme facteur, puis l'utiliser comme pivot. Toujours tester la
+formule finale sur $n=3$ ou $4$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{33}{Suite récurrente, racines complexes}{td-d7}{énoncé : TD, p.~11}
+\choix{tridiagonal : récurrence (méthode~1.4 du livre). Comme le résultat est donné, la vérification par récurrence avec une
+formule de trigonométrie est plus courte que la résolution.}
+Notons $D_n=\det(A_n)$. Le développement donne $D_n=2\cos\theta\,D_{n-1}-D_{n-2}$ ($bc=1$), avec $D_1=2\cos\theta$ et
+$D_2=4\cos^2\theta-1$. On suppose $\theta\notin\pi\Z$.
+\begin{itemize}
+\item $\frac{\sin2\theta}{\sin\theta}=2\cos\theta=D_1$ et $\frac{\sin3\theta}{\sin\theta}=4\cos^2\theta-1=D_2$, car
+      $\sin3\theta=3\sin\theta-4\sin^3\theta=\sin\theta(4\cos^2\theta-1)$.
+\item Si la formule est vraie aux rangs $n-1$ et $n-2$, la formule
+      $\sin\big((n+1)\theta\big)+\sin\big((n-1)\theta\big)=2\sin(n\theta)\cos\theta$ donne
+      $2\cos\theta D_{n-1}-D_{n-2}=\frac{\sin((n+1)\theta)}{\sin\theta}$ : elle est vraie au rang $n$.
+\end{itemize}
+Si $\theta\in\pi\Z$, $\cos\theta=\varepsilon=\pm1$ : racine double $\varepsilon$, et $D_n=(n+1)\varepsilon^n$, qui est la
+limite de $\frac{\sin((n+1)\theta)}{\sin\theta}$.
+\gain{pour \emph{trouver} la formule sans la connaître : $r^2-2\cos\theta\,r+1=0$ a pour racines $e^{\pm i\theta}$, donc
+$D_n=\lambda\cos n\theta+\mu\sin n\theta$ ; avec $D_0=1$ et $D_1=2\cos\theta$, on obtient $\lambda=1$,
+$\mu=\frac{\cos\theta}{\sin\theta}$, et $D_n=\frac{\sin\theta\cos n\theta+\cos\theta\sin n\theta}{\sin\theta}$.}
+\piege{la formule n'a pas de sens pour $\theta\in\pi\Z$ : il faut traiter ce cas à part (racine double).}
+\retenir{prolongement classique : $D_n=0\iff\theta=\frac{k\pi}{n+1}$ ($1\leq k\leq n$). Le déterminant d'ordre $n$ à diagonale $x$
+et voisins $1$ est un polynôme unitaire de degré $n$ ; il a ces $n$ racines distinctes $2\cos\frac{k\pi}{n+1}$, donc n'en a pas
+d'autre.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{34}{Vandermonde et interpolation de Lagrange}{n-lagrange}{énoncé : TD, p.~11}
+On cherche $P=a_0+a_1X+\dots+a_nX^n$. Les conditions $P(x_i)=y_i$ forment le système linéaire de $n+1$ équations à $n+1$ inconnues
+\[\begin{pmatrix}1&x_0&\cdots&x_0^n\\\vdots&&&\vdots\\1&x_n&\cdots&x_n^n\end{pmatrix}\begin{pmatrix}a_0\\\vdots\\a_n\end{pmatrix}=\begin{pmatrix}y_0\\\vdots\\y_n\end{pmatrix}.\]
+Sa matrice est la transposée d'une matrice de Vandermonde, de déterminant $\prod_{i<j}(x_j-x_i)\neq0$ puisque les $x_i$ sont distincts. Elle est donc inversible : le système a une unique solution, d'où l'existence et l'unicité de $P$.
+\retenir{« existence et unicité » d'une solution d'un système carré $\iff$ déterminant non nul.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{35}{Familles d'exponentielles}{n-expo}{énoncé : TD, p.~11}
+\choix{une relation $\sum c_kf_k=0$ est une infinité d'équations ; on en extrait un système carré en dérivant et en évaluant en $0$. Son déterminant est un Vandermonde.}
+Supposons $\sum_{k=1}^nc_ke^{a_kx}=0$ pour tout réel $x$. En dérivant $j$ fois ($0\leq j\leq n-1$) puis en prenant $x=0$ :
+\[\sum_{k=1}^nc_k\,a_k^j=0\qquad(0\leq j\leq n-1).\]
+C'est un système linéaire en $(c_1,\dots,c_n)$ dont la matrice $\big(a_k^j\big)_{0\leq j\leq n-1,\ 1\leq k\leq n}$ est une matrice de Vandermonde, de déterminant $\prod_{k<l}(a_l-a_k)\neq0$ car les $a_k$ sont distincts. Le système n'a que la solution nulle : $c_1=\dots=c_n=0$, la famille est libre.
+\retenir{montrer qu'une famille de fonctions est libre : extraire un système carré (valeurs, dérivées) de déterminant non nul.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{36}{Un Vandermonde lacunaire}{n-vdmlac}{énoncé : TD, p.~12}
+\choix{remplacer $d$ par une variable $x$ et voir $\Delta$ comme un polynôme $P(x)$ (méthode du polynôme). Supposons d'abord $a,b,c$ distincts.}
+En développant selon la dernière colonne, $P$ est de degré $\leq4$ et son coefficient en $x^4$ est $V(a,b,c)=(b-a)(c-a)(c-b)$. $P(a)=P(b)=P(c)=0$ (deux colonnes égales), donc $P(x)=V(a,b,c)(x-a)(x-b)(x-c)(x-r)$ pour un certain réel $r$.
+
+Le coefficient de $x^3$ dans $P$ est nul (la colonne de $x$ ne contient pas $x^3$). Dans le produit, il vaut $-V(a,b,c)(a+b+c+r)$, donc $r=-(a+b+c)$ et
+\[\Delta=(b-a)(c-a)(c-b)(d-a)(d-b)(d-c)\,(a+b+c+d).\]
+Si deux des réels $a,b,c$ sont égaux, les deux membres sont nuls (deux colonnes égales) : la formule reste vraie.
+\piege{il manque une puissance : le degré ne baisse pas, il apparaît une racine de plus à identifier, ici par le coefficient de $x^3$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{IV}{Exercices difficiles et type concours}{}
+\correction{37}{Déterminant triangulaire par blocs}{n-blocs}{énoncé : TD, p.~13}
+\q{1.} Pour $p=1$, $A=(a_{11})$ et la première colonne de $M$ est $(a_{11},0,\dots,0)^T$ : en développant selon elle, $\det M=a_{11}\det D$.
+
+Supposons le résultat vrai au rang $p-1$. On développe $\det M$ selon la première colonne, dont seuls les $p$ premiers coefficients $a_{i1}$ peuvent être non nuls :
+$\det M=\sum_{i=1}^p(-1)^{i+1}a_{i1}\,\det M_{i,1}$. Le mineur $M_{i,1}$ (ligne $i$ et colonne $1$ supprimées) est de la forme $\begin{pmatrix}A_{i,1}&B_i\\0&D\end{pmatrix}$ avec $A_{i,1}$ d'ordre $p-1$ ; par hypothèse de récurrence, $\det M_{i,1}=\det A_{i,1}\det D$. Donc
+$\det M=\Big(\sum_{i=1}^p(-1)^{i+1}a_{i1}\det A_{i,1}\Big)\det D=\det A\,\det D$ (développement de $\det A$ selon sa première colonne).
+
+\q{2.} $\dt{2&1\\1&3}\times\dt{4&1\\2&3}=5\times10=50$.
+\retenir{le bloc $B$ n'intervient pas : seule compte la structure triangulaire par blocs.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{38}{Fonction affine, parité, antisymétrie}{det-pb}{énoncé : TD, p.~13}
+\choix{coefficients constants au-dessus et au-dessous : c'est la situation de l'exercice~\ref{e:td-d10}, que l'on applique avec $\lambda_i=x$,
+$a=1$, $b=-1$.}
+\q{1.} Avec $D(c)$ le déterminant obtenu en ajoutant $c$ partout (affine) : $D(-1)=(x-1)^n$ (triangulaire inférieure),
+$D(1)=(x+1)^n$ (triangulaire supérieure), et pour une fonction affine $D(0)=\frac{D(1)+D(-1)}2$.
+
+\q{2.} $n$ pair : somme de deux puissances paires qui ne s'annulent pas ensemble, $\det>0$ : toujours inversible. $n$ impair :
+$(x+1)^n=(1-x)^n\iff x+1=1-x\iff x=0$ (injectivité de $u\mapsto u^n$) : inversible si et seulement si $x\neq0$.
+\retenir{pour $x=0$, $M_n(0)$ est antisymétrique : on retrouve qu'en ordre impair son déterminant est nul.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{39}{Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous}{td-d10}{énoncé : TD, p.~13}
+\choix{retrancher $x$ partout transforme les coefficients constants $a$ et $b$ en $a-x$ et $b-x$ : pour $x=a$ ou $x=b$, la
+matrice devient triangulaire. Il suffit donc de savoir que $P$ est affine (méthode~1.5 du livre).}
+Notons $Q(x)=\prod_{i=1}^n(\lambda_i-x)$.
+
+\q{1.} Les colonnes de $A_n-xU$ sont $C_j-xU_1$, où $U_1=(1,\dots,1)^T$. Les transvections $C_j\leftarrow C_j-C_1$ ($j\geq2$)
+donnent des colonnes $C_j-C_1$ indépendantes de $x$ ; seule la première, $C_1-xU_1$, dépend de $x$. Par linéarité selon la
+première colonne :
+\[P(x)=\det(C_1,C_2-C_1,\dots)-x\det(U_1,C_2-C_1,\dots)=\beta-\alpha x :\quad\deg P\leq1.\]
+\q{2.} $A_n-aU$ a des $0$ au-dessus de la diagonale : triangulaire inférieure, $P(a)=\prod(\lambda_i-a)=Q(a)$. De même
+$P(b)=Q(b)$. Comme $\det A_n=P(0)$ et que $P$ est affine, on écrit la droite passant par $(a,Q(a))$ et $(b,Q(b))$ :
+\[\det A_n=P(0)=\frac{b\,Q(a)-a\,Q(b)}{b-a}\qquad(a\neq b).\]
+(Vérification : en $x=a$, la droite $x\mapsto\frac{(b-x)Q(a)-(a-x)Q(b)}{b-a}$ vaut bien $Q(a)$.)
+
+\q{3.} Pour $a$ fixé, $b\mapsto\det A_n$ est polynomiale, donc continue : on fait tendre $b$ vers $a$. Avec
+$\varphi(u)=u\,Q(a)-a\,Q(u)$, on a $\varphi(a)=0$ et $\det A_n=\frac{\varphi(b)-\varphi(a)}{b-a}\to\varphi'(a)$. D'où, pour $a=b$,
+\[\det A_n=Q(a)-aQ'(a)=\prod_{i=1}^n(\lambda_i-a)+a\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-a).\]
+Contrôle : tous les $\lambda_i$ égaux à $\lambda$ : $(\lambda-a)^n+na(\lambda-a)^{n-1}=(\lambda+(n-1)a)(\lambda-a)^{n-1}$, c'est la
+proposition~1.13 du livre.
+\gain{reconnaître un \emph{taux d'accroissement} : une expression $\frac{\varphi(b)-\varphi(a)}{b-a}$ avec $\varphi(a)=0$ tend vers
+$\varphi'(a)$. C'est le sens de « à l'aide d'une dérivée ».}
+\piege{en 3, on ne peut pas faire $b=a$ dans la formule de la question 2 (division par $0$) ; il faut justifier le passage à la
+limite par la continuité du déterminant.}
+\retenir{trois techniques : (i) $x$ ajouté partout $\Rightarrow$ affine ; (ii) choisir les valeurs de $x$ qui rendent la matrice
+triangulaire ; (iii) prolonger une formule par continuité, la limite étant une dérivée.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{40}{Diagonale quelconque, des $1$ ailleurs}{n-diag1}{énoncé : TD, p.~14}
+\choix{c'est la situation de l'exercice~\ref{e:td-d10} (« $a$ au-dessus, $b$ au-dessous ») avec $a=b=1$, cas où l'on passe par la dérivée.}
+Notons $Q(x)=\prod_{i}(\lambda_i-x)$. L'exercice~\ref{e:td-d10} donne, pour $a=b$ : $\det A=Q(a)-aQ'(a)$, ici avec $a=1$. Or
+\[Q'(x)=-\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-x),\quad\text{donc}\quad Q(1)-Q'(1)=\prod_i(\lambda_i-1)+\sum_j\prod_{i\neq j}(\lambda_i-1).\]
+Comme les $\lambda_i-1$ sont non nuls, $\prod_{i\neq j}(\lambda_i-1)=\frac{\prod_i(\lambda_i-1)}{\lambda_j-1}$, d'où la formule.
+
+\emph{Variante directe.} Retrancher $1$ à tous les coefficients donne la matrice diagonale $\mathrm{diag}(\lambda_i-1)$ ; par la méthode de la fonction affine, $x\mapsto\det(A-xU)$ ($U$ : que des $1$) est affine, vaut $\prod(\lambda_i-1)$ en $x=1$, et l'on calcule sa pente par linéarité (une seule colonne de $U$ à la fois).
+Contrôle : pour $n=1$, $\lambda_1-1+1=\lambda_1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{41}{Le déterminant de Cauchy}{n-cauchy}{énoncé : TD, p.~14}
+\choix{pas de formule de récurrence évidente par développement : on fait apparaître des zéros par différences, en factorisant chaque fois les facteurs communs aux lignes et aux colonnes.}
+\q{1.} Pour $j<n$ : $\dfrac1{a_i+b_j}-\dfrac1{a_i+b_n}=\dfrac{b_n-b_j}{(a_i+b_j)(a_i+b_n)}$. On sort $b_n-b_j$ de la colonne $j$ ($j<n$) et $\frac1{a_i+b_n}$ de la ligne $i$ (tous les coefficients de la ligne $i$, y compris le dernier, $\frac1{a_i+b_n}$, le contiennent) :
+\[C_n=\frac{\prod_{j<n}(b_n-b_j)}{\prod_{i=1}^n(a_i+b_n)}\,\det M,\]
+où $M$ a pour coefficients $\frac1{a_i+b_j}$ dans les colonnes $j<n$, et des $1$ dans la dernière colonne.
+
+\q{2.} Dans $M$, $L_i\leftarrow L_i-L_n$ ($i<n$) : la dernière colonne devient $(0,\dots,0,1)^T$ et, pour $j<n$, $\dfrac1{a_i+b_j}-\dfrac1{a_n+b_j}=\dfrac{a_n-a_i}{(a_i+b_j)(a_n+b_j)}$. On sort $a_n-a_i$ de la ligne $i$ ($i<n$) et $\frac1{a_n+b_j}$ de la colonne $j$ ($j<n$) ; en développant selon la dernière colonne, il reste $C_{n-1}$ (construit sur $a_1,\dots,a_{n-1}$, $b_1,\dots,b_{n-1}$) :
+\[C_n=\frac{\prod_{j<n}(b_n-b_j)\prod_{i<n}(a_n-a_i)}{\prod_{i\leq n}(a_i+b_n)\prod_{j<n}(a_n+b_j)}\,C_{n-1}.\]
+
+\q{3.} Récurrence sur $n$ : $C_1=\frac1{a_1+b_1}$ convient. Le facteur obtenu en 2 contient exactement, au numérateur, les facteurs $(a_n-a_i)(b_n-b_i)$ pour $i<n$, et au dénominateur, les facteurs $(a_i+b_j)$ pour lesquels $i=n$ ou $j=n$. Avec l'hypothèse de récurrence pour $C_{n-1}$, on obtient la formule au rang $n$.
+\gain{conséquence : si les $a_i$ sont distincts et les $b_j$ distincts, la matrice de Cauchy est inversible. Pour $a_i=i$, $b_j=j-1$, on obtient la matrice de Hilbert $\left(\frac1{i+j-1}\right)$, dont le déterminant est l'inverse d'un entier.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

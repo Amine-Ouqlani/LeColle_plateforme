@@ -1,0 +1,610 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Déterminants (énoncés)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Déterminants · énoncés}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 1}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Déterminants}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Énoncés}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Ce livret rassemble 41 exercices, classés en quatre parties, du plus direct au plus exigeant.
+Il reprend \textbf{tous les exercices du livre} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
+du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livre.
+L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livre, exercice~1.5 · TD~1 de la classe »}, \emph{« Livre, exemple~2.4 »}
+ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
+Les corrections sont dans un livret séparé, \texttt{TD\_determinants\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}
+
+\vspace{0.6em}{\sffamily\bfseries\color{Bleu}Sommaire}\par\vspace{0.2em}{\small\setlength{\parskip}{1.5pt}\setlength{\columnsep}{1.2cm}\begin{multicols}{2}\raggedcolumns
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}I. Applications directes du cours\end{minipage}\hfill\pageref{partie:I}\par\vspace{0.15em}
+\sommaireligne{1}{Un déterminant $3\times3$ de deux façons}{n-calc3}
+\sommaireligne{2}{Effet des opérations sur les colonnes}{n-ops}
+\sommaireligne{3}{Alignement avec paramètre}{n-alignes}
+\sommaireligne{4}{Alignement de trois points}{td-d1}
+\sommaireligne{5}{Volume d'un tétraèdre, équation d'un plan}{n-tetra}
+\sommaireligne{6}{Distance de deux droites : un calcul}{n-dist}
+\sommaireligne{7}{Une base de $\mathbb R_n[X]$, le déterminant de la dérivation}{ex-base}
+\sommaireligne{8}{Déterminants d'endomorphismes de $\mathbb R_n[X]$}{n-endo}
+\sommaireligne{9}{Inversibilité selon un paramètre}{n-param}
+\sommaireligne{10}{Diagonale nulle, des $1$ ailleurs}{n-zero}
+\sommaireligne{11}{Déterminants nuls sans calcul}{n-nul}
+\sommaireligne{12}{Un Vandermonde déguisé}{n-trigo}
+\sommaireligne{13}{Quand $A-\lambda I_3$ n'est-elle pas inversible ?}{n-valp}
+\sommaireligne{14}{Choisir la méthode : un $4\times4$ à somme constante}{ex-160}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}II. Exercices classiques et méthodes incontournables\end{minipage}\hfill\pageref{partie:II}\par\vspace{0.15em}
+\sommaireligne{15}{Multiplicativité, propriété globale}{g-carre}
+\sommaireligne{16}{Propriétés globales : $A^2=-I_n$, $A^TA=I_n$, $A^k=0$}{n-carre}
+\sommaireligne{17}{Similitude : $z\mapsto az$ vue comme application linéaire}{td-d8}
+\sommaireligne{18}{Comatrice, coefficients entiers\HP}{hp-com}
+\sommaireligne{19}{Base et déterminant (somme constante)}{td-d6}
+\sommaireligne{20}{Un déterminant circulant d'ordre 3}{n-circ}
+\sommaireligne{21}{La matrice $\max(i,j)$}{ex-max}
+\sommaireligne{22}{La matrice $\min(i,j)$}{n-min}
+\sommaireligne{23}{Déterminant en forme de X}{td-d4}
+\sommaireligne{24}{Suite récurrente linéaire d'ordre 2}{td-d3}
+\sommaireligne{25}{Un tridiagonal à paramètre}{n-tri}
+\sommaireligne{26}{Déterminant de Vandermonde}{td-d5}
+\sommaireligne{27}{Déterminant de $M\mapsto AM$}{b-endo}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}III. Exercices de synthèse et approfondissement\end{minipage}\hfill\pageref{partie:III}\par\vspace{0.15em}
+\sommaireligne{28}{Distance de deux droites de l'espace}{td-d2}
+\sommaireligne{29}{Déterminant de la transposition}{n-transp}
+\sommaireligne{30}{Différences de colonnes puis de lignes : $|i-j|$}{f-absij}
+\sommaireligne{31}{Différences pondérées : $a^{|i-j|}$}{f-ka}
+\sommaireligne{32}{Déterminant en forme de Z}{td-d9}
+\sommaireligne{33}{Suite récurrente, racines complexes}{td-d7}
+\sommaireligne{34}{Vandermonde et interpolation de Lagrange}{n-lagrange}
+\sommaireligne{35}{Familles d'exponentielles}{n-expo}
+\sommaireligne{36}{Un Vandermonde lacunaire}{n-vdmlac}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}IV. Exercices difficiles et type concours\end{minipage}\hfill\pageref{partie:IV}\par\vspace{0.15em}
+\sommaireligne{37}{Déterminant triangulaire par blocs}{n-blocs}
+\sommaireligne{38}{Fonction affine, parité, antisymétrie}{det-pb}
+\sommaireligne{39}{Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous}{td-d10}
+\sommaireligne{40}{Diagonale quelconque, des $1$ ailleurs}{n-diag1}
+\sommaireligne{41}{Le déterminant de Cauchy}{n-cauchy}
+\end{multicols}}
+\clearpage
+\partie{I}{Applications directes du cours}{Calculer un petit déterminant, utiliser les opérations sur les lignes et les colonnes, traduire alignement, aire, volume et inversibilité.}
+\exercice{1}{1}{Un déterminant $3\times3$ de deux façons}{Exercice complémentaire}{développement, règle de Sarrus}{n-calc3}{1}
+Calculer $D=\dt{1&0&2\\2&1&0\\0&3&1}$ en développant selon la première colonne, puis par la règle de Sarrus.
+\place
+\exercice{2}{1}{Effet des opérations sur les colonnes}{Exercice complémentaire}{multilinéarité, transvections, $\det(\lambda A)$}{n-ops}{1}
+Soient $C_1,C_2,C_3\in\R^3$ avec $\det(C_1,C_2,C_3)=5$. Calculer, en justifiant chaque étape :
+\[\text{(a) }\det(C_1+2C_2,\ C_2,\ 3C_3-C_1)\qquad\text{(b) }\det(C_1+C_2,\ C_2+C_3,\ C_3+C_1)\qquad\text{(c) }\det(-2A)\]
+où $A$ est la matrice de colonnes $C_1,C_2,C_3$.
+\place
+\exercice{3}{1}{Alignement avec paramètre}{Exercice complémentaire}{déterminant de deux vecteurs, alignement}{n-alignes}{2}
+Pour quelles valeurs de $m\in\R$ les points $A(1,2)$, $B(3,m)$, $C(m,8)$ sont-ils alignés ?
+\place
+\exercice{4}{2}{Alignement de trois points}{Livre, exercice 1.5 · TD 1 de la classe}{déterminant 3$\times$3, transvections, alignement}{td-d1}{2}
+Soit $A(a,a')$, $B(b,b')$ et $C(c,c')$ tels que $\dt{1&1&1\\a&b&c\\a'&b'&c'}=0$. Montrer que $A$, $B$, $C$ sont alignés dans
+le plan.
+\place
+\exercice{5}{1}{Volume d'un tétraèdre, équation d'un plan}{Exercice complémentaire}{produit mixte, volume, équation de plan}{n-tetra}{2}
+On considère $A(1,0,0)$, $B(0,2,0)$, $C(0,0,3)$ et $D(1,1,1)$ dans un repère orthonormé de l'espace.
+\begin{enumerate}
+\item Calculer le volume du tétraèdre $ABCD$.
+\item Donner une équation du plan $(ABC)$ sous la forme $\det(\vv{AM},\vv{AB},\vv{AC})=0$, puis développée.
+\end{enumerate}
+\place
+\exercice{6}{1}{Distance de deux droites : un calcul}{Exercice complémentaire}{produit mixte, produit vectoriel, distance}{n-dist}{3}
+Calculer la distance entre les droites $\mathcal D_1$ passant par $O$ dirigée par $\ve u=(1,1,0)$ et $\mathcal D_2$ passant par $C(0,0,1)$ dirigée par $\ve v=(1,-1,0)$.
+\place
+\exercice{7}{1}{Une base de $\mathbb R_n[X]$, le déterminant de la dérivation}{Livre, § 1.3 (application du cours)}{base, matrice triangulaire, déterminant d'un endomorphisme}{ex-base}{3}
+\begin{enumerate}
+\item Montrer que $\mathcal C=(1,\ 1+X,\ 1+X+X^2,\ \dots,\ 1+X+\dots+X^n)$ est une base de $\R_n[X]$.
+\item Soit $D:P\mapsto P'$ la dérivation de $\R_n[X]$. Calculer $\det D$. $D$ est-elle bijective ?
+\end{enumerate}
+\place
+\exercice{8}{2}{Déterminants d'endomorphismes de $\mathbb R_n[X]$}{Exercice complémentaire}{déterminant d'un endomorphisme, matrice triangulaire}{n-endo}{3}
+Calculer le déterminant des endomorphismes suivants de $\R_n[X]$ : $f:P\mapsto P(X+1)$, $\ g:P\mapsto XP'$, $\ h:P\mapsto P+P'$. Lesquels sont bijectifs ?
+\place
+\exercice{9}{2}{Inversibilité selon un paramètre}{Exercice complémentaire}{somme constante, factorisation, inversibilité}{n-param}{4}
+Pour $m\in\R$, on pose $A_m=\begin{pmatrix}m&1&1\\1&m&1\\1&1&m\end{pmatrix}$. Calculer $\det A_m$ sous forme factorisée et déterminer les valeurs de $m$ pour lesquelles $A_m$ est inversible.
+\place
+\exercice{10}{1}{Diagonale nulle, des $1$ ailleurs}{Exercice complémentaire}{somme constante}{n-zero}{4}
+Calculer le déterminant d'ordre $n\geq2$ dont la diagonale est nulle et tous les autres coefficients valent $1$.
+\place
+\exercice{11}{2}{Déterminants nuls sans calcul}{Exercice complémentaire}{famille liée, rang}{n-nul}{4}
+Soit $n\geq3$. Montrer sans calcul que les déterminants des matrices $\big(i+j\big)_{1\leq i,j\leq n}$ et $\big(\sin(i+j)\big)_{1\leq i,j\leq n}$ sont nuls.
+\place
+\exercice{12}{2}{Un Vandermonde déguisé}{Exercice complémentaire}{Vandermonde, trigonométrie, opérations élémentaires}{n-trigo}{4}
+Soient $a,b,c$ des réels. Calculer, sous forme factorisée,
+\[D=\dt{1&\cos a&\cos2a\\1&\cos b&\cos2b\\1&\cos c&\cos2c}.\]
+À quelle condition sur $a,b,c$ ce déterminant est-il nul ?
+\place
+\exercice{13}{2}{Quand $A-\lambda I_3$ n'est-elle pas inversible ?}{Exercice complémentaire}{inversibilité, déterminant à paramètre, système linéaire}{n-valp}{5}
+Soit $A=\begin{pmatrix}1&2&0\\2&1&0\\0&0&3\end{pmatrix}$.
+\begin{enumerate}
+\item Calculer $\det(A-\lambda I_3)$ sous forme factorisée, pour $\lambda\in\R$.
+\item En déduire les réels $\lambda$ pour lesquels il existe une colonne $X\neq0$ telle que $AX=\lambda X$, et donner de telles colonnes.
+\end{enumerate}
+\place
+\exercice{14}{2}{Choisir la méthode : un $4\times4$ à somme constante}{Livre, exemple 1.7}{somme constante, opérations élémentaires}{ex-160}{5}
+Calculer
+\[D=\dt{1&2&3&4\\4&1&2&3\\3&4&1&2\\2&3&4&1}.\]
+Avant tout calcul, observer les lignes de la matrice.
+\place
+\clearpage
+\partie{II}{Exercices classiques et méthodes incontournables}{Propriétés globales, somme constante, différences successives, déterminants creux, récurrences, Vandermonde.}
+\exercice{15}{3}{Multiplicativité, propriété globale}{Livre, exercice 1.2}{$\det(AB)$, $\det(\lambda A)$, question sans coefficients}{g-carre}{6}
+Soit $A\in\Mn{\R}$ telle que $A^2=-I_n$. Montrer que $n$ est pair. Le résultat subsiste-t-il pour une matrice complexe ?
+\place
+\exercice{16}{2}{Propriétés globales : $A^2=-I_n$, $A^TA=I_n$, $A^k=0$}{Exercice complémentaire}{multiplicativité, $\det(\lambda A)$, transposée}{n-carre}{6}
+Soit $n\geq1$ et $A\in\mathcal M_n(\R)$.
+\begin{enumerate}
+\item Montrer que si $n$ est impair, il n'existe pas de matrice $A$ telle que $A^2=-I_n$. Donner une telle matrice pour $n=2$.
+\item Montrer que si $A^TA=I_n$, alors $\det A\in\{-1,1\}$.
+\item Montrer que s'il existe $k\geq1$ tel que $A^k=0$, alors $A$ n'est pas inversible.
+\end{enumerate}
+\place
+\exercice{17}{3}{Similitude : $z\mapsto az$ vue comme application linéaire}{Livre, exercice 1.1 · TD 8 de la classe}{déterminant d'un endomorphisme, nombres complexes, orientation}{td-d8}{6}
+Soit $\C$ vu comme un $\R$-espace vectoriel. On fixe $a\in\C^*$ et l'on note $f(z)=az$, appelée similitude linéaire de
+rapport $a$ dans le plan complexe.
+\begin{enumerate}
+\item Prouver que $f$ est bijective et déterminer $f^{-1}$.
+\item À quelle condition $f$ est-elle une symétrie du plan ?
+\item Calculer $\mathrm{tr}(f)$ et $\det(f)$ en fonction de $a$.
+\item Si $|a|=1$, reconnaître $f$ en tant qu'application géométrique simple.
+\end{enumerate}
+\place
+\exercice{18}{3}{Comatrice, coefficients entiers\HP}{Livre, exercice 1.4}{comatrice, inverse, matrices à coefficients entiers}{hp-com}{7}
+\begin{enumerate}
+\item Calculer la comatrice de $A=\begin{pmatrix}1&2&0\\0&1&1\\1&0&1\end{pmatrix}$ et en déduire $A^{-1}$.
+\item Soit $A$ à coefficients entiers. Montrer que $A$ est inversible d'inverse à coefficients entiers si et seulement si
+      $\det A=\pm1$.
+\item Pour $A$ inversible, exprimer $\det(\mathrm{com}A)$ en fonction de $\det A$.
+\end{enumerate}
+\place
+\exercice{19}{3}{Base et déterminant (somme constante)}{Livre, exercice 1.7 · TD 6 de la classe}{base, somme constante, $D_n(a,b)$}{td-d6}{7}
+Soit $\mathcal B=(e_1,\dots,e_n)$ une base d'un espace vectoriel $E$ sur $\K$, et $(a,b)\in\K^2$. On pose, pour
+$j\in\ient1n$, $\delta_j=ae_j+b\sum_{i\neq j}e_i$. Prouver que $\mathcal C=(\delta_1,\dots,\delta_n)$ est une base de $E$ si et
+seulement si $a\neq b$ et $a+(n-1)b\neq0$.
+\place
+\exercice{20}{3}{Un déterminant circulant d'ordre 3}{Exercice complémentaire}{somme constante, factorisation}{n-circ}{8}
+Montrer que $\dt{a&b&c\\c&a&b\\b&c&a}=(a+b+c)(a^2+b^2+c^2-ab-bc-ca)$.
+\place
+\exercice{21}{3}{La matrice $\max(i,j)$}{Livre, exemple 1.14}{différences successives, développement}{ex-max}{8}
+Pour $n\geq2$, on note $A_n=\big(\max(i,j)\big)_{1\leq i,j\leq n}$. Calculer $\det A_n$.
+\place
+\exercice{22}{3}{La matrice $\min(i,j)$}{Exercice complémentaire}{différences successives}{n-min}{9}
+Calculer $\det\big(\min(i,j)\big)_{1\leq i,j\leq n}$.
+\place
+\exercice{23}{3}{Déterminant en forme de X}{Livre, exercice 1.10 · TD 4 de la classe}{déterminant creux, récurrence, permutation des lignes et des colonnes}{td-d4}{9}
+Pour $(a,b)\in\K^2$, calculer le déterminant de taille $2n\times2n$
+\[A_{2n}=\dt{a&0&\cdots&\cdots&0&b\\0&a&&&b&0\\\vdots&&\ddots&\iddots&&\vdots\\\vdots&&\iddots&\ddots&&\vdots\\0&b&&&a&0\\b&0&\cdots&\cdots&0&a}.\]
+\place
+\exercice{24}{3}{Suite récurrente linéaire d'ordre 2}{Livre, exercice 1.13 · TD 3 de la classe}{tridiagonal, récurrence d'ordre 2, équation caractéristique}{td-d3}{10}
+Soit $A_n=\big(5\delta_{i,j}+6\delta_{i,j-1}+\delta_{i-1,j}\big)_{1\leq i,j\leq n}$.
+\begin{enumerate}
+\item Calculer $\det(A_4)$.
+\item Soit $u_n=\det(A_n)$. Montrer que $(u_n)$ est une suite récurrente linéaire d'ordre 2 et la calculer.
+\end{enumerate}
+\place
+\exercice{25}{3}{Un tridiagonal à paramètre}{Exercice complémentaire}{tridiagonal, récurrence d'ordre 2}{n-tri}{10}
+Soit $x\in\R$. On note $T_n$ le déterminant d'ordre $n$ tridiagonal de diagonale $1+x^2$, dont les coefficients juste au-dessus et juste au-dessous de la diagonale valent $x$, les autres étant nuls.
+\begin{enumerate}
+\item Établir une relation entre $T_n$, $T_{n-1}$ et $T_{n-2}$.
+\item En déduire $T_n=1+x^2+x^4+\dots+x^{2n}$.
+\end{enumerate}
+\place
+\exercice{26}{4}{Déterminant de Vandermonde}{Livre, exercice 1.12 · TD 5 de la classe}{Vandermonde, déterminant vu comme polynôme}{td-d5}{11}
+Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pmatrix}$ et $P(x)=\det(A)$.
+\begin{enumerate}
+\item Prouver que $P$ est un polynôme, donner son degré et ses racines.
+\item En déduire la valeur de $\det(A)$ sous forme de produit de $6$ facteurs.
+\item Soit $A=\big(a_j^{\,i-1}\big)_{1\leq i,j\leq n}$ ; montrer par récurrence que
+      $\det(A)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p)$.
+\end{enumerate}
+\place
+\exercice{27}{4}{Déterminant de $M\mapsto AM$}{Livre, exercice 1.3}{endomorphisme de matrices, base adaptée, matrice par blocs}{b-endo}{12}
+Soit $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ et $f:\mathcal M_2(\R)\to\mathcal M_2(\R)$, $M\mapsto AM$. Montrer que
+$\det f=(\det A)^2$. En déduire une condition pour que $f$ soit bijectif, et $f^{-1}$.
+\place
+\clearpage
+\partie{III}{Exercices de synthèse et approfondissement}{Plusieurs méthodes à combiner, géométrie de l'espace, endomorphismes, polynômes.}
+\exercice{28}{3}{Distance de deux droites de l'espace}{Livre, exercice 1.6 · TD 2 de la classe}{produit mixte, perpendiculaire commune, distance}{td-d2}{12}
+Soient $(AB)$ et $(CD)$ deux droites (non parallèles) de l'espace. Prouver que
+\[d\big((AB),(CD)\big)=\frac{\big|\det(\vv{AB},\vv{CD},\vv{AC})\big|}{\|\vv{AB}\wedge\vv{CD}\|}.\]
+\place
+\exercice{29}{3}{Déterminant de la transposition}{Exercice complémentaire}{symétrie, base adaptée, matrices symétriques et antisymétriques}{n-transp}{13}
+Soit $\tau:\mathcal M_n(\R)\to\mathcal M_n(\R)$, $M\mapsto M^T$. Montrer que $\tau$ est une symétrie et calculer $\det\tau$.
+\place
+\exercice{30}{4}{Différences de colonnes puis de lignes : $|i-j|$}{Livre, exercice 1.8}{différences successives, matrice définie par une formule}{f-absij}{13}
+Calculer le déterminant $B_n$ de la matrice $\big(|i-j|\big)_{1\leq i,j\leq n}$, $n\geq2$.
+\place
+\exercice{31}{4}{Différences pondérées : $a^{|i-j|}$}{Livre, exercice 1.9}{différences successives pondérées}{f-ka}{14}
+Soit $a\in\R$. Calculer $\det\big(a^{|i-j|}\big)_{1\leq i,j\leq n}$.
+\place
+\exercice{32}{4}{Déterminant en forme de Z}{Livre, exercice 1.11 · TD 9 de la classe}{déterminant creux, pivot, nombre d'échanges}{td-d9}{14}
+Soit $n\geq3$. On considère le déterminant en forme de Z
+\[D=\dt{a_1&a_2&\cdots&a_{n-1}&a_n\\0&0&\cdots&b_{n-1}&0\\\vdots&&\iddots&&\vdots\\0&b_2&\cdots&0&0\\c_1&c_2&\cdots&c_{n-1}&c_n},\]
+où, pour $2\leq k\leq n-1$, la ligne $k$ ne contient que $b_{n+1-k}$, en colonne $n+1-k$. Calculer $\det(D)$ en pensant d'abord
+à factoriser tout ce qui peut l'être.
+\place
+\exercice{33}{4}{Suite récurrente, racines complexes}{Livre, exercice 1.14 · TD 7 de la classe}{tridiagonal, trigonométrie, récurrence}{td-d7}{15}
+Soit $\theta\in\R$. On considère la matrice d'ordre $n$ ayant des $2\cos\theta$ sur la diagonale, des $1$ juste au-dessus et
+juste au-dessous, et des $0$ ailleurs. Vérifier que $\det(A_n)=\dfrac{\sin\big((n+1)\theta\big)}{\sin\theta}$.
+\place
+\exercice{34}{4}{Vandermonde et interpolation de Lagrange}{Exercice complémentaire}{Vandermonde, système linéaire, polynômes}{n-lagrange}{15}
+Soient $x_0,\dots,x_n$ des réels deux à deux distincts et $y_0,\dots,y_n$ des réels quelconques. Montrer qu'il existe un unique polynôme $P\in\R_n[X]$ tel que $P(x_i)=y_i$ pour tout $i$.
+\place
+\exercice{35}{3}{Familles d'exponentielles}{Exercice complémentaire}{famille libre, Vandermonde, système linéaire}{n-expo}{16}
+Soient $a_1<a_2<\dots<a_n$ des réels et $f_k:x\mapsto e^{a_kx}$. Montrer que la famille $(f_1,\dots,f_n)$ est libre dans l'espace des fonctions de $\R$ dans $\R$.
+\place
+\exercice{36}{4}{Un Vandermonde lacunaire}{Exercice complémentaire}{Vandermonde, déterminant vu comme polynôme}{n-vdmlac}{16}
+Soient $a,b,c,d$ réels. Calculer, sous forme factorisée,
+\[\Delta=\dt{1&1&1&1\\a&b&c&d\\a^2&b^2&c^2&d^2\\a^4&b^4&c^4&d^4}.\]
+\place
+\clearpage
+\partie{IV}{Exercices difficiles et type concours}{Problèmes longs ou techniques, dans l'esprit des épreuves écrites.}
+\exercice{37}{4}{Déterminant triangulaire par blocs}{Exercice complémentaire}{blocs, récurrence, développement}{n-blocs}{17}
+Soient $A\in\mathcal M_p(\R)$, $B\in\mathcal M_{p,q}(\R)$, $D\in\mathcal M_q(\R)$ et $M=\begin{pmatrix}A&B\\0&D\end{pmatrix}\in\mathcal M_{p+q}(\R)$.
+\begin{enumerate}
+\item Montrer par récurrence sur $p$ que $\det M=\det A\,\det D$.
+\item Application : calculer $\dt{2&1&5&7\\1&3&-1&2\\0&0&4&1\\0&0&2&3}$.
+\end{enumerate}
+\place
+\exercice{38}{4}{Fonction affine, parité, antisymétrie}{Livre, exercice 1.16}{fonction affine, matrice antisymétrique, parité de $n$}{det-pb}{17}
+Soit $M_n(x)$ la matrice d'ordre $n\geq2$ ayant des $x$ sur la diagonale, des $1$ au-dessus et des $-1$ au-dessous.
+\begin{enumerate}
+\item Montrer que $\det M_n(x)=\dfrac{(x+1)^n+(x-1)^n}2$.
+\item Pour quelles valeurs réelles de $x$ la matrice est-elle inversible ?
+\end{enumerate}
+\place
+\exercice{39}{5}{Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous}{Livre, exercice 1.15 · TD 10 de la classe}{fonction affine, matrice triangulaire, prolongement par continuité}{td-d10}{17}
+On note $U$ la matrice de taille $n\times n$ dont tous les coefficients valent $1$, et
+\[A_n=\begin{pmatrix}\lambda_1&a&\cdots&a\\b&\lambda_2&\ddots&\vdots\\\vdots&\ddots&\ddots&a\\b&\cdots&b&\lambda_n\end{pmatrix}.\]
+\begin{enumerate}
+\item Soit $P(x)=\det(A_n-xU)$. Montrer que $\deg(P)\leq1$.
+\item Calculer $P(a)$ et $P(b)$ et en déduire $\det(A_n)$ pour $a\neq b$.
+\item À l'aide d'une dérivée, trouver $\det(A_n)$ pour $a=b$.
+\end{enumerate}
+\place
+\exercice{40}{5}{Diagonale quelconque, des $1$ ailleurs}{Exercice complémentaire}{fonction affine, dérivée, polynôme}{n-diag1}{18}
+Soient $\lambda_1,\dots,\lambda_n$ des réels, tous différents de $1$. On note $A$ la matrice de diagonale $(\lambda_1,\dots,\lambda_n)$ dont tous les autres coefficients valent $1$. Montrer que
+\[\det A=\prod_{i=1}^n(\lambda_i-1)\left(1+\sum_{i=1}^n\frac1{\lambda_i-1}\right).\]
+\place
+\exercice{41}{5}{Le déterminant de Cauchy}{Exercice complémentaire}{opérations élémentaires, factorisation, récurrence}{n-cauchy}{19}
+Soient $a_1,\dots,a_n,b_1,\dots,b_n$ des réels tels que $a_i+b_j\neq0$ pour tous $i,j$. On note $C_n=\det\left(\dfrac1{a_i+b_j}\right)_{1\leq i,j\leq n}$.
+\begin{enumerate}
+\item Retrancher la dernière colonne à chacune des autres, puis factoriser autant que possible.
+\item Retrancher ensuite la dernière ligne à chacune des autres. En déduire une relation entre $C_n$ et $C_{n-1}$.
+\item Montrer que
+\[C_n=\frac{\prod_{1\leq i<j\leq n}(a_j-a_i)(b_j-b_i)}{\prod_{1\leq i,j\leq n}(a_i+b_j)}.\]
+\end{enumerate}
+\place
+\end{document}
