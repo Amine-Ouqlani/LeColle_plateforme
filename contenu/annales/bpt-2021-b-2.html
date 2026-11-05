@@ -1,0 +1,58 @@
+<p class="ann-lead">La partie II (« manège à plateforme tournante ») étudie la courbe $\Gamma$ d'affixe $z(t)=2e^{it}+e^{-2it}$, une hypocycloïde à trois rebroussements (deltoïde). Symétries par rotation, factorisation par l'angle moitié, point stationnaire, longueur, développée : une synthèse des chapitres 2 et 3.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2021-b-2.svg" alt="Deltoïde, arc d'étude, tangente en M(π/3) passant par A(2,0), et développée" loading="lazy"><figcaption>$\Gamma$ (arc d'étude $[0,\frac\pi3]$ en trait épais), la tangente en $M(\frac\pi3)$ qui passe par $A(2,0)$, et la développée $\Gamma_1$ en ocre.</figcaption></figure>
+
+<article class="q">
+<h3>Q1–Q2 — Préliminaires</h3>
+<details class="corr"><summary>Correction</summary>
+<p>Q1 : l'image de $M(z)$ par la rotation $r_\theta$ de centre $O$ a pour affixe $e^{i\theta}z$ ; par l'homothétie $h_a$, $az$. Les deux commutent : $e^{i\theta}(az)=a(e^{i\theta}z)$.</p>
+<p>Q2 : $\cos a\cos b=\frac12[\cos(a-b)+\cos(a+b)]$, $\sin a\cos b=\frac12[\sin(a+b)+\sin(a-b)]$, $\sin a\sin b=\frac12[\cos(a-b)-\cos(a+b)]$. Avec $a=\frac{p+q}2$, $b=\frac{p-q}2$ : $\cos p-\cos q=-2\sin\frac{p+q}2\sin\frac{p-q}2$ et $\sin p+\sin q=2\sin\frac{p+q}2\cos\frac{p-q}2$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3(a)–(c) — Paramétrage et réduction <span class="q-ref">fiche §2.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) $2e^{it}+e^{-2it}=(2\cos t+\cos2t)+i(2\sin t-\sin2t)$.</p>
+<p>(b) $z\big(t+\frac{2\pi}3\big)=2e^{it}e^{2i\pi/3}+e^{-2it}e^{-4i\pi/3}=e^{2i\pi/3}\big(2e^{it}+e^{-2it}e^{-2i\pi}\big)=e^{2i\pi/3}z(t)$ : $M\big(t+\frac{2\pi}3\big)=r_{2\pi/3}\big(M(t)\big)$. La rotation de centre $O$ et d'angle $\frac{2\pi}3$ laisse $\Gamma$ invariante.</p>
+<p>(c) $z$ est $2\pi$-périodique ; grâce à (b), il suffit d'un intervalle de longueur $\frac{2\pi}3$, par exemple $\big[-\frac\pi3,\frac\pi3\big]$. Puis $z(-t)=\overline{z(t)}$ : symétrie d'axe $(Ox)$, on étudie sur $\big[0,\frac\pi3\big]$. On complète par la réflexion d'axe $(Ox)$, puis par les rotations d'angles $\frac{2\pi}3$ et $\frac{4\pi}3$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3(d)–(f) — Dérivées factorisées <span class="q-ref">fiche §2.1 (angle moitié)</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$x'(t)=-2\sin t-2\sin2t=-2\sin t(1+2\cos t)$ et, par Q2, $\sin t+\sin2t=2\sin\frac{3t}2\cos\frac t2$, d'où $x'(t)=-4\sin\frac{3t}2\cos\frac t2$.</p>
+<p>$y'(t)=2\cos t-2\cos2t=2(1-\cos t)(1+2\cos t)$ (car $\cos2t=2\cos^2t-1$) et $\cos t-\cos2t=2\sin\frac{3t}2\sin\frac t2$, d'où $y'(t)=4\sin\frac{3t}2\sin\frac t2$.</p>
+<p>(f) Sur $\big[0,\frac\pi3\big]$, $\frac{3t}2\in\big[0,\frac\pi2\big]$ : $x'\leq0$ et $y'\geq0$. $x$ décroît de $3$ à $\frac12$, $y$ croît de $0$ à $\frac{\sqrt3}2$ ; seul $t=0$ annule les deux dérivées.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3(g)(h) — Tangente en $M\big(\frac\pi3\big)$, nature de $M(0)$ <span class="q-ref">fiche §2.2, §2.4</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(g) $M\big(\frac\pi3\big)=\big(\frac12,\frac{\sqrt3}2\big)$, $f'\big(\frac\pi3\big)=(-2\sqrt3,2)$. Tangente : $2\big(x-\frac12\big)+2\sqrt3\big(y-\frac{\sqrt3}2\big)=0$, soit $x+\sqrt3\,y=2$, qui passe bien par $A(2,0)$.</p>
+<p>(h) $M(0)=(3,0)$ et $f'(0)=\vec0$ : point stationnaire. $f''(0)=(-6,0)\neq\vec0$, donc $p=2$ ; $f'''(0)=(0,6)$ et $\det\big(f''(0),f'''(0)\big)=-36\neq0$, donc $q=3$. <strong>Rebroussement de première espèce</strong>, tangente dirigée par $(1,0)$ : l'axe $(Ox)$.</p>
+<p class="astuce">Point stationnaire sur un axe de symétrie : la tangente est l'axe lui-même ou sa perpendiculaire.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3(i) — Longueur de $\Gamma$ <span class="q-ref">volume 2, §1.1</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$\|f'(t)\|^2=16\sin^2\frac{3t}2\big(\cos^2\frac t2+\sin^2\frac t2\big)$, donc $\|f'(t)\|=4\big|\sin\frac{3t}2\big|$. Sur $\big[0,\frac{2\pi}3\big]$, $\sin\frac{3t}2\geq0$ :
+\[\int_0^{2\pi/3}4\sin\tfrac{3t}2\,dt=\tfrac83\Big[-\cos\tfrac{3t}2\Big]_0^{2\pi/3}=\tfrac{16}3.\]
+Par la symétrie de rotation, la longueur totale est $3\times\frac{16}3=16$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q4 — Développée <span class="q-ref">volume 2, §1.2–1.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) Pour $t\in\big]0,\frac{2\pi}3\big[$, $f'=4\sin\frac{3t}2\,(-\cos\frac t2,\sin\frac t2)$, donc $\vec T=(\cos\alpha,\sin\alpha)$ avec $\alpha=\pi-\frac t2$. Alors $\frac{ds}{dt}=4\sin\frac{3t}2$ et $\gamma=\frac{d\alpha}{ds}=-\frac1{8\sin(3t/2)}$, $R=\frac1\gamma=-8\sin\frac{3t}2$, $\vec N=(-\sin\frac t2,-\cos\frac t2)$. Centre de courbure :
+\[I=M+R\vec N=M+8\sin\tfrac{3t}2\big(\sin\tfrac t2,\cos\tfrac t2\big)=M+\big(4(\cos t-\cos2t),\ 4(\sin t+\sin2t)\big),\]
+soit $I(t)=(6\cos t-3\cos2t,\ 6\sin t+3\sin2t)$.</p>
+<p>(b) En affixes, $I(t)=6e^{it}-3e^{-2it}$, donc $I\big(t+\frac\pi3\big)=e^{i\pi/3}\big(6e^{it}+3e^{-2it}\big)=3e^{i\pi/3}z(t)$ : $a=3$. La développée est l'image de $\Gamma$ par la similitude $f_{(3,\pi/3)}$ (rapport $3$, angle $\frac\pi3$).</p>
+<p>(d) La tangente en $M(t)$ fait l'angle $\pi-\frac t2$ avec $(Ox)$ : les tangentes en $M(t)$ et $M(t')$ sont orthogonales si et seulement si $\frac{t'-t}2\equiv\frac\pi2\ [\pi]$, soit $t'\equiv t+\pi\ [2\pi]$. Enfin $I(t+\pi)=3e^{i\pi/3}z\big(t+\frac{2\pi}3\big)=3e^{i\pi}z(t)=-3z(t)$ : la tangente à $\Gamma_1$ en $I(t+\pi)$ est l'image de la tangente en $M(t)$ par une homothétie, donc lui est parallèle.</p>
+</details>
+</article>

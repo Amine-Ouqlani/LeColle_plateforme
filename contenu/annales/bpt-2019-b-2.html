@@ -1,0 +1,47 @@
+<p class="ann-lead">La partie II démontre la formule de la comatrice et l'applique : c'est exactement l'encadré hors programme du §1.3 et l'exercice 1.4 du livre. Le détail des calculs est exigé.</p>
+
+<article class="q">
+<h3>Q1 — Inverse d'une matrice $3\times3$ <span class="q-ref">fiche §1.3 (comatrice)</span></h3>
+<p class="q-sujet">$M=\begin{pmatrix}1&-1&1\\-1&2&1\\1&1&2\end{pmatrix}$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>Développement selon la première ligne : $\det M=1(4-1)-(-1)(-2-1)+1(-1-2)=3-3-3=-3\neq0$.</p>
+<p>Cofacteurs $(-1)^{i+j}\Delta_{i,j}$ : $\mathrm{com}(M)=\begin{pmatrix}3&3&-3\\3&1&-2\\-3&-2&1\end{pmatrix}$ (symétrique ici, comme $M$). Donc
+\[M^{-1}=\frac1{\det M}\mathrm{com}(M)^T=\begin{pmatrix}-1&-1&1\\-1&-\frac13&\frac23\\1&\frac23&-\frac13\end{pmatrix}.\]</p>
+<p class="astuce">Vérifier toujours une ligne : $(1,-1,1)\cdot(-1,-1,1)=-1+1+1=1$ et $(1,-1,1)\cdot(-1,-\frac13,\frac23)=-1+\frac13+\frac23=0$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2 — Inverse par un polynôme annulateur</h3>
+<details class="corr"><summary>Méthode</summary>
+<p>Le sujet fait calculer $N^2-3N+2I$ pour une matrice $N\in\mathcal M_4(\R)$ donnée. Si l'on trouve la matrice nulle, alors $N(3I-N)=2I$, donc $N$ est inversible et $N^{-1}=\frac12(3I-N)$. Le calcul de $N^2$ est à faire sur le sujet.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3 — Formule de la comatrice <span class="q-ref">fiche §1.2, §1.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) i. Développement selon la colonne $j$ : $\det A=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\det(A_{i,j})$.</p>
+<p>ii. Pour $j\neq j'$, soit $B$ la matrice obtenue en remplaçant la colonne $j$ de $A$ par sa colonne $j'$. $B$ a deux colonnes égales, donc $\det B=0$. Les mineurs $B_{i,j}$ sont ceux de $A$ (on supprime la colonne $j$), et le développement de $\det B$ selon sa colonne $j$ donne $\sum_i(-1)^{i+j}a_{i,j'}\det(A_{i,j})=0$.</p>
+<p>(b) i. $c_{i,j}=\sum_kb_{i,k}a_{k,j}$. ii. Avec $b_{i,k}=(-1)^{i+k}\det(A_{k,i})$ : $c_{i,j}=\sum_k(-1)^{k+i}a_{k,j}\det(A_{k,i})$, qui vaut $\det A$ si $j=i$ (développement selon la colonne $i$) et $0$ si $j\neq i$ (question a.ii). Donc $BA=\det(A)\,I_n$.</p>
+<p>iii. Si $A$ est inversible, $A^{-1}=\frac1{\det A}B$, et $B=\mathrm{com}(A)^T$.</p>
+<p class="piege">Bien noter l'inversion des indices : $b_{i,j}$ utilise le mineur $A_{j,i}$. C'est la transposée de la comatrice.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q4 — Application à $A(u,v)$ <span class="q-ref">fiche §1.2, §1.3</span></h3>
+<p class="q-sujet">$A(u,v)=\begin{pmatrix}uv-u&uv&u^2-v\\v-1&v&2u\\u&u&-1\end{pmatrix}$ : plus grand domaine $D$ où $A(u,v)$ est inversible, puis $A(u,v)^{-1}$.</p>
+<details class="indic"><summary>Indication</summary><p>$C_1\leftarrow C_1-C_2$ fait apparaître une colonne très simple.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>$C_1\leftarrow C_1-C_2$ donne la colonne $(-u,-1,0)^T$ :
+\[\det A=\dt{-u&uv&u^2-v\\-1&v&2u\\0&u&-1}.\]
+Développement selon la première colonne : $\det A=-u(-v-2u^2)+1\cdot(-uv-u^3+uv)=u(v+2u^2)-u^3=u(u^2+v)$.</p>
+<p>$D=\{(u,v)\in\R^2 : u\neq0\text{ et }v\neq-u^2\}$ : le plan privé de l'axe $u=0$ et de la parabole $v=-u^2$.</p>
+<p>Comatrice transposée (calcul des neuf cofacteurs) :
+\[A(u,v)^{-1}=\frac1{u(u^2+v)}\begin{pmatrix}-(2u^2+v)&u^3&v(u^2+v)\\2u^2+v-1&u(1-u^2)&(1-v)(u^2+v)\\-u&u^2&0\end{pmatrix}.\]</p>
+<p class="astuce">Contrôle rapide : le produit de la dernière ligne de $A$ par la dernière colonne de la matrice entre parenthèses vaut $u\,v(u^2+v)+u(1-v)(u^2+v)+0=u(u^2+v)=\det A$.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Voir aussi :</strong> la partie I du même sujet (enveloppe, développée) est traitée dans le chapitre 3 ; la partie III (surfaces) sort de nos chapitres.</div>

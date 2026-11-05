@@ -1,0 +1,23 @@
+<p class="ann-lead">La partie II étudie un triangle $ABC$ acutangle d'un plan de l'espace, avec $a=BC$, $b=AC$, $c=AB$, et $H$ le projeté orthogonal de $A$ sur $(BC)$, $h=AH$. Les questions 1 à 3 et 5 utilisent l'aire orientée et le produit vectoriel du chapitre 1 ; les questions 4, 6 et 7 (loi des sinus, Al-Kashi) sont de la géométrie élémentaire.</p>
+
+<article class="q">
+<h3>Q1 à Q3 — Trois expressions de l'aire <span class="q-ref">fiche §1.1, §1.4</span></h3>
+<p class="q-sujet">Relier $\sin\widehat C$, $h$ et $b$ ; exprimer l'aire en fonction de $a$ et $h$, puis de $a$, $b$ et $\sin\widehat C$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>Le triangle $AHC$ est rectangle en $H$ ; comme le triangle est acutangle, $H\in[BC]$ et $h=AH=AC\sin\widehat C=b\sin\widehat C$.</p>
+<p>L'aire vaut $\mathcal A=\frac12\,BC\times AH=\frac12ah$, donc $\mathcal A=\frac12ab\sin\widehat C$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q5 — Produit vectoriel, déterminant et aire <span class="q-ref">fiche §1.1, §1.4</span></h3>
+<p class="q-sujet">Comparer $\|\overrightarrow{BC}\wedge\overrightarrow{AC}\|$, $\|\overrightarrow{BC}\wedge\overrightarrow{AH}\|$ et $\det(\overrightarrow{BC},\overrightarrow{AC})$ (dans une base orthonormée du plan du triangle), puis interpréter.</p>
+<details class="indic"><summary>Indication</summary><p>Décomposer $\overrightarrow{AC}=\overrightarrow{AH}+\overrightarrow{HC}$ : le second vecteur est colinéaire à $\overrightarrow{BC}$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>$\overrightarrow{BC}\wedge\overrightarrow{AC}=\overrightarrow{BC}\wedge\overrightarrow{AH}+\overrightarrow{BC}\wedge\overrightarrow{HC}=\overrightarrow{BC}\wedge\overrightarrow{AH}$, car $\overrightarrow{HC}$ est colinéaire à $\overrightarrow{BC}$.</p>
+<p>Comme $\overrightarrow{BC}\perp\overrightarrow{AH}$, $\|\overrightarrow{BC}\wedge\overrightarrow{AH}\|=BC\cdot AH\cdot\sin\frac\pi2=ah$.</p>
+<p>Dans une base orthonormée $(\vec e_1,\vec e_2)$ du plan du triangle, complétée par $\vec e_3=\vec e_1\wedge\vec e_2$, deux vecteurs du plan ont un produit vectoriel égal à $\det(\vec u,\vec v)\,\vec e_3$. Donc $|\det(\overrightarrow{BC},\overrightarrow{AC})|=\|\overrightarrow{BC}\wedge\overrightarrow{AC}\|$.</p>
+<p><strong>Conclusion :</strong> les trois quantités valent $ah=2\mathcal A$ en valeur absolue : la norme du produit vectoriel et la valeur absolue du déterminant mesurent l'aire du parallélogramme construit sur les deux vecteurs, le double de l'aire du triangle.</p>
+<p class="astuce">C'est exactement l'interprétation du §1.1 : $|\det(\vec u,\vec v)|$ = aire du parallélogramme = base × hauteur.</p>
+</details>
+</article>

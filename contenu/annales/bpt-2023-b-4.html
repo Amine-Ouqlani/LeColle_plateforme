@@ -1,0 +1,49 @@
+<p class="ann-lead">La quatrième partie étudie la courbe plane $\Gamma : x(t)=e^t+e^{-t}$, $y(t)=2-e^t$, $t\in\R$ (projeté de la courbe de la troisième partie). C'est une étude de courbe complète, très proche du devoir : variations, tangentes, branches infinies, asymptote oblique et position. Questions 1 à 6 et 7(a) : chapitre 2.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2023-b-4.svg" alt="Courbe Γ avec ses asymptotes y = 2 et y = −x + 2, et les tangentes en A(0) et A(ln 2)" loading="lazy"><figcaption>$\Gamma$, ses deux asymptotes (pointillés) et les tangentes en $A(0)$ et $A(\ln2)$.</figcaption></figure>
+
+<article class="q">
+<h3>Q1 — Variations <span class="q-ref">fiche §2.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$x'(t)=e^t-e^{-t}$, du signe de $t$ ; $y'(t)=-e^t<0$.</p>
+<table class="tab">
+<tr><th>$t$</th><td>$-\infty$</td><td></td><td>$0$</td><td></td><td>$+\infty$</td></tr>
+<tr><th>$x$</th><td>$+\infty$</td><td>$\searrow$</td><td>$2$</td><td>$\nearrow$</td><td>$+\infty$</td></tr>
+<tr><th>$y$</th><td>$2$</td><td>$\searrow$</td><td>$1$</td><td>$\searrow$</td><td>$-\infty$</td></tr>
+</table>
+<p>Pas de point stationnaire ($y'$ ne s'annule jamais).</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2–Q3 — Tangentes <span class="q-ref">fiche §2.2</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Q2 : $f'(0)=(0,-1)$ : tangente <strong>verticale</strong> $x=2$ en $A(0)=(2,1)$.</p>
+<p>Q3 : $y=0\iff e^t=2\iff t=\ln2$ : $A(\ln2)=\big(\frac52,0\big)$. $f'(\ln2)=\big(\frac32,-2\big)$, vecteur directeur $(3,-4)$. Tangente : $4\big(x-\frac52\big)+3y=0$, soit $4x+3y=10$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q4–Q5 — Branches infinies et position <span class="q-ref">fiche §2.5</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Q4 ($t\to-\infty$) : $x\to+\infty$ et $y\to2$ : <strong>asymptote horizontale</strong> $y=2$. Comme $y-2=-e^t<0$, la courbe est au-dessous.</p>
+<p>Q5 ($t\to+\infty$) : $\frac yx\to-1$, puis $y+x=2+e^{-t}\to2$ : <strong>asymptote oblique</strong> $D : y=-x+2$. Position : $y-(-x+2)=e^{-t}>0$, la courbe est <strong>au-dessus</strong> de $D$.</p>
+<p class="piege">Le calcul de $y+x$ (et non seulement $\frac yx$) est indispensable pour conclure à l'asymptote ; la position se lit sur le même calcul.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q6 — Tracé</h3>
+<details class="corr"><summary>Correction</summary>
+<p>Pour $t$ croissant, le point descend constamment ($y'<0$). Il part de l'asymptote $y=2$ (par-dessous, à droite), arrive en $A(0)=(2,1)$ avec une tangente verticale, coupe l'axe des abscisses en $\big(\frac52,0\big)$, puis longe l'asymptote $y=-x+2$ par-dessus vers la droite et le bas.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q7(a) — Distance à l'asymptote</h3>
+<details class="corr"><summary>Correction</summary>
+<p>$B(t)=\big(x(t),\,2-x(t)\big)$, donc $A(t)B(t)=|y(t)-2+x(t)|=e^{-t}$.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> Q7(b) (séries) et Q7(c) (aire infinie) ; parties I à III (réduction, courbes de l'espace, surfaces).</div>

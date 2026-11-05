@@ -1,0 +1,60 @@
+<p class="ann-lead">La partie I part de la famille de droites $D_t : (t^2-1)x-2ty=2t(t-1)$, en cherche l'enveloppe $\Gamma$, la compare au cercle $\Gamma'$ de centre $(1,1)$ et de rayon $1$, puis étudie les développantes de ce cercle. Questions 1 à 5 : volume 2 (enveloppes, développée, Frenet) et chapitre 2. Les questions 6 et 7 sont plus longues ; on donne des pistes.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2019-b-1.svg" alt="Cercle de centre (1,1) et de rayon 1, avec plusieurs droites D_t qui lui sont tangentes" loading="lazy"><figcaption>Quelques droites $D_t$ : toutes tangentes au cercle $\Gamma'$, leur enveloppe.</figcaption></figure>
+
+<article class="q">
+<h3>Q1 — Projeté orthogonal et distance <span class="q-ref">fiche §2.5</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>Le projeté $H_0$ de $M_0(x_0,y_0)$ sur $D:ax+by+c=0$ s'écrit $H_0=M_0+\lambda(a,b)$ ($\vec n=(a,b)$ est normal à $D$). $H_0\in D$ donne $a(x_0+\lambda a)+b(y_0+\lambda b)+c=0$, d'où
+\[\lambda=-\frac{ax_0+by_0+c}{a^2+b^2},\qquad d(M_0,D)=M_0H_0=|\lambda|\sqrt{a^2+b^2}=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}.\]</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2 — Point équidistant de toutes les droites</h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) $D_{-1} : y=2$ ; $D_0 : x=0$ ; $D_1 : y=0$. Équidistant de $y=2$ et $y=0$ : $y=1$ ; puis $|x|=1$ : les points $(1,1)$ et $(-1,1)$.</p>
+<p>(b) Un point équidistant de toutes les $D_t$ est l'un des deux. Pour $\Omega(1,1)$ :
+\[d(\Omega,D_t)=\frac{|t^2-1-2t-2t^2+2t|}{\sqrt{(t^2-1)^2+4t^2}}=\frac{t^2+1}{t^2+1}=1\quad\text{pour tout }t.\]
+Pour $(-1,1)$, la distance vaut $\frac{|3t^2-1|}{t^2+1}$, égale à $\frac{11}5$ pour $t=2$ : non constante. Donc $\Omega(1,1)$ est l'unique point cherché, à distance $1$ de toutes les droites.</p>
+<p class="astuce">$(t^2-1)^2+4t^2=(t^2+1)^2$ : identité à reconnaître.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q3 — Enveloppe de $(D_t)$ <span class="q-ref">volume 2, §2.1</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) Pour $x=0$ : $-2ty=2t(t-1)$, le point $P_t=(0,1-t)$ est sur $D_t$ (vrai aussi pour $t=0$). Vecteur normal $(t^2-1,-2t)$, donc vecteur directeur $(2t,t^2-1)$ ; représentation : $x=2t\lambda$, $y=1-t+(t^2-1)\lambda$.</p>
+<p>(b) On résout le système formé de l'équation et de sa dérivée par rapport à $t$ :
+\[\begin{cases}(t^2-1)x-2ty=2t^2-2t\\2tx-2y=4t-2\end{cases}\]
+La seconde donne $y=tx-2t+1$ ; en reportant, $(t^2-1)x-2t^2x+4t^2-2t=2t^2-2t$, soit $x=\dfrac{2t^2}{1+t^2}$, puis $y=\dfrac{(1-t)^2}{1+t^2}$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q4 — $\Gamma$ et le cercle $\Gamma'$ <span class="q-ref">fiche §2.3</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) $\Gamma' : x=1+\cos\theta$, $y=1+\sin\theta$ est le cercle de centre $(1,1)$ et de rayon $1$, parcouru une fois.</p>
+<p>(b) $x-1=\frac{t^2-1}{t^2+1}$ et $y-1=\frac{-2t}{t^2+1}$, donc $(x-1)^2+(y-1)^2=\frac{(t^2-1)^2+4t^2}{(t^2+1)^2}=1$ : $\Gamma\subset\Gamma'$. Le point $(2,1)$ n'est pas atteint ($x=2$ imposerait $2t^2=2+2t^2$) : $\Gamma=\Gamma'\setminus\{(2,1)\}$, les courbes ne sont pas égales (ce point est la limite quand $t\to\pm\infty$).</p>
+<p>(c) Avec $t=\tan\frac\varphi2$, $\varphi\in\,]-\pi,\pi[$ : $x-1=-\cos\varphi$, $y-1=-\sin\varphi$, donc $M$ est le point de $\Gamma'$ d'angle $\theta=\varphi+\pi=\pi+2\arctan t$, fonction croissante de $t$. Les deux courbes sont parcourues dans le <strong>même sens</strong> (trigonométrique).</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q5 — Questions de cours <span class="q-ref">volume 2</span></h3>
+<details class="corr"><summary>Correction</summary>
+<ul>
+<li>Développée d'une courbe régulière : lieu des centres de courbure ; c'est aussi l'enveloppe des normales.</li>
+<li>Enveloppe de $(D_t)$ : courbe paramétrée $t\mapsto E(t)$ telle que, pour tout $t$, $E(t)\in D_t$ et $D_t$ est tangente à la courbe en $E(t)$.</li>
+<li>Formules de Frenet : $\dfrac{d\vec T}{ds}=\gamma\vec N$, $\dfrac{d\vec N}{ds}=-\gamma\vec T$.</li>
+</ul>
+</details>
+</article>
+
+<article class="q">
+<h3>Q6–Q7 — Développantes du cercle (pistes)</h3>
+<details class="indic"><summary>Pistes</summary>
+<p>Q6 : sur $\Gamma'$, $\vec T(\theta)=(-\sin\theta,\cos\theta)$, $s(\theta)=\theta$ (rayon 1), le repère de Frenet a pour origine le point $M(\theta)$ du cercle. $P_k(\theta)=M(\theta)+(k-\theta)\vec T(\theta)$ ; en dérivant, la vitesse de $P_k$ est colinéaire à $\vec N$ et s'annule pour $\theta=k$ : c'est le point non régulier, situé sur le cercle. La développée de $\Lambda_k$ est le cercle (privé du point correspondant).</p>
+<p>Q7 : écrire $\overrightarrow{MP}=\lambda\vec T$, dériver, et utiliser que la tangente à $\Lambda$ en $P$ est orthogonale à $\vec T$ ; on obtient $\frac{ds}{d\theta}+\frac{d\lambda}{d\theta}=0$, donc $\lambda=k-s$.</p>
+</details>
+</article>

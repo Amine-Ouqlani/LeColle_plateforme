@@ -1,0 +1,49 @@
+<p class="ann-lead">La partie II étudie $\Gamma : x(t)=t^2+\frac2t$, $y(t)=\frac1{t^2}+2t$, $t<0$ : normale, développée, cercle de courbure, puis cercle tangent en $M_{-1}$ et ordre de contact par développement limité. Les questions de développée et de courbure relèvent du volume 2 ; le développement limité (Q2c–d) relève du chapitre 2.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2015-b-2.svg" alt="Courbe Γ et son cercle osculateur en M(−1), de centre (7,7)" loading="lazy"><figcaption>La courbe ($t<0$) et le cercle de courbure en $M_{-1}=(-1,-1)$, de centre $\Omega(7,7)$ et de rayon $8\sqrt2$.</figcaption></figure>
+
+<article class="q">
+<h3>Q1(a) — Normale en $M_t$ <span class="q-ref">fiche §2.2</span></h3>
+<p class="q-sujet">Justifier la représentation paramétrique de la normale : $x_t(u)=t^2+\frac2t+u$, $y_t(u)=\frac1{t^2}+2t-tu$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>$x'(t)=2t-\frac2{t^2}=\frac{2(t^3-1)}{t^2}$ et $y'(t)=-\frac2{t^3}+2=\frac{2(t^3-1)}{t^3}$, donc $f'(t)=\frac{2(t^3-1)}{t^3}\,(t,1)$.</p>
+<p>Pour $t<0$, $t^3-1\neq0$ : le point est régulier et la tangente est dirigée par $(t,1)$. La normale passe par $M_t$ et est dirigée par $(1,-t)$, orthogonal à $(t,1)$ : d'où la représentation proposée.</p>
+<p class="astuce">Factoriser la vitesse ($f'=\lambda\vec g$) simplifie tout : on ne garde que la direction $\vec g=(t,1)$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(b) — Développée <span class="q-ref">volume 2, §2.2</span></h3>
+<details class="indic"><summary>Indication</summary><p>La développée est l'enveloppe des normales : écrire l'équation cartésienne de la normale, la dériver par rapport à $t$, résoudre le système.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>Normale en $M_t$ (vecteur normal $(t,1)$) : $tX+Y=t\,x(t)+y(t)=t^3+2t+2+\frac1{t^2}$.</p>
+<p>Dérivée par rapport à $t$ : $X=3t^2+2-\frac2{t^3}$. Puis $Y=t^3+2t+2+\frac1{t^2}-tX=-2t^3+2+\frac3{t^2}$.</p>
+<p>La développée est la courbe $t\mapsto\Big(3t^2+2-\dfrac2{t^3},\ -2t^3+2+\dfrac3{t^2}\Big)$, $t<0$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q1(c) — Cercle de courbure en $M_{-1}$</h3>
+<details class="corr"><summary>Correction</summary>
+<p>$M_{-1}=(-1,-1)$ et le centre de courbure est le point de la développée de paramètre $-1$ : $I=(3+2+2,\ 2+2+3)=(7,7)$. Le rayon est $R=IM_{-1}=\sqrt{8^2+8^2}=8\sqrt2$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2(a)(b) — Cercles tangents en $M_{-1}$</h3>
+<details class="corr"><summary>Correction</summary>
+<p>Un cercle de centre $\Omega(a,b)$ est tangent à $\Gamma$ en $M_{-1}$ si et seulement si $\Omega$ est sur la normale en $M_{-1}$, dirigée par $(1,1)$ : c'est la droite $y=x$, donc $b=a$, et $r=\Omega M_{-1}=\sqrt2\,|a+1|$.</p>
+<p>Équation : $f_a(x,y)=(x-a)^2+(y-a)^2-2(a+1)^2=0$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2(c)(d) — Développements limités et contact <span class="q-ref">fiche §2.1, §2.4</span></h3>
+<details class="indic"><summary>Indication</summary><p>Poser $t=-1+h$ et écrire $\frac1t=-\frac1{1-h}$.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>Avec $t=-1+h$ : $\frac1t=-(1+h+h^2+h^3)+o(h^3)$ et $\frac1{t^2}=1+2h+3h^2+4h^3+o(h^3)$. D'où
+\[x(t)=-1-4h-h^2-2h^3+o(h^3),\qquad y(t)=-1+4h+3h^2+4h^3+o(h^3).\]</p>
+<p>L'énoncé donne $f_a\big(x(t),y(t)\big)=(28-4a)(t+1)^2+(28-4a)(t+1)^3+o\big((t+1)^3\big)$ (on peut le vérifier avec les développements ci-dessus). Ce terme est un $o\big((t+1)^3\big)$ si et seulement si $a=7$.</p>
+<p>On trouve alors $\Omega=(7,7)$ et $r=8\sqrt2$ : c'est exactement le <strong>cercle de courbure</strong> de la question 1(c), le cercle qui « colle » le mieux à la courbe en $M_{-1}$ (cercle osculateur).</p>
+</details>
+</article>

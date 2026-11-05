@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapitre — Le Collé</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+
+    <main class="main" id="main">
+      <header class="main-head">
+        <p class="crumbs"><a href="index.html">Accueil</a> › <a href="index.html#chapitres">Chapitres</a> › <span id="crumb"></span></p>
+        <h1 class="title" id="titre"></h1>
+        <div class="title-bar"></div>
+        <p class="lead" id="accroche"></p>
+      </header>
+
+      <nav class="tabs" role="tablist" aria-label="Ressources du chapitre">
+        <button class="tab" role="tab" data-tab="ensemble">Vue d'ensemble</button>
+        <button class="tab" role="tab" data-tab="cours">Cours</button>
+        <button class="tab" role="tab" data-tab="fiche">Fiche</button>
+        <button class="tab" role="tab" data-tab="presentation">Présentation</button>
+        <button class="tab" role="tab" data-tab="td">TD <span class="count" data-count="td"></span></button>
+        <button class="tab" role="tab" data-tab="annales">Annales <span class="count" data-count="annales"></span></button>
+        <button class="tab" role="tab" data-tab="entrainement">Entraînement</button>
+        <button class="tab" role="tab" data-tab="ressources">Ressources</button>
+      </nav>
+
+      <section class="panel" id="panel-ensemble" role="tabpanel"></section>
+      <section class="panel" id="panel-cours" role="tabpanel"></section>
+      <section class="panel" id="panel-fiche" role="tabpanel"></section>
+      <section class="panel" id="panel-presentation" role="tabpanel"></section>
+      <section class="panel" id="panel-td" role="tabpanel"></section>
+      <section class="panel" id="panel-annales" role="tabpanel"></section>
+      <section class="panel" id="panel-entrainement" role="tabpanel"></section>
+      <section class="panel" id="panel-ressources" role="tabpanel"></section>
+
+      <footer class="foot"><span>© <span id="annee"></span> Le Collé — Ahmed Amine Ouqlani</span><span id="chap-nav"></span></footer>
+    </main>
+  </div>
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Navigation rapide"></nav>
+
+  <script src="data/documents.js"></script>
+  <script src="data/chapitres.js"></script>
+  <script src="data/exercices.js"></script>
+  <script src="data/annales.js"></script>
+  <script src="data/entrainement.js"></script>
+  <script src="assets/vendor/katex/katex.min.js"></script>
+  <script src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/chapitre.js"></script>
+</body>
+</html>

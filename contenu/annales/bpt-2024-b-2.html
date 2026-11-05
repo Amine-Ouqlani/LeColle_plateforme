@@ -1,0 +1,49 @@
+<p class="ann-lead">L'exercice 2 étudie des courbes « en polaires » $\Lambda_n : x_n(t)=r_n(t)\cos t$, $y_n(t)=r_n(t)\sin t$, puis une enveloppe. Partie C (cissoïde) : chapitre 2, très proche du <a href="lecteur.html?doc=livre&amp;page=21">TD 3</a>. Parties B et D : volume 2 (longueur, Frenet, développée, enveloppe). Le jury a relevé la confusion entre tangentes horizontales et verticales.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2024-b-2.svg" alt="À gauche la cissoïde Λ3 avec son asymptote x = 1 ; à droite la spirale Λ2 et sa développée" loading="lazy"><figcaption>À gauche $\Lambda_3$ ($r=\frac{\sin^2t}{\cos t}$) et son asymptote ; à droite $\Lambda_2$ ($r=e^t$) et sa développée, image par la rotation d'angle $\frac\pi2$.</figcaption></figure>
+
+<article class="q">
+<h3>Partie A — Deux cercles</h3>
+<details class="corr"><summary>Correction</summary>
+<p>$\Lambda_0$ ($r_0=R$) : cercle de centre $O$ et de rayon $R$. $\Lambda_1$ ($r_1=\cos t$, $t\in[-\frac\pi2,\frac\pi2]$) : $x=\cos^2t=\frac{1+\cos2t}2$, $y=\cos t\sin t=\frac{\sin2t}2$, donc $\big(x-\frac12\big)^2+y^2=\frac14$ : cercle de centre $\big(\frac12,0\big)$ et de rayon $\frac12$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Partie B — La spirale $\Lambda_2$ ($r_2=e^t$) <span class="q-ref">volume 2, §1</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$f'(t)=e^t(\cos t-\sin t,\ \sin t+\cos t)=\sqrt2e^t\big(\cos(t+\frac\pi4),\ \sin(t+\frac\pi4)\big)$, donc $\|f'\|=\sqrt2e^t$.</p>
+<p>1. Longueur de $t=-\ln3$ à $t=3\ln2$ : $\int\sqrt2e^t\,dt=\sqrt2\big(8-\frac13\big)=\frac{23\sqrt2}3$.</p>
+<p>2. Sur $\R$, $\int_0^T\sqrt2e^tdt\to+\infty$ : longueur <strong>infinie</strong>.</p>
+<p>3. $x'=\sqrt2e^t\cos(t+\frac\pi4)=0\iff t=\frac\pi4+k\pi$, et alors $y'=\pm\sqrt2e^t\neq0$ : tangentes verticales en $M\big(\frac\pi4+k\pi\big)=(-1)^ke^{\pi/4+k\pi}\frac{\sqrt2}2(1,1)$. Tous ces points sont sur la droite passant par $O$, dirigée par $(1,1)$.</p>
+<p>4. $\vec T=\big(\cos(t+\frac\pi4),\sin(t+\frac\pi4)\big)$, $\vec N=\big(-\sin(t+\frac\pi4),\cos(t+\frac\pi4)\big)$ ; $\alpha=t+\frac\pi4$, $\frac{ds}{dt}=\sqrt2e^t$, donc $\gamma=\frac{d\alpha}{ds}=\frac1{\sqrt2e^t}$.</p>
+<p>5. $I=M+\frac1\gamma\vec N=e^t(\cos t,\sin t)+e^t\big(-\sin t-\cos t,\ \cos t-\sin t\big)=e^t(-\sin t,\cos t)$.</p>
+<p>6. En affixes, $I(t)=ie^te^{it}=i\,z(t)$ : la développée $C_2$ est l'image de $\Lambda_2$ par la rotation de centre $O$ et d'angle $\frac\pi2$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Partie C — La cissoïde $\Lambda_3$ ($r_3=\frac{\sin^2t}{\cos t}$) <span class="q-ref">fiche §2.3–2.5</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>$x_3(t)=\sin^2t$, $y_3(t)=\frac{\sin^3t}{\cos t}$, $t\in\big]-\frac\pi2,\frac\pi2\big[$.</p>
+<p>1. $x_3(-t)=x_3(t)$ et $y_3(-t)=-y_3(t)$ : symétrie d'axe $(Ox)$ ; on étudie sur $\big[0,\frac\pi2\big[$ puis on complète par cette symétrie.</p>
+<p>2. $x_3'=2\sin t\cos t\geq0$ ; $y_3'=\frac{3\sin^2t\cos^2t+\sin^4t}{\cos^2t}=\sin^2t\Big(2+\frac1{\cos^2t}\Big)\geq0$. Sur $\big[0,\frac\pi2\big[$, $x$ croît de $0$ vers $1$, $y$ croît de $0$ vers $+\infty$.</p>
+<p>3. En $0$ : $f'(0)=\vec0$. Développements : $x_3=t^2-\frac{t^4}3+o(t^4)$, $y_3=t^3+o(t^4)$, donc $f(t)=t^2(1,0)+t^3(0,1)+o(t^3)$ : $p=2$, $q=3$, <strong>rebroussement de première espèce</strong> en $O$, tangente $(Ox)$.</p>
+<p>4. $M_3\big(\frac\pi4\big)=\big(\frac12,\frac12\big)$ ; $f'\big(\frac\pi4\big)=(1,2)$.</p>
+<p>5. Quand $t\to\frac\pi2^-$ : $x\to1$, $y\to+\infty$ : <strong>asymptote verticale</strong> $x=1$ ; $x-1=-\cos^2t<0$, la courbe est à gauche.</p>
+<p class="astuce">Équation cartésienne : $y^2=\frac{\sin^6t}{\cos^2t}=\frac{x^3}{1-x}$ ; c'est la cissoïde du TD 3.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Partie D — Enveloppe <span class="q-ref">volume 2, §2.1</span></h3>
+<p class="q-sujet">$h(t)=t^2(1+\tan^2t)$, $k(t)=\tan t+t(1+\tan^2t)$ ; $D_t : k(t)\,x-y=h(t)$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>1. $h'=2t(1+\tan^2t)+t^2\cdot2\tan t(1+\tan^2t)=2t(1+\tan^2t)(1+t\tan t)$ ; $k'=2(1+\tan^2t)+2t\tan t(1+\tan^2t)=2(1+\tan^2t)(1+t\tan t)$.</p>
+<p>2. $D_t$ coupe $(Oy)$ en $(0,-h(t))$ ; vecteur directeur $(1,k(t))$ ; représentation $x=\lambda$, $y=-h(t)+k(t)\lambda$.</p>
+<p>3. Système $k x-y=h$, $k'x=h'$ : là où $1+t\tan t\neq0$, $x=\frac{h'}{k'}=t$, puis $y=kt-h=t\tan t$. L'enveloppe est $C_4 : t\mapsto(t,\ t\tan t)$.</p>
+<p>4. Avec $r_4(t)=\frac t{\cos t}$ : $r_4\cos t=t$ et $r_4\sin t=t\tan t$. Donc oui, $C_4=\Lambda_4$ pour $r_4(t)=\frac t{\cos t}$.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> exercice 1 (surface) et exercice 3 (équations matricielles, diagonalisation).</div>

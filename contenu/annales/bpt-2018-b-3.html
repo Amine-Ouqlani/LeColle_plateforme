@@ -1,0 +1,35 @@
+<p class="ann-lead">La partie III étudie la spirale d'Archimède $\Gamma : x(\theta)=\theta\cos\theta$, $y(\theta)=\theta\sin\theta$, $\theta\in[0,2\pi]$. Les questions 1, 2 et 5(a) relèvent du chapitre 2 ; les constructions à la règle et au compas (Q3, Q5b, Q6) et l'aire (Q4) sortent de nos chapitres.</p>
+
+<figure class="ann-fig"><img src="assets/img/annales/bpt-2018-b-3.svg" alt="Spirale d'Archimède et ses trois points à tangente horizontale" loading="lazy"><figcaption>La spirale pour $\theta\in[0,2\pi]$ et ses trois tangentes horizontales, en $\theta_0=0$, $\theta_2\approx2{,}03$ et $\theta_4\approx4{,}91$.</figcaption></figure>
+
+<article class="q">
+<h3>Q1 — Vitesse et régularité <span class="q-ref">fiche §2.1, §2.2</span></h3>
+<details class="corr"><summary>Correction</summary>
+<p>(a) $z(\theta)=\theta e^{i\theta}$. (b) $z'(\theta)=e^{i\theta}+i\theta e^{i\theta}=e^{i\theta}(1+i\theta)$.</p>
+<p>(c) $\Big\|\frac{d\overrightarrow{OM}}{d\theta}\Big\|=|z'(\theta)|=|1+i\theta|=\sqrt{1+\theta^2}\geq1$ : <strong>tous les points sont réguliers</strong>.</p>
+<p class="astuce">Passer par l'affixe complexe évite de dériver deux produits : $|e^{i\theta}|=1$.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q2 — Tangentes horizontales <span class="q-ref">fiche §2.2</span></h3>
+<p class="q-sujet">Avec $f(\theta)=\tan\theta+\theta$ sur $D=[0,2\pi]\setminus\{\frac\pi2,\frac{3\pi}2\}$ : variations de $f$, $f$ s'annule exactement trois fois en $\theta_0<\theta_2<\theta_4$, en déduire les points à tangente horizontale.</p>
+<details class="indic"><summary>Indication</summary><p>$y'(\theta)=\sin\theta+\theta\cos\theta$ : factoriser par $\cos\theta$ là où il ne s'annule pas.</p></details>
+<details class="corr"><summary>Correction</summary>
+<p>(a) $f'(\theta)=1+\tan^2\theta+1=2+\tan^2\theta>0$ : $f$ est strictement croissante sur chacun des intervalles $\big[0,\frac\pi2\big[$, $\big]\frac\pi2,\frac{3\pi}2\big[$, $\big]\frac{3\pi}2,2\pi\big]$, avec $f(0)=0$, $f\to+\infty$ en $\frac\pi2^-$ et $\frac{3\pi}2^-$, $f\to-\infty$ en $\frac\pi2^+$ et $\frac{3\pi}2^+$, $f(2\pi)=2\pi$.</p>
+<p>(b) Sur $\big[0,\frac\pi2\big[$ : seul zéro $\theta_0=0$. Sur $\big]\frac\pi2,\frac{3\pi}2\big[$ : $f$ continue strictement croissante de $-\infty$ à $+\infty$, un unique zéro $\theta_2$, et $\theta_2\in\big]\frac\pi2,\pi\big[$ car $f(\pi)=\pi>0$. Sur $\big]\frac{3\pi}2,2\pi\big]$ : de $-\infty$ à $2\pi$, un unique zéro $\theta_4$.</p>
+<p>(c) $y'(\theta)=\sin\theta+\theta\cos\theta=\cos\theta\,f(\theta)$ si $\cos\theta\neq0$, et $y'=\pm1\neq0$ en $\frac\pi2$, $\frac{3\pi}2$. Tous les points étant réguliers, la tangente est horizontale si et seulement si $y'(\theta)=0$, c'est-à-dire $f(\theta)=0$ : aux points $M(\theta_0)=O$, $M(\theta_2)$ et $M(\theta_4)$.</p>
+<p class="piege">Ne pas diviser par $\cos\theta$ sans traiter à part les valeurs où il s'annule.</p>
+</details>
+</article>
+
+<article class="q">
+<h3>Q5(a) — Tangente en $M\big(\frac\pi2\big)$ <span class="q-ref">fiche §2.2</span></h3>
+<p class="q-sujet">La tangente en $M\big(\frac\pi2\big)$ coupe l'axe des abscisses en $N$ : calculer $ON$.</p>
+<details class="corr"><summary>Correction</summary>
+<p>$M\big(\frac\pi2\big)=\big(0,\frac\pi2\big)$ et $z'\big(\frac\pi2\big)=i\big(1+i\frac\pi2\big)=-\frac\pi2+i$ : vecteur directeur $\big(-\frac\pi2,1\big)$. La tangente $\big(-\frac\pi2s,\ \frac\pi2+s\big)$ coupe $y=0$ pour $s=-\frac\pi2$ : $N=\big(\frac{\pi^2}4,0\big)$, $ON=\frac{\pi^2}4$.</p>
+<p>Le cercle de centre $O$ passant par $M\big(\frac\pi2\big)$ a pour rayon $\frac\pi2$ et pour périmètre $\pi^2=4\,ON$ : un segment de longueur $4\,ON$ répond au problème.</p>
+</details>
+</article>
+
+<div class="hors"><strong>Hors de nos chapitres :</strong> Q3 (construction des points), Q4 (aire), Q5(b) et Q6 (constructions géométriques).</div>

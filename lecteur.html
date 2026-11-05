@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecteur — Le Collé</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="reader">
+  <div class="rd-bar">
+    <a class="icon-btn hide-embed" id="rd-back" href="index.html" aria-label="Retour">&larr;</a>
+    <button class="icon-btn" id="rd-toc" aria-label="Sommaire du document" aria-expanded="false"></button>
+    <div class="rd-title" id="rd-title">Chargement…</div>
+    <button class="icon-btn" id="rd-prev" aria-label="Page précédente"></button>
+    <label class="rd-page"><span class="sr-only">Page</span><input id="rd-input" inputmode="numeric" value="1"> / <span id="rd-total">…</span></label>
+    <button class="icon-btn" id="rd-next" aria-label="Page suivante"></button>
+    <button class="icon-btn" id="rd-zout" aria-label="Réduire"></button>
+    <button class="icon-btn" id="rd-zin" aria-label="Agrandir"></button>
+    <button class="icon-btn" id="rd-fs" aria-label="Plein écran"></button>
+    <a class="icon-btn" id="rd-open" target="_blank" rel="noopener" aria-label="Ouvrir dans un nouvel onglet"></a>
+    <a class="icon-btn" id="rd-dl" download aria-label="Télécharger le PDF"></a>
+  </div>
+  <div class="rd-progress"><span id="rd-prog" style="width:0"></span></div>
+  <div class="rd-body">
+    <nav class="rd-outline" id="rd-outline" aria-label="Sommaire"></nav>
+    <div class="rd-scroll" id="rd-scroll" hidden><div class="rd-pages" id="rd-pages"></div></div>
+    <div class="rd-stage" id="rd-stage" hidden>
+      <canvas id="rd-canvas"></canvas>
+      <button class="rd-nav prev" id="rd-tprev" aria-label="Diapositive précédente"><span></span></button>
+      <button class="rd-nav next" id="rd-tnext" aria-label="Diapositive suivante"><span></span></button>
+    </div>
+    <div class="rd-loading" id="rd-loading">Chargement du document…</div>
+  </div>
+
+  <script src="data/documents.js"></script>
+  <script src="data/chapitres.js"></script>
+  <script src="data/exercices.js"></script>
+  <script src="data/annales.js"></script>
+  <script src="data/entrainement.js"></script>
+  <script src="assets/vendor/pdfjs/pdf.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/lecteur.js"></script>
+</body>
+</html>
