@@ -10,12 +10,9 @@
   document.title = `${D.titre} — Le Collé`;
 
   // icônes de la barre
-  $('#rd-toc').innerHTML = icon('list'); $('#rd-prev').innerHTML = icon('left'); $('#rd-next').innerHTML = icon('right');
-  $('#rd-zin').innerHTML = icon('zoomin'); $('#rd-zout').innerHTML = icon('zoomout'); $('#rd-fs').innerHTML = icon('expand');
-  $('#rd-open').innerHTML = icon('external'); $('#rd-dl').innerHTML = icon('download');
   $('#rd-dl').href = D.fichier;
-  $('#rd-title').innerHTML = `${esc(D.titre)}<small>${esc(D.version)}</small>`;
-  if (!embed) { $('#rd-open').hidden = true; if (document.referrer && new URL(document.referrer).origin === location.origin) $('#rd-back').href = document.referrer; }
+  $('#rd-title').textContent = D.titre;
+  if (document.referrer && new URL(document.referrer).origin === location.origin && !/lecteur\.html/.test(document.referrer)) $('#rd-back').href = document.referrer;
   if (slides) { $('#rd-zin').hidden = true; $('#rd-zout').hidden = true; } else { $('#rd-fs').hidden = true; }
 
   if (!window.pdfjsLib) { $('#rd-loading').innerHTML = `Le lecteur n'a pas pu démarrer. <a href="${D.fichier}">Ouvrir le PDF</a>`; return; }
@@ -31,12 +28,9 @@
   $('#rd-total').textContent = fin;
   $('#rd-input').max = fin;
   $('#rd-loading').hidden = true;
-  if (!embed) noterVisite(D.titre, location.pathname.split('/').pop() + location.search);
 
   const signaler = () => {
     $('#rd-input').value = page;
-    $('#rd-prog').style.width = ((page - debut + 1) / (fin - debut + 1) * 100) + '%';
-    $('#rd-open').href = lecteurUrl(docId, page, slides ? { mode: 'slides' } : {});
     $$('#rd-outline button').forEach(b => b.classList.toggle('cur', Number(b.dataset.p) === courantSection()));
     if (embed && parent !== window) parent.postMessage({ lcPage: page }, '*');
   };
@@ -75,7 +69,6 @@
   if (slides) {
     const stage = $('#rd-stage'), canvas = $('#rd-canvas'), ctx = canvas.getContext('2d');
     stage.hidden = false;
-    $('#rd-tprev span').innerHTML = icon('left'); $('#rd-tnext span').innerHTML = icon('right');
     let tache = null;
     const rendre = async () => {
       const pg = await pdf.getPage(page);
@@ -103,14 +96,14 @@
     /* ---------- mode document : défilement continu, rendu paresseux */
     const scroll = $('#rd-scroll'), pagesEl = $('#rd-pages');
     scroll.hidden = false;
-    let zoom = store.get('zoom', 1);
+    let zoom = 1;
+    try { zoom = Number(localStorage.getItem('lc:zoom')) || 1; } catch (e) { /* stockage indisponible */ }
     const p1 = await pdf.getPage(debut);
     const ratio = p1.getViewport({ scale: 1 }).height / p1.getViewport({ scale: 1 }).width;
     const conteneurs = [];
     for (let p = debut; p <= fin; p++) {
       const div = document.createElement('div');
       div.className = 'rd-pg'; div.dataset.p = p; div.id = 'p' + p;
-      div.innerHTML = `<span class="pgnum">${p}</span>`;
       pagesEl.appendChild(div); conteneurs.push(div);
     }
     const largeur = () => Math.min(scroll.clientWidth - 24, 920) * zoom;
@@ -138,7 +131,7 @@
     scroll.addEventListener('scroll', () => requestAnimationFrame(majCourante), { passive: true });
     aller = p => { page = Math.min(fin, Math.max(debut, p)); $('#p' + page).scrollIntoView({ block: 'start' }); scroll.scrollTop -= 8; signaler(); };
     const rezoom = z => {
-      const rel = page; zoom = Math.min(2.5, Math.max(0.5, z)); store.set('zoom', zoom);
+      const rel = page; zoom = Math.min(2.5, Math.max(0.5, z)); try { localStorage.setItem('lc:zoom', zoom); } catch (e) { /* stockage indisponible */ }
       dims(); conteneurs.forEach(d => { d.dataset.ok = ''; io.unobserve(d); io.observe(d); }); aller(rel);
     };
     $('#rd-zin').addEventListener('click', () => rezoom(zoom * 1.2));

@@ -3,48 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le Collé — Maths PT</title>
-  <meta name="description" content="Espace de travail de mathématiques PT : cours, fiches, présentations, TD corrigés, annales et examens blancs.">
+  <title>Le Collé — Mathématiques PT</title>
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="page">
-    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
-
-    <main class="main" id="main">
-      <header class="main-head">
-        <p class="crumbs">Le Collé · Mathématiques PT</p>
-        <h1 class="title">Espace de travail</h1>
-        <div class="title-bar"></div>
-      </header>
-
-      <nav class="tabs" role="tablist" aria-label="Sections">
-        <button class="tab" role="tab" data-tab="accueil">Accueil</button>
-        <button class="tab" role="tab" data-tab="chapitres">Chapitres</button>
-        <button class="tab" role="tab" data-tab="exercices">Exercices <span class="count" data-count="exercices"></span></button>
-        <button class="tab" role="tab" data-tab="annales">Annales <span class="count" data-count="annales"></span></button>
-        <button class="tab" role="tab" data-tab="entrainement">Entraînement</button>
-        <button class="tab" role="tab" data-tab="bibliotheque">Bibliothèque</button>
-        <button class="tab" role="tab" data-tab="parcours">Parcours</button>
-      </nav>
-
-      <section class="panel" id="panel-accueil" role="tabpanel"></section>
-      <section class="panel" id="panel-chapitres" role="tabpanel"></section>
-      <section class="panel" id="panel-exercices" role="tabpanel"></section>
-      <section class="panel" id="panel-annales" role="tabpanel"></section>
-      <section class="panel" id="panel-entrainement" role="tabpanel"></section>
-      <section class="panel" id="panel-bibliotheque" role="tabpanel"></section>
-      <section class="panel" id="panel-parcours" role="tabpanel"></section>
-
-      <footer class="foot"><span>© <span id="annee"></span> Le Collé — Ahmed Amine Ouqlani</span><span>Annales : sujets officiels de la Banque PT, consultés sur WikiPrépa ; corrections Le Collé.</span></footer>
-    </main>
-  </div>
-  <nav class="bottom-nav" id="bottom-nav" aria-label="Navigation rapide"></nav>
+  <main class="wrap" id="contenu"></main>
 
   <script src="data/documents.js"></script>
   <script src="data/chapitres.js"></script>

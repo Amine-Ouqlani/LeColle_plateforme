@@ -26,10 +26,11 @@ python3 -m http.server 8000   # puis ouvrir http://localhost:8000
 ## Organisation
 
 ```
-index.html          accueil : chapitres, exercices, annales, entraînement, bibliothèque, parcours
-chapitre.html?id=…  page d'un chapitre : cours, fiche, présentation, TD, annales, entraînement, ressources
-annale.html?id=…    une annale : liens officiels, méthodes, indications, correction
-lecteur.html?doc=…  lecteur PDF (pdf.js) : &page=, &mode=slides, &debut=&fin= (plage), &embed=1
+index.html          accueil : les chapitres et la liste des documents
+chapitre.html?id=…  tout un chapitre sur une page : cours, fiche et présentation, TD par niveau, annales, révision
+annales.html        les annales, par chapitre ; annale.html?id=… : une annale et sa correction
+entrainement.html   devoirs et examens blancs
+lecteur.html?doc=…  lecteur PDF (pdf.js) : &page=, &mode=slides, &debut=&fin= (plage)
 data/               CONTENU : documents, chapitres, exercices, annales, entraînement
 contenu/annales/    corrections des annales (HTML + formules LaTeX rendues par KaTeX)
 docs/               PDF et sources LaTeX
