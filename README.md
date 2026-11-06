@@ -53,6 +53,12 @@ Chaque chapitre PT a deux PDF dans `docs/pt/td/` : le TD (énoncés seuls, en qu
 - Les énoncés et corrections des exercices du livre sont repris tels quels depuis ses sources ; les exemples du cours et les exercices complémentaires sont dans `outils/td/nouveaux_*.tex`, le plan dans `outils/td/meta.py`.
 - `python3 outils/td/build_td.py` compile les six PDF et relève la page de chaque exercice ; `python3 outils/td/integrer.py` copie les PDF dans `docs/td/` et régénère `data/pt/exercices.js`, si bien que chaque lien « Énoncé » ou « Corrigé » du site ouvre le TD ou le livret à la bonne page. (Les chemins vers les sources des livres sont en tête de `build_td.py`.)
 
+## La sélection de 5 problèmes
+
+Pour chaque chapitre PT, `docs/pt/selection/Selection_<chapitre>.pdf` réunit cinq problèmes à travailler après le cours (énoncés, une page d'indications, corrections). Le choix et les en-têtes sont dans `outils/td/selection.py`, les problèmes nouveaux ou adaptés d'annales dans `outils/td/selection.tex`. `python3 outils/td/build_selection.py` compile les trois livrets, puis `python3 outils/td/integrer_selection.py` met à jour `data/pt/selection.js` (pages de chaque énoncé, indication et correction).
+
+Les questions d'annales sont indexées par chapitre et par notion dans `data/pt/annales-questions.js` (`python3 outils/annales_questions.py`, à relancer après l'ajout d'une annale).
+
 ## Ajouter du contenu
 
 - **Un document PT** : déposer le PDF (et sa source) dans `docs/pt/`, puis ajouter une entrée dans `data/pt/documents.js`.

@@ -1,0 +1,295 @@
+% =====================================================================
+% Le Collé — sélection de 5 problèmes par chapitre : problèmes nouveaux,
+% regroupés ou adaptés d'annales. Les autres problèmes de la sélection
+% sont repris tels quels du TD (voir selection.py).
+% =====================================================================
+
+% ------------------------------------------------------------ DÉTERMINANTS
+\begin{exo}{sel-det-param}{2}{un déterminant à paramètre, de l'algèbre à la géométrie}
+Pour $m\in\R$, on pose
+\[A_m=\begin{pmatrix}m&1&1\\1&m&1\\1&1&m\end{pmatrix},\]
+et l'on note $\ve u_1$, $\ve u_2$, $\ve u_3$ les vecteurs de $\R^3$ dont les coordonnées dans la base canonique sont les colonnes de $A_m$.
+\begin{enumerate}
+\item Calculer $\det A_m$ sous forme factorisée, \emph{sans développer}.
+\item Pour quelles valeurs de $m$ la famille $(\ve u_1,\ve u_2,\ve u_3)$ est-elle une base de $\R^3$ ?
+\item On suppose $m=-2$. Donner une relation de dépendance linéaire entre $\ve u_1$, $\ve u_2$, $\ve u_3$, puis une équation d'un plan qui contient ces trois vecteurs. Que dire de la famille pour $m=1$ ?
+\item On suppose $m=2$. Calculer le volume du parallélépipède construit sur $\ve u_1$, $\ve u_2$, $\ve u_3$, puis celui du tétraèdre $OU_1U_2U_3$, où $\vv{OU_k}=\ve u_k$.
+\item Toujours pour $m=2$, calculer \emph{sans nouveau calcul de déterminant} : $\det\big(A_2^T\big)$, $\det\big(A_2^2\big)$, $\det(3A_2)$ et $\det\big(A_2^{-1}\big)$.
+\item Généralisation. Soit $n\geq2$ et $B_m\in\mathcal M_n(\R)$ la matrice dont les coefficients diagonaux valent $m$ et tous les autres $1$. Montrer que $\det B_m=(m+n-1)(m-1)^{n-1}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-det-param}
+\choix{toutes les lignes ont la même somme $m+2$ : on l'additionne dans une colonne, on la factorise, puis on fait apparaître des zéros. On ne développe jamais un déterminant à paramètre « brut » : on obtiendrait un polynôme à factoriser ensuite.}
+\q{1.} $C_1\leftarrow C_1+C_2+C_3$ (le déterminant ne change pas), puis on sort $m+2$ de la première colonne (linéarité) :
+\[\det A_m=(m+2)\dt{1&1&1\\1&m&1\\1&1&m}.\]
+Avec $L_2\leftarrow L_2-L_1$ et $L_3\leftarrow L_3-L_1$, la matrice devient triangulaire supérieure de diagonale $(1,m-1,m-1)$ :
+\[\det A_m=(m+2)(m-1)^2.\]
+
+\q{2.} $(\ve u_1,\ve u_2,\ve u_3)$ est une base de $\R^3$ si et seulement si $\det(\ve u_1,\ve u_2,\ve u_3)=\det A_m\neq0$, c'est-à-dire si et seulement si $m\notin\{-2,1\}$.
+
+\q{3.} Pour $m=-2$, la somme des colonnes est la colonne $(m+2)(1,1,1)^T=0$ : $\ve u_1+\ve u_2+\ve u_3=\ve 0$, relation de dépendance non triviale. Chaque vecteur a des coordonnées de somme $m+2=0$ : ils sont tous dans le plan $x+y+z=0$ (ils sont \emph{coplanaires}, ce qu'exprime $\det=0$).
+Pour $m=1$, $\ve u_1=\ve u_2=\ve u_3=(1,1,1)$ : les trois vecteurs sont égaux, donc colinéaires.
+
+\q{4.} Le volume du parallélépipède est $|\det(\ve u_1,\ve u_2,\ve u_3)|=|\det A_2|=4\times1^2=4$. Celui du tétraèdre en est le sixième : $\frac46=\frac23$.
+
+\q{5.} $\det(A_2^T)=\det A_2=4$ ; $\det(A_2^2)=(\det A_2)^2=16$ ; $\det(3A_2)=3^3\det A_2=108$ (la matrice est d'ordre $3$) ; $\det(A_2^{-1})=\frac1{\det A_2}=\frac14$.
+\piege{$\det(3A)=3\det A$ est faux : chacune des $n$ colonnes est multipliée par $3$, d'où $3^n$.}
+
+\q{6.} Même méthode : $C_1\leftarrow C_1+\dots+C_n$ donne une première colonne constante égale à $m+n-1$, que l'on sort ; puis $L_i\leftarrow L_i-L_1$ ($2\leq i\leq n$) rend la matrice triangulaire supérieure, de diagonale $(1,m-1,\dots,m-1)$. Donc $\det B_m=(m+n-1)(m-1)^{n-1}$ (pour $n=3$, on retrouve la question~1).
+\retenir{somme des lignes (ou des colonnes) constante $\Rightarrow$ additionner toutes les colonnes dans la première et factoriser ; un déterminant nul se lit géométriquement (vecteurs coplanaires, colinéaires), un déterminant non nul comme un volume.}
+\end{corrige}
+
+\begin{exo}{sel-det-tridiag}{3}{les déterminants tridiagonaux}
+Soient $a$, $b$, $c$ des réels. Pour $n\geq1$, on note $T_n$ le déterminant d'ordre $n$ dont les coefficients diagonaux valent $a$, les coefficients situés juste au-dessus de la diagonale valent $b$, ceux situés juste au-dessous valent $c$, et tous les autres $0$.
+\begin{enumerate}
+\item Montrer que, pour $n\geq3$, $T_n=aT_{n-1}-bc\,T_{n-2}$. Que valent $T_1$ et $T_2$ ?
+\item \emph{Premier cas.} Soit $A_n=\big(5\delta_{i,j}+6\delta_{i,j-1}+\delta_{i-1,j}\big)_{1\leq i,j\leq n}$, où $\delta$ est le symbole de Kronecker.
+\begin{enumerate}
+\item Écrire $A_4$ et calculer $\det(A_4)$.
+\item Calculer $u_n=\det(A_n)$ pour tout $n\geq1$.
+\end{enumerate}
+\item \emph{Second cas.} Soit $\theta\in\R$ et $D_n$ le déterminant d'ordre $n$ à diagonale $2\cos\theta$ et dont les coefficients voisins de la diagonale valent $1$.
+\begin{enumerate}
+\item Montrer que, si $\theta\notin\pi\Z$, $D_n=\dfrac{\sin\big((n+1)\theta\big)}{\sin\theta}$.
+\item Que vaut $D_n$ si $\theta\in\pi\Z$ ?
+\item En déduire les réels $x$ pour lesquels le déterminant d'ordre $n$ à diagonale $x$ et voisins $1$ est nul.
+\end{enumerate}
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-det-tridiag}
+\choix{un déterminant tridiagonal se calcule par une relation de récurrence : on développe selon la première ligne, puis le second mineur selon sa première colonne. Toujours vérifier la formule finale sur un petit $n$.}
+\q{1.} On développe $T_n$ selon sa première ligne $(a,b,0,\dots,0)$ : $T_n=a\,T_{n-1}-b\,\Delta_{1,2}$, où $\Delta_{1,2}$ est le mineur obtenu en supprimant la ligne $1$ et la colonne $2$. Sa première colonne est $(c,0,\dots,0)^T$ ; en le développant selon elle, $\Delta_{1,2}=c\,T_{n-2}$. Donc
+\[T_n=aT_{n-1}-bc\,T_{n-2}\quad(n\geq3),\qquad T_1=a,\quad T_2=a^2-bc.\]
+\piege{le coefficient $b$ est en position $(1,2)$ : il porte le signe $(-1)^{1+2}=-1$. L'oublier donne $+bc$.}
+
+\q{2.(a)} $\delta_{i,j-1}=1$ si et seulement si $j=i+1$ : des $6$ juste au-dessus de la diagonale ; $\delta_{i-1,j}=1$ si et seulement si $i=j+1$ : des $1$ juste au-dessous ; des $5$ sur la diagonale. C'est un tridiagonal avec $a=5$, $bc=6$ :
+\[A_4=\begin{pmatrix}5&6&0&0\\1&5&6&0\\0&1&5&6\\0&0&1&5\end{pmatrix},\qquad u_n=5u_{n-1}-6u_{n-2},\quad u_1=5,\ u_2=19.\]
+Donc $u_3=5\cdot19-6\cdot5=65$ et $\det(A_4)=u_4=5\cdot65-6\cdot19=211$.
+
+\q{2.(b)} L'équation caractéristique $r^2-5r+6=0$ a pour racines $2$ et $3$ : $u_n=\alpha2^n+\beta3^n$. Avec $2\alpha+3\beta=5$ et $4\alpha+9\beta=19$ : $\beta=3$, $\alpha=-2$, d'où
+\[u_n=3^{n+1}-2^{n+1}.\]
+Contrôle : $u_4=243-32=211$.
+\gain{on peut poser $u_0=1$ (valeur qui rend la relation vraie pour $n=2$) : les conditions $u_0=1$, $u_1=5$ donnent les constantes plus vite.}
+
+\q{3.(a)} Ici $a=2\cos\theta$ et $bc=1$ : $D_n=2\cos\theta\,D_{n-1}-D_{n-2}$, avec $D_1=2\cos\theta$, $D_2=4\cos^2\theta-1$. Comme le résultat est donné, une \emph{récurrence double} est plus courte qu'une résolution.
+\begin{itemize}
+\item $\frac{\sin2\theta}{\sin\theta}=2\cos\theta=D_1$ et $\frac{\sin3\theta}{\sin\theta}=4\cos^2\theta-1=D_2$, car $\sin3\theta=3\sin\theta-4\sin^3\theta=\sin\theta(4\cos^2\theta-1)$.
+\item Si la formule est vraie aux rangs $n-1$ et $n-2$, la formule $\sin\big((n+1)\theta\big)+\sin\big((n-1)\theta\big)=2\sin(n\theta)\cos\theta$ donne $2\cos\theta\,D_{n-1}-D_{n-2}=\frac{\sin((n+1)\theta)}{\sin\theta}$ : elle est vraie au rang $n$.
+\end{itemize}
+\gain{pour \emph{trouver} la formule : $r^2-2\cos\theta\,r+1=0$ a pour racines $e^{\pm i\theta}$, donc $D_n=\lambda\cos n\theta+\mu\sin n\theta$, et $D_0=1$, $D_1=2\cos\theta$ donnent $\lambda=1$, $\mu=\frac{\cos\theta}{\sin\theta}$.}
+
+\q{3.(b)} Si $\theta\in\pi\Z$, $\cos\theta=\varepsilon=\pm1$ : l'équation caractéristique $r^2-2\varepsilon r+1=(r-\varepsilon)^2$ a une racine double, et $D_n=(n+1)\varepsilon^n$ (vérifier sur $D_1=2\varepsilon$, $D_2=3$). C'est bien la limite de $\frac{\sin((n+1)\theta)}{\sin\theta}$ quand $\theta$ tend vers $k\pi$.
+
+\q{3.(c)} Notons $P_n(x)$ ce déterminant : par la question~1, $P_n(x)=xP_{n-1}(x)-P_{n-2}(x)$, donc $P_n$ est un polynôme unitaire de degré $n$. Pour $x=2\cos\theta$ avec $\theta\in\,]0,\pi[$, $P_n(x)=0\iff\sin((n+1)\theta)=0\iff\theta=\frac{k\pi}{n+1}$ ($1\leq k\leq n$). On obtient $n$ racines distinctes $2\cos\frac{k\pi}{n+1}$ ; un polynôme de degré $n$ n'en a pas d'autre. Le déterminant est nul si et seulement si $x\in\left\{2\cos\frac{k\pi}{n+1},\ 1\leq k\leq n\right\}$.
+\retenir{tridiagonal (diagonale $a$, voisins $b$ et $c$) $\Rightarrow T_n=aT_{n-1}-bc\,T_{n-2}$ ; puis suite récurrente linéaire d'ordre $2$ (racines réelles, complexes ou double).}
+\end{corrige}
+
+\begin{exo}{sel-det-2019}{4}{comatrice et inversion de matrices}
+\emph{Dans tout le problème, pour $A\in\mathcal M_n(\R)$, on note $A_{i,j}$ la matrice d'ordre $n-1$ obtenue en supprimant la ligne $i$ et la colonne $j$ de $A$ ; le réel $(-1)^{i+j}\det(A_{i,j})$ est le cofacteur d'indice $(i,j)$, et la matrice de ces cofacteurs est la \emph{comatrice} $\mathrm{com}(A)$.}
+\begin{enumerate}
+\item Soit $M=\begin{pmatrix}1&-1&1\\-1&2&1\\1&1&2\end{pmatrix}$. Calculer $\det M$, puis $\mathrm{com}(M)$, et vérifier que $M\,\mathrm{com}(M)^T=(\det M)I_3$. En déduire $M^{-1}$.
+\item \emph{Démonstration de la formule.} Soit $A=(a_{i,j})\in\mathcal M_n(\R)$.
+\begin{enumerate}
+\item Rappeler la formule du développement de $\det A$ selon la colonne $j$.
+\item Soient $j\neq j'$. En considérant la matrice obtenue en remplaçant la colonne $j$ de $A$ par sa colonne $j'$, montrer que $\sum_{i=1}^n(-1)^{i+j}a_{i,j'}\det(A_{i,j})=0$.
+\item Soit $B=\mathrm{com}(A)^T$, de coefficients $b_{i,j}=(-1)^{i+j}\det(A_{j,i})$. Montrer que $BA=\det(A)I_n$. En déduire une expression de $A^{-1}$ lorsque $A$ est inversible.
+\end{enumerate}
+\item \emph{Application.} Pour $(u,v)\in\R^2$, on pose $A(u,v)=\begin{pmatrix}uv-u&uv&u^2-v\\v-1&v&2u\\u&u&-1\end{pmatrix}$.
+\begin{enumerate}
+\item Calculer $\det A(u,v)$ sous forme factorisée.
+\item Déterminer l'ensemble $D$ des couples $(u,v)$ pour lesquels $A(u,v)$ est inversible, et le décrire géométriquement.
+\item Pour $(u,v)\in D$, calculer $A(u,v)^{-1}$.
+\end{enumerate}
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-det-2019}
+\choix{la formule de la comatrice n'est qu'un développement selon une colonne, utilisé deux fois : une fois « normalement » (coefficients diagonaux de $BA$), une fois sur une matrice à deux colonnes égales (coefficients hors diagonale).}
+\q{1.} Développement selon la première ligne : $\det M=1\cdot(4-1)-(-1)(-2-1)+1\cdot(-1-2)=3-3-3=-3\neq0$. Les neuf cofacteurs donnent
+\[\mathrm{com}(M)=\begin{pmatrix}3&3&-3\\3&1&-2\\-3&-2&1\end{pmatrix}\qquad\text{(symétrique, comme $M$)},\]
+et l'on vérifie $M\,\mathrm{com}(M)^T=-3I_3$ (par exemple, ligne $1$ de $M$ par colonne $1$ : $3-3-3=-3$ ; par colonne $2$ : $3-1-2=0$). Donc
+\[M^{-1}=\frac1{\det M}\,\mathrm{com}(M)^T=\begin{pmatrix}-1&-1&1\\-1&-\frac13&\frac23\\1&\frac23&-\frac13\end{pmatrix}.\]
+
+\q{2.(a)} $\det A=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\det(A_{i,j})$.
+
+\q{2.(b)} Soit $A'$ la matrice obtenue en remplaçant la colonne $j$ de $A$ par sa colonne $j'$. Elle a deux colonnes égales (la $j$-ième et la $j'$-ième), donc $\det A'=0$. D'autre part, supprimer la colonne $j$ de $A'$ ou de $A$ donne la même matrice : $A'_{i,j}=A_{i,j}$. Le développement de $\det A'$ selon sa colonne $j$, dont les coefficients sont les $a_{i,j'}$, donne exactement la somme proposée, qui est donc nulle.
+
+\q{2.(c)} Le coefficient $(i,j)$ de $BA$ est
+\[\sum_{k=1}^nb_{i,k}a_{k,j}=\sum_{k=1}^n(-1)^{k+i}a_{k,j}\det(A_{k,i}).\]
+Pour $j=i$, c'est le développement de $\det A$ selon la colonne $i$ : il vaut $\det A$. Pour $j\neq i$, c'est la somme de la question~(b) avec les colonnes $i$ et $j$ : il vaut $0$. Donc $BA=\det(A)I_n$ et, si $A$ est inversible,
+\[A^{-1}=\frac1{\det A}\,\mathrm{com}(A)^T.\]
+\piege{bien noter l'inversion des indices : $b_{i,j}$ utilise le mineur $A_{j,i}$. C'est la \emph{transposée} de la comatrice.}
+
+\q{3.(a)} $C_1\leftarrow C_1-C_2$ fait apparaître la colonne $(-u,-1,0)^T$ :
+\[\det A(u,v)=\dt{-u&uv&u^2-v\\-1&v&2u\\0&u&-1}.\]
+On développe selon la première colonne : $\det A(u,v)=-u(-v-2u^2)-(-1)\big(-uv-u(u^2-v)\big)=u(v+2u^2)-u^3=u(u^2+v)$.
+
+\q{3.(b)} $A(u,v)$ est inversible si et seulement si $u\neq0$ et $v\neq-u^2$ : $D$ est le plan privé de l'axe $u=0$ et de la parabole $v=-u^2$.
+
+\q{3.(c)} Les neuf cofacteurs se calculent comme en~1 ; avec la formule de~2.(c) :
+\[A(u,v)^{-1}=\frac1{u(u^2+v)}\begin{pmatrix}-(2u^2+v)&u^3&v(u^2+v)\\2u^2+v-1&u(1-u^2)&(1-v)(u^2+v)\\-u&u^2&0\end{pmatrix}.\]
+Contrôle rapide : le produit de la dernière ligne de $A(u,v)$ par la dernière colonne de la matrice entre parenthèses vaut $uv(u^2+v)+u(1-v)(u^2+v)=u(u^2+v)$.
+\retenir{inverse d'une matrice $3\times3$ à paramètres : $A^{-1}=\frac1{\det A}\mathrm{com}(A)^T$ ; faire d'abord apparaître des zéros pour le déterminant, et toujours contrôler un coefficient du produit.}
+\end{corrige}
+
+% ------------------------------------------------------------ COURBES
+\begin{exo}{sel-c-2014}{4}{une famille de cubiques}
+Pour $A=(a,b)\in\R^2$, on considère la courbe $\Gamma_A$ :
+\[x(t)=t^3+3t^2-at,\qquad y(t)=t^3-3t^2-bt,\qquad t\in\R.\]
+\begin{enumerate}
+\item On suppose $a=b=9$.
+\begin{enumerate}
+\item Comparer $x(-t)$ et $y(-t)$ à $x(t)$ et $y(t)$. En déduire que $\Gamma_A$ admet un axe de symétrie $\Delta$, et réduire l'étude à $\R_+$.
+\item Factoriser $x'$ et $y'$. Dresser le tableau de variations conjoint sur $\R_+$, puis préciser les points à tangente horizontale ou verticale et la tangente en $M(0)$.
+\item Montrer que $\Gamma_A$ possède un unique point double, le déterminer, et donner l'angle des deux tangentes en ce point.
+\item Étudier la branche infinie quand $t\to+\infty$.
+\item Tracer $\Gamma_A$.
+\end{enumerate}
+\item On revient au cas général. Montrer que $\Gamma_A$ possède un point stationnaire si et seulement si $A$ appartient à la courbe $\mathcal P$ d'équation $(x-y)^2=24(x+y)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-c-2014}
+\q{1.(a)} $x(-t)=-t^3+3t^2+9t=-(t^3-3t^2-9t)=-y(t)$ et de même $y(-t)=-x(t)$. Donc $M(-t)=\big(-y(t),-x(t)\big)$ : c'est l'image de $M(t)$ par $(x,y)\mapsto(-y,-x)$, la réflexion d'axe $\Delta:y=-x$. Comme $t\mapsto-t$ échange $\R_+$ et $\R_-$, on étudie la courbe pour $t\geq0$ et l'on complète par la symétrie d'axe $\Delta$.
+\choix{le tableau du cours ne contient pas cette symétrie telle quelle : elle combine $t\mapsto-t$ et l'échange de $x$ et $y$. Toujours comparer $x(-t)$ à $\pm x(t)$ \emph{et} à $\pm y(t)$.}
+
+\q{1.(b)} $x'(t)=3t^2+6t-9=3(t-1)(t+3)$ et $y'(t)=3t^2-6t-9=3(t-3)(t+1)$ : pas de zéro commun, tous les points sont réguliers.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c|ccccccc}
+$t$ & $0$ & & $1$ & & $3$ & & $+\infty$\\\hline
+$x$ & $0$ & $\searrow$ & $-5$ & $\nearrow$ & $27$ & $\nearrow$ & $+\infty$\\
+$y$ & $0$ & $\searrow$ & $-11$ & $\searrow$ & $-27$ & $\nearrow$ & $+\infty$
+\end{tabular}
+\end{center}
+Tangente verticale en $M(1)=(-5,-11)$ ($x'(1)=0$, $y'(1)=-12\neq0$) ; tangente horizontale en $M(3)=(27,-27)$ ($y'(3)=0$, $x'(3)=36\neq0$). En $t=0$, $f'(0)=(-9,-9)$ : la tangente en $O$ est la droite $y=x$.
+\piege{« $x'=0$ donc tangente verticale » exige $y'\neq0$ au même point.}
+
+\q{1.(c)} Pour $t\neq s$, on divise $x(t)-x(s)$ et $y(t)-y(s)$ par $t-s$ :
+\[\frac{x(t)-x(s)}{t-s}=t^2+ts+s^2+3(t+s)-9,\qquad\frac{y(t)-y(s)}{t-s}=t^2+ts+s^2-3(t+s)-9.\]
+Ces deux quantités sont nulles si et seulement si leur différence $6(t+s)$ et l'une d'elles le sont : $s=-t$, puis $t^2-9=0$. Le seul point double est $M(3)=M(-3)=(27,-27)$, situé sur $\Delta$. Les tangentes sont dirigées par $f'(3)=(36,0)$ et $f'(-3)=(0,36)$ : elles sont \emph{perpendiculaires}.
+\choix{diviser par $t-s$ élimine la solution parasite $t=s$ ; on travaille ensuite avec des expressions symétriques en $t$ et $s$.}
+
+\q{1.(d)} Quand $t\to+\infty$, $x$ et $y$ tendent vers $+\infty$, $\frac yx\to1$ et $y-x=-6t^2\to-\infty$ : branche parabolique de direction $y=x$.
+\piege{$\lim\frac yx=1$ ne suffit pas : c'est $\lim(y-x)$ qui tranche entre asymptote et branche parabolique.}
+
+\q{1.(e)} Pour $t\geq0$ : départ de $O$ vers le bas et la gauche (tangente $y=x$), tangente verticale en $(-5,-11)$, tangente horizontale au point double $(27,-27)$, puis branche parabolique vers le haut et la droite. On complète par la réflexion d'axe $y=-x$ ; la boucle est parcourue pour $t\in[-3,3]$.
+
+\q{2.} $M(t)$ est stationnaire si et seulement si $3t^2+6t-a=0$ et $3t^2-6t-b=0$. La différence donne $12t=a-b$, la somme $6t^2=a+b$.
+\emph{Condition nécessaire :} $t=\frac{a-b}{12}$ et $6\frac{(a-b)^2}{144}=a+b$, soit $(a-b)^2=24(a+b)$.
+\emph{Réciproque :} si $(a-b)^2=24(a+b)$, on pose $t=\frac{a-b}{12}$ ; alors $3t^2=\frac{a+b}2$ et $6t=\frac{a-b}2$, d'où $x'(t)=\frac{a+b}2+\frac{a-b}2-a=0$ et $y'(t)=\frac{a+b}2-\frac{a-b}2-b=0$.
+\retenir{un « si et seulement si » demande les deux sens ; la réciproque est souvent une vérification de deux lignes, à ne pas oublier.}
+\end{corrige}
+
+% ------------------------------------------------------------ MÉTRIQUE
+\begin{exo}{sel-m-cycloide}{3}{la cycloïde : longueur, repère de Frenet, développée}
+On considère la cycloïde $f(t)=(t-\sin t,\ 1-\cos t)$, $t\in\R$.
+\begin{enumerate}
+\item Montrer que $f'(t)=2\sin\frac t2\left(\sin\frac t2,\cos\frac t2\right)$. Calculer la longueur d'une arche ($t\in[0,2\pi]$), puis l'abscisse curviligne $s$ d'origine $O=M(0)$ pour $t\in[0,2\pi]$.
+\item Pour $t\in\,]0,2\pi[$, déterminer le repère de Frenet $(\ve T,\ve N)$, l'angle $\alpha$ de la tangente et la courbure $\gamma$.
+\item Montrer que le centre de courbure est $I(t)=(t+\sin t,\ \cos t-1)$.
+\item En déduire que la développée de la cycloïde est une cycloïde, image de la première par une translation.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-m-cycloide}
+\choix{on factorise $f'$ par l'angle moitié pour l'écrire $f'=v(\cos\alpha,\sin\alpha)$ avec $v>0$ : on lit alors en même temps la vitesse (longueur), l'angle (courbure) et le repère de Frenet.}
+\q{1.} $f'(t)=(1-\cos t,\sin t)=\left(2\sin^2\tfrac t2,\ 2\sin\tfrac t2\cos\tfrac t2\right)=2\sin\tfrac t2\left(\sin\tfrac t2,\cos\tfrac t2\right)$, d'où $\|f'(t)\|=2\left|\sin\frac t2\right|=2\sin\frac t2$ sur $[0,2\pi]$. Donc
+\[L=\int_0^{2\pi}2\sin\tfrac t2\,dt=\left[-4\cos\tfrac t2\right]_0^{2\pi}=8,\qquad s(t)=\int_0^t2\sin\tfrac u2\,du=4\left(1-\cos\tfrac t2\right).\]
+\piege{$\sqrt{4\sin^2\frac t2}=2|\sin\frac t2|$ : sur $[2\pi,4\pi]$ le sinus est négatif ; sans valeur absolue, la deuxième arche aurait une « longueur » $-8$.}
+
+\q{2.} Sur $]0,2\pi[$, $v=2\sin\frac t2>0$, donc $\ve T=\left(\sin\frac t2,\cos\frac t2\right)=(\cos\alpha,\sin\alpha)$ avec $\alpha=\frac\pi2-\frac t2$, et $\ve N=\left(-\cos\frac t2,\sin\frac t2\right)$ (rotation de $\ve T$ d'angle $\frac\pi2$). Alors
+\[\gamma=\frac{d\alpha}{ds}=\frac{\alpha'(t)}{v}=\frac{-1/2}{2\sin(t/2)}=-\frac1{4\sin(t/2)}.\]
+($\gamma<0$ : parcourue de gauche à droite, la cycloïde tourne vers la droite.)
+
+\q{3.} $R=\frac1\gamma=-4\sin\frac t2$ et
+\[I=M+R\ve N=(t-\sin t,1-\cos t)+4\sin\tfrac t2\left(\cos\tfrac t2,-\sin\tfrac t2\right),\]
+c'est-à-dire $I=\left(t-\sin t+2\sin t,\ 1-\cos t-4\sin^2\frac t2\right)$,
+soit $I=(t+\sin t,\cos t-1)$, car $4\sin^2\frac t2=2(1-\cos t)$.
+
+\q{4.} En posant $t=u+\pi$ : $I=(u-\sin u+\pi,\ -1-\cos u)=(u-\sin u,\ 1-\cos u)+(\pi,-2)$. La développée est la même cycloïde, translatée de $(\pi,-2)$ : ses rebroussements sont au milieu des arches de la première.
+\retenir{la factorisation par l'angle moitié donne d'un coup $v$, $\alpha$, $\ve T$, $\ve N$ et $\gamma$. La développée d'une cycloïde est une cycloïde (propriété utilisée par Huygens pour le pendule isochrone).}
+\end{corrige}
+
+\begin{exo}{sel-m-ellipse}{4}{l'ellipse : courbure aux sommets et développée}
+Soient $a>b>0$ et l'ellipse $f(t)=(a\cos t,b\sin t)$, $t\in\R$. On note $\alpha$ l'angle de la tangente.
+\begin{enumerate}
+\item Montrer que, en un point régulier, $\alpha'(t)=\dfrac{\det(f',f'')}{\|f'\|^2}$, puis que la courbure vaut $\gamma=\dfrac{\det(f',f'')}{\|f'\|^3}$. Calculer $\gamma(t)$ pour l'ellipse.
+\item Calculer le rayon de courbure aux quatre sommets. Où la courbure est-elle maximale ? minimale ?
+\item Écrire une équation de la normale en $M(t)$.
+\item En déduire la développée de l'ellipse comme enveloppe des normales.
+\item Retrouver, à l'aide de la développée, les rayons de courbure aux sommets $(a,0)$ et $(0,b)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-m-ellipse}
+\choix{l'angle $\alpha$ n'a pas d'expression simple : on dérive $\tan\alpha=\frac{y'}{x'}$, ce qui justifie la formule du déterminant. Pour la développée, plutôt que de calculer $R$ et $\ve N$ en tout point, on enveloppe les normales : il ne reste qu'un système linéaire $2\times2$.}
+\q{1.} Là où $x'\neq0$, $\tan\alpha=\frac{y'}{x'}$ ; en dérivant, $(1+\tan^2\alpha)\alpha'=\frac{x'y''-y'x''}{x'^2}$ et $1+\tan^2\alpha=\frac{x'^2+y'^2}{x'^2}$, d'où $\alpha'=\frac{\det(f',f'')}{\|f'\|^2}$ (même calcul avec $\cot\alpha$ là où $y'\neq0$). Comme $\frac{ds}{dt}=\|f'\|$, $\gamma=\frac{d\alpha}{ds}=\frac{\det(f',f'')}{\|f'\|^3}$. Ici $f'=(-a\sin t,b\cos t)$, $f''=(-a\cos t,-b\sin t)$ et $\det(f',f'')=ab$ :
+\[\gamma(t)=\frac{ab}{(a^2\sin^2t+b^2\cos^2t)^{3/2}}>0.\]
+
+\q{2.} En $t=0$ ou $\pi$ (sommets $(\pm a,0)$) : $R=\frac{(b^2)^{3/2}}{ab}=\frac{b^2}a$. En $t=\pm\frac\pi2$ (sommets $(0,\pm b)$) : $R=\frac{a^2}b$. Le dénominateur de $\gamma$ est minimal quand $\sin t=0$ (car $b^2<a^2$) : la courbure est maximale aux extrémités du grand axe, minimale à celles du petit axe.
+\gain{contrôle : pour $a=b$, on trouve $R=a$ (cercle).}
+
+\q{3.} La normale passe par $M(t)$ et est orthogonale à $f'(t)=(-a\sin t,b\cos t)$ : $-a\sin t\,(x-a\cos t)+b\cos t\,(y-b\sin t)=0$, soit
+\[ax\sin t-by\cos t=(a^2-b^2)\sin t\cos t.\]
+
+\q{4.} En dérivant par rapport à $t$ : $ax\cos t+by\sin t=(a^2-b^2)\cos2t$. Le système formé par ces deux équations a pour déterminant $ab(\sin^2t+\cos^2t)=ab\neq0$ ; on obtient
+\[x=\frac{a^2-b^2}a\cos^3t,\qquad y=-\frac{a^2-b^2}b\sin^3t.\]
+La développée est une astroïde étirée (astroïde de Lamé), avec quatre rebroussements sur les axes.
+
+\q{5.} En $t=0$, le centre de courbure, point de la développée, est $\left(\frac{a^2-b^2}a,0\right)=\left(a-\frac{b^2}a,0\right)$, à la distance $\frac{b^2}a$ du sommet $(a,0)$. En $t=\frac\pi2$ : $\left(0,-\frac{a^2-b^2}b\right)=\left(0,b-\frac{a^2}b\right)$, à la distance $\frac{a^2}b$ du sommet $(0,b)$. On retrouve les rayons de la question~2.
+\retenir{$\gamma=\frac{\det(f',f'')}{\|f'\|^3}$ ; développée $=$ enveloppe des normales : équation de la normale, dérivée par rapport au paramètre, système $2\times2$. Les rebroussements de la développée correspondent aux sommets, où la courbure est extrémale.}
+\end{corrige}
+
+\begin{exo}{sel-m-2021}{5}{la deltoïde}
+On identifie le plan à $\C$ et l'on considère la courbe $\Gamma$ d'affixe $z(t)=2e^{it}+e^{-2it}$, $t\in\R$ ; on note $f(t)=\big(x(t),y(t)\big)$.
+\begin{enumerate}
+\item \emph{Préliminaires.} Établir les formules $\cos p-\cos q=-2\sin\frac{p+q}2\sin\frac{p-q}2$ et $\sin p+\sin q=2\sin\frac{p+q}2\cos\frac{p-q}2$.
+\item \emph{Étude de $\Gamma$.}
+\begin{enumerate}
+\item Exprimer $x(t)$ et $y(t)$.
+\item Montrer que $z\big(t+\frac{2\pi}3\big)=e^{2i\pi/3}z(t)$ et interpréter géométriquement. Montrer que $z(-t)=\overline{z(t)}$. En déduire qu'on peut restreindre l'étude à $\big[0,\frac\pi3\big]$ et expliquer comment obtenir la courbe entière.
+\item Montrer que $x'(t)=-4\sin\frac{3t}2\cos\frac t2$ et $y'(t)=4\sin\frac{3t}2\sin\frac t2$. Étudier les variations de $x$ et $y$ sur $\big[0,\frac\pi3\big]$.
+\item Donner une équation de la tangente en $M\big(\frac\pi3\big)$ et vérifier qu'elle passe par $A(2,0)$.
+\item Préciser la nature du point $M(0)$ et sa tangente.
+\item Calculer la longueur totale de $\Gamma$.
+\end{enumerate}
+\item \emph{Développée.}
+\begin{enumerate}
+\item Pour $t\in\big]0,\frac{2\pi}3\big[$, déterminer $\ve T$, l'angle $\alpha$, la courbure, le rayon de courbure et $\ve N$, puis montrer que le centre de courbure est $I(t)=(6\cos t-3\cos2t,\ 6\sin t+3\sin2t)$.
+\item Montrer que $I\big(t+\frac\pi3\big)$ a pour affixe $3e^{i\pi/3}z(t)$. En déduire que la développée de $\Gamma$ est l'image de $\Gamma$ par une similitude dont on précisera le rapport et l'angle.
+\end{enumerate}
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-m-2021}
+\choix{tout passe par la forme complexe : les symétries se lisent sur $z(t)$, l'angle moitié factorise les dérivées, et la développée se compare à $\Gamma$ par une similitude, c'est-à-dire une multiplication par un nombre complexe.}
+\q{1.} Avec $\cos a\cos b=\frac12[\cos(a-b)+\cos(a+b)]$, $\sin a\sin b=\frac12[\cos(a-b)-\cos(a+b)]$ et $\sin a\cos b=\frac12[\sin(a+b)+\sin(a-b)]$, on pose $a=\frac{p+q}2$, $b=\frac{p-q}2$ (donc $a+b=p$, $a-b=q$) : $-2\sin a\sin b=\cos p-\cos q$ et $2\sin a\cos b=\sin p+\sin q$.
+
+\q{2.(a)} $z(t)=(2\cos t+\cos2t)+i(2\sin t-\sin2t)$ : $x(t)=2\cos t+\cos2t$, $y(t)=2\sin t-\sin2t$.
+
+\q{2.(b)} $z\big(t+\frac{2\pi}3\big)=2e^{it}e^{2i\pi/3}+e^{-2it}e^{-4i\pi/3}=e^{2i\pi/3}\big(2e^{it}+e^{-2it}e^{-2i\pi}\big)=e^{2i\pi/3}z(t)$ : $M\big(t+\frac{2\pi}3\big)$ est l'image de $M(t)$ par la rotation de centre $O$ et d'angle $\frac{2\pi}3$, qui laisse donc $\Gamma$ invariante. Par ailleurs $z(-t)=\overline{z(t)}$ : symétrie d'axe $(Ox)$.
+Comme $z$ est $2\pi$-périodique, la rotation permet de se limiter à un intervalle de longueur $\frac{2\pi}3$, par exemple $\big[-\frac\pi3,\frac\pi3\big]$, puis la symétrie à $\big[0,\frac\pi3\big]$. On complète par la réflexion d'axe $(Ox)$, puis par les rotations d'angles $\frac{2\pi}3$ et $\frac{4\pi}3$.
+
+\q{2.(c)} $x'(t)=-2\sin t-2\sin2t=-2(\sin t+\sin2t)=-4\sin\frac{3t}2\cos\frac t2$ et $y'(t)=2\cos t-2\cos2t=4\sin\frac{3t}2\sin\frac t2$ (question~1). Sur $\big[0,\frac\pi3\big]$, $\frac{3t}2\in\big[0,\frac\pi2\big]$ : $x'\leq0$ et $y'\geq0$ ; $x$ décroît de $3$ à $\frac12$, $y$ croît de $0$ à $\frac{\sqrt3}2$. Seul $t=0$ annule les deux dérivées.
+
+\q{2.(d)} $M\big(\frac\pi3\big)=\big(\frac12,\frac{\sqrt3}2\big)$ et $f'\big(\frac\pi3\big)=\big(-2\sqrt3,2\big)$. La tangente a pour équation $2\big(x-\frac12\big)+2\sqrt3\big(y-\frac{\sqrt3}2\big)=0$, soit $x+\sqrt3\,y=2$ ; elle passe par $A(2,0)$.
+
+\q{2.(e)} $M(0)=(3,0)$ et $f'(0)=\ve0$. $f''(0)=(-6,0)\neq\ve0$, donc $p=2$ ; $f'''(0)=(0,6)$ et $\det\big(f''(0),f'''(0)\big)=-36\neq0$, donc $q=3$ : \emph{rebroussement de première espèce}, de tangente l'axe $(Ox)$.
+\gain{un point stationnaire sur un axe de symétrie a pour tangente cet axe ou sa perpendiculaire.}
+
+\q{2.(f)} $\|f'(t)\|^2=16\sin^2\frac{3t}2\big(\cos^2\frac t2+\sin^2\frac t2\big)$, donc $\|f'(t)\|=4\big|\sin\frac{3t}2\big|$. Sur $\big[0,\frac{2\pi}3\big]$, $\sin\frac{3t}2\geq0$ :
+\[\int_0^{2\pi/3}4\sin\tfrac{3t}2\,dt=\tfrac83\Big[-\cos\tfrac{3t}2\Big]_0^{2\pi/3}=\tfrac{16}3.\]
+Par la symétrie de rotation, la longueur totale est $3\times\frac{16}3=16$.
+
+\q{3.(a)} Pour $t\in\big]0,\frac{2\pi}3\big[$, $f'(t)=4\sin\frac{3t}2\left(-\cos\frac t2,\sin\frac t2\right)$ avec $v=4\sin\frac{3t}2>0$, donc $\ve T=(\cos\alpha,\sin\alpha)$ avec $\alpha=\pi-\frac t2$, et $\ve N=\left(-\sin\frac t2,-\cos\frac t2\right)$. Alors $\gamma=\frac{\alpha'(t)}{v}=-\frac1{8\sin(3t/2)}$ et $R=-8\sin\frac{3t}2$. Le centre de courbure est
+\[I=M+R\ve N=M+8\sin\tfrac{3t}2\left(\sin\tfrac t2,\cos\tfrac t2\right)=M+\big(4(\cos t-\cos2t),\ 4(\sin t+\sin2t)\big),\]
+d'après la question~1, soit $I(t)=(6\cos t-3\cos2t,\ 6\sin t+3\sin2t)$.
+
+\q{3.(b)} En affixes, $I(t)=6e^{it}-3e^{-2it}$, donc
+\[I\big(t+\tfrac\pi3\big)=6e^{it}e^{i\pi/3}-3e^{-2it}e^{-2i\pi/3}=e^{i\pi/3}\big(6e^{it}-3e^{-2it}e^{-i\pi}\big)=3e^{i\pi/3}\big(2e^{it}+e^{-2it}\big)=3e^{i\pi/3}z(t).\]
+Quand $t$ décrit $\R$, $t+\frac\pi3$ aussi : la développée est l'image de $\Gamma$ par la similitude de centre $O$, de rapport $3$ et d'angle $\frac\pi3$.
+\retenir{courbe définie par une affixe : symétries par $z(t+\tau)=e^{i\varphi}z(t)$ ou $z(-t)=\overline{z(t)}$ ; longueur et courbure par l'angle moitié.}
+\end{corrige}

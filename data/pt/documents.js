@@ -95,6 +95,39 @@ LC.documents = {
     description: "Première forme du travail : séance de deux heures découpée en étapes minutées, galerie d'exemples, séries d'entraînement. Remplacée par le livre principal, conservée pour mémoire."
   },
   /* ---- TD (générés par td/build_td.py) ---- */
+  "selection-determinants": {
+    titre: "Sélection — Déterminants",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_determinants.pdf",
+    source: "docs/pt/sources/selection/Selection_determinants.tex",
+    pages: 13,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
+  "selection-courbes": {
+    titre: "Sélection — Courbes paramétrées",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_courbes.pdf",
+    source: "docs/pt/sources/selection/Selection_courbes.tex",
+    pages: 15,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
+  "selection-metrique": {
+    titre: "Sélection — Propriétés métriques des courbes",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_metrique.pdf",
+    source: "docs/pt/sources/selection/Selection_metrique.tex",
+    pages: 11,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
   "td-determinants": {
     "titre": "TD — Déterminants",
     "sousTitre": "Chapitre 1 · 41 exercices · énoncés",

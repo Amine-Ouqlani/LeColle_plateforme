@@ -177,3 +177,42 @@ body[data-filiere] .site-head, body[data-filiere] .rd-bar { border-top: 3px soli
 .choix-carte[data-filiere="mp"] .choix-tag { color: var(--mp); }
 .choix-titre { display: block; font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 4px 0 8px; }
 .choix-texte { display: block; color: var(--ink-2); font-size: 16px; }
+
+/* ---------- parcours guidé (chapitre, entraînement, annales) ---------- */
+.suite { margin-top: 14px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--soft); color: var(--ink-2); }
+.small { font-size: 15px; }
+.dots { font-size: 11px; letter-spacing: 1px; color: var(--accent); white-space: nowrap; }
+.dots .off { color: var(--line); }
+details.plus { margin-top: 12px; }
+details.plus > summary { cursor: pointer; color: var(--accent); width: fit-content; }
+details.plus[open] > summary { margin-bottom: 8px; }
+details.plus > h3:first-of-type { margin-top: 12px; }
+.etapes { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; padding: 0; margin: 14px 0 6px; counter-reset: e; font-size: 15.5px; }
+.etapes li { counter-increment: e; }
+.etapes li::before { content: counter(e) ". "; color: var(--muted); }
+.etapes-def { margin: 18px 0 0; display: grid; gap: 4px; }
+.etape { margin-top: 30px; padding-top: 4px; scroll-margin-top: 16px; }
+.etape h3 { margin: 0 0 6px; display: flex; align-items: baseline; gap: 10px; font-size: 19px; }
+.etape-num { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--accent); border: 1px solid currentColor; border-radius: 50%; width: 24px; height: 24px; display: inline-grid; place-items: center; flex: none; transform: translateY(-2px); }
+.etape > p { color: var(--ink-2); }
+.etape.principale { border-left: 3px solid var(--accent); padding-left: 16px; margin-left: -19px; }
+@media (max-width: 600px) { .etape.principale { margin-left: 0; padding-left: 12px; } }
+.pbs { list-style: none; padding: 0; margin-top: 10px; border-top: 1px solid var(--line); }
+.pb { padding: 14px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+.pb-tete { display: flex; gap: 12px; align-items: flex-start; }
+.pb-num { font-family: var(--serif); font-size: 22px; color: var(--accent); line-height: 1.2; min-width: 1.2em; }
+.pb-corps { margin-left: calc(1.2em + 12px); margin-top: 4px; }
+.pb-corps > p + p { margin-top: 4px; }
+.pb-actions { margin-top: 8px; font-weight: 600; }
+.indic { margin: 10px 0 0; padding: 8px 12px; background: var(--soft); border-radius: 4px; }
+.indic p + p { margin-top: 4px; }
+.erreurs { margin-top: 4px; display: grid; gap: 4px; }
+.etapes-mini { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 14.5px; margin-top: 2px; }
+.list > li > .row + p, .list > li > .row + details { margin-left: 0; }
+.choix-chap { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 26px 0 4px; border-bottom: 1px solid var(--line); }
+.choix-chap button { background: none; border: none; font: inherit; color: var(--ink-2); cursor: pointer; padding: 6px 0; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.choix-chap button[aria-pressed="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--accent); }
+.filtres { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 6px 0 10px; font-size: 15px; color: var(--ink-2); }
+.filtres select { font: inherit; margin-left: 6px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--ink); }
+.q.cible > h3 { color: var(--accent); }
+.q { scroll-margin-top: 16px; }

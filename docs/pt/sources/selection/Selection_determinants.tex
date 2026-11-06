@@ -1,0 +1,622 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — Déterminants : sélection de 5 problèmes},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}Sélection · Déterminants}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\makeatletter
+\newcommand{\probleme}[7]{% numéro, étape, titre, difficulté, origine, durée, identifiant
+  \clearpage\phantomsection\label{p:#7}\pdfbookmark[1]{Problème #1 — #2}{p.#7}%
+  {\sffamily\small\color{Gris}\textls[150]{PROBLÈME #1\ \ ·\ \ \MakeUppercase{#2}}}\par\nobreak\vspace{0.15em}
+  {\sffamily\bfseries\LARGE\color{Ink}#3}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  \noindent{\footnotesize\sffamily\color{Gris}Difficulté~\niveau{#4}\quad·\quad durée indicative : #6\quad·\quad #5}\par\nobreak\vspace{0.3em}}
+\newcommand{\fichepb}[3]{% notions, objectifs, prérequis
+  {\small\setlength{\parskip}{0.15em}%
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Notions}}#1\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Objectifs}}#2\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Prérequis}}#3\par}
+  \vspace{0.4em}{\color{Filet}\hrule height 0.4pt}\vspace{0.6em}}
+\newcommand{\titresection}[2]{% titre, texte
+  \clearpage\phantomsection\pdfbookmark[0]{#1}{s.#1}%
+  {\sffamily\bfseries\fontsize{24}{28}\selectfont\color{Ink}#1}\par\vspace{0.3em}
+  {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.5em}{\small\color{Gris}#2}\par\vspace{0.6em}}
+\newcommand{\soustitre}[3]{% numéro, titre, label
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Problème~#1}\quad{\sffamily\bfseries\color{Ink}#2}\par\nobreak\vspace{0.3em}}
+\makeatother
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 1}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}Sélection --- Déterminants}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Cinq problèmes à travailler après le cours}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Ces cinq problèmes sont la sélection principale pour les séances, \emph{après} l'explication du cours.
+Ils vont de la mise en application au niveau des devoirs et des concours ; chacun réunit plusieurs résultats du chapitre.
+Ils complètent le TD complet et le livre, qu'ils ne remplacent pas.
+
+\textbf{Mode d'emploi.} Les traiter dans l'ordre. Pour chaque problème : lire l'en-tête (notions, objectifs, prérequis),
+chercher au brouillon, puis rédiger. En cas de blocage, lire \emph{une seule} indication (page des indications), puis reprendre.
+Ne lire la correction qu'une fois le problème terminé ou après un vrai effort : elle explique le \emph{choix de la méthode}
+avant les calculs. L'origine de chaque problème est indiquée en tête ; les problèmes « d'après » un concours sont des
+adaptations rédigées par Le Collé, pas les énoncés officiels.}
+\vspace{1.2em}
+{\small\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\noindent\begin{tabular}{@{}r>{\raggedright\arraybackslash\sffamily\footnotesize}p{2.9cm}>{\raggedright\arraybackslash}p{6.1cm}ll@{\hspace{6pt}}ccc@{}}
+& & & & & {\footnotesize\sffamily énoncé} & {\footnotesize\sffamily indic.} & {\footnotesize\sffamily corrigé}\\\hline
+1 & \textcolor{Gris}{Mise en application} & Un déterminant à paramètre, de l'algèbre à la géométrie & \niveau{2} & 30\,min & \pageref{p:sel-det-param} & \pageref{i:sel-det-param} & \pageref{c:sel-det-param}\\
+2 & \textcolor{Gris}{Méthodes classiques} & Les déterminants tridiagonaux & \niveau{3} & 45\,min & \pageref{p:sel-det-tridiag} & \pageref{i:sel-det-tridiag} & \pageref{c:sel-det-tridiag}\\
+3 & \textcolor{Gris}{Approfondissement} & Le déterminant de Vandermonde & \niveau{4} & 40\,min & \pageref{p:td-d5} & \pageref{i:td-d5} & \pageref{c:td-d5}\\
+4 & \textcolor{Gris}{Problème de synthèse} & Un déterminant affine : $a$ au-dessus, $b$ au-dessous & \niveau{5} & 50\,min & \pageref{p:td-d10} & \pageref{i:td-d10} & \pageref{c:td-d10}\\
+5 & \textcolor{Gris}{Niveau DS / concours} & Comatrice et inversion de matrices & \niveau{4} & 1\,h & \pageref{p:sel-det-2019} & \pageref{i:sel-det-2019} & \pageref{c:sel-det-2019}\\
+\end{tabular}}
+\probleme{1}{Mise en application}{Un déterminant à paramètre, de l'algèbre à la géométrie}{2}{Problème original Le Collé}{30\,min}{sel-det-param}
+\fichepb{opérations élémentaires, linéarité, caractérisation des bases, volume, propriétés globales.}{Calculer un déterminant sans le développer, puis interpréter le résultat : base, vecteurs coplanaires, volume, $\det(\lambda A)$, $\det(AB)$.}{Règles de calcul sur les colonnes ; Déterminant d'une matrice triangulaire.}
+Pour $m\in\R$, on pose
+\[A_m=\begin{pmatrix}m&1&1\\1&m&1\\1&1&m\end{pmatrix},\]
+et l'on note $\ve u_1$, $\ve u_2$, $\ve u_3$ les vecteurs de $\R^3$ dont les coordonnées dans la base canonique sont les colonnes de $A_m$.
+\begin{enumerate}
+\item Calculer $\det A_m$ sous forme factorisée, \emph{sans développer}.
+\item Pour quelles valeurs de $m$ la famille $(\ve u_1,\ve u_2,\ve u_3)$ est-elle une base de $\R^3$ ?
+\item On suppose $m=-2$. Donner une relation de dépendance linéaire entre $\ve u_1$, $\ve u_2$, $\ve u_3$, puis une équation d'un plan qui contient ces trois vecteurs. Que dire de la famille pour $m=1$ ?
+\item On suppose $m=2$. Calculer le volume du parallélépipède construit sur $\ve u_1$, $\ve u_2$, $\ve u_3$, puis celui du tétraèdre $OU_1U_2U_3$, où $\vv{OU_k}=\ve u_k$.
+\item Toujours pour $m=2$, calculer \emph{sans nouveau calcul de déterminant} : $\det\big(A_2^T\big)$, $\det\big(A_2^2\big)$, $\det(3A_2)$ et $\det\big(A_2^{-1}\big)$.
+\item Généralisation. Soit $n\geq2$ et $B_m\in\mathcal M_n(\R)$ la matrice dont les coefficients diagonaux valent $m$ et tous les autres $1$. Montrer que $\det B_m=(m+n-1)(m-1)^{n-1}$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-det-param} · correction p.~\pageref{c:sel-det-param}}
+\probleme{2}{Méthodes classiques}{Les déterminants tridiagonaux}{3}{Livre, exercices 1.13 et 1.14 (TD 3 et TD 7 de la classe), réunis en un problème}{45\,min}{sel-det-tridiag}
+\fichepb{développement selon une ligne, relation de récurrence, suites récurrentes linéaires d'ordre 2, trigonométrie.}{Établir et exploiter la relation $T_n=aT_{n-1}-bc\,T_{n-2}$, dans un cas à racines réelles et dans un cas à racines complexes.}{Développement selon une ligne ou une colonne ; Suites récurrentes linéaires d'ordre 2 ; Formules d'addition.}
+Soient $a$, $b$, $c$ des réels. Pour $n\geq1$, on note $T_n$ le déterminant d'ordre $n$ dont les coefficients diagonaux valent $a$, les coefficients situés juste au-dessus de la diagonale valent $b$, ceux situés juste au-dessous valent $c$, et tous les autres $0$.
+\begin{enumerate}
+\item Montrer que, pour $n\geq3$, $T_n=aT_{n-1}-bc\,T_{n-2}$. Que valent $T_1$ et $T_2$ ?
+\item \emph{Premier cas.} Soit $A_n=\big(5\delta_{i,j}+6\delta_{i,j-1}+\delta_{i-1,j}\big)_{1\leq i,j\leq n}$, où $\delta$ est le symbole de Kronecker.
+\begin{enumerate}
+\item Écrire $A_4$ et calculer $\det(A_4)$.
+\item Calculer $u_n=\det(A_n)$ pour tout $n\geq1$.
+\end{enumerate}
+\item \emph{Second cas.} Soit $\theta\in\R$ et $D_n$ le déterminant d'ordre $n$ à diagonale $2\cos\theta$ et dont les coefficients voisins de la diagonale valent $1$.
+\begin{enumerate}
+\item Montrer que, si $\theta\notin\pi\Z$, $D_n=\dfrac{\sin\big((n+1)\theta\big)}{\sin\theta}$.
+\item Que vaut $D_n$ si $\theta\in\pi\Z$ ?
+\item En déduire les réels $x$ pour lesquels le déterminant d'ordre $n$ à diagonale $x$ et voisins $1$ est nul.
+\end{enumerate}
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-det-tridiag} · correction p.~\pageref{c:sel-det-tridiag}}
+\probleme{3}{Approfondissement}{Le déterminant de Vandermonde}{4}{Livre, exercice 1.12 · TD 5 de la classe · TD complet, exercice~26}{40\,min}{td-d5}
+\fichepb{déterminant vu comme polynôme, degré, racines, coefficient dominant, récurrence.}{Calculer un déterminant sans le développer, en l'étudiant comme un polynôme ; généraliser par récurrence.}{Polynômes : degré, racines, factorisation ; Développement selon une colonne.}
+Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pmatrix}$ et $P(x)=\det(A)$.
+\begin{enumerate}
+\item Prouver que $P$ est un polynôme, donner son degré et ses racines.
+\item En déduire la valeur de $\det(A)$ sous forme de produit de $6$ facteurs.
+\item Soit $A=\big(a_j^{\,i-1}\big)_{1\leq i,j\leq n}$ ; montrer par récurrence que
+      $\det(A)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p)$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:td-d5} · correction p.~\pageref{c:td-d5}}
+\probleme{4}{Problème de synthèse}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{5}{Livre, exercice 1.15 · TD 10 de la classe · TD complet, exercice~39}{50\,min}{td-d10}
+\fichepb{fonction affine, linéarité par rapport aux colonnes, matrice triangulaire, prolongement par continuité.}{Introduire une variable pour rendre le calcul simple, exploiter le degré, puis traiter un cas limite.}{Linéarité par rapport aux colonnes ; Dérivée et taux d'accroissement.}
+On note $U$ la matrice de taille $n\times n$ dont tous les coefficients valent $1$, et
+\[A_n=\begin{pmatrix}\lambda_1&a&\cdots&a\\b&\lambda_2&\ddots&\vdots\\\vdots&\ddots&\ddots&a\\b&\cdots&b&\lambda_n\end{pmatrix}.\]
+\begin{enumerate}
+\item Soit $P(x)=\det(A_n-xU)$. Montrer que $\deg(P)\leq1$.
+\item Calculer $P(a)$ et $P(b)$ et en déduire $\det(A_n)$ pour $a\neq b$.
+\item À l'aide d'une dérivée, trouver $\det(A_n)$ pour $a=b$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:td-d10} · correction p.~\pageref{c:td-d10}}
+\probleme{5}{Niveau DS / concours}{Comatrice et inversion de matrices}{4}{D'après Banque PT 2019, Mathématiques B, partie II (énoncé adapté par Le Collé)}{1\,h}{sel-det-2019}
+\fichepb{développement selon une colonne, comatrice, inverse, déterminant à paramètres.}{Démontrer la formule de la comatrice et l'appliquer à une matrice à deux paramètres, comme dans un sujet de concours.}{Développement selon une ligne ou une colonne ; Déterminant à deux colonnes égales.}
+\emph{Dans tout le problème, pour $A\in\mathcal M_n(\R)$, on note $A_{i,j}$ la matrice d'ordre $n-1$ obtenue en supprimant la ligne $i$ et la colonne $j$ de $A$ ; le réel $(-1)^{i+j}\det(A_{i,j})$ est le cofacteur d'indice $(i,j)$, et la matrice de ces cofacteurs est la \emph{comatrice} $\mathrm{com}(A)$.}
+\begin{enumerate}
+\item Soit $M=\begin{pmatrix}1&-1&1\\-1&2&1\\1&1&2\end{pmatrix}$. Calculer $\det M$, puis $\mathrm{com}(M)$, et vérifier que $M\,\mathrm{com}(M)^T=(\det M)I_3$. En déduire $M^{-1}$.
+\item \emph{Démonstration de la formule.} Soit $A=(a_{i,j})\in\mathcal M_n(\R)$.
+\begin{enumerate}
+\item Rappeler la formule du développement de $\det A$ selon la colonne $j$.
+\item Soient $j\neq j'$. En considérant la matrice obtenue en remplaçant la colonne $j$ de $A$ par sa colonne $j'$, montrer que $\sum_{i=1}^n(-1)^{i+j}a_{i,j'}\det(A_{i,j})=0$.
+\item Soit $B=\mathrm{com}(A)^T$, de coefficients $b_{i,j}=(-1)^{i+j}\det(A_{j,i})$. Montrer que $BA=\det(A)I_n$. En déduire une expression de $A^{-1}$ lorsque $A$ est inversible.
+\end{enumerate}
+\item \emph{Application.} Pour $(u,v)\in\R^2$, on pose $A(u,v)=\begin{pmatrix}uv-u&uv&u^2-v\\v-1&v&2u\\u&u&-1\end{pmatrix}$.
+\begin{enumerate}
+\item Calculer $\det A(u,v)$ sous forme factorisée.
+\item Déterminer l'ensemble $D$ des couples $(u,v)$ pour lesquels $A(u,v)$ est inversible, et le décrire géométriquement.
+\item Pour $(u,v)\in D$, calculer $A(u,v)^{-1}$.
+\end{enumerate}
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-det-2019} · correction p.~\pageref{c:sel-det-2019}}
+\titresection{Indications}{Une indication par question délicate. N\'en lire qu\'une à la fois, puis reprendre la recherche.}
+\soustitre{1}{Un déterminant à paramètre, de l'algèbre à la géométrie}{i:sel-det-param}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Toutes les lignes ont la même somme : $C_1\leftarrow C_1+C_2+C_3$, puis factoriser.
+\item 2. Une famille de trois vecteurs de $\R^3$ est une base si et seulement si son déterminant est non nul.
+\item 3. Que vaut la colonne $C_1+C_2+C_3$ quand $m=-2$ ? Regarder la somme des coordonnées de chaque vecteur.
+\item 4. Volume du parallélépipède $=|\det|$ ; tétraèdre : un sixième.
+\item 5. $\det(A^T)=\det A$, $\det(AB)=\det A\det B$, $\det(\lambda A)=\lambda^n\det A$.
+\item 6. Même méthode qu'en 1, avec $n$ colonnes ; puis $L_i\leftarrow L_i-L_1$.
+\end{itemize}
+\soustitre{2}{Les déterminants tridiagonaux}{i:sel-det-tridiag}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Développer selon la première ligne ; le second mineur obtenu a une première colonne presque nulle.
+\item 2.(a) Dessiner la matrice : $\delta_{i,j-1}=1$ exactement quand $j=i+1$.
+\item 2.(b) Équation caractéristique $r^2-5r+6=0$.
+\item 3.(a) Le résultat est donné : une récurrence double suffit, avec $\sin\big((n+1)\theta\big)+\sin\big((n-1)\theta\big)=2\sin(n\theta)\cos\theta$.
+\item 3.(b) $\cos\theta=\pm1$ : l'équation caractéristique a une racine double.
+\item 3.(c) Poser $x=2\cos\theta$ et compter les racines obtenues ; le déterminant est un polynôme de degré $n$ en $x$.
+\end{itemize}
+\soustitre{3}{Le déterminant de Vandermonde}{i:td-d5}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. $x$ n'apparaît que dans la dernière colonne : développer selon elle. Quelles valeurs de $x$ rendent deux colonnes égales ?
+\item 2. Le coefficient dominant est le cofacteur de $x^3$ : c'est un Vandermonde d'ordre $3$.
+\item 3. Remplacer $a_n$ par une variable $x$ et reprendre exactement le raisonnement des questions 1 et 2.
+\end{itemize}
+\soustitre{4}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{i:td-d10}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Retrancher la première colonne de $A_n-xU$ à toutes les autres : $x$ ne reste que dans une colonne.
+\item 2. Pour $x=a$ ou $x=b$, la matrice $A_n-xU$ est triangulaire. Une fonction affine est déterminée par deux valeurs.
+\item 3. Pour $a$ fixé, $\det A_n$ est une fonction continue de $b$ : faire tendre $b$ vers $a$ et reconnaître un taux d'accroissement.
+\end{itemize}
+\soustitre{5}{Comatrice et inversion de matrices}{i:sel-det-2019}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Développer selon la première ligne ; contrôler en calculant deux coefficients de $M\,\mathrm{com}(M)^T$.
+\item 2.(b) Une matrice qui a deux colonnes égales a un déterminant nul ; ses mineurs $A_{i,j}$ sont ceux de $A$.
+\item 2.(c) Écrire le coefficient $(i,j)$ de $BA$ et distinguer $j=i$ et $j\neq i$.
+\item 3.(a) $C_1\leftarrow C_1-C_2$ fait apparaître deux coefficients simples et un zéro.
+\item 3.(c) Neuf cofacteurs, puis $A^{-1}=\frac1{\det A}\mathrm{com}(A)^T$ ; contrôler un coefficient du produit.
+\end{itemize}
+\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du livre » désignent le cours.}
+\soustitre{1}{Un déterminant à paramètre, de l'algèbre à la géométrie}{c:sel-det-param}
+\choix{toutes les lignes ont la même somme $m+2$ : on l'additionne dans une colonne, on la factorise, puis on fait apparaître des zéros. On ne développe jamais un déterminant à paramètre « brut » : on obtiendrait un polynôme à factoriser ensuite.}
+\q{1.} $C_1\leftarrow C_1+C_2+C_3$ (le déterminant ne change pas), puis on sort $m+2$ de la première colonne (linéarité) :
+\[\det A_m=(m+2)\dt{1&1&1\\1&m&1\\1&1&m}.\]
+Avec $L_2\leftarrow L_2-L_1$ et $L_3\leftarrow L_3-L_1$, la matrice devient triangulaire supérieure de diagonale $(1,m-1,m-1)$ :
+\[\det A_m=(m+2)(m-1)^2.\]
+
+\q{2.} $(\ve u_1,\ve u_2,\ve u_3)$ est une base de $\R^3$ si et seulement si $\det(\ve u_1,\ve u_2,\ve u_3)=\det A_m\neq0$, c'est-à-dire si et seulement si $m\notin\{-2,1\}$.
+
+\q{3.} Pour $m=-2$, la somme des colonnes est la colonne $(m+2)(1,1,1)^T=0$ : $\ve u_1+\ve u_2+\ve u_3=\ve 0$, relation de dépendance non triviale. Chaque vecteur a des coordonnées de somme $m+2=0$ : ils sont tous dans le plan $x+y+z=0$ (ils sont \emph{coplanaires}, ce qu'exprime $\det=0$).
+Pour $m=1$, $\ve u_1=\ve u_2=\ve u_3=(1,1,1)$ : les trois vecteurs sont égaux, donc colinéaires.
+
+\q{4.} Le volume du parallélépipède est $|\det(\ve u_1,\ve u_2,\ve u_3)|=|\det A_2|=4\times1^2=4$. Celui du tétraèdre en est le sixième : $\frac46=\frac23$.
+
+\q{5.} $\det(A_2^T)=\det A_2=4$ ; $\det(A_2^2)=(\det A_2)^2=16$ ; $\det(3A_2)=3^3\det A_2=108$ (la matrice est d'ordre $3$) ; $\det(A_2^{-1})=\frac1{\det A_2}=\frac14$.
+\piege{$\det(3A)=3\det A$ est faux : chacune des $n$ colonnes est multipliée par $3$, d'où $3^n$.}
+
+\q{6.} Même méthode : $C_1\leftarrow C_1+\dots+C_n$ donne une première colonne constante égale à $m+n-1$, que l'on sort ; puis $L_i\leftarrow L_i-L_1$ ($2\leq i\leq n$) rend la matrice triangulaire supérieure, de diagonale $(1,m-1,\dots,m-1)$. Donc $\det B_m=(m+n-1)(m-1)^{n-1}$ (pour $n=3$, on retrouve la question~1).
+\retenir{somme des lignes (ou des colonnes) constante $\Rightarrow$ additionner toutes les colonnes dans la première et factoriser ; un déterminant nul se lit géométriquement (vecteurs coplanaires, colinéaires), un déterminant non nul comme un volume.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{2}{Les déterminants tridiagonaux}{c:sel-det-tridiag}
+\choix{un déterminant tridiagonal se calcule par une relation de récurrence : on développe selon la première ligne, puis le second mineur selon sa première colonne. Toujours vérifier la formule finale sur un petit $n$.}
+\q{1.} On développe $T_n$ selon sa première ligne $(a,b,0,\dots,0)$ : $T_n=a\,T_{n-1}-b\,\Delta_{1,2}$, où $\Delta_{1,2}$ est le mineur obtenu en supprimant la ligne $1$ et la colonne $2$. Sa première colonne est $(c,0,\dots,0)^T$ ; en le développant selon elle, $\Delta_{1,2}=c\,T_{n-2}$. Donc
+\[T_n=aT_{n-1}-bc\,T_{n-2}\quad(n\geq3),\qquad T_1=a,\quad T_2=a^2-bc.\]
+\piege{le coefficient $b$ est en position $(1,2)$ : il porte le signe $(-1)^{1+2}=-1$. L'oublier donne $+bc$.}
+
+\q{2.(a)} $\delta_{i,j-1}=1$ si et seulement si $j=i+1$ : des $6$ juste au-dessus de la diagonale ; $\delta_{i-1,j}=1$ si et seulement si $i=j+1$ : des $1$ juste au-dessous ; des $5$ sur la diagonale. C'est un tridiagonal avec $a=5$, $bc=6$ :
+\[A_4=\begin{pmatrix}5&6&0&0\\1&5&6&0\\0&1&5&6\\0&0&1&5\end{pmatrix},\qquad u_n=5u_{n-1}-6u_{n-2},\quad u_1=5,\ u_2=19.\]
+Donc $u_3=5\cdot19-6\cdot5=65$ et $\det(A_4)=u_4=5\cdot65-6\cdot19=211$.
+
+\q{2.(b)} L'équation caractéristique $r^2-5r+6=0$ a pour racines $2$ et $3$ : $u_n=\alpha2^n+\beta3^n$. Avec $2\alpha+3\beta=5$ et $4\alpha+9\beta=19$ : $\beta=3$, $\alpha=-2$, d'où
+\[u_n=3^{n+1}-2^{n+1}.\]
+Contrôle : $u_4=243-32=211$.
+\gain{on peut poser $u_0=1$ (valeur qui rend la relation vraie pour $n=2$) : les conditions $u_0=1$, $u_1=5$ donnent les constantes plus vite.}
+
+\q{3.(a)} Ici $a=2\cos\theta$ et $bc=1$ : $D_n=2\cos\theta\,D_{n-1}-D_{n-2}$, avec $D_1=2\cos\theta$, $D_2=4\cos^2\theta-1$. Comme le résultat est donné, une \emph{récurrence double} est plus courte qu'une résolution.
+\begin{itemize}
+\item $\frac{\sin2\theta}{\sin\theta}=2\cos\theta=D_1$ et $\frac{\sin3\theta}{\sin\theta}=4\cos^2\theta-1=D_2$, car $\sin3\theta=3\sin\theta-4\sin^3\theta=\sin\theta(4\cos^2\theta-1)$.
+\item Si la formule est vraie aux rangs $n-1$ et $n-2$, la formule $\sin\big((n+1)\theta\big)+\sin\big((n-1)\theta\big)=2\sin(n\theta)\cos\theta$ donne $2\cos\theta\,D_{n-1}-D_{n-2}=\frac{\sin((n+1)\theta)}{\sin\theta}$ : elle est vraie au rang $n$.
+\end{itemize}
+\gain{pour \emph{trouver} la formule : $r^2-2\cos\theta\,r+1=0$ a pour racines $e^{\pm i\theta}$, donc $D_n=\lambda\cos n\theta+\mu\sin n\theta$, et $D_0=1$, $D_1=2\cos\theta$ donnent $\lambda=1$, $\mu=\frac{\cos\theta}{\sin\theta}$.}
+
+\q{3.(b)} Si $\theta\in\pi\Z$, $\cos\theta=\varepsilon=\pm1$ : l'équation caractéristique $r^2-2\varepsilon r+1=(r-\varepsilon)^2$ a une racine double, et $D_n=(n+1)\varepsilon^n$ (vérifier sur $D_1=2\varepsilon$, $D_2=3$). C'est bien la limite de $\frac{\sin((n+1)\theta)}{\sin\theta}$ quand $\theta$ tend vers $k\pi$.
+
+\q{3.(c)} Notons $P_n(x)$ ce déterminant : par la question~1, $P_n(x)=xP_{n-1}(x)-P_{n-2}(x)$, donc $P_n$ est un polynôme unitaire de degré $n$. Pour $x=2\cos\theta$ avec $\theta\in\,]0,\pi[$, $P_n(x)=0\iff\sin((n+1)\theta)=0\iff\theta=\frac{k\pi}{n+1}$ ($1\leq k\leq n$). On obtient $n$ racines distinctes $2\cos\frac{k\pi}{n+1}$ ; un polynôme de degré $n$ n'en a pas d'autre. Le déterminant est nul si et seulement si $x\in\left\{2\cos\frac{k\pi}{n+1},\ 1\leq k\leq n\right\}$.
+\retenir{tridiagonal (diagonale $a$, voisins $b$ et $c$) $\Rightarrow T_n=aT_{n-1}-bc\,T_{n-2}$ ; puis suite récurrente linéaire d'ordre $2$ (racines réelles, complexes ou double).}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{3}{Le déterminant de Vandermonde}{c:td-d5}
+\choix{$x$ n'apparaît que dans la dernière colonne : méthode~1.3 du livre. On ne développe surtout pas « à la main » : on
+utilise la structure (degré, coefficient dominant, racines).}
+\q{1.} En développant selon la dernière colonne $(1,x,x^2,x^3)^T$,
+$P(x)=\gamma_0+\gamma_1x+\gamma_2x^2+\gamma_3x^3$, où les $\gamma_k$ sont des cofacteurs indépendants de $x$ : $P$ est un
+polynôme de degré au plus $3$. Son coefficient de $x^3$ est le cofacteur $(-1)^{4+4}\Delta_{4,4}$,
+\[\gamma_3=\dt{1&1&1\\a&b&c\\a^2&b^2&c^2}=(b-a)(c-a)(c-b)\]
+(Vandermonde d'ordre 3 : $C_2\leftarrow C_2-C_1$, $C_3\leftarrow C_3-C_1$, puis on sort $b-a$ et $c-a$). Enfin $P(a)=P(b)=P(c)=0$
+(deux colonnes égales).
+\begin{itemize}
+\item Si $a,b,c$ sont distincts, $\gamma_3\neq0$ : $P$ est de degré $3$ et ses racines sont exactement $a$, $b$, $c$.
+\item Sinon, $A$ a deux colonnes égales pour tout $x$ : $P=0$.
+\end{itemize}
+\q{2.} Un polynôme de degré $3$ de coefficient dominant $\gamma_3$ et de racines $a,b,c$ vaut $\gamma_3(x-a)(x-b)(x-c)$ :
+\[\det A=(b-a)(c-a)(c-b)(x-a)(x-b)(x-c),\]
+formule vraie aussi lorsque $a,b,c$ ne sont pas distincts (les deux membres sont nuls).
+
+\q{3.} Notons $V_n(a_1,\dots,a_n)$ ce déterminant. La propriété est vraie pour $n=2$ : $V_2=a_2-a_1$. Supposons-la vraie au rang
+$n-1$. Remplaçons $a_n$ par $x$ : comme en 1, $Q(x)=V_n(a_1,\dots,a_{n-1},x)$ est un polynôme de degré au plus $n-1$, de
+coefficient de $x^{n-1}$ égal au cofacteur $V_{n-1}(a_1,\dots,a_{n-1})$, et s'annule en $a_1,\dots,a_{n-1}$. Si les $a_p$
+($p<n$) sont distincts, $Q(x)=V_{n-1}(a_1,\dots,a_{n-1})\prod_{p=1}^{n-1}(x-a_p)$ ; sinon les deux membres sont nuls. En
+$x=a_n$ et par hypothèse de récurrence :
+\[V_n=\prod_{k=2}^{n-1}\prod_{p=1}^{k-1}(a_k-a_p)\times\prod_{p=1}^{n-1}(a_n-a_p)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p).\]
+\gain{le coefficient dominant se lit sans calcul : c'est le mineur qui reste quand on barre la ligne et la colonne de
+$x^{n-1}$. Et les racines évidentes viennent de « deux colonnes égales ».}
+\piege{oublier le cas où les $a_p$ ne sont pas distincts (le degré chute) ; il se règle en une phrase, mais il faut l'écrire.}
+\retenir{la méthode du polynôme s'applique dès qu'une variable n'occupe qu'une ligne ou une colonne. $V\neq0\iff$ les points
+sont distincts : c'est l'outil de l'interpolation de Lagrange et de la liberté des familles $(x\mapsto e^{\alpha_ix})$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{4}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{c:td-d10}
+\choix{retrancher $x$ partout transforme les coefficients constants $a$ et $b$ en $a-x$ et $b-x$ : pour $x=a$ ou $x=b$, la
+matrice devient triangulaire. Il suffit donc de savoir que $P$ est affine (méthode~1.5 du livre).}
+Notons $Q(x)=\prod_{i=1}^n(\lambda_i-x)$.
+
+\q{1.} Les colonnes de $A_n-xU$ sont $C_j-xU_1$, où $U_1=(1,\dots,1)^T$. Les transvections $C_j\leftarrow C_j-C_1$ ($j\geq2$)
+donnent des colonnes $C_j-C_1$ indépendantes de $x$ ; seule la première, $C_1-xU_1$, dépend de $x$. Par linéarité selon la
+première colonne :
+\[P(x)=\det(C_1,C_2-C_1,\dots)-x\det(U_1,C_2-C_1,\dots)=\beta-\alpha x :\quad\deg P\leq1.\]
+\q{2.} $A_n-aU$ a des $0$ au-dessus de la diagonale : triangulaire inférieure, $P(a)=\prod(\lambda_i-a)=Q(a)$. De même
+$P(b)=Q(b)$. Comme $\det A_n=P(0)$ et que $P$ est affine, on écrit la droite passant par $(a,Q(a))$ et $(b,Q(b))$ :
+\[\det A_n=P(0)=\frac{b\,Q(a)-a\,Q(b)}{b-a}\qquad(a\neq b).\]
+(Vérification : en $x=a$, la droite $x\mapsto\frac{(b-x)Q(a)-(a-x)Q(b)}{b-a}$ vaut bien $Q(a)$.)
+
+\q{3.} Pour $a$ fixé, $b\mapsto\det A_n$ est polynomiale, donc continue : on fait tendre $b$ vers $a$. Avec
+$\varphi(u)=u\,Q(a)-a\,Q(u)$, on a $\varphi(a)=0$ et $\det A_n=\frac{\varphi(b)-\varphi(a)}{b-a}\to\varphi'(a)$. D'où, pour $a=b$,
+\[\det A_n=Q(a)-aQ'(a)=\prod_{i=1}^n(\lambda_i-a)+a\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-a).\]
+Contrôle : tous les $\lambda_i$ égaux à $\lambda$ : $(\lambda-a)^n+na(\lambda-a)^{n-1}=(\lambda+(n-1)a)(\lambda-a)^{n-1}$, c'est la
+proposition~1.13 du livre.
+\gain{reconnaître un \emph{taux d'accroissement} : une expression $\frac{\varphi(b)-\varphi(a)}{b-a}$ avec $\varphi(a)=0$ tend vers
+$\varphi'(a)$. C'est le sens de « à l'aide d'une dérivée ».}
+\piege{en 3, on ne peut pas faire $b=a$ dans la formule de la question 2 (division par $0$) ; il faut justifier le passage à la
+limite par la continuité du déterminant.}
+\retenir{trois techniques : (i) $x$ ajouté partout $\Rightarrow$ affine ; (ii) choisir les valeurs de $x$ qui rendent la matrice
+triangulaire ; (iii) prolonger une formule par continuité, la limite étant une dérivée.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{5}{Comatrice et inversion de matrices}{c:sel-det-2019}
+\choix{la formule de la comatrice n'est qu'un développement selon une colonne, utilisé deux fois : une fois « normalement » (coefficients diagonaux de $BA$), une fois sur une matrice à deux colonnes égales (coefficients hors diagonale).}
+\q{1.} Développement selon la première ligne : $\det M=1\cdot(4-1)-(-1)(-2-1)+1\cdot(-1-2)=3-3-3=-3\neq0$. Les neuf cofacteurs donnent
+\[\mathrm{com}(M)=\begin{pmatrix}3&3&-3\\3&1&-2\\-3&-2&1\end{pmatrix}\qquad\text{(symétrique, comme $M$)},\]
+et l'on vérifie $M\,\mathrm{com}(M)^T=-3I_3$ (par exemple, ligne $1$ de $M$ par colonne $1$ : $3-3-3=-3$ ; par colonne $2$ : $3-1-2=0$). Donc
+\[M^{-1}=\frac1{\det M}\,\mathrm{com}(M)^T=\begin{pmatrix}-1&-1&1\\-1&-\frac13&\frac23\\1&\frac23&-\frac13\end{pmatrix}.\]
+
+\q{2.(a)} $\det A=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\det(A_{i,j})$.
+
+\q{2.(b)} Soit $A'$ la matrice obtenue en remplaçant la colonne $j$ de $A$ par sa colonne $j'$. Elle a deux colonnes égales (la $j$-ième et la $j'$-ième), donc $\det A'=0$. D'autre part, supprimer la colonne $j$ de $A'$ ou de $A$ donne la même matrice : $A'_{i,j}=A_{i,j}$. Le développement de $\det A'$ selon sa colonne $j$, dont les coefficients sont les $a_{i,j'}$, donne exactement la somme proposée, qui est donc nulle.
+
+\q{2.(c)} Le coefficient $(i,j)$ de $BA$ est
+\[\sum_{k=1}^nb_{i,k}a_{k,j}=\sum_{k=1}^n(-1)^{k+i}a_{k,j}\det(A_{k,i}).\]
+Pour $j=i$, c'est le développement de $\det A$ selon la colonne $i$ : il vaut $\det A$. Pour $j\neq i$, c'est la somme de la question~(b) avec les colonnes $i$ et $j$ : il vaut $0$. Donc $BA=\det(A)I_n$ et, si $A$ est inversible,
+\[A^{-1}=\frac1{\det A}\,\mathrm{com}(A)^T.\]
+\piege{bien noter l'inversion des indices : $b_{i,j}$ utilise le mineur $A_{j,i}$. C'est la \emph{transposée} de la comatrice.}
+
+\q{3.(a)} $C_1\leftarrow C_1-C_2$ fait apparaître la colonne $(-u,-1,0)^T$ :
+\[\det A(u,v)=\dt{-u&uv&u^2-v\\-1&v&2u\\0&u&-1}.\]
+On développe selon la première colonne : $\det A(u,v)=-u(-v-2u^2)-(-1)\big(-uv-u(u^2-v)\big)=u(v+2u^2)-u^3=u(u^2+v)$.
+
+\q{3.(b)} $A(u,v)$ est inversible si et seulement si $u\neq0$ et $v\neq-u^2$ : $D$ est le plan privé de l'axe $u=0$ et de la parabole $v=-u^2$.
+
+\q{3.(c)} Les neuf cofacteurs se calculent comme en~1 ; avec la formule de~2.(c) :
+\[A(u,v)^{-1}=\frac1{u(u^2+v)}\begin{pmatrix}-(2u^2+v)&u^3&v(u^2+v)\\2u^2+v-1&u(1-u^2)&(1-v)(u^2+v)\\-u&u^2&0\end{pmatrix}.\]
+Contrôle rapide : le produit de la dernière ligne de $A(u,v)$ par la dernière colonne de la matrice entre parenthèses vaut $uv(u^2+v)+u(1-v)(u^2+v)=u(u^2+v)$.
+\retenir{inverse d'une matrice $3\times3$ à paramètres : $A^{-1}=\frac1{\det A}\mathrm{com}(A)^T$ ; faire d'abord apparaître des zéros pour le déterminant, et toujours contrôler un coefficient du produit.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

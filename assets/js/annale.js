@@ -16,7 +16,7 @@ document.title = `${A.concours} ${A.annee} — ${plain(A.titre)} — Le Collé`;
     l.corrigeExterne && `<a href="${l.corrigeExterne}" target="_blank" rel="noopener">Un autre corrigé (externe)</a>`
   ].filter(Boolean).join('');
   root.innerHTML = `
-    <p class="kicker"><a href="annales.html">Annales</a> · ${A.concours} ${A.annee}</p>
+    <p class="kicker"><a href="annales.html?ch=${A.chapitres[0]}">Annales</a> · ${A.concours} ${A.annee}</p>
     <h1>${A.titre}</h1>
     <p class="meta">${A.concours}, ${A.epreuve} ${A.annee}, ${A.partie} — questions ${A.questions}. Environ ${A.duree}.</p>
     <p class="links" style="margin-top:14px">${liens}</p>
@@ -42,4 +42,8 @@ document.title = `${A.concours} ${A.annee} — ${plain(A.titre)} — Le Collé`;
     el.replaceWith(a);
   });
   renderMath($('#ann-body'));
+  /* une ancre par question (#q-1, #q-2…), utilisée par la page Annales */
+  $$('#ann-body article.q').forEach((q, k) => { q.id = 'q-' + (k + 1); });
+  const cible = location.hash && document.getElementById(location.hash.slice(1));
+  if (cible) { cible.classList.add('cible'); cible.scrollIntoView({ block: 'start' }); }
 })();

@@ -21,7 +21,7 @@ function renderMath(root) {
   renderMathInElement(root, {
     delimiters: [{ left: '\\[', right: '\\]', display: true }, { left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
     throwOnError: false,
-    macros: { '\\R': '\\mathbb{R}', '\\C': '\\mathbb{C}', '\\K': '\\mathbb{K}', '\\Z': '\\mathbb{Z}', '\\dt': '\\left|\\begin{matrix}#1\\end{matrix}\\right|' }
+    macros: { '\\ve': '\\vec{#1}', '\\vv': '\\overrightarrow{#1}', '\\R': '\\mathbb{R}', '\\C': '\\mathbb{C}', '\\K': '\\mathbb{K}', '\\Z': '\\mathbb{Z}', '\\dt': '\\left|\\begin{matrix}#1\\end{matrix}\\right|' }
   });
 }
 

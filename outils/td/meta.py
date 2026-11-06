@@ -36,7 +36,7 @@ CHAPITRES = {
        ['ds-pb', 'c-concours', 'c-concours2']),
     ]},
   'metrique': {
-    'num': 3, 'titre': 'Propriétés métriques des courbes', 'livre': 'livre7',
+    'num': 3, 'titre': 'Propriétés métriques des courbes', 'court': 'Propriétés métriques', 'livre': 'livre7',
     'parties': [
       ('I', "Applications directes du cours",
        "Longueur, abscisse curviligne, courbure d'un cercle et d'un graphe, première enveloppe.",
