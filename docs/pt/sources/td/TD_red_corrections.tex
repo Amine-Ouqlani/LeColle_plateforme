@@ -1,0 +1,569 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Algèbre linéaire et réduction (corrections)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Algèbre linéaire et réduction · corrections}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 2}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Algèbre linéaire et réduction}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Corrections détaillées des 29 exercices du TD, dans le même ordre et avec les mêmes numéros.
+Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
+resservira. Les renvois « méthode~1.3 du cours » désignent le cours.
+\textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
+
+\partie{I}{Applications directes du cours}{}
+\correction{1}{Valeurs propres de matrices $2\times2$}{rdn-1}{énoncé : TD, p.~2}
+\choix{en taille $2$, $\chi=x^2-\tr\,x+\det$ : aucun déterminant à calculer.}
+$\chi_A=x^2-5x+6=(x-2)(x-3)$. $A-2I_2=\begin{pmatrix}2&-2\\1&-1\end{pmatrix}$ : $E_2=\vect(1,1)$ ; $A-3I_2=\begin{pmatrix}1&-2\\1&-2\end{pmatrix}$ :
+$E_3=\vect(2,1)$. Deux valeurs propres distinctes : $A$ est diagonalisable (dans $\R$ et dans $\C$).
+$\chi_B=x^2-2x+2$, de discriminant $-4$ : pas de valeur propre réelle, $B$ n'est pas diagonalisable dans $\mathcal M_2(\R)$.
+Dans $\C$ : valeurs propres $1\pm i$, distinctes, donc $B$ est diagonalisable dans $\mathcal M_2(\C)$ ; $E_{1+i}=\vect(i,1)$ et
+$E_{1-i}=\vect(-i,1)$ (conjugués).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{2}{Retrouver une matrice à partir de ses éléments propres}{rdn-2}{énoncé : TD, p.~2}
+Dans la base $\big((1,2),(1,1)\big)$, la matrice de $f$ est $D=\mathrm{diag}(2,-3)$. Avec $P=\begin{pmatrix}1&1\\2&1\end{pmatrix}$,
+$P^{-1}=\frac1{-1}\begin{pmatrix}1&-1\\-2&1\end{pmatrix}=\begin{pmatrix}-1&1\\2&-1\end{pmatrix}$, et
+\[A=PDP^{-1}=\begin{pmatrix}2&-3\\4&-3\end{pmatrix}\begin{pmatrix}-1&1\\2&-1\end{pmatrix}=\begin{pmatrix}-8&5\\-10&7\end{pmatrix}.\]
+Contrôle : $A(1,2)^T=(2,4)^T$, $A(1,1)^T=(-3,-3)^T$, $\tr A=-1=2-3$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{3}{Une matrice triangulaire}{rdn-3}{énoncé : TD, p.~2}
+$A$ est triangulaire : $\Sp(A)=\{1,2,3\}$, trois valeurs propres distinctes en dimension $3$ : diagonalisable.
+$(A-I_3)X=0$ : $x+y=0$, $x+y+2z=0$, d'où $E_1=\vect(1,-1,0)$. $(A-2I_3)X=0$ : $x=0$, $y+z=0$ : $E_2=\vect(0,1,-1)$.
+$(A-3I_3)X=0$ : $x=y=0$ : $E_3=\vect(0,0,1)$. Ainsi $A=PDP^{-1}$ avec
+$P=\begin{pmatrix}1&0&0\\-1&1&0\\0&-1&1\end{pmatrix}$, $D=\mathrm{diag}(1,2,3)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{4}{Sommes directes dans $\mathbb R^3$}{red-somme}{énoncé : TD, p.~3}
+\q{1.} Si $v\in F\cap G$, $v=(m,m,m)$ et $3m=0$ : $F\cap G=\{0\}$. De plus $\dim F=2$ (un hyperplan de $\R^3$) et $\dim G=1$ : la
+somme est directe et de dimension $3$, donc $\R^3=F\oplus G$. On cherche $v=w+m(1,1,1)$ avec $w\in F$ : la somme des coordonnées
+de $w$ est nulle, d'où $x+y+z=3m$. Donc
+\[v=\underbrace{\big(x-m,\,y-m,\,z-m\big)}_{\in F}+\underbrace{m(1,1,1)}_{\in G},\qquad m=\frac{x+y+z}3.\]
+\q{2.} Les intersections deux à deux sont nulles, mais $(1,0,0)+(0,1,0)-(1,1,0)=0$ est une décomposition non triviale de $0$ :
+la somme n'est pas directe (proposition~1.4 du cours). D'ailleurs $D_1+D_2+D_3$ est le plan $z=0$, de dimension $2<3$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{5}{Fonctions paires et impaires}{rdn-17}{énoncé : TD, p.~3}
+\choix{dimension infinie : on revient à la définition (existence et unicité de la décomposition), par analyse-synthèse.}
+\emph{Unicité.} Si $f\in\mathcal P\cap\mathcal I$, $f(-x)=f(x)=-f(x)$, donc $f=0$. \emph{Existence.} Pour $f\in E$, on pose
+$p(x)=\frac{f(x)+f(-x)}2$ (paire) et $i(x)=\frac{f(x)-f(-x)}2$ (impaire) : $f=p+i$. Donc $E=\mathcal P\oplus\mathcal I$.
+Pour $\exp$ : $\exp=\ch+\sh$.
+\gain{l'application $f\mapsto\big(x\mapsto f(-x)\big)$ est une symétrie : $\mathcal P$ et $\mathcal I$ sont ses sous-espaces propres pour $1$ et $-1$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{6}{Hyperplans de $\mathbb R^4$}{red-hyp}{énoncé : TD, p.~3}
+\q{1.} En ajoutant et en retranchant les équations : $x+z=0$ et $y+t=0$. Donc $H_1\cap H_2=\{(x,y,-x,-y)\}$, de base
+$\big((1,0,-1,0),(0,1,0,-1)\big)$ : dimension $2=4-2$.
+\q{2.} $u\notin H_1$ ($1+1+1+1=4\neq0$) : $\R^4=H_1\oplus\vect(u)$ (proposition~1.10 du cours). En revanche $u\in H_2$
+($1-1+1-1=0$) : $\vect(u)\subset H_2$, ce n'est pas un supplémentaire.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{7}{Diagonaliser une matrice $3\times3$}{red-diag1}{énoncé : TD, p.~3}
+\choix{dans $xI_3-A$, chaque ligne a pour somme $x+1$ : on factorise.}
+$C_1\leftarrow C_1+C_2+C_3$ puis $L_2\leftarrow L_2-L_1$, $L_3\leftarrow L_3-L_1$ :
+\[\chi_A(x)=(x+1)\dt{1&1&1\\1&x-1&1\\1&1&x-1}=(x+1)\dt{1&1&1\\0&x-2&0\\0&0&x-2}=(x+1)(x-2)^2.\]
+$A-2I_3$ a trois lignes égales à $(-1,-1,-1)$ : rang $1$, $\dim E_2=2=m(2)$ ; $A$ est diagonalisable. $E_2$ est le plan
+$x+y+z=0$, de base $(1,-1,0)$, $(1,0,-1)$ ; $E_{-1}=\vect(1,1,1)$ (somme des lignes de $A$ égale à $-1$). Donc
+\[P=\begin{pmatrix}1&1&1\\1&-1&0\\1&0&-1\end{pmatrix},\qquad D=\mathrm{diag}(-1,2,2),\qquad A=PDP^{-1}.\]
+Contrôle : $\tr A=3=-1+2+2$, et $A(1,-1,0)^T=(2,-2,0)^T$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{II}{Exercices classiques et méthodes incontournables}{}
+\correction{8}{Deux propriétés de la trace}{red-trace}{énoncé : TD, p.~4}
+\q{1.} Par linéarité et $\tr(AB)=\tr(BA)$ : $\tr(AB-BA)=0$, alors que $\tr(I_n)=n\neq0$.
+\q{2.} L'endomorphisme $p$ de $\K^n$ associé à $A$ est un projecteur ; dans une base adaptée à $\K^n=\Im p\oplus\Ker p$, sa matrice
+est $\mathrm{diag}(I_r,0)$ avec $r=\rg(p)$. Donc $A$ est semblable à cette matrice, et $\tr A=r=\rg A$.
+\retenir{la trace ne voit pas l'ordre d'un produit de deux matrices : $\tr(AB-BA)=0$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{9}{Lire des blocs}{red-stable}{énoncé : TD, p.~4}
+\q{1.} $f(x,0,z)=(3x+z,\,0,\,x+3z)$ a une deuxième coordonnée nulle : $F$ est stable. $f(u)=A(1,1,0)^T=(2,2,0)=2u$ : $G$ est stable
+($u$ est un vecteur propre).
+\q{2.} $u\notin F$ (sa deuxième coordonnée vaut $1$) : $\R^3=F\oplus G$. Dans la base $(e_1,e_3,u)$ : $f(e_1)=(3,0,1)=3e_1+e_3$,
+$f(e_3)=(1,0,3)=e_1+3e_3$, $f(u)=2u$, donc
+\[\Mat(f)=\begin{pmatrix}3&1&0\\1&3&0\\0&0&2\end{pmatrix},\qquad\det A=(9-1)\times2=16,\qquad\tr A=3+3+2=8.\]
+\retenir{deux sous-espaces stables supplémentaires $\Rightarrow$ matrice diagonale par blocs.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{10}{Matrice compagnon}{red-chi}{énoncé : TD, p.~4}
+On développe $\chi_C(x)=\dt{x&0&c\\-1&x&b\\0&-1&x+a}$ selon la première colonne :
+\[\chi_C(x)=x\big(x(x+a)+b\big)+\big(0\cdot(x+a)+c\big)=x^3+ax^2+bx+c.\]
+Pour les valeurs propres $1,-1,2$, on veut $\chi=(x-1)(x+1)(x-2)=x^3-2x^2-x+2$ : $a=-2$, $b=-1$, $c=2$, soit
+$C=\begin{pmatrix}0&0&-2\\1&0&1\\0&1&2\end{pmatrix}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{11}{Éléments propres de $P\mapsto(X+1)P'$}{red-elem}{énoncé : TD, p.~5}
+\q{1.} $f$ est linéaire (dérivation, produit par un polynôme fixé) et, si $\deg P\leq n$, $\deg\big((X+1)P'\big)\leq1+(n-1)=n$.
+\q{2.} $f\big((X+1)^k\big)=(X+1)\cdot k(X+1)^{k-1}=k(X+1)^k$, et $(X+1)^k\neq0$ : vecteur propre associé à $k$. On obtient $n+1$
+valeurs propres distinctes $0,1,\dots,n$ en dimension $n+1$ : ce sont toutes les valeurs propres (corollaire~1.19 du cours),
+et chaque sous-espace propre est une droite (théorème~1.24 du cours) : $E_k(f)=\vect\big((X+1)^k\big)$. La famille
+$\big((X+1)^k\big)_{0\leq k\leq n}$ est une base de vecteurs propres : $f$ est diagonalisable.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{12}{Diagonalisabilité selon un paramètre}{red-diag2}{énoncé : TD, p.~5}
+$A_a$ est triangulaire : $\chi_{A_a}=(x-1)^2(x-2)$. La valeur propre $2$ est simple ($\dim E_2=1$). Pour la valeur double $1$ :
+$A_a-I_3=\begin{pmatrix}0&a&1\\0&0&1\\0&0&1\end{pmatrix}$. Si $a\neq0$, les deux dernières colonnes sont indépendantes : rang $2$,
+$\dim E_1=1<2$, pas diagonalisable. Si $a=0$ : rang $1$, $\dim E_1=2$, diagonalisable. Pour $a=0$ : $E_1=\{z=0\}=\vect(e_1,e_2)$ ;
+$(A_0-2I_3)X=0$ donne $x=z$, $y=z$ : $E_2=\vect(1,1,1)$. Ainsi $A_0=PDP^{-1}$ avec
+$P=\begin{pmatrix}1&0&1\\0&1&1\\0&0&1\end{pmatrix}$, $D=\mathrm{diag}(1,1,2)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{13}{Puissances et suites couplées}{red-puiss}{énoncé : TD, p.~5}
+$\chi_A=x^2-2x-3=(x-3)(x+1)$, $E_3=\vect(1,1)$, $E_{-1}=\vect(1,-1)$. Avec $P=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$,
+$P^{-1}=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ :
+\[A^k=PD^kP^{-1}=\frac12\begin{pmatrix}3^k+(-1)^k&3^k-(-1)^k\\3^k-(-1)^k&3^k+(-1)^k\end{pmatrix}.\]
+Puis $X_k=A^kX_0$ est la première colonne de $A^k$ : $u_k=\frac{3^k+(-1)^k}2$, $v_k=\frac{3^k-(-1)^k}2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{14}{La matrice anti-diagonale}{rdn-4}{énoncé : TD, p.~5}
+\q{1.} $A_nX$ renverse l'ordre des coordonnées : $(x_1,\dots,x_n)\mapsto(x_n,\dots,x_1)$. Donc $A_n^2=I_n$. Si $A_nX=\lambda X$,
+$X\neq0$, alors $X=A_n^2X=\lambda^2X$, donc $\lambda^2=1$.
+\q{2.} $E_1=\{X,\ x_i=x_{n+1-i}\}$ : on choisit librement $x_1,\dots,x_{\lceil n/2\rceil}$, $\dim E_1=\lceil\frac n2\rceil$.
+$E_{-1}=\{X,\ x_i=-x_{n+1-i}\}$ : si $n$ est impair, la coordonnée centrale est nulle ; $\dim E_{-1}=\lfloor\frac n2\rfloor$.
+La somme des dimensions vaut $n$ : $A_n$ est diagonalisable (c'est la matrice d'une symétrie).
+\q{3.} $\tr A_n=\lceil\frac n2\rceil-\lfloor\frac n2\rfloor$ ($0$ si $n$ est pair, $1$ sinon), et $\det A_n=(-1)^{\lfloor n/2\rfloor}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{15}{La transposition}{rdn-5}{énoncé : TD, p.~6}
+$T$ est linéaire et $T\circ T=\Id$ : c'est une symétrie. $E_1(T)$ est l'espace $\mathcal S_n$ des matrices symétriques, de dimension
+$\frac{n(n+1)}2$ ; $E_{-1}(T)$ est l'espace $\mathcal A_n$ des matrices antisymétriques, de dimension $\frac{n(n-1)}2$. La somme des
+dimensions vaut $n^2$ : $T$ est diagonalisable, $\Mn{\R}=\mathcal S_n\oplus\mathcal A_n$. Dans une base adaptée :
+\[\tr T=\frac{n(n+1)}2-\frac{n(n-1)}2=n,\qquad\det T=(-1)^{n(n-1)/2}.\]
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{16}{Un endomorphisme défini avec la trace}{rdn-18}{énoncé : TD, p.~6}
+\q{1.} $H$ est le noyau de la forme linéaire non nulle $\tr$ : c'est un hyperplan (dimension $n^2-1$). $\tr(I_n)=n\neq0$, donc
+$I_n\notin H$ et $\Mn{\R}=H\oplus\vect(I_n)$.
+\q{2.} Pour $M\in H$, $f(M)=M$ ; et $f(I_n)=I_n+nI_n=(n+1)I_n$. Une base adaptée à $H\oplus\vect(I_n)$ est formée de vecteurs
+propres : $f$ est diagonalisable, de matrice $\mathrm{diag}(1,\dots,1,n+1)$. Donc $\tr f=n^2-1+n+1=n^2+n$ et $\det f=n+1\neq0$ :
+$f$ est un automorphisme.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{17}{Une matrice de transition}{rdn-6}{énoncé : TD, p.~6}
+\q{1.} Les colonnes ont pour somme $1$ : $(1,1)A=(1,1)$, donc $A^T$ admet $(1,1)^T$ comme vecteur propre pour $1$, et
+$\det(A-I_2)=\det(A^T-I_2)=0$. Par la trace, $r=\tr A-1=1-p-q$ ; comme $0<p+q<2$, $-1<r<1$.
+\q{2.} $E_1$ : $-px+qy=0$, $E_1=\vect(q,p)$ ; $E_r$ : $qx+qy=0$, $E_r=\vect(1,-1)$. Avec $P=\begin{pmatrix}q&1\\p&-1\end{pmatrix}$,
+$P^{-1}=\frac1{p+q}\begin{pmatrix}1&1\\p&-q\end{pmatrix}$ :
+\[A^k=PD^kP^{-1}=\frac1{p+q}\begin{pmatrix}q+pr^k&q-qr^k\\p-pr^k&p+qr^k\end{pmatrix}\xrightarrow[k\to+\infty]{}\frac1{p+q}\begin{pmatrix}q&q\\p&p\end{pmatrix},\]
+car $r^k\to0$. Les deux colonnes de la limite sont égales : quel que soit l'état initial, la répartition tend vers $\big(\frac q{p+q},\frac p{p+q}\big)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{III}{Exercices de synthèse et approfondissement}{}
+\correction{18}{La matrice dont tous les coefficients valent $1$}{red-rang1}{énoncé : TD, p.~7}
+\q{1.} Toutes les colonnes de $J_n$ sont égales et non nulles : $\rg J_n=1$. Donc $E_0=\Ker J_n$ est de dimension $n-1$ : c'est
+l'hyperplan $x_1+\dots+x_n=0$. Par ailleurs $J_n(1,\dots,1)^T=n(1,\dots,1)^T$ : $n$ est valeur propre. Comme
+$\dim E_0+\dim E_n\geq(n-1)+1=n$, il y a égalité, $J_n$ est diagonalisable, $\Sp(J_n)=\{0,n\}$ et $\chi_{J_n}=x^{n-1}(x-n)$.
+(Contrôle : $\tr J_n=n=0+\dots+0+n$.)
+\q{2.} Si $J_nX=\mu X$, alors $(aI_n+bJ_n)X=(a+b\mu)X$ : les vecteurs propres de $J_n$ sont vecteurs propres de $aI_n+bJ_n$, et
+dans la même base, $aI_n+bJ_n$ est diagonale : valeurs propres $a$ (multiplicité $n-1$) et $a+nb$. Donc
+$\det(aI_n+bJ_n)=a^{n-1}(a+nb)$, résultat obtenu par opérations élémentaires dans le chapitre \emph{Déterminants}.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{19}{Matrices nilpotentes}{red-nilp}{énoncé : TD, p.~7}
+\q{1.} Voir l'exemple : si $AX=\lambda X$, $X\neq0$, alors $A^pX=\lambda^pX=0$, donc $\lambda=0$. Dans $\C$, $\chi_A$ est scindé et
+sa seule racine est $0$ : $\chi_A=x^n$. Par la proposition~1.38 du cours, $\tr A=0$ et $\det A=0$.
+\q{2.} Si $A$ est diagonalisable, $A=PDP^{-1}$ avec $D$ diagonale portant les valeurs propres, toutes nulles : $A=0$.
+La réciproque est claire. Exemple : $A=\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{20}{Matrices circulantes}{rdn-7}{énoncé : TD, p.~7}
+\q{1.} $J$ permute circulairement les vecteurs de base ($Je_1=e_2$, $Je_2=e_3$, $Je_3=e_1$), donc $J^3=I_3$. En développant,
+$\chi_J=x^3-1=(x-1)(x-j)(x-j^2)$. Sur $\R$, $\chi_J$ n'est pas scindé : $J$ n'est pas diagonalisable dans $\mathcal M_3(\R)$ ; sur $\C$,
+trois valeurs propres distinctes : diagonalisable.
+\q{2.} $JX_\omega=(\omega,1,\omega^2)^T=\omega(1,\omega^2,\omega)^T$ car $\omega^3=1$.
+\q{3.} $MX_\omega=(a+b\omega+c\omega^2)X_\omega$ : la base $(X_1,X_j,X_{j^2})$ de vecteurs propres de $J$ (valeurs propres distinctes)
+est formée de vecteurs propres de $M$. Donc $M$ est diagonalisable, de valeurs propres $a+b\omega+c\omega^2$, et $\det M$ est leur produit.
+\retenir{des matrices qui sont des combinaisons de $I$, $J$, $J^2$ ont les mêmes vecteurs propres que $J$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{21}{Un endomorphisme de $\mathbb R_n[X]$}{rdn-8}{énoncé : TD, p.~8}
+\q{1.} $f$ est linéaire. Si $P=\sum_{i\leq n}a_iX^i$, le terme de degré $n+1$ de $f(P)$ vaut $na_nX^{n+1}-na_nX^{n+1}=0$ : $f(P)\in\R_n[X]$.
+\q{2.} $P_k'=k(X-1)^{k-1}(X+1)^{n-k}+(n-k)(X-1)^k(X+1)^{n-k-1}$, donc
+$(X^2-1)P_k'=\big(k(X+1)+(n-k)(X-1)\big)P_k=\big(nX+2k-n\big)P_k$. Ainsi $f(P_k)=nXP_k-(nX+2k-n)P_k=(n-2k)P_k$, et $P_k\neq0$.
+\q{3.} Les $n+1$ valeurs $n,n-2,\dots,-n$ sont distinctes et $\dim\R_n[X]=n+1$ : $f$ est diagonalisable et
+$\Sp(f)=\{n-2k,\ 0\leq k\leq n\}$. Pour $n=2$ : $\Sp=\{2,0,-2\}$, $\tr f=0$, $\det f=0$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{22}{Un opérateur différentiel en dimension finie}{rdn-9}{énoncé : TD, p.~8}
+\q{1.} $e_k'=ke_k$ : $e_k$ est vecteur propre de la dérivation $D$ pour la valeur propre $k$. Les valeurs propres $0,\dots,4$ sont
+distinctes : la famille est libre (théorème~1.18 du cours, valable en dimension quelconque).
+\q{2.} $\varphi(e_k)=(k^2-3k+2)e_k=(k-1)(k-2)e_k\in E$ : par linéarité, $\varphi(E)\subset E$. Matrice : $\mathrm{diag}(2,0,0,2,6)$.
+\q{3.} $\Ker\varphi=\vect(e_1,e_2)$ et $\Im\varphi=\vect(e_0,e_3,e_4)$ (lecture de la matrice diagonale). Comme $\varphi(e_3)=2e_3$,
+$\frac12e_3$ est solution, et les solutions dans $E$ sont $y=\frac12e^{3x}+ae^x+be^{2x}$. On retrouve exactement les solutions
+de $y''-3y'+2y=e^{3x}$ (racines $1$, $2$ ; $3$ non racine) : elles sont toutes dans $E$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{23}{$AB$ et $BA$}{rdn-10}{énoncé : TD, p.~8}
+\q{1.} Si $BX=0$, alors $\lambda X=ABX=0$, impossible ($\lambda\neq0$, $X\neq0$). Et $BA(BX)=B(ABX)=\lambda BX$ : $BX$ est vecteur
+propre de $BA$ pour $\lambda$.
+\q{2.} $0\in\Sp(AB)\iff\det(AB)=0\iff\det A\det B=0\iff\det(BA)=0$. Avec 1 (et les rôles de $A$, $B$ échangés), $\Sp(AB)=\Sp(BA)$.
+\q{3.} $AB=0$ est diagonalisable ; $BA=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ ne l'est pas (seule valeur propre $0$, et $BA\neq0$).
+Mêmes valeurs propres, mais pas mêmes sous-espaces propres.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{24}{Une relation entre $f$ et l'identité}{rdn-11}{énoncé : TD, p.~9}
+\q{1.} $(f-3\Id)\big((f+2\Id)(x)\big)=0$ ; et $(f+2\Id)\circ(f-3\Id)=f^2-f-6\Id=(f-3\Id)\circ(f+2\Id)=0$.
+\q{2.} L'égalité proposée est vraie ($\frac15(f+2\Id-f+3\Id)=\Id$). Le premier terme est dans $\Ker(f-3\Id)$, le second dans
+$\Ker(f+2\Id)$ (question 1) : $E=\Ker(f-3\Id)+\Ker(f+2\Id)$. La somme est directe : si $f(x)=3x$ et $f(x)=-2x$, alors $5x=0$.
+\q{3.} $E$ est somme directe de $E_3(f)$ et $E_{-2}(f)$ (l'un peut être réduit à $\{0\}$) : une base adaptée est formée de vecteurs
+propres, $f$ est diagonalisable, et toute valeur propre vérifie $(\lambda-3)(\lambda+2)=0$.
+\gain{cette décomposition n'utilise que le calcul $\frac15\big((f+2\Id)-(f-3\Id)\big)=\Id$ ; on la retrouve pour les projecteurs ($f^2=f$) et les symétries ($f^2=\Id$).}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{25}{Racines carrées d'une matrice}{red-racine}{énoncé : TD, p.~9}
+\q{1.} Si $M^2=D$, alors $MD=M\cdot M^2=M^2\cdot M=DM$. Les coefficients de $D$ sont distincts : $M$ est diagonale
+(proposition~1.35 du cours), $M=\mathrm{diag}(m_1,m_2,m_3)$ avec $m_1^2=1$, $m_2^2=4$, $m_3^2=9$. Les solutions sont les
+$8$ matrices $\mathrm{diag}(\pm1,\pm2,\pm3)$.
+\q{2.} $A=PDP^{-1}$ ; avec $N=P^{-1}MP$, $M^2=A\iff N^2=D$. L'application $M\mapsto P^{-1}MP$ étant bijective, il y a exactement
+$8$ solutions : $M=P\,\mathrm{diag}(\pm1,\pm2,\pm3)\,P^{-1}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{IV}{Exercices difficiles et type concours}{}
+\correction{26}{Trigonaliser une matrice (guidé)}{red-trig}{énoncé : TD, p.~10}
+\q{1.} $\chi_T(x)=x^3-5x^2+8x-4$ (développement, ou contrôle par $\tr T=5$ et $\det T=4$) ; $1$ est racine évidente, et
+$\chi_T(x)=(x-1)(x^2-4x+4)=(x-1)(x-2)^2$. Pour la valeur double : $T-2I_3=\begin{pmatrix}3&-17&25\\2&-11&16\\1&-5&7\end{pmatrix}$ est
+de rang $2$ (deux premières colonnes non proportionnelles, déterminant nul), donc $\dim E_2=1<2$ : $T$ n'est pas
+diagonalisable, ni dans $\R$ ni dans $\C$ (le polynôme et les sous-espaces propres sont les mêmes).
+\q{2.} On trouve $E_1=\vect(v_1)$ avec $v_1=(11,7,3)$ et $E_2=\vect(v_2)$ avec $v_2=(3,2,1)$. On cherche $v_3$ tel que
+$(T-2I_3)v_3=v_2$ : $v_3=(1,0,0)$ convient ($Te_1=(5,2,1)=2e_1+v_2$). Le déterminant de $(v_1,v_2,v_3)$ vaut
+$\dt{11&3&1\\7&2&0\\3&1&0}=7-6=1\neq0$ : c'est une base, et
+\[T=Q\begin{pmatrix}1&0&0\\0&2&1\\0&0&2\end{pmatrix}Q^{-1},\qquad Q=\begin{pmatrix}11&3&1\\7&2&0\\3&1&0\end{pmatrix}.\]
+\retenir{trigonaliser : vecteurs propres d'abord, puis un vecteur qui complète en donnant une colonne triangulaire.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{27}{Matrices de rang 1}{rdn-12}{énoncé : TD, p.~10}
+\q{1.} Les colonnes de $A$ sont toutes proportionnelles à une colonne non nulle $U$ : $C_j=v_jU$, d'où $A=UV^T$ avec $V=(v_j)\neq0$.
+Alors $A^2=U(V^TU)V^T$, et $V^TU=\sum u_iv_i=\tr(UV^T)=\tr A$ (un réel) : $A^2=\tr(A)A$.
+\q{2.} $\dim E_0=n-\rg A=n-1\geq1$. Si $\tr A\neq0$ : $AU=U(V^TU)=\tr(A)U$, donc $\tr A$ est une autre valeur propre ; $\dim E_0+\dim E_{\tr A}\geq n$,
+$A$ est diagonalisable. Si $\tr A=0$ : si $AX=\lambda X$, $X\neq0$, alors $\lambda^2X=A^2X=0$, donc $\Sp(A)=\{0\}$ ; diagonalisable,
+$A$ serait nulle, ce qui contredit $\rg A=1$.
+\q{3.} La première a une trace nulle : non diagonalisable. La seconde a pour trace $5$ : diagonalisable, de valeurs propres $0$ et $5$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{28}{Une récurrence linéaire d'ordre 3}{rdn-13}{énoncé : TD, p.~10}
+\q{1.} $C=\begin{pmatrix}0&1&0\\0&0&1\\-2&1&2\end{pmatrix}$. En développant selon la première colonne :
+$\chi_C(x)=x^3-2x^2-x+2=(x-1)(x+1)(x-2)$ ($1$ racine évidente). Trois valeurs propres distinctes : $C$ est diagonalisable.
+\q{2.} $X_k=C^kX_0=PD^kP^{-1}X_0$ avec $D=\mathrm{diag}(1,(-1)^k,2^k)$ à la puissance $k$ : chaque coordonnée de $X_k$, en particulier
+$u_k$, est une combinaison linéaire fixe de $1$, $(-1)^k$, $2^k$. Avec $k=0,1,2$ : $\alpha+\beta+\gamma=3$, $\alpha-\beta+2\gamma=2$,
+$\alpha+\beta+4\gamma=6$, d'où $\gamma=1$, $\alpha=\beta=1$ : $u_k=1+(-1)^k+2^k$. Contrôle : $u_3=2\cdot6+2-6=8=1-1+8$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{29}{Racines carrées et diagonalisabilité}{rdn-14}{énoncé : TD, p.~11}
+\q{1.} $B=P\Delta P^{-1}\Rightarrow A=B^2=P\Delta^2P^{-1}$, avec $\Delta^2$ diagonale. Réciproque fausse : $A=0$ est diagonalisable, et
+$B=\begin{pmatrix}0&1&0\\0&0&0\\0&0&0\end{pmatrix}$ vérifie $B^2=0$ sans être diagonalisable.
+\q{2.} $AB=B^3=BA$. Si $AX=\lambda X$, alors $A(BX)=B(AX)=\lambda BX$ : $BX\in E_\lambda(A)$, qui est une droite $\vect(X)$ (valeur
+propre simple). Donc $BX=\mu X$ : $X$ est vecteur propre de $B$. Une base de vecteurs propres de $A$ est une base de vecteurs
+propres de $B$ : $B$ est diagonalisable.
+\retenir{deux matrices qui commutent : les sous-espaces propres de l'une sont stables par l'autre.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

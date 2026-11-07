@@ -1,0 +1,306 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb,mathrsfs,stmaryrd}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=1.4cm,right=1.4cm,headheight=12pt,headsep=0.4cm,footskip=0.7cm]{geometry}
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}\definecolor{Fond}{HTML}{F2F4F7}\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}\definecolor{Gris}{HTML}{5E6672}\definecolor{Filet}{HTML}{C5CCD6}
+\usepackage{multicol,enumitem,booktabs,array,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.17,trig format plots=rad}
+\usetikzlibrary{arrows.meta}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.25em}
+\setlength{\columnsep}{0.55cm}\setlength{\columnseprule}{0.3pt}\renewcommand{\columnseprulecolor}{\color{Filet}}
+\setlist{itemsep=0.05em,topsep=0.15em,parsep=0pt,leftmargin=1.1em}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\scriptsize\textbullet}}
+\setlist[enumerate]{label=\textsf{\scriptsize\color{Bleu}\arabic*.},leftmargin=1.3em}
+\linespread{1.02}
+
+\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}\newcommand{\rg}{\operatorname{rg}}\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}\newcommand{\Id}{\operatorname{Id}}\newcommand{\com}{\operatorname{com}}
+\newcommand{\vv}[1]{\overrightarrow{#1}}\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\HP}{{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\livre}[1]{{\sffamily\scriptsize\color{Gris}[#1]}}
+
+% ---------- titres ----------
+\newcommand{\chapitre}[2]{\clearpage\phantomsection\pdfbookmark[0]{#1 --- #2}{chap#1}\markboth{#1 --- #2}{}%
+  \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\color{white}\sffamily\bfseries\Large\strut #1\quad
+  {\normalsize\mdseries #2}}}\par\vspace{0.4em}}
+\newcommand{\notion}[1]{\par\needspace{9\baselineskip}\vspace{0.5em}\phantomsection\pdfbookmark[1]{#1}{\detokenize{#1}}\noindent{\sffamily\bfseries\color{Bleu}\large #1}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{0.1em}}
+\newcommand{\sous}[1]{\par\needspace{6\baselineskip}\vspace{0.25em}\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1}\par\nobreak}
+
+% ---------- encadrés ----------
+\tcbset{base/.style={enhanced,arc=0pt,boxrule=0pt,left=4pt,right=3pt,top=2pt,bottom=2pt,before skip=0.35em,after skip=0.35em,
+  fontupper=\small}}
+\newtcolorbox{DEF}[1][]{base,colback=white,borderline west={1.4pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}DÉFINITION\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newtcolorbox{PROP}[1][]{base,colback=Fond,borderline west={2pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}\ifx\relax#1\relax PROPRIÉTÉ\else #1\fi}\par}}
+\newtcolorbox{FORM}[1][]{base,colback=white,colframe=BleuMoyen,boxrule=0.5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}\ifx\relax#1\relax FORMULES\else #1\fi}\par}}
+\newtcolorbox{METH}[1]{base,colback=white,borderline north={0.8pt}{0pt}{Bleu},borderline south={0.8pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\colorbox{Bleu}{\color{white}MÉTHODE}\ \color{Bleu}#1}\par\smallskip}}
+\newtcolorbox{PIEGE}{base,colback=Brique!5,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
+\newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche Équations différentielles}
+\fancyfoot[C]{\scriptsize\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\pgfplotsset{mini/.style={axis lines=middle,axis line style={Filet},xtick=\empty,ytick=\empty,width=3.2cm,height=3.2cm,
+  xmin=-1.15,xmax=1.15,ymin=-1.15,ymax=1.15,title style={font=\scriptsize\sffamily,yshift=-0.15cm},samples=80}}
+
+
+\newcommand{\sh}{\operatorname{sh}}\newcommand{\ch}{\operatorname{ch}}\DeclareMathOperator{\argsh}{argsh}
+\hypersetup{pdftitle={Le Collé — fiche de référence : équations différentielles}}
+\begin{document}
+\thispagestyle{empty}
+\noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 1}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Équations différentielles}\par\smallskip
+{\color{white!85!Bleu}\sffamily structure, théorème de Cauchy, méthodes de résolution, pièges et résultats du TD}\vspace{0.4em}}}
+
+\vspace{0.6em}
+{\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Elle reprend tout le cours
+du chapitre avec les mêmes numéros de parties et les mêmes notations que la présentation et le livre. Les renvois \livre{th.~1.3}
+désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet. $I$ est un intervalle non réduit à un point, $\K=\R$ ou $\C$.}
+
+\vspace{0.4em}
+{\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
+1.1 Structure et théorème de Cauchy \dotfill\pageref{n11}\\
+1.2 Premier ordre, recollement \dotfill\pageref{n12}\\
+1.3 Second ordre à coefficients constants \dotfill\pageref{n13}\\
+1.4 Second ordre à coefficients continus \dotfill\pageref{n14}\\
+1.5 Quelle méthode ? Pièges \dotfill\pageref{n15}\\
+1.6 Résultats du TD \dotfill\pageref{n16}\\
+\end{tabular}}
+
+\vspace{0.6em}
+\pdfbookmark[0]{Chapitre 1 --- Équations différentielles}{chap1}\markboth{Chapitre 1 --- Équations différentielles}{}
+\begin{multicols}{2}\raggedcolumns
+% ======================================================================
+\notion{1.1 Structure et théorème de Cauchy}\label{n11}
+
+\begin{DEF}[\livre{déf.~1.1}]
+Ordre 1 : $(E)$ $y'+a(t)y=b(t)$. Ordre 2 : $(E)$ $y''+a(t)y'+b(t)y=c(t)$, avec $a,b,c$ \emph{continues} sur $I$ (forme
+\emph{normalisée}). $(H)$ : même équation avec second membre nul.\\
+$\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$ se normalise en divisant par $\alpha$, \emph{seulement là où $\alpha\neq0$}.
+\end{DEF}
+
+\begin{PROP}[STRUCTURE \livre{prop.~1.2}]
+$L(y)=y''+ay'+by$ est linéaire : $S_H=\mathrm{Ker}\,L$ est un espace vectoriel.\\
+Superposition : $L(y_1)=c_1$, $L(y_2)=c_2\Rightarrow L(y_1+y_2)=c_1+c_2$.\\
+Si $y_p$ est solution de $(E)$ :\quad $S_E=y_p+S_H$.
+\end{PROP}
+
+\begin{PROP}[THÉORÈME DE CAUCHY LINÉAIRE \livre{th.~1.3}]
+$t_0\in I$. Ordre 1 : une unique solution avec $y(t_0)=y_0$.\\
+Ordre 2 : une unique solution avec $y(t_0)=y_0$ et $y'(t_0)=y_1$.\\
+Conséquences \livre{cor.~1.4} : $\dim S_H=1$ (ordre 1), $\dim S_H=2$ (ordre 2), via l'isomorphisme $h\mapsto(h(t_0),h'(t_0))$ ;
+une solution de $(H)$ nulle en $t_0$ avec sa dérivée est nulle.
+\end{PROP}
+
+\begin{METH}{Résoudre une équation linéaire}
+\begin{enumerate}
+\item Normaliser (préciser l'intervalle).
+\item Résoudre $(H)$ : une droite ou un plan.
+\item Trouver \emph{une} solution particulière (superposition si besoin).
+\item $S_E=y_p+S_H$ ; \emph{puis} seulement les conditions initiales.
+\end{enumerate}
+Ordre 2 : deux solutions de $(H)$ \emph{non proportionnelles} engendrent $S_H$. En cas de doute :
+$\dt{y_1(t_0)&y_2(t_0)\\y_1'(t_0)&y_2'(t_0)}\neq0$.
+\end{METH}
+
+\begin{METH}{Équation intégrale \livre{méth.~1.1}}
+Inconnue sous $\int_{x_0}^x$ : la fonction est dérivable ; \emph{dériver}, et lire la condition initiale en $x=x_0$.
+Conclure par équivalence (ou vérifier).\\
+Ex. : $f(x)=1+\int_0^xtf(t)\,dt\iff f'=xf$, $f(0)=1\iff f=e^{x^2/2}$.
+\end{METH}
+
+% ======================================================================
+\notion{1.2 Premier ordre, recollement}\label{n12}
+
+\begin{FORM}[ÉQUATION HOMOGÈNE \livre{th.~1.6}]
+$A$ primitive de $a$ sur $I$ : solutions de $y'+a(t)y=0$ :
+\[y=Ke^{-A(t)},\quad K\in\K.\]
+Preuve : $(ye^{A})'=(y'+ay)e^{A}=0$.\\
+Primitives utiles : $\frac1t\to\ln|t|$, $\tan\to-\ln|\cos|$, $\frac{t}{1+t^2}\to\frac12\ln(1+t^2)$, $\frac{u'}u\to\ln|u|$.
+\end{FORM}
+
+\begin{METH}{Solution particulière \livre{méth.~1.2}}
+\begin{enumerate}
+\item Évidente : constante, polynôme de bas degré.
+\item $a$ constant, second membre $P(t)e^{mt}$ : $y=Q(t)e^{mt}$, $\deg Q=\deg P$ si $m\neq-a$, $\deg P+1$ si $m=-a$.
+\item $\cos\omega t$, $\sin\omega t$ : résoudre avec $e^{i\omega t}$, prendre $\operatorname{Re}$ ou $\operatorname{Im}$ (coefficients réels).
+\item \emph{Variation de la constante} : $y=\lambda(t)e^{-A(t)}$ ; il reste
+\[\lambda'(t)=b(t)e^{A(t)}.\]
+Toujours applicable. Primitive non usuelle : écrire $\int_{t_0}^t$.
+\end{enumerate}
+\end{METH}
+
+\begin{ASTU}
+$y'+y=\sin t$ : $z'+z=e^{it}$, $z=\frac{e^{it}}{1+i}=\frac{(1-i)e^{it}}2$, $y_p=\operatorname{Im}z=\frac{\sin t-\cos t}2$.\\
+$a\cos t+b\sin t=\sqrt{a^2+b^2}\cos(t-\varphi)$ : amplitude et phase.
+\end{ASTU}
+
+\begin{METH}{Recoller en $t_0$ où $\alpha(t_0)=0$ \livre{méth.~1.3}}
+\begin{enumerate}
+\item Résoudre de chaque côté : constantes $K_-$, $K_+$.
+\item Continuité en $t_0$ : limites finies et égales.
+\item Dérivabilité : limites des taux $\frac{y(t)-y(t_0)}{t-t_0}$ égales.
+\item Vérifier l'équation \emph{en} $t_0$.
+\end{enumerate}
+\end{METH}
+\begin{FORM}[TROIS SITUATIONS]
+$ty'+y=1$ : $1+\frac{K_\pm}t$ ; une seule solution sur $\R$ : $y=1$.\\
+$ty'-y=t^2$ : $t^2+K_\pm t$ ; dérivabilité $\Rightarrow K_+=K_-$ : une infinité (droite affine).\\
+$ty'=1$ : $\ln|t|+K_\pm$ ; aucune solution sur $\R$.\\
+$ty'-2y=t^3$ : $t^3+K_\pm t^2$, $K_+,K_-$ libres \livre{TD~18}.
+\end{FORM}
+
+% ======================================================================
+\notion{1.3 Second ordre à coefficients constants}\label{n13}
+
+\begin{FORM}[ÉQUATION CARACTÉRISTIQUE \livre{th.~1.11}]
+$y''+ay'+by=0$ ;\ $e^{rt}$ solution $\iff r^2+ar+b=0$.\\
+$\K=\C$ : $r_1\neq r_2$ : $Ae^{r_1t}+Be^{r_2t}$ ;\ racine double $r$ : $(A+Bt)e^{rt}$.\\
+$a,b$ réels, solutions réelles, $\Delta=a^2-4b$ :\\
+\begin{tabular}{@{}ll@{}}
+$\Delta>0$ & $Ae^{r_1t}+Be^{r_2t}$\\
+$\Delta=0$ & $(A+Bt)e^{rt}$\\
+$\Delta<0$, $r=\alpha\pm i\beta$ & $e^{\alpha t}\big(A\cos\beta t+B\sin\beta t\big)$
+\end{tabular}
+\end{FORM}
+
+\begin{METH}{Second membre $P(t)e^{mt}$ \livre{méth.~1.4}}
+$y=Q(t)e^{mt}$, $\deg Q=\deg P+$ (multiplicité de $m$ : $0$, $1$ ou $2$).\\
+En reportant :
+\[Q''+(2m+a)Q'+(m^2+am+b)Q=P.\]
+Racine simple : terme en $Q$ nul. Racine double : $Q''=P$.\\
+$\cos\omega t$, $e^{\alpha t}\sin\omega t$ : passer par $e^{(\alpha+i\omega)t}$.\\
+Second membre somme : superposition.
+\end{METH}
+
+\begin{FORM}[RÉSONANCE, OSCILLATEURS]
+$y''+\omega^2y=\cos t$ : $\omega\neq1$ : $y_p=\frac{\cos t}{\omega^2-1}$, tout est borné ; $\omega=1$ : $y_p=\frac t2\sin t$, rien n'est borné.\\
+$y''+y=\sin t$ : $y_p=-\frac t2\cos t$.\\
+$y''+2\lambda y'+\omega^2y=0$ ($\lambda,\omega>0$) : $\lambda>\omega$ apériodique, $\lambda=\omega$ critique, $\lambda<\omega$
+pseudo-périodique, pulsation $\sqrt{\omega^2-\lambda^2}$, amortie par $e^{-\lambda t}$.
+\end{FORM}
+
+\begin{METH}{Variation de la constante, ordre 2 \livre{méth.~1.5}}
+Second membre d'une autre forme : $\varphi$ solution de $(H)$ \emph{ne s'annulant pas} sur $I$ ($e^{rt}$, ou $\cos$ sur
+$]-\frac\pi2,\frac\pi2[$), $y=\lambda\varphi$ : équation du \emph{premier ordre} en $\lambda'$, puis intégrer.\\
+Ex. : $y''+y=\frac1{\cos t}$ : $y=t\sin t+\cos t\ln(\cos t)+K\sin t+D\cos t$ \livre{TD~13}.
+\end{METH}
+
+% ======================================================================
+\notion{1.4 Second ordre à coefficients continus}\label{n14}
+{\small $\alpha y''+\beta y'+\gamma y=\delta$, $\alpha\neq0$ sur $I$. Pas de formule : trouver deux solutions non proportionnelles
+de $(H)$, puis une particulière. \textbf{L'énoncé indique la méthode.}}
+
+\begin{METH}{Solution polynomiale ou exponentielle \livre{méth.~1.6}}
+Polynôme de degré $n$ : coefficient de $t^n$ nul $\Rightarrow$ valeur de $n$ ; puis identifier.\\
+$y=e^{rt}$ : égalité pour tout $t$ $\Rightarrow$ conditions sur $r$ (coefficient de $t$ et constante).\\
+Ex. : $(2t+1)y''+(4t-2)y'-8y=0$ : $4t^2+1$ et $e^{-2t}$.
+\end{METH}
+
+\begin{METH}{Solution connue $\varphi$ ne s'annulant pas \livre{méth.~1.7}}
+$y=\lambda\varphi$ : le terme en $\lambda$ disparaît,
+\[\alpha\varphi\,\lambda''+(2\alpha\varphi'+\beta\varphi)\lambda'=\delta.\]
+Premier ordre en $\mu=\lambda'$, puis intégrer : deux constantes.\\
+Ex. : $(t+1)y''-(t+2)y'+y=0$ : $\varphi=e^t$, $S_H=\{a(t+2)+be^t\}$.
+\end{METH}
+
+\begin{METH}{Changement de variable \livre{méth.~1.8}}
+$t=\varphi(x)$, $\varphi$ bijection $\mathcal C^2$ de réciproque $\mathcal C^2$ ; $z(x)=y(\varphi(x))$,
+$z'=\varphi'\,y'\circ\varphi$, $z''=\varphi'^2\,y''\circ\varphi+\varphi''\,y'\circ\varphi$.\\
+$t=\cos x$ : $(1-t^2)y''-ty'+y=0\to z''+z=0$, $y=At+B\sqrt{1-t^2}$.\\
+$t=\sh x$ : $(1+t^2)y''+ty'-y=0\to z''-z=0$, $y=At+B\sqrt{1+t^2}$.\\
+Euler, $t=e^x$ : $t^2y''=z''-z'$, $ty'=z'$.
+\end{METH}
+
+\begin{METH}{Changement de fonction}
+L'énoncé propose $z=ty$, $z=t^2y$\dots : calculer $z'$, $z''$ et reconnaître le premier membre.\\
+$z=ty$ : $z''+z=ty''+2y'+ty$.\quad $z=t^2y$ : $z''=t^2y''+4ty'+2y$.
+\end{METH}
+
+\begin{METH}{Série entière \livre{méth.~1.9}}
+\emph{Analyse} : $y=\sum a_nt^n$, dériver terme à terme, décaler les indices, coefficient de $t^n$ nul $\Rightarrow$ récurrence.\\
+\emph{Synthèse} : calculer $a_n$, rayon $R>0$, la somme est solution sur $]-R,R[$ ; reconnaître une fonction usuelle.\\
+$\sum\frac{t^n}{n!}=e^t$ ; $\sum\frac{t^{2n}}{(2n)!}=\ch t$ ; $\sum\frac{(-1)^nt^{2n+1}}{(2n+1)!}=\sin t$ ; $\sum(-1)^nt^n=\frac1{1+t}$.
+\end{METH}
+\begin{PIEGE}
+Une série entière ne donne en général qu'une partie de $S_H$, et seulement sur $]-R,R[$.
+\end{PIEGE}
+
+% ======================================================================
+\notion{1.5 Quelle méthode ? Pièges}\label{n15}
+{\small\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}@{}}
+\hline
+\textbf{Équation} & \textbf{Méthode}\\\hline
+$y'+a(t)y=b(t)$ & $Ke^{-A}$ ; évidente, forme du second membre, ou variation\\
+$\alpha(t)y'+\dots$, $\alpha(t_0)=0$ & chaque intervalle, puis recoller\\
+$y''+ay'+by=c(t)$ & caractéristique ; $P(t)e^{mt}$ ; sinon variation\\
+$\alpha y''+\beta y'+\gamma y=\delta$ & suivre l'indication : polynôme, $e^{rt}$, $y=\lambda\varphi$, $t=\varphi(x)$, $z=t^ky$, série entière\\
+$f$ sous $\int_0^x$ & dériver\\
+$f'(x)=f(-x)$, etc. & dériver, puis \emph{réciproque}\\\hline
+\end{tabular}}
+
+\begin{PIEGE}
+Normaliser avant la primitive ; signe de $e^{-A}$.\\
+Résonance : si $m$ est racine, $Ce^{mt}$ ne marche pas.\\
+$\sin$ au second membre : partie \emph{imaginaire}.\\
+Conditions initiales \emph{après} avoir ajouté $y_p$.\\
+Diviser par un coefficient qui s'annule sans le dire.\\
+Recollement : vérifier l'équation au point $t_0$ ; ne pas affirmer l'unicité sans preuve.
+\end{PIEGE}
+
+\begin{HPBOX}
+Systèmes différentiels $X'=AX$, équations d'ordre $n\geq3$, wronskien comme outil théorique : hors programme PT.
+L'équation d'Euler n'est au programme qu'avec l'indication $t=e^x$.
+\end{HPBOX}
+
+% ======================================================================
+\notion{1.6 Résultats du TD}\label{n16}
+{\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
+TD2 & $y'-2y=e^t\sin2t$ : $y_p=-\frac{e^t}5(\sin2t+2\cos2t)$ ; $y'+y=te^{-t}$ : $\frac{t^2}2e^{-t}$.\\
+TD6 & $\cos t\,y'+\sin t\,y=1$, $y(0)=2$ : $y=\sin t+2\cos t$.\\
+TD8 & $y''+y=\sin t$, $y(0)=y'(0)=0$ : $\frac{\sin t-t\cos t}2$, non bornée.\\
+TD10 & $y''-4y'+4y=(t+1)e^{2t}$ : $Q''=t+1$, $y_p=\left(\frac{t^3}6+\frac{t^2}2\right)e^{2t}$.\\
+TD12 & $(1+t^2)y'+ty=1$ : $y=\frac{\argsh t+C}{\sqrt{1+t^2}}$.\\
+TD14 & $f=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}du\right)$.\\
+TD16 & $(1+t^2)y''+ty'-y=0$ : $At+B\sqrt{1+t^2}$.\\
+TD17 & $|t|y'-y=t^2$ : une seule solution sur $\R$.\\
+TD20 & $t^2y''-3ty'+4y=t^2$ : $t^2\left(\frac{\ln^2t}2+A+B\ln t\right)$.\\
+TD21 & $f'(x)=f(-x)$ : $f=A(\cos+\sin)$.\\
+TD23 & $y''-2ty'-2y=0$, $y(0)=1$, $y'(0)=0$ : $e^{t^2}$.\\
+TD24 & $4ty''+2y'-y=0$ : $\ch\sqrt t$ ($t\geq0$), $\cos\sqrt{-t}$.\\
+TD25 & $t^2y''+4ty'+(2-t^2)y=1$ : unique solution $\frac{\ch t-1}{t^2}$.\\
+TD27 & $ty''+2y'+ty=0$ : sur $\R$, la droite $\frac{\sin t}t$.\\
+TD28 & $y''+y=f$ ($2\pi$-pér.) : solutions périodiques $\iff\int_0^{2\pi}f\cos=\int_0^{2\pi}f\sin=0$.
+\end{tabular}}
+
+\end{multicols}
+\end{document}

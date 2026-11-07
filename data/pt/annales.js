@@ -122,7 +122,9 @@ LC.annales = [
   }
 ];
 
-/* Sujets examinés et écartés (aucune question sur nos chapitres) — pour mémoire */
+/* Sujets examinés et écartés (aucune question sur les chapitres de l'époque) — pour mémoire.
+   Depuis l'ajout des chapitres Équations différentielles et Réduction, les sujets 2016 B, 2022 B, 2023 A et 2025 B
+   sont à réexaminer pour ces deux chapitres. */
 LC.annalesEcartees = [
   "Banque PT 2016 Maths B (surfaces, plan osculateur, système différentiel)",
   "Banque PT 2020 Maths B (gradient, rotationnel, surfaces)",

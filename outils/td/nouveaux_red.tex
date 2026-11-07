@@ -1,0 +1,244 @@
+% =====================================================================
+% Le Collé — Algèbre linéaire et réduction : exercices complémentaires du TD
+% =====================================================================
+
+\begin{exo}{rdn-1}{1}{valeurs propres de matrices $2\times2$}
+Déterminer les valeurs propres réelles et les sous-espaces propres de $A=\begin{pmatrix}4&-2\\1&1\end{pmatrix}$ et de
+$B=\begin{pmatrix}1&-1\\1&1\end{pmatrix}$. Ces matrices sont-elles diagonalisables dans $\mathcal M_2(\R)$ ? dans $\mathcal M_2(\C)$ ?
+\end{exo}
+\begin{corrige}{rdn-1}
+\choix{en taille $2$, $\chi=x^2-\tr\,x+\det$ : aucun déterminant à calculer.}
+$\chi_A=x^2-5x+6=(x-2)(x-3)$. $A-2I_2=\begin{pmatrix}2&-2\\1&-1\end{pmatrix}$ : $E_2=\vect(1,1)$ ; $A-3I_2=\begin{pmatrix}1&-2\\1&-2\end{pmatrix}$ :
+$E_3=\vect(2,1)$. Deux valeurs propres distinctes : $A$ est diagonalisable (dans $\R$ et dans $\C$).
+$\chi_B=x^2-2x+2$, de discriminant $-4$ : pas de valeur propre réelle, $B$ n'est pas diagonalisable dans $\mathcal M_2(\R)$.
+Dans $\C$ : valeurs propres $1\pm i$, distinctes, donc $B$ est diagonalisable dans $\mathcal M_2(\C)$ ; $E_{1+i}=\vect(i,1)$ et
+$E_{1-i}=\vect(-i,1)$ (conjugués).
+\end{corrige}
+
+\begin{exo}{rdn-2}{1}{retrouver une matrice à partir de ses éléments propres}
+Soit $f\in\mathcal L(\R^2)$ tel que $E_2(f)=\vect\big((1,2)\big)$ et $E_{-3}(f)=\vect\big((1,1)\big)$. Déterminer la matrice de $f$
+dans la base canonique.
+\end{exo}
+\begin{corrige}{rdn-2}
+Dans la base $\big((1,2),(1,1)\big)$, la matrice de $f$ est $D=\mathrm{diag}(2,-3)$. Avec $P=\begin{pmatrix}1&1\\2&1\end{pmatrix}$,
+$P^{-1}=\frac1{-1}\begin{pmatrix}1&-1\\-2&1\end{pmatrix}=\begin{pmatrix}-1&1\\2&-1\end{pmatrix}$, et
+\[A=PDP^{-1}=\begin{pmatrix}2&-3\\4&-3\end{pmatrix}\begin{pmatrix}-1&1\\2&-1\end{pmatrix}=\begin{pmatrix}-8&5\\-10&7\end{pmatrix}.\]
+Contrôle : $A(1,2)^T=(2,4)^T$, $A(1,1)^T=(-3,-3)^T$, $\tr A=-1=2-3$.
+\end{corrige}
+
+\begin{exo}{rdn-3}{1}{une matrice triangulaire}
+Montrer sans calcul que $A=\begin{pmatrix}1&0&0\\1&2&0\\1&1&3\end{pmatrix}$ est diagonalisable, puis la diagonaliser.
+\end{exo}
+\begin{corrige}{rdn-3}
+$A$ est triangulaire : $\Sp(A)=\{1,2,3\}$, trois valeurs propres distinctes en dimension $3$ : diagonalisable.
+$(A-I_3)X=0$ : $x+y=0$, $x+y+2z=0$, d'où $E_1=\vect(1,-1,0)$. $(A-2I_3)X=0$ : $x=0$, $y+z=0$ : $E_2=\vect(0,1,-1)$.
+$(A-3I_3)X=0$ : $x=y=0$ : $E_3=\vect(0,0,1)$. Ainsi $A=PDP^{-1}$ avec
+$P=\begin{pmatrix}1&0&0\\-1&1&0\\0&-1&1\end{pmatrix}$, $D=\mathrm{diag}(1,2,3)$.
+\end{corrige}
+
+\begin{exo}{rdn-17}{1}{fonctions paires et impaires}
+Soit $E$ l'espace des fonctions de $\R$ dans $\R$, $\mathcal P$ le sous-espace des fonctions paires et $\mathcal I$ celui des
+fonctions impaires. Montrer que $E=\mathcal P\oplus\mathcal I$. Que donne cette décomposition pour $\exp$ ?
+\end{exo}
+\begin{corrige}{rdn-17}
+\choix{dimension infinie : on revient à la définition (existence et unicité de la décomposition), par analyse-synthèse.}
+\emph{Unicité.} Si $f\in\mathcal P\cap\mathcal I$, $f(-x)=f(x)=-f(x)$, donc $f=0$. \emph{Existence.} Pour $f\in E$, on pose
+$p(x)=\frac{f(x)+f(-x)}2$ (paire) et $i(x)=\frac{f(x)-f(-x)}2$ (impaire) : $f=p+i$. Donc $E=\mathcal P\oplus\mathcal I$.
+Pour $\exp$ : $\exp=\ch+\sh$.
+\gain{l'application $f\mapsto\big(x\mapsto f(-x)\big)$ est une symétrie : $\mathcal P$ et $\mathcal I$ sont ses sous-espaces propres pour $1$ et $-1$.}
+\end{corrige}
+
+\begin{exo}{rdn-4}{2}{la matrice anti-diagonale}
+Soit $n\geq2$ et $A_n\in\Mn{\R}$ définie par $a_{i,j}=1$ si $i+j=n+1$ et $a_{i,j}=0$ sinon.
+\begin{enumerate}
+\item Calculer $A_n^2$. En déduire que $\Sp(A_n)\subset\{-1,1\}$.
+\item Déterminer $E_1(A_n)$ et $E_{-1}(A_n)$ et leurs dimensions. $A_n$ est-elle diagonalisable ?
+\item En déduire $\tr A_n$ et $\det A_n$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-4}
+\q{1.} $A_nX$ renverse l'ordre des coordonnées : $(x_1,\dots,x_n)\mapsto(x_n,\dots,x_1)$. Donc $A_n^2=I_n$. Si $A_nX=\lambda X$,
+$X\neq0$, alors $X=A_n^2X=\lambda^2X$, donc $\lambda^2=1$.
+\q{2.} $E_1=\{X,\ x_i=x_{n+1-i}\}$ : on choisit librement $x_1,\dots,x_{\lceil n/2\rceil}$, $\dim E_1=\lceil\frac n2\rceil$.
+$E_{-1}=\{X,\ x_i=-x_{n+1-i}\}$ : si $n$ est impair, la coordonnée centrale est nulle ; $\dim E_{-1}=\lfloor\frac n2\rfloor$.
+La somme des dimensions vaut $n$ : $A_n$ est diagonalisable (c'est la matrice d'une symétrie).
+\q{3.} $\tr A_n=\lceil\frac n2\rceil-\lfloor\frac n2\rfloor$ ($0$ si $n$ est pair, $1$ sinon), et $\det A_n=(-1)^{\lfloor n/2\rfloor}$.
+\end{corrige}
+
+\begin{exo}{rdn-5}{2}{la transposition}
+Soit $T:\Mn{\R}\to\Mn{\R}$, $M\mapsto M^T$. Montrer que $T$ est diagonalisable ; déterminer ses valeurs propres, ses
+sous-espaces propres, sa trace et son déterminant.
+\end{exo}
+\begin{corrige}{rdn-5}
+$T$ est linéaire et $T\circ T=\Id$ : c'est une symétrie. $E_1(T)$ est l'espace $\mathcal S_n$ des matrices symétriques, de dimension
+$\frac{n(n+1)}2$ ; $E_{-1}(T)$ est l'espace $\mathcal A_n$ des matrices antisymétriques, de dimension $\frac{n(n-1)}2$. La somme des
+dimensions vaut $n^2$ : $T$ est diagonalisable, $\Mn{\R}=\mathcal S_n\oplus\mathcal A_n$. Dans une base adaptée :
+\[\tr T=\frac{n(n+1)}2-\frac{n(n-1)}2=n,\qquad\det T=(-1)^{n(n-1)/2}.\]
+\end{corrige}
+
+\begin{exo}{rdn-18}{2}{un endomorphisme défini avec la trace}
+Soit $n\geq2$ et $f:\Mn{\R}\to\Mn{\R}$, $M\mapsto M+\tr(M)I_n$.
+\begin{enumerate}
+\item Montrer que $H=\{M,\ \tr M=0\}$ est un hyperplan de $\Mn{\R}$ et que $\Mn{\R}=H\oplus\vect(I_n)$.
+\item Montrer que $f$ est diagonalisable et calculer $\tr f$ et $\det f$. $f$ est-il un automorphisme ?
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-18}
+\q{1.} $H$ est le noyau de la forme linéaire non nulle $\tr$ : c'est un hyperplan (dimension $n^2-1$). $\tr(I_n)=n\neq0$, donc
+$I_n\notin H$ et $\Mn{\R}=H\oplus\vect(I_n)$.
+\q{2.} Pour $M\in H$, $f(M)=M$ ; et $f(I_n)=I_n+nI_n=(n+1)I_n$. Une base adaptée à $H\oplus\vect(I_n)$ est formée de vecteurs
+propres : $f$ est diagonalisable, de matrice $\mathrm{diag}(1,\dots,1,n+1)$. Donc $\tr f=n^2-1+n+1=n^2+n$ et $\det f=n+1\neq0$ :
+$f$ est un automorphisme.
+\end{corrige}
+
+\begin{exo}{rdn-6}{2}{une matrice de transition}
+Soient $p,q\in\,]0,1[$ et $A=\begin{pmatrix}1-p&q\\p&1-q\end{pmatrix}$.
+\begin{enumerate}
+\item Montrer que $1$ est valeur propre de $A$, et déterminer l'autre valeur propre $r$. Vérifier que $|r|<1$.
+\item Diagonaliser $A$, calculer $A^k$ et sa limite quand $k\to+\infty$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-6}
+\q{1.} Les colonnes ont pour somme $1$ : $(1,1)A=(1,1)$, donc $A^T$ admet $(1,1)^T$ comme vecteur propre pour $1$, et
+$\det(A-I_2)=\det(A^T-I_2)=0$. Par la trace, $r=\tr A-1=1-p-q$ ; comme $0<p+q<2$, $-1<r<1$.
+\q{2.} $E_1$ : $-px+qy=0$, $E_1=\vect(q,p)$ ; $E_r$ : $qx+qy=0$, $E_r=\vect(1,-1)$. Avec $P=\begin{pmatrix}q&1\\p&-1\end{pmatrix}$,
+$P^{-1}=\frac1{p+q}\begin{pmatrix}1&1\\p&-q\end{pmatrix}$ :
+\[A^k=PD^kP^{-1}=\frac1{p+q}\begin{pmatrix}q+pr^k&q-qr^k\\p-pr^k&p+qr^k\end{pmatrix}\xrightarrow[k\to+\infty]{}\frac1{p+q}\begin{pmatrix}q&q\\p&p\end{pmatrix},\]
+car $r^k\to0$. Les deux colonnes de la limite sont égales : quel que soit l'état initial, la répartition tend vers $\big(\frac q{p+q},\frac p{p+q}\big)$.
+\end{corrige}
+
+\begin{exo}{rdn-7}{3}{matrices circulantes}
+Soit $J=\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}$ et $j=e^{2i\pi/3}$.
+\begin{enumerate}
+\item Calculer $J^3$ et $\chi_J$. $J$ est-elle diagonalisable dans $\mathcal M_3(\R)$ ? dans $\mathcal M_3(\C)$ ?
+\item Pour $\omega\in\{1,j,j^2\}$, vérifier que $X_\omega=(1,\omega^2,\omega)^T$ est vecteur propre de $J$.
+\item Soient $a,b,c\in\C$ et $M=aI_3+bJ+cJ^2=\begin{pmatrix}a&c&b\\b&a&c\\c&b&a\end{pmatrix}$. Montrer que $M$ est diagonalisable et
+que $\det M=(a+b+c)(a+bj+cj^2)(a+bj^2+cj)$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-7}
+\q{1.} $J$ permute circulairement les vecteurs de base ($Je_1=e_2$, $Je_2=e_3$, $Je_3=e_1$), donc $J^3=I_3$. En développant,
+$\chi_J=x^3-1=(x-1)(x-j)(x-j^2)$. Sur $\R$, $\chi_J$ n'est pas scindé : $J$ n'est pas diagonalisable dans $\mathcal M_3(\R)$ ; sur $\C$,
+trois valeurs propres distinctes : diagonalisable.
+\q{2.} $JX_\omega=(\omega,1,\omega^2)^T=\omega(1,\omega^2,\omega)^T$ car $\omega^3=1$.
+\q{3.} $MX_\omega=(a+b\omega+c\omega^2)X_\omega$ : la base $(X_1,X_j,X_{j^2})$ de vecteurs propres de $J$ (valeurs propres distinctes)
+est formée de vecteurs propres de $M$. Donc $M$ est diagonalisable, de valeurs propres $a+b\omega+c\omega^2$, et $\det M$ est leur produit.
+\retenir{des matrices qui sont des combinaisons de $I$, $J$, $J^2$ ont les mêmes vecteurs propres que $J$.}
+\end{corrige}
+
+\begin{exo}{rdn-8}{3}{un endomorphisme de $\R_n[X]$}
+Soit $n\geq1$ et $f(P)=nXP-(X^2-1)P'$ pour $P\in\R_n[X]$.
+\begin{enumerate}
+\item Montrer que $f$ est un endomorphisme de $\R_n[X]$.
+\item Pour $0\leq k\leq n$, on pose $P_k=(X-1)^k(X+1)^{n-k}$. Montrer que $P_k$ est vecteur propre de $f$, associé à $n-2k$.
+\item En déduire que $f$ est diagonalisable, et donner $\Sp(f)$, $\tr f$, $\det f$ pour $n=2$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-8}
+\q{1.} $f$ est linéaire. Si $P=\sum_{i\leq n}a_iX^i$, le terme de degré $n+1$ de $f(P)$ vaut $na_nX^{n+1}-na_nX^{n+1}=0$ : $f(P)\in\R_n[X]$.
+\q{2.} $P_k'=k(X-1)^{k-1}(X+1)^{n-k}+(n-k)(X-1)^k(X+1)^{n-k-1}$, donc
+$(X^2-1)P_k'=\big(k(X+1)+(n-k)(X-1)\big)P_k=\big(nX+2k-n\big)P_k$. Ainsi $f(P_k)=nXP_k-(nX+2k-n)P_k=(n-2k)P_k$, et $P_k\neq0$.
+\q{3.} Les $n+1$ valeurs $n,n-2,\dots,-n$ sont distinctes et $\dim\R_n[X]=n+1$ : $f$ est diagonalisable et
+$\Sp(f)=\{n-2k,\ 0\leq k\leq n\}$. Pour $n=2$ : $\Sp=\{2,0,-2\}$, $\tr f=0$, $\det f=0$.
+\end{corrige}
+
+\begin{exo}{rdn-9}{3}{un opérateur différentiel en dimension finie}
+Pour $k\in\ient04$, soit $e_k:x\mapsto e^{kx}$, et $E=\vect(e_0,\dots,e_4)$.
+\begin{enumerate}
+\item Montrer que $(e_0,\dots,e_4)$ est libre. \emph{(Ce sont des vecteurs propres de la dérivation.)}
+\item Soit $\varphi(y)=y''-3y'+2y$. Montrer que $\varphi$ est un endomorphisme de $E$ ; écrire sa matrice dans la base $(e_k)$.
+\item Déterminer $\Ker\varphi$ et $\Im\varphi$. Résoudre dans $E$ l'équation $\varphi(y)=e^{3x}$, et comparer avec le chapitre
+\emph{Équations différentielles}.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-9}
+\q{1.} $e_k'=ke_k$ : $e_k$ est vecteur propre de la dérivation $D$ pour la valeur propre $k$. Les valeurs propres $0,\dots,4$ sont
+distinctes : la famille est libre (théorème~\ref{t:somme-propres}, valable en dimension quelconque).
+\q{2.} $\varphi(e_k)=(k^2-3k+2)e_k=(k-1)(k-2)e_k\in E$ : par linéarité, $\varphi(E)\subset E$. Matrice : $\mathrm{diag}(2,0,0,2,6)$.
+\q{3.} $\Ker\varphi=\vect(e_1,e_2)$ et $\Im\varphi=\vect(e_0,e_3,e_4)$ (lecture de la matrice diagonale). Comme $\varphi(e_3)=2e_3$,
+$\frac12e_3$ est solution, et les solutions dans $E$ sont $y=\frac12e^{3x}+ae^x+be^{2x}$. On retrouve exactement les solutions
+de $y''-3y'+2y=e^{3x}$ (racines $1$, $2$ ; $3$ non racine) : elles sont toutes dans $E$.
+\end{corrige}
+
+\begin{exo}{rdn-10}{3}{$AB$ et $BA$}
+Soient $A,B\in\Mn{\K}$.
+\begin{enumerate}
+\item Soit $\lambda\neq0$ une valeur propre de $AB$ et $X$ un vecteur propre associé. Montrer que $BX\neq0$ et que $\lambda$ est valeur
+propre de $BA$.
+\item Montrer que $0$ est valeur propre de $AB$ si et seulement si elle l'est de $BA$. Conclure : $\Sp(AB)=\Sp(BA)$.
+\item Avec $A=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ et $B=\begin{pmatrix}1&0\\0&0\end{pmatrix}$, comparer la diagonalisabilité de $AB$ et de $BA$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-10}
+\q{1.} Si $BX=0$, alors $\lambda X=ABX=0$, impossible ($\lambda\neq0$, $X\neq0$). Et $BA(BX)=B(ABX)=\lambda BX$ : $BX$ est vecteur
+propre de $BA$ pour $\lambda$.
+\q{2.} $0\in\Sp(AB)\iff\det(AB)=0\iff\det A\det B=0\iff\det(BA)=0$. Avec 1 (et les rôles de $A$, $B$ échangés), $\Sp(AB)=\Sp(BA)$.
+\q{3.} $AB=0$ est diagonalisable ; $BA=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ ne l'est pas (seule valeur propre $0$, et $BA\neq0$).
+Mêmes valeurs propres, mais pas mêmes sous-espaces propres.
+\end{corrige}
+
+\begin{exo}{rdn-11}{3}{une relation entre $f$ et l'identité}
+Soit $E$ de dimension finie et $f\in\LE$ tel que $(f-3\Id)\circ(f+2\Id)=0$.
+\begin{enumerate}
+\item Montrer que $\Im(f+2\Id)\subset\Ker(f-3\Id)$ et $\Im(f-3\Id)\subset\Ker(f+2\Id)$.
+\item En écrivant $x=\frac15(f+2\Id)(x)-\frac15(f-3\Id)(x)$, montrer que $E=\Ker(f-3\Id)\oplus\Ker(f+2\Id)$.
+\item En déduire que $f$ est diagonalisable et que $\Sp(f)\subset\{3,-2\}$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-11}
+\q{1.} $(f-3\Id)\big((f+2\Id)(x)\big)=0$ ; et $(f+2\Id)\circ(f-3\Id)=f^2-f-6\Id=(f-3\Id)\circ(f+2\Id)=0$.
+\q{2.} L'égalité proposée est vraie ($\frac15(f+2\Id-f+3\Id)=\Id$). Le premier terme est dans $\Ker(f-3\Id)$, le second dans
+$\Ker(f+2\Id)$ (question 1) : $E=\Ker(f-3\Id)+\Ker(f+2\Id)$. La somme est directe : si $f(x)=3x$ et $f(x)=-2x$, alors $5x=0$.
+\q{3.} $E$ est somme directe de $E_3(f)$ et $E_{-2}(f)$ (l'un peut être réduit à $\{0\}$) : une base adaptée est formée de vecteurs
+propres, $f$ est diagonalisable, et toute valeur propre vérifie $(\lambda-3)(\lambda+2)=0$.
+\gain{cette décomposition n'utilise que le calcul $\frac15\big((f+2\Id)-(f-3\Id)\big)=\Id$ ; on la retrouve pour les projecteurs ($f^2=f$) et les symétries ($f^2=\Id$).}
+\end{corrige}
+
+\begin{exo}{rdn-12}{4}{matrices de rang 1}
+Soit $A\in\Mn{\R}$ de rang $1$ ($n\geq2$).
+\begin{enumerate}
+\item Montrer qu'il existe des colonnes $U,V$ non nulles telles que $A=UV^T$. Montrer que $A^2=\tr(A)\,A$.
+\item Montrer que $0$ est valeur propre, avec $\dim E_0=n-1$. Montrer que $A$ est diagonalisable si et seulement si $\tr A\neq0$.
+\item Exemple : $\begin{pmatrix}1&-1\\1&-1\end{pmatrix}$ est-elle diagonalisable ? et $\begin{pmatrix}1&2\\2&4\end{pmatrix}$ ?
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-12}
+\q{1.} Les colonnes de $A$ sont toutes proportionnelles à une colonne non nulle $U$ : $C_j=v_jU$, d'où $A=UV^T$ avec $V=(v_j)\neq0$.
+Alors $A^2=U(V^TU)V^T$, et $V^TU=\sum u_iv_i=\tr(UV^T)=\tr A$ (un réel) : $A^2=\tr(A)A$.
+\q{2.} $\dim E_0=n-\rg A=n-1\geq1$. Si $\tr A\neq0$ : $AU=U(V^TU)=\tr(A)U$, donc $\tr A$ est une autre valeur propre ; $\dim E_0+\dim E_{\tr A}\geq n$,
+$A$ est diagonalisable. Si $\tr A=0$ : si $AX=\lambda X$, $X\neq0$, alors $\lambda^2X=A^2X=0$, donc $\Sp(A)=\{0\}$ ; diagonalisable,
+$A$ serait nulle, ce qui contredit $\rg A=1$.
+\q{3.} La première a une trace nulle : non diagonalisable. La seconde a pour trace $5$ : diagonalisable, de valeurs propres $0$ et $5$.
+\end{corrige}
+
+\begin{exo}{rdn-13}{4}{une récurrence linéaire d'ordre 3}
+Soit $(u_k)$ définie par $u_0=3$, $u_1=2$, $u_2=6$ et $u_{k+3}=2u_{k+2}+u_{k+1}-2u_k$. On pose $X_k=(u_k,u_{k+1},u_{k+2})^T$.
+\begin{enumerate}
+\item Écrire $X_{k+1}=CX_k$, calculer $\chi_C$ et montrer que $C$ est diagonalisable.
+\item En déduire qu'il existe $\alpha,\beta,\gamma$ tels que $u_k=\alpha+\beta(-1)^k+\gamma2^k$, puis les déterminer.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-13}
+\q{1.} $C=\begin{pmatrix}0&1&0\\0&0&1\\-2&1&2\end{pmatrix}$. En développant selon la première colonne :
+$\chi_C(x)=x^3-2x^2-x+2=(x-1)(x+1)(x-2)$ ($1$ racine évidente). Trois valeurs propres distinctes : $C$ est diagonalisable.
+\q{2.} $X_k=C^kX_0=PD^kP^{-1}X_0$ avec $D=\mathrm{diag}(1,(-1)^k,2^k)$ à la puissance $k$ : chaque coordonnée de $X_k$, en particulier
+$u_k$, est une combinaison linéaire fixe de $1$, $(-1)^k$, $2^k$. Avec $k=0,1,2$ : $\alpha+\beta+\gamma=3$, $\alpha-\beta+2\gamma=2$,
+$\alpha+\beta+4\gamma=6$, d'où $\gamma=1$, $\alpha=\beta=1$ : $u_k=1+(-1)^k+2^k$. Contrôle : $u_3=2\cdot6+2-6=8=1-1+8$.
+\end{corrige}
+
+\begin{exo}{rdn-14}{4}{racines carrées et diagonalisabilité}
+Soient $A,B\in\mathcal M_3(\R)$ telles que $B^2=A$.
+\begin{enumerate}
+\item Montrer que si $B$ est diagonalisable, $A$ l'est aussi. La réciproque est-elle vraie ?
+\item On suppose que $A$ a trois valeurs propres distinctes. Montrer que $AB=BA$, puis que tout vecteur propre de $A$ est vecteur
+propre de $B$. En déduire que $B$ est diagonalisable.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{rdn-14}
+\q{1.} $B=P\Delta P^{-1}\Rightarrow A=B^2=P\Delta^2P^{-1}$, avec $\Delta^2$ diagonale. Réciproque fausse : $A=0$ est diagonalisable, et
+$B=\begin{pmatrix}0&1&0\\0&0&0\\0&0&0\end{pmatrix}$ vérifie $B^2=0$ sans être diagonalisable.
+\q{2.} $AB=B^3=BA$. Si $AX=\lambda X$, alors $A(BX)=B(AX)=\lambda BX$ : $BX\in E_\lambda(A)$, qui est une droite $\vect(X)$ (valeur
+propre simple). Donc $BX=\mu X$ : $X$ est vecteur propre de $B$. Une base de vecteurs propres de $A$ est une base de vecteurs
+propres de $B$ : $B$ est diagonalisable.
+\retenir{deux matrices qui commutent : les sous-espaces propres de l'une sont stables par l'autre.}
+\end{corrige}

@@ -62,7 +62,7 @@
   \vskip0.18cm
   \hbox{\begin{tikzpicture}
     \fill[Fond] (0,0) rectangle (\paperwidth,2.2pt);
-    \pgfmathsetmacro\prog{\insertframenumber/max(\inserttotalframenumber,1)}
+    \pgfmathsetmacro\prog{min(\insertframenumber/max(\inserttotalframenumber,1),1)}
     \fill[Ocre] (0,0) rectangle ({\prog*\paperwidth},2.2pt);
   \end{tikzpicture}}}
 
@@ -126,6 +126,17 @@
   \end{frame}}
 
 
+% ---------- exercices en séance : énoncé sur une diapositive, correction sur la suivante ----------
+\newcommand{\badgeexo}[1]{\tikz[baseline=(e.base)]\node[fill=Vert,text=white,font=\sffamily\bfseries\scriptsize,inner sep=2.5pt,rounded corners=1pt](e){EXERCICE #1};\hspace{0.4em}}
+\newcommand{\badgecor}[1]{\tikz[baseline=(e.base)]\node[draw=Vert,line width=0.8pt,text=Vert,font=\sffamily\bfseries\scriptsize,inner sep=2.2pt,rounded corners=1pt](e){CORRECTION #1};\hspace{0.4em}}
+\newtcolorbox{ENONCE}[1][]{sb,colback=Vert!6,borderline west={3pt}{0pt}{Vert},left=9pt,top=5pt,bottom=5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{Vert}À TOI\ifx\relax#1\relax\else\ \ ·\ \ \MakeUppercase{#1}\fi}\par\vspace{4pt}}}
+\newtcolorbox{INDICE}{sb,colback=white,colframe=Vert!60,boxrule=0.5pt,before upper={\etiq{Vert}{Indice (si besoin)}}}
+\newtcolorbox{RAIS}[1][Le raisonnement]{sb,colback=Vert!5,borderline west={2pt}{0pt}{Vert},before upper={\etiq{Vert}{#1}}}
+\newtcolorbox{OUTIL}{sb,colback=Fond,borderline west={2pt}{0pt}{Bleu},before upper={\etiq{Bleu}{Propriété ou méthode utilisée}}}
+\newcommand{\etape}[1]{{\sffamily\bfseries\footnotesize\color{Vert}#1}\ }
+\newcommand{\objectif}[1]{\par\vspace{2pt}{\footnotesize\sffamily\color{Gris}Objectif : #1}}
+
 \title{Le Collé --- Déterminants et courbes paramétrées}
 
 \begin{document}
@@ -157,7 +168,7 @@
 \column{0.48\textwidth}
 \begin{PIEGE}erreur classique à éviter\end{PIEGE}\vspace{-9pt}
 \begin{ASTU}technique qui fait gagner du temps\end{ASTU}\vspace{-9pt}
-\begin{ATOI}question pour l'élève ; réponse à la diapositive suivante\end{ATOI}\vspace{-9pt}
+\begin{ATOI}question ou exercice ; correction à la diapositive suivante\end{ATOI}\vspace{-9pt}
 \begin{RETENIR}l'essentiel d'une partie\end{RETENIR}
 \end{columns}
 {\footnotesize Même code couleur que la fiche. \ajout{} : ajout absent du livre. \ \HP{} : hors programme.
@@ -518,6 +529,38 @@ Avant tout calcul : que remarques-tu sur les lignes ?
 $C_2-C_1$, $C_3-C_1$ : \ $\dt{-1&0&0\\2&-4&-4\\1&0&-4}=-1\times16=-16$, \ donc \ $\boxed{D=-160}$.
 \end{frame}
 
+% ---------------------------------------------------------------- EXERCICE D1
+\begin{frame}{\badgeexo{1}Les règles de calcul en action}
+\begin{ENONCE}[5 min]
+\begin{enumerate}
+\item Calculer $\dt{1&2&1\\2&5&3\\-1&1&4}$ par opérations sur les lignes.
+\item Sans aucun calcul : que vaut $\dt{1&2&3\\4&5&6\\7&8&9}$ ?
+\item $A\in\mathcal M_3(\R)$ avec $\det A=5$. Que vaut $\det(2A)$ ? et $\det(-A^T)$ ?
+\end{enumerate}
+\objectif{transvections, colonnes liées, $\det(\lambda A)=\lambda^n\det A$. Indice pour 2 : comparer $C_1+C_3$ et $C_2$.}
+\end{ENONCE}
+\end{frame}
+
+\begin{frame}{\badgecor{1}Les règles de calcul en action}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+Créer des zéros par transvections (déterminant inchangé), repérer une relation entre colonnes, compter les facteurs sortis.
+\end{RAIS}
+\begin{OUTIL}
+Règles de calcul (§1.2) ; colonnes liées $\Rightarrow\det=0$.
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} $L_2\leftarrow L_2-2L_1$, $L_3\leftarrow L_3+L_1$ :
+$\dt{1&2&1\\0&1&1\\0&3&5}=1\times(5-3)=2$.\\[3pt]
+\pause
+\etape{2.} $C_1+C_3=2C_2$ : colonnes liées, le déterminant est \textbf{nul}.\\[3pt]
+\pause
+\etape{3.} $\det(2A)=2^3\cdot5=40$ ; \ $\det(-A^T)=(-1)^3\det A=-5$.
+\end{columns}
+{\small\color{Brique}\textbf{Piège :} $\det(2A)\neq2\det A$, les trois colonnes sont multipliées par $2$.}
+\end{frame}
+
 % =====================================================================
 \partie{1.3}{Propriétés globales, endomorphismes}{Que dit le déterminant d'une matrice, d'un produit, d'un endomorphisme ?}{\rmI}
 
@@ -620,6 +663,40 @@ $\det f>0$ : orientation conservée ; $<0$ : renversée.
 \end{FORM}
 \end{frame}
 
+% ---------------------------------------------------------------- EXERCICE D2
+\begin{frame}{\badgeexo{2}Déterminant d'un endomorphisme}
+\begin{ENONCE}[6 min]
+Calculer le déterminant des endomorphismes suivants, en choisissant une base adaptée.
+\begin{enumerate}
+\item $T:\mathcal M_2(\R)\to\mathcal M_2(\R)$, $M\mapsto M^T$.
+\item $g:\R_2[X]\to\R_2[X]$, $P\mapsto P(X+1)$. Est-ce un automorphisme ?
+\end{enumerate}
+\objectif{ne jamais calculer dans une base mal choisie.}
+\end{ENONCE}
+\pause
+\begin{INDICE}
+1 : matrices symétriques, matrices antisymétriques. \quad 2 : images de $1$, $X$, $X^2$.
+\end{INDICE}
+\end{frame}
+
+\begin{frame}{\badgecor{2}Déterminant d'un endomorphisme}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+$\det f$ ne dépend pas de la base : on prend celle où la matrice est diagonale ou triangulaire.
+\end{RAIS}
+\begin{OUTIL}
+$\det f=\det\Mat_{\mathcal B}(f)$ ; matrice triangulaire.
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} Base $\big(E_{11},E_{22},E_{12}+E_{21}\big)$ (symétriques, $T=\Id$) complétée par $E_{12}-E_{21}$ (antisymétrique, $T=-\Id$) :
+$\Mat(T)=\mathrm{diag}(1,1,1,-1)$, \ $\det T=-1$.\\[3pt]
+\pause
+\etape{2.} $g(1)=1$, $g(X)=1+X$, $g(X^2)=1+2X+X^2$ : dans $(1,X,X^2)$,
+$\Mat(g)=\begin{pmatrix}1&1&1\\0&1&2\\0&0&1\end{pmatrix}$, triangulaire : $\det g=1\neq0$, \textbf{automorphisme}.
+\end{columns}
+\end{frame}
+
 \begin{frame}{Pour aller plus loin : la comatrice \HP}
 \begin{HPBOX}
 $\com(A)=\big((-1)^{i+j}\Delta_{i,j}\big)$ \ (matrice des cofacteurs). Pour toute $A$ :
@@ -706,6 +783,34 @@ Sécantes $\iff d=0$.
 \end{columns}
 \end{frame}
 
+% ---------------------------------------------------------------- EXERCICE D3
+\begin{frame}{\badgeexo{3}Coplanaires ? Quel volume ?}
+\begin{ENONCE}[5 min]
+Dans l'espace muni d'un repère orthonormé, $A(1,2,0)$, $B(2,3,1)$, $C(0,1,1)$, $D(1,1,2)$.
+\begin{enumerate}
+\item Les quatre points sont-ils coplanaires ?
+\item Calculer le volume du tétraèdre $ABCD$.
+\end{enumerate}
+\objectif{le dictionnaire géométrique du §1.4.}
+\end{ENONCE}
+\end{frame}
+
+\begin{frame}{\badgecor{3}Coplanaires ? Quel volume ?}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+Coplanaires $\iff\det(\vv{AB},\vv{AC},\vv{AD})=0$ ; sinon, ce déterminant est le volume orienté du parallélépipède, le tétraèdre
+en vaut le sixième.
+\end{RAIS}
+\column{0.59\textwidth}
+\etape{1.} $\vv{AB}=(1,1,1)$, $\vv{AC}=(-1,-1,1)$, $\vv{AD}=(0,-1,2)$. Avec $C_2\leftarrow C_2+C_1$ :
+\[\dt{1&-1&0\\1&-1&-1\\1&1&2}=\dt{1&0&0\\1&0&-1\\1&2&2}=2.\]
+Non nul : \textbf{non coplanaires}.\\[3pt]
+\pause
+\etape{2.} $\mathcal V=\frac16|2|=\frac13$.
+\end{columns}
+\end{frame}
+
 % =====================================================================
 \partie{1.5}{Quelle méthode pour quel déterminant ?}{Face à un déterminant d'ordre $n$, comment choisir la bonne technique avant de calculer ?}{\rmI}
 
@@ -781,6 +886,40 @@ Vérifier la formule $|i-j|$ pour $n=2$, $n=3$.
 \pause
 \[n=2:\ \dt{0&1\\1&0}=-1=(-1)^1\cdot1\cdot2^0\ \rep{\checkmark}\quad
 n=3:\ \dt{0&1&2\\1&0&1\\2&1&0}=4=(-1)^2\cdot2\cdot2\ \rep{\checkmark}\]
+\end{frame}
+
+% ---------------------------------------------------------------- EXERCICE D4
+\begin{frame}{\badgeexo{4}La matrice $\min(i,j)$}
+\begin{ENONCE}[5 min]
+Pour $n\geq1$, calculer $\Delta_n=\det\big(\min(i,j)\big)_{1\leq i,j\leq n}$, par exemple
+$\Delta_4=\dt{1&1&1&1\\1&2&2&2\\1&2&3&3\\1&2&3&4}$.
+\objectif{les différences successives, dans le bon ordre.}
+\end{ENONCE}
+\pause
+\begin{INDICE}
+Que vaut la ligne $L_i-L_{i-1}$ ? Par quelle ligne commencer ?
+\end{INDICE}
+\end{frame}
+
+\begin{frame}{\badgecor{4}La matrice $\min(i,j)$}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+Deux lignes consécutives ne diffèrent que sur la fin : leurs différences font apparaître une matrice triangulaire.
+\end{RAIS}
+\begin{OUTIL}
+Différences successives (§1.6) ; matrice triangulaire.
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} $L_i-L_{i-1}=(0,\dots,0,1,\dots,1)$, le premier $1$ en colonne $i$.\\[3pt]
+\etape{2.} On fait $L_n\leftarrow L_n-L_{n-1}$, puis $L_{n-1}\leftarrow L_{n-1}-L_{n-2}$, \dots, $L_2\leftarrow L_2-L_1$ :
+\emph{chaque opération utilise une ligne pas encore modifiée}.\\[3pt]
+\pause
+\etape{3.} La matrice obtenue est triangulaire supérieure, de diagonale $(1,\dots,1)$ : $\Delta_n=1$.
+\end{columns}
+\begin{PIEGE}
+Commencer par $L_2-L_1$ puis $L_3-L_2$ utiliserait une ligne \emph{déjà modifiée}.
+\end{PIEGE}
 \end{frame}
 
 \begin{frame}{Déterminants creux : X, Z, N}
@@ -1125,6 +1264,36 @@ Ellipse $f(\theta)=(2\cos\theta,\sin\theta)$ : tangente en $\theta=\frac\pi4$ ?
 \end{columns}
 \end{frame}
 
+% ---------------------------------------------------------------- EXERCICE C1
+\begin{frame}{\badgeexo{5}Tangentes horizontales, verticales, en un point}
+\begin{ENONCE}[5 min]
+Soit $f(t)=\big(t^2,\ t^3-3t\big)$, $t\in\R$.
+\begin{enumerate}
+\item Déterminer les points où la tangente est horizontale, puis verticale.
+\item Donner une équation de la tangente au point de paramètre $t=2$.
+\end{enumerate}
+\objectif{tangente dirigée par $f'(t)$ en un point régulier.}
+\end{ENONCE}
+\end{frame}
+
+\begin{frame}{\badgecor{5}Tangentes horizontales, verticales, en un point}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+En un point régulier, la tangente est dirigée par $f'(t)=(x'(t),y'(t))$ : horizontale si $y'=0$, verticale si $x'=0$.
+\end{RAIS}
+\begin{OUTIL}
+Tangente en un point régulier : $\det\big(M-f(t_0),\,f'(t_0)\big)=0$.
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} $f'(t)=(2t,\ 3t^2-3)$. Horizontale : $t=\pm1$ ($x'\neq0$), points $(1,-2)$ et $(1,2)$.
+Verticale : $t=0$ ($y'(0)=-3\neq0$), point $(0,0)$.\\[3pt]
+\pause
+\etape{2.} $f(2)=(4,2)$, $f'(2)=(4,9)$ :
+\[\dt{x-4&4\\y-2&9}=0\iff9x-4y-28=0.\]
+\end{columns}
+\end{frame}
+
 \begin{frame}{D'où vient la pente $\dfrac{y'}{x'}$ ?}
 Si $x'(t_0)\neq0$, $x$ est strictement monotone près de $t_0$ : localement, la courbe est un \textbf{graphe}
 \[y(t)=g\big(x(t)\big).\]
@@ -1197,6 +1366,33 @@ $f(t+T)=f(t)$ & période & une période
 \end{axis}
 \end{tikzpicture}\\
 {\scriptsize $x$ paire, $y$ impaire : symétrie d'axe $(Ox)$}
+\end{columns}
+\end{frame}
+
+% ---------------------------------------------------------------- EXERCICE C2
+\begin{frame}{\badgeexo{6}Réduire l'intervalle d'étude}
+\begin{ENONCE}[5 min]
+Soit $f(t)=\big(\sin2t,\ \sin3t\big)$. Réduire l'intervalle d'étude au maximum, en précisant à chaque étape la transformation
+géométrique qui permet de reconstituer la courbe.
+\objectif{périodicité, puis $f(-t)$, puis $f(\pi-t)$.}
+\end{ENONCE}
+\end{frame}
+
+\begin{frame}{\badgecor{6}Réduire l'intervalle d'étude}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+On compare $f(t+T)$, $f(-t)$, $f(a-t)$ à $(\pm x,\pm y)$ : chaque relation divise l'intervalle par $2$ et fournit une symétrie.
+\end{RAIS}
+\begin{OUTIL}
+Réduction par les symétries (§2.3).
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} $f$ est $2\pi$-périodique : étude sur $[-\pi,\pi]$.\\[3pt]
+\etape{2.} $f(-t)=(-x,-y)$ : symétrie de centre $O$ ; étude sur $[0,\pi]$.\\[3pt]
+\pause
+\etape{3.} $f(\pi-t)=\big(\sin(2\pi-2t),\sin(3\pi-3t)\big)=(-x,\,y)$ : symétrie d'axe $(Oy)$ ; étude sur $\left[0,\frac\pi2\right]$.\\[3pt]
+Reconstitution : arc sur $\left[0,\frac\pi2\right]$, symétrique par rapport à $(Oy)$, puis par rapport à $O$.
 \end{columns}
 \end{frame}
 
@@ -1291,6 +1487,37 @@ $p$ pair & rebr. 2\textsuperscript{e} esp. & rebr. 1\textsuperscript{re} esp.
 \item $p$ impair : $X$ change de signe, la courbe \emph{passe} ; $p$ pair : elle \emph{rebrousse}.
 \item $q$ impair : $Y$ change de signe, la courbe \emph{traverse} sa tangente.
 \end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- EXERCICE C3
+\begin{frame}{\badgeexo{7}Trois points stationnaires}
+\begin{ENONCE}[6 min]
+Pour chaque courbe, déterminer $p$ et $q$ au point de paramètre $0$, puis l'allure locale.
+\[\text{(a)}\ \big(t^2,\ t^3\big)\qquad\text{(b)}\ \big(t^3,\ t^5\big)\qquad\text{(c)}\ \big(t^2,\ t^4+t^5\big)\]
+\objectif{appliquer le théorème $(p,q)$.}
+\end{ENONCE}
+\pause
+\begin{INDICE}
+$p$ : premier ordre de dérivée non nulle ; $q$ : premier ordre où la dérivée n'est plus colinéaire à $f^{(p)}(0)$.
+\end{INDICE}
+\end{frame}
+
+\begin{frame}{\badgecor{7}Trois points stationnaires}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+Les coordonnées sont des polynômes : les dérivées en $0$ se lisent sur les coefficients. Parités de $p$ et $q$ $\Rightarrow$ allure.
+\end{RAIS}
+\begin{OUTIL}
+Théorème $(p,q)$ (§2.4).
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{(a)} $f''(0)=(2,0)$, $f'''(0)=(0,6)$ : $p=2$, $q=3$ : \textbf{rebroussement de première espèce}.\\[3pt]
+\pause
+\etape{(b)} $f'''(0)=(6,0)$, $f^{(5)}(0)=(0,120)$ : $p=3$, $q=5$, impairs : \textbf{inflexion}.\\[3pt]
+\pause
+\etape{(c)} $f''(0)=(2,0)$, $f'''(0)=(0,0)$, $f^{(4)}(0)=(0,24)$ : $p=2$, $q=4$ : \textbf{rebroussement de seconde espèce}.
+\end{columns}
 \end{frame}
 
 \begin{frame}{Méthode : étudier un point par développement limité}
@@ -1453,6 +1680,33 @@ La première limite seule ne prouve rien.
 \end{center}
 \vspace{-0.15cm}
 {\small Pour \textbf{chaque} borne et valeur interdite. Position : signe de $y-\alpha x-\beta$ (développement asymptotique).}
+\end{frame}
+
+% ---------------------------------------------------------------- EXERCICE C4
+\begin{frame}{\badgeexo{8}Une branche infinie}
+\begin{ENONCE}[6 min]
+Soit $f(t)=\left(\dfrac t{t-1},\ \dfrac{t^2}{t-1}\right)$. Étudier la branche infinie quand $t\to1$ : direction asymptotique,
+asymptote éventuelle, position de la courbe.
+\objectif{$\frac yx$, puis $y-\alpha x$, puis le signe de l'écart.}
+\end{ENONCE}
+\end{frame}
+
+\begin{frame}{\badgecor{8}Une branche infinie}
+\begin{columns}[T]
+\column{0.38\textwidth}
+\begin{RAIS}
+$x$ et $y$ tendent vers l'infini : on cherche la pente $\alpha=\lim\frac yx$, puis $\lim(y-\alpha x)$.
+\end{RAIS}
+\begin{OUTIL}
+Classification des branches infinies (§2.5).
+\end{OUTIL}
+\column{0.59\textwidth}
+\etape{1.} $\frac yx=t\to1$ : direction asymptotique de pente $1$.\\[3pt]
+\pause
+\etape{2.} $y-x=\frac{t^2-t}{t-1}=t\to1$ : \textbf{asymptote} $y=x+1$.\\[3pt]
+\pause
+\etape{3.} $y-(x+1)=t-1$ : la courbe est au-dessus de l'asymptote pour $t>1$, en dessous pour $t<1$.
+\end{columns}
 \end{frame}
 
 \begin{frame}{Exemple : une asymptote oblique \ajout}

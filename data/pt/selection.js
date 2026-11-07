@@ -1,6 +1,325 @@
 /* Le Collé PT — sélection de 5 problèmes par chapitre (généré par outils/td/integrer_selection.py) */
 window.LC = window.LC || {};
 LC.selection = {
+ "ed": {
+  "doc": "selection-ed",
+  "problemes": [
+   {
+    "id": "sel-ed-regimes",
+    "num": 1,
+    "etape": "Mise en application",
+    "titre": "Régime transitoire et régime permanent",
+    "difficulte": 2,
+    "duree": 35,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "premier ordre",
+     "équation caractéristique",
+     "passage aux complexes",
+     "solution périodique",
+     "comportement en $+\\infty$"
+    ],
+    "objectifs": "Résoudre des équations à coefficients constants, puis interpréter la structure « solution particulière + solution homogène » en termes de régimes.",
+    "prerequis": [
+     "Résolution du premier ordre",
+     "Théorème sur l'équation caractéristique",
+     "Écriture $a\\cos t+b\\sin t=A\\cos(t-\\varphi)$"
+    ],
+    "indications": [
+     "1. Résoudre $z'+z=e^{it}$, puis prendre la partie réelle.",
+     "2. Si $K\\neq0$, la fonction $Ke^{-t}$ est strictement monotone : peut-elle être périodique ?",
+     "4. Discuter le signe de $\\lambda^2-1$ ; pour $\\lambda>1$, regarder la somme et le produit des racines.",
+     "5. Toutes les exponentielles ont une partie réelle strictement négative.",
+     "6. $i^2+i+1=i$ : $z=\\frac{e^{it}}i$."
+    ],
+    "page": 2,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "ed-poly",
+    "num": 2,
+    "etape": "Méthodes classiques",
+    "titre": "Solution polynomiale et changement de variable",
+    "difficulte": 2,
+    "duree": 35,
+    "origine": "Cours, exercice 1.8 · TD complet, exercice 16",
+    "notions": [
+     "solution polynomiale",
+     "changement de variable",
+     "théorème de Cauchy",
+     "problème de Cauchy"
+    ],
+    "objectifs": "Résoudre une équation à coefficients variables par deux méthodes guidées, et contrôler le résultat par la dimension de l'espace des solutions.",
+    "prerequis": [
+     "Théorème de Cauchy linéaire",
+     "Dérivée d'une composée",
+     "Fonctions hyperboliques"
+    ],
+    "indications": [
+     "1. Chercher le degré $n$ par le terme dominant, puis les coefficients.",
+     "2. Poser $z(x)=y(\\sh x)$ : $z'(x)=\\ch x y'(\\sh x)$, puis dériver encore ; on doit obtenir $z''-z=0$.",
+     "2. Pour revenir à $t$ : $\\ch x=\\sqrt{1+t^2}$ et $e^{x}=t+\\sqrt{1+t^2}$.",
+     "3. Les conditions en $0$ portent sur $y(0)=z(0)$ et $y'(0)=z'(0)$."
+    ],
+    "page": 3,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "edn-12",
+    "num": 3,
+    "etape": "Approfondissement",
+    "titre": "Changement de fonction et recollement",
+    "difficulte": 4,
+    "duree": 45,
+    "origine": "Exercice complémentaire · TD complet, exercice 25",
+    "notions": [
+     "changement de fonction",
+     "coefficients constants",
+     "recollement",
+     "série entière"
+    ],
+    "objectifs": "Ramener une équation à coefficients variables à une équation à coefficients constants, puis étudier les solutions au point où le coefficient dominant s'annule.",
+    "prerequis": [
+     "Dérivée d'un produit",
+     "Développements limités usuels",
+     "Séries entières usuelles"
+    ],
+    "indications": [
+     "1. Calculer $z'$ et $z''$, et comparer $z''-z$ au premier membre de $(E)$.",
+     "2. $z''-z=1$ : une constante est solution particulière.",
+     "3. Développer le numérateur en $0$ : la limite n'est finie que si le numérateur est un $O(t^2)$.",
+     "3. Pour la dérivabilité en $0$, écrire $\\frac{\\ch t-1}{t^2}$ comme somme d'une série entière."
+    ],
+    "page": 4,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "edn-14",
+    "num": 4,
+    "etape": "Problème de synthèse",
+    "titre": "Trois méthodes pour une même équation",
+    "difficulte": 5,
+    "duree": 50,
+    "origine": "Exercice complémentaire · TD complet, exercice 27",
+    "notions": [
+     "série entière",
+     "changement de fonction",
+     "recollement",
+     "théorème de Cauchy",
+     "dimension de l'espace des solutions"
+    ],
+    "objectifs": "Croiser trois méthodes sur une même équation, et comprendre pourquoi l'espace des solutions sur $\\R$ peut être une droite.",
+    "prerequis": [
+     "Séries entières : produit par $t$, dérivation",
+     "Théorème de Cauchy linéaire"
+    ],
+    "indications": [
+     "1. Écrire chaque terme sous la forme $\\sum(\\dots)t^n$ ; la relation lie $a_{n+1}$ à $a_{n-1}$.",
+     "1. $\\sum\\frac{(-1)^pt^{2p+1}}{(2p+1)!}=\\sin t$.",
+     "2. $z'=y+ty'$.",
+     "4. Pour quelles constantes la solution a-t-elle une limite finie en $0$ ?"
+    ],
+    "page": 5,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "edn-15",
+    "num": 5,
+    "etape": "Niveau DS / concours",
+    "titre": "Solutions périodiques d'un oscillateur forcé",
+    "difficulte": 5,
+    "duree": 60,
+    "origine": "Exercice complémentaire · TD complet, exercice 28",
+    "notions": [
+     "intégrale fonction de sa borne",
+     "problème de Cauchy",
+     "périodicité",
+     "résonance"
+    ],
+    "objectifs": "Exprimer une solution par une intégrale, puis caractériser l'existence de solutions périodiques, comme dans un problème de concours.",
+    "prerequis": [
+     "Dérivée de $x\\mapsto\\int_0^xg$",
+     "Intégrale d'une fonction périodique sur une période"
+    ],
+    "indications": [
+     "1. Développer $\\sin(t-u)=\\sin t\\cos u-\\cos t\\sin u$ et sortir de l'intégrale ce qui ne dépend pas de $u$.",
+     "2. $\\int_t^{t+2\\pi}g=\\int_0^{2\\pi}g$ pour $g$ continue et $2\\pi$-périodique.",
+     "3. Une fonction $C\\sin t-S\\cos t$ est nulle si et seulement si $C=S=0$ : l'évaluer en $0$ et en $\\frac\\pi2$.",
+     "4. $\\int_0^{2\\pi}\\cos^2u du=\\pi$ ; $\\int_0^{2\\pi}\\cos2u\\cos u du=0$."
+    ],
+    "page": 6,
+    "pageIndication": 7,
+    "pageCorrige": 10
+   }
+  ]
+ },
+ "red": {
+  "doc": "selection-red",
+  "problemes": [
+   {
+    "id": "sel-red-suites",
+    "num": 1,
+    "etape": "Mise en application",
+    "titre": "Diagonaliser pour calculer des puissances",
+    "difficulte": 2,
+    "duree": 35,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "matrice de rang 1",
+     "éléments propres",
+     "diagonalisation",
+     "puissances",
+     "suites couplées",
+     "binôme"
+    ],
+    "objectifs": "Réduire une matrice de la forme $aI+bJ$ sans polynôme caractéristique, puis exploiter la réduction : puissances, suites, inverse.",
+    "prerequis": [
+     "Théorème du rang",
+     "Critères de diagonalisation",
+     "Formule du binôme pour des matrices qui commutent"
+    ],
+    "indications": [
+     "1. $J$ est de rang $1$ : que vaut $\\dim\\Ker J$ ? Calculer $J(1,1,1)^T$.",
+     "2. Mettre en colonnes une base de chaque sous-espace propre, dans l'ordre des valeurs propres de $D$.",
+     "3. $J^2=3J$ ; $2I_3$ et $J$ commutent, le binôme s'applique.",
+     "4. $X_k=A^kX_0$, avec $X_0=(1,0,0)^T$ : c'est la première colonne de $A^k$.",
+     "5. Vérifier que $AB=I_3$ avec $B=\\frac12I_3-\\frac1{10}J$."
+    ],
+    "page": 2,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "rdn-8",
+    "num": 2,
+    "etape": "Méthodes classiques",
+    "titre": "Un endomorphisme de $\\mathbb R_n[X]$",
+    "difficulte": 3,
+    "duree": 35,
+    "origine": "Exercice complémentaire · TD complet, exercice 21",
+    "notions": [
+     "endomorphisme de polynômes",
+     "degré",
+     "vecteurs propres",
+     "valeurs propres distinctes"
+    ],
+    "objectifs": "Diagonaliser un endomorphisme sans écrire sa matrice, en vérifiant qu'une famille donnée est formée de vecteurs propres.",
+    "prerequis": [
+     "Dérivée d'un produit",
+     "Corollaire : $n$ valeurs propres distinctes"
+    ],
+    "indications": [
+     "1. Regarder le coefficient de $X^{n+1}$ dans $f(P)$.",
+     "2. Écrire $(X^2-1)P_k'$ en factorisant $P_k$ : $X^2-1=(X-1)(X+1)$.",
+     "3. Compter les valeurs propres obtenues et comparer à $\\dim\\R_n[X]$."
+    ],
+    "page": 3,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "sel-red-tridiag",
+    "num": 3,
+    "etape": "Approfondissement",
+    "titre": "Une matrice tridiagonale et ses valeurs propres",
+    "difficulte": 4,
+    "duree": 50,
+    "origine": "Problème original Le Collé, en lien avec le chapitre Déterminants",
+    "notions": [
+     "déterminant tridiagonal",
+     "récurrence",
+     "trigonométrie",
+     "valeurs propres distinctes",
+     "vecteurs propres"
+    ],
+    "objectifs": "Calculer un polynôme caractéristique par récurrence, en lire les racines, puis en tirer une identité trigonométrique.",
+    "prerequis": [
+     "Déterminants tridiagonaux",
+     "Formules d'addition",
+     "Déterminant et valeurs propres"
+    ],
+    "indications": [
+     "1. Développer selon la première ligne, puis le second mineur selon sa première colonne.",
+     "2. Récurrence double ; $\\sin(a+b)+\\sin(a-b)=2\\sin a\\cos b$.",
+     "3. Quand $\\sin\\big((n+1)\\theta\\big)$ s'annule-t-il sur $]0,\\pi[$ ? Combien de valeurs obtient-on ?",
+     "4. Même formule trigonométrique ; ne pas oublier les coordonnées $j=1$ et $j=n$.",
+     "5. $1-\\cos\\theta=2\\sin^2\\frac\\theta2$ ; le déterminant est le produit des valeurs propres."
+    ],
+    "page": 4,
+    "pageIndication": 7,
+    "pageCorrige": 10
+   },
+   {
+    "id": "sel-red-commutant",
+    "num": 4,
+    "etape": "Problème de synthèse",
+    "titre": "Matrices qui commutent avec une matrice diagonalisable",
+    "difficulte": 4,
+    "duree": 50,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "commutant",
+     "changement de base",
+     "Vandermonde",
+     "dimension",
+     "racines carrées"
+    ],
+    "objectifs": "Résoudre des équations matricielles en passant dans une base propre, et identifier un sous-espace par sa dimension.",
+    "prerequis": [
+     "Diagonalisation",
+     "Matrices commutant avec une diagonale",
+     "Déterminant de Vandermonde"
+    ],
+    "indications": [
+     "1. $\\mathcal C(A)$ est le noyau d'une application linéaire.",
+     "2. Poser $N=P^{-1}MP$ et écrire le coefficient $(i,j)$ de $DN-ND$.",
+     "3. Conjuguer la relation par $P$ : on obtient trois équations scalaires.",
+     "4. $M$ commute avec $M^2$.",
+     "5. Les colonnes de $P$ sont des vecteurs propres pour $2$, $4$, $6$."
+    ],
+    "page": 5,
+    "pageIndication": 7,
+    "pageCorrige": 10
+   },
+   {
+    "id": "sel-red-crochet",
+    "num": 5,
+    "etape": "Niveau DS / concours",
+    "titre": "L'endomorphisme $M\\mapsto AM-MA$",
+    "difficulte": 5,
+    "duree": 60,
+    "origine": "Problème original Le Collé, dans l'esprit des épreuves écrites",
+    "notions": [
+     "base canonique de $\\mathcal M_n(\\mathbb R)$",
+     "vecteurs propres",
+     "conjugaison",
+     "trace",
+     "endomorphisme nilpotent"
+    ],
+    "objectifs": "Réduire un endomorphisme d'un espace de matrices, transporter la réduction par conjugaison, et construire un contre-exemple.",
+    "prerequis": [
+     "Produit par une matrice diagonale",
+     "Diagonalisation",
+     "Matrices nilpotentes"
+    ],
+    "indications": [
+     "1. $DE_{i,j}$ : la ligne $i$ de $E_{i,j}$ est multipliée par $d_i$ ; $E_{i,j}D$ : la colonne $j$ par $d_j$.",
+     "2. La base canonique est formée de vecteurs propres. $\\sum_{i,j}(d_i-d_j)$ ?",
+     "3. Développer, et simplifier $P^{-1}P$.",
+     "4. Les $PE_{i,j}P^{-1}$ forment une base de $\\mathcal M_n(\\mathbb R)$.",
+     "5. $E_{1,2}E_{2,1}=E_{1,1}$ et $E_{2,1}E_{1,2}=E_{2,2}$.",
+     "6. Que vaut la seule valeur propre possible d'un endomorphisme $u$ tel que $u^3=0$ ?"
+    ],
+    "page": 6,
+    "pageIndication": 7,
+    "pageCorrige": 11
+   }
+  ]
+ },
  "determinants": {
   "doc": "selection-determinants",
   "problemes": [

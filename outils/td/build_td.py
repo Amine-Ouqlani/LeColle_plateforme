@@ -15,7 +15,13 @@ BUILD = os.path.join(ICI, 'build')
 os.makedirs(BUILD, exist_ok=True)
 
 SOURCES = [f'{H}/livre6/LeColle.tex', f'{H}/livre7/LeColle_metrique.tex',
-           f'{ICI}/nouveaux_det.tex', f'{ICI}/nouveaux_courbes.tex', f'{ICI}/nouveaux_metrique.tex']
+           f'{ICI}/nouveaux_det.tex', f'{ICI}/nouveaux_courbes.tex', f'{ICI}/nouveaux_metrique.tex',
+           f'{H}/nouveaux/corps_ed.tex', f'{H}/nouveaux/nouveaux_ed.tex']
+for _c in ('red',):  # chapitres ajoutés au fur et à mesure
+    for _p in (f'{H}/nouveaux/corps_{_c}.tex', f'{H}/nouveaux/nouveaux_{_c}.tex'):
+        if os.path.exists(_p): SOURCES.append(_p)
+# exercices des nouveaux cours (un livre par chapitre) : identifiant du livre -> source
+COURS_SRC = {'ed': f'{H}/nouveaux/corps_ed.tex', 'red': f'{H}/nouveaux/corps_red.tex'}
 LIVRE_SRC = {f'{H}/livre6/LeColle.tex', f'{H}/livre7/LeColle_metrique.tex'}
 
 # ------------------------------------------------------------------ lecture des sources
@@ -58,7 +64,9 @@ def aux(path):
         d[m.group(1)] = (m.group(2), m.group(3))
     return d
 AUX = {'livre6': aux(f'{H}/livre6/LeColle.aux'), 'livre7': aux(f'{H}/livre7/LeColle_metrique.aux')}
-NOM_LIVRE = {'livre6': 'du livre', 'livre7': 'du volume 2'}
+NOM_LIVRE = {'livre6': 'du livre', 'livre7': 'du volume 2', 'ed': 'du cours', 'red': 'du cours'}
+for _c, _f in (('ed', 'LeColle_ED'), ('red', 'LeColle_Reduction')):
+    if os.path.exists(f'{H}/nouveaux/{_f}.aux'): AUX[_c] = aux(f'{H}/nouveaux/{_f}.aux')
 
 ANCIENS = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'), encoding='utf8'))}
 
@@ -86,6 +94,8 @@ def tex(s):
 
 def origine(id_, livre):
     if id_ in EXEMPLES: return EXEMPLES[id_]
+    if livre in COURS_SRC and EXOS[id_]['src'] == COURS_SRC[livre]:
+        return f"Cours, exercice {AUX[livre]['e:' + id_][0]}"
     if id_ in ANCIENS:
         a = ANCIENS[id_]
         num = AUX[livre]['e:' + id_][0]
@@ -106,6 +116,7 @@ def info(id_):
 def preambule(titre_pdf, entete):
     p = open(f'{H}/livre6/preambule.tex', encoding='utf8').read()
     p = p.replace('pdftitle={Le Collé — Déterminants et courbes paramétrées}', f'pdftitle={{{titre_pdf}}}')
+    p += r'\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}' + '\n'
     p += r'''
 % ================================================================ TD : mise en page propre au livret d'exercices
 \fancyhf{}
@@ -160,7 +171,14 @@ def generer(cid, pages_cor=None, pages_enon=None):
 
     # ---------------- énoncés
     corps = []
-    legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
+    if ch.get('nouveau'):
+        legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
+Il reprend \textbf{tous les exercices du cours} (proposés à la fin de chaque partie du livre), complétés par des
+\textbf{exercices complémentaires}, absents du livre. L'origine de chaque exercice est indiquée en haut à droite :
+\emph{« Cours, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
+Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\_') + r'''\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}''')
+    else:
+     legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
 Il reprend \textbf{tous les exercices du livre} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
 du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livre.
 L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livre, exercice~1.5 · TD~1 de la classe »}, \emph{« Livre, exemple~2.4 »}
@@ -195,7 +213,7 @@ Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\
     corps = []
     texte = (r'{\small Corrections détaillées des ' + str(total) + r''' exercices du TD, dans le même ordre et avec les mêmes numéros.
 Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
-resservira. Les renvois « méthode~1.4 du livre », « théorème~2.3 du volume~2 »… désignent le cours.
+resservira. Les renvois ''' + (r"« méthode~1.3 du cours »" if ch.get('nouveau') else r"« méthode~1.4 du livre », « théorème~2.3 du volume~2 »…") + r''' désignent le cours.
 \textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}''')
     corps.append(entete_doc(ch, 'Corrections', texte))
     for (num_p, titre_p, desc_p, ids) in ch['parties']:

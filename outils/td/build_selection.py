@@ -101,7 +101,7 @@ adaptations rédigées par Le Collé, pas les énoncés officiels.}''' '\n'
         corps.append(r'\soustitre{' + str(k) + '}{' + tex(p['titre']) + '}{i:' + p['id'] + '}')
         corps.append(r'\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]' + ''.join(r'\item ' + x + '\n' for x in p['indications']) + r'\end{itemize}')
     # ---------------- corrections
-    corps.append(r'\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du livre » désignent le cours.}')
+    corps.append(r'\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du ' + ('cours' if ch.get('nouveau') else 'livre') + r' » désignent le cours.}')
     for k, p in enumerate(sel, 1):
         i = p['id']
         cor = renvois_td(adapter(CORS[i], livre, lettre))

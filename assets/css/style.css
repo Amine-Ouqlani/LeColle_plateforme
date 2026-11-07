@@ -216,3 +216,10 @@ details.plus > h3:first-of-type { margin-top: 12px; }
 .filtres select { font: inherit; margin-left: 6px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--ink); }
 .q.cible > h3 { color: var(--accent); }
 .q { scroll-margin-top: 16px; }
+
+/* ---------- page d'un chapitre : les documents en un coup d'œil ---------- */
+.ressources { list-style: none; margin: 22px 0 6px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.ressources a { display: block; height: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); }
+.ressources a:hover { border-color: var(--accent); }
+.ressources b { display: block; font-weight: 600; color: var(--accent); }
+.ressources span { display: block; font-size: 14px; line-height: 1.35; color: var(--muted); }

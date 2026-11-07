@@ -1,0 +1,586 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — Algèbre linéaire et réduction : sélection de 5 problèmes},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}Sélection · Algèbre linéaire et réduction}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\makeatletter
+\newcommand{\probleme}[7]{% numéro, étape, titre, difficulté, origine, durée, identifiant
+  \clearpage\phantomsection\label{p:#7}\pdfbookmark[1]{Problème #1 — #2}{p.#7}%
+  {\sffamily\small\color{Gris}\textls[150]{PROBLÈME #1\ \ ·\ \ \MakeUppercase{#2}}}\par\nobreak\vspace{0.15em}
+  {\sffamily\bfseries\LARGE\color{Ink}#3}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  \noindent{\footnotesize\sffamily\color{Gris}Difficulté~\niveau{#4}\quad·\quad durée indicative : #6\quad·\quad #5}\par\nobreak\vspace{0.3em}}
+\newcommand{\fichepb}[3]{% notions, objectifs, prérequis
+  {\small\setlength{\parskip}{0.15em}%
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Notions}}#1\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Objectifs}}#2\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Prérequis}}#3\par}
+  \vspace{0.4em}{\color{Filet}\hrule height 0.4pt}\vspace{0.6em}}
+\newcommand{\titresection}[2]{% titre, texte
+  \clearpage\phantomsection\pdfbookmark[0]{#1}{s.#1}%
+  {\sffamily\bfseries\fontsize{24}{28}\selectfont\color{Ink}#1}\par\vspace{0.3em}
+  {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.5em}{\small\color{Gris}#2}\par\vspace{0.6em}}
+\newcommand{\soustitre}[3]{% numéro, titre, label
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Problème~#1}\quad{\sffamily\bfseries\color{Ink}#2}\par\nobreak\vspace{0.3em}}
+\makeatother
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 2}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}Sélection --- Réduction}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Cinq problèmes à travailler après le cours}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Ces cinq problèmes sont la sélection principale pour les séances, \emph{après} l'explication du cours.
+Ils vont de la mise en application au niveau des devoirs et des concours ; chacun réunit plusieurs résultats du chapitre.
+Ils complètent le TD complet et le livre, qu'ils ne remplacent pas.
+
+\textbf{Mode d'emploi.} Les traiter dans l'ordre. Pour chaque problème : lire l'en-tête (notions, objectifs, prérequis),
+chercher au brouillon, puis rédiger. En cas de blocage, lire \emph{une seule} indication (page des indications), puis reprendre.
+Ne lire la correction qu'une fois le problème terminé ou après un vrai effort : elle explique le \emph{choix de la méthode}
+avant les calculs. L'origine de chaque problème est indiquée en tête ; les problèmes « d'après » un concours sont des
+adaptations rédigées par Le Collé, pas les énoncés officiels.}
+\vspace{1.2em}
+{\small\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\noindent\begin{tabular}{@{}r>{\raggedright\arraybackslash\sffamily\footnotesize}p{2.9cm}>{\raggedright\arraybackslash}p{6.1cm}ll@{\hspace{6pt}}ccc@{}}
+& & & & & {\footnotesize\sffamily énoncé} & {\footnotesize\sffamily indic.} & {\footnotesize\sffamily corrigé}\\\hline
+1 & \textcolor{Gris}{Mise en application} & Diagonaliser pour calculer des puissances & \niveau{2} & 35\,min & \pageref{p:sel-red-suites} & \pageref{i:sel-red-suites} & \pageref{c:sel-red-suites}\\
+2 & \textcolor{Gris}{Méthodes classiques} & Un endomorphisme de $\mathbb R_n[X]$ & \niveau{3} & 35\,min & \pageref{p:rdn-8} & \pageref{i:rdn-8} & \pageref{c:rdn-8}\\
+3 & \textcolor{Gris}{Approfondissement} & Une matrice tridiagonale et ses valeurs propres & \niveau{4} & 50\,min & \pageref{p:sel-red-tridiag} & \pageref{i:sel-red-tridiag} & \pageref{c:sel-red-tridiag}\\
+4 & \textcolor{Gris}{Problème de synthèse} & Matrices qui commutent avec une matrice diagonalisable & \niveau{4} & 50\,min & \pageref{p:sel-red-commutant} & \pageref{i:sel-red-commutant} & \pageref{c:sel-red-commutant}\\
+5 & \textcolor{Gris}{Niveau DS / concours} & L'endomorphisme $M\mapsto AM-MA$ & \niveau{5} & 1\,h & \pageref{p:sel-red-crochet} & \pageref{i:sel-red-crochet} & \pageref{c:sel-red-crochet}\\
+\end{tabular}}
+\probleme{1}{Mise en application}{Diagonaliser pour calculer des puissances}{2}{Problème original Le Collé}{35\,min}{sel-red-suites}
+\fichepb{matrice de rang 1, éléments propres, diagonalisation, puissances, suites couplées, binôme.}{Réduire une matrice de la forme $aI+bJ$ sans polynôme caractéristique, puis exploiter la réduction : puissances, suites, inverse.}{Théorème du rang ; Critères de diagonalisation ; Formule du binôme pour des matrices qui commutent.}
+Soit $A=\begin{pmatrix}3&1&1\\1&3&1\\1&1&3\end{pmatrix}$ et $J$ la matrice de $\mathcal M_3(\R)$ dont tous les coefficients valent $1$.
+\begin{enumerate}
+\item Écrire $A$ à l'aide de $I_3$ et $J$. Déterminer, sans calculer de polynôme caractéristique, les valeurs propres et les sous-espaces
+propres de $J$, puis ceux de $A$.
+\item Donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$.
+\item Calculer $J^2$, puis $A^k$ pour $k\in\N$ de deux façons : par la formule du binôme, et par $A^k=PD^kP^{-1}$. Vérifier que
+\[A^k=2^kI_3+\frac{5^k-2^k}3\,J.\]
+\item On définit trois suites par $u_0=1$, $v_0=w_0=0$ et
+$u_{k+1}=3u_k+v_k+w_k$, $v_{k+1}=u_k+3v_k+w_k$, $w_{k+1}=u_k+v_k+3w_k$. Exprimer $u_k$, $v_k$, $w_k$ et la limite de $\frac{u_k}{5^k}$.
+\item Montrer que $A$ est inversible et vérifier que la formule de la question~3 reste vraie pour $k=-1$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-red-suites} · correction p.~\pageref{c:sel-red-suites}}
+\probleme{2}{Méthodes classiques}{Un endomorphisme de $\mathbb R_n[X]$}{3}{Exercice complémentaire · TD complet, exercice~21}{35\,min}{rdn-8}
+\fichepb{endomorphisme de polynômes, degré, vecteurs propres, valeurs propres distinctes.}{Diagonaliser un endomorphisme sans écrire sa matrice, en vérifiant qu'une famille donnée est formée de vecteurs propres.}{Dérivée d'un produit ; Corollaire : $n$ valeurs propres distinctes.}
+Soit $n\geq1$ et $f(P)=nXP-(X^2-1)P'$ pour $P\in\R_n[X]$.
+\begin{enumerate}
+\item Montrer que $f$ est un endomorphisme de $\R_n[X]$.
+\item Pour $0\leq k\leq n$, on pose $P_k=(X-1)^k(X+1)^{n-k}$. Montrer que $P_k$ est vecteur propre de $f$, associé à $n-2k$.
+\item En déduire que $f$ est diagonalisable, et donner $\Sp(f)$, $\tr f$, $\det f$ pour $n=2$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:rdn-8} · correction p.~\pageref{c:rdn-8}}
+\probleme{3}{Approfondissement}{Une matrice tridiagonale et ses valeurs propres}{4}{Problème original Le Collé, en lien avec le chapitre Déterminants}{50\,min}{sel-red-tridiag}
+\fichepb{déterminant tridiagonal, récurrence, trigonométrie, valeurs propres distinctes, vecteurs propres.}{Calculer un polynôme caractéristique par récurrence, en lire les racines, puis en tirer une identité trigonométrique.}{Déterminants tridiagonaux ; Formules d'addition ; Déterminant et valeurs propres.}
+Pour $n\geq1$, soit $A_n\in\Mn{\R}$ la matrice dont les coefficients $a_{i,i+1}$ et $a_{i+1,i}$ valent $1$, tous les autres étant nuls,
+et $\chi_n=\chi_{A_n}$.
+\begin{enumerate}
+\item Calculer $\chi_1$, $\chi_2$, et montrer que $\chi_n(x)=x\chi_{n-1}(x)-\chi_{n-2}(x)$ pour $n\geq3$.
+\item Soit $\theta\in\,]0,\pi[$. Montrer que $\chi_n(2\cos\theta)=\dfrac{\sin\big((n+1)\theta\big)}{\sin\theta}$ pour tout $n\geq1$.
+\item En déduire les valeurs propres de $A_n$, et que $A_n$ est diagonalisable.
+\item Pour $1\leq k\leq n$ et $\theta_k=\frac{k\pi}{n+1}$, montrer que $X_k=\big(\sin(j\theta_k)\big)_{1\leq j\leq n}$ est un vecteur propre de $A_n$.
+\item Soit $B_n=2I_n-A_n$. Déterminer ses valeurs propres ; en déduire que $B_n$ est inversible et, en utilisant $\det B_n=n+1$ (chapitre
+\emph{Déterminants}), la valeur de $\displaystyle\prod_{k=1}^n4\sin^2\frac{k\pi}{2(n+1)}$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-red-tridiag} · correction p.~\pageref{c:sel-red-tridiag}}
+\probleme{4}{Problème de synthèse}{Matrices qui commutent avec une matrice diagonalisable}{4}{Problème original Le Collé}{50\,min}{sel-red-commutant}
+\fichepb{commutant, changement de base, Vandermonde, dimension, racines carrées.}{Résoudre des équations matricielles en passant dans une base propre, et identifier un sous-espace par sa dimension.}{Diagonalisation ; Matrices commutant avec une diagonale ; Déterminant de Vandermonde.}
+Soit $A\in\mathcal M_3(\R)$ ayant trois valeurs propres distinctes $\lambda_1,\lambda_2,\lambda_3$, et $A=PDP^{-1}$ avec
+$D=\mathrm{diag}(\lambda_1,\lambda_2,\lambda_3)$. On note $\mathcal C(A)=\{M\in\mathcal M_3(\R),\ AM=MA\}$.
+\begin{enumerate}
+\item Montrer que $\mathcal C(A)$ est un sous-espace vectoriel de $\mathcal M_3(\R)$ qui contient $I_3$, $A$ et $A^2$.
+\item Montrer que $M\in\mathcal C(A)$ si et seulement si $P^{-1}MP$ est diagonale. En déduire $\dim\mathcal C(A)$.
+\item Montrer que $(I_3,A,A^2)$ est libre \emph{(utiliser un déterminant de Vandermonde)} et en déduire que $\mathcal C(A)=\vect(I_3,A,A^2)$.
+\item On suppose $\lambda_1,\lambda_2,\lambda_3>0$. Montrer que l'équation $M^2=A$ a exactement $8$ solutions, et que chacune s'écrit
+$aI_3+bA+cA^2$.
+\item Application : $A=\begin{pmatrix}5&1&-1\\2&4&-2\\1&-1&3\end{pmatrix}$, dont les valeurs propres sont $2$, $4$, $6$ (exemple du cours).
+Exprimer les solutions de $M^2=A$ à l'aide de $P=\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-red-commutant} · correction p.~\pageref{c:sel-red-commutant}}
+\probleme{5}{Niveau DS / concours}{L'endomorphisme $M\mapsto AM-MA$}{5}{Problème original Le Collé, dans l'esprit des épreuves écrites}{1\,h}{sel-red-crochet}
+\fichepb{base canonique de $\mathcal M_n(\mathbb R)$, vecteurs propres, conjugaison, trace, endomorphisme nilpotent.}{Réduire un endomorphisme d'un espace de matrices, transporter la réduction par conjugaison, et construire un contre-exemple.}{Produit par une matrice diagonale ; Diagonalisation ; Matrices nilpotentes.}
+Soit $n\geq2$. Pour $A\in\Mn{\R}$, on définit $\Phi_A:\Mn{\R}\to\Mn{\R}$ par $\Phi_A(M)=AM-MA$. On note $E_{i,j}$ les matrices de la
+base canonique de $\Mn{\R}$ (coefficient $1$ en position $(i,j)$, $0$ ailleurs).
+
+\emph{Partie A : cas diagonal.} Soit $D=\mathrm{diag}(d_1,\dots,d_n)$.
+\begin{enumerate}
+\item Montrer que $\Phi_D$ est un endomorphisme et que $\Phi_D(E_{i,j})=(d_i-d_j)E_{i,j}$.
+\item En déduire que $\Phi_D$ est diagonalisable, son spectre, et sa trace. Si les $d_i$ sont distincts, déterminer $\Ker\Phi_D$.
+\end{enumerate}
+\emph{Partie B : cas diagonalisable.} Soit $A=PDP^{-1}$.
+\begin{enumerate}\setcounter{enumi}{2}
+\item Montrer que $\Phi_A(PMP^{-1})=P\,\Phi_D(M)\,P^{-1}$ pour toute $M$.
+\item En déduire que $\Phi_A$ est diagonalisable, avec les mêmes valeurs propres que $\Phi_D$, et que $\tr\Phi_A=0$.
+\end{enumerate}
+\emph{Partie C : un cas non diagonalisable.} $n=2$ et $A=E_{1,2}=\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
+\begin{enumerate}\setcounter{enumi}{4}
+\item Écrire la matrice de $\Phi_A$ dans la base $(E_{1,1},E_{1,2},E_{2,1},E_{2,2})$ et calculer $\Phi_A^3$.
+\item En déduire que $\Phi_A$ n'est pas diagonalisable.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-red-crochet} · correction p.~\pageref{c:sel-red-crochet}}
+\titresection{Indications}{Une indication par question délicate. N\'en lire qu\'une à la fois, puis reprendre la recherche.}
+\soustitre{1}{Diagonaliser pour calculer des puissances}{i:sel-red-suites}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. $J$ est de rang $1$ : que vaut $\dim\Ker J$ ? Calculer $J(1,1,1)^T$.
+\item 2. Mettre en colonnes une base de chaque sous-espace propre, dans l'ordre des valeurs propres de $D$.
+\item 3. $J^2=3J$ ; $2I_3$ et $J$ commutent, le binôme s'applique.
+\item 4. $X_k=A^kX_0$, avec $X_0=(1,0,0)^T$ : c'est la première colonne de $A^k$.
+\item 5. Vérifier que $AB=I_3$ avec $B=\frac12I_3-\frac1{10}J$.
+\end{itemize}
+\soustitre{2}{Un endomorphisme de $\mathbb R_n[X]$}{i:rdn-8}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Regarder le coefficient de $X^{n+1}$ dans $f(P)$.
+\item 2. Écrire $(X^2-1)P_k'$ en factorisant $P_k$ : $X^2-1=(X-1)(X+1)$.
+\item 3. Compter les valeurs propres obtenues et comparer à $\dim\R_n[X]$.
+\end{itemize}
+\soustitre{3}{Une matrice tridiagonale et ses valeurs propres}{i:sel-red-tridiag}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Développer selon la première ligne, puis le second mineur selon sa première colonne.
+\item 2. Récurrence double ; $\sin(a+b)+\sin(a-b)=2\sin a\cos b$.
+\item 3. Quand $\sin\big((n+1)\theta\big)$ s'annule-t-il sur $]0,\pi[$ ? Combien de valeurs obtient-on ?
+\item 4. Même formule trigonométrique ; ne pas oublier les coordonnées $j=1$ et $j=n$.
+\item 5. $1-\cos\theta=2\sin^2\frac\theta2$ ; le déterminant est le produit des valeurs propres.
+\end{itemize}
+\soustitre{4}{Matrices qui commutent avec une matrice diagonalisable}{i:sel-red-commutant}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. $\mathcal C(A)$ est le noyau d'une application linéaire.
+\item 2. Poser $N=P^{-1}MP$ et écrire le coefficient $(i,j)$ de $DN-ND$.
+\item 3. Conjuguer la relation par $P$ : on obtient trois équations scalaires.
+\item 4. $M$ commute avec $M^2$.
+\item 5. Les colonnes de $P$ sont des vecteurs propres pour $2$, $4$, $6$.
+\end{itemize}
+\soustitre{5}{L'endomorphisme $M\mapsto AM-MA$}{i:sel-red-crochet}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. $DE_{i,j}$ : la ligne $i$ de $E_{i,j}$ est multipliée par $d_i$ ; $E_{i,j}D$ : la colonne $j$ par $d_j$.
+\item 2. La base canonique est formée de vecteurs propres. $\sum_{i,j}(d_i-d_j)$ ?
+\item 3. Développer, et simplifier $P^{-1}P$.
+\item 4. Les $PE_{i,j}P^{-1}$ forment une base de $\mathcal M_n(\mathbb R)$.
+\item 5. $E_{1,2}E_{2,1}=E_{1,1}$ et $E_{2,1}E_{1,2}=E_{2,2}$.
+\item 6. Que vaut la seule valeur propre possible d'un endomorphisme $u$ tel que $u^3=0$ ?
+\end{itemize}
+\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du cours » désignent le cours.}
+\soustitre{1}{Diagonaliser pour calculer des puissances}{c:sel-red-suites}
+\choix{$A=2I_3+J$ : les vecteurs propres de $J$ sont ceux de $A$ ; et $J$, de rang $1$, se réduit sans calcul.}
+\q{1.} $A=2I_3+J$. $J$ est de rang $1$ : $E_0(J)=\Ker J$ est le plan $x+y+z=0$ ; $J(1,1,1)^T=3(1,1,1)^T$, donc $E_3(J)=\vect(1,1,1)$
+(les dimensions totalisent $3$). Si $JX=\mu X$, $AX=(2+\mu)X$ : $\Sp(A)=\{2,5\}$, $E_2(A)$ est le plan $x+y+z=0$, $E_5(A)=\vect(1,1,1)$.
+
+\q{2.} $P=\begin{pmatrix}1&1&1\\1&-1&0\\1&0&-1\end{pmatrix}$ (colonnes : $(1,1,1)$, puis une base du plan), $D=\mathrm{diag}(5,2,2)$.
+
+\q{3.} $J^2=3J$, d'où $J^i=3^{i-1}J$ pour $i\geq1$. Comme $2I_3$ et $J$ commutent, le binôme donne
+\[A^k=\sum_{i=0}^k\binom ki2^{k-i}J^i=2^kI_3+\frac13\Big(\sum_{i=1}^k\binom ki2^{k-i}3^i\Big)J=2^kI_3+\frac{(2+3)^k-2^k}3J.\]
+Par la diagonalisation, $A^k=PD^kP^{-1}$ a pour coefficients diagonaux $\frac{5^k+2\cdot2^k}3$ et pour autres coefficients
+$\frac{5^k-2^k}3$ : c'est la même matrice.
+
+\q{4.} $X_k=A^kX_0$ est la première colonne de $A^k$ : $u_k=\frac{5^k+2^{k+1}}3$, $v_k=w_k=\frac{5^k-2^k}3$, et
+$\frac{u_k}{5^k}\to\frac13$ (car $\left(\frac25\right)^k\to0$). Les trois suites ont le même comportement dominant, porté par la
+valeur propre $5$.
+
+\q{5.} $0\notin\Sp(A)$ : $A$ est inversible. Pour $k=-1$ : $B=\frac12I_3-\frac1{10}J$, et
+$AB=(2I_3+J)\left(\frac12I_3-\frac1{10}J\right)=I_3+\left(\frac12-\frac15-\frac3{10}\right)J=I_3$.
+\retenir{une matrice de la forme $aI+bJ$ se réduit en lisant les éléments propres de $J$ ; ses puissances restent de cette forme.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{2}{Un endomorphisme de $\mathbb R_n[X]$}{c:rdn-8}
+\q{1.} $f$ est linéaire. Si $P=\sum_{i\leq n}a_iX^i$, le terme de degré $n+1$ de $f(P)$ vaut $na_nX^{n+1}-na_nX^{n+1}=0$ : $f(P)\in\R_n[X]$.
+\q{2.} $P_k'=k(X-1)^{k-1}(X+1)^{n-k}+(n-k)(X-1)^k(X+1)^{n-k-1}$, donc
+$(X^2-1)P_k'=\big(k(X+1)+(n-k)(X-1)\big)P_k=\big(nX+2k-n\big)P_k$. Ainsi $f(P_k)=nXP_k-(nX+2k-n)P_k=(n-2k)P_k$, et $P_k\neq0$.
+\q{3.} Les $n+1$ valeurs $n,n-2,\dots,-n$ sont distinctes et $\dim\R_n[X]=n+1$ : $f$ est diagonalisable et
+$\Sp(f)=\{n-2k,\ 0\leq k\leq n\}$. Pour $n=2$ : $\Sp=\{2,0,-2\}$, $\tr f=0$, $\det f=0$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{3}{Une matrice tridiagonale et ses valeurs propres}{c:sel-red-tridiag}
+\choix{un déterminant tridiagonal se calcule par récurrence (chapitre \emph{Déterminants}) ; la substitution $x=2\cos\theta$ rend la
+récurrence trigonométrique et donne les racines.}
+\q{1.} $\chi_1=x$, $\chi_2=\dt{x&-1\\-1&x}=x^2-1$. On développe $\det(xI_n-A_n)$ selon la première ligne : le premier terme est
+$x\chi_{n-1}$ ; le second, $-(-1)$ fois un mineur dont la première colonne est $(-1,0,\dots,0)^T$, vaut, en développant selon cette
+colonne, $-\chi_{n-2}$. D'où $\chi_n=x\chi_{n-1}-\chi_{n-2}$.
+
+\q{2.} Récurrence double. $n=1$ : $\frac{\sin2\theta}{\sin\theta}=2\cos\theta$ ; $n=2$ : $\frac{\sin3\theta}{\sin\theta}=4\cos^2\theta-1$.
+Hérédité : $2\cos\theta\sin(n\theta)-\sin\big((n-1)\theta\big)=\sin\big((n+1)\theta\big)$ (formule $\sin(a+b)+\sin(a-b)=2\sin a\cos b$).
+
+\q{3.} Pour $\theta_k=\frac{k\pi}{n+1}$, $k=1,\dots,n$, on a $\theta_k\in\,]0,\pi[$ et $\sin\big((n+1)\theta_k\big)=0$ : les $n$ réels
+$\lambda_k=2\cos\theta_k$ sont racines de $\chi_n$. Ils sont distincts ($\cos$ est strictement décroissante sur $]0,\pi[$), et
+$\chi_n$ est de degré $n$ : ce sont toutes les valeurs propres, toutes simples, et $A_n$ est diagonalisable.
+
+\q{4.} La $j$-ième coordonnée de $A_nX_k$ est $\sin\big((j-1)\theta_k\big)+\sin\big((j+1)\theta_k\big)=2\cos\theta_k\sin(j\theta_k)$, y compris
+pour $j=1$ et $j=n$ car $\sin0=\sin\big((n+1)\theta_k\big)=0$. Et $X_k\neq0$ ($\sin\theta_k\neq0$) : $A_nX_k=\lambda_kX_k$.
+
+\q{5.} Les valeurs propres de $B_n$ sont $2-2\cos\theta_k=4\sin^2\frac{\theta_k}2>0$ : $B_n$ est inversible. Le déterminant est le
+produit des valeurs propres : $\displaystyle\prod_{k=1}^n4\sin^2\frac{k\pi}{2(n+1)}=n+1$.
+\retenir{déterminants (récurrence), trigonométrie et réduction se répondent : les racines de $\chi_n$ sont lues sur $\sin\big((n+1)\theta\big)=0$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{4}{Matrices qui commutent avec une matrice diagonalisable}{c:sel-red-commutant}
+\choix{tout se lit dans la base propre : avec $N=P^{-1}MP$, la condition $AM=MA$ devient $DN=ND$, et une matrice qui commute avec
+une diagonale à coefficients distincts est diagonale.}
+\q{1.} $M\mapsto AM-MA$ est linéaire et $\mathcal C(A)$ est son noyau. $I_3$, $A$, $A^2$ commutent avec $A$.
+
+\q{2.} $AM=MA\iff PDP^{-1}M=MPDP^{-1}\iff D(P^{-1}MP)=(P^{-1}MP)D$. Les $\lambda_i$ étant distincts, cela équivaut à $P^{-1}MP$
+diagonale (le coefficient $(i,j)$ de $DN-ND$ vaut $(\lambda_i-\lambda_j)n_{i,j}$). Donc $\mathcal C(A)=\{P\Delta P^{-1},\ \Delta\text{ diagonale}\}$,
+image de l'espace des matrices diagonales (dimension $3$) par l'isomorphisme $\Delta\mapsto P\Delta P^{-1}$ : $\dim\mathcal C(A)=3$.
+
+\q{3.} Si $aI_3+bA+cA^2=0$, alors $P^{-1}(\dots)P=aI_3+bD+cD^2=0$, soit $a+b\lambda_i+c\lambda_i^2=0$ pour $i=1,2,3$. Ce système a pour
+déterminant le Vandermonde $(\lambda_2-\lambda_1)(\lambda_3-\lambda_1)(\lambda_3-\lambda_2)\neq0$ : $a=b=c=0$. Trois vecteurs libres
+dans un espace de dimension $3$ : $\mathcal C(A)=\vect(I_3,A,A^2)$.
+
+\q{4.} Si $M^2=A$, $M$ commute avec $M^2=A$, donc $M=P\Delta P^{-1}$ avec $\Delta$ diagonale et $\Delta^2=D$ :
+$\Delta=\mathrm{diag}(\pm\sqrt{\lambda_1},\pm\sqrt{\lambda_2},\pm\sqrt{\lambda_3})$, soit $8$ choix, qui conviennent tous. Chaque solution est
+dans $\mathcal C(A)$, donc de la forme $aI_3+bA+cA^2$ (question~3).
+
+\q{5.} $A=PDP^{-1}$ avec $D=\mathrm{diag}(2,4,6)$ (exemple du cours). Les solutions sont
+$M=P\,\mathrm{diag}(\pm\sqrt2,\pm2,\pm\sqrt6)\,P^{-1}$, $8$ matrices.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{5}{L'endomorphisme $M\mapsto AM-MA$}{c:sel-red-crochet}
+\choix{dans le cas diagonal, la base canonique de $\Mn{\R}$ est déjà une base de vecteurs propres ; le cas diagonalisable s'y ramène
+par conjugaison ; le contre-exemple utilise le résultat sur les endomorphismes nilpotents.}
+\q{1.} $\Phi_D$ est linéaire (produit matriciel). $DE_{i,j}=d_iE_{i,j}$ (la ligne $i$ est multipliée par $d_i$) et $E_{i,j}D=d_jE_{i,j}$
+(la colonne $j$ par $d_j$) : $\Phi_D(E_{i,j})=(d_i-d_j)E_{i,j}$.
+
+\q{2.} La base canonique est formée de vecteurs propres : $\Phi_D$ est diagonalisable, $\Sp(\Phi_D)=\{d_i-d_j,\ 1\leq i,j\leq n\}$, et
+$\tr\Phi_D=\sum_{i,j}(d_i-d_j)=0$. Si les $d_i$ sont distincts, $d_i-d_j=0\iff i=j$ : $\Ker\Phi_D=\vect(E_{1,1},\dots,E_{n,n})$, les matrices
+diagonales.
+
+\q{3.} $\Phi_A(PMP^{-1})=PDP^{-1}PMP^{-1}-PMP^{-1}PDP^{-1}=P(DM-MD)P^{-1}$.
+
+\q{4.} D'après 3, $\Phi_A(PE_{i,j}P^{-1})=(d_i-d_j)PE_{i,j}P^{-1}$. Les $PE_{i,j}P^{-1}$ forment une base de $\Mn{\R}$ (image d'une base par
+l'automorphisme $M\mapsto PMP^{-1}$) : c'est une base de vecteurs propres, la matrice de $\Phi_A$ y est la même que celle de $\Phi_D$
+dans la base canonique. Même spectre, et $\tr\Phi_A=\tr\Phi_D=0$.
+
+\q{5.} $\Phi_A(E_{1,1})=-E_{1,2}$, $\Phi_A(E_{1,2})=0$, $\Phi_A(E_{2,1})=E_{1,1}-E_{2,2}$, $\Phi_A(E_{2,2})=E_{1,2}$. Matrice :
+\[\begin{pmatrix}0&0&1&0\\-1&0&0&1\\0&0&0&0\\0&0&-1&0\end{pmatrix}.\]
+$\Phi_A^2(E_{2,1})=\Phi_A(E_{1,1}-E_{2,2})=-2E_{1,2}$ et $\Phi_A^2$ s'annule sur les trois autres vecteurs ; puis $\Phi_A^3=0$.
+
+\q{6.} $\Phi_A^3=0$ : la seule valeur propre possible est $0$ (si $\Phi_A(M)=\lambda M$, $M\neq0$, alors $\lambda^3M=0$). Diagonalisable,
+$\Phi_A$ serait nul ; or $\Phi_A(E_{1,1})\neq0$. Donc $\Phi_A$ n'est pas diagonalisable : la diagonalisabilité de $A$ est essentielle en partie~B.
+\retenir{conjuguer par $P$ transporte tout : éléments propres, trace, diagonalisabilité.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

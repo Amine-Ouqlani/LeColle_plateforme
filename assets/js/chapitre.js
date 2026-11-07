@@ -22,7 +22,7 @@ const cours = `
     ${ligne('Livre complet', `${doc(coursDoc).titre} · cours, exemples et corrigés`, lire(coursDoc, C.cours.debut) + lienPdf(doc(coursDoc)))}
     ${C.fiche ? ligne(doc(C.fiche.doc).titre, 'l\'essentiel du chapitre sur 3 pages, à imprimer', lire(C.fiche.doc, 1) + lienPdf(doc(C.fiche.doc)))
               : ligne('Fiche de référence', 'pas encore de fiche : le résumé des méthodes du volume 2 en tient lieu', lire(coursDoc, 13))}
-    ${C.presentation ? ligne('Présentation', `les diapositives de la séance · <a href="${slidesUrl('presentationStatique', C.presentation.statique.debut)}">sans animations</a>`, lire('presentation', C.presentation.debut, true) + lienPdf(doc('presentation')))
+    ${C.presentation ? ligne('Présentation', `les diapositives de la séance${C.presentation.exercices ? `, avec ${C.presentation.exercices} exercices intégrés` : ''} · <a href="${slidesUrl(C.presentation.statique.doc, C.presentation.statique.debut)}">sans animations</a>`, lire(C.presentation.doc, C.presentation.debut, true) + lienPdf(doc(C.presentation.doc)))
                      : ''}
   </ul>
   <details class="plus"><summary>Le livre partie par partie</summary>
@@ -31,7 +31,7 @@ const cours = `
   </details>`;
 
 /* ---------------------------------------------------------------- exercices du TD (listes repliées) */
-const ORIG = { lecolle: 'livre', exemple: 'exemple du cours', devoir: 'devoir type', complementaire: 'complémentaire' };
+const ORIG = { lecolle: 'livre', exemple: 'exemple du cours', devoir: 'devoir type', complementaire: 'complémentaire', cours: 'exercice du livre' };
 const ligneExo = e => {
   const origine = e.origine === 'td' ? `TD ${e.td}` : ORIG[e.origine] || '';
   return `<li id="exo-${e.id}"><div class="row"><div class="main"><details><summary><span class="num">${e.num}</span>${e.titre} <span class="tag">· ${origine}${e.hp ? ' · hors programme' : ''}</span> ${dots(e.difficulte)}</summary>
@@ -64,6 +64,18 @@ const annalesChap = Object.entries(parAnnale).sort((a, b) => annale(b[0]).annee 
 const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">${s.titre}</a>`, `${dureeTexte(s.duree)} · ${s.type === 'examen' ? 'examen blanc, extraits d\'annales' : 'devoir'}`,
   s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">Sujet</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : '')).join('');
 
+/* ---------------------------------------------------------------- les documents du chapitre, en un coup d'œil */
+const res = (nom, desc, href) => `<li><a href="${href}"><b>${nom}</b><span>${desc}</span></a></li>`;
+const ressources = [
+  res('Cours', 'le livre complet', lecteurUrl(coursDoc, C.cours.debut)),
+  C.presentation ? res('Présentation', 'le support de séance', slidesUrl(C.presentation.doc, C.presentation.debut)) : '',
+  C.fiche ? res('Fiche', 'l\'essentiel, à imprimer', lecteurUrl(C.fiche.doc, 1)) : '',
+  res('5 problèmes', 'la sélection après le cours', '#etape-3'),
+  T ? res('TD', `${EXOS.length} exercices, énoncés`, lecteurUrl(T.doc, 1)) : '',
+  T ? res('Corrections', 'du TD, détaillées', lecteurUrl(T.corrections, 1)) : '',
+  QUESTIONS.length ? res('Annales', `${QUESTIONS.length} questions de concours`, '#etape-5') : ''
+].join('');
+
 /* ---------------------------------------------------------------- page */
 const ETAPES = [['etape-1', 'Consolider le cours'], ['etape-2', 'Travailler les méthodes'], ['etape-3', 'Les 5 problèmes'], ['etape-4', 'Approfondir'], ['etape-5', 'Se préparer aux évaluations']];
 const i = LC.chapitres.indexOf(C), prev = LC.chapitres[i - 1], next = LC.chapitres[i + 1];
@@ -73,6 +85,7 @@ $('#contenu').innerHTML = `
   <h1>${C.titre}</h1>
   <p class="intro">${C.accroche}</p>
   <p class="suite">Après la séance : relis la fiche, puis travaille <a href="#etape-3">les 5 problèmes</a> dans l'ordre.</p>
+  <ul class="ressources">${ressources}</ul>
 
   <h2 id="cours">Le cours</h2>
   ${cours}
@@ -107,6 +120,7 @@ $('#contenu').innerHTML = `
   <section class="etape" id="etape-5"><h3><span class="etape-num">5</span>Se préparer aux évaluations</h3>
     <p>En temps limité, sans documents : un devoir ou un examen blanc, et les questions de concours sur ce chapitre.</p>
     ${evaluations ? `<ul class="list">${evaluations}</ul>` : ''}
+    ${!evaluations && !annalesChap ? '<p class="muted">Pas encore d\'annales sélectionnées pour ce chapitre : les problèmes de niveau IV du TD et le cinquième problème de la sélection en tiennent lieu.</p>' : ''}
     ${annalesChap ? `<details class="plus"><summary>Annales de concours sur ce chapitre <span class="tag">(${QUESTIONS.length} questions)</span></summary><ul class="list">${annalesChap}</ul>
       <p class="muted" style="margin-top:8px"><a href="annales.html?ch=${C.id}">Les mêmes questions, classées par notion →</a></p></details>` : ''}
   </section>

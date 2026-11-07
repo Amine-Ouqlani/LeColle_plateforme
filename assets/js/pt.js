@@ -13,11 +13,11 @@ const chapitres = LC.chapitres.map(c => `<li><span class="n">${c.num}</span><div
     <p class="links"><a href="chapitre.html?id=${c.id}#cours">Le cours</a><a href="chapitre.html?id=${c.id}#etape-3">Les 5 problèmes</a><a href="chapitre.html?id=${c.id}#entrainement">S'entraîner</a></p></div></li>`).join('');
 
 const GROUPES = [
-  ['Livres', ['livre', 'volume2']],
-  ['Fiches de référence', ['fiche-determinants', 'fiche-courbes']],
-  ['Présentation', ['presentation', 'presentationStatique']],
-  ['Sélections de 5 problèmes', ['selection-determinants', 'selection-courbes', 'selection-metrique']],
-  ['TD et corrections', ['td-determinants', 'td-determinants-corrections', 'td-courbes', 'td-courbes-corrections', 'td-metrique', 'td-metrique-corrections']],
+  ['Livres', ['livre-ed', 'livre-red', 'livre', 'volume2']],
+  ['Fiches de référence', ['fiche-ed', 'fiche-red', 'fiche-determinants', 'fiche-courbes']],
+  ['Présentations', ['presentation-ed', 'presentation-ed-statique', 'presentation-red', 'presentation-red-statique', 'presentation', 'presentationStatique']],
+  ['Sélections de 5 problèmes', ['selection-ed', 'selection-red', 'selection-determinants', 'selection-courbes', 'selection-metrique']],
+  ['TD et corrections', ['td-ed', 'td-ed-corrections', 'td-red', 'td-red-corrections', 'td-determinants', 'td-determinants-corrections', 'td-courbes', 'td-courbes-corrections', 'td-metrique', 'td-metrique-corrections']],
   ['Autres', ['revision', 'archive']]
 ];
 const ligneDoc = id => {

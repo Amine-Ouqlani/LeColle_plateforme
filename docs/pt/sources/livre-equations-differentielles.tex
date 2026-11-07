@@ -1,0 +1,861 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Équations différentielles linéaires
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — Équations différentielles linéaires},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+\begin{document}
+\pagenumbering{roman}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[Bleu] (current page.north west) rectangle ([yshift=-15.5cm]current page.north east);
+  \node[anchor=north west,text=white,font=\sffamily\small] at ([xshift=2.6cm,yshift=-3.2cm]current page.north west)
+     {\textls[250]{MATHÉMATIQUES\ \ ·\ \ CPGE PT\ \ ·\ \ DEUXIÈME ANNÉE}};
+  \node[anchor=north west,text=white] at ([xshift=2.5cm,yshift=-4.4cm]current page.north west)
+     {\fontsize{62}{66}\selectfont\scshape Le Collé};
+  \draw[Ocre,line width=1.6pt] ([xshift=2.6cm,yshift=-7.3cm]current page.north west) -- ++(4.2cm,0);
+  \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
+     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Équations différentielles};
+  \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Équations linéaires du premier et du second ordre\\[0.15cm]Coefficients constants et coefficients continus};
+  \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
+     at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
+     {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{Le premier chapitre de l'année : la structure des solutions, les méthodes de résolution, et le théorème de Cauchy linéaire.}};
+  \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west) {Ahmed Amine Ouqlani};
+  \draw[Filet] ([xshift=2.6cm,yshift=2.6cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.6cm]current page.south east);
+\end{tikzpicture}
+\end{titlepage}
+\thispagestyle{plain}
+\section*{Avant-propos}
+\markboth{Avant-propos}{}
+Ce livre accompagne la séance sur les équations différentielles linéaires. Il reprend, dans l'ordre et avec les mêmes
+notations, la présentation projetée en séance, et sert de référence pour travailler seul ensuite : chaque résultat y est
+énoncé avec ses hypothèses, chaque méthode est illustrée par un exemple rédigé, et chaque partie se termine par quelques
+exercices, corrigés au chapitre~2.
+
+Le programme de PT prolonge la première année : les équations du premier ordre et du second ordre à coefficients constants
+sont supposées connues, mais elles sont reprises ici en entier, car elles servent dans toutes les autres méthodes.
+La nouveauté de deuxième année est l'équation du second ordre à \emph{coefficients continus}
+$y''+a(t)y'+b(t)y=c(t)$ : théorème de Cauchy linéaire, structure de l'ensemble des solutions, et quelques méthodes de
+résolution guidées (solution polynomiale, solution connue ne s'annulant pas, changement de variable, séries entières).
+
+La recherche de solutions développables en série entière (§1.4) suppose connu le chapitre sur les séries entières ;
+si ce n'est pas encore le cas, on peut la laisser de côté sans gêner la suite. Les notions hors programme sont signalées \HP.
+Les compléments (TD complet et ses corrections, sélection de cinq problèmes, fiche de référence) suivent la même numérotation.
+
+\vfill
+{\footnotesize\sffamily\color{Gris}\textcopyright~2026 Ahmed Amine Ouqlani. Tous droits réservés.\par}
+\clearpage
+\thispagestyle{plain}
+\hypertarget{toc}{}
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\ongletstrue
+% =====================================================================
+%            CHAPITRE 1 — ÉQUATIONS DIFFÉRENTIELLES LINÉAIRES
+% =====================================================================
+\clearpage
+\section{Équations différentielles linéaires}\label{sec:ed}
+
+Une équation différentielle relie une fonction inconnue $y$ à ses dérivées. Lorsqu'elle est \emph{linéaire}, l'ensemble de
+ses solutions a une structure très simple : une solution particulière, plus toutes les solutions de l'équation sans second
+membre, qui forment un espace vectoriel de dimension $1$ (premier ordre) ou $2$ (second ordre). Tout le chapitre consiste à
+exploiter cette structure : trouver l'espace des solutions homogènes, puis une seule solution particulière.
+
+\ouverture{%
+\begin{itemize}[leftmargin=1.1em,itemsep=1pt]
+\item Connaître la structure de l'ensemble des solutions et le théorème de Cauchy linéaire.
+\item Résoudre les équations du premier ordre et du second ordre à coefficients constants.
+\item Résoudre une équation du second ordre à coefficients continus en suivant une méthode indiquée.
+\item Recoller des solutions en un point où le coefficient dominant s'annule.
+\end{itemize}}{%
+Dérivation, primitives usuelles, intégration par parties ; nombres complexes, exponentielle complexe ; espaces vectoriels
+(sous-espace, dimension) ; pour le §1.4, séries entières.}{Deux séances}
+
+Dans tout le chapitre, $I$ est un intervalle de $\R$ non réduit à un point et $\K=\R$ ou $\C$.
+
+% ---------------------------------------------------------------------
+\subsection{Vocabulaire et structure des solutions}\label{ss:structure}
+
+\begin{definition}
+Une \emph{équation différentielle linéaire scalaire} d'ordre $1$, resp.\ $2$, est une équation de la forme
+\[(E)\quad y'+a(t)y=b(t),\qquad\text{resp.}\qquad (E)\quad y''+a(t)y'+b(t)y=c(t),\]
+où $a$, $b$ (et $c$) sont des fonctions \emph{continues} de $I$ dans $\K$. Une \emph{solution} est une fonction $y$ dérivable
+(resp.\ deux fois dérivable) sur $I$ qui vérifie l'égalité en tout point de $I$. Le \emph{second membre} est $b$ (resp.\ $c$) ;
+l'\emph{équation homogène associée} $(H)$ est obtenue en le remplaçant par $0$.
+\end{definition}
+
+On rencontre souvent l'équation sous la forme $\alpha(t)y'+\beta(t)y=\gamma(t)$, ou $\alpha(t)y''+\dots$ : on ne peut la mettre
+sous la forme ci-dessus (forme \emph{normalisée}) qu'en divisant par $\alpha(t)$, donc \emph{sur un intervalle où $\alpha$ ne
+s'annule pas}. Les points où $\alpha$ s'annule sont traités à part (§\ref{ss:recollement}).
+
+\begin{proposition}[structure]\label{p:structure}
+Soit $L(y)=y''+a(t)y'+b(t)y$ (ou $L(y)=y'+a(t)y$ au premier ordre).
+\begin{enumerate}
+\item $L$ est linéaire : $L(\lambda y+\mu z)=\lambda L(y)+\mu L(z)$. L'ensemble $S_H$ des solutions de $(H)$ est donc un
+\emph{espace vectoriel} (le noyau de $L$).
+\item \emph{Principe de superposition.} Si $L(y_1)=c_1$ et $L(y_2)=c_2$, alors $L(y_1+y_2)=c_1+c_2$.
+\item Si $y_p$ est une solution de $(E)$, les solutions de $(E)$ sont exactement les fonctions $y_p+h$, avec $h\in S_H$ :
+\[S_E=y_p+S_H.\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Le 1 vient de la linéarité de la dérivation ; le 2 en est un cas particulier. Pour le 3 : $L(y)=c=L(y_p)$ équivaut à
+$L(y-y_p)=0$, c'est-à-dire $y-y_p\in S_H$.
+\end{proof}
+
+\begin{reflexe}
+Résoudre une équation linéaire, c'est toujours faire deux choses séparées : \textbf{(1)} résoudre l'équation homogène ;
+\textbf{(2)} trouver \emph{une} solution particulière. Le principe de superposition permet de découper un second membre compliqué
+en morceaux simples.
+\end{reflexe}
+
+\begin{theoreme}[Cauchy linéaire]\label{t:cauchy}
+Soit $t_0\in I$.
+\begin{itemize}
+\item Ordre $1$ : pour tout $y_0\in\K$, il existe une unique solution de $y'+a(t)y=b(t)$ sur $I$ telle que $y(t_0)=y_0$.
+\item Ordre $2$ : pour tous $y_0,y_1\in\K$, il existe une unique solution de $y''+a(t)y'+b(t)y=c(t)$ sur $I$ telle que
+$y(t_0)=y_0$ et $y'(t_0)=y_1$.
+\end{itemize}
+\end{theoreme}
+
+La démonstration au second ordre est hors programme ; au premier ordre, elle découle du théorème~\ref{t:ordre1}. Deux
+conséquences reviennent constamment.
+
+\begin{corollaire}\label{c:dim}
+\begin{enumerate}
+\item Une solution de l'équation homogène qui s'annule en un point (au premier ordre), ou qui s'annule avec sa dérivée en un
+point (au second ordre), est la fonction nulle.
+\item $S_H$ est une droite vectorielle au premier ordre, un plan vectoriel au second ordre : l'application
+$h\mapsto\big(h(t_0),h'(t_0)\big)$ est un isomorphisme de $S_H$ sur $\K^2$.
+\end{enumerate}
+\end{corollaire}
+
+\begin{proof}
+1. La fonction nulle est solution du même problème de Cauchy ; par unicité, c'est la seule.
+2. Au second ordre, $\Phi:h\mapsto(h(t_0),h'(t_0))$ est linéaire ; elle est surjective (existence) et injective (point 1). Donc
+$\dim S_H=\dim\K^2=2$. Même raisonnement au premier ordre avec $h\mapsto h(t_0)$.
+\end{proof}
+
+\begin{enpratique}
+Pour montrer que deux solutions $y_1,y_2$ de $(H)$ engendrent $S_H$ au second ordre, il suffit de vérifier qu'elles ne sont pas
+proportionnelles : elles forment alors une famille libre de deux vecteurs dans un plan. Si on ne voit pas qu'elles ne sont pas
+proportionnelles, on calcule en un point $t_0$ le déterminant $\dt{y_1(t_0)&y_2(t_0)\\y_1'(t_0)&y_2'(t_0)}$ : il est non nul
+si et seulement si les vecteurs $\Phi(y_1)$ et $\Phi(y_2)$ de $\K^2$ forment une base (chapitre \emph{Déterminants}).
+\end{enpratique}
+
+\begin{exemple}[une équation intégrale]
+Cherchons les fonctions continues $f$ telles que $f(x)=1+\int_0^xtf(t)\,dt$ pour tout réel $x$. Le membre de droite est
+dérivable (intégrale de fonction continue) ; donc $f$ l'est, et $f'(x)=xf(x)$, avec $f(0)=1$. Réciproquement, une solution de ce
+problème de Cauchy vérifie l'équation intégrale (intégrer $f'=xf$ de $0$ à $x$). Par le théorème~\ref{t:ordre1}, $f(x)=e^{x^2/2}$.
+\end{exemple}
+
+\begin{methode}{Équation intégrale}\label{m:integrale}
+Si l'inconnue apparaît sous une intégrale $\int_{x_0}^x$, dériver pour obtenir une équation différentielle, et relever la
+condition initiale en $x=x_0$. Conclure par équivalence (ou vérifier que la solution trouvée convient).
+\end{methode}
+
+\begin{exo}{ed-integ}{2}{équation intégrale}
+Déterminer les fonctions $f$ continues sur $\R$ telles que, pour tout réel $x$, $f(x)-\displaystyle\int_0^x tf(t)\,dt=1+x$.
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Équations du premier ordre}\label{ss:ordre1}
+
+\begin{theoreme}[équation homogène]\label{t:ordre1}
+Soit $a$ continue sur $I$ et $A$ une primitive de $a$ sur $I$. Les solutions de $y'+a(t)y=0$ sur $I$ sont les fonctions
+\[t\mapsto Ke^{-A(t)},\qquad K\in\K.\]
+\end{theoreme}
+
+\begin{proof}
+Si $y$ est solution, $\big(y\,e^{A}\big)'=(y'+ay)e^{A}=0$ sur l'intervalle $I$, donc $y\,e^{A}$ est constante. Réciproquement,
+$Ke^{-A}$ est solution.
+\end{proof}
+
+\begin{attention}
+On écrit l'équation sous forme \emph{normalisée} $y'+a(t)y=b(t)$ avant de prendre une primitive : pour $ty'+y=\ln t$ sur
+$\R_+^*$, c'est $a(t)=\frac1t$, et non $a(t)=1$. Le signe compte : $y'=a(t)y$ donne $Ke^{+A(t)}$.
+\end{attention}
+
+\begin{methode}{Trouver une solution particulière au premier ordre}\label{m:part1}
+\begin{enumerate}
+\item \emph{Solution évidente :} une constante, un polynôme de bas degré\dots\ (essayer $y=$ constante si le second membre est constant).
+\item \emph{Coefficient $a$ constant et second membre $P(t)e^{mt}$} ($P$ polynôme, $m\in\K$) : chercher $y=Q(t)e^{mt}$ avec $Q$
+polynôme de même degré que $P$ si $m\neq-a$, de degré $\deg P+1$ si $m=-a$ (résonance).
+Pour $\cos(\omega t)$ ou $\sin(\omega t)$ : résoudre avec $e^{i\omega t}$, puis prendre la partie réelle ou imaginaire
+(les coefficients doivent être réels).
+\item \emph{Variation de la constante :} chercher $y=\lambda(t)e^{-A(t)}$. En reportant, les termes en $\lambda$ disparaissent et il reste
+\[\lambda'(t)=b(t)\,e^{A(t)},\]
+qu'on intègre. Méthode toujours applicable, à garder quand rien de simple n'apparaît.
+\end{enumerate}
+\end{methode}
+
+\begin{exemple}[second membre polynomial]
+$y'-y=t^2-3t+1$. Ici $a=-1$ et $m=0\neq1$ : on cherche $y=\alpha t^2+\beta t+\gamma$. En identifiant
+$(2\alpha t+\beta)-(\alpha t^2+\beta t+\gamma)=t^2-3t+1$ : $\alpha=-1$, $\beta=1$, $\gamma=0$. Solutions : $y=-t^2+t+Ke^t$.
+\end{exemple}
+
+\begin{exemple}[second membre trigonométrique]
+$y'-3y=-7\sin(4t)$. On résout $z'-3z=-7e^{4it}$ en cherchant $z=\nu e^{4it}$ : $(4i-3)\nu=-7$, $\nu=\frac{-7}{-3+4i}=\frac{21+28i}{25}$.
+La partie imaginaire de $z$ est solution de l'équation initiale (dont les coefficients sont réels) :
+$y_p=\operatorname{Im}\!\big(\tfrac{21+28i}{25}(\cos4t+i\sin4t)\big)=\tfrac{28}{25}\cos4t+\tfrac{21}{25}\sin4t$. Solutions :
+$y=y_p+Ke^{3t}$.
+\end{exemple}
+
+\begin{exemple}[variation de la constante]
+$ty'+y=\ln t$ sur $\R_+^*$, soit $y'+\frac1ty=\frac{\ln t}t$. Homogène : $y=\frac Kt$. On pose $y=\frac{\lambda(t)}t$ : $\lambda'=\ln t$,
+$\lambda=t\ln t-t$. Solutions : $y=\ln t-1+\frac Kt$.
+\end{exemple}
+
+\subsubsection*{Recollement}\label{ss:recollement}
+
+\begin{methode}{Recoller des solutions}\label{m:recollement}
+Pour $\alpha(t)y'+\beta(t)y=\gamma(t)$ quand $\alpha$ s'annule en $t_0$ :
+\begin{enumerate}
+\item résoudre sur chacun des intervalles où $\alpha$ ne s'annule pas (deux constantes $K_-$ et $K_+$) ;
+\item une solution sur $I$ tout entier est \emph{continue} en $t_0$ : égalité des limites à gauche et à droite ;
+\item elle est \emph{dérivable} en $t_0$ : égalité des limites des taux d'accroissement (ou des dérivées, si elles ont une limite) ;
+\item vérifier que l'équation est satisfaite en $t_0$ lui-même.
+\end{enumerate}
+Le nombre de solutions sur $I$ peut être $0$, $1$ ou infini : le théorème de Cauchy ne s'applique pas en $t_0$.
+\end{methode}
+
+\begin{exemple}[trois situations]
+\begin{itemize}
+\item $ty'+y=1$ : sur $\R_+^*$ et $\R_-^*$, $y=1+\frac{K_\pm}t$. La continuité en $0$ impose $K_+=K_-=0$ :
+\emph{une seule} solution sur $\R$, $y=1$.
+\item $ty'-y=t^2$ : sur chaque demi-droite, $y=t^2+K_\pm t$ ; ces fonctions tendent vers $0$ en $0$, et le taux d'accroissement
+$\frac{y(t)}t=t+K_\pm$ tend vers $K_\pm$. La dérivabilité impose $K_+=K_-$ : \emph{une infinité} de solutions, $y=t^2+Kt$.
+\item $ty'=1$ : $y=\ln|t|+K_\pm$ n'a pas de limite finie en $0$ : \emph{aucune} solution sur $\R$.
+\end{itemize}
+\end{exemple}
+
+\begin{exo}{ed-o1}{1}{solutions particulières}
+Résoudre sur $\R$ : (a) $y'+y=\sin t$ ; (b) $y'-2y=e^t\sin(2t)$ ; (c) $y'+y=te^{-t}$.
+\end{exo}
+\begin{exo}{ed-cauchy1}{2}{problème de Cauchy}
+Résoudre sur $\left]-\frac\pi2,\frac\pi2\right[$ le problème $\cos(t)\,y'+\sin(t)\,y=1$, $y(0)=2$.
+\end{exo}
+\begin{exo}{ed-recol}{3}{recollement}
+On considère $(E)$ : $|t|\,y'-y=t^2$.
+\begin{enumerate}
+\item Résoudre $(E)$ sur $\R_+^*$ et sur $\R_-^*$.
+\item Déterminer les solutions de $(E)$ sur $\R$.
+\end{enumerate}
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Second ordre à coefficients constants}\label{ss:constants}
+
+On considère $(E)$ : $y''+ay'+by=c(t)$ avec $a,b\in\K$ constants et $c$ continue sur $I$. L'\emph{équation caractéristique}
+est $r^2+ar+b=0$ ; elle vient de ce que $t\mapsto e^{rt}$ est solution de $(H)$ si et seulement si $r^2+ar+b=0$.
+
+\begin{theoreme}[équation homogène]\label{t:caract}
+\begin{itemize}
+\item \emph{Cas complexe} ($\K=\C$). Si l'équation caractéristique a deux racines distinctes $r_1,r_2$, les solutions sont
+$t\mapsto Ae^{r_1t}+Be^{r_2t}$ ; si elle a une racine double $r$, ce sont $t\mapsto(A+Bt)e^{rt}$ ($A,B\in\C$).
+\item \emph{Cas réel} ($a,b\in\R$, solutions réelles). Discriminant $\Delta=a^2-4b$ :
+\begin{itemize}
+\item $\Delta>0$, racines réelles $r_1\neq r_2$ : $y=Ae^{r_1t}+Be^{r_2t}$ ;
+\item $\Delta=0$, racine double $r$ : $y=(A+Bt)e^{rt}$ ;
+\item $\Delta<0$, racines $\alpha\pm i\beta$ ($\beta>0$) : $y=e^{\alpha t}\big(A\cos(\beta t)+B\sin(\beta t)\big)$,
+\end{itemize}
+avec $A,B\in\R$.
+\end{itemize}
+\end{theoreme}
+
+\begin{proof}
+Soit $r$ une racine et $y=z\,e^{rt}$. Alors $y''+ay'+by=\big(z''+(2r+a)z'\big)e^{rt}$ (le terme en $z$ disparaît car
+$r^2+ar+b=0$). Donc $y$ est solution si et seulement si $z'$ est solution de $w'+(2r+a)w=0$. Si $r$ est double, $2r+a=0$ :
+$z''=0$, $z=A+Bt$. Sinon $2r+a=r-r_2\neq0$ : $z'=Ce^{(r_2-r)t}$, d'où $z=A+Be^{(r_2-r)t}$. Dans le cas réel avec $\Delta<0$,
+on prend les parties réelle et imaginaire des solutions complexes $e^{(\alpha\pm i\beta)t}$, qui sont deux solutions réelles
+non proportionnelles d'un plan vectoriel.
+\end{proof}
+
+\begin{methode}{Second membre $P(t)e^{mt}$}\label{m:part2}
+Pour $y''+ay'+by=P(t)e^{mt}$ ($P$ polynôme, $m\in\K$), chercher $y=Q(t)e^{mt}$ avec $Q$ polynôme et
+\[\deg Q=\begin{cases}\deg P&\text{si $m$ n'est pas racine de l'équation caractéristique},\\\deg P+1&\text{si $m$ est racine simple},\\\deg P+2&\text{si $m$ est racine double}.\end{cases}\]
+En reportant, on obtient $Q''+(2m+a)Q'+(m^2+am+b)Q=P$ : on identifie les coefficients.
+Cas particuliers : second membre polynomial ($m=0$) ; $\cos(\omega t)$, $\sin(\omega t)$, $e^{\alpha t}\cos(\omega t)$ : passer par
+$e^{(\alpha+i\omega)t}$ et prendre la partie réelle ou imaginaire.
+\end{methode}
+
+\begin{astuce}
+La formule $Q''+(2m+a)Q'+(m^2+am+b)Q=P$ évite de dériver deux fois un produit. Quand $m$ est racine double,
+$m^2+am+b=0$ et $2m+a=0$ : il reste $Q''=P$, il suffit d'intégrer deux fois.
+\end{astuce}
+
+\begin{exemple}[superposition]
+$y''-3y'+2y=2t+3+(6t+1)e^{-t}+e^t$. Racines $1$ et $2$ : $S_H=\{Ae^t+Be^{2t}\}$. On découpe le second membre :
+\begin{itemize}
+\item $2t+3$ ($m=0$, non racine) : $y_1=\alpha t+\beta$, $-3\alpha+2(\alpha t+\beta)=2t+3$, $y_1=t+3$ ;
+\item $(6t+1)e^{-t}$ ($m=-1$, non racine) : $Q''-5Q'+6Q=6t+1$ avec $Q=\alpha t+\beta$ : $y_2=(t+1)e^{-t}$ ;
+\item $e^t$ ($m=1$, racine simple) : $Q''-Q'=1$, $Q=-t$ : $y_3=-te^t$.
+\end{itemize}
+Solutions : $y=t+3+(t+1)e^{-t}-te^t+Ae^t+Be^{2t}$.
+\end{exemple}
+
+\begin{exemple}[résonance]
+$y''+y=\sin t$. Ici $i$ est racine simple de $r^2+1$ : on cherche $z=Q(t)e^{it}$ pour $z''+z=e^{it}$, avec $\deg Q=1$.
+$Q''+2iQ'=1$ donne $Q=-\frac{i}2t$, $z=-\frac{it}2e^{it}$, et $y_p=\operatorname{Im}z=-\frac t2\cos t$.
+Solutions : $y=-\frac t2\cos t+A\cos t+B\sin t$. L'amplitude de $y_p$ croît sans limite : c'est la résonance de l'oscillateur
+non amorti excité à sa propre pulsation.
+\end{exemple}
+
+\begin{enpratique}
+L'oscillateur amorti $y''+2\lambda y'+\omega^2y=0$ ($\lambda,\omega>0$) a pour discriminant réduit $\lambda^2-\omega^2$ :
+régime \emph{apériodique} si $\lambda>\omega$ (deux exponentielles décroissantes), \emph{critique} si $\lambda=\omega$,
+\emph{pseudo-périodique} si $\lambda<\omega$ (oscillations de pulsation $\sqrt{\omega^2-\lambda^2}$ amorties par $e^{-\lambda t}$).
+\end{enpratique}
+
+\begin{methode}{Variation de la constante au second ordre}\label{m:var2}
+Si le second membre n'a pas la forme $P(t)e^{mt}$, prendre une solution $\varphi$ de $(H)$ qui ne s'annule pas sur $I$
+(par exemple $e^{rt}$) et chercher $y=\lambda(t)\varphi(t)$. En reportant, le terme en $\lambda$ disparaît et on obtient une
+équation du \emph{premier ordre} en $\lambda'$ : la résoudre, puis intégrer.
+\end{methode}
+
+\begin{exemple}
+$y''-2y'+y=\frac{2te^t}{1+t^2}$. Racine double $1$, $\varphi(t)=e^t$. Avec $y=\lambda e^t$ : $y''-2y'+y=\lambda''e^t$, donc
+$\lambda''=\frac{2t}{1+t^2}$, $\lambda'=\ln(1+t^2)+C$, et par intégration par parties
+$\lambda=t\ln(1+t^2)-2t+2\arctan t+Ct+D$. Solutions : $y=\big(t\ln(1+t^2)-2t+2\arctan t\big)e^t+(Ct+D)e^t$.
+\end{exemple}
+
+\begin{exo}{ed-c1}{1}{équations homogènes}
+Résoudre sur $\R$ : (a) $y''-3y'+2y=0$ ; (b) $y''+2y'+y=0$ ; (c) $y''+y'+y=0$ (solutions réelles).
+\end{exo}
+\begin{exo}{ed-c2}{2}{seconds membres}
+Résoudre sur $\R$ : (a) $y''+4y'+4y=\sin t$ ; (b) $y''-2y'+y=e^{mt}$, selon le réel $m$.
+\end{exo}
+\begin{exo}{ed-c3}{2}{résonance et problème de Cauchy}
+Déterminer la solution de $y''+y=\sin t$ telle que $y(0)=0$ et $y'(0)=0$. Est-elle bornée sur $\R$ ?
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Second ordre à coefficients continus}\label{ss:continus}
+
+On considère $(E)$ : $\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$, avec des fonctions continues et $\alpha$ \emph{qui ne
+s'annule pas} sur $I$. Il n'y a plus de formule générale ; le théorème de Cauchy et la structure restent vrais
+(théorème~\ref{t:cauchy}, corollaire~\ref{c:dim}) : il suffit de trouver \emph{deux solutions non proportionnelles} de $(H)$, puis
+une solution particulière. L'énoncé indique en général la méthode.
+
+\begin{methode}{Chercher une solution polynomiale ou exponentielle}\label{m:poly}
+\emph{Polynomiale :} on pose $y=\sum_{k=0}^na_kt^k$ avec $a_n\neq0$ et l'on écrit que le coefficient de plus haut degré est nul :
+cela fixe $n$. On identifie ensuite les autres coefficients.\\
+\emph{Exponentielle :} on reporte $y=e^{rt}$ ; l'égalité doit avoir lieu pour tout $t$, d'où des conditions sur $r$.
+\end{methode}
+
+\begin{exemple}
+$(2t+1)y''+(4t-2)y'-8y=0$. Pour $y$ de degré $n$, le coefficient de $t^n$ est $(4n-8)a_n$ : $n=2$. Avec $y=at^2+bt+c$ on trouve
+$b=0$, $c=\frac a4$ : $y_1=4t^2+1$. Avec $y=e^{rt}$ : $(2t+1)r^2+(4t-2)r-8=0$ pour tout $t$, soit $2r^2+4r=0$ et $r^2-2r-8=0$ :
+$r=-2$, $y_2=e^{-2t}$. Sur tout intervalle ne contenant pas $-\frac12$, $y_1$ et $y_2$ ne sont pas proportionnelles :
+$S_H=\{A(4t^2+1)+Be^{-2t}\}$.
+\end{exemple}
+
+\begin{methode}{Une solution $\varphi$ de $(H)$ ne s'annulant pas est connue}\label{m:abaisse}
+Chercher $y=\lambda(t)\varphi(t)$ (programme). En reportant, le terme en $\lambda$ disparaît (car $\varphi$ est solution) :
+\[\alpha\varphi\,\lambda''+(2\alpha\varphi'+\beta\varphi)\,\lambda'=\delta,\]
+équation du \emph{premier ordre} en $\mu=\lambda'$. On la résout (§\ref{ss:ordre1}), puis on intègre $\mu$. Les deux constantes
+d'intégration donnent la solution générale.
+\end{methode}
+
+\begin{exemple}[d'après un TD]
+$t^2y''-2y=3t^2$ sur $\R_+^*$. Un polynôme solution de $(H)$ a un coefficient dominant vérifiant $n(n-1)-2=0$ : $n=2$, et
+$\varphi(t)=t^2$ convient. Avec $y=\lambda t^2$ : $t^4\lambda''+4t^3\lambda'=3t^2$, soit $\mu'+\frac4t\mu=\frac3{t^2}$.
+L'homogène donne $\frac K{t^4}$, la variation de la constante $\mu=\frac1t$ : $\mu=\frac1t+\frac K{t^4}$, puis
+$\lambda=\ln t-\frac K{3t^3}+D$. Solutions : $y=t^2\ln t+\frac at+bt^2$, $(a,b)\in\R^2$.
+\end{exemple}
+
+\begin{methode}{Changement de variable}\label{m:chgt}
+L'énoncé propose $t=\varphi(x)$ avec $\varphi$ bijective et $\mathcal C^2$, de réciproque $\mathcal C^2$. On pose
+$z(x)=y(\varphi(x))$, on calcule $z'(x)=\varphi'(x)y'(\varphi(x))$ et $z''(x)$, et l'on traduit l'équation en $z$, qui doit
+devenir une équation connue (souvent à coefficients constants). On revient enfin à $y=z\circ\varphi^{-1}$.
+\end{methode}
+
+\begin{exemple}
+$(1-t^2)y''-ty'+y=0$ sur $]-1,1[$, avec $t=\cos x$, $x\in\,]0,\pi[$. $z'(x)=-\sin x\,y'(\cos x)$ et
+$z''(x)=\sin^2x\,y''(\cos x)-\cos x\,y'(\cos x)$. L'équation devient $z''+z=0$ : $z=A\cos x+B\sin x$, et comme
+$\sin(\arccos t)=\sqrt{1-t^2}$, $y=At+B\sqrt{1-t^2}$.
+\end{exemple}
+
+\begin{plusloin}
+L'équation d'Euler $t^2y''+aty'+by=0$ sur $\R_+^*$ se ramène à coefficients constants par $t=e^x$ :
+$z''+(a-1)z'+bz=0$. Par exemple $t^2y''-ty'+y=0$ donne $z''-2z'+z=0$, $z=(A+Bx)e^x$, d'où $y=t(A+B\ln t)$.
+\end{plusloin}
+
+\begin{methode}{Solution développable en série entière}\label{m:se}
+\emph{Analyse :} supposer $y(t)=\sum a_nt^n$ de rayon $R>0$, dériver terme à terme, regrouper par puissance de $t$ (décaler
+les indices), et identifier (unicité du développement) : on obtient une relation de récurrence sur les $a_n$.
+\emph{Synthèse :} calculer les $a_n$, déterminer le rayon de la série obtenue, et conclure que sa somme est solution sur
+$]-R,R[$ ; reconnaître si possible une fonction usuelle.
+\end{methode}
+
+\begin{exemple}
+$(t^2+t)y''+(3t+1)y'+y=0$. Le coefficient de $t^n$ est $n(n-1)a_n+(n+1)na_{n+1}+3na_n+(n+1)a_{n+1}+a_n=(n+1)^2(a_n+a_{n+1})$.
+Donc $a_{n+1}=-a_n$, $a_n=(-1)^na_0$, de rayon $1$ : $y=\frac{a_0}{1+t}$ sur $]-1,1[$.
+\end{exemple}
+
+\begin{attention}
+Ces méthodes donnent les solutions sur un intervalle où le coefficient de $y''$ ne s'annule pas. Une série entière n'est
+solution que sur son intervalle de convergence ; elle ne donne en général qu'une partie de $S_H$.
+\end{attention}
+
+\begin{exo}{ed-poly}{2}{solution polynomiale}
+On considère $(E)$ : $(1+t^2)y''+ty'-y=0$ sur $\R$.
+\begin{enumerate}
+\item Déterminer les solutions polynomiales de $(E)$.
+\item Résoudre $(E)$ en posant $t=\sh x$.
+\item Déterminer la solution telle que $y(0)=1$ et $y'(0)=1$.
+\end{enumerate}
+\end{exo}
+\begin{exo}{ed-abaisse}{3}{une solution connue}
+On considère $(E)$ : $(t+1)y''-(t+2)y'+y=0$ sur $]-1,+\infty[$.
+\begin{enumerate}
+\item Déterminer une solution de la forme $t\mapsto e^{rt}$.
+\item En déduire toutes les solutions de $(E)$.
+\end{enumerate}
+\end{exo}
+\begin{exo}{ed-se}{3}{série entière}
+Déterminer la solution développable en série entière du problème $y''-2ty'-2y=0$, $y(0)=1$, $y'(0)=0$, et l'exprimer à l'aide
+des fonctions usuelles.
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Quelle méthode ? Synthèse}\label{ss:synthese}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\small
+\begin{tabular}{p{0.38\linewidth}p{0.55\linewidth}}
+\hline
+\textbf{Équation} & \textbf{Méthode}\\\hline
+$y'+a(t)y=b(t)$ & homogène $Ke^{-A}$ ; particulière évidente, de la forme du second membre, ou variation de la constante (méthode~\ref{m:part1})\\
+$\alpha(t)y'+\dots$ avec $\alpha$ qui s'annule & résoudre sur chaque intervalle, puis recoller (méthode~\ref{m:recollement})\\
+$y''+ay'+by=c(t)$, $a,b$ constants & équation caractéristique ; second membre $P(t)e^{mt}$ (méthode~\ref{m:part2}) ; sinon variation de la constante (méthode~\ref{m:var2})\\
+$\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$ & suivre l'indication : solution polynomiale ou exponentielle (\ref{m:poly}), solution connue (\ref{m:abaisse}), changement de variable (\ref{m:chgt}), série entière (\ref{m:se})\\
+inconnue sous une intégrale & dériver (méthode~\ref{m:integrale})\\\hline
+\end{tabular}
+\end{center}
+
+\begin{attention}\textbf{Pièges fréquents.}
+\begin{itemize}[leftmargin=1.1em]
+\item Oublier de normaliser avant de prendre la primitive, ou se tromper de signe dans $e^{-A}$.
+\item Oublier la résonance : si $m$ est racine, la forme $Ce^{mt}$ ne peut pas marcher.
+\item Prendre la partie réelle au lieu de la partie imaginaire (second membre en $\sin$).
+\item Fixer les constantes avec les conditions initiales \emph{avant} d'avoir ajouté la solution particulière.
+\item Diviser par un coefficient qui s'annule sans le signaler, ou affirmer l'unicité d'une solution recollée sans vérifier.
+\end{itemize}
+\end{attention}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=2pt]
+\item $S_E=y_p+S_H$ ; $S_H$ est une droite (ordre 1) ou un plan (ordre 2) dès que le coefficient dominant ne s'annule pas.
+\item Cauchy : une condition $y(t_0)$ à l'ordre 1, deux conditions $y(t_0),y'(t_0)$ à l'ordre 2, déterminent une unique solution.
+\item Ordre 1 : $y=Ke^{-A(t)}$, puis variation de la constante $\lambda'=b\,e^{A}$.
+\item Coefficients constants : $r^2+ar+b=0$ ; second membre $P(t)e^{mt}$, degré augmenté de la multiplicité de $m$.
+\item Coefficients continus : deux solutions non proportionnelles de $(H)$ suffisent ; une solution connue $\varphi$ ramène au
+premier ordre par $y=\lambda\varphi$.
+\end{itemize}
+\end{essentiel}
+
+% =====================================================================
+%                              CORRIGÉS
+% =====================================================================
+\clearpage
+\section{Corrigés}\label{sec:corriges}
+
+\begin{corrige}{ed-integ}
+\choix{l'inconnue est sous une intégrale de borne variable : on dérive (méthode~\ref{m:integrale}).}
+Si $f$ convient, $f(x)=1+x+\int_0^xtf(t)\,dt$ est dérivable, $f'(x)=1+xf(x)$, et $f(0)=1$. Réciproquement, une solution de ce
+problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation de départ. On résout $y'-xy=1$ : l'homogène donne $Ke^{x^2/2}$ ;
+la variation de la constante donne $\lambda'=e^{-x^2/2}$, sans primitive usuelle. On écrit donc la solution du problème de Cauchy
+sous forme intégrale :
+\[f(x)=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}\,du\right).\]
+\retenir{une primitive sans expression usuelle s'écrit $\int_{x_0}^x$ ; la borne $x_0$ est choisie pour que la condition initiale soit simple.}
+\end{corrige}
+
+\begin{corrige}{ed-o1}
+\q{(a)} Homogène : $Ke^{-t}$. Par $z'+z=e^{it}$, $z=\frac{e^{it}}{1+i}=\frac{(1-i)e^{it}}2$, d'où $y_p=\operatorname{Im}z=\frac{\sin t-\cos t}2$.
+Solutions : $y=\frac{\sin t-\cos t}2+Ke^{-t}$.
+
+\q{(b)} Homogène : $Ke^{2t}$. Le second membre est $\operatorname{Im}\big(e^{(1+2i)t}\big)$ et $1+2i\neq2$ : on cherche $z=\nu e^{(1+2i)t}$,
+$\nu(1+2i-2)=1$, $\nu=\frac1{-1+2i}=\frac{-1-2i}5$. Donc $y_p=\operatorname{Im}z=-\frac{e^t}5\big(\sin2t+2\cos2t\big)$ et
+$y=Ke^{2t}-\frac{e^t}5(\sin2t+2\cos2t)$.
+
+\q{(c)} $m=-1=-a$ : résonance, on cherche $y=Q(t)e^{-t}$ avec $\deg Q=2$. En reportant : $Q'=t$, $Q=\frac{t^2}2$.
+Solutions : $y=\left(\frac{t^2}2+K\right)e^{-t}$.
+\piege{en (c), chercher $(\alpha t+\beta)e^{-t}$ échoue : le terme $\beta e^{-t}$ est solution de l'homogène.}
+\end{corrige}
+
+\begin{corrige}{ed-cauchy1}
+Sur $\left]-\frac\pi2,\frac\pi2\right[$, $\cos t\neq0$ : $y'+\tan(t)\,y=\frac1{\cos t}$. Une primitive de $\tan$ est $-\ln(\cos t)$, d'où
+l'homogène $y=Ke^{\ln\cos t}=K\cos t$. Variation de la constante : $y=\lambda\cos t$ donne $\lambda'\cos t=\frac1{\cos t}$,
+$\lambda=\tan t+K$. Solutions : $y=\sin t+K\cos t$ ; $y(0)=K=2$. La solution est $y=\sin t+2\cos t$.
+\gain{une solution particulière évidente ($\sin t$) se vérifie en une ligne : $\cos t\cos t+\sin t\sin t=1$.}
+\end{corrige}
+
+\begin{corrige}{ed-recol}
+\q{1.} Sur $\R_+^*$ : $ty'-y=t^2$, soit $y'-\frac yt=t$. Homogène : $Kt$ ; $y=t^2$ convient. Solutions : $y=t^2+K_+t$.
+Sur $\R_-^*$ : $-ty'-y=t^2$, soit $y'+\frac yt=-t$. Homogène : $\frac Kt$ ; on cherche $y=\alpha t^2$ : $2\alpha t+\alpha t=-t$,
+$\alpha=-\frac13$. Solutions : $y=-\frac{t^2}3+\frac{K_-}t$.
+
+\q{2.} Soit $y$ solution sur $\R$. Elle est continue en $0$ : la limite à gauche n'est finie que si $K_-=0$, et alors elle vaut
+$0$ ; donc $y(0)=0$. À droite, $\frac{y(t)}t=t+K_+\to K_+$ ; à gauche, $\frac{y(t)}t=-\frac t3\to0$. La dérivabilité en $0$
+impose $K_+=0$. Réciproquement, la fonction $y$ égale à $t^2$ sur $\R_+$ et à $-\frac{t^2}3$ sur $\R_-$ est dérivable en $0$
+($y'(0)=0$), et l'équation est vérifiée en $0$ ($0-0=0$). Il y a donc une unique solution sur $\R$.
+\retenir{continuité, puis dérivabilité, puis vérification de l'équation au point de raccord.}
+\end{corrige}
+
+\begin{corrige}{ed-c1}
+(a) $r^2-3r+2=(r-1)(r-2)$ : $y=Ae^t+Be^{2t}$. (b) $(r+1)^2$ : $y=(A+Bt)e^{-t}$.
+(c) $r=-\frac12\pm i\frac{\sqrt3}2$ : $y=e^{-t/2}\left(A\cos\frac{\sqrt3}2t+B\sin\frac{\sqrt3}2t\right)$.
+\end{corrige}
+
+\begin{corrige}{ed-c2}
+\q{(a)} Racine double $-2$ : $S_H=\{(A+Bt)e^{-2t}\}$. Pour $z''+4z'+4z=e^{it}$, $i$ n'est pas racine : $z=\frac{e^{it}}{(i+2)^2}=\frac{e^{it}}{3+4i}=\frac{(3-4i)e^{it}}{25}$,
+d'où $y_p=\operatorname{Im}z=\frac{3\sin t-4\cos t}{25}$ et $y=(A+Bt)e^{-2t}+\frac{3\sin t-4\cos t}{25}$.
+
+\q{(b)} Racine double $1$ : $S_H=\{(A+Bt)e^t\}$. Si $m\neq1$, $m$ n'est pas racine : $y_p=\frac{e^{mt}}{(m-1)^2}$. Si $m=1$, racine
+double : $Q''=1$, $y_p=\frac{t^2}2e^t$.
+\retenir{l'expression de $y_p$ change de forme exactement quand $m$ devient racine : discuter selon la multiplicité.}
+\end{corrige}
+
+\begin{corrige}{ed-c3}
+D'après l'exemple de résonance, $y=-\frac t2\cos t+A\cos t+B\sin t$. $y(0)=A=0$ ; $y'(t)=-\frac12\cos t+\frac t2\sin t+B\cos t$,
+$y'(0)=B-\frac12=0$. La solution est $y=\frac{\sin t-t\cos t}2$. Elle n'est pas bornée : $y(2k\pi)=-k\pi\to-\infty$.
+\end{corrige}
+
+\begin{corrige}{ed-poly}
+\q{1.} Pour $y$ de degré $n$, le coefficient de $t^n$ est $\big(n(n-1)+n-1\big)a_n=(n^2-1)a_n$ : $n=1$ (le cas constant donne
+$y=0$). Avec $y=at+b$ : $at-at-b=0$, donc $b=0$. Solutions polynomiales : $y=at$.
+
+\q{2.} $t=\sh x$ est une bijection $\mathcal C^2$ de $\R$ sur $\R$, de réciproque $\mathcal C^2$. Avec $z(x)=y(\sh x)$ :
+$z'=\ch x\,y'(\sh x)$, $z''=\ch^2x\,y''(\sh x)+\sh x\,y'(\sh x)$. Comme $1+\sh^2x=\ch^2x$, l'équation devient $z''-z=0$ :
+$z=A\sh x+B\ch x$, d'où $y=At+B\sqrt{1+t^2}$.
+
+\q{3.} $y(0)=B=1$ et $y'(0)=A=1$ : $y=t+\sqrt{1+t^2}$.
+\retenir{le changement de variable proposé transforme $1+t^2$ en $\ch^2x$ : l'équation devient à coefficients constants.}
+\end{corrige}
+
+\begin{corrige}{ed-abaisse}
+\q{1.} $y=e^{rt}$ : $(t+1)r^2-(t+2)r+1=0$ pour tout $t$, soit $r^2-r=0$ et $r^2-2r+1=0$ : $r=1$. Donc $\varphi(t)=e^t$.
+
+\q{2.} $\varphi$ ne s'annule pas : on pose $y=\lambda e^t$. Alors $y'=(\lambda'+\lambda)e^t$, $y''=(\lambda''+2\lambda'+\lambda)e^t$ et
+l'équation devient $(t+1)\lambda''+t\lambda'=0$, soit $\mu'=-\frac t{t+1}\mu=\left(-1+\frac1{t+1}\right)\mu$ pour $\mu=\lambda'$.
+D'où $\mu=K(t+1)e^{-t}$, puis $\lambda=-K(t+2)e^{-t}+D$ (vérifier : $\big((t+2)e^{-t}\big)'=-(t+1)e^{-t}$).
+Solutions : $y=a(t+2)+be^t$, $(a,b)\in\R^2$.
+\gain{on peut vérifier directement que $t+2$ est solution : $0-(t+2)+(t+2)=0$.}
+\end{corrige}
+
+\begin{corrige}{ed-se}
+\choix{analyse-synthèse : relation de récurrence par identification, puis rayon de convergence.}
+Avec $y=\sum a_nt^n$ : $\sum(n+2)(n+1)a_{n+2}t^n-\sum2na_nt^n-\sum2a_nt^n=0$, d'où $(n+2)(n+1)a_{n+2}=2(n+1)a_n$, soit
+$a_{n+2}=\frac2{n+2}a_n$. Avec $a_1=y'(0)=0$, les termes impairs sont nuls ; $a_0=1$ et $a_{2p}=\frac2{2p}a_{2p-2}=\frac1{p!}$.
+Donc $y=\sum\frac{t^{2p}}{p!}=e^{t^2}$, de rayon infini. Vérification : $y'=2te^{t^2}$, $y''=(2+4t^2)e^{t^2}$ et
+$y''-2ty'-2y=0$.
+\end{corrige}
+
+\end{document}

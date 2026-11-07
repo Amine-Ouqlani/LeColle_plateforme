@@ -9,8 +9,149 @@ window.LC = window.LC || {};
 
 LC.chapitres = [
   {
-    id: "determinants",
+    id: "ed",
     num: 1,
+    titre: "Équations différentielles",
+    accroche: "Une solution particulière, plus toutes les solutions sans second membre : premier ordre, second ordre à coefficients constants puis continus, théorème de Cauchy linéaire.",
+    statut: "complet",
+    td: { doc: "td-ed", corrections: "td-ed-corrections" },
+    prerequis: [
+      "Dérivation, primitives usuelles, intégration par parties.",
+      "Nombres complexes, exponentielle complexe.",
+      "Espaces vectoriels : sous-espace, dimension.",
+      "Pour le §1.4 : séries entières."
+    ],
+    cours: {
+      doc: "livre-ed",
+      debut: 4, fin: 12,
+      sections: [
+        { num: "1.1", titre: "Vocabulaire et structure des solutions", page: 4 },
+        { num: "1.2", titre: "Équations du premier ordre, recollement", page: 6 },
+        { num: "1.3", titre: "Second ordre à coefficients constants", page: 7 },
+        { num: "1.4", titre: "Second ordre à coefficients continus", page: 9 },
+        { num: "1.5", titre: "Quelle méthode ? Synthèse", page: 11 }
+      ],
+      corriges: { debut: 13, fin: 15 }
+    },
+    fiche: {
+      doc: "fiche-ed", debut: 1, fin: 3,
+      sections: [
+        { num: "1.1", titre: "Structure et théorème de Cauchy", page: 1 },
+        { num: "1.2", titre: "Premier ordre, recollement", page: 1 },
+        { num: "1.3", titre: "Second ordre à coefficients constants", page: 2 },
+        { num: "1.4", titre: "Second ordre à coefficients continus", page: 2 },
+        { num: "1.5", titre: "Quelle méthode ? Pièges", page: 3 },
+        { num: "1.6", titre: "Résultats du TD", page: 3 }
+      ]
+    },
+    presentation: {
+      doc: "presentation-ed", debut: 1, fin: 86,
+      statique: { doc: "presentation-ed-statique", debut: 1, fin: 44 },
+      exercices: 7,
+      sections: [
+        { num: "1.1", titre: "Structure, théorème de Cauchy", page: 5, pageStatique: 5 },
+        { num: "1.2", titre: "Premier ordre, recollement", page: 22, pageStatique: 13 },
+        { num: "1.3", titre: "Second ordre, coefficients constants", page: 42, pageStatique: 22 },
+        { num: "1.4", titre: "Second ordre, coefficients continus", page: 61, pageStatique: 31 },
+        { num: "1.5", titre: "Quelle méthode ? Synthèse", page: 83, pageStatique: 41 }
+      ]
+    },
+    erreurs: [
+      "Prendre une primitive de $a$ sans avoir normalisé l'équation (diviser par le coefficient de $y'$), ou se tromper de signe dans $Ke^{-A(t)}$.",
+      "Chercher une solution particulière $Ce^{mt}$ alors que $m$ est racine de l'équation caractéristique (résonance) : le degré de $Q$ augmente de la multiplicité.",
+      "Second membre en $\\sin(\\omega t)$ : prendre la partie réelle au lieu de la partie imaginaire.",
+      "Fixer les constantes avec les conditions initiales avant d'avoir ajouté la solution particulière.",
+      "Diviser par un coefficient qui s'annule sans le signaler, puis appliquer le théorème de Cauchy en ce point.",
+      "Recollement : oublier de vérifier la dérivabilité et l'équation au point de raccord, ou affirmer l'unicité sans preuve.",
+      "Série entière : oublier le rayon de convergence, ou croire qu'elle donne toujours toutes les solutions."
+    ],
+    flash: [
+      { q: "Structure de l'ensemble des solutions de $y''+a(t)y'+b(t)y=c(t)$ ?", r: "$S_E=y_p+S_H$, où $S_H$ est un plan vectoriel ($a,b,c$ continues sur un intervalle)." },
+      { q: "Solutions de $y'+a(t)y=0$ sur un intervalle ?", r: "$y=Ke^{-A(t)}$, $A$ primitive de $a$." },
+      { q: "Variation de la constante au premier ordre : que reste-t-il ?", r: "Avec $y=\\lambda(t)e^{-A(t)}$ : $\\lambda'(t)=b(t)e^{A(t)}$." },
+      { q: "$y''-2y'+y=e^t$ : quelle forme pour $y_p$ ?", r: "$1$ est racine double : $y=Q(t)e^t$ avec $Q''=1$, soit $y_p=\\frac{t^2}2e^t$." },
+      { q: "Solutions réelles de $y''+2y'+5y=0$ ?", r: "$r=-1\\pm2i$ : $y=e^{-t}(A\\cos2t+B\\sin2t)$." },
+      { q: "On connaît une solution $\\varphi$ de $(H)$ qui ne s'annule pas. Que faire ?", r: "Poser $y=\\lambda\\varphi$ : on obtient une équation du premier ordre en $\\lambda'$." },
+      { q: "Combien de conditions initiales pour un problème de Cauchy du second ordre ?", r: "Deux : $y(t_0)$ et $y'(t_0)$." }
+    ]
+  },
+  {
+    id: "red",
+    num: 2,
+    titre: "Algèbre linéaire et réduction",
+    accroche: "Sommes directes, sous-espaces stables, trace ; puis éléments propres, polynôme caractéristique, diagonalisation et trigonalisation : choisir la base où la matrice est la plus simple.",
+    statut: "complet",
+    td: { doc: "td-red", corrections: "td-red-corrections" },
+    prerequis: [
+      "Bases, dimension, théorème du rang, matrice d'une application linéaire, changement de base.",
+      "Le chapitre Déterminants (calcul par opérations élémentaires).",
+      "Polynômes : racines, multiplicité, factorisation."
+    ],
+    cours: {
+      doc: "livre-red",
+      debut: 4, fin: 17,
+      sections: [
+        { num: "1.1", titre: "Matrices semblables, sommes directes, trace, hyperplans", page: 4 },
+        { num: "1.2", titre: "Sous-espaces stables", page: 7 },
+        { num: "1.3", titre: "Éléments propres", page: 8 },
+        { num: "1.4", titre: "Polynôme caractéristique", page: 10 },
+        { num: "1.5", titre: "Diagonalisation", page: 11 },
+        { num: "1.6", titre: "Applications de la diagonalisation", page: 13 },
+        { num: "1.7", titre: "Trigonalisation", page: 15 },
+        { num: "1.8", titre: "Quelle méthode ? Synthèse", page: 16 }
+      ],
+      corriges: { debut: 18, fin: 21 }
+    },
+    fiche: {
+      doc: "fiche-red", debut: 1, fin: 3,
+      sections: [
+        { num: "1.1", titre: "Semblables, sommes directes, trace, hyperplans", page: 1 },
+        { num: "1.2", titre: "Sous-espaces stables", page: 1 },
+        { num: "1.3", titre: "Éléments propres", page: 1 },
+        { num: "1.4", titre: "Polynôme caractéristique", page: 2 },
+        { num: "1.5", titre: "Diagonalisation", page: 2 },
+        { num: "1.6", titre: "Applications", page: 2 },
+        { num: "1.7", titre: "Trigonalisation", page: 2 },
+        { num: "1.8", titre: "Quelle méthode ? Pièges ; résultats du TD", page: 3 }
+      ]
+    },
+    presentation: {
+      doc: "presentation-red", debut: 1, fin: 95,
+      statique: { doc: "presentation-red-statique", debut: 1, fin: 49 },
+      exercices: 9,
+      sections: [
+        { num: "1.1", titre: "Semblables, sommes directes, trace", page: 8, pageStatique: 6 },
+        { num: "1.2", titre: "Sous-espaces stables", page: 27, pageStatique: 15 },
+        { num: "1.3", titre: "Éléments propres", page: 36, pageStatique: 20 },
+        { num: "1.4", titre: "Polynôme caractéristique", page: 47, pageStatique: 25 },
+        { num: "1.5", titre: "Diagonalisation", page: 59, pageStatique: 30 },
+        { num: "1.6", titre: "Applications", page: 74, pageStatique: 37 },
+        { num: "1.7", titre: "Trigonalisation", page: 85, pageStatique: 42 },
+        { num: "1.8", titre: "Synthèse", page: 92, pageStatique: 46 }
+      ]
+    },
+    erreurs: [
+      "Prendre un vecteur nul comme vecteur propre : un vecteur propre est non nul, même si $E_\\lambda$ contient $0$.",
+      "Conclure qu'une somme de trois sous-espaces est directe parce que les intersections deux à deux sont nulles.",
+      "Oublier de vérifier que $\\chi_A$ est scindé sur $\\mathbb R$ avant de diagonaliser (rotation).",
+      "Croire qu'une valeur propre double empêche la diagonalisation : il faut comparer $\\dim E_\\lambda$ à la multiplicité.",
+      "Développer $\\chi_A$ au lieu de le factoriser au fur et à mesure, puis ne plus savoir trouver les racines.",
+      "Ranger les vecteurs propres en lignes dans $P$, ou dans un ordre différent de celui des valeurs propres dans $D$.",
+      "Écrire $A=P^{-1}DP$ alors que les colonnes de $P$ sont des vecteurs propres : c'est $A=PDP^{-1}$."
+    ],
+    flash: [
+      { q: "Polynôme caractéristique d'une matrice $2\\times2$ ?", r: "$\\chi_A=x^2-\\mathrm{tr}(A)\\,x+\\det A$." },
+      { q: "Comment obtenir $\\dim E_\\lambda(A)$ rapidement ?", r: "$\\dim E_\\lambda=n-\\mathrm{rg}(A-\\lambda I_n)$ (théorème du rang)." },
+      { q: "Une matrice $n\\times n$ a $n$ valeurs propres distinctes. Conclusion ?", r: "Elle est diagonalisable, et chaque sous-espace propre est une droite." },
+      { q: "$\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ est-elle diagonalisable ?", r: "Non : seule valeur propre $1$ ; diagonalisable, elle serait égale à $I_2$." },
+      { q: "Valeurs propres d'une matrice de rang $1$ ?", r: "$0$, d'ordre au moins $n-1$, et $\\mathrm{tr}(A)$." },
+      { q: "Si $\\chi_A$ est scindé, que valent $\\mathrm{tr}A$ et $\\det A$ ?", r: "La somme et le produit des valeurs propres, comptées avec multiplicité." },
+      { q: "$A=PDP^{-1}$ : que vaut $A^k$ ?", r: "$A^k=PD^kP^{-1}$, $D^k$ diagonale des $\\lambda_i^k$." }
+    ]
+  },
+  {
+    id: "determinants",
+    num: 3,
     titre: "Déterminants",
     accroche: "Une famille de n vecteurs est-elle une base ? Le déterminant répond par un nombre : un volume orienté, nul exactement quand les vecteurs sont liés.",
     statut: "complet",
@@ -46,15 +187,16 @@ LC.chapitres = [
       ]
     },
     presentation: {
-      doc: "presentation", debut: 4, fin: 111,
-      statique: { doc: "presentationStatique", debut: 4, fin: 47 },
+      doc: "presentation", debut: 4, fin: 126,
+      statique: { doc: "presentationStatique", debut: 4, fin: 55 },
+      exercices: 4,
       sections: [
         { num: "1.1", titre: "Dimensions 2 et 3", page: 5, pageStatique: 5 },
         { num: "1.2", titre: "Définition et règles de calcul", page: 20, pageStatique: 11 },
-        { num: "1.3", titre: "Propriétés globales, endomorphismes", page: 43, pageStatique: 21 },
-        { num: "1.4", titre: "Géométrie", page: 62, pageStatique: 28 },
-        { num: "1.5", titre: "Quelle méthode pour quel déterminant ?", page: 71, pageStatique: 32 },
-        { num: "1.6", titre: "Techniques d'ordre n", page: 73, pageStatique: 34 }
+        { num: "1.3", titre: "Propriétés globales, endomorphismes", page: 47, pageStatique: 23 },
+        { num: "1.4", titre: "Géométrie", page: 70, pageStatique: 32 },
+        { num: "1.5", titre: "Quelle méthode pour quel déterminant ?", page: 82, pageStatique: 38 },
+        { num: "1.6", titre: "Techniques d'ordre n", page: 84, pageStatique: 40 }
       ]
     },
     erreurs: [
@@ -77,7 +219,7 @@ LC.chapitres = [
   },
   {
     id: "courbes",
-    num: 2,
+    num: 4,
     titre: "Courbes paramétrées planes",
     accroche: "Décrire une courbe par un point mobile M(t) : tangentes, points stationnaires, branches infinies, inflexions, tracé complet.",
     statut: "complet",
@@ -116,16 +258,17 @@ LC.chapitres = [
       ]
     },
     presentation: {
-      doc: "presentation", debut: 112, fin: 207,
-      statique: { doc: "presentationStatique", debut: 48, fin: 87 },
+      doc: "presentation", debut: 127, fin: 237,
+      statique: { doc: "presentationStatique", debut: 56, fin: 103 },
+      exercices: 4,
       sections: [
-        { num: "2.1", titre: "Fonctions vectorielles, outils de calcul", page: 113, pageStatique: 49 },
-        { num: "2.2", titre: "Tangente, pente", page: 123, pageStatique: 54 },
-        { num: "2.3", titre: "Plan d'étude, symétries, tracé", page: 135, pageStatique: 59 },
-        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 146, pageStatique: 64 },
-        { num: "2.5", titre: "Branches infinies, positions", page: 169, pageStatique: 73 },
-        { num: "2.6", titre: "Intersections, points doubles", page: 184, pageStatique: 79 },
-        { num: "2.7", titre: "Check-list et résultats des TD", page: 203, pageStatique: 85 }
+        { num: "2.1", titre: "Fonctions vectorielles, outils de calcul", page: 128, pageStatique: 57 },
+        { num: "2.2", titre: "Tangente, pente", page: 138, pageStatique: 62 },
+        { num: "2.3", titre: "Plan d'étude, symétries, tracé", page: 153, pageStatique: 69 },
+        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 167, pageStatique: 76 },
+        { num: "2.5", titre: "Branches infinies, positions", page: 195, pageStatique: 87 },
+        { num: "2.6", titre: "Intersections, points doubles", page: 214, pageStatique: 95 },
+        { num: "2.7", titre: "Check-list et résultats des TD", page: 233, pageStatique: 101 }
       ]
     },
     revision: {
@@ -164,7 +307,7 @@ LC.chapitres = [
   },
   {
     id: "metrique",
-    num: 3,
+    num: 5,
     titre: "Propriétés métriques et enveloppes",
     accroche: "Longueur, abscisse curviligne, repère de Frenet, courbure, développée, et enveloppe d'une famille de droites.",
     statut: "partiel",
@@ -211,5 +354,6 @@ LC.parcours = [
   { date: "3 novembre 2026", titre: "Livre « Cours, TD et devoir »", texte: "Réécriture calée sur le cours reçu en classe : les deux feuilles de TD intégralement corrigées, chacune après les notions qu'elle demande, et un problème type devoir surveillé.", docs: ["livre"] },
   { date: "4 novembre 2026", titre: "Volume 2 et fiche de révision du devoir", texte: "Les propriétés métriques et les enveloppes passent dans un volume séparé. Fiche personnalisée construite à partir du devoir de courbes paramétrées.", docs: ["volume2", "revision"] },
   { date: "5 novembre 2026", titre: "Fiche de référence et présentation", texte: "Une fiche imprimable pour travailler pendant les séances et réviser, une présentation pour expliquer, avec les mêmes numéros de parties et les mêmes notations.", docs: ["fiche-determinants", "fiche-courbes", "presentation"] },
-  { date: "5 novembre 2026", titre: "Plateforme et annales", texte: "Regroupement de tout le travail, et sélection commentée d'annales de la Banque PT (Mathématiques B, 2014–2024) qui portent sur nos chapitres, avec corrections détaillées.", docs: [] }
+  { date: "5 novembre 2026", titre: "Plateforme et annales", texte: "Regroupement de tout le travail, et sélection commentée d'annales de la Banque PT (Mathématiques B, 2014–2024) qui portent sur nos chapitres, avec corrections détaillées.", docs: [] },
+  { date: "7 novembre 2026", titre: "Deux nouveaux chapitres, présentations avec exercices", texte: "Équations différentielles et Algèbre linéaire et réduction : livre, présentation avec exercices intégrés, fiche, cinq problèmes, TD et corrections. Les présentations des Déterminants et des Courbes reçoivent huit exercices en séance.", docs: ["livre-ed", "livre-red", "presentation-ed", "presentation-red"] }
 ];
