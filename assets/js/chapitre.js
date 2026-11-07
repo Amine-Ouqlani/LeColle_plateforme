@@ -19,15 +19,15 @@ const lire = (id, page, slides) => `<a href="${slides ? slidesUrl(id, page) : le
 /* ---------------------------------------------------------------- le cours */
 const cours = `
   <ul class="list">
-    ${ligne('Livre complet', `${doc(coursDoc).titre} · cours, exemples et corrigés`, lire(coursDoc, C.cours.debut) + lienPdf(doc(coursDoc)))}
+    ${ligne('Livret du chapitre', 'cours, méthodes, exemples et exercices corrigés', lire(coursDoc, C.cours.debut) + lienPdf(doc(coursDoc)))}
     ${C.fiche ? ligne(doc(C.fiche.doc).titre, 'l\'essentiel du chapitre sur 3 pages, à imprimer', lire(C.fiche.doc, 1) + lienPdf(doc(C.fiche.doc)))
-              : ligne('Fiche de référence', 'pas encore de fiche : le résumé des méthodes du volume 2 en tient lieu', lire(coursDoc, 13))}
+              : ligne('Fiche de référence', 'pas encore de fiche : l\'index des méthodes du livret en tient lieu', lire(coursDoc, 13))}
     ${C.presentation ? ligne('Présentation', `les diapositives de la séance${C.presentation.exercices ? `, avec ${C.presentation.exercices} exercices intégrés` : ''} · <a href="${slidesUrl(C.presentation.statique.doc, C.presentation.statique.debut)}">sans animations</a>`, lire(C.presentation.doc, C.presentation.debut, true) + lienPdf(doc(C.presentation.doc)))
                      : ''}
   </ul>
-  <details class="plus"><summary>Le livre partie par partie</summary>
+  <details class="plus"><summary>Le livret partie par partie</summary>
     <ul class="list">${C.cours.sections.map(s => `<li class="row"><div class="main"><span class="num">${s.num}</span><a href="${lecteurUrl(coursDoc, s.page)}">${s.titre}</a></div></li>`).join('')}
-    <li class="row"><div class="main"><span class="num"></span><a href="${lecteurUrl(coursDoc, C.cours.corriges.debut)}">Corrigés des exercices du livre</a></div></li></ul>
+    <li class="row"><div class="main"><span class="num"></span><a href="${lecteurUrl(coursDoc, C.cours.corriges.debut)}">Corrigés des exercices du livret</a></div></li></ul>
   </details>`;
 
 /* ---------------------------------------------------------------- exercices du TD (listes repliées) */
@@ -67,7 +67,7 @@ const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">$
 /* ---------------------------------------------------------------- les documents du chapitre, en un coup d'œil */
 const res = (nom, desc, href) => `<li><a href="${href}"><b>${nom}</b><span>${desc}</span></a></li>`;
 const ressources = [
-  res('Cours', 'le livre complet', lecteurUrl(coursDoc, C.cours.debut)),
+  res('Livret', 'le cours du chapitre', lecteurUrl(coursDoc, C.cours.debut)),
   C.presentation ? res('Présentation', 'le support de séance', slidesUrl(C.presentation.doc, C.presentation.debut)) : '',
   C.fiche ? res('Fiche', 'l\'essentiel, à imprimer', lecteurUrl(C.fiche.doc, 1)) : '',
   res('5 problèmes', 'la sélection après le cours', '#etape-3'),

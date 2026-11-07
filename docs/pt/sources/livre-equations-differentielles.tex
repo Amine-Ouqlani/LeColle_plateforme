@@ -59,11 +59,13 @@
 \numberwithin{table}{section}
 
 % ---------- Titres ----------
+% numéro du chapitre dans le parcours PT (affiché), distinct de la numérotation interne
+\newcommand{\grandnum}{\thesection}\newcommand{\ongletcouleur}{Bleu}
 % Chapitres (sections) : grand numéro, titre en linéale, filet ocre
 \titleformat{\section}[display]
   {\normalfont\sffamily\color{Ink}}
   {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
-   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\grandnum}}
   {0.4em}
   {\fontsize{25}{30}\selectfont\bfseries}
   [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
@@ -88,14 +90,14 @@
 
 % ---------- Table des matières ----------
 \titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
-  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+  {}{}{\hfill\contentspage}[\addvspace{0.2em}]
 \titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
   {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
 
 % ---------- En-têtes et pieds de page ----------
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
 \fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
 \fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
 \fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
@@ -271,8 +273,8 @@
 \usepackage{eso-pic}
 \newif\ifonglets \ongletsfalse
 \newcommand{\dessineronglet}{%
-  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
-  \edef\ongnum{\the\value{section}}%
+  \edef\ongcol{\ongletcouleur}%
+  \edef\ongnum{\grandnum}%
   \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
   \begin{tikzpicture}[remember picture,overlay]
   \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
@@ -305,6 +307,7 @@
 
 
 \begin{document}
+\renewcommand{\grandnum}{1}
 \pagenumbering{roman}
 \begin{titlepage}
 \thispagestyle{empty}
@@ -332,7 +335,7 @@
 Ce livre accompagne la séance sur les équations différentielles linéaires. Il reprend, dans l'ordre et avec les mêmes
 notations, la présentation projetée en séance, et sert de référence pour travailler seul ensuite : chaque résultat y est
 énoncé avec ses hypothèses, chaque méthode est illustrée par un exemple rédigé, et chaque partie se termine par quelques
-exercices, corrigés au chapitre~2.
+exercices, corrigés à la fin du livret.
 
 Le programme de PT prolonge la première année : les équations du premier ordre et du second ordre à coefficients constants
 sont supposées connues, mais elles sont reprises ici en entier, car elles servent dans toutes les autres méthodes.
@@ -765,6 +768,7 @@ premier ordre par $y=\lambda\varphi$.
 %                              CORRIGÉS
 % =====================================================================
 \clearpage
+\renewcommand{\ongletcouleur}{Ocre}
 \section{Corrigés}\label{sec:corriges}
 
 \begin{corrige}{ed-integ}

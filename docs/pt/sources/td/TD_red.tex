@@ -344,9 +344,9 @@
 {\sffamily\Large\color{BleuMoyen}Énoncés}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
 {\small Ce livret rassemble 29 exercices, classés en quatre parties, du plus direct au plus exigeant.
-Il reprend \textbf{tous les exercices du cours} (proposés à la fin de chaque partie du livre), complétés par des
-\textbf{exercices complémentaires}, absents du livre. L'origine de chaque exercice est indiquée en haut à droite :
-\emph{« Cours, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
+Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours), complétés par des
+\textbf{exercices complémentaires}, absents du livret. L'origine de chaque exercice est indiquée en haut à droite :
+\emph{« Livret, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
 Les corrections sont dans un livret séparé, \texttt{TD\_red\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}
 
 \vspace{0.6em}{\sffamily\bfseries\color{Bleu}Sommaire}\par\vspace{0.2em}{\small\setlength{\parskip}{1.5pt}\setlength{\columnsep}{1.2cm}\begin{multicols}{2}\raggedcolumns
@@ -397,7 +397,7 @@ dans la base canonique.
 \exercice{3}{1}{Une matrice triangulaire}{Exercice complémentaire}{matrice triangulaire, valeurs propres distinctes}{rdn-3}{2}
 Montrer sans calcul que $A=\begin{pmatrix}1&0&0\\1&2&0\\1&1&3\end{pmatrix}$ est diagonalisable, puis la diagonaliser.
 \place
-\exercice{4}{1}{Sommes directes dans $\mathbb R^3$}{Cours, exercice 1.1}{somme directe, décomposition, hyperplan}{red-somme}{2}
+\exercice{4}{1}{Sommes directes dans $\mathbb R^3$}{Livret, exercice 1.1}{somme directe, décomposition, hyperplan}{red-somme}{2}
 \begin{enumerate}
 \item Dans $\R^3$, on pose $F=\{(x,y,z),\ x+y+z=0\}$ et $G=\vect\big((1,1,1)\big)$. Montrer que $\R^3=F\oplus G$ et décomposer
 $v=(x,y,z)$ selon cette somme.
@@ -408,25 +408,25 @@ $v=(x,y,z)$ selon cette somme.
 Soit $E$ l'espace des fonctions de $\R$ dans $\R$, $\mathcal P$ le sous-espace des fonctions paires et $\mathcal I$ celui des
 fonctions impaires. Montrer que $E=\mathcal P\oplus\mathcal I$. Que donne cette décomposition pour $\exp$ ?
 \place
-\exercice{6}{2}{Hyperplans de $\mathbb R^4$}{Cours, exercice 1.3}{hyperplan, intersection, supplémentaire}{red-hyp}{2}
+\exercice{6}{2}{Hyperplans de $\mathbb R^4$}{Livret, exercice 1.3}{hyperplan, intersection, supplémentaire}{red-hyp}{2}
 Dans $\R^4$, on considère $H_1$ : $x+y+z+t=0$ et $H_2$ : $x-y+z-t=0$, et $u=(1,1,1,1)$.
 \begin{enumerate}
 \item Donner la dimension et une base de $H_1\cap H_2$.
 \item La droite $\vect(u)$ est-elle un supplémentaire de $H_1$ ? de $H_2$ ?
 \end{enumerate}
 \place
-\exercice{7}{1}{Diagonaliser une matrice $3\times3$}{Cours, exercice 1.7}{polynôme caractéristique, sous-espaces propres, diagonalisation}{red-diag1}{3}
+\exercice{7}{1}{Diagonaliser une matrice $3\times3$}{Livret, exercice 1.7}{polynôme caractéristique, sous-espaces propres, diagonalisation}{red-diag1}{3}
 Diagonaliser $A=\begin{pmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{pmatrix}$ : donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$.
 \place
 \clearpage
 \partie{II}{Exercices classiques et méthodes incontournables}{Trace, sous-espaces stables, polynôme caractéristique, diagonalisation selon un paramètre, puissances, symétries.}
-\exercice{8}{2}{Deux propriétés de la trace}{Cours, exercice 1.2}{trace, $\mathrm{tr}(AB)=\mathrm{tr}(BA)$, projecteur}{red-trace}{3}
+\exercice{8}{2}{Deux propriétés de la trace}{Livret, exercice 1.2}{trace, $\mathrm{tr}(AB)=\mathrm{tr}(BA)$, projecteur}{red-trace}{3}
 \begin{enumerate}
 \item Montrer qu'il n'existe pas de matrices $A,B\in\Mn{\K}$ telles que $AB-BA=I_n$.
 \item Soit $A\in\Mn{\K}$ telle que $A^2=A$. Montrer que $\rg(A)=\tr(A)$.
 \end{enumerate}
 \place
-\exercice{9}{2}{Lire des blocs}{Cours, exercice 1.4}{sous-espace stable, matrice par blocs, déterminant, trace}{red-stable}{3}
+\exercice{9}{2}{Lire des blocs}{Livret, exercice 1.4}{sous-espace stable, matrice par blocs, déterminant, trace}{red-stable}{3}
 Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}3&-1&1\\0&2&0\\1&-1&3\end{pmatrix}$ dans la base canonique
 $(e_1,e_2,e_3)$.
 \begin{enumerate}
@@ -434,22 +434,22 @@ $(e_1,e_2,e_3)$.
 \item Montrer que $\R^3=F\oplus G$ et écrire la matrice de $f$ dans la base $(e_1,e_3,u)$. En déduire $\det A$ et $\tr A$.
 \end{enumerate}
 \place
-\exercice{10}{2}{Matrice compagnon}{Cours, exercice 1.6}{polynôme caractéristique, développement}{red-chi}{4}
+\exercice{10}{2}{Matrice compagnon}{Livret, exercice 1.6}{polynôme caractéristique, développement}{red-chi}{4}
 Soient $a,b,c\in\K$ et $C=\begin{pmatrix}0&0&-c\\1&0&-b\\0&1&-a\end{pmatrix}$. Montrer que $\chi_C(x)=x^3+ax^2+bx+c$.
 En déduire une matrice dont les valeurs propres sont $1$, $-1$ et $2$.
 \place
-\exercice{11}{2}{Éléments propres de $P\mapsto(X+1)P'$}{Cours, exercice 1.5}{vecteur propre, spectre, endomorphisme de polynômes}{red-elem}{4}
+\exercice{11}{2}{Éléments propres de $P\mapsto(X+1)P'$}{Livret, exercice 1.5}{vecteur propre, spectre, endomorphisme de polynômes}{red-elem}{4}
 Soit $n\geq1$ et $f:\R_n[X]\to\R_n[X]$, $P\mapsto(X+1)P'$.
 \begin{enumerate}
 \item Vérifier que $f$ est un endomorphisme de $\R_n[X]$.
 \item Montrer que $(X+1)^k$ est un vecteur propre de $f$ pour $0\leq k\leq n$. En déduire $\Sp(f)$ et les sous-espaces propres.
 \end{enumerate}
 \place
-\exercice{12}{2}{Diagonalisabilité selon un paramètre}{Cours, exercice 1.8}{matrice triangulaire, rang, multiplicité}{red-diag2}{4}
+\exercice{12}{2}{Diagonalisabilité selon un paramètre}{Livret, exercice 1.8}{matrice triangulaire, rang, multiplicité}{red-diag2}{4}
 Pour $a\in\R$, on pose $A_a=\begin{pmatrix}1&a&1\\0&1&1\\0&0&2\end{pmatrix}$. Pour quelles valeurs de $a$ la matrice $A_a$ est-elle
 diagonalisable ? La diagonaliser dans ce cas.
 \place
-\exercice{13}{2}{Puissances et suites couplées}{Cours, exercice 1.10}{diagonalisation, puissances, suites récurrentes}{red-puiss}{5}
+\exercice{13}{2}{Puissances et suites couplées}{Livret, exercice 1.10}{diagonalisation, puissances, suites récurrentes}{red-puiss}{5}
 Soit $A=\begin{pmatrix}1&2\\2&1\end{pmatrix}$. Calculer $A^k$ pour $k\in\N$, puis exprimer $u_k$ et $v_k$ pour les suites définies par
 $u_0=1$, $v_0=0$, $u_{k+1}=u_k+2v_k$, $v_{k+1}=2u_k+v_k$, en utilisant $A^k$. Retrouver le résultat de l'exemple du cours (§1.6).
 \place
@@ -481,14 +481,14 @@ Soient $p,q\in\,]0,1[$ et $A=\begin{pmatrix}1-p&q\\p&1-q\end{pmatrix}$.
 \place
 \clearpage
 \partie{III}{Exercices de synthèse et approfondissement}{Matrices de rang 1, nilpotentes, circulantes ; endomorphismes de polynômes et de fonctions ; $AB$ et $BA$ ; racines carrées.}
-\exercice{18}{3}{La matrice dont tous les coefficients valent $1$}{Cours, exercice 1.9}{rang, hyperplan, diagonalisation, déterminant}{red-rang1}{6}
+\exercice{18}{3}{La matrice dont tous les coefficients valent $1$}{Livret, exercice 1.9}{rang, hyperplan, diagonalisation, déterminant}{red-rang1}{6}
 Soit $n\geq2$ et $J_n\in\Mn{\R}$ la matrice dont tous les coefficients valent $1$.
 \begin{enumerate}
 \item Déterminer le rang de $J_n$, puis ses valeurs propres et ses sous-espaces propres. Est-elle diagonalisable ?
 \item Soient $a,b$ réels, $b\neq0$. En déduire les valeurs propres de $aI_n+bJ_n$, et son déterminant.
 \end{enumerate}
 \place
-\exercice{19}{2}{Matrices nilpotentes}{Cours, exercice 1.12}{valeurs propres, trace, diagonalisation}{red-nilp}{6}
+\exercice{19}{2}{Matrices nilpotentes}{Livret, exercice 1.12}{valeurs propres, trace, diagonalisation}{red-nilp}{6}
 Soit $A\in\Mn{\C}$ telle que $A^p=0$ pour un entier $p\geq1$.
 \begin{enumerate}
 \item Montrer que $\Sp(A)=\{0\}$, puis que $\chi_A(x)=x^n$. En déduire $\tr A$ et $\det A$.
@@ -538,7 +538,7 @@ Soit $E$ de dimension finie et $f\in\LE$ tel que $(f-3\Id)\circ(f+2\Id)=0$.
 \item En déduire que $f$ est diagonalisable et que $\Sp(f)\subset\{3,-2\}$.
 \end{enumerate}
 \place
-\exercice{25}{3}{Racines carrées d'une matrice}{Cours, exercice 1.11}{commutant, matrice diagonale, changement de base}{red-racine}{8}
+\exercice{25}{3}{Racines carrées d'une matrice}{Livret, exercice 1.11}{commutant, matrice diagonale, changement de base}{red-racine}{8}
 \begin{enumerate}
 \item Déterminer les matrices $M\in\mathcal M_3(\R)$ telles que $M^2=D$, où $D=\mathrm{diag}(1,4,9)$. \emph{(Montrer d'abord que $M$ commute avec $D$.)}
 \item Soit $A\in\mathcal M_3(\R)$ diagonalisable, de valeurs propres $1$, $4$, $9$. Combien existe-t-il de matrices $M$ telles que $M^2=A$ ?
@@ -546,7 +546,7 @@ Soit $E$ de dimension finie et $f\in\LE$ tel que $(f-3\Id)\circ(f+2\Id)=0$.
 \place
 \clearpage
 \partie{IV}{Exercices difficiles et type concours}{Trigonalisation guidée, récurrences, matrices qui commutent, dans l'esprit des épreuves écrites.}
-\exercice{26}{3}{Trigonaliser une matrice (guidé)}{Cours, exercice 1.13}{trigonalisation, multiplicité, base}{red-trig}{9}
+\exercice{26}{3}{Trigonaliser une matrice (guidé)}{Livret, exercice 1.13}{trigonalisation, multiplicité, base}{red-trig}{9}
 Soit $T=\begin{pmatrix}5&-17&25\\2&-9&16\\1&-5&9\end{pmatrix}$.
 \begin{enumerate}
 \item Calculer $\chi_T$ et montrer que $T$ n'est pas diagonalisable, même dans $\mathcal M_3(\C)$.

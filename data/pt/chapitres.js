@@ -163,8 +163,8 @@ LC.chapitres = [
       "Suites récurrentes linéaires d'ordre 2 (rappelées dans la fiche §1.6)."
     ],
     cours: {
-      doc: "livre",
-      debut: 4, fin: 13,
+      doc: "livre-det",
+      debut: 4, fin: 12,
       sections: [
         { num: "1.1", titre: "Dimensions 2 et 3 : aire et volume orientés", page: 4 },
         { num: "1.2", titre: "Le déterminant d'ordre n : définition, règles de calcul", page: 5 },
@@ -172,7 +172,7 @@ LC.chapitres = [
         { num: "1.4", titre: "Géométrie : alignement, coplanarité, distances", page: 8 },
         { num: "1.5", titre: "Techniques de calcul d'ordre n", page: 9 }
       ],
-      corriges: { debut: 25, fin: 33 }
+      corriges: { debut: 13, fin: 21 }
     },
     fiche: {
       doc: "fiche-determinants", debut: 1, fin: 3,
@@ -187,8 +187,8 @@ LC.chapitres = [
       ]
     },
     presentation: {
-      doc: "presentation", debut: 4, fin: 126,
-      statique: { doc: "presentationStatique", debut: 4, fin: 55 },
+      doc: "presentation-det", debut: 1, fin: 127,
+      statique: { doc: "presentation-det-statique", debut: 1, fin: 56 },
       exercices: 4,
       sections: [
         { num: "1.1", titre: "Dimensions 2 et 3", page: 5, pageStatique: 5 },
@@ -231,19 +231,19 @@ LC.chapitres = [
       "Équation d'une droite, distance d'un point à une droite."
     ],
     cours: {
-      doc: "livre",
-      debut: 14, fin: 24,
+      doc: "livre-courbes",
+      debut: 4, fin: 14,
       sections: [
-        { num: "2.1", titre: "Représentation paramétrique, fonctions vectorielles", page: 14 },
-        { num: "2.2", titre: "Tangente en un point régulier", page: 14 },
-        { num: "2.3", titre: "Plan d'étude et réduction", page: 15 },
-        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 17 },
-        { num: "2.5", titre: "Branches infinies, position", page: 20 },
-        { num: "2.6", titre: "Synthèse : une courbe de Lissajous", page: 22 },
-        { num: "2.7", titre: "Fiche : réussir l'étude d'une courbe", page: 23 },
-        { num: "2.8", titre: "Problème type devoir surveillé", page: 23 }
+        { num: "2.1", titre: "Représentation paramétrique, fonctions vectorielles", page: 4 },
+        { num: "2.2", titre: "Tangente en un point régulier", page: 4 },
+        { num: "2.3", titre: "Plan d'étude et réduction", page: 5 },
+        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 7 },
+        { num: "2.5", titre: "Branches infinies, position", page: 10 },
+        { num: "2.6", titre: "Synthèse : une courbe de Lissajous", page: 12 },
+        { num: "2.7", titre: "Fiche : réussir l'étude d'une courbe", page: 13 },
+        { num: "2.8", titre: "Problème type devoir surveillé", page: 13 }
       ],
-      corriges: { debut: 33, fin: 45 }
+      corriges: { debut: 15, fin: 24 }
     },
     fiche: {
       doc: "fiche-courbes", debut: 1, fin: 3,
@@ -258,17 +258,17 @@ LC.chapitres = [
       ]
     },
     presentation: {
-      doc: "presentation", debut: 127, fin: 237,
-      statique: { doc: "presentationStatique", debut: 56, fin: 103 },
+      doc: "presentation-courbes", debut: 1, fin: 114,
+      statique: { doc: "presentation-courbes-statique", debut: 1, fin: 51 },
       exercices: 4,
       sections: [
-        { num: "2.1", titre: "Fonctions vectorielles, outils de calcul", page: 128, pageStatique: 57 },
-        { num: "2.2", titre: "Tangente, pente", page: 138, pageStatique: 62 },
-        { num: "2.3", titre: "Plan d'étude, symétries, tracé", page: 153, pageStatique: 69 },
-        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 167, pageStatique: 76 },
-        { num: "2.5", titre: "Branches infinies, positions", page: 195, pageStatique: 87 },
-        { num: "2.6", titre: "Intersections, points doubles", page: 214, pageStatique: 95 },
-        { num: "2.7", titre: "Check-list et résultats des TD", page: 233, pageStatique: 101 }
+        { num: "2.1", titre: "Fonctions vectorielles, outils de calcul", page: 5, pageStatique: 5 },
+        { num: "2.2", titre: "Tangente, pente", page: 15, pageStatique: 10 },
+        { num: "2.3", titre: "Plan d'étude, symétries, tracé", page: 30, pageStatique: 17 },
+        { num: "2.4", titre: "Points stationnaires, étude locale, inflexions", page: 44, pageStatique: 24 },
+        { num: "2.5", titre: "Branches infinies, positions", page: 72, pageStatique: 35 },
+        { num: "2.6", titre: "Intersections, points doubles", page: 91, pageStatique: 43 },
+        { num: "2.7", titre: "Check-list et résultats des TD", page: 110, pageStatique: 49 }
       ]
     },
     revision: {
@@ -312,7 +312,7 @@ LC.chapitres = [
     accroche: "Longueur, abscisse curviligne, repère de Frenet, courbure, développée, et enveloppe d'une famille de droites.",
     statut: "partiel",
     td: { doc: "td-metrique", corrections: "td-metrique-corrections" },
-    manque: "Pas encore de fiche de référence ni de présentation pour ce chapitre : le volume 2 en tient lieu.",
+    manque: "Pas encore de fiche de référence ni de présentation pour ce chapitre : le livret en tient lieu.",
     prerequis: [
       "Tout le chapitre 2 (tangente, $\\det(f',f'')$, factorisation par l'angle moitié).",
       "Intégrales : primitives usuelles, $\\int|\\cdot|$ sur un intervalle où le signe est connu.",
@@ -346,14 +346,15 @@ LC.chapitres = [
 ];
 
 /* Documents transversaux affichés dans « Ressources » */
-LC.transversal = ["presentation", "presentationStatique", "revision", "archive"];
+LC.transversal = ["livret-pt", "presentations-pt", "presentations-pt-statique", "revision", "archive"];
 
 /* Chronologie du travail (onglet « Parcours ») */
 LC.parcours = [
   { date: "2 novembre 2026", titre: "Séance 1 — livre de séance", texte: "Première séance de deux heures : l'essentiel des déterminants et les premiers outils des courbes, découpés en étapes minutées. Neuf versions successives ; la dernière est conservée en archive.", docs: ["archive"] },
-  { date: "3 novembre 2026", titre: "Livre « Cours, TD et devoir »", texte: "Réécriture calée sur le cours reçu en classe : les deux feuilles de TD intégralement corrigées, chacune après les notions qu'elle demande, et un problème type devoir surveillé.", docs: ["livre"] },
+  { date: "3 novembre 2026", titre: "Livre « Cours, TD et devoir »", texte: "Réécriture calée sur le cours reçu en classe : les deux feuilles de TD intégralement corrigées, chacune après les notions qu'elle demande, et un problème type devoir surveillé.", docs: ["livre-det", "livre-courbes"] },
   { date: "4 novembre 2026", titre: "Volume 2 et fiche de révision du devoir", texte: "Les propriétés métriques et les enveloppes passent dans un volume séparé. Fiche personnalisée construite à partir du devoir de courbes paramétrées.", docs: ["volume2", "revision"] },
-  { date: "5 novembre 2026", titre: "Fiche de référence et présentation", texte: "Une fiche imprimable pour travailler pendant les séances et réviser, une présentation pour expliquer, avec les mêmes numéros de parties et les mêmes notations.", docs: ["fiche-determinants", "fiche-courbes", "presentation"] },
+  { date: "5 novembre 2026", titre: "Fiche de référence et présentation", texte: "Une fiche imprimable pour travailler pendant les séances et réviser, une présentation pour expliquer, avec les mêmes numéros de parties et les mêmes notations.", docs: ["fiche-determinants", "fiche-courbes", "presentation-det", "presentation-courbes"] },
   { date: "5 novembre 2026", titre: "Plateforme et annales", texte: "Regroupement de tout le travail, et sélection commentée d'annales de la Banque PT (Mathématiques B, 2014–2024) qui portent sur nos chapitres, avec corrections détaillées.", docs: [] },
-  { date: "7 novembre 2026", titre: "Deux nouveaux chapitres, présentations avec exercices", texte: "Équations différentielles et Algèbre linéaire et réduction : livre, présentation avec exercices intégrés, fiche, cinq problèmes, TD et corrections. Les présentations des Déterminants et des Courbes reçoivent huit exercices en séance.", docs: ["livre-ed", "livre-red", "presentation-ed", "presentation-red"] }
+  { date: "7 novembre 2026", titre: "Deux nouveaux chapitres, présentations avec exercices", texte: "Équations différentielles et Algèbre linéaire et réduction : livre, présentation avec exercices intégrés, fiche, cinq problèmes, TD et corrections. Les présentations des Déterminants et des Courbes reçoivent huit exercices en séance.", docs: ["livre-ed", "livre-red", "presentation-ed", "presentation-red"] },
+  { date: "7 novembre 2026", titre: "Un livret et une présentation par chapitre, et les documents complets", texte: "Le livre « Déterminants, courbes » et sa présentation sont séparés par chapitre. Le livret complet PT et les présentations complètes PT sont assemblés automatiquement à partir des documents de chaque chapitre.", docs: ["livret-pt", "presentations-pt"] }
 ];

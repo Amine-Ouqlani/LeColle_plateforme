@@ -398,7 +398,7 @@ et l'on note $\ve u_1$, $\ve u_2$, $\ve u_3$ les vecteurs de $\R^3$ dont les coo
 \item Généralisation. Soit $n\geq2$ et $B_m\in\mathcal M_n(\R)$ la matrice dont les coefficients diagonaux valent $m$ et tous les autres $1$. Montrer que $\det B_m=(m+n-1)(m-1)^{n-1}$.
 \end{enumerate}
 \par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-det-param} · correction p.~\pageref{c:sel-det-param}}
-\probleme{2}{Méthodes classiques}{Les déterminants tridiagonaux}{3}{Livre, exercices 1.13 et 1.14 (TD 3 et TD 7 de la classe), réunis en un problème}{45\,min}{sel-det-tridiag}
+\probleme{2}{Méthodes classiques}{Les déterminants tridiagonaux}{3}{Livret, exercices 1.13 et 1.14 (TD 3 et TD 7 de la classe), réunis en un problème}{45\,min}{sel-det-tridiag}
 \fichepb{développement selon une ligne, relation de récurrence, suites récurrentes linéaires d'ordre 2, trigonométrie.}{Établir et exploiter la relation $T_n=aT_{n-1}-bc\,T_{n-2}$, dans un cas à racines réelles et dans un cas à racines complexes.}{Développement selon une ligne ou une colonne ; Suites récurrentes linéaires d'ordre 2 ; Formules d'addition.}
 Soient $a$, $b$, $c$ des réels. Pour $n\geq1$, on note $T_n$ le déterminant d'ordre $n$ dont les coefficients diagonaux valent $a$, les coefficients situés juste au-dessus de la diagonale valent $b$, ceux situés juste au-dessous valent $c$, et tous les autres $0$.
 \begin{enumerate}
@@ -416,7 +416,7 @@ Soient $a$, $b$, $c$ des réels. Pour $n\geq1$, on note $T_n$ le déterminant d'
 \end{enumerate}
 \end{enumerate}
 \par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-det-tridiag} · correction p.~\pageref{c:sel-det-tridiag}}
-\probleme{3}{Approfondissement}{Le déterminant de Vandermonde}{4}{Livre, exercice 1.12 · TD 5 de la classe · TD complet, exercice~26}{40\,min}{td-d5}
+\probleme{3}{Approfondissement}{Le déterminant de Vandermonde}{4}{Livret, exercice 1.12 · TD 5 de la classe · TD complet, exercice~26}{40\,min}{td-d5}
 \fichepb{déterminant vu comme polynôme, degré, racines, coefficient dominant, récurrence.}{Calculer un déterminant sans le développer, en l'étudiant comme un polynôme ; généraliser par récurrence.}{Polynômes : degré, racines, factorisation ; Développement selon une colonne.}
 Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pmatrix}$ et $P(x)=\det(A)$.
 \begin{enumerate}
@@ -426,7 +426,7 @@ Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pm
       $\det(A)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p)$.
 \end{enumerate}
 \par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:td-d5} · correction p.~\pageref{c:td-d5}}
-\probleme{4}{Problème de synthèse}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{5}{Livre, exercice 1.15 · TD 10 de la classe · TD complet, exercice~39}{50\,min}{td-d10}
+\probleme{4}{Problème de synthèse}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{5}{Livret, exercice 1.15 · TD 10 de la classe · TD complet, exercice~39}{50\,min}{td-d10}
 \fichepb{fonction affine, linéarité par rapport aux colonnes, matrice triangulaire, prolongement par continuité.}{Introduire une variable pour rendre le calcul simple, exploiter le degré, puis traiter un cas limite.}{Linéarité par rapport aux colonnes ; Dérivée et taux d'accroissement.}
 On note $U$ la matrice de taille $n\times n$ dont tous les coefficients valent $1$, et
 \[A_n=\begin{pmatrix}\lambda_1&a&\cdots&a\\b&\lambda_2&\ddots&\vdots\\\vdots&\ddots&\ddots&a\\b&\cdots&b&\lambda_n\end{pmatrix}.\]
@@ -489,7 +489,7 @@ On note $U$ la matrice de taille $n\times n$ dont tous les coefficients valent $
 \item 3.(a) $C_1\leftarrow C_1-C_2$ fait apparaître deux coefficients simples et un zéro.
 \item 3.(c) Neuf cofacteurs, puis $A^{-1}=\frac1{\det A}\mathrm{com}(A)^T$ ; contrôler un coefficient du produit.
 \end{itemize}
-\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du livre » désignent le cours.}
+\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du livret » désignent le livret du chapitre.}
 \soustitre{1}{Un déterminant à paramètre, de l'algèbre à la géométrie}{c:sel-det-param}
 \choix{toutes les lignes ont la même somme $m+2$ : on l'additionne dans une colonne, on la factorise, puis on fait apparaître des zéros. On ne développe jamais un déterminant à paramètre « brut » : on obtiendrait un polynôme à factoriser ensuite.}
 \q{1.} $C_1\leftarrow C_1+C_2+C_3$ (le déterminant ne change pas), puis on sort $m+2$ de la première colonne (linéarité) :
@@ -538,7 +538,7 @@ Contrôle : $u_4=243-32=211$.
 \retenir{tridiagonal (diagonale $a$, voisins $b$ et $c$) $\Rightarrow T_n=aT_{n-1}-bc\,T_{n-2}$ ; puis suite récurrente linéaire d'ordre $2$ (racines réelles, complexes ou double).}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \soustitre{3}{Le déterminant de Vandermonde}{c:td-d5}
-\choix{$x$ n'apparaît que dans la dernière colonne : méthode~1.3 du livre. On ne développe surtout pas « à la main » : on
+\choix{$x$ n'apparaît que dans la dernière colonne : méthode~1.3 du livret. On ne développe surtout pas « à la main » : on
 utilise la structure (degré, coefficient dominant, racines).}
 \q{1.} En développant selon la dernière colonne $(1,x,x^2,x^3)^T$,
 $P(x)=\gamma_0+\gamma_1x+\gamma_2x^2+\gamma_3x^3$, où les $\gamma_k$ sont des cofacteurs indépendants de $x$ : $P$ est un
@@ -568,7 +568,7 @@ sont distincts : c'est l'outil de l'interpolation de Lagrange et de la liberté 
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \soustitre{4}{Un déterminant affine : $a$ au-dessus, $b$ au-dessous}{c:td-d10}
 \choix{retrancher $x$ partout transforme les coefficients constants $a$ et $b$ en $a-x$ et $b-x$ : pour $x=a$ ou $x=b$, la
-matrice devient triangulaire. Il suffit donc de savoir que $P$ est affine (méthode~1.5 du livre).}
+matrice devient triangulaire. Il suffit donc de savoir que $P$ est affine (méthode~1.5 du livret).}
 Notons $Q(x)=\prod_{i=1}^n(\lambda_i-x)$.
 
 \q{1.} Les colonnes de $A_n-xU$ sont $C_j-xU_1$, où $U_1=(1,\dots,1)^T$. Les transvections $C_j\leftarrow C_j-C_1$ ($j\geq2$)
@@ -584,7 +584,7 @@ $P(b)=Q(b)$. Comme $\det A_n=P(0)$ et que $P$ est affine, on écrit la droite pa
 $\varphi(u)=u\,Q(a)-a\,Q(u)$, on a $\varphi(a)=0$ et $\det A_n=\frac{\varphi(b)-\varphi(a)}{b-a}\to\varphi'(a)$. D'où, pour $a=b$,
 \[\det A_n=Q(a)-aQ'(a)=\prod_{i=1}^n(\lambda_i-a)+a\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-a).\]
 Contrôle : tous les $\lambda_i$ égaux à $\lambda$ : $(\lambda-a)^n+na(\lambda-a)^{n-1}=(\lambda+(n-1)a)(\lambda-a)^{n-1}$, c'est la
-proposition~1.13 du livre.
+proposition~1.13 du livret.
 \gain{reconnaître un \emph{taux d'accroissement} : une expression $\frac{\varphi(b)-\varphi(a)}{b-a}$ avec $\varphi(a)=0$ tend vers
 $\varphi'(a)$. C'est le sens de « à l'aide d'une dérivée ».}
 \piege{en 3, on ne peut pas faire $b=a$ dans la formule de la question 2 (division par $0$) ; il faut justifier le passage à la

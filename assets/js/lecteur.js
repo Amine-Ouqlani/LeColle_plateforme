@@ -2,8 +2,12 @@
 'use strict';
 
 (async function lecteur() {
-  const docId = params.get('doc') || 'livre';
-  const D = LC.documents[docId] || LC.documents.livre;
+  /* anciens identifiants (documents remplacés par un document par chapitre et des documents complets) */
+  const ANCIENS = { livre: 'livret-pt', fiche: 'fiche-determinants', presentation: 'presentations-pt', presentationStatique: 'presentations-pt-statique' };
+  const demande = params.get('doc') || 'livret-pt';
+  const docId = LC.documents[demande] ? demande : (ANCIENS[demande] || 'livret-pt');
+  if (docId !== demande) { params.set('doc', docId); params.delete('page'); history.replaceState(null, '', '?' + params.toString()); }
+  const D = LC.documents[docId];
   if (!LC.documents[docId] && docId === 'fiche') location.replace(lecteurUrl('fiche-determinants', 1));
   const embed = params.get('embed') === '1';
   const slides = params.get('mode') === 'slides';

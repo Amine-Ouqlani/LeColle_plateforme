@@ -21,7 +21,7 @@ document.title = `${A.concours} ${A.annee} — ${plain(A.titre)} — Le Collé`;
     <p class="meta">${A.concours}, ${A.epreuve} ${A.annee}, ${A.partie} — questions ${A.questions}. Environ ${A.duree}.</p>
     <p class="links" style="margin-top:14px">${liens}</p>
     <p style="margin-top:22px"><b>À revoir avant de commencer.</b></p>
-    <ul>${A.methodes.map(([ref, txt]) => { const r = ficheRef(ref); return `<li><a href="${r.url}">${r.label}</a> — ${txt}</li>`; }).join('')}</ul>
+    <ul>${A.methodes.map(([ref, txt]) => { const r = ficheRef(ref, A.chapitres); return `<li><a href="${r.url}">${r.label}</a> — ${txt}</li>`; }).join('')}</ul>
     <p class="muted" style="margin-top:14px">Lis la question sur le sujet officiel et cherche-la ; les énoncés ci-dessous en sont des résumés. Ouvre l'indication si tu bloques, la correction ensuite.</p>
     <div class="ann-body" id="ann-body"><p class="muted">Chargement…</p></div>
     <nav class="pager">${prev ? `<a href="annale.html?id=${prev.id}">← ${prev.annee}, ${prev.partie}</a>` : '<span></span>'}${next ? `<a href="annale.html?id=${next.id}">${next.annee}, ${next.partie} →</a>` : ''}</nav>`;
@@ -38,7 +38,7 @@ document.title = `${A.concours} ${A.annee} — ${plain(A.titre)} — Le Collé`;
     const t = el.textContent, m = t.match(/§\s?(\d\.\d)/);
     if (!m) return;
     const a = document.createElement('a');
-    a.className = 'q-ref'; a.href = ficheRef((/volume 2/.test(t) ? 'V2 ' : '') + m[1]).url; a.textContent = t;
+    a.className = 'q-ref'; a.href = ficheRef((/volume 2/.test(t) ? 'V2 ' : '') + m[1], A.chapitres).url; a.textContent = t;
     el.replaceWith(a);
   });
   renderMath($('#ann-body'));

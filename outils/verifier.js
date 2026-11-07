@@ -4,7 +4,7 @@ const ctx = {}; ctx.window = ctx; vm.createContext(ctx);
 for (const f of ['pt/documents', 'pt/chapitres', 'pt/exercices', 'pt/annales', 'pt/entrainement', 'pt/selection', 'pt/annales-questions']) vm.runInContext(fs.readFileSync(`data/${f}.js`, 'utf8'), ctx);
 const LC = ctx.LC; const err = []; const ok = p => fs.existsSync(p) || err.push('fichier manquant : ' + p);
 const pages = {};
-for (const [id, d] of Object.entries(LC.documents)) { ok(d.fichier); ok(d.source); pages[id] = d.pages; if (!d.fichier.startsWith('docs/pt/')) err.push('document PT hors de docs/pt : ' + id); }
+for (const [id, d] of Object.entries(LC.documents)) { ok(d.fichier); if (d.source) ok(d.source); else if (d.type !== "complet") err.push("source manquante : " + id); pages[id] = d.pages; if (!d.fichier.startsWith('docs/pt/')) err.push('document PT hors de docs/pt : ' + id); }
 // filière MP : contexte séparé, aucun document partagé avec PT
 const mp = {}; mp.window = mp; vm.createContext(mp); vm.runInContext(fs.readFileSync('data/mp/ouvrages.js', 'utf8'), mp);
 for (const [id, d] of Object.entries(mp.LC.documents)) { ok(d.fichier); if (!d.fichier.startsWith('docs/mp/') || d.filiere !== 'mp') err.push('document MP mal rangé : ' + id); if (LC.documents[id]) err.push('identifiant commun PT/MP : ' + id);

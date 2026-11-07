@@ -43,7 +43,7 @@ LC.selection = {
     "titre": "Solution polynomiale et changement de variable",
     "difficulte": 2,
     "duree": 35,
-    "origine": "Cours, exercice 1.8 · TD complet, exercice 16",
+    "origine": "Livret, exercice 1.8 · TD complet, exercice 16",
     "notions": [
      "solution polynomiale",
      "changement de variable",
@@ -362,7 +362,7 @@ LC.selection = {
     "titre": "Les déterminants tridiagonaux",
     "difficulte": 3,
     "duree": 45,
-    "origine": "Livre, exercices 1.13 et 1.14 (TD 3 et TD 7 de la classe), réunis en un problème",
+    "origine": "Livret, exercices 1.13 et 1.14 (TD 3 et TD 7 de la classe), réunis en un problème",
     "notions": [
      "développement selon une ligne",
      "relation de récurrence",
@@ -394,7 +394,7 @@ LC.selection = {
     "titre": "Le déterminant de Vandermonde",
     "difficulte": 4,
     "duree": 40,
-    "origine": "Livre, exercice 1.12 · TD 5 de la classe · TD complet, exercice 26",
+    "origine": "Livret, exercice 1.12 · TD 5 de la classe · TD complet, exercice 26",
     "notions": [
      "déterminant vu comme polynôme",
      "degré, racines, coefficient dominant",
@@ -421,7 +421,7 @@ LC.selection = {
     "titre": "Un déterminant affine : $a$ au-dessus, $b$ au-dessous",
     "difficulte": 5,
     "duree": 50,
-    "origine": "Livre, exercice 1.15 · TD 10 de la classe · TD complet, exercice 39",
+    "origine": "Livret, exercice 1.15 · TD 10 de la classe · TD complet, exercice 39",
     "notions": [
      "fonction affine",
      "linéarité par rapport aux colonnes",
@@ -514,7 +514,7 @@ LC.selection = {
     "titre": "La cardioïde",
     "difficulte": 4,
     "duree": 45,
-    "origine": "Livre, exercice 2.3 · TD 4 de la classe · TD complet, exercice 16",
+    "origine": "Livret, exercice 2.3 · TD 4 de la classe · TD complet, exercice 16",
     "notions": [
      "symétrie",
      "angle moitié",
@@ -544,7 +544,7 @@ LC.selection = {
     "titre": "La cubique de Descartes",
     "difficulte": 4,
     "duree": 45,
-    "origine": "Livre, exercice 2.8 · TD 8 de la classe · TD complet, exercice 18",
+    "origine": "Livret, exercice 2.8 · TD 8 de la classe · TD complet, exercice 18",
     "notions": [
      "symétrie $t\\mapsto\\frac1t$",
      "tableau de variations",
@@ -603,7 +603,7 @@ LC.selection = {
     "titre": "Problème de synthèse, type devoir surveillé",
     "difficulte": 5,
     "duree": 90,
-    "origine": "Livre, exercice 2.11 · problème type devoir · TD complet, exercice 30",
+    "origine": "Livret, exercice 2.11 · problème type devoir · TD complet, exercice 30",
     "notions": [
      "étude complète",
      "point stationnaire",
@@ -669,7 +669,7 @@ LC.selection = {
     "titre": "La cycloïde : longueur, repère de Frenet, développée",
     "difficulte": 3,
     "duree": 45,
-    "origine": "Livre, volume 2, exercices 1.1 et 1.4, réunis en un problème",
+    "origine": "Livret, exercices 1.1 et 1.4, réunis en un problème",
     "notions": [
      "angle moitié",
      "longueur",
@@ -729,7 +729,7 @@ LC.selection = {
     "titre": "L'ellipse : courbure aux sommets et développée",
     "difficulte": 4,
     "duree": 60,
-    "origine": "Livre, volume 2, exercices 1.3 et 2.2, réunis en un problème",
+    "origine": "Livret, exercices 1.3 et 2.2, réunis en un problème",
     "notions": [
      "angle de la tangente",
      "courbure",

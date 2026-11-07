@@ -6,9 +6,39 @@
 window.LC = window.LC || {};
 
 LC.documents = {
+  "livret-pt": {
+    titre: "Livret complet PT",
+    sousTitre: "Tous les cours, dans l'ordre des chapitres 1 à 5",
+    type: "complet",
+    fichier: "docs/pt/livres/livret-complet-PT.pdf",
+    pages: 103,
+    version: "v1",
+    maj: "2026-11-07",
+    description: "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : équations différentielles, réduction, déterminants, courbes paramétrées, propriétés métriques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
+  },
+  "presentations-pt": {
+    titre: "Présentations complètes PT",
+    sousTitre: "Toutes les présentations des chapitres 1 à 4",
+    type: "complet",
+    fichier: "docs/pt/presentations/presentations-completes-PT.pdf",
+    pages: 424,
+    version: "v1",
+    maj: "2026-11-07",
+    description: "Les présentations de tous les chapitres réunies en un seul PDF, avec un sommaire et des signets. En séance, on utilise la présentation du chapitre."
+  },
+  "presentations-pt-statique": {
+    titre: "Présentations complètes PT (sans animations)",
+    sousTitre: "Une page par diapositive, pour réviser ou imprimer",
+    type: "complet",
+    fichier: "docs/pt/presentations/presentations-completes-PT-sans-animations.pdf",
+    pages: 202,
+    version: "v1",
+    maj: "2026-11-07",
+    description: "La même présentation complète, chaque diapositive dans son état final."
+  },
   "livre-ed": {
     titre: "Équations différentielles",
-    sousTitre: "Chapitre 1 · livre complet : cours, méthodes, exercices corrigés",
+    sousTitre: "Chapitre 1 · livret : cours, méthodes, exercices corrigés",
     type: "cours",
     fichier: "docs/pt/livres/livre-equations-differentielles.pdf",
     source: "docs/pt/sources/livre-equations-differentielles.tex",
@@ -17,49 +47,16 @@ LC.documents = {
     maj: "2026-11-07",
     description: "Structure des solutions et théorème de Cauchy linéaire, premier ordre et recollement, second ordre à coefficients constants, second ordre à coefficients continus (solution polynomiale, solution connue, changement de variable, série entière). Exercices corrigés à la fin."
   },
-  "livre-red": {
-    titre: "Algèbre linéaire et réduction",
-    sousTitre: "Chapitre 2 · livre complet : cours, méthodes, exercices corrigés",
-    type: "cours",
-    fichier: "docs/pt/livres/livre-reduction.pdf",
-    source: "docs/pt/sources/livre-reduction.tex",
-    pages: 21,
-    version: "v1",
-    maj: "2026-11-07",
-    description: "Matrices semblables, sommes directes, trace, hyperplans, sous-espaces stables ; éléments propres, polynôme caractéristique, diagonalisation et ses applications, trigonalisation. Exercices corrigés à la fin."
-  },
-  "fiche-ed": {
-    titre: "Fiche de référence — Équations différentielles",
-    sousTitre: "Chapitre 1 · imprimable",
-    type: "fiche",
-    fichier: "docs/pt/fiches/fiche-equations-differentielles.pdf",
-    source: "docs/pt/sources/fiche-equations-differentielles.tex",
-    pages: 3,
-    version: "v1",
-    maj: "2026-11-07",
-    description: "Structure et théorème de Cauchy, premier ordre et recollement, coefficients constants, coefficients continus, choix de la méthode, pièges et résultats du TD."
-  },
-  "fiche-red": {
-    titre: "Fiche de référence — Algèbre linéaire et réduction",
-    sousTitre: "Chapitre 2 · imprimable",
-    type: "fiche",
-    fichier: "docs/pt/fiches/fiche-reduction.pdf",
-    source: "docs/pt/sources/fiche-reduction.tex",
-    pages: 3,
-    version: "v1",
-    maj: "2026-11-07",
-    description: "Sommes directes, trace, hyperplans, sous-espaces stables, éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges et résultats du TD."
-  },
   "presentation-ed": {
     titre: "Présentation — Équations différentielles",
-    sousTitre: "Support de séance (2 h) · 7 exercices intégrés",
+    sousTitre: "Chapitre 1 · Support de séance (2 h) · 7 exercices intégrés",
     type: "presentation",
     fichier: "docs/pt/presentations/presentation-equations-differentielles.pdf",
     source: "docs/pt/sources/presentation-equations-differentielles.tex",
     pages: 86,
     version: "v1",
     maj: "2026-11-07",
-    description: "Les diapositives de la séance, avec sept exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+    description: "Les diapositives de la séance, avec 7 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
   },
   "presentation-ed-statique": {
     titre: "Présentation — Équations différentielles (sans animations)",
@@ -72,16 +69,38 @@ LC.documents = {
     maj: "2026-11-07",
     description: "La même présentation, chaque diapositive dans son état final."
   },
+  "fiche-ed": {
+    titre: "Fiche de référence — Équations différentielles",
+    sousTitre: "Chapitre 1 · imprimable",
+    type: "fiche",
+    fichier: "docs/pt/fiches/fiche-equations-differentielles.pdf",
+    source: "docs/pt/sources/fiche-equations-differentielles.tex",
+    pages: 3,
+    version: "v1",
+    maj: "2026-11-07",
+    description: "Structure et théorème de Cauchy, premier ordre et recollement, coefficients constants, coefficients continus, choix de la méthode, pièges et résultats du TD."
+  },
+  "livre-red": {
+    titre: "Algèbre linéaire et réduction",
+    sousTitre: "Chapitre 2 · livret : cours, méthodes, exercices corrigés",
+    type: "cours",
+    fichier: "docs/pt/livres/livre-reduction.pdf",
+    source: "docs/pt/sources/livre-reduction.tex",
+    pages: 21,
+    version: "v1",
+    maj: "2026-11-07",
+    description: "Matrices semblables, sommes directes, trace, hyperplans, sous-espaces stables ; éléments propres, polynôme caractéristique, diagonalisation et ses applications, trigonalisation. Exercices corrigés à la fin."
+  },
   "presentation-red": {
     titre: "Présentation — Algèbre linéaire et réduction",
-    sousTitre: "Support de deux séances · 9 exercices intégrés",
+    sousTitre: "Chapitre 2 · Support de deux séances · 9 exercices intégrés",
     type: "presentation",
     fichier: "docs/pt/presentations/presentation-reduction.pdf",
     source: "docs/pt/sources/presentation-reduction.tex",
     pages: 95,
     version: "v1",
     maj: "2026-11-07",
-    description: "Les diapositives des séances, avec neuf exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+    description: "Les diapositives de la séance, avec 9 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
   },
   "presentation-red-statique": {
     titre: "Présentation — Algèbre linéaire et réduction (sans animations)",
@@ -94,49 +113,115 @@ LC.documents = {
     maj: "2026-11-07",
     description: "La même présentation, chaque diapositive dans son état final."
   },
-  livre: {
-    titre: "Déterminants, courbes paramétrées planes",
-    sousTitre: "Cours, TD et devoir — livre principal",
-    type: "cours",
-    fichier: "docs/pt/livres/livre-determinants-courbes.pdf",
-    source: "docs/pt/sources/livre-determinants-courbes.tex",
-    pages: 47,
-    version: "v14",
-    maj: "2026-11-04",
-    description: "Tout le cours de déterminants et de courbes paramétrées (avec les compléments hors programme utiles aux TD), les deux feuilles de TD intégralement corrigées et un problème type devoir surveillé."
-  },
-  volume2: {
-    titre: "Propriétés métriques et enveloppes",
-    sousTitre: "Volume 2 — longueur, courbure, développée, enveloppes",
-    type: "cours",
-    fichier: "docs/pt/livres/volume2-metrique-enveloppes.pdf",
-    source: "docs/pt/sources/volume2-metrique-enveloppes.tex",
-    pages: 14,
+  "fiche-red": {
+    titre: "Fiche de référence — Algèbre linéaire et réduction",
+    sousTitre: "Chapitre 2 · imprimable",
+    type: "fiche",
+    fichier: "docs/pt/fiches/fiche-reduction.pdf",
+    source: "docs/pt/sources/fiche-reduction.tex",
+    pages: 3,
     version: "v1",
-    maj: "2026-11-04",
-    description: "Longueur et abscisse curviligne, repère de Frenet, courbure, cercle de courbure, développée, enveloppe d'une famille de droites. Même forme que le livre principal."
+    maj: "2026-11-07",
+    description: "Sommes directes, trace, hyperplans, sous-espaces stables, éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges et résultats du TD."
+  },
+  "livre-det": {
+    titre: "Déterminants",
+    sousTitre: "Chapitre 3 · livret : cours, méthodes, exercices corrigés",
+    type: "cours",
+    fichier: "docs/pt/livres/livre-determinants.pdf",
+    source: "docs/pt/sources/livre-determinants.tex",
+    pages: 23,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "Aire et volume orientés, définition et règles de calcul, propriétés globales, géométrie, techniques de calcul d'ordre n, avec la feuille de TD de la classe intégralement corrigée et les compléments hors programme utiles."
+  },
+  "presentation-det": {
+    titre: "Présentation — Déterminants",
+    sousTitre: "Chapitre 3 · Support de deux séances · 4 exercices intégrés",
+    type: "presentation",
+    fichier: "docs/pt/presentations/presentation-determinants.pdf",
+    source: "docs/pt/sources/presentation-determinants.tex",
+    pages: 127,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "Les diapositives de la séance, avec 4 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+  },
+  "presentation-det-statique": {
+    titre: "Présentation — Déterminants (sans animations)",
+    sousTitre: "Une page par diapositive",
+    type: "presentation",
+    fichier: "docs/pt/presentations/presentation-determinants-sans-animations.pdf",
+    source: "docs/pt/sources/presentation-determinants.tex",
+    pages: 56,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "La même présentation, chaque diapositive dans son état final."
   },
   "fiche-determinants": {
     titre: "Fiche de référence — Déterminants",
-    sousTitre: "Chapitre 1 · imprimable",
+    sousTitre: "Chapitre 3 · imprimable",
     type: "fiche",
     fichier: "docs/pt/fiches/fiche-determinants.pdf",
     source: "docs/pt/sources/fiche-determinants.tex",
     pages: 3,
     version: "v2",
-    maj: "2026-11-05",
+    maj: "2026-11-07",
     description: "Définitions, règles de calcul, propriétés globales, géométrie, choix de la méthode selon la forme du déterminant, techniques d'ordre n, pièges et résultats des TD."
+  },
+  "livre-courbes": {
+    titre: "Courbes paramétrées planes",
+    sousTitre: "Chapitre 4 · livret : cours, méthodes, exercices corrigés",
+    type: "cours",
+    fichier: "docs/pt/livres/livre-courbes.pdf",
+    source: "docs/pt/sources/livre-courbes.tex",
+    pages: 28,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "Fonctions vectorielles, tangentes, plan d'étude, points stationnaires, branches infinies, une courbe de Lissajous, avec la feuille de TD de la classe intégralement corrigée et un problème type devoir surveillé."
+  },
+  "presentation-courbes": {
+    titre: "Présentation — Courbes paramétrées planes",
+    sousTitre: "Chapitre 4 · Support de deux séances · 4 exercices intégrés",
+    type: "presentation",
+    fichier: "docs/pt/presentations/presentation-courbes.pdf",
+    source: "docs/pt/sources/presentation-courbes.tex",
+    pages: 114,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "Les diapositives de la séance, avec 4 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+  },
+  "presentation-courbes-statique": {
+    titre: "Présentation — Courbes paramétrées planes (sans animations)",
+    sousTitre: "Une page par diapositive",
+    type: "presentation",
+    fichier: "docs/pt/presentations/presentation-courbes-sans-animations.pdf",
+    source: "docs/pt/sources/presentation-courbes.tex",
+    pages: 51,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "La même présentation, chaque diapositive dans son état final."
   },
   "fiche-courbes": {
     titre: "Fiche de référence — Courbes paramétrées planes",
-    sousTitre: "Chapitre 2 · imprimable",
+    sousTitre: "Chapitre 4 · imprimable",
     type: "fiche",
     fichier: "docs/pt/fiches/fiche-courbes-parametrees.pdf",
     source: "docs/pt/sources/fiche-courbes-parametrees.tex",
     pages: 3,
     version: "v2",
-    maj: "2026-11-05",
+    maj: "2026-11-07",
     description: "Outils de calcul, tangente et pente, plan d'étude et symétries, points stationnaires et inflexions, branches infinies, points doubles, check-list de tracé et résultats des TD."
+  },
+  "volume2": {
+    titre: "Propriétés métriques et enveloppes",
+    sousTitre: "Chapitre 5 · livret : longueur, courbure, développée, enveloppes",
+    type: "cours",
+    fichier: "docs/pt/livres/volume2-metrique-enveloppes.pdf",
+    source: "docs/pt/sources/volume2-metrique-enveloppes.tex",
+    pages: 14,
+    version: "v2",
+    maj: "2026-11-07",
+    description: "Longueur et abscisse curviligne, repère de Frenet, courbure, cercle de courbure, développée, enveloppe d'une famille de droites. Même forme que les autres livrets."
   },
   revision: {
     titre: "Fiche de révision personnalisée — devoir de courbes",
@@ -148,28 +233,6 @@ LC.documents = {
     version: "v1",
     maj: "2026-11-04",
     description: "Construite à partir du devoir surveillé de courbes paramétrées : pour chaque question, ce qu'il faut savoir, la méthode, et la correction rédigée comme dans une copie."
-  },
-  presentation: {
-    titre: "Présentation — Déterminants et courbes paramétrées",
-    sousTitre: "Support de séance — révélation progressive · 8 exercices intégrés",
-    type: "presentation",
-    fichier: "docs/pt/presentations/presentation.pdf",
-    source: "docs/pt/sources/presentation.tex",
-    pages: 237,
-    version: "v2",
-    maj: "2026-11-07",
-    description: "La présentation projetée pendant les séances : une idée par diapositive, questions « À toi », schémas, et huit exercices à chercher en direct (énoncé, puis correction sur la diapositive suivante). Chaque diapositive renvoie à la partie correspondante de la fiche."
-  },
-  presentationStatique: {
-    titre: "Présentation — Déterminants et courbes (sans animations)",
-    sousTitre: "Une page par diapositive — pour réviser ou imprimer",
-    type: "presentation",
-    fichier: "docs/pt/presentations/presentation-sans-animations.pdf",
-    source: "docs/pt/sources/presentation.tex",
-    pages: 103,
-    version: "v2",
-    maj: "2026-11-07",
-    description: "La même présentation, chaque diapositive dans son état final."
   },
   archive: {
     titre: "Livre de la séance 1 (première version)",
@@ -192,7 +255,7 @@ LC.documents = {
     "pages": 9,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Tous les exercices du livre (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+    "description": "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
   },
   "td-ed-corrections": {
     "titre": "TD — Équations différentielles : corrections",
@@ -214,7 +277,7 @@ LC.documents = {
     "pages": 11,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Tous les exercices du livre (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+    "description": "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
   },
   "td-red-corrections": {
     "titre": "TD — Algèbre linéaire et réduction : corrections",
@@ -291,7 +354,7 @@ LC.documents = {
     "pages": 14,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+    "description": "Tous les exercices du livret pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
   },
   "td-determinants-corrections": {
     "titre": "TD — Déterminants : corrections",
@@ -313,7 +376,7 @@ LC.documents = {
     "pages": 13,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+    "description": "Tous les exercices du livret pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
   },
   "td-courbes-corrections": {
     "titre": "TD — Courbes paramétrées : corrections",
@@ -335,7 +398,7 @@ LC.documents = {
     "pages": 10,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+    "description": "Tous les exercices du livret pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
   },
   "td-metrique-corrections": {
     "titre": "TD — Propriétés métriques des courbes : corrections",

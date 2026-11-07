@@ -87,11 +87,11 @@ CHAPITRES = {
 
 # origine des exemples du livre mis en exercice
 EXEMPLES = {
-  'ex-160': 'Livre, exemple 1.7', 'ex-max': 'Livre, exemple 1.14', 'ex-base': 'Livre, § 1.3 (application du cours)',
-  'ex-ellipse': 'Livre, exemple 2.4', 'ex-dl': 'Livre, exemple 2.6', 'ex-infl': 'Livre, § 2.4 (remarque du cours)',
-  'ex-liss': 'Livre, exemple 2.9',
-  'ex-cardio': 'Livre, volume 2, exemple 1.2', 'ex-devparab': 'Livre, volume 2, exemple 1.7',
-  'ex-echelle': 'Livre, volume 2, exemple 2.2',
+  'ex-160': 'Livret, exemple 1.7', 'ex-max': 'Livret, exemple 1.14', 'ex-base': 'Livret, § 1.3 (application du cours)',
+  'ex-ellipse': 'Livret, exemple 2.4', 'ex-dl': 'Livret, exemple 2.6', 'ex-infl': 'Livret, § 2.4 (remarque du cours)',
+  'ex-liss': 'Livret, exemple 2.9',
+  'ex-cardio': 'Livret, exemple 1.2', 'ex-devparab': 'Livret, exemple 1.7',
+  'ex-echelle': 'Livret, exemple 2.2',
 }
 
 # titre, notions, objectif, indication — pour les exercices absents de data/exercices.js

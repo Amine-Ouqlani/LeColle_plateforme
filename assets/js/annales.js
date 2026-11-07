@@ -14,7 +14,7 @@ function questions(cid) {
   return sections(c).map(s => {
     const l = qs.filter(q => q.section === s.num);
     if (!l.length) return '';
-    return `<h3>${s.titre} <span class="tag">${c.fiche ? 'fiche' : 'volume 2'} §${s.num}</span></h3><ul class="list">${l.map(q => {
+    return `<h3>${s.titre} <span class="tag">${c.fiche ? 'fiche' : 'livret'} §${s.num}</span></h3><ul class="list">${l.map(q => {
       const a = annale(q.annale);
       return `<li class="row"><div class="main"><a href="annale.html?id=${a.id}#q-${q.q}">${q.label} — ${q.titre}</a><br>
         <span class="tag">${a.concours} ${a.annee} · ${a.epreuve}, ${a.partie} · </span>${dots(Math.min(5, a.difficulte + 1))}</div>

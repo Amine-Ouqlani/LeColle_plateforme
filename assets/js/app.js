@@ -25,15 +25,17 @@ function renderMath(root) {
   });
 }
 
-/* « 2.4 » ou « V2 2.1 » → page de la fiche ou du volume 2 */
-function ficheRef(ref) {
+/* « 2.4 » ou « V2 2.1 » → page de la fiche (ou du livret des propriétés métriques).
+   ids : chapitres concernés (ex. ceux d'une annale), pour lever l'ambiguïté des numéros internes §1.x */
+function ficheRef(ref, ids) {
   const v2 = ref.startsWith('V2 ');
   const num = v2 ? ref.slice(3) : ref;
   if (v2) {
     const s = chap('metrique').cours.sections.find(s => s.num === num);
-    return { url: lecteurUrl('volume2', s ? s.page : 4), label: `volume 2, §${num}` };
+    return { url: lecteurUrl('volume2', s ? s.page : 4), label: `livret des propriétés métriques, §${num}` };
   }
-  for (const c of LC.chapitres) {
+  const pool = ids && ids.length ? LC.chapitres.filter(c => ids.includes(c.id)).concat(LC.chapitres.filter(c => !ids.includes(c.id))) : LC.chapitres;
+  for (const c of pool) {
     const s = c.fiche && c.fiche.sections.find(s => s.num === num);
     if (s) return { url: lecteurUrl(c.fiche.doc, s.page), label: `fiche §${num}` };
   }

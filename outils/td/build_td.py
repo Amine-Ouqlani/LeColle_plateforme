@@ -10,19 +10,19 @@ ICI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ICI)
 from meta import CHAPITRES, EXEMPLES, META
 
-H = '/home/claude'
+H = os.path.normpath(os.path.join(ICI, '..', '..'))  # racine du site
 BUILD = os.path.join(ICI, 'build')
 os.makedirs(BUILD, exist_ok=True)
 
-SOURCES = [f'{H}/livre6/LeColle.tex', f'{H}/livre7/LeColle_metrique.tex',
-           f'{ICI}/nouveaux_det.tex', f'{ICI}/nouveaux_courbes.tex', f'{ICI}/nouveaux_metrique.tex',
-           f'{H}/nouveaux/corps_ed.tex', f'{H}/nouveaux/nouveaux_ed.tex']
-for _c in ('red',):  # chapitres ajoutés au fur et à mesure
-    for _p in (f'{H}/nouveaux/corps_{_c}.tex', f'{H}/nouveaux/nouveaux_{_c}.tex'):
-        if os.path.exists(_p): SOURCES.append(_p)
-# exercices des nouveaux cours (un livre par chapitre) : identifiant du livre -> source
-COURS_SRC = {'ed': f'{H}/nouveaux/corps_ed.tex', 'red': f'{H}/nouveaux/corps_red.tex'}
-LIVRE_SRC = {f'{H}/livre6/LeColle.tex', f'{H}/livre7/LeColle_metrique.tex'}
+# sources : les livrets du site (docs/pt/sources) et les exercices complémentaires (ce dossier)
+S = os.path.normpath(os.path.join(ICI, '..', '..', 'docs', 'pt', 'sources'))
+BL = os.path.normpath(os.path.join(ICI, '..', 'livrets', 'build'))   # .aux produits par outils/livrets/construire.py
+LIVRETS = {'determinants': 'livre-determinants', 'courbes': 'livre-courbes', 'metrique': 'volume2-metrique-enveloppes',
+           'ed': 'livre-equations-differentielles', 'red': 'livre-reduction'}
+SOURCES = [f'{S}/{f}.tex' for f in LIVRETS.values()] + \
+          [f'{ICI}/nouveaux_{c}.tex' for c in ('det', 'courbes', 'metrique', 'ed', 'red')]
+# exercices des livrets écrits après la séance 1 : identifiant du livre -> source
+COURS_SRC = {'ed': f'{S}/livre-equations-differentielles.tex', 'red': f'{S}/livre-reduction.tex'}
 
 # ------------------------------------------------------------------ lecture des sources
 def groupe(s, i):
@@ -63,10 +63,10 @@ def aux(path):
     for m in re.finditer(r'\\newlabel\{([^}]*)\}\{\{([^}]*)\}\{([^}]*)\}', open(path, encoding='utf8').read()):
         d[m.group(1)] = (m.group(2), m.group(3))
     return d
-AUX = {'livre6': aux(f'{H}/livre6/LeColle.aux'), 'livre7': aux(f'{H}/livre7/LeColle_metrique.aux')}
-NOM_LIVRE = {'livre6': 'du livre', 'livre7': 'du volume 2', 'ed': 'du cours', 'red': 'du cours'}
-for _c, _f in (('ed', 'LeColle_ED'), ('red', 'LeColle_Reduction')):
-    if os.path.exists(f'{H}/nouveaux/{_f}.aux'): AUX[_c] = aux(f'{H}/nouveaux/{_f}.aux')
+AUX = {'livre6': {**aux(f'{BL}/livre-determinants.aux'), **aux(f'{BL}/livre-courbes.aux')},
+       'livre7': aux(f'{BL}/volume2-metrique-enveloppes.aux'),
+       'ed': aux(f'{BL}/livre-equations-differentielles.aux'), 'red': aux(f'{BL}/livre-reduction.aux')}
+NOM_LIVRE = {'livre6': 'du livret', 'livre7': 'du livret', 'ed': 'du livret', 'red': 'du livret'}
 
 ANCIENS = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'), encoding='utf8'))}
 
@@ -95,11 +95,11 @@ def tex(s):
 def origine(id_, livre):
     if id_ in EXEMPLES: return EXEMPLES[id_]
     if livre in COURS_SRC and EXOS[id_]['src'] == COURS_SRC[livre]:
-        return f"Cours, exercice {AUX[livre]['e:' + id_][0]}"
+        return f"Livret, exercice {AUX[livre]['e:' + id_][0]}"
     if id_ in ANCIENS:
         a = ANCIENS[id_]
         num = AUX[livre]['e:' + id_][0]
-        base = f'Livre, exercice {num}' if livre == 'livre6' else f'Livre, volume 2, exercice {num}'
+        base = f'Livret, exercice {num}'
         if a['origine'] == 'td': return f'{base} · TD {a["td"]} de la classe'
         if a['origine'] == 'devoir': return f'{base} · problème type devoir'
         return base
@@ -114,7 +114,7 @@ def info(id_):
 
 # ------------------------------------------------------------------ préambule commun
 def preambule(titre_pdf, entete):
-    p = open(f'{H}/livre6/preambule.tex', encoding='utf8').read()
+    p = open(f'{ICI}/preambule_td.tex', encoding='utf8').read()
     p = p.replace('pdftitle={Le Collé — Déterminants et courbes paramétrées}', f'pdftitle={{{titre_pdf}}}')
     p += r'\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}' + '\n'
     p += r'''
@@ -173,15 +173,15 @@ def generer(cid, pages_cor=None, pages_enon=None):
     corps = []
     if ch.get('nouveau'):
         legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
-Il reprend \textbf{tous les exercices du cours} (proposés à la fin de chaque partie du livre), complétés par des
-\textbf{exercices complémentaires}, absents du livre. L'origine de chaque exercice est indiquée en haut à droite :
-\emph{« Cours, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
+Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours), complétés par des
+\textbf{exercices complémentaires}, absents du livret. L'origine de chaque exercice est indiquée en haut à droite :
+\emph{« Livret, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
 Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\_') + r'''\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}''')
     else:
      legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
-Il reprend \textbf{tous les exercices du livre} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
-du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livre.
-L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livre, exercice~1.5 · TD~1 de la classe »}, \emph{« Livre, exemple~2.4 »}
+Il reprend \textbf{tous les exercices du livret} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
+du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livret.
+L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livret, exercice~1.5 · TD~1 de la classe »}, \emph{« Livret, exemple~2.4 »}
 ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
 Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\_') + r'''\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}''')
     corps.append(entete_doc(ch, 'Énoncés', legende))
@@ -213,7 +213,7 @@ Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\
     corps = []
     texte = (r'{\small Corrections détaillées des ' + str(total) + r''' exercices du TD, dans le même ordre et avec les mêmes numéros.
 Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
-resservira. Les renvois ''' + (r"« méthode~1.3 du cours »" if ch.get('nouveau') else r"« méthode~1.4 du livre », « théorème~2.3 du volume~2 »…") + r''' désignent le cours.
+resservira. Les renvois ''' + r"« méthode~1.3 du livret »"  + r''' désignent le cours.
 \textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}''')
     corps.append(entete_doc(ch, 'Corrections', texte))
     for (num_p, titre_p, desc_p, ids) in ch['parties']:
@@ -223,7 +223,7 @@ resservira. Les renvois ''' + (r"« méthode~1.3 du cours »" if ch.get('nouveau
             e = EXOS[i]; inf = info(i)
             c = CORS[i]
             if c.strip() == '%%LISS%%':
-                L = open(f'{H}/livre6/LeColle.tex', encoding='utf8').read()
+                L = open(f'{S}/livre-courbes.tex', encoding='utf8').read()
                 a = L.index(r'\q{Réduction.} $f$ est $2\pi$-périodique ; $f(-t)=(x,-y)$ : axe $(Ox)$ ; $f(\pi-t)')
                 b = L.index(r'\end{figure}', a) + len(r'\end{figure}')
                 c = L[a:b].replace(r'\label{fig:liss}', '').replace('[H]', '[h!]')

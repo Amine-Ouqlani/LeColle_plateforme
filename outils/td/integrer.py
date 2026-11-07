@@ -7,7 +7,7 @@ ICI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ICI)
 from meta import CHAPITRES, META
 
-SITE = '/home/claude/site'
+SITE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 B = os.path.join(ICI, 'build')
 TD = json.load(open(os.path.join(B, 'td.json'), encoding='utf8'))
 OLD = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'), encoding='utf8'))}
@@ -28,9 +28,9 @@ for cid, ch in CHAPITRES.items():
     n = len(TD[cid])
     for suffixe, cle, titre, sous, desc in [
         ('', f'td-{cid}', f"TD — {ch['titre']}", f"Chapitre {ch['num']} · {n} exercices · énoncés",
-         ("Tous les exercices du livre (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+         ("Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
           if ch.get('nouveau') else
-          f"Tous les exercices du livre pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections.")),
+          f"Tous les exercices du livret pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections.")),
         ('_corrections', f'td-{cid}-corrections', f"TD — {ch['titre']} : corrections", f"Chapitre {ch['num']} · corrections détaillées",
          f"Les corrections détaillées des {n} exercices du TD, dans le même ordre et avec les mêmes numéros."),
     ]:
@@ -78,10 +78,9 @@ for cid, ch in CHAPITRES.items():
             for k in ('fiche', 'incontournable', 'hp'):
                 if o.get(k): e[k] = o[k]
             e.update(notions=o['notions'], prerequis=o.get('prerequis', []), objectifs=o['objectifs'], indication=o['indication'])
-            e['livre'] = o['enonce']
         else:
             t, n, ob, ind = META[i]
-            org = 'exemple' if i.startswith('ex-') else ('cours' if x['origine'].startswith('Cours,') else 'complementaire')
+            org = 'exemple' if i.startswith('ex-') else ('cours' if x['origine'].startswith('Livret,') else 'complementaire')
             e = dict(id=i, chapitre=cid, num=x['num'], partie=x['partie'], titre=t, origine=org, provenance=x['origine'],
                      difficulte=x['diff'], niveau=NIV[x['partie']], notions=n, prerequis=[], objectifs=ob, indication=ind)
         e['enonce'] = dict(doc=f'td-{cid}', page=x['page'])
@@ -102,7 +101,6 @@ entete = '''/* =================================================================
              "complementaire" (exercice ajouté au TD, absent du livre)
    provenance : la mention imprimée dans le TD
    enonce / corrige : page PDF dans le TD et dans le livret de corrections
-   livre : page de l'énoncé dans le livre (exercices du livre seulement)
    ===================================================================== */
 window.LC = window.LC || {};
 

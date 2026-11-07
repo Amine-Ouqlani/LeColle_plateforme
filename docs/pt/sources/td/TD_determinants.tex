@@ -344,9 +344,9 @@
 {\sffamily\Large\color{BleuMoyen}Énoncés}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
 {\small Ce livret rassemble 41 exercices, classés en quatre parties, du plus direct au plus exigeant.
-Il reprend \textbf{tous les exercices du livre} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
-du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livre.
-L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livre, exercice~1.5 · TD~1 de la classe »}, \emph{« Livre, exemple~2.4 »}
+Il reprend \textbf{tous les exercices du livret} (TD de la classe, exercices d'entraînement, problème type devoir) et les exemples
+du cours qui se prêtent à l'entraînement, complétés par des \textbf{exercices complémentaires}, absents du livret.
+L'origine de chaque exercice est indiquée en haut à droite : \emph{« Livret, exercice~1.5 · TD~1 de la classe »}, \emph{« Livret, exemple~2.4 »}
 ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
 Les corrections sont dans un livret séparé, \texttt{TD\_determinants\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}
 
@@ -410,7 +410,7 @@ où $A$ est la matrice de colonnes $C_1,C_2,C_3$.
 \exercice{3}{1}{Alignement avec paramètre}{Exercice complémentaire}{déterminant de deux vecteurs, alignement}{n-alignes}{2}
 Pour quelles valeurs de $m\in\R$ les points $A(1,2)$, $B(3,m)$, $C(m,8)$ sont-ils alignés ?
 \place
-\exercice{4}{2}{Alignement de trois points}{Livre, exercice 1.5 · TD 1 de la classe}{déterminant 3$\times$3, transvections, alignement}{td-d1}{2}
+\exercice{4}{2}{Alignement de trois points}{Livret, exercice 1.5 · TD 1 de la classe}{déterminant 3$\times$3, transvections, alignement}{td-d1}{2}
 Soit $A(a,a')$, $B(b,b')$ et $C(c,c')$ tels que $\dt{1&1&1\\a&b&c\\a'&b'&c'}=0$. Montrer que $A$, $B$, $C$ sont alignés dans
 le plan.
 \place
@@ -424,7 +424,7 @@ On considère $A(1,0,0)$, $B(0,2,0)$, $C(0,0,3)$ et $D(1,1,1)$ dans un repère o
 \exercice{6}{1}{Distance de deux droites : un calcul}{Exercice complémentaire}{produit mixte, produit vectoriel, distance}{n-dist}{3}
 Calculer la distance entre les droites $\mathcal D_1$ passant par $O$ dirigée par $\ve u=(1,1,0)$ et $\mathcal D_2$ passant par $C(0,0,1)$ dirigée par $\ve v=(1,-1,0)$.
 \place
-\exercice{7}{1}{Une base de $\mathbb R_n[X]$, le déterminant de la dérivation}{Livre, § 1.3 (application du cours)}{base, matrice triangulaire, déterminant d'un endomorphisme}{ex-base}{3}
+\exercice{7}{1}{Une base de $\mathbb R_n[X]$, le déterminant de la dérivation}{Livret, § 1.3 (application du cours)}{base, matrice triangulaire, déterminant d'un endomorphisme}{ex-base}{3}
 \begin{enumerate}
 \item Montrer que $\mathcal C=(1,\ 1+X,\ 1+X+X^2,\ \dots,\ 1+X+\dots+X^n)$ est une base de $\R_n[X]$.
 \item Soit $D:P\mapsto P'$ la dérivation de $\R_n[X]$. Calculer $\det D$. $D$ est-elle bijective ?
@@ -454,14 +454,14 @@ Soit $A=\begin{pmatrix}1&2&0\\2&1&0\\0&0&3\end{pmatrix}$.
 \item En déduire les réels $\lambda$ pour lesquels il existe une colonne $X\neq0$ telle que $AX=\lambda X$, et donner de telles colonnes.
 \end{enumerate}
 \place
-\exercice{14}{2}{Choisir la méthode : un $4\times4$ à somme constante}{Livre, exemple 1.7}{somme constante, opérations élémentaires}{ex-160}{5}
+\exercice{14}{2}{Choisir la méthode : un $4\times4$ à somme constante}{Livret, exemple 1.7}{somme constante, opérations élémentaires}{ex-160}{5}
 Calculer
 \[D=\dt{1&2&3&4\\4&1&2&3\\3&4&1&2\\2&3&4&1}.\]
 Avant tout calcul, observer les lignes de la matrice.
 \place
 \clearpage
 \partie{II}{Exercices classiques et méthodes incontournables}{Propriétés globales, somme constante, différences successives, déterminants creux, récurrences, Vandermonde.}
-\exercice{15}{3}{Multiplicativité, propriété globale}{Livre, exercice 1.2}{$\det(AB)$, $\det(\lambda A)$, question sans coefficients}{g-carre}{6}
+\exercice{15}{3}{Multiplicativité, propriété globale}{Livret, exercice 1.2}{$\det(AB)$, $\det(\lambda A)$, question sans coefficients}{g-carre}{6}
 Soit $A\in\Mn{\R}$ telle que $A^2=-I_n$. Montrer que $n$ est pair. Le résultat subsiste-t-il pour une matrice complexe ?
 \place
 \exercice{16}{2}{Propriétés globales : $A^2=-I_n$, $A^TA=I_n$, $A^k=0$}{Exercice complémentaire}{multiplicativité, $\det(\lambda A)$, transposée}{n-carre}{6}
@@ -472,7 +472,7 @@ Soit $n\geq1$ et $A\in\mathcal M_n(\R)$.
 \item Montrer que s'il existe $k\geq1$ tel que $A^k=0$, alors $A$ n'est pas inversible.
 \end{enumerate}
 \place
-\exercice{17}{3}{Similitude : $z\mapsto az$ vue comme application linéaire}{Livre, exercice 1.1 · TD 8 de la classe}{déterminant d'un endomorphisme, nombres complexes, orientation}{td-d8}{6}
+\exercice{17}{3}{Similitude : $z\mapsto az$ vue comme application linéaire}{Livret, exercice 1.1 · TD 8 de la classe}{déterminant d'un endomorphisme, nombres complexes, orientation}{td-d8}{6}
 Soit $\C$ vu comme un $\R$-espace vectoriel. On fixe $a\in\C^*$ et l'on note $f(z)=az$, appelée similitude linéaire de
 rapport $a$ dans le plan complexe.
 \begin{enumerate}
@@ -482,7 +482,7 @@ rapport $a$ dans le plan complexe.
 \item Si $|a|=1$, reconnaître $f$ en tant qu'application géométrique simple.
 \end{enumerate}
 \place
-\exercice{18}{3}{Comatrice, coefficients entiers\HP}{Livre, exercice 1.4}{comatrice, inverse, matrices à coefficients entiers}{hp-com}{7}
+\exercice{18}{3}{Comatrice, coefficients entiers\HP}{Livret, exercice 1.4}{comatrice, inverse, matrices à coefficients entiers}{hp-com}{7}
 \begin{enumerate}
 \item Calculer la comatrice de $A=\begin{pmatrix}1&2&0\\0&1&1\\1&0&1\end{pmatrix}$ et en déduire $A^{-1}$.
 \item Soit $A$ à coefficients entiers. Montrer que $A$ est inversible d'inverse à coefficients entiers si et seulement si
@@ -490,7 +490,7 @@ rapport $a$ dans le plan complexe.
 \item Pour $A$ inversible, exprimer $\det(\mathrm{com}A)$ en fonction de $\det A$.
 \end{enumerate}
 \place
-\exercice{19}{3}{Base et déterminant (somme constante)}{Livre, exercice 1.7 · TD 6 de la classe}{base, somme constante, $D_n(a,b)$}{td-d6}{7}
+\exercice{19}{3}{Base et déterminant (somme constante)}{Livret, exercice 1.7 · TD 6 de la classe}{base, somme constante, $D_n(a,b)$}{td-d6}{7}
 Soit $\mathcal B=(e_1,\dots,e_n)$ une base d'un espace vectoriel $E$ sur $\K$, et $(a,b)\in\K^2$. On pose, pour
 $j\in\ient1n$, $\delta_j=ae_j+b\sum_{i\neq j}e_i$. Prouver que $\mathcal C=(\delta_1,\dots,\delta_n)$ est une base de $E$ si et
 seulement si $a\neq b$ et $a+(n-1)b\neq0$.
@@ -498,17 +498,17 @@ seulement si $a\neq b$ et $a+(n-1)b\neq0$.
 \exercice{20}{3}{Un déterminant circulant d'ordre 3}{Exercice complémentaire}{somme constante, factorisation}{n-circ}{8}
 Montrer que $\dt{a&b&c\\c&a&b\\b&c&a}=(a+b+c)(a^2+b^2+c^2-ab-bc-ca)$.
 \place
-\exercice{21}{3}{La matrice $\max(i,j)$}{Livre, exemple 1.14}{différences successives, développement}{ex-max}{8}
+\exercice{21}{3}{La matrice $\max(i,j)$}{Livret, exemple 1.14}{différences successives, développement}{ex-max}{8}
 Pour $n\geq2$, on note $A_n=\big(\max(i,j)\big)_{1\leq i,j\leq n}$. Calculer $\det A_n$.
 \place
 \exercice{22}{3}{La matrice $\min(i,j)$}{Exercice complémentaire}{différences successives}{n-min}{9}
 Calculer $\det\big(\min(i,j)\big)_{1\leq i,j\leq n}$.
 \place
-\exercice{23}{3}{Déterminant en forme de X}{Livre, exercice 1.10 · TD 4 de la classe}{déterminant creux, récurrence, permutation des lignes et des colonnes}{td-d4}{9}
+\exercice{23}{3}{Déterminant en forme de X}{Livret, exercice 1.10 · TD 4 de la classe}{déterminant creux, récurrence, permutation des lignes et des colonnes}{td-d4}{9}
 Pour $(a,b)\in\K^2$, calculer le déterminant de taille $2n\times2n$
 \[A_{2n}=\dt{a&0&\cdots&\cdots&0&b\\0&a&&&b&0\\\vdots&&\ddots&\iddots&&\vdots\\\vdots&&\iddots&\ddots&&\vdots\\0&b&&&a&0\\b&0&\cdots&\cdots&0&a}.\]
 \place
-\exercice{24}{3}{Suite récurrente linéaire d'ordre 2}{Livre, exercice 1.13 · TD 3 de la classe}{tridiagonal, récurrence d'ordre 2, équation caractéristique}{td-d3}{10}
+\exercice{24}{3}{Suite récurrente linéaire d'ordre 2}{Livret, exercice 1.13 · TD 3 de la classe}{tridiagonal, récurrence d'ordre 2, équation caractéristique}{td-d3}{10}
 Soit $A_n=\big(5\delta_{i,j}+6\delta_{i,j-1}+\delta_{i-1,j}\big)_{1\leq i,j\leq n}$.
 \begin{enumerate}
 \item Calculer $\det(A_4)$.
@@ -522,7 +522,7 @@ Soit $x\in\R$. On note $T_n$ le déterminant d'ordre $n$ tridiagonal de diagonal
 \item En déduire $T_n=1+x^2+x^4+\dots+x^{2n}$.
 \end{enumerate}
 \place
-\exercice{26}{4}{Déterminant de Vandermonde}{Livre, exercice 1.12 · TD 5 de la classe}{Vandermonde, déterminant vu comme polynôme}{td-d5}{11}
+\exercice{26}{4}{Déterminant de Vandermonde}{Livret, exercice 1.12 · TD 5 de la classe}{Vandermonde, déterminant vu comme polynôme}{td-d5}{11}
 Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pmatrix}$ et $P(x)=\det(A)$.
 \begin{enumerate}
 \item Prouver que $P$ est un polynôme, donner son degré et ses racines.
@@ -531,32 +531,32 @@ Soit $A=\begin{pmatrix}1&1&1&1\\a&b&c&x\\a^2&b^2&c^2&x^2\\a^3&b^3&c^3&x^3\end{pm
       $\det(A)=\prod_{k=2}^n\prod_{p=1}^{k-1}(a_k-a_p)$.
 \end{enumerate}
 \place
-\exercice{27}{4}{Déterminant de $M\mapsto AM$}{Livre, exercice 1.3}{endomorphisme de matrices, base adaptée, matrice par blocs}{b-endo}{12}
+\exercice{27}{4}{Déterminant de $M\mapsto AM$}{Livret, exercice 1.3}{endomorphisme de matrices, base adaptée, matrice par blocs}{b-endo}{12}
 Soit $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ et $f:\mathcal M_2(\R)\to\mathcal M_2(\R)$, $M\mapsto AM$. Montrer que
 $\det f=(\det A)^2$. En déduire une condition pour que $f$ soit bijectif, et $f^{-1}$.
 \place
 \clearpage
 \partie{III}{Exercices de synthèse et approfondissement}{Plusieurs méthodes à combiner, géométrie de l'espace, endomorphismes, polynômes.}
-\exercice{28}{3}{Distance de deux droites de l'espace}{Livre, exercice 1.6 · TD 2 de la classe}{produit mixte, perpendiculaire commune, distance}{td-d2}{12}
+\exercice{28}{3}{Distance de deux droites de l'espace}{Livret, exercice 1.6 · TD 2 de la classe}{produit mixte, perpendiculaire commune, distance}{td-d2}{12}
 Soient $(AB)$ et $(CD)$ deux droites (non parallèles) de l'espace. Prouver que
 \[d\big((AB),(CD)\big)=\frac{\big|\det(\vv{AB},\vv{CD},\vv{AC})\big|}{\|\vv{AB}\wedge\vv{CD}\|}.\]
 \place
 \exercice{29}{3}{Déterminant de la transposition}{Exercice complémentaire}{symétrie, base adaptée, matrices symétriques et antisymétriques}{n-transp}{13}
 Soit $\tau:\mathcal M_n(\R)\to\mathcal M_n(\R)$, $M\mapsto M^T$. Montrer que $\tau$ est une symétrie et calculer $\det\tau$.
 \place
-\exercice{30}{4}{Différences de colonnes puis de lignes : $|i-j|$}{Livre, exercice 1.8}{différences successives, matrice définie par une formule}{f-absij}{13}
+\exercice{30}{4}{Différences de colonnes puis de lignes : $|i-j|$}{Livret, exercice 1.8}{différences successives, matrice définie par une formule}{f-absij}{13}
 Calculer le déterminant $B_n$ de la matrice $\big(|i-j|\big)_{1\leq i,j\leq n}$, $n\geq2$.
 \place
-\exercice{31}{4}{Différences pondérées : $a^{|i-j|}$}{Livre, exercice 1.9}{différences successives pondérées}{f-ka}{14}
+\exercice{31}{4}{Différences pondérées : $a^{|i-j|}$}{Livret, exercice 1.9}{différences successives pondérées}{f-ka}{14}
 Soit $a\in\R$. Calculer $\det\big(a^{|i-j|}\big)_{1\leq i,j\leq n}$.
 \place
-\exercice{32}{4}{Déterminant en forme de Z}{Livre, exercice 1.11 · TD 9 de la classe}{déterminant creux, pivot, nombre d'échanges}{td-d9}{14}
+\exercice{32}{4}{Déterminant en forme de Z}{Livret, exercice 1.11 · TD 9 de la classe}{déterminant creux, pivot, nombre d'échanges}{td-d9}{14}
 Soit $n\geq3$. On considère le déterminant en forme de Z
 \[D=\dt{a_1&a_2&\cdots&a_{n-1}&a_n\\0&0&\cdots&b_{n-1}&0\\\vdots&&\iddots&&\vdots\\0&b_2&\cdots&0&0\\c_1&c_2&\cdots&c_{n-1}&c_n},\]
 où, pour $2\leq k\leq n-1$, la ligne $k$ ne contient que $b_{n+1-k}$, en colonne $n+1-k$. Calculer $\det(D)$ en pensant d'abord
 à factoriser tout ce qui peut l'être.
 \place
-\exercice{33}{4}{Suite récurrente, racines complexes}{Livre, exercice 1.14 · TD 7 de la classe}{tridiagonal, trigonométrie, récurrence}{td-d7}{15}
+\exercice{33}{4}{Suite récurrente, racines complexes}{Livret, exercice 1.14 · TD 7 de la classe}{tridiagonal, trigonométrie, récurrence}{td-d7}{15}
 Soit $\theta\in\R$. On considère la matrice d'ordre $n$ ayant des $2\cos\theta$ sur la diagonale, des $1$ juste au-dessus et
 juste au-dessous, et des $0$ ailleurs. Vérifier que $\det(A_n)=\dfrac{\sin\big((n+1)\theta\big)}{\sin\theta}$.
 \place
@@ -579,14 +579,14 @@ Soient $A\in\mathcal M_p(\R)$, $B\in\mathcal M_{p,q}(\R)$, $D\in\mathcal M_q(\R)
 \item Application : calculer $\dt{2&1&5&7\\1&3&-1&2\\0&0&4&1\\0&0&2&3}$.
 \end{enumerate}
 \place
-\exercice{38}{4}{Fonction affine, parité, antisymétrie}{Livre, exercice 1.16}{fonction affine, matrice antisymétrique, parité de $n$}{det-pb}{17}
+\exercice{38}{4}{Fonction affine, parité, antisymétrie}{Livret, exercice 1.16}{fonction affine, matrice antisymétrique, parité de $n$}{det-pb}{17}
 Soit $M_n(x)$ la matrice d'ordre $n\geq2$ ayant des $x$ sur la diagonale, des $1$ au-dessus et des $-1$ au-dessous.
 \begin{enumerate}
 \item Montrer que $\det M_n(x)=\dfrac{(x+1)^n+(x-1)^n}2$.
 \item Pour quelles valeurs réelles de $x$ la matrice est-elle inversible ?
 \end{enumerate}
 \place
-\exercice{39}{5}{Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous}{Livre, exercice 1.15 · TD 10 de la classe}{fonction affine, matrice triangulaire, prolongement par continuité}{td-d10}{17}
+\exercice{39}{5}{Polynôme de degré 1 : $a$ au-dessus, $b$ au-dessous}{Livret, exercice 1.15 · TD 10 de la classe}{fonction affine, matrice triangulaire, prolongement par continuité}{td-d10}{17}
 On note $U$ la matrice de taille $n\times n$ dont tous les coefficients valent $1$, et
 \[A_n=\begin{pmatrix}\lambda_1&a&\cdots&a\\b&\lambda_2&\ddots&\vdots\\\vdots&\ddots&\ddots&a\\b&\cdots&b&\lambda_n\end{pmatrix}.\]
 \begin{enumerate}
