@@ -809,7 +809,23 @@ On considère la courbe paramétrée $\mathcal C$ par $x(t)=\frac1t$, $y(t)=\fra
 \end{exo}
 
 % ---------------------------------------------------------------------
-\subsection{Synthèse : une courbe de Lissajous}
+\subsection{Intersections, points doubles ; synthèse}
+
+Deux questions reviennent à la fin d'une étude : où la courbe recoupe-t-elle une droite, et où se recoupe-t-elle elle-même ?
+Elles n'utilisent aucun résultat nouveau, seulement une organisation du calcul.
+
+\begin{methode}{Intersection de la courbe et d'une droite}\label{meth:inter}
+Reporter $x(t)$ et $y(t)$ dans l'équation de la droite : on obtient une équation d'inconnue $t$. Si elle est trigonométrique,
+tout exprimer avec $X=\cos t$, élever au carré ($\sin^2t=1-X^2$) et factoriser ; \emph{vérifier les signes} à la fin, car
+l'élévation au carré ajoute des solutions. Une racine double correspond à une tangence.
+\end{methode}
+
+\begin{methode}{Rechercher un point double}\label{meth:double}
+Résoudre $f(t)=f(s)$ avec $t\neq s$ (modulo la période) ; une symétrie réduit la recherche : un point double situé sur l'axe
+$(Oy)$ vérifie $x(t)=0$. En un point double, il y a \emph{une tangente par paramètre}.
+\end{methode}
+
+L'exemple suivant applique ces deux méthodes, et avec elles tout le chapitre : réduction, variations, tangentes, inflexions.
 
 \begin{exemple}\label{ex:liss}
 $f(t)=(\cos3t,\ 2\sin t)$. Étude, tangentes au point double $J=(0,1)$, autres points communs à la courbe et à l'une de ces

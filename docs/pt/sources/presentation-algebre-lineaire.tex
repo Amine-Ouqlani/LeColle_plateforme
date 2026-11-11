@@ -264,7 +264,8 @@ Deux matrices qui diffèrent par un invariant ne sont \emph{pas} semblables. (La
 % =====================================================================
 \partie{1.2}{Produit, somme directe, projecteurs}{Comment découper un espace en morceaux ?}{\rmI}
 
-\begin{frame}{Somme de plusieurs sous-espaces, somme directe}
+\begin{frame}{Produit, somme de plusieurs sous-espaces, somme directe}
+\noindent{\small\textbf{Produit} \livre{prop.~1.4} : $\dim(E_1\times\dots\times E_p)=\dim E_1+\dots+\dim E_p$ (bases mises bout à bout).}\par\vspace{-1pt}
 \begin{columns}[T]
 \column{0.58\textwidth}
 \begin{DEF}
@@ -290,7 +291,7 @@ Somme directe : bases concaténées $=$ base ;\ $\dim\bigoplus F_i=\sum\dim F_i$
 \raggedright Intersections deux à deux nulles, mais $(1,0)+(0,1)-(1,1)=0$ : \textbf{pas directe}.
 \end{PIEGE}
 \end{columns}
-{\small En dimension finie : $E=F\oplus G\iff F\cap G=\{0\}$ \ et \ $\dim F+\dim G=\dim E$.}
+\vspace{-4pt}{\small En dimension finie : $E=F\oplus G\iff F\cap G=\{0\}$ \ et \ $\dim F+\dim G=\dim E$.}
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 1
@@ -328,12 +329,9 @@ Si $v=w+m(1,1,1)$, $w\in F$ : $(x-m)-(y-m)+2(z-m)=0$, donc
 \end{columns}
 \end{frame}
 
-\begin{frame}{Produit d'espaces ; projecteurs et symétries}
+\begin{frame}{Projecteurs et symétries}
 \begin{columns}[T]
 \column{0.5\textwidth}
-\begin{PROP}[Produit \livre{prop.~1.4}]
-$\dim(E_1\times\dots\times E_p)=\dim E_1+\dots+\dim E_p$.
-\end{PROP}
 \begin{DEF}
 $E=F\oplus G$, $x=x_F+x_G$ : projection $p(x)=x_F$ sur $F$ parallèlement à $G$ ; symétrie $s(x)=x_F-x_G$ ; \ $s=2p-\Id$.
 \end{DEF}

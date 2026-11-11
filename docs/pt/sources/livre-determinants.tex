@@ -518,17 +518,7 @@ Il existe une unique application $\det:\Mn{\K}\to\K$ vérifiant :
 produit mixte ; pour $n=2$, (i), (ii), (iii) suffisent à retrouver
 $\det\big(ae_1+ce_2,be_1+de_2\big)=ab\det(e_1,e_1)+ad\det(e_1,e_2)+cb\det(e_2,e_1)+cd\det(e_2,e_2)=ad-bc$, car $\det(e_1,e_1)=\det(e_2,e_2)=0$ (ii) et $\det(e_2,e_1)=-\det(e_1,e_2)=-1$.
 
-\begin{theoreme}[développement]\label{thm:dev}
-Pour tous $i,j$ (démonstration non exigible) :
-\[\det A=\sum_{j=1}^n(-1)^{i+j}a_{i,j}\Delta_{i,j}\quad\text{(ligne $i$)},\qquad
-\det A=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\Delta_{i,j}\quad\text{(colonne $j$)},\]
-où le \emph{mineur} $\Delta_{i,j}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$, les signes
-$(-1)^{i+j}$ formant un damier qui commence par $+$. Tout ce qui est vrai des colonnes est vrai des lignes
-($\det A^T=\det A$).
-\end{theoreme}
-
-Le développement donne une définition équivalente, \emph{par récurrence} sur $n$ à partir de $\dt{a&b\\c&d}=ad-bc$ ; pour
-$n=3$, on retrouve~\eqref{eq:det3}.
+Avant tout calcul, tirons de la seule définition les règles qui serviront dans tout le chapitre.
 
 \begin{proposition}\label{prop:op}
 \begin{enumerate}
@@ -550,6 +540,20 @@ $\det(A+B)\neq\det A+\det B$ et $\det(\lambda A)=\lambda^n\det A$, non $\lambda\
 modifiée garde le coefficient $1$ ; deux opérations successives s'appliquent l'une \emph{après} l'autre (la seconde voit la
 colonne déjà modifiée).
 \end{attention}
+
+Reste à calculer effectivement : le développement ramène un déterminant d'ordre $n$ à des déterminants d'ordre $n-1$.
+
+\begin{theoreme}[développement]\label{thm:dev}
+Pour tous $i,j$ (démonstration non exigible) :
+\[\det A=\sum_{j=1}^n(-1)^{i+j}a_{i,j}\Delta_{i,j}\quad\text{(ligne $i$)},\qquad
+\det A=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\Delta_{i,j}\quad\text{(colonne $j$)},\]
+où le \emph{mineur} $\Delta_{i,j}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$, les signes
+$(-1)^{i+j}$ formant un damier qui commence par $+$. Tout ce qui est vrai des colonnes est vrai des lignes
+($\det A^T=\det A$) : en particulier, la proposition~\ref{prop:op} vaut aussi pour les lignes.
+\end{theoreme}
+
+Le développement donne une définition équivalente, \emph{par récurrence} sur $n$ à partir de $\dt{a&b\\c&d}=ad-bc$ ; pour
+$n=3$, on retrouve~\eqref{eq:det3}.
 
 \begin{theoreme}\label{thm:tri}
 Le déterminant d'une matrice triangulaire est le produit de ses coefficients diagonaux.

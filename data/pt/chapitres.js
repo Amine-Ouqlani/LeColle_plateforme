@@ -58,7 +58,7 @@ LC.chapitres = [
         {
           "num": "1.6",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 10
+          "page": 11
         }
       ],
       "debut": 4,
@@ -237,12 +237,12 @@ LC.chapitres = [
         {
           "num": "1.4",
           "titre": "Géométrie : alignement, coplanarité, distances",
-          "page": 8
+          "page": 9
         },
         {
           "num": "1.5",
           "titre": "Techniques de calcul d'ordre n",
-          "page": 9
+          "page": 10
         }
       ],
       "corriges": {
@@ -415,7 +415,7 @@ LC.chapitres = [
         {
           "num": "1.3",
           "titre": "Diagonalisation",
-          "page": 7
+          "page": 8
         },
         {
           "num": "1.4",
@@ -602,12 +602,12 @@ LC.chapitres = [
         {
           "num": "1.3",
           "titre": "Second ordre à coefficients constants",
-          "page": 7
+          "page": 8
         },
         {
           "num": "1.4",
           "titre": "Second ordre à coefficients continus",
-          "page": 9
+          "page": 10
         },
         {
           "num": "1.5",
@@ -677,8 +677,8 @@ LC.chapitres = [
         {
           "num": "1.2",
           "titre": "Premier ordre, recollement",
-          "page": 22,
-          "pageStatique": 13
+          "page": 20,
+          "pageStatique": 12
         },
         {
           "num": "1.3",
@@ -774,12 +774,12 @@ LC.chapitres = [
         {
           "num": "2.2",
           "titre": "Tangente en un point régulier",
-          "page": 4
+          "page": 5
         },
         {
           "num": "2.3",
           "titre": "Plan d'étude et réduction",
-          "page": 5
+          "page": 6
         },
         {
           "num": "2.4",
@@ -793,7 +793,7 @@ LC.chapitres = [
         },
         {
           "num": "2.6",
-          "titre": "Synthèse : une courbe de Lissajous",
+          "titre": "Intersections, points doubles ; synthèse",
           "page": 12
         },
         {
@@ -804,7 +804,7 @@ LC.chapitres = [
         {
           "num": "2.8",
           "titre": "Problème type devoir surveillé",
-          "page": 13
+          "page": 14
         }
       ],
       "corriges": {

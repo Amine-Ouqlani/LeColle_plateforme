@@ -451,20 +451,6 @@ proportionnelles, on calcule en un point $t_0$ le déterminant $\dt{y_1(t_0)&y_2
 si et seulement si les vecteurs $\Phi(y_1)$ et $\Phi(y_2)$ de $\K^2$ forment une base (chapitre \emph{Déterminants}).
 \end{enpratique}
 
-\begin{exemple}[une équation intégrale]
-Cherchons les fonctions continues $f$ telles que $f(x)=1+\int_0^xtf(t)\,dt$ pour tout réel $x$. Le membre de droite est
-dérivable (intégrale de fonction continue) ; donc $f$ l'est, et $f'(x)=xf(x)$, avec $f(0)=1$. Réciproquement, une solution de ce
-problème de Cauchy vérifie l'équation intégrale (intégrer $f'=xf$ de $0$ à $x$). Par le théorème~\ref{t:ordre1}, $f(x)=e^{x^2/2}$.
-\end{exemple}
-
-\begin{methode}{Équation intégrale}\label{m:integrale}
-Si l'inconnue apparaît sous une intégrale $\int_{x_0}^x$, dériver pour obtenir une équation différentielle, et relever la
-condition initiale en $x=x_0$. Conclure par équivalence (ou vérifier que la solution trouvée convient).
-\end{methode}
-
-\begin{exo}{ed-integ}{2}{équation intégrale}
-Déterminer les fonctions $f$ continues sur $\R$ telles que, pour tout réel $x$, $f(x)-\displaystyle\int_0^x tf(t)\,dt=1+x$.
-\end{exo}
 
 % ---------------------------------------------------------------------
 \subsection{Équations du premier ordre}\label{ss:ordre1}
@@ -514,6 +500,22 @@ $ty'+y=\ln t$ sur $\R_+^*$, soit $y'+\frac1ty=\frac{\ln t}t$. Homogène : $y=\fr
 $\lambda=t\ln t-t$. Solutions : $y=\ln t-1+\frac Kt$.
 \end{exemple}
 
+\subsubsection*{Équations intégrales}
+
+Une équation où l'inconnue figure sous une intégrale se ramène, en dérivant, à un problème de Cauchy du premier ordre : c'est
+une application directe de ce qui précède.
+
+\begin{exemple}[une équation intégrale]
+Cherchons les fonctions continues $f$ telles que $f(x)=1+\int_0^xtf(t)\,dt$ pour tout réel $x$. Le membre de droite est
+dérivable (intégrale de fonction continue) ; donc $f$ l'est, et $f'(x)=xf(x)$, avec $f(0)=1$. Réciproquement, une solution de ce
+problème de Cauchy vérifie l'équation intégrale (intégrer $f'=xf$ de $0$ à $x$). Par le théorème~\ref{t:ordre1}, $f(x)=e^{x^2/2}$.
+\end{exemple}
+
+\begin{methode}{Équation intégrale}\label{m:integrale}
+Si l'inconnue apparaît sous une intégrale $\int_{x_0}^x$, dériver pour obtenir une équation différentielle, et relever la
+condition initiale en $x=x_0$. Conclure par équivalence (ou vérifier que la solution trouvée convient).
+\end{methode}
+
 \subsubsection*{Recollement}\label{ss:recollement}
 
 \begin{methode}{Recoller des solutions}\label{m:recollement}
@@ -542,6 +544,9 @@ Résoudre sur $\R$ : (a) $y'+y=\sin t$ ; (b) $y'-2y=e^t\sin(2t)$ ; (c) $y'+y=te^
 \end{exo}
 \begin{exo}{ed-cauchy1}{2}{problème de Cauchy}
 Résoudre sur $\left]-\frac\pi2,\frac\pi2\right[$ le problème $\cos(t)\,y'+\sin(t)\,y=1$, $y(0)=2$.
+\end{exo}
+\begin{exo}{ed-integ}{2}{équation intégrale}
+Déterminer les fonctions $f$ continues sur $\R$ telles que, pour tout réel $x$, $f(x)-\displaystyle\int_0^x tf(t)\,dt=1+x$.
 \end{exo}
 \begin{exo}{ed-recol}{3}{recollement}
 On considère $(E)$ : $|t|\,y'-y=t^2$.
@@ -789,16 +794,6 @@ premier ordre par $y=\lambda\varphi$.
 \renewcommand{\ongletcouleur}{Ocre}
 \section{Corrigés}\label{sec:corriges}
 
-\begin{corrige}{ed-integ}
-\choix{l'inconnue est sous une intégrale de borne variable : on dérive (méthode~\ref{m:integrale}).}
-Si $f$ convient, $f(x)=1+x+\int_0^xtf(t)\,dt$ est dérivable, $f'(x)=1+xf(x)$, et $f(0)=1$. Réciproquement, une solution de ce
-problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation de départ. On résout $y'-xy=1$ : l'homogène donne $Ke^{x^2/2}$ ;
-la variation de la constante donne $\lambda'=e^{-x^2/2}$, sans primitive usuelle. On écrit donc la solution du problème de Cauchy
-sous forme intégrale :
-\[f(x)=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}\,du\right).\]
-\retenir{une primitive sans expression usuelle s'écrit $\int_{x_0}^x$ ; la borne $x_0$ est choisie pour que la condition initiale soit simple.}
-\end{corrige}
-
 \begin{corrige}{ed-o1}
 \q{(a)} Homogène : $Ke^{-t}$. Par $z'+z=e^{it}$, $z=\frac{e^{it}}{1+i}=\frac{(1-i)e^{it}}2$, d'où $y_p=\operatorname{Im}z=\frac{\sin t-\cos t}2$.
 Solutions : $y=\frac{\sin t-\cos t}2+Ke^{-t}$.
@@ -817,6 +812,16 @@ Sur $\left]-\frac\pi2,\frac\pi2\right[$, $\cos t\neq0$ : $y'+\tan(t)\,y=\frac1{\
 l'homogène $y=Ke^{\ln\cos t}=K\cos t$. Variation de la constante : $y=\lambda\cos t$ donne $\lambda'\cos t=\frac1{\cos t}$,
 $\lambda=\tan t+K$. Solutions : $y=\sin t+K\cos t$ ; $y(0)=K=2$. La solution est $y=\sin t+2\cos t$.
 \gain{une solution particulière évidente ($\sin t$) se vérifie en une ligne : $\cos t\cos t+\sin t\sin t=1$.}
+\end{corrige}
+
+\begin{corrige}{ed-integ}
+\choix{l'inconnue est sous une intégrale de borne variable : on dérive (méthode~\ref{m:integrale}).}
+Si $f$ convient, $f(x)=1+x+\int_0^xtf(t)\,dt$ est dérivable, $f'(x)=1+xf(x)$, et $f(0)=1$. Réciproquement, une solution de ce
+problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation de départ. On résout $y'-xy=1$ : l'homogène donne $Ke^{x^2/2}$ ;
+la variation de la constante donne $\lambda'=e^{-x^2/2}$, sans primitive usuelle. On écrit donc la solution du problème de Cauchy
+sous forme intégrale :
+\[f(x)=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}\,du\right).\]
+\retenir{une primitive sans expression usuelle s'écrit $\int_{x_0}^x$ ; la borne $x_0$ est choisie pour que la condition initiale soit simple.}
 \end{corrige}
 
 \begin{corrige}{ed-recol}

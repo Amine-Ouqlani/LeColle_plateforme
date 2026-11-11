@@ -353,28 +353,11 @@ Toujours fixer les constantes \emph{après} avoir écrit la solution générale 
 \end{ASTU}
 \end{frame}
 
-\begin{frame}{Inconnue sous une intégrale : dériver}
-\begin{METH}{Équation intégrale \livre{méth.~1.1}}
-Si $f$ apparaît sous $\int_{x_0}^x$ : le membre de droite est dérivable, donc $f$ aussi ; \textbf{dériver}, et lire la condition
-initiale en $x=x_0$. Conclure par équivalence (ou vérifier).
-\end{METH}
-\pause
-\begin{EX}
-$f$ continue et $f(x)=1+\displaystyle\int_0^xtf(t)\,dt$ pour tout $x$.
-\begin{itemize}
-\item $f$ est dérivable et $f'(x)=xf(x)$ ; en $x=0$ : $f(0)=1$.
-\item Réciproquement, une solution de ce problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation.
-\item Premier ordre (§1.2) : $f(x)=e^{x^2/2}$.
-\end{itemize}
-\end{EX}
-{\small\color{Gris}Variante avec $1+x$ au lieu de $1$ : exercice~14 du TD.}
-\end{frame}
-
 % =====================================================================
 \partie{1.2}{Premier ordre, recollement}{Comment résoudre $y'+a(t)y=b(t)$, et que faire quand le coefficient de $y'$ s'annule ?}{\rmI}
 
 \begin{frame}{L'équation homogène du premier ordre}
-\begin{PROP}[Théorème \livre{th.~1.6}]
+\begin{PROP}[Théorème \livre{th.~1.5}]
 $A$ primitive de $a$ sur $I$. Les solutions de $y'+a(t)y=0$ sur $I$ sont les
 \[t\mapsto Ke^{-A(t)},\qquad K\in\K.\]
 \end{PROP}
@@ -396,7 +379,7 @@ $y'=a(t)y$ donne $Ke^{+A(t)}$.
 \end{frame}
 
 \begin{frame}{Trouver une solution particulière}
-\begin{METH}{Solution particulière au premier ordre \livre{méth.~1.2}}
+\begin{METH}{Solution particulière au premier ordre \livre{méth.~1.1}}
 \begin{enumerate}
 \item \textbf{Évidente} : une constante, un polynôme de bas degré.
 \item \textbf{$a$ constant, second membre $P(t)e^{mt}$} : $y=Q(t)e^{mt}$ ; $\deg Q=\deg P$ si $m\neq-a$, \ $\deg P+1$ si $m=-a$.\\
@@ -471,6 +454,23 @@ $y=(t+K)e^{t^2}$ ; $y(0)=1$ : \ $y=(t+1)e^{t^2}$.\\[3pt]
 $y=\frac{\cos t+\sin t}2+Ke^{-t}$.\\[2pt]
 {\footnotesize\color{Gris}$Ke^{-t}\to0$ : toutes les solutions rejoignent la solution périodique (problème~1 de la sélection).}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Inconnue sous une intégrale : dériver}
+\begin{METH}{Équation intégrale \livre{méth.~1.2}}
+Si $f$ apparaît sous $\int_{x_0}^x$ : le membre de droite est dérivable, donc $f$ aussi ; \textbf{dériver}, et lire la condition
+initiale en $x=x_0$. Conclure par équivalence (ou vérifier).
+\end{METH}
+\pause
+\begin{EX}
+$f$ continue et $f(x)=1+\displaystyle\int_0^xtf(t)\,dt$ pour tout $x$.
+\begin{itemize}
+\item $f$ est dérivable et $f'(x)=xf(x)$ ; en $x=0$ : $f(0)=1$.
+\item Réciproquement, une solution de ce problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation.
+\item Premier ordre (§1.2) : $f(x)=e^{x^2/2}$.
+\end{itemize}
+\end{EX}
+{\small\color{Gris}Variante avec $1+x$ au lieu de $1$ : exercice~14 du TD.}
 \end{frame}
 
 \begin{frame}{Quand le coefficient de $y'$ s'annule : recoller}

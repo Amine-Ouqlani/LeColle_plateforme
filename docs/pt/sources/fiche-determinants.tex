@@ -123,22 +123,23 @@ $\det:\Mn{\K}\to\K$ est l'unique application (i) \emph{linéaire par rapport à 
 Lecture : (i) sortir un facteur d'une colonne, découper une colonne en somme ; (ii) orientation ; (iii) cube unité.
 \end{DEF}
 
-\begin{PROP}[DÉVELOPPEMENT \livre{th.~1.4}]
-Pour toute ligne $i$ ou colonne $j$ :
-\[\det A=\sum_j(-1)^{i+j}a_{i,j}\Delta_{i,j}=\sum_i(-1)^{i+j}a_{i,j}\Delta_{i,j},\]
-$\Delta_{i,j}$ (mineur) : on supprime ligne $i$ et colonne $j$. Signes en damier :
-$\left(\begin{smallmatrix}+&-&+&\cdots\\-&+&-&\\+&-&+&\\\vdots&&&\ddots\end{smallmatrix}\right)$.
-Définition équivalente par récurrence à partir de $ad-bc$. Lignes et colonnes jouent le même rôle ($\det A^T=\det A$).
-\end{PROP}
-
-\begin{PROP}[RÈGLES DE CALCUL]
+\begin{PROP}[RÈGLES DE CALCUL \livre{prop.~1.4}]
 \begin{tabular}{@{}ll@{}}
 $C_i\leftrightarrow C_j$ (échange) & $\det\times(-1)$\\
 $C_i\leftarrow\lambda C_i$ (dilatation) & $\det\times\lambda$\\
 $C_i\leftarrow C_i+\lambda C_j$, $j\neq i$ (transvection) & $\det$ inchangé
 \end{tabular}\\
 Colonne nulle, deux colonnes égales ou proportionnelles : $\det=0$.\\
-$\det(\lambda A)=\lambda^n\det A$.\quad Triangulaire : produit de la diagonale.
+$\det(\lambda A)=\lambda^n\det A$.
+\end{PROP}
+
+\begin{PROP}[DÉVELOPPEMENT \livre{th.~1.5}]
+Pour toute ligne $i$ ou colonne $j$ :
+\[\det A=\sum_j(-1)^{i+j}a_{i,j}\Delta_{i,j}=\sum_i(-1)^{i+j}a_{i,j}\Delta_{i,j},\]
+$\Delta_{i,j}$ (mineur) : on supprime ligne $i$ et colonne $j$. Signes en damier :
+$\left(\begin{smallmatrix}+&-&+&\cdots\\-&+&-&\\+&-&+&\\\vdots&&&\ddots\end{smallmatrix}\right)$.
+Définition équivalente par récurrence à partir de $ad-bc$. Lignes et colonnes jouent le même rôle ($\det A^T=\det A$).\\
+Triangulaire : produit de la diagonale \livre{th.~1.6}.
 \end{PROP}
 
 \begin{METH}{Calculer un déterminant \livre{méth.~1.1}}

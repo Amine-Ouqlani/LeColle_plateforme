@@ -15,4 +15,18 @@ $('#contenu').innerHTML = `
       <span class="choix-titre">Les ouvrages Le Collé</span>
       <span class="choix-texte">Maths (Sup, Spé, résumé), et les cours d'informatique, de SI et de chimie.</span>
     </a>
-  </div>`;
+  </div>
+  <section class="programmes" aria-labelledby="prog-titre">
+    <h2 id="prog-titre">Programmes officiels de mathématiques</h2>
+    <p class="programmes-texte">Les textes du Bulletin officiel, sur le site du ministère : ce qui est exigible en première année (PTSI) et en deuxième année (PT).</p>
+    <div class="programmes-liens">
+      <a class="programme" href="https://cache.media.education.gouv.fr/file/SPE1-MEN-MESRI-4-2-2021/65/2/spe781_annexe_1373652.pdf" target="_blank" rel="noopener">
+        <span class="programme-titre">Programme PTSI</span>
+        <span class="programme-detail">Première année · BO spécial n° 1 du 11 février 2021 · PDF</span>
+      </a>
+      <a class="programme" href="https://cache.media.education.gouv.fr/file/31/23/2/ensecsup735_annexes_1417232.pdf" target="_blank" rel="noopener">
+        <span class="programme-titre">Programme PT</span>
+        <span class="programme-detail">Deuxième année · BO n° 31 du 26 août 2021 · PDF</span>
+      </a>
+    </div>
+  </section>`;

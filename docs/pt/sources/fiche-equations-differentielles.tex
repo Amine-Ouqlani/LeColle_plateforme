@@ -129,23 +129,17 @@ Ordre 2 : deux solutions de $(H)$ \emph{non proportionnelles} engendrent $S_H$. 
 $\dt{y_1(t_0)&y_2(t_0)\\y_1'(t_0)&y_2'(t_0)}\neq0$.
 \end{METH}
 
-\begin{METH}{Équation intégrale \livre{méth.~1.1}}
-Inconnue sous $\int_{x_0}^x$ : la fonction est dérivable ; \emph{dériver}, et lire la condition initiale en $x=x_0$.
-Conclure par équivalence (ou vérifier).\\
-Ex. : $f(x)=1+\int_0^xtf(t)\,dt\iff f'=xf$, $f(0)=1\iff f=e^{x^2/2}$.
-\end{METH}
-
 % ======================================================================
 \notion{1.2 Premier ordre, recollement}\label{n12}
 
-\begin{FORM}[ÉQUATION HOMOGÈNE \livre{th.~1.6}]
+\begin{FORM}[ÉQUATION HOMOGÈNE \livre{th.~1.5}]
 $A$ primitive de $a$ sur $I$ : solutions de $y'+a(t)y=0$ :
 \[y=Ke^{-A(t)},\quad K\in\K.\]
 Preuve : $(ye^{A})'=(y'+ay)e^{A}=0$.\\
 Primitives utiles : $\frac1t\to\ln|t|$, $\tan\to-\ln|\cos|$, $\frac{t}{1+t^2}\to\frac12\ln(1+t^2)$, $\frac{u'}u\to\ln|u|$.
 \end{FORM}
 
-\begin{METH}{Solution particulière \livre{méth.~1.2}}
+\begin{METH}{Solution particulière \livre{méth.~1.1}}
 \begin{enumerate}
 \item Évidente : constante, polynôme de bas degré.
 \item $a$ constant, second membre $P(t)e^{mt}$ : $y=Q(t)e^{mt}$, $\deg Q=\deg P$ si $m\neq-a$, $\deg P+1$ si $m=-a$.
@@ -160,6 +154,12 @@ Toujours applicable. Primitive non usuelle : écrire $\int_{t_0}^t$.
 $y'+y=\sin t$ : $z'+z=e^{it}$, $z=\frac{e^{it}}{1+i}=\frac{(1-i)e^{it}}2$, $y_p=\operatorname{Im}z=\frac{\sin t-\cos t}2$.\\
 $a\cos t+b\sin t=\sqrt{a^2+b^2}\cos(t-\varphi)$ : amplitude et phase.
 \end{ASTU}
+
+\begin{METH}{Équation intégrale \livre{méth.~1.2}}
+Inconnue sous $\int_{x_0}^x$ : la fonction est dérivable ; \emph{dériver}, et lire la condition initiale en $x=x_0$.
+Conclure par équivalence (ou vérifier).\\
+Ex. : $f(x)=1+\int_0^xtf(t)\,dt\iff f'=xf$, $f(0)=1\iff f=e^{x^2/2}$.
+\end{METH}
 
 \begin{METH}{Recoller en $t_0$ où $\alpha(t_0)=0$ \livre{méth.~1.3}}
 \begin{enumerate}

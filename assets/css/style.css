@@ -184,6 +184,16 @@ body[data-filiere] .site-head, body[data-filiere] .rd-bar { border-top: 3px soli
 .choix-carte[data-filiere="mp"] .choix-tag { color: var(--mp); }
 .choix-titre { display: block; font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 4px 0 8px; }
 .choix-texte { display: block; color: var(--ink-2); font-size: 16px; }
+.programmes { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); }
+.programmes h2 { font-size: 19px; margin: 0 0 4px; }
+.programmes-texte { color: var(--ink-2); font-size: 15.5px; margin: 0 0 14px; }
+.programmes-liens { display: grid; gap: 12px; }
+@media (min-width: 680px) { .programmes-liens { grid-template-columns: 1fr 1fr; } }
+.programme { display: block; padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); }
+.programme:hover { text-decoration: none; border-color: var(--muted); }
+.programme-titre { display: block; font-weight: 600; color: var(--pt); }
+.programme-titre::after { content: " ↗"; font-weight: 400; color: var(--muted); }
+.programme-detail { display: block; color: var(--ink-2); font-size: 14.5px; }
 
 /* ---------- parcours guidé (chapitre, entraînement, annales) ---------- */
 .suite { margin-top: 14px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--soft); color: var(--ink-2); }
