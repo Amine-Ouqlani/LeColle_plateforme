@@ -4,6 +4,7 @@
 const C = chap(params.get('id')) || LC.chapitres[0];
 cadre('pt', 'chapitres');
 document.title = `${C.titre} — Le Collé PT`;
+document.querySelector('meta[name="description"]')?.setAttribute('content', plain(C.accroche));
 
 const EXOS = LC.exercices.filter(e => e.chapitre === C.id);
 const SEL = LC.selection[C.id];
@@ -14,18 +15,20 @@ const T = C.td;
 const annale = id => LC.annales.find(a => a.id === id);
 const dots = n => `<span class="dots" title="difficulté ${n} sur 5" aria-label="difficulté ${n} sur 5">${'●'.repeat(n)}<span class="off">${'●'.repeat(5 - n)}</span></span>`;
 const ligne = (titre, desc, liens) => `<li class="row"><div class="main">${titre}${desc ? `<br><span class="tag">${desc}</span>` : ''}</div><div class="side">${liens}</div></li>`;
-const lire = (id, page, slides) => `<a href="${slides ? slidesUrl(id, page) : lecteurUrl(id, page)}">Lire</a>`;
 
-/* ---------------------------------------------------------------- le cours */
-const cours = `
-  <ul class="list">
-    ${ligne('Livret du chapitre', 'cours, méthodes, exemples et exercices corrigés', lire(coursDoc, C.cours.debut) + lienPdf(doc(coursDoc)))}
-    ${C.fiche ? ligne(doc(C.fiche.doc).titre, 'l\'essentiel du chapitre sur 3 pages, à imprimer', lire(C.fiche.doc, 1) + lienPdf(doc(C.fiche.doc)))
-              : ligne('Fiche de référence', 'pas encore de fiche : l\'index des méthodes du livret en tient lieu', lire(coursDoc, 13))}
-    ${C.presentation ? ligne('Présentation', `les diapositives de la séance${C.presentation.exercices ? `, avec ${C.presentation.exercices} exercices intégrés` : ''} · <a href="${slidesUrl(C.presentation.statique.doc, C.presentation.statique.debut)}">sans animations</a>`, lire(C.presentation.doc, C.presentation.debut, true) + lienPdf(doc(C.presentation.doc)))
-                     : ''}
-  </ul>
-  <details class="plus"><summary>Le livret partie par partie</summary>
+/* ---------------------------------------------------------------- les ressources du chapitre (cartes) */
+const RES = ressourcesChapitre(C);
+const carte = r => {
+  const d = doc(r.doc);
+  const acts = r.actions.map(([t, h, sec]) => `<a href="${h}"${sec ? ' class="sec"' : ''}>${t}</a>`).join('');
+  return `<li class="carte" id="res-${r.cle}"><p class="carte-tete"><b>${r.nom}</b><span class="tag">${d.pages} p.</span></p>
+    <p class="carte-desc">${r.desc}</p>
+    <p class="carte-actions">${acts}<a class="dl" href="${d.fichier}" download="${nomFichier(d)}" aria-label="Télécharger le PDF : ${r.nom}">PDF</a></p></li>`;
+};
+const groupe = g => RES.filter(r => r.groupe === g).map(carte).join('');
+const sansFiche = !C.fiche && C.cours.index
+  ? `<p class="muted small note-sous">Pas encore de fiche ni de présentation pour ce chapitre : l'<a href="${lecteurUrl(coursDoc, C.cours.index)}">index des méthodes du livret</a> en tient lieu.</p>` : '';
+const parties = `<details class="plus"><summary>Le livret partie par partie</summary>
     <ul class="list">${C.cours.sections.map(s => `<li class="row"><div class="main"><span class="num">${s.num}</span><a href="${lecteurUrl(coursDoc, s.page)}">${s.titre}</a></div></li>`).join('')}
     <li class="row"><div class="main"><span class="num"></span><a href="${lecteurUrl(coursDoc, C.cours.corriges.debut)}">Corrigés des exercices du livret</a></div></li></ul>
   </details>`;
@@ -64,38 +67,42 @@ const annalesChap = Object.entries(parAnnale).sort((a, b) => annale(b[0]).annee 
 const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">${s.titre}</a>`, `${dureeTexte(s.duree)} · ${s.type === 'examen' ? 'examen blanc, extraits d\'annales' : 'devoir'}`,
   s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">Sujet</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : '')).join('');
 
-/* ---------------------------------------------------------------- les documents du chapitre, en un coup d'œil */
-const res = (nom, desc, href) => `<li><a href="${href}"><b>${nom}</b><span>${desc}</span></a></li>`;
-const ressources = [
-  res('Livret', 'le cours du chapitre', lecteurUrl(coursDoc, C.cours.debut)),
-  C.presentation ? res('Présentation', 'le support de séance', slidesUrl(C.presentation.doc, C.presentation.debut)) : '',
-  C.fiche ? res('Fiche', 'l\'essentiel, à imprimer', lecteurUrl(C.fiche.doc, 1)) : '',
-  res('5 problèmes', 'la sélection après le cours', '#etape-3'),
-  T ? res('TD', `${EXOS.length} exercices, énoncés`, lecteurUrl(T.doc, 1)) : '',
-  T ? res('Corrections', 'du TD, détaillées', lecteurUrl(T.corrections, 1)) : '',
-  QUESTIONS.length ? res('Annales', `${QUESTIONS.length} questions de concours`, '#etape-5') : ''
-].join('');
-
 /* ---------------------------------------------------------------- page */
 const ETAPES = [['etape-1', 'Consolider le cours'], ['etape-2', 'Travailler les méthodes'], ['etape-3', 'Les 5 problèmes'], ['etape-4', 'Approfondir'], ['etape-5', 'Se préparer aux évaluations']];
 const i = LC.chapitres.indexOf(C), prev = LC.chapitres[i - 1], next = LC.chapitres[i + 1];
 
+const B = C.bilan;
+const bilanLigne = B ? `<ul class="list">${ligne(`Exercice bilan <span class="tag">· ${B.duree} min, sans document</span>`, 'les notions essentielles du chapitre ; le corrigé indique, question par question, ce qu\'une erreur révèle',
+  `<a href="${lecteurUrl(B.doc, 1)}">Énoncé</a><a href="${lecteurUrl(B.doc, B.corrige)}">Corrigé</a>`)}</ul>` : '';
+const lien = (cle, texte) => { const r = RES.find(x => x.cle === cle); return r ? `<a href="#res-${cle}">${texte}</a>` : ''; };
+const conseil = [C.presentation && `suis la ${lien('presentation', 'présentation')} en séance`, `relis ${C.fiche ? `la ${lien('fiche', 'fiche')}` : `le ${lien('livret', 'livret')}`}`,
+  B && `vérifie tes acquis avec l'${lien('bilan', 'exercice bilan')}`, 'travaille <a href="#etape-3">les 5 problèmes</a>'].filter(Boolean);
+
 $('#contenu').innerHTML = `
-  <p class="kicker"><a href="pt.html">Chapitres</a> · ${C.num}</p>
+  <nav class="fil" aria-label="Chapitres">
+    <a href="pt.html">← Tous les chapitres</a>
+    <span class="chap-switch">${LC.chapitres.map(c => c === C ? `<span aria-current="page" title="${c.titre}">${c.num}</span>` : `<a href="chapitre.html?id=${c.id}" title="Chapitre ${c.num} — ${c.titre}">${c.num}</a>`).join('')}</span>
+  </nav>
+  <p class="kicker">Chapitre ${C.num} sur ${LC.chapitres.length}</p>
   <h1>${C.titre}</h1>
   <p class="intro">${C.accroche}</p>
-  <p class="suite">Après la séance : relis la fiche, puis travaille <a href="#etape-3">les 5 problèmes</a> dans l'ordre.</p>
-  <ul class="ressources">${ressources}</ul>
+  <p class="suite"><b>Pour travailler ce chapitre :</b> ${conseil.slice(0, -1).join(', ')}, puis ${conseil[conseil.length - 1]}.</p>
 
-  <h2 id="cours">Le cours</h2>
-  ${cours}
+  <h2 id="ressources">Les ressources du chapitre</h2>
+  <h3 class="groupe">Apprendre le cours</h3>
+  <ul class="cartes">${groupe('apprendre')}</ul>
+  ${sansFiche}
+  ${parties}
+  <h3 class="groupe">S'entraîner</h3>
+  <ul class="cartes deux">${groupe('entrainer')}</ul>
 
-  <h2 id="entrainement">S'entraîner, en cinq étapes</h2>
-  <p class="muted">Dans l'ordre ; passe directement à une étape si tu maîtrises les précédentes.${T ? ` Tous les exercices sont dans le <a href="${lecteurUrl(T.doc, 1)}">TD complet</a>, corrigés dans le <a href="${lecteurUrl(T.corrections, 1)}">livret de corrections</a>.` : ''}</p>
+  <h2 id="entrainement">Le parcours d'entraînement</h2>
+  <p class="muted">Cinq étapes, du cours au niveau concours. Fais-les dans l'ordre, ou va directement à celle qui te correspond.</p>
   <ol class="etapes">${ETAPES.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join('')}</ol>
 
   <section class="etape" id="etape-1"><h3><span class="etape-num">1</span>Consolider le cours</h3>
-    <p>Relis ${C.fiche ? `la <a href="${lecteurUrl(C.fiche.doc, 1)}">fiche</a>` : 'le résumé du livre'}, réponds de tête aux questions rapides, puis fais quelques applications directes.</p>
+    <p>Relis ${C.fiche ? `la <a href="${lecteurUrl(C.fiche.doc, 1)}">fiche</a>` : `le <a href="${lecteurUrl(coursDoc, C.cours.debut)}">livret</a>`}, réponds de tête aux questions rapides, puis fais l'exercice bilan : il dit tout de suite ce qui est acquis et ce qu'il faut revoir.</p>
+    ${bilanLigne}
     <details class="plus"><summary>Questions rapides <span class="tag">(${C.flash.length})</span></summary><div class="qa">${C.flash.map(f => `<details><summary>${f.q}</summary><p>${f.r}</p></details>`).join('')}</div></details>
     ${listeTD(['I'], 'Applications directes du cours')}
   </section>
@@ -107,7 +114,7 @@ $('#contenu').innerHTML = `
   </section>
 
   <section class="etape principale" id="etape-3"><h3><span class="etape-num">3</span>Les 5 problèmes</h3>
-    <p>La sélection des séances, du plus simple au niveau concours. Pour chacun : cherche, ouvre une indication si tu bloques, lis la correction à la fin. Tout est aussi dans le <a href="${lecteurUrl(SEL.doc, 1)}">livret de la sélection</a> (${lienPdf(doc(SEL.doc))}).</p>
+    <p>La sélection des séances, du plus simple au niveau concours. Pour chacun : cherche, ouvre une indication si tu bloques, lis la correction à la fin. Les cinq sont réunis dans le <a href="${lecteurUrl(SEL.doc, 1)}">livret de la sélection</a> (${lienPdf(doc(SEL.doc))}).</p>
     <ol class="pbs">${SEL.problemes.map(probleme).join('')}</ol>
   </section>
 
@@ -120,12 +127,12 @@ $('#contenu').innerHTML = `
   <section class="etape" id="etape-5"><h3><span class="etape-num">5</span>Se préparer aux évaluations</h3>
     <p>En temps limité, sans documents : un devoir ou un examen blanc, et les questions de concours sur ce chapitre.</p>
     ${evaluations ? `<ul class="list">${evaluations}</ul>` : ''}
-    ${!evaluations && !annalesChap ? '<p class="muted">Pas encore d\'annales sélectionnées pour ce chapitre : les problèmes de niveau IV du TD et le cinquième problème de la sélection en tiennent lieu.</p>' : ''}
+    ${!evaluations && !annalesChap ? '<p class="muted">Pas encore d\'annales sélectionnées pour ce chapitre : les exercices de niveau IV du TD et le cinquième problème de la sélection en tiennent lieu.</p>' : ''}
     ${annalesChap ? `<details class="plus"><summary>Annales de concours sur ce chapitre <span class="tag">(${QUESTIONS.length} questions)</span></summary><ul class="list">${annalesChap}</ul>
       <p class="muted" style="margin-top:8px"><a href="annales.html?ch=${C.id}">Les mêmes questions, classées par notion →</a></p></details>` : ''}
   </section>
 
-  <nav class="pager">${prev ? `<a href="chapitre.html?id=${prev.id}">← ${prev.titre}</a>` : '<span></span>'}${next ? `<a href="chapitre.html?id=${next.id}">${next.titre} →</a>` : ''}</nav>`;
+  <nav class="pager" aria-label="Chapitre précédent ou suivant">${prev ? `<a href="chapitre.html?id=${prev.id}"><span class="tag">← Chapitre ${prev.num}</span>${prev.titre}</a>` : '<span></span>'}${next ? `<a class="next" href="chapitre.html?id=${next.id}"><span class="tag">Chapitre ${next.num} →</span>${next.titre}</a>` : ''}</nav>`;
 renderMath($('#contenu'));
 
 /* indications des problèmes : affichées sur place */
@@ -135,7 +142,7 @@ $$('[data-indic]').forEach(a => a.addEventListener('click', ev => {
 }));
 
 /* ancres, y compris celles des versions précédentes du site */
-const alias = { presentation: 'cours', fiche: 'cours', ressources: 'cours', ensemble: '', td: 'entrainement', revision: 'etape-1', annales: 'etape-5' };
+const alias = { cours: 'ressources', presentation: 'res-presentation', fiche: 'res-fiche', bilan: 'res-bilan', ensemble: '', td: 'res-td', revision: 'etape-1', annales: 'etape-5' };
 const h = location.hash.slice(1);
 const cible = h in alias ? alias[h] : h;
 const exo = params.get('exo');

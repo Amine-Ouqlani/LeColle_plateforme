@@ -18,6 +18,9 @@ for (const c of LC.chapitres) {
     c.presentation.sections.forEach(s => page({ doc: st.doc, page: s.pageStatique }, c.id + ' statique ' + s.num)); }
   if (c.td) { page({ doc: c.td.doc, page: 1 }, c.id + ' TD'); page({ doc: c.td.corrections, page: 1 }, c.id + ' corrections'); }
   if (!LC.selection[c.id]) err.push('chapitre sans sélection : ' + c.id);
+  if (!c.bilan) err.push('chapitre sans exercice bilan : ' + c.id); else { page({ doc: c.bilan.doc, page: 1 }, c.id + ' bilan'); page({ doc: c.bilan.doc, page: c.bilan.corrige }, c.id + ' bilan corrigé'); }
+  if (c.cours.index) page({ doc: c.cours.doc, page: c.cours.index }, c.id + ' index');
+  page({ doc: c.cours.doc, page: c.cours.corriges.fin }, c.id + ' corrigés');
 }
 for (const e of LC.exercices) { page(e.enonce, e.id); page(e.corrige, e.id); if (!LC.chapitres.find(c => c.id === e.chapitre)) err.push('chapitre inconnu ' + e.id); }
 for (const a of LC.annales) { ok(a.contenu); const h = fs.readFileSync(a.contenu, 'utf8'); for (const m of h.matchAll(/src="([^"]+)"/g)) ok(m[1]); }

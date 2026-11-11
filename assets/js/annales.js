@@ -6,7 +6,8 @@ cadre('pt', 'annales');
 const annale = id => LC.annales.find(a => a.id === id);
 const dots = n => `<span class="dots" title="difficulté ${n} sur 5">${'●'.repeat(n)}<span class="off">${'●'.repeat(5 - n)}</span></span>`;
 const sections = c => (c.fiche || c.cours).sections;
-let courant = (chap(params.get('ch')) || LC.chapitres[0]).id;
+const nbQ = cid => LC.questionsAnnales.filter(q => q.chapitre === cid).length;
+let courant = (chap(params.get('ch')) || LC.chapitres.find(c => nbQ(c.id)) || LC.chapitres[0]).id;
 
 function questions(cid) {
   const c = chap(cid);
@@ -37,8 +38,8 @@ const sujet = s => `<li class="row" data-annee="${s.annee}" data-corrige="${s.ex
 
 $('#contenu').innerHTML = `
   <h1>Annales</h1>
-  <p class="intro">Les questions de concours qui portent sur nos chapitres, classées par notion, avec une correction rédigée pour chacune.</p>
-  <nav class="choix-chap" aria-label="Chapitre">${LC.chapitres.map(c => `<button type="button" data-ch="${c.id}" aria-pressed="${c.id === courant}">${c.num}. ${c.titre}</button>`).join('')}</nav>
+  <p class="intro">Les questions de concours qui portent sur nos chapitres, classées par notion, avec une correction rédigée pour chacune. Choisis un chapitre ; le nombre de questions est entre parenthèses.</p>
+  <nav class="choix-chap" aria-label="Chapitre">${LC.chapitres.map(c => `<button type="button" data-ch="${c.id}" aria-pressed="${c.id === courant}"${nbQ(c.id) ? '' : ' disabled title="pas encore de question de concours sur ce chapitre"'}>${c.num}. ${c.titre} <span class="tag">(${nbQ(c.id)})</span></button>`).join('')}</nav>
   <div id="questions"></div>
 
   <h2>Sujets complets</h2>
@@ -54,6 +55,7 @@ function afficher() {
   $('#questions').innerHTML = questions(courant) || '<p class="muted">Aucune question pour ce chapitre.</p>';
   $$('.choix-chap button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ch === courant)));
   renderMath($('#questions'));
+  $('.choix-chap [aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 $$('.choix-chap button').forEach(b => b.addEventListener('click', () => {
   courant = b.dataset.ch; history.replaceState(null, '', '?ch=' + courant); afficher();

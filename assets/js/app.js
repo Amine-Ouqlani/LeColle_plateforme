@@ -53,12 +53,12 @@ const nomFichier = d => {
   const base = d.fichier.split('/').pop();
   return /^le-colle-(pt|mp)/.test(base) ? base : `le-colle-${filiereDoc(d)}-${base}`;
 };
-const lienPdf = (d, texte = 'PDF') => `<a href="${d.fichier}" download="${nomFichier(d)}">${texte}</a>`;
+const lienPdf = (d, texte = 'PDF') => `<a class="dl" href="${d.fichier}" download="${nomFichier(d)}">${texte}</a>`;
 
 /* en-tête et pied de page communs : filière toujours visible (repère de couleur + étiquette) */
 const FILIERES = {
   pt: { nom: 'Filière PT', court: 'PT', accueil: 'pt.html',
-        nav: [['pt.html', 'Chapitres', 'chapitres'], ['annales.html', 'Annales', 'annales'], ['entrainement.html', 'Entraînement', 'entrainement'], ['pt.html#documents', 'Documents', 'documents']] },
+        nav: [['pt.html', 'Chapitres', 'chapitres'], ['entrainement.html', 'Entraînement', 'entrainement'], ['annales.html', 'Annales', 'annales'], ['pt.html#documents', 'Documents', 'documents']] },
   mp: { nom: 'Filière MP', court: 'MP', accueil: 'mp.html', nav: [['mp.html', 'Ouvrages', 'ouvrages']] }
 };
 function cadre(filiere, courant) {
@@ -70,10 +70,43 @@ function cadre(filiere, courant) {
   head.innerHTML = `<div class="wrap"><a class="logo" href="index.html">Le Collé</a>
     ${F ? `<a class="filiere" href="${F.accueil}">${F.nom}</a>
     <nav class="site-nav" aria-label="Navigation ${F.nom}">${F.nav.map(([h, l, id]) => `<a href="${h}" ${id === courant ? 'aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
-    <a class="switch" href="${FILIERES[autre].accueil}">Aller en ${FILIERES[autre].court} →</a>` : ''}</div>`;
+    <a class="switch" href="${FILIERES[autre].accueil}">Filière ${FILIERES[autre].court} →</a>` : ''}</div>`;
   document.body.prepend(head);
   const foot = document.createElement('footer');
   foot.className = 'site-foot';
-  foot.innerHTML = `<div class="wrap">Le Collé${F ? ' · ' + F.nom : ''} · Ahmed Amine Ouqlani</div>`;
+  foot.innerHTML = `<div class="wrap"><span>Le Collé${F ? ' · ' + F.nom : ''} · Ahmed Amine Ouqlani</span>
+    <span class="foot-links"><a href="index.html">Accueil</a>${F ? `<a href="${FILIERES[autre].accueil}">Filière ${FILIERES[autre].court}</a>` : ''}</span></div>`;
   document.body.append(foot);
+}
+
+/* les ressources d'un chapitre PT, dans un ordre unique pour tout le site (page du chapitre, documents, entraînement) :
+   groupe « apprendre » puis « s'entraîner » ; chaque ressource a un document PDF et des actions de lecture */
+function ressourcesChapitre(C) {
+  const R = [];
+  const d = id => LC.documents[id];
+  R.push({ cle: 'livret', groupe: 'apprendre', nom: 'Livret', doc: C.cours.doc,
+    desc: 'le cours complet : définitions, méthodes, exemples, exercices corrigés',
+    actions: [['Lire', lecteurUrl(C.cours.doc, C.cours.debut)]] });
+  if (C.presentation) R.push({ cle: 'presentation', groupe: 'apprendre', nom: 'Présentation', doc: C.presentation.doc,
+    desc: `les diapositives de la séance${C.presentation.exercices ? `, avec ${C.presentation.exercices} exercices intégrés` : ''} · <a href="${slidesUrl(C.presentation.statique.doc, C.presentation.statique.debut)}">version sans animations</a>`,
+    actions: [['Voir', slidesUrl(C.presentation.doc, C.presentation.debut)]] });
+  if (C.fiche) R.push({ cle: 'fiche', groupe: 'apprendre', nom: 'Fiche', doc: C.fiche.doc,
+    desc: `l'essentiel du chapitre en ${d(C.fiche.doc).pages} pages, à imprimer et à relire`,
+    actions: [['Lire', lecteurUrl(C.fiche.doc, 1)]] });
+  if (C.bilan) R.push({ cle: 'bilan', groupe: 'entrainer', nom: 'Exercice bilan', doc: C.bilan.doc,
+    desc: `${C.bilan.duree} min, sans document : vérifier ce qui est acquis avant la séance suivante`,
+    actions: [['Énoncé', lecteurUrl(C.bilan.doc, 1)], ['Corrigé', lecteurUrl(C.bilan.doc, C.bilan.corrige)]] });
+  const sel = LC.selection && LC.selection[C.id];
+  if (sel) R.push({ cle: 'problemes', groupe: 'entrainer', nom: '5 problèmes', doc: sel.doc,
+    desc: 'la sélection après le cours, du plus simple au niveau concours, avec indications',
+    actions: [['Voir les problèmes', `chapitre.html?id=${C.id}#etape-3`]] });
+  if (C.td) {
+    R.push({ cle: 'td', groupe: 'entrainer', nom: 'TD', doc: C.td.doc,
+      desc: `${(LC.exercices || []).filter(e => e.chapitre === C.id).length || ''} exercices classés en quatre niveaux, énoncés seuls`.trim(),
+      actions: [['Lire', lecteurUrl(C.td.doc, 1)]] });
+    R.push({ cle: 'corrections', groupe: 'entrainer', nom: 'Corrections du TD', court: 'Corrections', doc: C.td.corrections,
+      desc: 'chaque exercice du TD corrigé en détail',
+      actions: [['Lire', lecteurUrl(C.td.corrections, 1)]] });
+  }
+  return R;
 }

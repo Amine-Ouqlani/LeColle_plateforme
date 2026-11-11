@@ -246,6 +246,61 @@ LC.documents = {
     description: "Première forme du travail : séance de deux heures découpée en étapes minutées, galerie d'exemples, séries d'entraînement. Remplacée par le livre principal, conservée pour mémoire."
   },
   /* ---- TD (générés par td/build_td.py) ---- */
+  "bilan-ed": {
+    titre: "Exercice bilan — Équations différentielles",
+    sousTitre: "Chapitre 1 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    type: "bilan",
+    fichier: "docs/pt/bilans/bilan-ed.pdf",
+    source: "docs/pt/sources/exercices-bilan.tex",
+    pages: 3,
+    version: "v1",
+    maj: "2026-11-11",
+    description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
+  "bilan-red": {
+    titre: "Exercice bilan — Algèbre linéaire et réduction",
+    sousTitre: "Chapitre 2 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    type: "bilan",
+    fichier: "docs/pt/bilans/bilan-red.pdf",
+    source: "docs/pt/sources/exercices-bilan.tex",
+    pages: 3,
+    version: "v1",
+    maj: "2026-11-11",
+    description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
+  "bilan-determinants": {
+    titre: "Exercice bilan — Déterminants",
+    sousTitre: "Chapitre 3 · 13 min · énoncé, corrigé détaillé, notions évaluées",
+    type: "bilan",
+    fichier: "docs/pt/bilans/bilan-determinants.pdf",
+    source: "docs/pt/sources/exercices-bilan.tex",
+    pages: 3,
+    version: "v1",
+    maj: "2026-11-11",
+    description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
+  "bilan-courbes": {
+    titre: "Exercice bilan — Courbes paramétrées planes",
+    sousTitre: "Chapitre 4 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    type: "bilan",
+    fichier: "docs/pt/bilans/bilan-courbes.pdf",
+    source: "docs/pt/sources/exercices-bilan.tex",
+    pages: 2,
+    version: "v1",
+    maj: "2026-11-11",
+    description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
+  "bilan-metrique": {
+    titre: "Exercice bilan — Propriétés métriques et enveloppes",
+    sousTitre: "Chapitre 5 · 13 min · énoncé, corrigé détaillé, notions évaluées",
+    type: "bilan",
+    fichier: "docs/pt/bilans/bilan-metrique.pdf",
+    source: "docs/pt/sources/exercices-bilan.tex",
+    pages: 2,
+    version: "v1",
+    maj: "2026-11-11",
+    description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
   "td-ed": {
     "titre": "TD — Équations différentielles",
     "sousTitre": "Chapitre 1 · 28 exercices · énoncés",

@@ -11,6 +11,7 @@ LC.chapitres = [
   {
     id: "ed",
     num: 1,
+    bilan: { doc: "bilan-ed", corrige: 2, duree: 15 },
     titre: "Équations différentielles",
     accroche: "Une solution particulière, plus toutes les solutions sans second membre : premier ordre, second ordre à coefficients constants puis continus, théorème de Cauchy linéaire.",
     statut: "complet",
@@ -78,6 +79,7 @@ LC.chapitres = [
   {
     id: "red",
     num: 2,
+    bilan: { doc: "bilan-red", corrige: 2, duree: 15 },
     titre: "Algèbre linéaire et réduction",
     accroche: "Sommes directes, sous-espaces stables, trace ; puis éléments propres, polynôme caractéristique, diagonalisation et trigonalisation : choisir la base où la matrice est la plus simple.",
     statut: "complet",
@@ -152,6 +154,7 @@ LC.chapitres = [
   {
     id: "determinants",
     num: 3,
+    bilan: { doc: "bilan-determinants", corrige: 2, duree: 13 },
     titre: "Déterminants",
     accroche: "Une famille de n vecteurs est-elle une base ? Le déterminant répond par un nombre : un volume orienté, nul exactement quand les vecteurs sont liés.",
     statut: "complet",
@@ -220,6 +223,7 @@ LC.chapitres = [
   {
     id: "courbes",
     num: 4,
+    bilan: { doc: "bilan-courbes", corrige: 2, duree: 15 },
     titre: "Courbes paramétrées planes",
     accroche: "Décrire une courbe par un point mobile M(t) : tangentes, points stationnaires, branches infinies, inflexions, tracé complet.",
     statut: "complet",
@@ -308,6 +312,7 @@ LC.chapitres = [
   {
     id: "metrique",
     num: 5,
+    bilan: { doc: "bilan-metrique", corrige: 2, duree: 13 },
     titre: "Propriétés métriques et enveloppes",
     accroche: "Longueur, abscisse curviligne, repère de Frenet, courbure, développée, et enveloppe d'une famille de droites.",
     statut: "partiel",
@@ -328,7 +333,8 @@ LC.chapitres = [
         { num: "2.1", titre: "Enveloppe d'une famille de droites : définition et calcul", page: 8 },
         { num: "2.2", titre: "La développée, enveloppe des normales", page: 9 }
       ],
-      corriges: { debut: 10, fin: 12 }
+      corriges: { debut: 10, fin: 13 },
+      index: 14
     },
     erreurs: [
       "Calculer une longueur sans s'assurer du signe sous la valeur absolue : $\\|f'\\|=\\sqrt{x'^2+y'^2}$ doit être simplifiée sur un intervalle où le signe est connu.",

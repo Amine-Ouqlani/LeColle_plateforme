@@ -1,4 +1,4 @@
-/* Le Collé — accueil de la filière PT */
+/* Le Collé — accueil de la filière PT : les chapitres, puis tous les documents à télécharger */
 'use strict';
 
 /* anciennes adresses (onglets) */
@@ -7,48 +7,52 @@ if (ancien) location.replace(ancien);
 
 cadre('pt', 'chapitres');
 
-const chapitres = LC.chapitres.map(c => `<li><span class="n">${c.num}</span><div>
+/* les chapitres : la page du chapitre, et les trois accès les plus utilisés */
+const chapitres = LC.chapitres.map(c => {
+  const R = ressourcesChapitre(c);
+  const acces = ['livret', 'fiche', 'bilan', 'problemes'].map(k => R.find(r => r.cle === k)).filter(Boolean)
+    .map(r => `<a href="chapitre.html?id=${c.id}#res-${r.cle}">${r.nom}</a>`).join('');
+  return `<li><span class="n">${c.num}</span><div>
     <h2><a href="chapitre.html?id=${c.id}">${c.titre}</a></h2>
     <p>${c.accroche}</p>
-    <p class="links"><a href="chapitre.html?id=${c.id}#cours">Le cours</a><a href="chapitre.html?id=${c.id}#etape-3">Les 5 problèmes</a><a href="chapitre.html?id=${c.id}#entrainement">S'entraîner</a></p></div></li>`).join('');
+    <p class="links"><a href="chapitre.html?id=${c.id}"><b>Ouvrir le chapitre →</b></a>${acces}</p></div></li>`;
+}).join('');
 
-const GROUPES = [
-  ['Livrets des chapitres', ['livre-ed', 'livre-red', 'livre-det', 'livre-courbes', 'volume2']],
-  ['Présentations des chapitres', ['presentation-ed', 'presentation-red', 'presentation-det', 'presentation-courbes']],
-  ['Présentations sans animations', ['presentation-ed-statique', 'presentation-red-statique', 'presentation-det-statique', 'presentation-courbes-statique']],
-  ['Fiches de référence', ['fiche-ed', 'fiche-red', 'fiche-determinants', 'fiche-courbes']],
-  ['Sélections de 5 problèmes', ['selection-ed', 'selection-red', 'selection-determinants', 'selection-courbes', 'selection-metrique']],
-  ['TD et corrections', ['td-ed', 'td-ed-corrections', 'td-red', 'td-red-corrections', 'td-determinants', 'td-determinants-corrections', 'td-courbes', 'td-courbes-corrections', 'td-metrique', 'td-metrique-corrections']],
-  ['Autres', ['revision', 'archive']]
-];
-const estPres = id => doc(id).type === 'presentation' || /^presentations-/.test(id);
+/* documents : un PDF par ressource et par chapitre, dans l'ordre des pages de chapitre */
+const pdf = (id, nom) => { const d = doc(id); return `<a href="${d.fichier}" download="${nomFichier(d)}" title="${esc(d.titre)} · ${d.pages} pages">${nom}</a>`; };
+const parChapitre = LC.chapitres.map(c => `<li><span class="n">${c.num}</span><div>
+    <a class="t" href="chapitre.html?id=${c.id}#ressources">${c.titre}</a>
+    <p class="dl-chips">${ressourcesChapitre(c).map(r => pdf(r.doc, r.court || r.nom)).join('')}</p></div></li>`).join('');
+
 const ligneDoc = id => {
   const d = doc(id);
-  const lire = estPres(id) ? slidesUrl(id, 1) : lecteurUrl(id, 1);
+  const lire = d.type === 'presentation' || /^presentations-/.test(id) ? slidesUrl(id, 1) : lecteurUrl(id, 1);
   return `<li class="row"><div class="main">${d.titre}<br><span class="tag">${d.sousTitre} · ${d.pages} pages</span></div>
-    <div class="side"><a href="${lire}">Lire</a>${lienPdf(d)}${d.source ? `<a href="${d.source}" download>LaTeX</a>` : ''}</div></li>`;
+    <div class="side"><a href="${lire}">Lire</a>${lienPdf(d)}</div></li>`;
 };
-const nDocs = GROUPES.reduce((t, g) => t + g[1].length, 0);
+const statiques = LC.chapitres.filter(c => c.presentation).map(c => c.presentation.statique.doc);
+const sources = [...new Set(Object.values(LC.documents).filter(d => d.source).map(d => d.source))];
 
 $('#contenu').innerHTML = `
   <h1>Mathématiques PT</h1>
-  <p class="intro">Choisis un chapitre : sa page réunit son livret, sa présentation, sa fiche, les cinq problèmes, le TD et ses corrections. Les documents complets regroupent tous les chapitres.</p>
-
-  <h2 id="complet">Tous les cours en un document</h2>
-  <ul class="list">
-    <li class="row"><div class="main">Livret complet PT<br><span class="tag">les livrets des 5 chapitres, avec sommaire et signets · ${doc('livret-pt').pages} pages</span></div>
-      <div class="side"><a href="${lecteurUrl('livret-pt', 1)}">Lire</a>${lienPdf(doc('livret-pt'))}</div></li>
-    <li class="row"><div class="main">Présentations complètes PT<br><span class="tag">les présentations des chapitres 1 à 4, avec sommaire et signets · sans animations : <a href="${slidesUrl('presentations-pt-statique', 1)}">lire</a>, ${lienPdf(doc('presentations-pt-statique'), 'PDF')}</span></div>
-      <div class="side"><a href="${slidesUrl('presentations-pt', 1)}">Lire</a>${lienPdf(doc('presentations-pt'))}</div></li>
-  </ul>
-  <p class="muted">Le livret et la présentation de chaque chapitre sont sur la page du chapitre.</p>
+  <p class="intro">Chaque chapitre a sa page : le cours (livret, présentation, fiche), puis les exercices pour s'entraîner (exercice bilan, cinq problèmes, TD corrigé). Ouvre le chapitre que tu travailles.</p>
 
   <h2 id="chapitres">Les chapitres</h2>
   <ol class="chapters">${chapitres}</ol>
 
-  <h2 id="documents">Documents</h2>
-  <details class="plus" id="docs"><summary>Tous les documents de la filière PT <span class="tag">(${nDocs})</span></summary>
-    ${GROUPES.map(([t, ids]) => `<h3>${t}</h3><ul class="list">${ids.map(ligneDoc).join('')}</ul>`).join('')}
+  <h2 id="documents">Documents à télécharger</h2>
+  <p class="muted">Tous les PDF de la filière. Pour les lire en ligne, passe par la page du chapitre.</p>
+
+  <h3>Tous les chapitres en un document</h3>
+  <ul class="list">${['livret-pt', 'presentations-pt', 'presentations-pt-statique'].map(ligneDoc).join('')}</ul>
+
+  <h3>Par chapitre</h3>
+  <ol class="dl-chap">${parChapitre}</ol>
+
+  <details class="plus" id="autres"><summary>Autres documents <span class="tag">(${statiques.length + 2})</span></summary>
+    <ul class="list">${statiques.map(ligneDoc).join('')}${['revision', 'archive'].map(ligneDoc).join('')}</ul>
+  </details>
+  <details class="plus"><summary>Sources LaTeX <span class="tag">(${sources.length})</span></summary>
+    <ul class="list">${sources.map(s => `<li class="row"><div class="main"><a href="${s}" download>${s.split('/').pop()}</a></div></li>`).join('')}</ul>
   </details>`;
-if (location.hash === '#documents') $('#docs').open = true;
-addEventListener('hashchange', () => { if (location.hash === '#documents') $('#docs').open = true; });
+if (location.hash) setTimeout(() => document.getElementById(location.hash.slice(1))?.scrollIntoView(), 0);

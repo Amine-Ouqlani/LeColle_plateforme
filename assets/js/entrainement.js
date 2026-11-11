@@ -4,7 +4,7 @@
 cadre('pt', 'entrainement');
 
 const ETAPES = [
-  ['etape-1', 'Consolider le cours', 'fiche, questions rapides, applications directes'],
+  ['etape-1', 'Consolider le cours', 'fiche, questions rapides, exercice bilan, applications directes'],
   ['etape-2', 'Travailler les méthodes', 'exercices classiques, erreurs fréquentes'],
   ['etape-3', 'Les 5 problèmes', 'la sélection des séances, avec indications et corrections'],
   ['etape-4', 'Approfondir', 'synthèse, exercices difficiles'],
@@ -24,14 +24,13 @@ const sujet = s => {
 
 $('#contenu').innerHTML = `
   <h1>Entraînement</h1>
-  <p class="intro">Pour chaque chapitre, un parcours en cinq étapes, du cours au niveau concours. Commence à l'étape 1, ou va directement à celle qui te correspond.</p>
+  <p class="intro">Pour chaque chapitre, un parcours en cinq étapes, du cours au niveau concours, sur la page du chapitre. Commence à l'étape 1, ou va directement à celle qui te correspond.</p>
 
   <ol class="etapes-def">${ETAPES.map(([, t, d]) => `<li><b>${t}</b> — <span class="muted">${d}</span></li>`).join('')}</ol>
 
   <h2>Choisis ton chapitre</h2>
-  <ul class="list">${LC.chapitres.map(c => `<li><div class="row"><div class="main"><span class="num">${c.num}</span><a href="chapitre.html?id=${c.id}#entrainement">${c.titre}</a></div>
-    <div class="side"><a href="chapitre.html?id=${c.id}#etape-3">Les 5 problèmes</a></div></div>
-    <p class="etapes-mini"><span class="num"></span>${ETAPES.map(([id], k) => `<a href="chapitre.html?id=${c.id}#${id}" title="${ETAPES[k][1]}">Étape ${k + 1}</a>`).join('')}</p></li>`).join('')}</ul>
+  <ul class="list">${LC.chapitres.map(c => `<li class="row"><div class="main"><span class="num">${c.num}</span><a href="chapitre.html?id=${c.id}#entrainement">${c.titre}</a></div>
+    <div class="side ex">${c.bilan ? `<a href="${lecteurUrl(c.bilan.doc, 1)}">Exercice bilan</a>` : ''}<a href="chapitre.html?id=${c.id}#etape-3">Les 5 problèmes</a></div></li>`).join('')}</ul>
 
   <h2 id="evaluations">Devoirs et examens blancs</h2>
   <p class="muted">L'étape 5, en conditions réelles : sans livre ni fiche ni calculatrice, chronomètre lancé. Corrige-toi ensuite avec la fiche, puis avec le corrigé.</p>

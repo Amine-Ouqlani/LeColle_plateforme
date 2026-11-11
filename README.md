@@ -1,6 +1,6 @@
 # Le Collé — plateforme de mathématiques PT
 
-Espace de travail de l'élève : cours complets, fiche de référence, présentation, TD corrigés par niveau, annales de la Banque PT corrigées, examens blancs chronométrés.
+Espace de travail de l'élève : pour chaque chapitre, livret, présentation, fiche de référence, exercice bilan, cinq problèmes, TD corrigé par niveau ; annales de la Banque PT corrigées, examens blancs chronométrés.
 
 Site **100 % statique** (HTML, CSS, JavaScript), sans étape de compilation : compatible GitHub Pages tel quel.
 
@@ -29,8 +29,8 @@ Deux filières totalement séparées : chacune a ses pages, ses données et ses 
 
 ```
 index.html             accueil : choix de la filière
-pt.html                filière PT : chapitres et documents
-chapitre.html?id=…     PT : un chapitre (ressources, cours, TD, annales, révision)
+pt.html                filière PT : les chapitres, puis tous les documents à télécharger (#documents)
+chapitre.html?id=…     PT : un chapitre (ressources, parcours d'entraînement en cinq étapes)
 annales.html, annale.html?id=…, entrainement.html      PT
 mp.html                filière MP : les ouvrages par discipline
 ouvrage.html?id=…      MP : un ouvrage (présentation, livre complet, parties)
@@ -53,11 +53,19 @@ Chaque chapitre PT a deux PDF dans `docs/pt/td/` : le TD (énoncés seuls, en qu
 - Les énoncés et corrections des exercices du livre sont repris tels quels depuis ses sources ; les exemples du cours et les exercices complémentaires sont dans `outils/td/nouveaux_*.tex`, le plan dans `outils/td/meta.py`.
 - `python3 outils/td/build_td.py` compile les six PDF et relève la page de chaque exercice ; `python3 outils/td/integrer.py` copie les PDF dans `docs/td/` et régénère `data/pt/exercices.js`, si bien que chaque lien « Énoncé » ou « Corrigé » du site ouvre le TD ou le livret à la bonne page. (Les chemins vers les sources des livres sont en tête de `build_td.py`.)
 
+## Les exercices bilan
+
+Un exercice de 10 à 15 minutes par chapitre, fait en début de séance sans document pour vérifier que le chapitre précédent est acquis. Source unique : `docs/pt/sources/exercices-bilan.tex`. `python3 outils/bilans/construire.py` compile un PDF par chapitre pour le site (`docs/pt/bilans/bilan-<chapitre>.pdf` : l'énoncé en page 1, puis le corrigé et la grille « notions évaluées et diagnostic ») et met à jour leur nombre de pages dans `data/pt/documents.js`. Il compile aussi, dans `outils/bilans/build/`, la version professeur (tous les chapitres) et la version élève (énoncés seuls), pour l'impression. Dans `data/pt/chapitres.js`, le champ `bilan` de chaque chapitre donne le document, la page du corrigé et la durée.
+
+## Organisation d'une page de chapitre
+
+Une seule liste de ressources, définie dans `ressourcesChapitre()` (`assets/js/app.js`) et réutilisée partout (page du chapitre, documents de l'accueil PT) : *Apprendre le cours* (livret, présentation, fiche), puis *S'entraîner* (exercice bilan, 5 problèmes, TD, corrections du TD). Chaque carte a une action de lecture et un lien de téléchargement du PDF. Viennent ensuite le parcours d'entraînement en cinq étapes, puis la navigation vers le chapitre précédent ou suivant.
+
 ## La sélection de 5 problèmes
 
 Pour chaque chapitre PT, `docs/pt/selection/Selection_<chapitre>.pdf` réunit cinq problèmes à travailler après le cours (énoncés, une page d'indications, corrections). Le choix et les en-têtes sont dans `outils/td/selection.py`, les problèmes nouveaux ou adaptés d'annales dans `outils/td/selection.tex`. `python3 outils/td/build_selection.py` compile les cinq livrets, puis `python3 outils/td/integrer_selection.py` met à jour `data/pt/selection.js` (pages de chaque énoncé, indication et correction).
 
-Les chapitres PT, dans l'ordre : 1 Équations différentielles, 2 Algèbre linéaire et réduction, 3 Déterminants, 4 Courbes paramétrées, 5 Propriétés métriques. Chaque chapitre a son livret, sa présentation (avec des exercices intégrés : une diapositive d'énoncé, puis une diapositive de correction), sa fiche, ses cinq problèmes, son TD et ses corrections. Les PDF gardent leur numérotation interne (§1.1, théorème 1.3…), commune au livret, à la fiche, à la présentation et au TD ; le grand numéro de chapitre et l'onglet des livrets suivent l'ordre du site.
+Les chapitres PT, dans l'ordre : 1 Équations différentielles, 2 Algèbre linéaire et réduction, 3 Déterminants, 4 Courbes paramétrées, 5 Propriétés métriques. Chaque chapitre a son livret, sa présentation (avec des exercices intégrés : une diapositive d'énoncé, puis une diapositive de correction), sa fiche, son exercice bilan, ses cinq problèmes, son TD et ses corrections (le chapitre 5 n'a pas encore de fiche ni de présentation : l'index des méthodes de son livret en tient lieu). Les PDF gardent leur numérotation interne (§1.1, théorème 1.3…), commune au livret, à la fiche, à la présentation et au TD ; le grand numéro de chapitre et l'onglet des livrets suivent l'ordre du site.
 
 **Livrets et présentations : individuels et complets.** Les sources (`docs/pt/sources/livre-*.tex`, `volume2-*.tex`, `presentation-*.tex`, `fiche-*.tex`) sont les seuls documents édités à la main. `python3 outils/livrets/construire.py` les compile tous, puis assemble à partir des PDF obtenus le **livret complet PT** (`docs/pt/livres/livret-complet-PT.pdf`) et les **présentations complètes PT** (animées et sans animations), avec sommaire et signets ; il met aussi à jour le nombre de pages dans `data/pt/documents.js`. Les documents complets ne sont donc jamais en retard sur les documents des chapitres : après toute modification d'un cours, on relance ce script, puis `outils/td/build_td.py`, `build_selection.py`, `integrer.py` et `integrer_selection.py` (les TD lisent les exercices et les numéros dans les livrets). Le thème commun des présentations récentes est dans `outils/presentations/theme.tex`.
 

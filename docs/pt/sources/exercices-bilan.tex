@@ -1,0 +1,555 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.7cm,bottom=1.7cm,left=1.8cm,right=1.8cm,headheight=14pt,headsep=0.45cm,footskip=0.8cm]{geometry}
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{Fond}{HTML}{F2F4F7}\definecolor{Ocre}{HTML}{B07A26}\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}\definecolor{Filet}{HTML}{C5CCD6}
+\usepackage{enumitem,array,tabularx,booktabs,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true]{hyperref}
+
+% ---------- version : \proftrue (énoncé + corrigé + grille) / \proffalse (énoncés seuls) ----------
+\newif\ifprof
+\providecommand{\VERSION}{prof}
+\def\tmpprof{prof}\ifx\VERSION\tmpprof\proftrue\else\proffalse\fi
+% version « site » : énoncé + corrigé + grille, sans page de garde ; \CHAP = numéro du chapitre (0 = tous)
+\newif\ifsite\def\tmpsite{site}\ifx\VERSION\tmpsite\proftrue\sitetrue\fi
+\providecommand{\CHAP}{0}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.35em}
+\setlist{itemsep=0.25em,topsep=0.2em,parsep=0pt}
+\setlist[enumerate,1]{label=\textsf{\bfseries\color{Bleu}\arabic*.},leftmargin=1.6em}
+\setlist[enumerate,2]{label=\textsf{\color{BleuMoyen}\alph*)},leftmargin=1.5em}
+\renewcommand{\arraystretch}{1.25}
+
+\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\K}{\mathbb{K}}
+\newcommand{\rg}{\operatorname{rg}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Sp}{\operatorname{Sp}}\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\vv}[1]{\overrightarrow{#1}}\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+% ---------- titres ----------
+\newcommand{\bilan}[3]{\clearpage\phantomsection\pdfbookmark[0]{Chapitre #1 --- #2}{chap#1}\markboth{Chapitre #1 --- #2}{}%
+  \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.35em}%
+  {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE #1}}\par\smallskip
+  {\color{white}\sffamily\bfseries\Large Exercice bilan --- #2}\par\smallskip
+  {\color{white!85!Bleu}\sffamily\small Durée indicative : #3\ \ ·\ \ sans document}\vspace{0.35em}}}\par\vspace{0.6em}}
+\newcommand{\partie}[1]{\par\needspace{4\baselineskip}\vspace{0.3em}{\sffamily\bfseries\color{Bleu}#1}\par\nobreak}
+\newcommand{\corrige}{\clearpage\noindent{\sffamily\bfseries\Large\color{Ocre}Corrigé}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par}
+\newcommand{\q}[1]{\par\needspace{3\baselineskip}\smallskip{\sffamily\bfseries\color{Bleu}#1}\ }
+\newcommand{\prop}[1]{{\sffamily\footnotesize\color{Gris}[#1]}}
+
+\newtcolorbox{GRILLE}{enhanced,arc=0pt,boxrule=0pt,colback=Fond,borderline west={2pt}{0pt}{Ocre},left=5pt,right=4pt,
+  top=4pt,bottom=4pt,before skip=0.8em,
+  before upper={{\sffamily\bfseries\small\color{Ocre}NOTIONS ÉVALUÉES ET DIAGNOSTIC}\par\smallskip}}
+\newcolumntype{Q}{>{\leavevmode\sffamily\bfseries\footnotesize\color{Bleu}}p{0.7cm}}
+\newcolumntype{N}{>{\raggedright\arraybackslash\footnotesize}X}
+\newcommand{\entete}{\textsf{\scriptsize Q.} & \textsf{\scriptsize\bfseries Connaissances et compétences testées} &
+  \textsf{\scriptsize\bfseries Une erreur ici signale\dots}\\\midrule}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- \ifsite exercice bilan\else exercices bilan\ifprof\ (professeur)\fi\fi}
+\fancyfoot[C]{\scriptsize\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\begin{document}
+
+\ifnum\CHAP=0
+% ======================================================================
+\thispagestyle{empty}
+\noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.6em}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Exercices bilan}\par\smallskip
+{\color{white!85!Bleu}\sffamily Un exercice de 10 à 15 minutes par chapitre, en début de séance\ifprof\ --- version professeur\fi}\vspace{0.6em}}}
+\vspace{1em}
+
+\ifprof
+Chaque exercice reprend les notions essentielles d'un chapitre, du plus simple (connaissance du cours) au plus appliqué.
+Pour chaque chapitre : l'énoncé (une page, à donner tel quel), le corrigé détaillé, puis une grille qui associe à chaque question
+les notions testées et la lacune que révèle une erreur. Les notations et les numéros de propriétés sont ceux des livrets.
+Aucune notion hors programme n'est exigée ; la formule $\gamma=\det(f',f'')/\|f'\|^3$ n'apparaît dans le corrigé du chapitre~5
+que comme contrôle facultatif.
+
+\medskip
+\textsf{\bfseries\color{Bleu}Conseils d'utilisation}
+\begin{itemize}
+\item Laisser l'élève travailler sans le cours ; noter le temps passé sur chaque question : une question qui bloque plus de
+      deux ou trois minutes est déjà un indice.
+\item Corriger en lisant la colonne « Une erreur ici signale\dots{} » : elle dit quelle partie du cours reprendre.
+\item Les questions de cours (V/F, énoncés) se corrigent oralement en une minute ; insister sur la justification.
+\end{itemize}
+\else
+Ces exercices se font en début de séance, sans le cours, en 10 à 15 minutes. Ils ne sont pas notés : ils servent à repérer ce
+qui est acquis et ce qu'il faut revoir. Justifier chaque réponse en citant la propriété utilisée.
+\fi
+
+\medskip
+{\sffamily\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Chapitre} & \textbf{Exercice bilan} & \textbf{Durée}\\\midrule
+1 & Équations différentielles linéaires & 15 min\\
+2 & Réduction des endomorphismes & 15 min\\
+3 & Déterminants & 13 min\\
+4 & Courbes paramétrées planes & 15 min\\
+5 & Propriétés métriques et enveloppes & 13 min\\
+\bottomrule
+\end{tabular}}
+
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-1)\relax=0
+% ======================================================================
+%  CHAPITRE 1 — ÉQUATIONS DIFFÉRENTIELLES
+% ======================================================================
+\bilan{1}{Équations différentielles}{15 min}
+Toutes les fonctions sont à valeurs réelles.
+
+\begin{enumerate}
+\item Soient $a$, $b$, $c$ trois fonctions continues sur un intervalle $I$, et
+      $(E)\colon y''+a(t)y'+b(t)y=c(t)$, d'équation homogène associée $(H)$.
+  \begin{enumerate}
+  \item Énoncer le théorème de Cauchy linéaire pour $(E)$.
+  \item Quelle est la dimension de l'ensemble $S_H$ des solutions de $(H)$ ? Si $y_p$ est une solution de $(E)$, décrire
+        l'ensemble $S_E$ des solutions de $(E)$.
+  \end{enumerate}
+\item Résoudre sur $\R$ l'équation $(1+t^2)\,y'+2t\,y=1$.
+\item On considère $(E_3)\colon t\,y'-y=2t^3$.
+  \begin{enumerate}
+  \item Résoudre $(E_3)$ sur $]0,+\infty[$, puis sur $]-\infty,0[$.
+  \item Déterminer les solutions de $(E_3)$ définies sur $\R$.
+  \item Existe-t-il une solution de $(E_3)$ sur $\R$ telle que $y(0)=1$ ? Pourquoi cela ne contredit-il pas le théorème de
+        Cauchy ?
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item Déterminer les solutions réelles de $y''-2y'+5y=0$.
+  \item Déterminer la solution de $y''-3y'+2y=e^{t}$ vérifiant $y(0)=0$ et $y'(0)=0$.
+  \end{enumerate}
+\item Déterminer les solutions polynomiales de $(E_5)\colon(1+t^2)\,y''-2y=0$.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \prop{th.~1.3} Pour tout $t_0\in I$ et tout $(y_0,y_1)\in\R^2$, il existe une \emph{unique} solution $y$ de $(E)$
+\emph{sur $I$} telle que $y(t_0)=y_0$ et $y'(t_0)=y_1$. Les hypothèses comptent : équation \emph{normalisée} (coefficient
+de $y''$ égal à $1$) et coefficients \emph{continus sur $I$}.
+
+\q{1.b)} \prop{cor.~1.4, prop.~1.2} $S_H$ est un espace vectoriel de dimension $2$ : l'application $h\mapsto\big(h(t_0),h'(t_0)\big)$
+est un isomorphisme de $S_H$ sur $\R^2$ (linéaire, bijective par le théorème de Cauchy). Et $S_E=y_p+S_H=\{y_p+h,\ h\in S_H\}$ :
+ce n'est pas un espace vectoriel (si $c\neq0$), mais un ensemble affine.
+
+\q{2.} $1+t^2$ ne s'annule pas : on normalise sur $\R$ tout entier,
+\[y'+\frac{2t}{1+t^2}\,y=\frac1{1+t^2}.\]
+\begin{itemize}
+\item Homogène \prop{th.~1.6} : $A(t)=\ln(1+t^2)$ est une primitive de $\frac{2t}{1+t^2}$ (forme $\frac{u'}u$), donc
+      $S_H=\big\{t\mapsto\frac K{1+t^2},\ K\in\R\big\}$.
+\item Variation de la constante \prop{méth.~1.2} : $y=\dfrac{\lambda(t)}{1+t^2}$ ; il reste
+      $\lambda'(t)=b(t)e^{A(t)}=\dfrac1{1+t^2}\,(1+t^2)=1$, donc $\lambda(t)=t$ convient.
+\end{itemize}
+Les solutions sont les fonctions $y(t)=\dfrac{t+K}{1+t^2}$, $K\in\R$.
+\emph{Remarque} : on pouvait aussi voir $(1+t^2)y'+2ty=\big((1+t^2)y\big)'$.
+
+\q{3.a)} Sur $I_+=]0,+\infty[$ : $y'-\frac1ty=2t^2$. $A(t)=-\ln t$, donc $e^{-A(t)}=t$ et $S_H=\{Kt\}$. On cherche une solution
+polynomiale $y=\alpha t^3$ : $3\alpha t^3-\alpha t^3=2t^3$, d'où $\alpha=1$. Ainsi $y(t)=t^3+K_+t$.\\
+Sur $I_-=]-\infty,0[$ : $A(t)=-\ln|t|$, $e^{-A(t)}=|t|=-t$ ; la constante absorbe le signe : $y(t)=t^3+K_-t$.
+
+\q{3.b)} \prop{méth.~1.3} \emph{Analyse.} Si $y$ est solution sur $\R$, ses restrictions sont solutions sur $I_+$ et $I_-$ :
+$y(t)=t^3+K_+t$ pour $t>0$, $y(t)=t^3+K_-t$ pour $t<0$.
+\begin{itemize}
+\item Continuité en $0$ : les deux limites valent $0$, donc $y(0)=0$ (aucune condition sur $K_\pm$).
+\item Dérivabilité en $0$ : $\dfrac{y(t)-y(0)}{t}=t^2+K_\pm\to K_\pm$ ; il faut $K_+=K_-$.
+\end{itemize}
+\emph{Synthèse.} Pour $K\in\R$, $y(t)=t^3+Kt$ est dérivable sur $\R$ et vérifie $(E_3)$ sur $I_\pm$, et en $t=0$ :
+$0\cdot y'(0)-y(0)=0=2\cdot0^3$. Les solutions sur $\R$ sont les $y(t)=t^3+Kt$, $K\in\R$ : une droite affine de solutions.
+
+\q{3.c)} Non : toutes les solutions sur $\R$ vérifient $y(0)=0$. Pas de contradiction : le coefficient de $y'$ s'annule en
+$0$, donc $(E_3)$ ne peut pas être normalisée sur $\R$ ; le théorème de Cauchy ne s'applique que sur $I_+$ ou sur $I_-$, avec
+$t_0\neq0$.
+
+\q{4.a)} \prop{th.~1.11} $r^2-2r+5=0$, $\Delta=-16$, $r=1\pm2i$ : $y(t)=e^{t}\big(A\cos2t+B\sin2t\big)$, $(A,B)\in\R^2$.
+
+\q{4.b)} $r^2-3r+2=(r-1)(r-2)$ : $S_H=\{Ae^{t}+Be^{2t}\}$. Le second membre est $e^{mt}$ avec $m=1$, \emph{racine simple} : on
+cherche $y_p=Q(t)e^{t}$ avec $\deg Q=1$ \prop{méth.~1.4}. En reportant :
+$Q''+(2m+a)Q'+(m^2+am+b)Q=1$ avec $a=-3$, $b=2$, $m=1$, soit $Q''-Q'=1$ : $Q(t)=-t$. Donc $y_p(t)=-te^{t}$.\\
+Solution générale : $y=Ae^{t}+Be^{2t}-te^{t}$, puis $y'=Ae^{t}+2Be^{2t}-(1+t)e^{t}$.\\
+$y(0)=A+B=0$ et $y'(0)=A+2B-1=0$ donnent $B=1$, $A=-1$ :
+\[y(t)=e^{2t}-(1+t)\,e^{t}.\]
+
+\q{5.} \prop{méth.~1.6} Soit $y$ polynomiale non nulle de degré $n$, de coefficient dominant $c\neq0$. Le coefficient de $t^n$
+dans $(1+t^2)y''-2y$ est $c\big(n(n-1)-2\big)$ ; il est nul, donc $n^2-n-2=(n-2)(n+1)=0$ et $n=2$.
+On pose $y=\alpha t^2+\beta t+\gamma$ : $(1+t^2)\,2\alpha-2(\alpha t^2+\beta t+\gamma)=2\alpha-2\gamma-2\beta t=0$, d'où $\beta=0$
+et $\gamma=\alpha$. Les solutions polynomiales sont les $y=\alpha(1+t^2)$, $\alpha\in\R$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Théorème de Cauchy : hypothèses, deux conditions initiales à l'ordre 2. &
+  Oubli de $y'(t_0)$ : confusion ordre 1/ordre 2. Oubli « normalisée, continues » : hypothèses non comprises (à recouper avec 3.c).\\
+1.b & Structure : $S_H$ espace vectoriel de dimension 2, $S_E=y_p+S_H$. &
+  « $S_E$ est un espace vectoriel » ou « dimension 1 » : structure linéaire et rôle de Cauchy non assimilés.\\
+2 & Normalisation, primitive $\frac{u'}u$, solution $Ke^{-A}$, variation de la constante. &
+  $K(1+t^2)$ au lieu de $\frac K{1+t^2}$ : signe de $e^{-A}$. Erreur sur $\lambda'$ : formule $\lambda'=be^{A}$ mal sue.\\
+3.a & Résolution sur chaque intervalle, $\ln|t|$, solution polynomiale. &
+  Une seule résolution « pour $t\neq0$ » : intervalles et valeur absolue mal maîtrisés.\\
+3.b & Recollement : continuité, dérivabilité, vérification en $0$. &
+  $K_+$, $K_-$ laissés libres : test de dérivabilité oublié. Pas de vérification en $0$ : démarche analyse--synthèse incomplète.\\
+3.c & Domaine de validité du théorème de Cauchy. &
+  « Contradiction avec Cauchy » : le théorème est appliqué sans normaliser.\\
+4.a & Équation caractéristique, cas $\Delta<0$, forme réelle. &
+  $e^{2t}(\dots\cos t)$ : rôles de $\alpha$ et $\beta$ inversés dans $\alpha\pm i\beta$.\\
+4.b & Second membre $e^{mt}$ avec $m$ racine simple ; conditions initiales après $y_p$. &
+  Essai $y_p=Ce^{t}$ : résonance non repérée. Conditions initiales sur $S_H$ seul : ordre des étapes de la méthode.\\
+5 & Solution polynomiale : degré par le terme dominant, identification. &
+  Identification à l'aveugle sans borner le degré : méthode~1.6 non connue.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-2)\relax=0
+% ======================================================================
+%  CHAPITRE 2 — RÉDUCTION
+% ======================================================================
+\bilan{2}{Réduction des endomorphismes}{15 min}
+
+\begin{enumerate}
+\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
+  \begin{enumerate}
+  \item Si $A\in\mathcal M_3(\R)$ admet trois valeurs propres distinctes, alors $A$ est diagonalisable.
+  \item Si $A\in\mathcal M_3(\R)$ admet une valeur propre de multiplicité $2$, alors $A$ n'est pas diagonalisable.
+  \item La matrice $\pmat{0&-1\\1&0}$ est diagonalisable dans $\mathcal M_2(\R)$.
+  \item Si $A\in\mathcal M_n(\R)$ est diagonalisable et n'admet qu'une seule valeur propre $\lambda$, alors $A=\lambda I_n$.
+  \item Il existe $A,B\in\mathcal M_n(\R)$ telles que $AB-BA=I_n$.
+  \end{enumerate}
+\item Soit $A=\pmat{1&1&-1\\0&2&0\\-1&1&1}$.
+  \begin{enumerate}
+  \item Calculer le polynôme caractéristique $\chi_A$ sous forme factorisée. $A$ est-elle inversible ?
+  \item Déterminer les sous-espaces propres de $A$ (une base et la dimension de chacun).
+  \item Justifier que $A$ est diagonalisable, et donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$.
+  \item Sans calculer $P^{-1}$, déterminer $\tr(A^k)$ pour tout entier $k\geq1$.
+  \end{enumerate}
+\item Pour $a\in\R$, on pose $B_a=\pmat{1&a&0\\0&1&0\\0&0&2}$. Pour quelles valeurs de $a$ la matrice $B_a$ est-elle
+      diagonalisable ?
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \emph{Vrai} \prop{cor.~1.28}. Chaque sous-espace propre est de dimension au moins $1$, et la somme des trois est
+directe : $\sum\dim E_\lambda\geq3=n$, donc $\R^3=\bigoplus E_\lambda$.
+
+\q{1.b)} \emph{Faux.} $I_3$ (ou $\mathrm{diag}(1,1,2)$) a une valeur propre double et est diagonale. La valeur double n'empêche
+rien ; le critère est $\dim E_\lambda=m(\lambda)$ \prop{th.~1.27}.
+
+\q{1.c)} \emph{Faux.} $\chi(x)=x^2+1$ n'a pas de racine réelle : $\chi$ n'est pas scindé sur $\R$, la matrice n'a aucune valeur
+propre réelle. (Elle est diagonalisable dans $\mathcal M_2(\C)$, de valeurs propres $\pm i$.)
+
+\q{1.d)} \emph{Vrai.} $D=\lambda I_n$, donc $A=P(\lambda I_n)P^{-1}=\lambda PP^{-1}=\lambda I_n$.
+
+\q{1.e)} \emph{Faux} \prop{prop.~1.7}. $\tr(AB-BA)=\tr(AB)-\tr(BA)=0$, alors que $\tr(I_n)=n\neq0$.
+
+\q{2.a)} La deuxième ligne de $xI_3-A$ n'a qu'un coefficient non nul : on développe selon elle \prop{méth.~1.2}.
+\[\chi_A(x)=\dt{x-1&-1&1\\0&x-2&0\\1&-1&x-1}=(x-2)\dt{x-1&1\\1&x-1}=(x-2)\big((x-1)^2-1\big)=x\,(x-2)^2.\]
+$\Sp(A)=\{0,2\}$ avec $m(0)=1$, $m(2)=2$. Contrôles : $0+2+2=4=\tr A$ et $0\times2\times2=0=\det A$.
+$0$ est valeur propre, donc $A$ n'est pas inversible.
+
+\q{2.b)} \prop{méth.~1.1} $E_0=\Ker A$ : $x+y-z=0$, $2y=0$, $-x+y+z=0$, d'où $y=0$ et $z=x$ :
+$E_0=\vect\big((1,0,1)\big)$, de dimension $1$.\\
+$A-2I_3=\pmat{-1&1&-1\\0&0&0\\-1&1&-1}$ est de rang $1$, donc $\dim E_2=3-1=2$ : $E_2$ est le plan $y=x+z$,
+$E_2=\vect\big((1,1,0),(0,1,1)\big)$.
+
+\q{2.c)} $\chi_A$ est scindé et $\dim E_0=1=m(0)$, $\dim E_2=2=m(2)$ : $A$ est diagonalisable \prop{th.~1.27}. Les vecteurs propres
+en colonnes, \emph{dans l'ordre} de $D$ :
+\[P=\pmat{1&1&0\\0&1&1\\1&0&1},\qquad D=\pmat{0&0&0\\0&2&0\\0&0&2}.\]
+($\det P=2\neq0$ ; contrôle : $AP=PD$ colonne par colonne.)
+
+\q{2.d)} $A^k=PD^kP^{-1}$ \prop{prop.~1.33}, et la trace est invariante par similitude :
+$\tr(A^k)=\tr(D^k)=0^k+2^k+2^k=2^{k+1}$ pour $k\geq1$.
+
+\q{3.} $B_a$ est triangulaire : $\chi_{B_a}=(x-1)^2(x-2)$, $m(1)=2$, $m(2)=1$. La valeur propre $2$ est simple : pas de
+condition. $B_a-I_3=\pmat{0&a&0\\0&0&0\\0&0&1}$ est de rang $2$ si $a\neq0$, de rang $1$ si $a=0$. Donc $\dim E_1=2=m(1)$ si et
+seulement si $a=0$ : $B_a$ est diagonalisable si et seulement si $a=0$ (et $B_0$ est déjà diagonale).
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Valeurs propres distinctes $\Rightarrow$ diagonalisable. & Hésitation : le critère simple n'est pas connu.\\
+1.b & Condition suffisante ou condition nécessaire et suffisante. &
+  « Vrai » : l'élève croit qu'une valeur multiple empêche la diagonalisation ; critère $\dim E_\lambda=m(\lambda)$ non assimilé.\\
+1.c & $\chi$ scindé ; dépendance au corps $\R$ ou $\C$. & « Vrai, valeurs propres $\pm i$ » : le corps de base est ignoré.\\
+1.d & Écriture $A=PDP^{-1}$. & Pas de preuve : manipulation de la similitude fragile.\\
+1.e & Trace : linéarité, $\tr(AB)=\tr(BA)$. & Aucune idée : propriétés de la trace non connues.\\
+2.a & Calcul de $\chi_A$ (ligne creuse), factorisation, contrôles $\tr$/$\det$ ; $0\in\Sp(A)\iff A$ non inversible. &
+  Développement complet non factorisé : méthode de calcul de $\chi$ ; pas de lien avec l'inversibilité.\\
+2.b & $E_\lambda=\Ker(A-\lambda I)$, $\dim E_\lambda=n-\rg(A-\lambda I)$. & Système mal résolu ou dimension fausse : lien rang/noyau.\\
+2.c & Critère $\dim E_\lambda=m(\lambda)$ ; construction de $P$ et $D$. &
+  Vecteurs propres en lignes, ou ordre de $D$ incohérent : sens de $A=PDP^{-1}$ non compris.\\
+2.d & $A^k=PD^kP^{-1}$, invariance de la trace. & Calcul de $P^{-1}$ ou de $A^k$ : l'invariance de la trace n'est pas mobilisée.\\
+3 & Valeurs propres d'une matrice triangulaire ; rang avec paramètre. &
+  « Diagonalisable car valeurs propres sur la diagonale » : confusion triangulaire/diagonalisable.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-3)\relax=0
+% ======================================================================
+%  CHAPITRE 3 — DÉTERMINANTS
+% ======================================================================
+\bilan{3}{Déterminants}{13 min}
+
+\begin{enumerate}
+\item Soit $A\in\mathcal M_3(\R)$ telle que $\det A=2$. On note $C_1,C_2,C_3$ ses colonnes. Donner, sans justification longue :
+  \begin{enumerate}
+  \item $\det(3A)$,\quad $\det(-A)$,\quad $\det(A^T)$,\quad $\det(A^{-1})$,\quad $\det(A^2)$ ;
+  \item le déterminant de la matrice obtenue à partir de $A$ en \emph{(i)} échangeant $C_1$ et $C_3$ ;
+        \emph{(ii)} remplaçant $C_1$ par $C_1+5C_2$ ; \emph{(iii)} remplaçant $C_2$ par $2C_2+C_3$.
+  \end{enumerate}
+\item Pour $x\in\R$, calculer sous forme factorisée
+      $\Delta(x)=\dt{x&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}$. Pour quelles valeurs de $x$ la matrice correspondante est-elle inversible ?
+\item Pour quelles valeurs de $x\in\R$ les vecteurs $u=(1,x,x^2)$, $v=(1,1,1)$ et $w=(1,2,4)$ forment-ils une base de $\R^3$ ?
+\item Pour $n\geq1$, on note $T_n$ le déterminant de taille $n$ ayant des $3$ sur la diagonale, des $1$ juste au-dessus, des
+      $2$ juste au-dessous, et des $0$ ailleurs :
+      $T_n=\dt{3&1&&\\2&3&\ddots&\\&\ddots&\ddots&1\\&&2&3}$.
+  \begin{enumerate}
+  \item Calculer $T_1$ et $T_2$, puis montrer que $T_n=3T_{n-1}-2T_{n-2}$ pour $n\geq3$.
+  \item En déduire $T_n$ en fonction de $n$.
+  \end{enumerate}
+\item Soit $A\in\mathcal M_3(\R)$ telle que $A^T=-A$. Montrer que $A$ n'est pas inversible.
+\item Dans le plan rapporté à un repère orthonormé, on considère $A(1,2)$, $B(3,5)$ et $C(x,8)$.
+  \begin{enumerate}
+  \item Pour quelle valeur de $x$ les points $A$, $B$, $C$ sont-ils alignés ?
+  \item Calculer l'aire du triangle $ABC$ lorsque $x=1$.
+  \end{enumerate}
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} En taille $n=3$ : $\det(\lambda A)=\lambda^3\det A$.
+$\det(3A)=27\times2=54$ ;\ $\det(-A)=(-1)^3\times2=-2$ ;\ $\det(A^T)=2$ ;\ $\det(A^{-1})=\frac12$ ;\ $\det(A^2)=(\det A)^2=4$.
+
+\q{1.b)} \emph{(i)} échange de deux colonnes : $-2$. \emph{(ii)} transvection : $2$ (inchangé).
+\emph{(iii)} par linéarité selon la deuxième colonne, $\det(C_1,2C_2+C_3,C_3)=2\det(C_1,C_2,C_3)+\det(C_1,C_3,C_3)=4+0=4$.
+
+\q{2.} Chaque ligne a pour somme $x+3$ \prop{§1.5, somme constante} : $C_1\leftarrow C_1+C_2+C_3+C_4$, puis on sort $x+3$ :
+\[\Delta(x)=(x+3)\dt{1&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}\underset{L_i\leftarrow L_i-L_1}{=}(x+3)\dt{1&1&1&1\\0&x-1&0&0\\0&0&x-1&0\\0&0&0&x-1}=(x+3)(x-1)^3.\]
+La matrice est inversible si et seulement si $\Delta(x)\neq0$, soit $x\notin\{1,-3\}$. (C'est la formule
+$D_n(a,b)=(a+(n-1)b)(a-b)^{n-1}$ du cours, avec $a=x$, $b=1$, $n=4$.)
+
+\q{3.} Trois vecteurs de $\R^3$ forment une base si et seulement si leur déterminant dans la base canonique est non nul.
+On reconnaît un déterminant de Vandermonde \prop{th.~1.14} :
+\[\dt{1&1&1\\x&1&2\\x^2&1&4}=V(x,1,2)=(1-x)(2-x)(2-1)=(x-1)(x-2).\]
+C'est une base si et seulement si $x\notin\{1,2\}$ (les trois nombres $x,1,2$ sont distincts).
+
+\q{4.a)} $T_1=3$, $T_2=\dt{3&1\\2&3}=9-2=7$. Pour $n\geq3$, on développe selon la première ligne \prop{méth.~1.4} :
+$T_n=3\,T_{n-1}-1\cdot\Delta_{1,2}$, où le mineur $\Delta_{1,2}$ a pour première colonne $(2,0,\dots,0)^T$ ; en le développant
+selon cette colonne, $\Delta_{1,2}=2\,T_{n-2}$. D'où $T_n=3T_{n-1}-2T_{n-2}$.
+
+\q{4.b)} Suite récurrente linéaire d'ordre 2 : $r^2=3r-2$, racines $1$ et $2$, donc $T_n=\lambda+\mu2^n$.
+$T_1=\lambda+2\mu=3$ et $T_2=\lambda+4\mu=7$ donnent $\mu=2$, $\lambda=-1$ :
+\[T_n=2^{n+1}-1.\]
+Contrôle : $T_3=3\times7-2\times3=15=2^4-1$.
+
+\q{5.} $\det A=\det(A^T)=\det(-A)=(-1)^3\det A=-\det A$, donc $\det A=0$ et $A$ n'est pas inversible. (La taille impaire est
+essentielle : $\pmat{0&-1\\1&0}$ est antisymétrique et inversible.)
+
+\q{6.a)} $\vv{AB}=(2,3)$, $\vv{AC}=(x-1,6)$. Alignés $\iff\det(\vv{AB},\vv{AC})=\dt{2&x-1\\3&6}=12-3(x-1)=15-3x=0\iff x=5$.
+
+\q{6.b)} Pour $x=1$ : $\det(\vv{AB},\vv{AC})=12$, donc l'aire vaut $\frac12|12|=6$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & $\det(\lambda A)=\lambda^n\det A$, $\det(AB)$, $\det A^T$, $\det A^{-1}$. &
+  $\det(3A)=6$ : piège classique $\lambda$ au lieu de $\lambda^n$. $\det(-A)=2$ : même lacune.\\
+1.b & Effet des opérations élémentaires ; multilinéarité. &
+  (ii) $\neq2$ : transvection mal comprise. (iii) $=2$ : la colonne modifiée a le coefficient $2$, confusion transvection/dilatation.\\
+2 & Repérer la structure (somme constante), opérations sur lignes et colonnes, factorisation ; inversibilité. &
+  Développement brutal ou par Sarrus étendu : méthode « regarder d'abord » absente. Racine $-3$ oubliée : factorisation incomplète.\\
+3 & Base $\iff\det\neq0$ ; Vandermonde. & Recalcul complet sans reconnaître Vandermonde : formule non connue.\\
+4.a & Développement selon une ligne, signes $(-1)^{i+j}$, mineurs. &
+  $T_n=3T_{n-1}+2T_{n-2}$ : signe du cofacteur oublié. Mineur mal identifié : technique du développement fragile.\\
+4.b & Suites récurrentes linéaires d'ordre 2. & Constantes calées sur $T_0$ sans le justifier, ou mal calculées : méthode des suites.\\
+5 & Propriétés globales : $\det A^T$, $\det(\lambda A)$ avec $n$ impair. &
+  Recherche d'une matrice générale à coefficients : réflexe « appliquer $\det$ à la relation » absent.\\
+6 & Alignement, aire : interprétation géométrique de $\det$. & Oubli du $\frac12$ ou de la valeur absolue : aire du parallélogramme / du triangle confondues.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-4)\relax=0
+% ======================================================================
+%  CHAPITRE 4 — COURBES PARAMÉTRÉES
+% ======================================================================
+\bilan{4}{Courbes paramétrées planes}{15 min}
+Le plan est rapporté à un repère orthonormé $(O,\ve\imath,\ve\jmath)$.
+
+\partie{Partie I --- Étude d'une courbe}
+On considère la courbe $\Gamma$ paramétrée par $f(t)=\big(t^2,\ t^3-3t\big)$, $t\in\R$. On note $M(t)$ le point de paramètre $t$.
+\begin{enumerate}
+\item Comparer $M(-t)$ et $M(t)$. Quelle symétrie de $\Gamma$ en déduit-on ? Sur quel intervalle suffit-il d'étudier $\Gamma$ ?
+\item Calculer $f'(t)$. La courbe a-t-elle des points stationnaires ? Donner la tangente à $\Gamma$ en $M(0)$ et en $M(1)$.
+\item Calculer $M(\sqrt3)$ et $M(-\sqrt3)$. Montrer que ce point est le seul point double de $\Gamma$, et donner les équations des
+      tangentes en ce point.
+\item Calculer $\det\big(f'(t),f''(t)\big)$. La courbe $\Gamma$ possède-t-elle des points d'inflexion ?
+\item Préciser la nature de la branche infinie de $\Gamma$ lorsque $t\to+\infty$.
+\end{enumerate}
+
+\partie{Partie II --- Asymptote}
+\begin{enumerate}[resume]
+\item Soit $h(t)=\left(t+\dfrac1t,\ t-\dfrac1t\right)$, $t>0$. Montrer que la droite $y=x$ est asymptote à la courbe quand
+      $t\to+\infty$, et préciser la position de la courbe par rapport à elle.
+\end{enumerate}
+
+\partie{Partie III --- Point stationnaire}
+\begin{enumerate}[resume]
+\item Soit $g(t)=\big(1-\cos t,\ t-\sin t\big)$. Vérifier que $g(0)$ est un point stationnaire. À l'aide de développements
+      limités, déterminer la nature de ce point et la tangente en ce point.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.} $M(-t)=\big(t^2,-t^3+3t\big)=\big(x(t),-y(t)\big)$ : $M(-t)$ est le symétrique de $M(t)$ par rapport à l'axe $(Ox)$.
+$\Gamma$ est symétrique par rapport à $(Ox)$ : on l'étudie pour $t\in[0,+\infty[$, puis on complète par cette symétrie.
+
+\q{2.} $f'(t)=\big(2t,\ 3(t^2-1)\big)$. $x'(t)=0$ seulement pour $t=0$, où $y'(0)=-3\neq0$ : aucun point stationnaire, la courbe est
+régulière.
+\begin{itemize}
+\item En $M(0)=O$ : $f'(0)=(0,-3)$, tangente verticale, c'est l'axe $(Oy)$. C'est cohérent : $O$ est sur l'axe de symétrie
+      $(Ox)$, la tangente y est perpendiculaire à l'axe.
+\item En $M(1)=(1,-2)$ : $f'(1)=(2,0)$, tangente horizontale $y=-2$.
+\end{itemize}
+
+\q{3.} $M(\sqrt3)=M(-\sqrt3)=(3,0)$ : c'est un point double.
+Unicité : si $f(t)=f(s)$ avec $t\neq s$, alors $t^2=s^2$ donne $s=-t$ (et $t\neq0$), puis $y(-t)=y(t)$, soit $-y(t)=y(t)$,
+donc $y(t)=t(t^2-3)=0$ et $t=\pm\sqrt3$.\\
+Tangentes : $f'(\sqrt3)=(2\sqrt3,6)$, colinéaire à $(1,\sqrt3)$ : $y=\sqrt3\,(x-3)$ ;
+$f'(-\sqrt3)=(-2\sqrt3,6)$, colinéaire à $(1,-\sqrt3)$ : $y=-\sqrt3\,(x-3)$ (symétriques l'une de l'autre par rapport à $(Ox)$).
+
+\q{4.} $f''(t)=(2,6t)$ et $\det(f',f'')=2t\cdot6t-3(t^2-1)\cdot2=6(t^2+1)>0$. Ce déterminant ne s'annule jamais : tout point est
+birégulier, il n'y a pas d'inflexion \prop{§2.4} ; la courbe est toujours du côté de $f''$ par rapport à sa tangente.
+
+\q{5.} Quand $t\to+\infty$, $x\to+\infty$ et $y\to+\infty$, et $\dfrac yx=t-\dfrac3t\to+\infty$ : branche parabolique de direction
+$(Oy)$ \prop{méth.~2.4}.
+
+\q{6.} Quand $t\to+\infty$, $x$ et $y$ tendent vers $+\infty$, $\dfrac yx=\dfrac{t^2-1}{t^2+1}\to1$, et
+$y-x=-\dfrac2t\to0$ : la droite $y=x$ est asymptote. Comme $y-x=-\frac2t<0$, la courbe est \emph{au-dessous} de son asymptote.
+
+\q{7.} $g'(t)=(\sin t,\ 1-\cos t)$, donc $g'(0)=\ve0$ : point stationnaire. \prop{méth.~2.2} En $0$ :
+\[g(h)=\left(\frac{h^2}2+o(h^3),\ \frac{h^3}6+o(h^3)\right)=O+h^2\,\ve a+h^3\,\ve b+o(h^3),\quad\ve a=\left(\tfrac12,0\right),\ \ve b=\left(0,\tfrac16\right).\]
+$\det(\ve a,\ve b)=\frac1{12}\neq0$ : $p=2$, $q=3$, donc \emph{point de rebroussement de première espèce}
+\prop{th.~2.5}. La tangente est dirigée par $\ve a$ : c'est l'axe $(Ox)$, d'équation $y=0$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1 & Symétries : relation entre $M(-t)$ et $M(t)$, réduction de l'intervalle. &
+  Symétrie par rapport à $(Oy)$ ou à $O$ : lecture du tableau des symétries.\\
+2 & Point régulier ou stationnaire ; tangente dirigée par $f'(t_0)$ ; tangente sur l'axe de symétrie. &
+  « $x'(0)=0$ donc stationnaire » : il faut que $x'$ et $y'$ s'annulent ensemble. Tangente horizontale/verticale inversée.\\
+3 & Points doubles : résoudre $f(t)=f(s)$, $t\neq s$ ; tangente en un point régulier. &
+  Seulement la vérification, pas l'unicité : méthode des points doubles. Équation fausse : écriture d'une tangente.\\
+4 & $\det(f',f'')$ ; birégularité ; inflexion = changement de signe. & « $f''\neq\ve0$ donc pas d'inflexion » : critère de colinéarité non compris.\\
+5 & Classification des branches infinies. & Asymptote annoncée sans calculer $\frac yx$ : méthode~2.4.\\
+6 & Asymptote oblique : $\lim\frac yx$, $\lim(y-\alpha x)$, position. &
+  Conclusion avec $\lim\frac yx=1$ seul : piège classique. Pas de position : signe de $y-x$ non exploité.\\
+7 & Point stationnaire par DL ; théorème $(p,q)$ ; tangente dirigée par le premier vecteur non nul. &
+  Tangente cherchée avec $g'(0)$ : piège. DL à un ordre insuffisant : méthode « jusqu'au premier vecteur non colinéaire ».\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-5)\relax=0
+% ======================================================================
+%  CHAPITRE 5 — MÉTRIQUE ET ENVELOPPES
+% ======================================================================
+\bilan{5}{Propriétés métriques et enveloppes}{13 min}
+Le plan est orienté et rapporté à un repère orthonormé direct.
+
+\partie{Partie I --- La spirale logarithmique}
+On considère la courbe $\Gamma$ paramétrée par $f(t)=\big(e^{t}\cos t,\ e^{t}\sin t\big)$, $t\in\R$.
+\begin{enumerate}
+\item Montrer que $f'(t)=\sqrt2\,e^{t}\big(\cos(t+\tfrac\pi4),\ \sin(t+\tfrac\pi4)\big)$. En déduire la vitesse $\|f'(t)\|$ et
+      une mesure $\alpha(t)$ de l'angle entre $\ve\imath$ et la tangente orientée.
+\item Calculer la longueur de l'arc $t\in[0,2\pi]$, puis l'abscisse curviligne $s(t)$ d'origine $M(0)$, orientée dans le sens des $t$
+      croissants.
+\item Déterminer le repère de Frenet $(\ve T,\ve N)$ en $M(t)$, la courbure $\gamma(t)$ et le rayon de courbure $R(t)$.
+\item
+  \begin{enumerate}
+  \item Montrer que le centre de courbure en $M(t)$ est $I(t)=e^{t}\big(-\sin t,\ \cos t\big)$.
+  \item En déduire que la développée de $\Gamma$ est l'image de $\Gamma$ par une transformation simple, que l'on précisera.
+  \item Rappeler le lien entre la développée d'une courbe et ses normales.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{Partie II --- Enveloppe}
+\begin{enumerate}[resume]
+\item Pour $t\in\R$, on considère la droite $\mathcal D_t\colon y=2tx-t^2$. Déterminer le point caractéristique de $\mathcal D_t$, puis
+      l'enveloppe de la famille $(\mathcal D_t)_{t\in\R}$, et reconnaître cette courbe.
+\item Vérifier que $\mathcal D_t$ est tangente à l'enveloppe en son point caractéristique.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.} $f'(t)=e^{t}\big(\cos t-\sin t,\ \sin t+\cos t\big)$. Or $\cos t-\sin t=\sqrt2\cos(t+\frac\pi4)$ et
+$\sin t+\cos t=\sqrt2\sin(t+\frac\pi4)$, d'où la forme annoncée. Comme $\sqrt2e^{t}>0$ :
+$\|f'(t)\|=\sqrt2\,e^{t}$ (la courbe est régulière) et $\alpha(t)=t+\frac\pi4$.
+
+\q{2.} $L=\displaystyle\int_0^{2\pi}\|f'(t)\|\,dt=\int_0^{2\pi}\sqrt2e^{t}\,dt=\sqrt2\,(e^{2\pi}-1)$, et
+$s(t)=\displaystyle\int_0^t\sqrt2e^{u}\,du=\sqrt2\,(e^{t}-1)$.
+
+\q{3.} $\ve T=\dfrac{f'}{\|f'\|}=\big(\cos(t+\tfrac\pi4),\sin(t+\tfrac\pi4)\big)$, et $\ve N$ s'obtient par rotation de $+\frac\pi2$ :
+$\ve N=\big(-\sin(t+\tfrac\pi4),\cos(t+\tfrac\pi4)\big)$.\\
+$\gamma=\dfrac{d\alpha}{ds}=\dfrac{\alpha'(t)}{s'(t)}=\dfrac1{\sqrt2\,e^{t}}=\dfrac{e^{-t}}{\sqrt2}>0$, et $R=\dfrac1\gamma=\sqrt2\,e^{t}$.\\
+\emph{Contrôle facultatif (hors programme)} : $\det(f',f'')=2e^{2t}$ et $\gamma=\dfrac{\det(f',f'')}{\|f'\|^3}=\dfrac{2e^{2t}}{2\sqrt2e^{3t}}$.
+
+\q{4.a)} $I=M+R\ve N=e^{t}(\cos t,\sin t)+e^{t}\big(-\sqrt2\sin(t+\tfrac\pi4),\ \sqrt2\cos(t+\tfrac\pi4)\big)$. Avec
+$\sqrt2\sin(t+\frac\pi4)=\sin t+\cos t$ et $\sqrt2\cos(t+\frac\pi4)=\cos t-\sin t$ :
+\[I(t)=e^{t}\big(\cos t-\sin t-\cos t,\ \sin t+\cos t-\sin t\big)=e^{t}\big(-\sin t,\ \cos t\big).\]
+
+\q{4.b)} $(-\sin t,\cos t)=\big(\cos(t+\frac\pi2),\sin(t+\frac\pi2)\big)$ : $I(t)$ est l'image de $M(t)$ par la rotation de centre $O$ et
+d'angle $\frac\pi2$. La développée de $\Gamma$ est l'image de $\Gamma$ par cette rotation : c'est encore une spirale logarithmique.
+
+\q{4.c)} La développée est l'enveloppe des normales : le centre de courbure $I(t)$ est le point caractéristique de la normale en $M(t)$.
+
+\q{5.} $\mathcal D_t\colon 2tx-y=t^2$. On dérive par rapport à $t$, $x$ et $y$ fixés \prop{méth.\ enveloppe} : $2x=2t$. Le système
+donne $x=t$ et $y=2t^2-t^2=t^2$. Le point caractéristique est $(t,t^2)$ ; l'enveloppe est la parabole $y=x^2$.
+
+\q{6.} La tangente à la parabole $y=x^2$ au point d'abscisse $t$ a pour équation $y=t^2+2t(x-t)=2tx-t^2$ : c'est exactement $\mathcal D_t$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1 & Mise sous la forme $f'=v(\cos\alpha,\sin\alpha)$ ; vitesse, angle de la tangente. &
+  Formules $\cos t-\sin t=\sqrt2\cos(t+\frac\pi4)$ non retrouvées : trigonométrie. $\alpha=t$ : confusion angle polaire/angle de la tangente.\\
+2 & Longueur $\int\|f'\|$, abscisse curviligne. & $\int f'$ au lieu de $\int\|f'\|$, ou mauvaise origine : définition de $s$ mal sue.\\
+3 & Repère de Frenet ($\ve N$ par rotation de $+\frac\pi2$), $\gamma=\frac{d\alpha}{ds}$, $R=\frac1\gamma$. &
+  $\gamma=\alpha'(t)$ : oubli de la division par $\frac{ds}{dt}$. Signe de $\ve N$ : orientation.\\
+4.a & Centre de courbure $I=M+R\ve N$. & Formule $I=M+\ve N/R$ : confusion courbure/rayon.\\
+4.b & Interprétation géométrique d'un paramétrage. & Pas de reconnaissance de la rotation : lecture géométrique des coordonnées.\\
+4.c & Développée = enveloppe des normales. & Ignoré : lien entre les deux parties du chapitre non fait.\\
+5 & Point caractéristique : équation et sa dérivée par rapport au paramètre, système $2\times2$. &
+  Dérivation par rapport à $x$ : méthode non comprise.\\
+6 & Définition de l'enveloppe : tangence au point caractéristique. & Pas de vérification : la définition (tangence) n'est pas connue.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+
+\fi
+\end{document}
