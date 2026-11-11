@@ -61,7 +61,7 @@
 
 \pagestyle{fancy}\fancyhf{}
 \fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
-\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche Algèbre linéaire et réduction}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche Réduction}
 \fancyfoot[C]{\scriptsize\sffamily\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 
@@ -71,99 +71,46 @@
 
 \newcommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\Sp}{\operatorname{Sp}}
 \newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
-\hypersetup{pdftitle={Le Collé — fiche de référence : algèbre linéaire et réduction}}
+\hypersetup{pdftitle={Le Collé — fiche de référence : réduction}}
 \begin{document}
 \thispagestyle{empty}
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
-{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 2}}\par\smallskip
-{\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Algèbre linéaire et réduction}\par\smallskip
-{\color{white!85!Bleu}\sffamily compléments, éléments propres, diagonalisation, trigonalisation, pièges et résultats du TD}\vspace{0.4em}}}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 3}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Réduction}\par\smallskip
+{\color{white!85!Bleu}\sffamily éléments propres, polynôme caractéristique, diagonalisation, trigonalisation, pièges et résultats du TD}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
-mêmes notations que la présentation et le livre ; \livre{th.~1.27} renvoie au livre, \livre{TD~13} à l'exercice~13 du TD complet.
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
+mêmes notations que la présentation et le livret ; \livre{th.~1.13} renvoie au livret, \livre{TD~8} à l'exercice~8 du TD complet.
+Les outils du chapitre~1 (sommes directes, trace, sous-espaces stables) sont sur la fiche \emph{Algèbre linéaire}.
 $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
-1.1 Matrices semblables, sommes directes, trace, hyperplans \dotfill\pageref{n11}\\
-1.2 Sous-espaces stables \dotfill\pageref{n12}\\
-1.3 Éléments propres \dotfill\pageref{n13}\\
-1.4 Polynôme caractéristique \dotfill\pageref{n14}\\
-1.5 Diagonalisation \dotfill\pageref{n15}\\
-1.6 Applications \dotfill\pageref{n16}\\
-1.7 Trigonalisation \dotfill\pageref{n17}\\
-1.8 Quelle méthode ? Pièges ; résultats du TD \dotfill\pageref{n18}\\
+1.1 Éléments propres \dotfill\pageref{n11}\\
+1.2 Polynôme caractéristique \dotfill\pageref{n12}\\
+1.3 Diagonalisation \dotfill\pageref{n13}\\
+1.4 Applications \dotfill\pageref{n14}\\
+1.5 Trigonalisation \dotfill\pageref{n15}\\
+1.6 Quelle méthode ? Pièges ; résultats du TD \dotfill\pageref{n16}\\
 \end{tabular}}
 
 \vspace{0.6em}
-\pdfbookmark[0]{Chapitre 2 --- Algèbre linéaire et réduction}{chap2}\markboth{Chapitre 2 --- Algèbre linéaire et réduction}{}
+\pdfbookmark[0]{Chapitre 3 --- Réduction}{chap3}\markboth{Chapitre 3 --- Réduction}{}
 \begin{multicols}{2}\raggedcolumns
 % ======================================================================
-\notion{1.1 Semblables, sommes directes, trace, hyperplans}\label{n11}
+\notion{1.1 Éléments propres}\label{n11}
 
-\begin{FORM}[CHANGEMENT DE BASE \livre{prop.~1.1}]
-$P$ = matrice de passage de $\mathcal B$ à $\mathcal B'$ (colonnes : $\mathcal B'$ dans $\mathcal B$) :
-\[\Mat_{\mathcal B'}(f)=P^{-1}\Mat_{\mathcal B}(f)\,P.\]
-$A$, $B$ \emph{semblables} : $B=P^{-1}AP$. Mêmes rang, $\det$, $\tr$, $\chi$, valeurs propres (avec multiplicités).
-\end{FORM}
-
-\begin{PROP}[SOMME DIRECTE \livre{prop.~1.4, th.~1.5}]
-$F_1+\dots+F_p$ directe $\iff$ ($x_1+\dots+x_p=0$, $x_i\in F_i\Rightarrow$ tous nuls).\\
-$p=2$ : $F\cap G=\{0\}$.\\
-Base adaptée : concaténation des bases ; $\dim\bigoplus F_i=\sum\dim F_i$.\\
-$E=F\oplus G\iff F\cap G=\{0\}$ et $\dim F+\dim G=n$.
-\end{PROP}
-\begin{PIEGE}
-$p\geq3$ : intersections deux à deux nulles $\not\Rightarrow$ directe ($\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$).
-\end{PIEGE}
-
-\begin{FORM}[TRACE \livre{prop.~1.7}]
-$\tr A=\sum a_{i,i}$, linéaire ; $\tr(AB)=\tr(BA)$ ; $\tr(P^{-1}AP)=\tr A$ ; $\tr f$ indépendante de la base.\\
-Projecteur : $\tr p=\rg p$. \ $AB-BA=I_n$ impossible \livre{TD~8}.\\
-$\tr(ABC)=\tr(CAB)$ mais $\neq\tr(BAC)$ en général.
-\end{FORM}
-
-\begin{PROP}[HYPERPLANS \livre{prop.~1.10}]
-Hyperplan : supplémentaire d'une droite, dimension $n-1$ ; $=\Ker\varphi$, $\varphi$ forme linéaire non nulle ; équation
-$a_1x_1+\dots+a_nx_n=0$.\\
-$u\notin H\Rightarrow E=H\oplus\vect(u)$.\\
-$p$ hyperplans : intersection de dimension $\geq n-p$ ; sous-espace de dimension $n-p$ = $p$ équations.
-\end{PROP}
-
-% ======================================================================
-\notion{1.2 Sous-espaces stables}\label{n12}
-
-\begin{DEF}
-$F$ stable : $f(F)\subset F$ ; induit $f_F\in\mathcal L(F)$. Vérifier $f(e_j)\in F$ sur une base de $F$.\\
-$f\circ g=g\circ f\Rightarrow\Ker g$, $\Im g$ stables par $f$.
-\end{DEF}
-
-\begin{PROP}[BLOCS \livre{th.~1.13}]
-Base adaptée à $F$ ($\dim F=p$) : $F$ stable $\iff\Mat(f)=\begin{pmatrix}A&B\\0&C\end{pmatrix}$, $A=\Mat(f_F)$.\\
-$E=F\oplus G$, les deux stables $\iff\begin{pmatrix}A&0\\0&C\end{pmatrix}$.\\
-$\det f=\det A\det C$, \ $\tr f=\tr A+\tr C$.
-\end{PROP}
-
-\begin{FORM}[PROJECTEURS, SYMÉTRIES]
-$p^2=p$ : $E=\Im p\oplus\Ker p$, $\Mat=\mathrm{diag}(I_r,0)$.\\
-$s^2=\Id$ : $E=\Ker(s-\Id)\oplus\Ker(s+\Id)$, $\Mat=\mathrm{diag}(I_r,-I_{n-r})$.\\
-Droite $\vect(u)$ stable $\iff f(u)=\lambda u$ \livre{prop.~1.14}.
-\end{FORM}
-
-% ======================================================================
-\notion{1.3 Éléments propres}\label{n13}
-
-\begin{DEF}[\livre{déf.~1.15}]
+\begin{DEF}[\livre{déf.~1.1}]
 $\lambda$ valeur propre : $\exists x\neq0$, $f(x)=\lambda x$ ; $x$ vecteur propre (\emph{non nul}).\\
 $E_\lambda(f)=\Ker(f-\lambda\Id_E)$, stable ; $\neq\{0\}\iff\lambda\in\Sp(f)$. \ $E_0=\Ker f$.\\
 Matrice : $AX=\lambda X$, $E_\lambda(A)$, $\Sp(A)$.\\
 Dérivation sur $\mathcal C^\infty$ : $E_\lambda=\vect(e^{\lambda t})$ ; $P\mapsto XP'$ : $X^k$, valeur $k$.
 \end{DEF}
 
-\begin{PROP}[SOMME DIRECTE \livre{th.~1.18}]
+\begin{PROP}[SOMME DIRECTE \livre{th.~1.4}]
 Sous-espaces propres pour des valeurs distinctes : somme directe. Vecteurs propres de valeurs distinctes : famille libre.\\
-Au plus $n$ valeurs propres \livre{cor.~1.19}.
+Au plus $n$ valeurs propres \livre{cor.~1.5}.
 \end{PROP}
 
 \begin{METH}{Sous-espace propre \livre{méth.~1.1}}
@@ -175,16 +122,16 @@ $\Sp_\R(A)\subset\Sp_\C(A)$ : la rotation $\begin{pmatrix}0&-1\\1&0\end{pmatrix}
 \end{PIEGE}
 
 % ======================================================================
-\notion{1.4 Polynôme caractéristique}\label{n14}
+\notion{1.2 Polynôme caractéristique}\label{n12}
 
-\begin{FORM}[DÉFINITION \livre{prop.~1.21}]
+\begin{FORM}[DÉFINITION \livre{prop.~1.7}]
 $\chi_A(x)=\det(xI_n-A)$, unitaire, degré $n$ :
 \[\chi_A=x^n-\tr(A)x^{n-1}+\dots+(-1)^n\det A.\]
 $n=2$ : $\chi_A=x^2-\tr(A)\,x+\det A$.\\
 $\Sp(A)$ = racines de $\chi_A$ dans $\K$ ; semblables $\Rightarrow$ même $\chi$ ; triangulaire : valeurs propres = diagonale.
 \end{FORM}
 
-\begin{PROP}[MULTIPLICITÉ \livre{th.~1.24}]
+\begin{PROP}[MULTIPLICITÉ \livre{th.~1.10}]
 $m(\lambda)$ = multiplicité comme racine de $\chi_f$.\quad $1\leq\dim E_\lambda\leq m(\lambda)$.\\
 Valeur propre simple $\Rightarrow\dim E_\lambda=1$.\\
 Preuve : base adaptée à $E_\lambda$ : $\begin{pmatrix}\lambda I_d&B\\0&C\end{pmatrix}$, $\chi_f=(x-\lambda)^d\chi_C$.
@@ -201,17 +148,17 @@ $\det(A-xI_n)=(-1)^n\chi_A(x)$ : mêmes racines, mais ce n'est pas $\chi_A$ si $
 \end{PIEGE}
 
 % ======================================================================
-\notion{1.5 Diagonalisation}\label{n15}
+\notion{1.3 Diagonalisation}\label{n13}
 
 \begin{DEF}
 $f$ diagonalisable : base de vecteurs propres. $A$ diagonalisable : $A=PDP^{-1}$, colonnes de $P$ = vecteurs propres, $D$ = valeurs
 propres \emph{dans le même ordre}.
 \end{DEF}
 
-\begin{PROP}[CRITÈRES \livre{th.~1.27}]
+\begin{PROP}[CRITÈRES \livre{th.~1.13}]
 $f$ diagonalisable $\iff E=\bigoplus E_\lambda\iff\sum\dim E_\lambda=n$\\
 $\iff\chi_f$ scindé et $\dim E_\lambda=m(\lambda)$ pour tout $\lambda$.\\
-$n$ valeurs propres distinctes $\Rightarrow$ diagonalisable \livre{cor.~1.28} (réciproque fausse : $I_n$).\\
+$n$ valeurs propres distinctes $\Rightarrow$ diagonalisable \livre{cor.~1.14} (réciproque fausse : $I_n$).\\
 Une seule valeur propre $\lambda$ et diagonalisable $\Rightarrow A=\lambda I_n$.\\
 Projecteurs, symétries : diagonalisables.
 \end{PROP}
@@ -232,9 +179,9 @@ $\begin{pmatrix}2&1\\-1&4\end{pmatrix}$ : $(x-3)^2$, $\dim E_3=1$ : non.
 \end{FORM}
 
 % ======================================================================
-\notion{1.6 Applications}\label{n16}
+\notion{1.4 Applications}\label{n14}
 
-\begin{FORM}[PUISSANCES \livre{prop.~1.33}]
+\begin{FORM}[PUISSANCES \livre{prop.~1.19}]
 $A=PDP^{-1}\Rightarrow A^k=PD^kP^{-1}$, $D^k=\mathrm{diag}(\lambda_i^k)$ ; $k\in\Z$ si $A$ inversible.\\
 $\begin{pmatrix}1&2\\2&1\end{pmatrix}^k=\frac12\begin{pmatrix}3^k+(-1)^k&3^k-(-1)^k\\3^k-(-1)^k&3^k+(-1)^k\end{pmatrix}$.
 \end{FORM}
@@ -245,7 +192,7 @@ Ordre 3 : $X_k=(u_k,u_{k+1},u_{k+2})$, matrice compagnon ; racines distinctes $\
 \end{METH}
 
 \begin{METH}{Équations matricielles}
-$D$ diagonale à coefficients distincts : $MD=DM\iff M$ diagonale \livre{prop.~1.35}.\\
+$D$ diagonale à coefficients distincts : $MD=DM\iff M$ diagonale \livre{prop.~1.21}.\\
 $A=PDP^{-1}$ : poser $N=P^{-1}MP$. $M^2=A$ ($3$ valeurs propres $>0$ distinctes) : $8$ solutions.\\
 $AB=BA$ : les $E_\lambda(A)$ sont stables par $B$.
 \end{METH}
@@ -254,9 +201,9 @@ Polynômes d'endomorphismes (polynôme annulateur, minimal) ; systèmes $X'=AX$ 
 \end{HPBOX}
 
 % ======================================================================
-\notion{1.7 Trigonalisation}\label{n17}
+\notion{1.5 Trigonalisation}\label{n15}
 
-\begin{PROP}[\livre{th.~1.37, prop.~1.38}]
+\begin{PROP}[\livre{th.~1.23, prop.~1.24}]
 Trigonalisable $\iff\chi$ scindé (admis). Toute $A\in\Mn{\C}$ est trigonalisable.\\
 $\chi_A=\prod(x-\lambda_i)$ (avec multiplicités) :
 \[\tr A=\sum\lambda_i,\qquad\det A=\prod\lambda_i.\]
@@ -264,19 +211,17 @@ $\chi_A=\prod(x-\lambda_i)$ (avec multiplicités) :
 
 \begin{ASTU}
 $2\times2$ : $\tr$ et $\det$ donnent les deux valeurs propres.\\
-$\rg A=1$ : $0$ d'ordre $\geq n-1$, et la dernière est $\tr A$ ; diagonalisable $\iff\tr A\neq0$ \livre{TD~27}.\\
+$\rg A=1$ : $0$ d'ordre $\geq n-1$, et la dernière est $\tr A$ ; diagonalisable $\iff\tr A\neq0$ \livre{TD~22}.\\
 $A^p=0$ : $\Sp_\C(A)=\{0\}$, $\chi_A=x^n$, $\tr A=0$ ; diagonalisable $\iff A=0$.
 \end{ASTU}
 
 % ======================================================================
-\notion{1.8 Quelle méthode ? Pièges ; résultats du TD}\label{n18}
+\notion{1.6 Quelle méthode ? Pièges ; résultats du TD}\label{n16}
 
 {\small\renewcommand{\arraystretch}{1.12}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
 \hline
 \textbf{Question} & \textbf{Méthode}\\\hline
-$E=F\oplus G$ ? & intersection nulle + dimensions\\
-$F$ stable ? & images d'une base de $F$ ; blocs\\
 $\lambda$ valeur propre ? & $\rg(A-\lambda I)<n$\\
 valeurs propres & $\chi_A$ factorisé ; $\tr$, $\det$\\
 diagonalisable ? & distinctes ; sinon $\dim E_\lambda=m(\lambda)$\\
@@ -293,19 +238,19 @@ Vecteurs propres en \emph{colonnes}, dans l'ordre de $D$. $A=PDP^{-1}$, pas $P^{
 \renewcommand{\arraystretch}{1.12}
 \begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
 TD2 & $E_2=\vect(1,2)$, $E_{-3}=\vect(1,1)$ : $A=\begin{pmatrix}-8&5\\-10&7\end{pmatrix}$.\\
-TD7 & $\begin{pmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{pmatrix}$ : $(x+1)(x-2)^2$, diagonalisable.\\
-TD11 & $(X+1)P'$ : $(X+1)^k$, valeur $k$.\\
-TD12 & $\begin{pmatrix}1&a&1\\0&1&1\\0&0&2\end{pmatrix}$ diagonalisable $\iff a=0$.\\
-TD14 & anti-diagonale : symétrie, $\dim E_1=\lceil\frac n2\rceil$.\\
-TD15 & $M\mapsto M^T$ : $\mathcal S_n\oplus\mathcal A_n$, $\tr=n$.\\
-TD17 & transition : $A^k\to\frac1{p+q}\begin{pmatrix}q&q\\p&p\end{pmatrix}$.\\
-TD18 & $J_n$ : $\{0,n\}$ ; $\det(aI+bJ)=a^{n-1}(a+nb)$.\\
-TD20 & circulante : $\det=\prod_{\omega^3=1}(a+b\omega+c\omega^2)$.\\
-TD21 & $nXP-(X^2-1)P'$ : $(X-1)^k(X+1)^{n-k}$, valeur $n-2k$.\\
-TD23 & $\Sp(AB)=\Sp(BA)$.\\
-TD24 & $(f-3\Id)(f+2\Id)=0\Rightarrow$ diagonalisable.\\
-TD26 & $T\sim\begin{pmatrix}1&0&0\\0&2&1\\0&0&2\end{pmatrix}$, non diagonalisable.\\
-TD28 & $u_k=1+(-1)^k+2^k$.
+TD4 & $(X+1)P'$ : $(X+1)^k$, valeur $k$.\\
+TD5 & $\begin{pmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{pmatrix}$ : $(x+1)(x-2)^2$, diagonalisable.\\
+TD7 & $\begin{pmatrix}1&a&1\\0&1&1\\0&0&2\end{pmatrix}$ diagonalisable $\iff a=0$.\\
+TD9 & anti-diagonale : symétrie, $\dim E_1=\lceil\frac n2\rceil$.\\
+TD10 & $M\mapsto M^T$ : $\mathcal S_n\oplus\mathcal A_n$, $\tr=n$.\\
+TD12 & transition : $A^k\to\frac1{p+q}\begin{pmatrix}q&q\\p&p\end{pmatrix}$.\\
+TD13 & $J_n$ : $\{0,n\}$ ; $\det(aI+bJ)=a^{n-1}(a+nb)$.\\
+TD15 & circulante : $\det=\prod_{\omega^3=1}(a+b\omega+c\omega^2)$.\\
+TD16 & $nXP-(X^2-1)P'$ : $(X-1)^k(X+1)^{n-k}$, valeur $n-2k$.\\
+TD18 & $\Sp(AB)=\Sp(BA)$.\\
+TD19 & $(f-3\Id)(f+2\Id)=0\Rightarrow$ diagonalisable.\\
+TD21 & $T\sim\begin{pmatrix}1&0&0\\0&2&1\\0&0&2\end{pmatrix}$, non diagonalisable.\\
+TD23 & $u_k=1+(-1)^k+2^k$.
 \end{tabular}}
 
 \end{multicols}

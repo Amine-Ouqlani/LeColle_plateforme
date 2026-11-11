@@ -484,3 +484,148 @@ $\Phi_A^2(E_{2,1})=\Phi_A(E_{1,1}-E_{2,2})=-2E_{1,2}$ et $\Phi_A^2$ s'annule sur
 $\Phi_A$ serait nul ; or $\Phi_A(E_{1,1})\neq0$. Donc $\Phi_A$ n'est pas diagonalisable : la diagonalisabilité de $A$ est essentielle en partie~B.
 \retenir{conjuguer par $P$ transporte tout : éléments propres, trace, diagonalisabilité.}
 \end{corrige}
+
+% =====================================================================
+%                 ALGÈBRE LINÉAIRE — sélection de 5 problèmes
+% =====================================================================
+
+\begin{exo}{sel-al-r4}{2}{deux plans supplémentaires de $\R^4$, une projection, une symétrie}
+Dans $E=\R^4$, on note $F$ l'ensemble des $(x,y,z,t)$ tels que $x+y+z+t=0$ et $x-y+z-t=0$, et $G=\vect(a,b)$ avec
+$a=(1,1,1,1)$ et $b=(1,-1,1,-1)$.
+\begin{enumerate}
+\item Justifier que $F$ est un sous-espace de dimension au moins $2$, puis en donner une base et la dimension.
+\item Montrer que $E=F\oplus G$.
+\item Soit $p$ la projection sur $F$ parallèlement à $G$. Pour $v=(x,y,z,t)$, on écrit $v=w+\alpha a+\beta b$ avec $w\in F$.
+Calculer $\alpha$ et $\beta$, puis la matrice de $p$ dans la base canonique.
+\item Vérifier que $\tr p=\rg p$. Écrire la matrice de la symétrie $s$ par rapport à $F$ parallèlement à $G$ et décrire $s(x,y,z,t)$.
+\item Donner un système d'équations de $G$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-al-r4}
+\choix{$F$ est une intersection de deux hyperplans : on obtient sa dimension, puis une projection se calcule en ne cherchant que la
+composante sur $G$.}
+\q{1.} $F$ est l'intersection de deux hyperplans de $\R^4$ : c'est un sous-espace de dimension au moins $4-2=2$. En ajoutant et en
+retranchant les équations : $x+z=0$ et $y+t=0$. Donc $F=\{(x,y,-x,-y)\}=\vect\big((1,0,-1,0),(0,1,0,-1)\big)$, de dimension $2$.
+\q{2.} Si $\alpha a+\beta b\in F$ : la première équation donne $4\alpha=0$, la seconde $4\beta=0$. Donc $F\cap G=\{0\}$ ; comme
+$a$ et $b$ ne sont pas proportionnels, $\dim G=2$, et $\dim F+\dim G=4$ : $E=F\oplus G$.
+\q{3.} Notons $\varphi_1(v)=x+y+z+t$ et $\varphi_2(v)=x-y+z-t$. On a $\varphi_1(a)=4$, $\varphi_1(b)=0$, $\varphi_2(a)=0$,
+$\varphi_2(b)=4$, et $\varphi_1(w)=\varphi_2(w)=0$. En appliquant $\varphi_1$ puis $\varphi_2$ à $v=w+\alpha a+\beta b$ :
+$\alpha=\frac{x+y+z+t}4$, $\beta=\frac{x-y+z-t}4$. Alors $p(v)=v-\alpha a-\beta b=\big(\frac{x-z}2,\frac{y-t}2,\frac{z-x}2,\frac{t-y}2\big)$ et
+\[\Mat(p)=\frac12\begin{pmatrix}1&0&-1&0\\0&1&0&-1\\-1&0&1&0\\0&-1&0&1\end{pmatrix}.\]
+\q{4.} $\tr p=\frac12\times4=2=\dim F=\rg p$. Puis $s=2p-\Id$ : $\Mat(s)=\begin{pmatrix}0&0&-1&0\\0&0&0&-1\\-1&0&0&0\\0&-1&0&0\end{pmatrix}$,
+soit $s(x,y,z,t)=(-z,-t,-x,-y)$. Contrôle : $s\circ s=\Id$, $s(a)=-a$, $s(b)=-b$, et $s$ fixe $(1,0,-1,0)$.
+\q{5.} $a$ et $b$ vérifient $x=z$ et $y=t$ ; ces deux équations indépendantes définissent un sous-espace de dimension $2$ qui contient
+$G$ : c'est $G$.
+\retenir{une forme linéaire nulle sur $F$ « lit » la composante sur $G$ : c'est la façon la plus rapide de calculer une projection.}
+\end{corrige}
+
+\begin{exo}{sel-al-lagrange}{2}{les polynômes interpolateurs de Lagrange}
+Soit $n\in\N$ et $a_0,\dots,a_n$ des réels deux à deux distincts. On considère $\varphi:\R_n[X]\to\R^{n+1}$,
+$P\mapsto\big(P(a_0),\dots,P(a_n)\big)$, et l'on note $(\varepsilon_0,\dots,\varepsilon_n)$ la base canonique de $\R^{n+1}$.
+\begin{enumerate}
+\item Montrer que $\varphi$ est linéaire et injective. En déduire que c'est un isomorphisme.
+\item En déduire que pour tous réels $b_0,\dots,b_n$, il existe un unique polynôme $P$ de degré au plus $n$ tel que $P(a_i)=b_i$
+pour tout $i$.
+\item On pose $L_i=\varphi^{-1}(\varepsilon_i)$. Montrer que $L_i=\prod_{j\neq i}\frac{X-a_j}{a_i-a_j}$.
+\item Montrer que $(L_0,\dots,L_n)$ est une base de $\R_n[X]$ et que les coordonnées de $P$ dans cette base sont $P(a_0),\dots,P(a_n)$.
+\item Pour $i$ fixé, montrer que $H_i=\{P\in\R_n[X],\ P(a_i)=0\}$ est un hyperplan, puis que $\bigcap_{j\neq i}H_j=\vect(L_i)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-al-lagrange}
+\choix{un isomorphisme entre espaces de même dimension finie s'obtient par l'injectivité seule (théorème du rang).}
+\q{1.} $\varphi(\lambda P+Q)=\lambda\varphi(P)+\varphi(Q)$ coordonnée par coordonnée. Si $\varphi(P)=0$, $P$ a les $n+1$ racines distinctes
+$a_0,\dots,a_n$ et est de degré au plus $n$ : $P=0$. Donc $\Ker\varphi=\{0\}$ ; comme $\dim\R_n[X]=n+1=\dim\R^{n+1}$, $\varphi$ est un
+isomorphisme.
+\q{2.} C'est la surjectivité (existence) et l'injectivité (unicité) de $\varphi$, appliquées à $(b_0,\dots,b_n)$.
+\q{3.} Le polynôme $Q_i=\prod_{j\neq i}\frac{X-a_j}{a_i-a_j}$ est de degré $n$, s'annule en chaque $a_j$, $j\neq i$, et vaut $1$ en $a_i$ :
+$\varphi(Q_i)=\varepsilon_i$, donc $Q_i=L_i$ par injectivité.
+\q{4.} L'image d'une base par un isomorphisme est une base : $(L_0,\dots,L_n)=\varphi^{-1}(\varepsilon_0,\dots,\varepsilon_n)$ est une base.
+Si $P=\sum\lambda_iL_i$, en évaluant en $a_k$ : $P(a_k)=\lambda_k$. Donc $P=\sum_{i=0}^nP(a_i)L_i$.
+\q{5.} $P\mapsto P(a_i)$ est une forme linéaire non nulle ($1\mapsto1$) : $H_i$ est un hyperplan. Si $P\in\bigcap_{j\neq i}H_j$, ses
+coordonnées $P(a_j)$, $j\neq i$, sont nulles : $P=P(a_i)L_i\in\vect(L_i)$ ; réciproquement $L_i$ s'annule en chaque $a_j$, $j\neq i$.
+L'intersection de ces $n$ hyperplans est une droite : sa dimension $1=(n+1)-n$ est la plus petite possible.
+\retenir{coordonnées dans la base de Lagrange $=$ valeurs aux points d'interpolation.}
+\end{corrige}
+
+\begin{exo}{sel-al-trace}{3}{la trace et les commutateurs}
+Soit $n\geq2$. On note $\mathcal T=\{M\in\Mn{\K},\ \tr M=0\}$ et $(E_{i,j})$ la base canonique de $\Mn{\K}$ ; on rappelle que
+$E_{i,j}E_{k,l}=E_{i,l}$ si $j=k$, et $0$ sinon.
+\begin{enumerate}
+\item Montrer que $\mathcal T$ est un hyperplan de $\Mn{\K}$, et que les matrices $E_{i,j}$ ($i\neq j$) et $E_{i,i}-E_{n,n}$ ($i<n$) en
+forment une base.
+\item Pour $i\neq j$, calculer $E_{i,i}E_{i,j}-E_{i,j}E_{i,i}$ et $E_{i,j}E_{j,i}-E_{j,i}E_{i,j}$.
+\item On appelle \emph{commutateur} toute matrice de la forme $AB-BA$. Montrer que le sous-espace engendré par les commutateurs est
+exactement $\mathcal T$.
+\item En déduire à nouveau qu'il n'existe pas de matrices $A$, $B$ telles que $AB-BA=I_n$. Existe-t-il $A$, $B$ telles que
+$AB-BA=E_{1,2}$ ?
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-al-trace}
+\q{1.} La trace est une forme linéaire non nulle : $\mathcal T$ est un hyperplan, de dimension $n^2-1$. Les $n^2-n$ matrices $E_{i,j}$
+($i\neq j$) et les $n-1$ matrices $E_{i,i}-E_{n,n}$ sont de trace nulle, au nombre de $n^2-1$. Elles forment une famille libre : dans
+une combinaison nulle, le coefficient $(i,j)$, $i\neq j$, donne le coefficient de $E_{i,j}$, et le coefficient $(i,i)$, $i<n$, celui de
+$E_{i,i}-E_{n,n}$. C'est donc une base de $\mathcal T$.
+\q{2.} $E_{i,i}E_{i,j}=E_{i,j}$ et $E_{i,j}E_{i,i}=0$ ($j\neq i$) : le premier commutateur vaut $E_{i,j}$. Ensuite $E_{i,j}E_{j,i}=E_{i,i}$
+et $E_{j,i}E_{i,j}=E_{j,j}$ : le second vaut $E_{i,i}-E_{j,j}$.
+\q{3.} Tout commutateur est dans $\mathcal T$, car $\tr(AB)=\tr(BA)$ : le sous-espace engendré est contenu dans $\mathcal T$. Par la
+question 2, chaque vecteur de la base de $\mathcal T$ de la question 1 est un commutateur : le sous-espace engendré contient $\mathcal T$.
+\q{4.} $\tr I_n=n\neq0$ : $I_n\notin\mathcal T$, donc $I_n$ n'est pas un commutateur. En revanche $E_{1,2}=E_{1,1}E_{1,2}-E_{1,2}E_{1,1}$.
+\retenir{les commutateurs engendrent exactement l'hyperplan des matrices de trace nulle.}
+\end{corrige}
+
+\begin{exo}{sel-al-carre}{4}{les endomorphismes de carré nul}
+Soit $E$ de dimension finie $n\geq1$ et $f\in\LE$ tel que $f\circ f=0$ et $f\neq0$. On note $r=\rg f$.
+\begin{enumerate}
+\item Montrer que $\Im f\subset\Ker f$, puis que $r\leq\frac n2$.
+\item Soit $(v_1,\dots,v_r)$ une famille telle que $\big(f(v_1),\dots,f(v_r)\big)$ soit une base de $\Im f$, que l'on complète en une base
+$\big(f(v_1),\dots,f(v_r),w_1,\dots,w_{n-2r}\big)$ de $\Ker f$. Montrer que
+$\mathcal B=\big(f(v_1),\dots,f(v_r),w_1,\dots,w_{n-2r},v_1,\dots,v_r\big)$ est une base de $E$.
+\item Écrire la matrice de $f$ dans $\mathcal B$ (par blocs) et en déduire $\tr f$.
+\item Exemple : $f$ de matrice $A=\begin{pmatrix}2&-1&1\\2&-1&1\\-2&1&-1\end{pmatrix}$ dans la base canonique de $\R^3$. Vérifier que $A^2=0$
+et donner une base de $\R^3$ dans laquelle la matrice de $f$ n'a qu'un coefficient non nul.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-al-carre}
+\choix{tout repose sur $\Im f\subset\Ker f$ et le théorème du rang ; la base est construite « en remontant » de l'image vers ses antécédents.}
+\q{1.} Pour $y=f(x)$, $f(y)=f\circ f(x)=0$ : $\Im f\subset\Ker f$. Donc $r\leq\dim\Ker f=n-r$ (théorème du rang), soit $r\leq\frac n2$.
+\q{2.} $\mathcal B$ a $r+(n-2r)+r=n$ vecteurs ; montrons qu'elle est libre. Si
+$\sum\lambda_if(v_i)+\sum\mu_kw_k+\sum\nu_iv_i=0$, on applique $f$ : les deux premières sommes sont dans $\Ker f$, donc
+$\sum\nu_if(v_i)=0$, et $\nu_i=0$ (base de $\Im f$). Il reste une combinaison nulle de la base de $\Ker f$ : tous les coefficients
+sont nuls. Famille libre de $n$ vecteurs : c'est une base.
+\q{3.} $f$ envoie les $n-r$ premiers vecteurs (dans $\Ker f$) sur $0$ et $v_i$ sur $f(v_i)$, le $i$-ième vecteur de $\mathcal B$ :
+\[\Mat_{\mathcal B}(f)=\begin{pmatrix}0&0&I_r\\0&0&0\\0&0&0\end{pmatrix}\quad\text{(blocs de tailles $r$, $n-2r$, $r$)},\qquad\tr f=0.\]
+\q{4.} Les lignes de $A$ sont proportionnelles à $(2,-1,1)$ et la colonne $(2,2,-2)$ vérifie $2\cdot2-2-2=0$ : $A^2=0$. $\Ker f$ est le
+plan $2x-y+z=0$, $\Im f=\vect(u)$ avec $u=(1,1,-1)$ ; $v=\frac12e_1$ vérifie $f(v)=u$, et $w=(1,2,0)\in\Ker f$ n'est pas colinéaire à
+$u$. Dans la base $(u,w,v)$, la matrice de $f$ a pour seul coefficient non nul un $1$ en position $(1,3)$.
+\retenir{endomorphisme de carré nul : $\Im f\subset\Ker f$, rang au plus $\frac n2$, trace nulle.}
+\end{corrige}
+
+\begin{exo}{sel-al-projecteurs}{5}{somme de deux projecteurs}
+Soit $E$ un $\K$-espace vectoriel de dimension finie, et $p$, $q$ deux projecteurs de $E$.
+\begin{enumerate}
+\item Montrer que $p+q$ est un projecteur si et seulement si $p\circ q+q\circ p=0$.
+\item On suppose $p\circ q+q\circ p=0$. En composant à gauche puis à droite par $p$, montrer que $p\circ q=q\circ p$, puis que
+$p\circ q=q\circ p=0$.
+\item En déduire que $p+q$ est un projecteur si et seulement si $p\circ q=q\circ p=0$.
+\item On suppose cette condition réalisée. Montrer que $\Im(p+q)=\Im p\oplus\Im q$ et $\Ker(p+q)=\Ker p\cap\Ker q$.
+\item Retrouver le résultat $\rg(p+q)=\rg p+\rg q$ à l'aide de la trace.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{sel-al-projecteurs}
+\choix{traduire « projecteur » par $u\circ u=u$, et composer intelligemment par $p$ pour isoler $p\circ q$.}
+\q{1.} $(p+q)^2=p^2+p\circ q+q\circ p+q^2=p+q+(p\circ q+q\circ p)$ : $p+q$ est un projecteur si et seulement si $p\circ q+q\circ p=0$.
+\q{2.} En composant $p\circ q+q\circ p=0$ à gauche par $p$ : $p\circ q+p\circ q\circ p=0$. À droite par $p$ : $p\circ q\circ p+q\circ p=0$.
+Par différence, $p\circ q=q\circ p$. Alors $2p\circ q=0$, donc $p\circ q=q\circ p=0$ (car $2\neq0$ dans $\K$).
+\q{3.} Le sens direct est la question 2, la réciproque la question 1.
+\q{4.} $\Im(p+q)\subset\Im p+\Im q$. Réciproquement, si $y=p(a)+q(b)$, alors $(p+q)(y)=p(a)+q(b)=y$ (car $p\circ q=q\circ p=0$),
+donc $y\in\Im(p+q)$. La somme est directe : si $y\in\Im p\cap\Im q$, $y=p(y)=p\big(q(y)\big)=0$. Enfin $\Ker p\cap\Ker q\subset\Ker(p+q)$,
+et si $p(x)+q(x)=0$, en appliquant $p$ : $p(x)=0$, puis $q(x)=0$.
+\q{5.} Pour un projecteur, rang $=$ trace : $\rg(p+q)=\tr(p+q)=\tr p+\tr q=\rg p+\rg q$, ce qui confirme que la somme
+$\Im p+\Im q$ est directe.
+\retenir{$p+q$ projecteur $\iff p\circ q=q\circ p=0$ ; et pour les projecteurs, la trace calcule le rang.}
+\end{corrige}

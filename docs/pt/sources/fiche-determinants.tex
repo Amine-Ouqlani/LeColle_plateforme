@@ -71,7 +71,7 @@
 \begin{document}
 \thispagestyle{empty}
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
-{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 3}}\par\smallskip
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 2}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Déterminants}\par\smallskip
 {\color{white!85!Bleu}\sffamily définitions, règles de calcul, méthodes, pièges et résultats des TD}\vspace{0.4em}}}
 
@@ -90,7 +90,7 @@
 \end{tabular}}
 
 \vspace{0.6em}
-\pdfbookmark[0]{Chapitre 3 --- Déterminants}{chap1}\markboth{Chapitre 3 --- Déterminants}{}
+\pdfbookmark[0]{Chapitre 2 --- Déterminants}{chap1}\markboth{Chapitre 2 --- Déterminants}{}
 \begin{multicols}{2}\raggedcolumns
 % ======================================================================
 \notion{1.1 Dimensions 2 et 3}\label{n11}
@@ -175,10 +175,11 @@ $\det_{\mathcal B}(u_1,\dots,u_n)$ : déterminant des coordonnées dans $\mathca
 $(u_1,\dots,u_n)$ base de $E$ ($\dim E=n$) $\iff\det_{\mathcal B}(u_j)\neq0$.\\
 $\det f=\det\Mat_{\mathcal B}(f)$ (indépendant de $\mathcal B$). $f$ automorphisme $\iff\det f\neq0$.\\
 $\det(f\circ g)=\det f\det g$, $\det(\lambda f)=\lambda^n\det f$, $\det f^{-1}=\frac1{\det f}$.\\
+Triangulaire par blocs \livre{prop.~1.11} : $\dt{A&B\\0&C}=\det A\det C$ (sous-espace stable, chapitre~1).\\
 Ex. : $(1,1+X,\dots,1+\dots+X^n)$ base de $\R_n[X]$ (triangulaire, diagonale de $1$) ; dérivation sur $\R_n[X]$ : $\det D=0$.
 \end{PROP}
 
-\begin{PROP}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.10}]
+\begin{PROP}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.12}]
 Projecteur $p$ : $\det p=1$ si $p=\Id$, $0$ sinon.\\
 Symétrie $s$ : $\det s=(-1)^{\dim\mathrm{Ker}(s+\Id)}=(-1)^{n-\rg(s+\Id)}$.\\
 Preuve : base adaptée, $\mathrm{diag}(I_r,0)$ ou $\mathrm{diag}(I_r,-I_{n-r})$. Réflexion du plan : $\det=-1$.
@@ -222,7 +223,7 @@ Aire triangle $=\frac12|\det(\vv{AB},\vv{AC})|$ ; volume tétraèdre $=\frac16|\
 Droites $A+\vect\ve u$, $C+\vect\ve v$ coplanaires $\iff\det(\vv{AC},\ve u,\ve v)=0$.
 \end{FORM}
 
-\begin{FORM}[DISTANCE DE DEUX DROITES \livre{prop.~1.11, TD~2}]
+\begin{FORM}[DISTANCE DE DEUX DROITES \livre{prop.~1.13, TD~2}]
 $\mathcal D_1=A+\vect\ve u$, $\mathcal D_2=C+\vect\ve v$ non parallèles :
 \[d(\mathcal D_1,\mathcal D_2)=\frac{|\det(\vv{AC},\ve u,\ve v)|}{\|\ve u\wedge\ve v\|}\quad(=\text{volume}/\text{base}).\]
 Perpendiculaire commune : $H=A+s\ve u$, $K=C+r\ve v$, $\vv{HK}\cdot\ve u=\vv{HK}\cdot\ve v=0$ (système de déterminant
@@ -287,7 +288,7 @@ Piège : signe de l'antidiagonale ($b$ en position $(1,2n)$ : $(-1)^{2n+1}=-1$) 
 \end{FORM}
 
 \sous{Vandermonde}
-\begin{FORM}[\livre{th.~1.14}]
+\begin{FORM}[\livre{th.~1.16}]
 $V(x_1,\dots,x_n)=\det\big(x_j^{\,i-1}\big)=\prod_{i<j}(x_j-x_i)$, non nul $\iff x_i$ distincts.\\
 $n=3$ : $(b-a)(c-a)(c-b)$. $\det(i^{j-1})=1!\,2!\cdots(n-1)!$.
 \end{FORM}

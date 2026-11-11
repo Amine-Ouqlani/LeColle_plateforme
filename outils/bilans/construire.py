@@ -17,7 +17,7 @@ RACINE = Path(__file__).resolve().parents[2]
 SOURCE = RACINE / 'docs/pt/sources/exercices-bilan.tex'
 BUILD = RACINE / 'outils/bilans/build'
 SORTIE = RACINE / 'docs/pt/bilans'
-CHAPITRES = {1: 'ed', 2: 'red', 3: 'determinants', 4: 'courbes', 5: 'metrique'}
+CHAPITRES = {1: 'al', 2: 'determinants', 3: 'red', 4: 'ed', 5: 'courbes', 6: 'metrique'}
 
 
 def compiler(nom, version, chap):
@@ -43,7 +43,7 @@ def main():
         pdf = compiler(f'bilan-{cid}', 'site', n)
         shutil.copy(pdf, SORTIE / pdf.name)
         p = pages(pdf)
-        docs = re.sub(rf'("bilan-{cid}": \{{.*?pages: )\d+', rf'\g<1>{p}', docs, flags=re.S)
+        docs = re.sub(rf'("bilan-{cid}": \{{.*?"?pages"?: )\d+', rf'\g<1>{p}', docs, flags=re.S)
         print(f'bilan-{cid}.pdf : {p} pages')
     (RACINE / 'data/pt/documents.js').write_text(docs, encoding='utf8')
     for version in ('prof', 'eleve'):

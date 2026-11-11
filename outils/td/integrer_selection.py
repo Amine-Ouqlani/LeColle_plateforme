@@ -32,7 +32,7 @@ for cid in SELECTION:
 p = f'{SITE}/data/pt/documents.js'; s = open(p, encoding='utf8').read()
 s = re.sub(r'  "selection-[a-z]+": \{.*?\n  \},\n', '', s, flags=re.S)
 bloc = ''.join(f'  "{k}": {{\n' + ',\n'.join(f'    {a}: ' + (str(v) if isinstance(v, int) else f'"{js(v)}"') for a, v in d.items()) + '\n  },\n' for k, d in docs.items())
-i = s.index('  "td-determinants": {'); s = s[:i] + bloc + s[i:]
+i = s.index('  /* ---- TD (générés'); s = s[:i] + bloc + s[i:]
 open(p, 'w', encoding='utf8').write(s)
 
 # selection.js

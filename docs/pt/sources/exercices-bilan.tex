@@ -22,6 +22,7 @@
 % version « site » : énoncé + corrigé + grille, sans page de garde ; \CHAP = numéro du chapitre (0 = tous)
 \newif\ifsite\def\tmpsite{site}\ifx\VERSION\tmpsite\proftrue\sitetrue\fi
 \providecommand{\CHAP}{0}
+\providecommand{\GLn}[1]{\mathrm{GL}_n(#1)}\providecommand{\LE}{\mathcal{L}(E)}\providecommand{\Mat}{\operatorname{Mat}}\providecommand{\Id}{\operatorname{Id}}\providecommand{\Mn}[1]{\mathcal{M}_{n}(#1)}\providecommand{\Im}{\operatorname{Im}}\renewcommand{\Im}{\operatorname{Im}}
 
 \setlength{\parindent}{0pt}\setlength{\parskip}{0.35em}
 \setlist{itemsep=0.25em,topsep=0.2em,parsep=0pt}
@@ -77,7 +78,7 @@
 Chaque exercice reprend les notions essentielles d'un chapitre, du plus simple (connaissance du cours) au plus appliqué.
 Pour chaque chapitre : l'énoncé (une page, à donner tel quel), le corrigé détaillé, puis une grille qui associe à chaque question
 les notions testées et la lacune que révèle une erreur. Les notations et les numéros de propriétés sont ceux des livrets.
-Aucune notion hors programme n'est exigée ; la formule $\gamma=\det(f',f'')/\|f'\|^3$ n'apparaît dans le corrigé du chapitre~5
+Aucune notion hors programme n'est exigée ; la formule $\gamma=\det(f',f'')/\|f'\|^3$ n'apparaît dans le corrigé du chapitre~6
 que comme contrôle facultatif.
 
 \medskip
@@ -98,20 +99,271 @@ qui est acquis et ce qu'il faut revoir. Justifier chaque réponse en citant la p
 \begin{tabular}{@{}l l l@{}}
 \toprule
 \textbf{Chapitre} & \textbf{Exercice bilan} & \textbf{Durée}\\\midrule
-1 & Équations différentielles linéaires & 15 min\\
-2 & Réduction des endomorphismes & 15 min\\
-3 & Déterminants & 13 min\\
-4 & Courbes paramétrées planes & 15 min\\
-5 & Propriétés métriques et enveloppes & 13 min\\
+1 & Algèbre linéaire & 13 min\\
+2 & Déterminants & 13 min\\
+3 & Réduction & 15 min\\
+4 & Équations différentielles linéaires & 15 min\\
+5 & Courbes paramétrées planes & 15 min\\
+6 & Propriétés métriques et enveloppes & 13 min\\
 \bottomrule
 \end{tabular}}
 
 \fi
 \ifnum\numexpr\CHAP*(\CHAP-1)\relax=0
 % ======================================================================
-%  CHAPITRE 1 — ÉQUATIONS DIFFÉRENTIELLES
+%  CHAPITRE 1 — ALGÈBRE LINÉAIRE
 % ======================================================================
-\bilan{1}{Équations différentielles}{15 min}
+\bilan{1}{Algèbre linéaire}{13 min}
+Le plan et l'espace sont rapportés à leurs bases canoniques.
+
+\begin{enumerate}
+\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple. $E$ est un espace de dimension finie.
+  \begin{enumerate}
+  \item Si $F$ et $G$ sont deux sous-espaces de $E$ tels que $F\cap G=\{0\}$, alors $E=F\oplus G$.
+  \item Trois droites vectorielles de $\R^2$ deux à deux distinctes sont en somme directe.
+  \item Si $p\in\LE$ vérifie $p\circ p=p$, alors $E=\Im p\oplus\Ker p$.
+  \item Deux matrices semblables ont la même trace.
+  \item Pour tout $f\in\LE$, $\Ker f$ et $\Im f$ sont supplémentaires.
+  \end{enumerate}
+\item Dans $\R^3$, soit $P$ le plan d'équation $x-y+z=0$ et $D=\vect(u)$ avec $u=(1,1,1)$.
+  \begin{enumerate}
+  \item Montrer que $\R^3=P\oplus D$.
+  \item Déterminer la matrice, dans la base canonique, de la projection $p$ sur $P$ parallèlement à $D$.
+  \item Vérifier sur cette matrice que $\tr p=\rg p$.
+  \end{enumerate}
+\item Dans $\R^4$, donner un système d'équations de $F=\vect\big((1,0,1,0),(0,1,0,1)\big)$. Combien en faut-il ?
+\item Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}2&0&1\\0&3&0\\1&0&2\end{pmatrix}$. Montrer que le plan
+      $F$ d'équation $y=0$ et la droite $\vect(e_2)$ sont stables par $f$, puis écrire la matrice de $f$ dans la base $(e_1,e_3,e_2)$.
+\item Soit $A\in\Mn{\K}$ telle que $A^2=A$ et $\tr A=0$. Montrer que $A=0$.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \emph{Faux}. Deux droites distinctes de $\R^3$ ont une intersection nulle, mais leur somme est un plan. Il faut aussi
+$\dim F+\dim G=\dim E$ (ou $F+G=E$) \prop{th.~1.8}.
+
+\q{1.b)} \emph{Faux}. $\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$ : $(1,0)+(0,1)-(1,1)=0$ est une décomposition non triviale de $0$
+\prop{prop.~1.7}. (Leur somme est $\R^2$, de dimension $2<3$.)
+
+\q{1.c)} \emph{Vrai} \prop{prop.~1.9}. $x=p(x)+\big(x-p(x)\big)$ avec $p(x)\in\Im p$ et $p\big(x-p(x)\big)=p(x)-p(x)=0$ ; et si
+$y\in\Im p\cap\Ker p$, $y=p(z)$ donne $y=p(p(z))=p(y)=0$.
+
+\q{1.d)} \emph{Vrai} \prop{prop.~1.14}. $\tr(P^{-1}AP)=\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr A$.
+
+\q{1.e)} \emph{Faux}. $f$ de matrice $\begin{pmatrix}0&1\\0&0\end{pmatrix}$ : $\Ker f=\Im f=\vect(e_1)$.
+
+\q{2.a)} $1-1+1=1\neq0$ : $u\notin P$, donc $P\cap D=\{0\}$ ; et $\dim P+\dim D=2+1=3$ : $\R^3=P\oplus D$ \prop{prop.~1.11}.
+
+\q{2.b)} Pour $v=(x,y,z)$, on cherche $t$ tel que $v-tu\in P$ : $(x-t)-(y-t)+(z-t)=0$, soit $t=x-y+z$. Alors $p(v)=v-tu$ et
+\[\Mat(p)=I_3-\begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}1&-1&1\end{pmatrix}=\begin{pmatrix}0&1&-1\\-1&2&-1\\-1&1&0\end{pmatrix}.\]
+
+\q{2.c)} $\tr p=0+2+0=2$, et $\rg p=\dim P=2$.
+
+\q{3.} $(x,y,z,t)=\lambda(1,0,1,0)+\mu(0,1,0,1)$ si et seulement si $x=\lambda$, $y=\mu$, $z=\lambda$, $t=\mu$ : les conditions de
+compatibilité sont $z=x$ et $t=y$. Il faut $4-\dim F=2$ équations \prop{méth.~1.1}.
+
+\q{4.} $f(x,0,z)=(2x+z,\,0,\,x+2z)$ : deuxième coordonnée nulle, $F$ est stable. $f(e_2)=3e_2$ : la droite est stable. Dans la base
+$(e_1,e_3,e_2)$ : $f(e_1)=2e_1+e_3$, $f(e_3)=e_1+2e_3$, $f(e_2)=3e_2$, d'où la matrice diagonale par blocs
+$\begin{pmatrix}2&1&0\\1&2&0\\0&0&3\end{pmatrix}$ \prop{th.~1.18}.
+
+\q{5.} $A$ est la matrice d'un projecteur, donc $\rg A=\tr A=0$ : $A=0$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Supplémentaires en dimension finie : deux conditions sur trois. & « Vrai » : l'élève oublie la condition de dimension.\\
+1.b & Somme directe de $p\geq3$ sous-espaces : unicité de la décomposition de $0$. &
+  « Vrai » : critère des intersections deux à deux appliqué à tort (piège principal du chapitre).\\
+1.c & Projecteurs : $E=\Im p\oplus\Ker p$. & Pas de preuve : décomposition $x=p(x)+(x-p(x))$ inconnue.\\
+1.d & Invariance de la trace par similitude ; $\tr(AB)=\tr(BA)$. & Preuve par le calcul des coefficients : la propriété clé n'est pas mobilisée.\\
+1.e & $\Ker f$ et $\Im f$ : supplémentaires seulement dans certains cas. & « Vrai » : confusion avec le théorème du rang (dimensions seulement).\\
+2.a & Hyperplan et droite non contenue : supplémentaires. & Calcul de l'intersection sans conclure par les dimensions.\\
+2.b & Calcul d'une projection en coordonnées. & Projection sur $D$ au lieu de $P$, ou recherche d'une base de $P$ inutilement : méthode non comprise.\\
+2.c & Trace et rang d'un projecteur. & Rang calculé par pivot sans voir $\rg p=\dim P$.\\
+3 & Équations d'un sous-espace engendré ; nombre d'équations. & Une seule équation, ou des équations non vérifiées par les générateurs.\\
+4 & Stabilité, matrice dans une base adaptée, blocs. & Matrice écrite en lignes, ou dans le mauvais ordre de base.\\
+5 & Projecteur : rang $=$ trace. & Calcul coefficient par coefficient : le lien rang/trace n'est pas acquis.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-2)\relax=0
+% ======================================================================
+%  CHAPITRE 2 — DÉTERMINANTS
+% ======================================================================
+\bilan{2}{Déterminants}{13 min}
+
+\begin{enumerate}
+\item Soit $A\in\mathcal M_3(\R)$ telle que $\det A=2$. On note $C_1,C_2,C_3$ ses colonnes. Donner, sans justification longue :
+  \begin{enumerate}
+  \item $\det(3A)$,\quad $\det(-A)$,\quad $\det(A^T)$,\quad $\det(A^{-1})$,\quad $\det(A^2)$ ;
+  \item le déterminant de la matrice obtenue à partir de $A$ en \emph{(i)} échangeant $C_1$ et $C_3$ ;
+        \emph{(ii)} remplaçant $C_1$ par $C_1+5C_2$ ; \emph{(iii)} remplaçant $C_2$ par $2C_2+C_3$.
+  \end{enumerate}
+\item Pour $x\in\R$, calculer sous forme factorisée
+      $\Delta(x)=\dt{x&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}$. Pour quelles valeurs de $x$ la matrice correspondante est-elle inversible ?
+\item Pour quelles valeurs de $x\in\R$ les vecteurs $u=(1,x,x^2)$, $v=(1,1,1)$ et $w=(1,2,4)$ forment-ils une base de $\R^3$ ?
+\item Pour $n\geq1$, on note $T_n$ le déterminant de taille $n$ ayant des $3$ sur la diagonale, des $1$ juste au-dessus, des
+      $2$ juste au-dessous, et des $0$ ailleurs :
+      $T_n=\dt{3&1&&\\2&3&\ddots&\\&\ddots&\ddots&1\\&&2&3}$.
+  \begin{enumerate}
+  \item Calculer $T_1$ et $T_2$, puis montrer que $T_n=3T_{n-1}-2T_{n-2}$ pour $n\geq3$.
+  \item En déduire $T_n$ en fonction de $n$.
+  \end{enumerate}
+\item Soit $A\in\mathcal M_3(\R)$ telle que $A^T=-A$. Montrer que $A$ n'est pas inversible.
+\item Dans le plan rapporté à un repère orthonormé, on considère $A(1,2)$, $B(3,5)$ et $C(x,8)$.
+  \begin{enumerate}
+  \item Pour quelle valeur de $x$ les points $A$, $B$, $C$ sont-ils alignés ?
+  \item Calculer l'aire du triangle $ABC$ lorsque $x=1$.
+  \end{enumerate}
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} En taille $n=3$ : $\det(\lambda A)=\lambda^3\det A$.
+$\det(3A)=27\times2=54$ ;\ $\det(-A)=(-1)^3\times2=-2$ ;\ $\det(A^T)=2$ ;\ $\det(A^{-1})=\frac12$ ;\ $\det(A^2)=(\det A)^2=4$.
+
+\q{1.b)} \emph{(i)} échange de deux colonnes : $-2$. \emph{(ii)} transvection : $2$ (inchangé).
+\emph{(iii)} par linéarité selon la deuxième colonne, $\det(C_1,2C_2+C_3,C_3)=2\det(C_1,C_2,C_3)+\det(C_1,C_3,C_3)=4+0=4$.
+
+\q{2.} Chaque ligne a pour somme $x+3$ \prop{§1.5, somme constante} : $C_1\leftarrow C_1+C_2+C_3+C_4$, puis on sort $x+3$ :
+\[\Delta(x)=(x+3)\dt{1&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}\underset{L_i\leftarrow L_i-L_1}{=}(x+3)\dt{1&1&1&1\\0&x-1&0&0\\0&0&x-1&0\\0&0&0&x-1}=(x+3)(x-1)^3.\]
+La matrice est inversible si et seulement si $\Delta(x)\neq0$, soit $x\notin\{1,-3\}$. (C'est la formule
+$D_n(a,b)=(a+(n-1)b)(a-b)^{n-1}$ du cours, avec $a=x$, $b=1$, $n=4$.)
+
+\q{3.} Trois vecteurs de $\R^3$ forment une base si et seulement si leur déterminant dans la base canonique est non nul.
+On reconnaît un déterminant de Vandermonde \prop{th.~1.16} :
+\[\dt{1&1&1\\x&1&2\\x^2&1&4}=V(x,1,2)=(1-x)(2-x)(2-1)=(x-1)(x-2).\]
+C'est une base si et seulement si $x\notin\{1,2\}$ (les trois nombres $x,1,2$ sont distincts).
+
+\q{4.a)} $T_1=3$, $T_2=\dt{3&1\\2&3}=9-2=7$. Pour $n\geq3$, on développe selon la première ligne \prop{méth.~1.4} :
+$T_n=3\,T_{n-1}-1\cdot\Delta_{1,2}$, où le mineur $\Delta_{1,2}$ a pour première colonne $(2,0,\dots,0)^T$ ; en le développant
+selon cette colonne, $\Delta_{1,2}=2\,T_{n-2}$. D'où $T_n=3T_{n-1}-2T_{n-2}$.
+
+\q{4.b)} Suite récurrente linéaire d'ordre 2 : $r^2=3r-2$, racines $1$ et $2$, donc $T_n=\lambda+\mu2^n$.
+$T_1=\lambda+2\mu=3$ et $T_2=\lambda+4\mu=7$ donnent $\mu=2$, $\lambda=-1$ :
+\[T_n=2^{n+1}-1.\]
+Contrôle : $T_3=3\times7-2\times3=15=2^4-1$.
+
+\q{5.} $\det A=\det(A^T)=\det(-A)=(-1)^3\det A=-\det A$, donc $\det A=0$ et $A$ n'est pas inversible. (La taille impaire est
+essentielle : $\pmat{0&-1\\1&0}$ est antisymétrique et inversible.)
+
+\q{6.a)} $\vv{AB}=(2,3)$, $\vv{AC}=(x-1,6)$. Alignés $\iff\det(\vv{AB},\vv{AC})=\dt{2&x-1\\3&6}=12-3(x-1)=15-3x=0\iff x=5$.
+
+\q{6.b)} Pour $x=1$ : $\det(\vv{AB},\vv{AC})=12$, donc l'aire vaut $\frac12|12|=6$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & $\det(\lambda A)=\lambda^n\det A$, $\det(AB)$, $\det A^T$, $\det A^{-1}$. &
+  $\det(3A)=6$ : piège classique $\lambda$ au lieu de $\lambda^n$. $\det(-A)=2$ : même lacune.\\
+1.b & Effet des opérations élémentaires ; multilinéarité. &
+  (ii) $\neq2$ : transvection mal comprise. (iii) $=2$ : la colonne modifiée a le coefficient $2$, confusion transvection/dilatation.\\
+2 & Repérer la structure (somme constante), opérations sur lignes et colonnes, factorisation ; inversibilité. &
+  Développement brutal ou par Sarrus étendu : méthode « regarder d'abord » absente. Racine $-3$ oubliée : factorisation incomplète.\\
+3 & Base $\iff\det\neq0$ ; Vandermonde. & Recalcul complet sans reconnaître Vandermonde : formule non connue.\\
+4.a & Développement selon une ligne, signes $(-1)^{i+j}$, mineurs. &
+  $T_n=3T_{n-1}+2T_{n-2}$ : signe du cofacteur oublié. Mineur mal identifié : technique du développement fragile.\\
+4.b & Suites récurrentes linéaires d'ordre 2. & Constantes calées sur $T_0$ sans le justifier, ou mal calculées : méthode des suites.\\
+5 & Propriétés globales : $\det A^T$, $\det(\lambda A)$ avec $n$ impair. &
+  Recherche d'une matrice générale à coefficients : réflexe « appliquer $\det$ à la relation » absent.\\
+6 & Alignement, aire : interprétation géométrique de $\det$. & Oubli du $\frac12$ ou de la valeur absolue : aire du parallélogramme / du triangle confondues.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-3)\relax=0
+% ======================================================================
+%  CHAPITRE 3 — RÉDUCTION
+% ======================================================================
+\bilan{3}{Réduction}{15 min}
+
+\begin{enumerate}
+\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
+  \begin{enumerate}
+  \item Si $A\in\mathcal M_3(\R)$ admet trois valeurs propres distinctes, alors $A$ est diagonalisable.
+  \item Si $A\in\mathcal M_3(\R)$ admet une valeur propre de multiplicité $2$, alors $A$ n'est pas diagonalisable.
+  \item La matrice $\pmat{0&-1\\1&0}$ est diagonalisable dans $\mathcal M_2(\R)$.
+  \item Si $A\in\mathcal M_n(\R)$ est diagonalisable et n'admet qu'une seule valeur propre $\lambda$, alors $A=\lambda I_n$.
+  \item Si $A\in\GLn{\R}$ est diagonalisable, alors $A^{-1}$ est diagonalisable.
+  \end{enumerate}
+\item Soit $A=\pmat{1&1&-1\\0&2&0\\-1&1&1}$.
+  \begin{enumerate}
+  \item Calculer le polynôme caractéristique $\chi_A$ sous forme factorisée. $A$ est-elle inversible ?
+  \item Déterminer les sous-espaces propres de $A$ (une base et la dimension de chacun).
+  \item Justifier que $A$ est diagonalisable, et donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$.
+  \item Sans calculer $P^{-1}$, déterminer $\tr(A^k)$ pour tout entier $k\geq1$.
+  \end{enumerate}
+\item Pour $a\in\R$, on pose $B_a=\pmat{1&a&0\\0&1&0\\0&0&2}$. Pour quelles valeurs de $a$ la matrice $B_a$ est-elle
+      diagonalisable ?
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \emph{Vrai} \prop{cor.~1.14}. Chaque sous-espace propre est de dimension au moins $1$, et la somme des trois est
+directe : $\sum\dim E_\lambda\geq3=n$, donc $\R^3=\bigoplus E_\lambda$.
+
+\q{1.b)} \emph{Faux.} $I_3$ (ou $\mathrm{diag}(1,1,2)$) a une valeur propre double et est diagonale. La valeur double n'empêche
+rien ; le critère est $\dim E_\lambda=m(\lambda)$ \prop{th.~1.13}.
+
+\q{1.c)} \emph{Faux.} $\chi(x)=x^2+1$ n'a pas de racine réelle : $\chi$ n'est pas scindé sur $\R$, la matrice n'a aucune valeur
+propre réelle. (Elle est diagonalisable dans $\mathcal M_2(\C)$, de valeurs propres $\pm i$.)
+
+\q{1.d)} \emph{Vrai.} $D=\lambda I_n$, donc $A=P(\lambda I_n)P^{-1}=\lambda PP^{-1}=\lambda I_n$.
+
+\q{1.e)} \emph{Vrai}. Si $A=PDP^{-1}$ avec $D=\mathrm{diag}(\lambda_i)$, les $\lambda_i$ sont non nuls ($A$ inversible) et $A^{-1}=PD^{-1}P^{-1}$, avec $D^{-1}=\mathrm{diag}(1/\lambda_i)$.
+
+\q{2.a)} La deuxième ligne de $xI_3-A$ n'a qu'un coefficient non nul : on développe selon elle \prop{méth.~1.2}.
+\[\chi_A(x)=\dt{x-1&-1&1\\0&x-2&0\\1&-1&x-1}=(x-2)\dt{x-1&1\\1&x-1}=(x-2)\big((x-1)^2-1\big)=x\,(x-2)^2.\]
+$\Sp(A)=\{0,2\}$ avec $m(0)=1$, $m(2)=2$. Contrôles : $0+2+2=4=\tr A$ et $0\times2\times2=0=\det A$.
+$0$ est valeur propre, donc $A$ n'est pas inversible.
+
+\q{2.b)} \prop{méth.~1.1} $E_0=\Ker A$ : $x+y-z=0$, $2y=0$, $-x+y+z=0$, d'où $y=0$ et $z=x$ :
+$E_0=\vect\big((1,0,1)\big)$, de dimension $1$.\\
+$A-2I_3=\pmat{-1&1&-1\\0&0&0\\-1&1&-1}$ est de rang $1$, donc $\dim E_2=3-1=2$ : $E_2$ est le plan $y=x+z$,
+$E_2=\vect\big((1,1,0),(0,1,1)\big)$.
+
+\q{2.c)} $\chi_A$ est scindé et $\dim E_0=1=m(0)$, $\dim E_2=2=m(2)$ : $A$ est diagonalisable \prop{th.~1.13}. Les vecteurs propres
+en colonnes, \emph{dans l'ordre} de $D$ :
+\[P=\pmat{1&1&0\\0&1&1\\1&0&1},\qquad D=\pmat{0&0&0\\0&2&0\\0&0&2}.\]
+($\det P=2\neq0$ ; contrôle : $AP=PD$ colonne par colonne.)
+
+\q{2.d)} $A^k=PD^kP^{-1}$ \prop{prop.~1.19}, et la trace est invariante par similitude :
+$\tr(A^k)=\tr(D^k)=0^k+2^k+2^k=2^{k+1}$ pour $k\geq1$.
+
+\q{3.} $B_a$ est triangulaire : $\chi_{B_a}=(x-1)^2(x-2)$, $m(1)=2$, $m(2)=1$. La valeur propre $2$ est simple : pas de
+condition. $B_a-I_3=\pmat{0&a&0\\0&0&0\\0&0&1}$ est de rang $2$ si $a\neq0$, de rang $1$ si $a=0$. Donc $\dim E_1=2=m(1)$ si et
+seulement si $a=0$ : $B_a$ est diagonalisable si et seulement si $a=0$ (et $B_0$ est déjà diagonale).
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Valeurs propres distinctes $\Rightarrow$ diagonalisable. & Hésitation : le critère simple n'est pas connu.\\
+1.b & Condition suffisante ou condition nécessaire et suffisante. &
+  « Vrai » : l'élève croit qu'une valeur multiple empêche la diagonalisation ; critère $\dim E_\lambda=m(\lambda)$ non assimilé.\\
+1.c & $\chi$ scindé ; dépendance au corps $\R$ ou $\C$. & « Vrai, valeurs propres $\pm i$ » : le corps de base est ignoré.\\
+1.d & Écriture $A=PDP^{-1}$. & Pas de preuve : manipulation de la similitude fragile.\\
+1.e & Écriture $A=PDP^{-1}$, inverse d'une matrice diagonale. & Pas de preuve : la diagonalisation n'est pas vue comme un changement de base.\\
+2.a & Calcul de $\chi_A$ (ligne creuse), factorisation, contrôles $\tr$/$\det$ ; $0\in\Sp(A)\iff A$ non inversible. &
+  Développement complet non factorisé : méthode de calcul de $\chi$ ; pas de lien avec l'inversibilité.\\
+2.b & $E_\lambda=\Ker(A-\lambda I)$, $\dim E_\lambda=n-\rg(A-\lambda I)$. & Système mal résolu ou dimension fausse : lien rang/noyau.\\
+2.c & Critère $\dim E_\lambda=m(\lambda)$ ; construction de $P$ et $D$. &
+  Vecteurs propres en lignes, ou ordre de $D$ incohérent : sens de $A=PDP^{-1}$ non compris.\\
+2.d & $A^k=PD^kP^{-1}$, invariance de la trace. & Calcul de $P^{-1}$ ou de $A^k$ : l'invariance de la trace n'est pas mobilisée.\\
+3 & Valeurs propres d'une matrice triangulaire ; rang avec paramètre. &
+  « Diagonalisable car valeurs propres sur la diagonale » : confusion triangulaire/diagonalisable.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-4)\relax=0
+% ======================================================================
+%  CHAPITRE 4 — ÉQUATIONS DIFFÉRENTIELLES
+% ======================================================================
+\bilan{4}{Équations différentielles}{15 min}
 Toutes les fonctions sont à valeurs réelles.
 
 \begin{enumerate}
@@ -215,186 +467,12 @@ et $\gamma=\alpha$. Les solutions polynomiales sont les $y=\alpha(1+t^2)$, $\alp
 \end{tabularx}
 \end{GRILLE}
 \fi
-
 \fi
-\ifnum\numexpr\CHAP*(\CHAP-2)\relax=0
+\ifnum\numexpr\CHAP*(\CHAP-5)\relax=0
 % ======================================================================
-%  CHAPITRE 2 — RÉDUCTION
+%  CHAPITRE 5 — COURBES PARAMÉTRÉES
 % ======================================================================
-\bilan{2}{Réduction des endomorphismes}{15 min}
-
-\begin{enumerate}
-\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
-  \begin{enumerate}
-  \item Si $A\in\mathcal M_3(\R)$ admet trois valeurs propres distinctes, alors $A$ est diagonalisable.
-  \item Si $A\in\mathcal M_3(\R)$ admet une valeur propre de multiplicité $2$, alors $A$ n'est pas diagonalisable.
-  \item La matrice $\pmat{0&-1\\1&0}$ est diagonalisable dans $\mathcal M_2(\R)$.
-  \item Si $A\in\mathcal M_n(\R)$ est diagonalisable et n'admet qu'une seule valeur propre $\lambda$, alors $A=\lambda I_n$.
-  \item Il existe $A,B\in\mathcal M_n(\R)$ telles que $AB-BA=I_n$.
-  \end{enumerate}
-\item Soit $A=\pmat{1&1&-1\\0&2&0\\-1&1&1}$.
-  \begin{enumerate}
-  \item Calculer le polynôme caractéristique $\chi_A$ sous forme factorisée. $A$ est-elle inversible ?
-  \item Déterminer les sous-espaces propres de $A$ (une base et la dimension de chacun).
-  \item Justifier que $A$ est diagonalisable, et donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$.
-  \item Sans calculer $P^{-1}$, déterminer $\tr(A^k)$ pour tout entier $k\geq1$.
-  \end{enumerate}
-\item Pour $a\in\R$, on pose $B_a=\pmat{1&a&0\\0&1&0\\0&0&2}$. Pour quelles valeurs de $a$ la matrice $B_a$ est-elle
-      diagonalisable ?
-\end{enumerate}
-
-\ifprof
-\corrige
-\q{1.a)} \emph{Vrai} \prop{cor.~1.28}. Chaque sous-espace propre est de dimension au moins $1$, et la somme des trois est
-directe : $\sum\dim E_\lambda\geq3=n$, donc $\R^3=\bigoplus E_\lambda$.
-
-\q{1.b)} \emph{Faux.} $I_3$ (ou $\mathrm{diag}(1,1,2)$) a une valeur propre double et est diagonale. La valeur double n'empêche
-rien ; le critère est $\dim E_\lambda=m(\lambda)$ \prop{th.~1.27}.
-
-\q{1.c)} \emph{Faux.} $\chi(x)=x^2+1$ n'a pas de racine réelle : $\chi$ n'est pas scindé sur $\R$, la matrice n'a aucune valeur
-propre réelle. (Elle est diagonalisable dans $\mathcal M_2(\C)$, de valeurs propres $\pm i$.)
-
-\q{1.d)} \emph{Vrai.} $D=\lambda I_n$, donc $A=P(\lambda I_n)P^{-1}=\lambda PP^{-1}=\lambda I_n$.
-
-\q{1.e)} \emph{Faux} \prop{prop.~1.7}. $\tr(AB-BA)=\tr(AB)-\tr(BA)=0$, alors que $\tr(I_n)=n\neq0$.
-
-\q{2.a)} La deuxième ligne de $xI_3-A$ n'a qu'un coefficient non nul : on développe selon elle \prop{méth.~1.2}.
-\[\chi_A(x)=\dt{x-1&-1&1\\0&x-2&0\\1&-1&x-1}=(x-2)\dt{x-1&1\\1&x-1}=(x-2)\big((x-1)^2-1\big)=x\,(x-2)^2.\]
-$\Sp(A)=\{0,2\}$ avec $m(0)=1$, $m(2)=2$. Contrôles : $0+2+2=4=\tr A$ et $0\times2\times2=0=\det A$.
-$0$ est valeur propre, donc $A$ n'est pas inversible.
-
-\q{2.b)} \prop{méth.~1.1} $E_0=\Ker A$ : $x+y-z=0$, $2y=0$, $-x+y+z=0$, d'où $y=0$ et $z=x$ :
-$E_0=\vect\big((1,0,1)\big)$, de dimension $1$.\\
-$A-2I_3=\pmat{-1&1&-1\\0&0&0\\-1&1&-1}$ est de rang $1$, donc $\dim E_2=3-1=2$ : $E_2$ est le plan $y=x+z$,
-$E_2=\vect\big((1,1,0),(0,1,1)\big)$.
-
-\q{2.c)} $\chi_A$ est scindé et $\dim E_0=1=m(0)$, $\dim E_2=2=m(2)$ : $A$ est diagonalisable \prop{th.~1.27}. Les vecteurs propres
-en colonnes, \emph{dans l'ordre} de $D$ :
-\[P=\pmat{1&1&0\\0&1&1\\1&0&1},\qquad D=\pmat{0&0&0\\0&2&0\\0&0&2}.\]
-($\det P=2\neq0$ ; contrôle : $AP=PD$ colonne par colonne.)
-
-\q{2.d)} $A^k=PD^kP^{-1}$ \prop{prop.~1.33}, et la trace est invariante par similitude :
-$\tr(A^k)=\tr(D^k)=0^k+2^k+2^k=2^{k+1}$ pour $k\geq1$.
-
-\q{3.} $B_a$ est triangulaire : $\chi_{B_a}=(x-1)^2(x-2)$, $m(1)=2$, $m(2)=1$. La valeur propre $2$ est simple : pas de
-condition. $B_a-I_3=\pmat{0&a&0\\0&0&0\\0&0&1}$ est de rang $2$ si $a\neq0$, de rang $1$ si $a=0$. Donc $\dim E_1=2=m(1)$ si et
-seulement si $a=0$ : $B_a$ est diagonalisable si et seulement si $a=0$ (et $B_0$ est déjà diagonale).
-
-\begin{GRILLE}
-\begin{tabularx}{\linewidth}{QNN}
-\entete
-1.a & Valeurs propres distinctes $\Rightarrow$ diagonalisable. & Hésitation : le critère simple n'est pas connu.\\
-1.b & Condition suffisante ou condition nécessaire et suffisante. &
-  « Vrai » : l'élève croit qu'une valeur multiple empêche la diagonalisation ; critère $\dim E_\lambda=m(\lambda)$ non assimilé.\\
-1.c & $\chi$ scindé ; dépendance au corps $\R$ ou $\C$. & « Vrai, valeurs propres $\pm i$ » : le corps de base est ignoré.\\
-1.d & Écriture $A=PDP^{-1}$. & Pas de preuve : manipulation de la similitude fragile.\\
-1.e & Trace : linéarité, $\tr(AB)=\tr(BA)$. & Aucune idée : propriétés de la trace non connues.\\
-2.a & Calcul de $\chi_A$ (ligne creuse), factorisation, contrôles $\tr$/$\det$ ; $0\in\Sp(A)\iff A$ non inversible. &
-  Développement complet non factorisé : méthode de calcul de $\chi$ ; pas de lien avec l'inversibilité.\\
-2.b & $E_\lambda=\Ker(A-\lambda I)$, $\dim E_\lambda=n-\rg(A-\lambda I)$. & Système mal résolu ou dimension fausse : lien rang/noyau.\\
-2.c & Critère $\dim E_\lambda=m(\lambda)$ ; construction de $P$ et $D$. &
-  Vecteurs propres en lignes, ou ordre de $D$ incohérent : sens de $A=PDP^{-1}$ non compris.\\
-2.d & $A^k=PD^kP^{-1}$, invariance de la trace. & Calcul de $P^{-1}$ ou de $A^k$ : l'invariance de la trace n'est pas mobilisée.\\
-3 & Valeurs propres d'une matrice triangulaire ; rang avec paramètre. &
-  « Diagonalisable car valeurs propres sur la diagonale » : confusion triangulaire/diagonalisable.\\
-\bottomrule
-\end{tabularx}
-\end{GRILLE}
-\fi
-
-\fi
-\ifnum\numexpr\CHAP*(\CHAP-3)\relax=0
-% ======================================================================
-%  CHAPITRE 3 — DÉTERMINANTS
-% ======================================================================
-\bilan{3}{Déterminants}{13 min}
-
-\begin{enumerate}
-\item Soit $A\in\mathcal M_3(\R)$ telle que $\det A=2$. On note $C_1,C_2,C_3$ ses colonnes. Donner, sans justification longue :
-  \begin{enumerate}
-  \item $\det(3A)$,\quad $\det(-A)$,\quad $\det(A^T)$,\quad $\det(A^{-1})$,\quad $\det(A^2)$ ;
-  \item le déterminant de la matrice obtenue à partir de $A$ en \emph{(i)} échangeant $C_1$ et $C_3$ ;
-        \emph{(ii)} remplaçant $C_1$ par $C_1+5C_2$ ; \emph{(iii)} remplaçant $C_2$ par $2C_2+C_3$.
-  \end{enumerate}
-\item Pour $x\in\R$, calculer sous forme factorisée
-      $\Delta(x)=\dt{x&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}$. Pour quelles valeurs de $x$ la matrice correspondante est-elle inversible ?
-\item Pour quelles valeurs de $x\in\R$ les vecteurs $u=(1,x,x^2)$, $v=(1,1,1)$ et $w=(1,2,4)$ forment-ils une base de $\R^3$ ?
-\item Pour $n\geq1$, on note $T_n$ le déterminant de taille $n$ ayant des $3$ sur la diagonale, des $1$ juste au-dessus, des
-      $2$ juste au-dessous, et des $0$ ailleurs :
-      $T_n=\dt{3&1&&\\2&3&\ddots&\\&\ddots&\ddots&1\\&&2&3}$.
-  \begin{enumerate}
-  \item Calculer $T_1$ et $T_2$, puis montrer que $T_n=3T_{n-1}-2T_{n-2}$ pour $n\geq3$.
-  \item En déduire $T_n$ en fonction de $n$.
-  \end{enumerate}
-\item Soit $A\in\mathcal M_3(\R)$ telle que $A^T=-A$. Montrer que $A$ n'est pas inversible.
-\item Dans le plan rapporté à un repère orthonormé, on considère $A(1,2)$, $B(3,5)$ et $C(x,8)$.
-  \begin{enumerate}
-  \item Pour quelle valeur de $x$ les points $A$, $B$, $C$ sont-ils alignés ?
-  \item Calculer l'aire du triangle $ABC$ lorsque $x=1$.
-  \end{enumerate}
-\end{enumerate}
-
-\ifprof
-\corrige
-\q{1.a)} En taille $n=3$ : $\det(\lambda A)=\lambda^3\det A$.
-$\det(3A)=27\times2=54$ ;\ $\det(-A)=(-1)^3\times2=-2$ ;\ $\det(A^T)=2$ ;\ $\det(A^{-1})=\frac12$ ;\ $\det(A^2)=(\det A)^2=4$.
-
-\q{1.b)} \emph{(i)} échange de deux colonnes : $-2$. \emph{(ii)} transvection : $2$ (inchangé).
-\emph{(iii)} par linéarité selon la deuxième colonne, $\det(C_1,2C_2+C_3,C_3)=2\det(C_1,C_2,C_3)+\det(C_1,C_3,C_3)=4+0=4$.
-
-\q{2.} Chaque ligne a pour somme $x+3$ \prop{§1.5, somme constante} : $C_1\leftarrow C_1+C_2+C_3+C_4$, puis on sort $x+3$ :
-\[\Delta(x)=(x+3)\dt{1&1&1&1\\1&x&1&1\\1&1&x&1\\1&1&1&x}\underset{L_i\leftarrow L_i-L_1}{=}(x+3)\dt{1&1&1&1\\0&x-1&0&0\\0&0&x-1&0\\0&0&0&x-1}=(x+3)(x-1)^3.\]
-La matrice est inversible si et seulement si $\Delta(x)\neq0$, soit $x\notin\{1,-3\}$. (C'est la formule
-$D_n(a,b)=(a+(n-1)b)(a-b)^{n-1}$ du cours, avec $a=x$, $b=1$, $n=4$.)
-
-\q{3.} Trois vecteurs de $\R^3$ forment une base si et seulement si leur déterminant dans la base canonique est non nul.
-On reconnaît un déterminant de Vandermonde \prop{th.~1.14} :
-\[\dt{1&1&1\\x&1&2\\x^2&1&4}=V(x,1,2)=(1-x)(2-x)(2-1)=(x-1)(x-2).\]
-C'est une base si et seulement si $x\notin\{1,2\}$ (les trois nombres $x,1,2$ sont distincts).
-
-\q{4.a)} $T_1=3$, $T_2=\dt{3&1\\2&3}=9-2=7$. Pour $n\geq3$, on développe selon la première ligne \prop{méth.~1.4} :
-$T_n=3\,T_{n-1}-1\cdot\Delta_{1,2}$, où le mineur $\Delta_{1,2}$ a pour première colonne $(2,0,\dots,0)^T$ ; en le développant
-selon cette colonne, $\Delta_{1,2}=2\,T_{n-2}$. D'où $T_n=3T_{n-1}-2T_{n-2}$.
-
-\q{4.b)} Suite récurrente linéaire d'ordre 2 : $r^2=3r-2$, racines $1$ et $2$, donc $T_n=\lambda+\mu2^n$.
-$T_1=\lambda+2\mu=3$ et $T_2=\lambda+4\mu=7$ donnent $\mu=2$, $\lambda=-1$ :
-\[T_n=2^{n+1}-1.\]
-Contrôle : $T_3=3\times7-2\times3=15=2^4-1$.
-
-\q{5.} $\det A=\det(A^T)=\det(-A)=(-1)^3\det A=-\det A$, donc $\det A=0$ et $A$ n'est pas inversible. (La taille impaire est
-essentielle : $\pmat{0&-1\\1&0}$ est antisymétrique et inversible.)
-
-\q{6.a)} $\vv{AB}=(2,3)$, $\vv{AC}=(x-1,6)$. Alignés $\iff\det(\vv{AB},\vv{AC})=\dt{2&x-1\\3&6}=12-3(x-1)=15-3x=0\iff x=5$.
-
-\q{6.b)} Pour $x=1$ : $\det(\vv{AB},\vv{AC})=12$, donc l'aire vaut $\frac12|12|=6$.
-
-\begin{GRILLE}
-\begin{tabularx}{\linewidth}{QNN}
-\entete
-1.a & $\det(\lambda A)=\lambda^n\det A$, $\det(AB)$, $\det A^T$, $\det A^{-1}$. &
-  $\det(3A)=6$ : piège classique $\lambda$ au lieu de $\lambda^n$. $\det(-A)=2$ : même lacune.\\
-1.b & Effet des opérations élémentaires ; multilinéarité. &
-  (ii) $\neq2$ : transvection mal comprise. (iii) $=2$ : la colonne modifiée a le coefficient $2$, confusion transvection/dilatation.\\
-2 & Repérer la structure (somme constante), opérations sur lignes et colonnes, factorisation ; inversibilité. &
-  Développement brutal ou par Sarrus étendu : méthode « regarder d'abord » absente. Racine $-3$ oubliée : factorisation incomplète.\\
-3 & Base $\iff\det\neq0$ ; Vandermonde. & Recalcul complet sans reconnaître Vandermonde : formule non connue.\\
-4.a & Développement selon une ligne, signes $(-1)^{i+j}$, mineurs. &
-  $T_n=3T_{n-1}+2T_{n-2}$ : signe du cofacteur oublié. Mineur mal identifié : technique du développement fragile.\\
-4.b & Suites récurrentes linéaires d'ordre 2. & Constantes calées sur $T_0$ sans le justifier, ou mal calculées : méthode des suites.\\
-5 & Propriétés globales : $\det A^T$, $\det(\lambda A)$ avec $n$ impair. &
-  Recherche d'une matrice générale à coefficients : réflexe « appliquer $\det$ à la relation » absent.\\
-6 & Alignement, aire : interprétation géométrique de $\det$. & Oubli du $\frac12$ ou de la valeur absolue : aire du parallélogramme / du triangle confondues.\\
-\bottomrule
-\end{tabularx}
-\end{GRILLE}
-\fi
-
-\fi
-\ifnum\numexpr\CHAP*(\CHAP-4)\relax=0
-% ======================================================================
-%  CHAPITRE 4 — COURBES PARAMÉTRÉES
-% ======================================================================
-\bilan{4}{Courbes paramétrées planes}{15 min}
+\bilan{5}{Courbes paramétrées planes}{15 min}
 Le plan est rapporté à un repère orthonormé $(O,\ve\imath,\ve\jmath)$.
 
 \partie{Partie I --- Étude d'une courbe}
@@ -472,13 +550,12 @@ $\det(\ve a,\ve b)=\frac1{12}\neq0$ : $p=2$, $q=3$, donc \emph{point de rebrouss
 \end{tabularx}
 \end{GRILLE}
 \fi
-
 \fi
-\ifnum\numexpr\CHAP*(\CHAP-5)\relax=0
+\ifnum\numexpr\CHAP*(\CHAP-6)\relax=0
 % ======================================================================
-%  CHAPITRE 5 — MÉTRIQUE ET ENVELOPPES
+%  CHAPITRE 6 — MÉTRIQUE ET ENVELOPPES
 % ======================================================================
-\bilan{5}{Propriétés métriques et enveloppes}{13 min}
+\bilan{6}{Propriétés métriques et enveloppes}{13 min}
 Le plan est orienté et rapporté à un repère orthonormé direct.
 
 \partie{Partie I --- La spirale logarithmique}
@@ -550,6 +627,5 @@ donne $x=t$ et $y=2t^2-t^2=t^2$. Le point caractéristique est $(t,t^2)$ ; l'env
 \end{tabularx}
 \end{GRILLE}
 \fi
-
 \fi
 \end{document}

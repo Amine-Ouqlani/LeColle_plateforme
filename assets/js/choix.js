@@ -8,7 +8,7 @@ $('#contenu').innerHTML = `
     <a class="choix-carte" data-filiere="pt" href="pt.html">
       <span class="choix-tag">Filière PT</span>
       <span class="choix-titre">Mathématiques PT</span>
-      <span class="choix-texte">Cinq chapitres, des équations différentielles aux propriétés métriques : livrets, présentations, fiches, exercices bilan, problèmes, TD corrigés, annales et examens blancs.</span>
+      <span class="choix-texte">Six chapitres, de l'algèbre linéaire aux propriétés métriques des courbes : livrets, présentations, fiches, exercices bilan, problèmes, TD corrigés, annales et examens blancs.</span>
     </a>
     <a class="choix-carte" data-filiere="mp" href="mp.html">
       <span class="choix-tag">Filière MP</span>

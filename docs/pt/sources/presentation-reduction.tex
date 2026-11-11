@@ -140,7 +140,7 @@
 \newcommand{\objectif}[1]{\par\vspace{2pt}{\footnotesize\sffamily\color{Gris}Objectif : #1}}
 \newcommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\Sp}{\operatorname{Sp}}
 \newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
-\title{Le Collé --- Algèbre linéaire et réduction}
+\title{Le Collé --- Réduction}
 
 \begin{document}
 
@@ -149,13 +149,13 @@
 \begin{tikzpicture}[remember picture,overlay]
   \fill[Bleu] (current page.north west) rectangle (current page.south east);
   \node[anchor=north west,text=white!70!Bleu,font=\sffamily\scriptsize] at ([xshift=1cm,yshift=-1.2cm]current page.north west)
-    {LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 2\ \ ·\ \ SUPPORT DE SÉANCE};
+    {LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 3\ \ ·\ \ SUPPORT DE SÉANCE};
   \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{26}{30}\selectfont,text width=13cm] at ([xshift=1cm,yshift=-2.1cm]current page.north west)
-    {Algèbre linéaire\\ et réduction};
+    {Réduction};
   \fill[Ocre] ([xshift=1cm,yshift=-4.6cm]current page.north west) rectangle ([xshift=4cm,yshift=-4.65cm]current page.north west);
   \node[anchor=north west,text=white!80!Bleu,font=\normalsize,text width=12.5cm] at ([xshift=1cm,yshift=-5cm]current page.north west)
-    {Présentation pour expliquer, avec neuf exercices à chercher en séance ;\\ le \textbf{livre} pour relire, la \textbf{fiche} pour réviser.
-     Mêmes parties (§1.1 à §1.8), mêmes notations.};
+    {Présentation pour expliquer, avec six exercices à chercher en séance ;\\ le \textbf{livret} pour relire, la \textbf{fiche} pour réviser.
+     Mêmes parties (§1.1 à §1.6), mêmes notations.};
 \end{tikzpicture}
 \end{frame}
 
@@ -185,35 +185,33 @@
 \small
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{@{}l l r@{}}
-\multicolumn{3}{@{}l}{\sffamily\bfseries\color{Ocre}Séance 1 --- le langage}\\
-\textbf{\color{Bleu}1.1} & Semblables, sommes directes, trace & \color{Vert}Ex.~1, 2\\
-\textbf{\color{Bleu}1.2} & Sous-espaces stables & \color{Vert}Ex.~3\\
-\textbf{\color{Bleu}1.3} & Éléments propres & \color{Vert}Ex.~4\\
-\textbf{\color{Bleu}1.4} & Polynôme caractéristique & \color{Vert}Ex.~5\\[2pt]
-\multicolumn{3}{@{}l}{\sffamily\bfseries\color{Ocre}Séance 2 --- la réduction}\\
-\textbf{\color{Bleu}1.5} & Diagonalisation & \color{Vert}Ex.~6, 7\\
-\textbf{\color{Bleu}1.6} & Applications & \color{Vert}Ex.~8\\
-\textbf{\color{Bleu}1.7} & Trigonalisation & \color{Vert}Ex.~9\\
-\textbf{\color{Bleu}1.8} & Synthèse &
+\multicolumn{3}{@{}l}{\sffamily\bfseries\color{Ocre}Séance 1 --- vecteurs propres et diagonalisation}\\
+\textbf{\color{Bleu}1.1} & Éléments propres & \color{Vert}Ex.~1\\
+\textbf{\color{Bleu}1.2} & Polynôme caractéristique & \color{Vert}Ex.~2\\
+\textbf{\color{Bleu}1.3} & Diagonalisation & \color{Vert}Ex.~3, 4\\[2pt]
+\multicolumn{3}{@{}l}{\sffamily\bfseries\color{Ocre}Séance 2 --- les applications}\\
+\textbf{\color{Bleu}1.4} & Applications & \color{Vert}Ex.~5\\
+\textbf{\color{Bleu}1.5} & Trigonalisation & \color{Vert}Ex.~6\\
+\textbf{\color{Bleu}1.6} & Synthèse &
 \end{tabular}
 \column{0.4\textwidth}
 \begin{ASTU}[Le fil du chapitre]
 \small Une seule question : \textbf{dans quelle base la matrice de $f$ est-elle la plus simple ?}\\[3pt]
-Sous-espace stable $\to$ droite stable $\to$ vecteur propre $\to$ base de vecteurs propres.
+Droite stable (chapitre~1) $\to$ vecteur propre $\to$ polynôme caractéristique $\to$ base de vecteurs propres.
 \end{ASTU}
-{\small\color{Gris}Prérequis : bases, dimension, théorème du rang, matrices ; le chapitre \emph{Déterminants}.}
+{\small\color{Gris}Prérequis : chapitre~1 (sommes directes, sous-espaces stables, trace) ; chapitre~2 (déterminants).}
 \end{columns}
 \end{frame}
 
-\chapitre{Chapitre 2 · Algèbre linéaire et réduction}
-\newcommand{\rmI}{\rmitem{1.1}{Semblables, sommes directes, trace}\rmitem{1.2}{Sous-espaces stables}\rmitem{1.3}{Éléments propres}
-  \rmitem{1.4}{Polynôme caractéristique}\rmitem{1.5}{Diagonalisation}\rmitem{1.6}{Applications}\rmitem{1.7}{Trigonalisation}\rmitem{1.8}{Synthèse}}
+\chapitre{Chapitre 3 · Réduction}
+\newcommand{\rmI}{\rmitem{1.1}{Éléments propres}\rmitem{1.2}{Polynôme caractéristique}\rmitem{1.3}{Diagonalisation}
+  \rmitem{1.4}{Applications}\rmitem{1.5}{Trigonalisation}\rmitem{1.6}{Synthèse}}
 
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
   \fill[Bleu] (current page.north west) rectangle (current page.south east);
   \fill[Ocre] ([yshift=-4.2cm]current page.north west) rectangle ([yshift=-4.25cm,xshift=5cm]current page.north west);
-  \node[anchor=north west,text=white!70!Bleu,font=\sffamily\small] at ([xshift=1cm,yshift=-1.6cm]current page.north west) {Chapitre 2};
+  \node[anchor=north west,text=white!70!Bleu,font=\sffamily\small] at ([xshift=1cm,yshift=-1.6cm]current page.north west) {Chapitre 3};
   \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{30}{32}\selectfont] at ([xshift=1cm,yshift=-2.3cm]current page.north west) {Réduction};
   \node[anchor=north west,text width=12.5cm,text=white,font=\large] at ([xshift=1cm,yshift=-4.7cm]current page.north west)
     {Choisir la base qui rend la matrice diagonale.\\[2pt]
@@ -252,265 +250,10 @@ Quels vecteurs sont \textbf{simplement dilatés} ? Comment les \textbf{trouver} 
 \end{frame}
 
 % =====================================================================
-\partie{1.1}{Semblables, sommes directes, trace}{Qu'est-ce qui ne dépend pas de la base ? Comment découper un espace en morceaux ?}{\rmI}
-
-\begin{frame}{Changement de base, matrices semblables}
-\begin{PROP}[Changement de base \livre{prop.~1.1}]
-$P$ matrice de passage de $\mathcal B$ à $\mathcal B'$ (colonnes : vecteurs de $\mathcal B'$ en coordonnées dans $\mathcal B$) :
-\[\Mat_{\mathcal B'}(f)=P^{-1}\,\Mat_{\mathcal B}(f)\,P.\]
-\end{PROP}
-\begin{DEF}
-$A$ et $B$ sont \emph{semblables} s'il existe $P$ inversible avec $B=P^{-1}AP$ : même endomorphisme, deux bases.
-\end{DEF}
-\pause
-\begin{RETENIR}
-\textbf{Invariants de similitude} : rang, déterminant, trace, polynôme caractéristique, valeurs propres.\\
-Deux matrices qui diffèrent par un invariant ne sont \emph{pas} semblables. (La réciproque est fausse.)
-\end{RETENIR}
-\end{frame}
-
-\begin{frame}{Somme de plusieurs sous-espaces, somme directe}
-\begin{columns}[T]
-\column{0.58\textwidth}
-\begin{DEF}
-$F_1+\dots+F_p=\{x_1+\dots+x_p,\ x_i\in F_i\}$.\\
-Somme \emph{directe} $F_1\oplus\dots\oplus F_p$ : décomposition \emph{unique}.
-\end{DEF}
-\begin{PROP}[Caractérisation \livre{prop.~1.4}]
-Directe $\iff$ \big($x_1+\dots+x_p=0$, $x_i\in F_i\Rightarrow$ tous nuls\big).\\
-Pour deux : $F\cap G=\{0\}$.
-\end{PROP}
-\pause
-\begin{PROP}[Base adaptée \livre{th.~1.5}]
-Somme directe : bases concaténées $=$ base ;\ $\dim\bigoplus F_i=\sum\dim F_i$.
-\end{PROP}
-\column{0.38\textwidth}
-\begin{PIEGE}[Trois droites du plan]
-\centering
-\begin{tikzpicture}[scale=0.8]
-  \draw[Bleu,thick] (-1.3,0)--(1.5,0) node[right,font=\scriptsize]{$\vect(1,0)$};
-  \draw[Ocre,thick] (0,-1.1)--(0,1.4) node[above,font=\scriptsize]{$\vect(0,1)$};
-  \draw[Brique,thick] (-1,-1)--(1.3,1.3) node[right,font=\scriptsize]{$\vect(1,1)$};
-\end{tikzpicture}\\[2pt]
-\raggedright Intersections deux à deux nulles, mais $(1,0)+(0,1)-(1,1)=0$ : \textbf{pas directe}.
-\end{PIEGE}
-\end{columns}
-{\small En dimension finie : $E=F\oplus G\iff F\cap G=\{0\}$ \ et \ $\dim F+\dim G=\dim E$.}
-\end{frame}
-
-% ---------------------------------------------------------------- EXERCICE 1
-\begin{frame}{\badgeexo{1}Un plan et une droite}
-\begin{ENONCE}[4 min]
-Dans $\R^3$, soit $F$ le plan d'équation $x-y+2z=0$.
-\begin{enumerate}
-\item Montrer que $G=\vect\big((1,1,1)\big)$ est un supplémentaire de $F$, et décomposer $v=(x,y,z)$ selon $\R^3=F\oplus G$.
-\item $H=\vect\big((1,1,0)\big)$ est-il un supplémentaire de $F$ ?
-\end{enumerate}
-\objectif{la caractérisation par l'intersection et les dimensions.}
-\end{ENONCE}
-\pause
-\begin{INDICE}
-Écrire $v=w+m(1,1,1)$ avec $w\in F$, et reporter dans l'équation de $F$.
-\end{INDICE}
-\end{frame}
-
-\begin{frame}{\badgecor{1}Un plan et une droite}
-\begin{columns}[T]
-\column{0.4\textwidth}
-\begin{RAIS}
-Une droite $\vect(u)$ est un supplémentaire d'un plan $F$ de $\R^3$ exactement quand $u\notin F$ : intersection nulle, et $2+1=3$.
-\end{RAIS}
-\begin{OUTIL}
-$E=F\oplus G\iff F\cap G=\{0\}$ et $\dim F+\dim G=\dim E$.
-\end{OUTIL}
-\column{0.57\textwidth}
-\etape{1.} $(1,1,1)$ : $1-1+2=2\neq0$, donc $(1,1,1)\notin F$ : $F\cap G=\{0\}$, et $2+1=3$ : $\R^3=F\oplus G$.\\[3pt]
-\pause
-Si $v=w+m(1,1,1)$, $w\in F$ : $(x-m)-(y-m)+2(z-m)=0$, donc
-\[m=\frac{x-y+2z}2,\qquad v=\underbrace{v-m(1,1,1)}_{\in F}+\underbrace{m(1,1,1)}_{\in G}.\]
-\pause
-\etape{2.} $1-1+0=0$ : $(1,1,0)\in F$, donc $H\subset F$ : \textbf{non}.
-\end{columns}
-\end{frame}
-
-\begin{frame}{La trace}
-\begin{columns}[T]
-\column{0.55\textwidth}
-\begin{DEF}
-$\tr(A)=\sum_{i=1}^na_{i,i}$ : somme des coefficients diagonaux.
-\end{DEF}
-\begin{PROP}[\livre{prop.~1.7}]
-\begin{itemize}
-\item $\tr$ est linéaire ;
-\item $\tr(AB)=\tr(BA)$ ;
-\item $\tr(P^{-1}AP)=\tr(A)$ : on définit $\tr(f)$.
-\end{itemize}
-\end{PROP}
-\column{0.41\textwidth}
-\pause
-\textbf{Preuve :}
-\[\tr(AB)=\sum_{i,k}a_{i,k}b_{k,i}=\tr(BA).\]
-Puis $\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr A$.
-\end{columns}
-\pause
-\begin{columns}[T]
-\column{0.48\textwidth}
-\begin{EX}[Projecteur]
-Base adaptée : $\mathrm{diag}(I_r,0)$, donc $\tr(p)=r=\rg(p)$.
-\end{EX}
-\column{0.48\textwidth}
-\begin{PIEGE}
-$\tr(AB)\neq\tr A\,\tr B$ ; \ $\tr(ABC)\neq\tr(BAC)$ en général.
-\end{PIEGE}
-\end{columns}
-\end{frame}
-
-% ---------------------------------------------------------------- EXERCICE 2
-\begin{frame}{\badgeexo{2}Semblables ou non ?}
-\begin{ENONCE}[5 min]
-Les matrices suivantes sont-elles semblables ? Justifier en une ligne.
-\[\text{(a)}\ \begin{pmatrix}1&2\\0&3\end{pmatrix}\ \text{et}\ \begin{pmatrix}2&0\\1&2\end{pmatrix}\qquad
-\text{(b)}\ I_2\ \text{et}\ \begin{pmatrix}1&1\\0&1\end{pmatrix}\qquad
-\text{(c)}\ \begin{pmatrix}1&0\\0&0\end{pmatrix}\ \text{et}\ \begin{pmatrix}0&0\\0&0\end{pmatrix}\]
-\objectif{utiliser les invariants, et voir leurs limites.}
-\end{ENONCE}
-\pause
-\begin{INDICE}
-Comparer trace, déterminant, rang. En (b), quelles sont les matrices semblables à $I_2$ ?
-\end{INDICE}
-\end{frame}
-
-\begin{frame}{\badgecor{2}Semblables ou non ?}
-\begin{columns}[T]
-\column{0.4\textwidth}
-\begin{RAIS}
-Un invariant différent suffit pour dire \emph{non}. Mais des invariants égaux ne suffisent pas pour dire \emph{oui}.
-\end{RAIS}
-\begin{OUTIL}
-Rang, trace, déterminant invariants par similitude.
-\end{OUTIL}
-\column{0.57\textwidth}
-\etape{(a)} Même trace $4$, mais déterminants $3$ et $4$ : \textbf{non}.\\[4pt]
-\pause
-\etape{(b)} Même trace $2$, même déterminant $1$, même rang\dots\ mais $P^{-1}I_2P=I_2$ pour toute $P$ : la seule matrice semblable à $I_2$ est $I_2$. \textbf{Non}.\\[4pt]
-\pause
-\etape{(c)} Rangs $1$ et $0$ : \textbf{non}.
-\end{columns}
-\begin{ASTU}
-(b) prépare le §1.5 : $\begin{pmatrix}1&1\\0&1\end{pmatrix}$ ne sera pas diagonalisable.
-\end{ASTU}
-\end{frame}
-
-\begin{frame}{Hyperplans}
-\begin{DEF}
-Hyperplan de $E$ ($\dim E=n$) : sous-espace qui admet une droite comme supplémentaire ; dimension $n-1$.
-\end{DEF}
-\begin{PROP}[\livre{prop.~1.10}]
-\begin{itemize}
-\item Hyperplans $=$ noyaux des formes linéaires non nulles : une équation $a_1x_1+\dots+a_nx_n=0$.
-\item $H=\Ker\varphi$, $u\notin H$ $\Rightarrow$ $E=H\oplus\vect(u)$ \quad (exercice~1).
-\item $p$ hyperplans : intersection de dimension $\geq n-p$ ; un sous-espace de dimension $n-p$ est défini par $p$ équations.
-\end{itemize}
-\end{PROP}
-\begin{EX}[Lecture géométrique]
-Dans $\R^3$ : un plan vectoriel $=$ une équation ; une droite $=$ deux équations (deux plans qui se coupent).
-\end{EX}
-\end{frame}
-
-% =====================================================================
-\partie{1.2}{Sous-espaces stables}{Comment lire sur une matrice qu'un sous-espace est « respecté » par $f$ ?}{\rmI}
-
-\begin{frame}{Sous-espace stable, endomorphisme induit}
-\begin{DEF}
-$F$ est \emph{stable} par $f$ si $f(F)\subset F$. L'endomorphisme induit $f_F:F\to F$, $x\mapsto f(x)$.
-\end{DEF}
-\begin{PROP}[\livre{prop.~1.12}]
-\begin{itemize}
-\item $F=\vect(e_1,\dots,e_p)$ stable $\iff f(e_j)\in F$ pour tout $j$ : on vérifie sur une base.
-\item $\Ker f$ et $\Im f$ sont stables par $f$ ; si $f\circ g=g\circ f$, $\Ker g$ et $\Im g$ sont stables par $f$.
-\end{itemize}
-\end{PROP}
-\pause
-\textbf{Preuve du second point :} $g(x)=0\Rightarrow g\big(f(x)\big)=f\big(g(x)\big)=0$ ; \ $f\big(g(x)\big)=g\big(f(x)\big)\in\Im g$.
-\end{frame}
-
-\begin{frame}{Traduction matricielle : des blocs}
-\begin{columns}[c]
-\column{0.58\textwidth}
-\begin{PROP}[Théorème \livre{th.~1.13}]
-Base adaptée à $F$ ($p$ premiers vecteurs dans $F$) :
-\[F\text{ stable}\iff\Mat(f)=\begin{pmatrix}A&B\\0&C\end{pmatrix}.\]
-$E=F\oplus G$, les deux stables $\iff\begin{pmatrix}A&0\\0&C\end{pmatrix}$.\\
-Alors $\det f=\det A\det C$, \ $\tr f=\tr A+\tr C$.
-\end{PROP}
-\column{0.38\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.55]
-  \draw[Filet] (0,0) rectangle (4,4);
-  \fill[Fond] (0,1.5) rectangle (2.5,4); \node at (1.25,2.75) {$A$};
-  \node at (3.25,2.75) {$B$};
-  \node[Brique] at (1.25,0.75) {$0$};
-  \fill[Fond] (2.5,0) rectangle (4,1.5); \node at (3.25,0.75) {$C$};
-  \draw[Gris,dashed] (2.5,0)--(2.5,4); \draw[Gris,dashed] (0,1.5)--(4,1.5);
-  \node[font=\scriptsize,Gris] at (1.25,4.4) {images de $e_1,\dots,e_p$};
-\end{tikzpicture}\\[2pt]
-{\footnotesize\color{Gris}le $0$ dit : les $f(e_j)$, $j\leq p$, restent dans $F$}
-\end{columns}
-\pause
-\begin{columns}[T]
-\column{0.58\textwidth}
-\begin{FORM}[Projecteurs, symétries]
-$p^2=p$ : $\mathrm{diag}(I_r,0)$ dans $\Im p\oplus\Ker p$.\\
-$s^2=\Id$ : $\mathrm{diag}(I_r,-I_{n-r})$ dans $\Ker(s-\Id)\oplus\Ker(s+\Id)$.
-\end{FORM}
-\column{0.38\textwidth}
-\begin{PROP}[Droite stable \livre{prop.~1.14}]
-$\vect(u)$ stable $\iff f(u)=\lambda u$.
-\end{PROP}
-\end{columns}
-\end{frame}
-
-% ---------------------------------------------------------------- EXERCICE 3
-\begin{frame}{\badgeexo{3}Chercher des droites stables}
-\begin{ENONCE}[6 min]
-Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1&2&0\\2&1&0\\0&0&-1\end{pmatrix}$.
-\begin{enumerate}
-\item Montrer que le plan $F$ : $z=0$ et la droite $\vect(e_3)$ sont stables par $f$. Que dit la forme de $A$ ?
-\item Montrer que les droites engendrées par $(1,1,0)$ et $(1,-1,0)$ sont stables.
-\item En déduire une base dans laquelle la matrice de $f$ est diagonale.
-\end{enumerate}
-\objectif{passer des sous-espaces stables aux vecteurs propres.}
-\end{ENONCE}
-\end{frame}
-
-\begin{frame}{\badgecor{3}Chercher des droites stables}
-\begin{columns}[T]
-\column{0.4\textwidth}
-\begin{RAIS}
-Les blocs se lisent sur $A$ ; une droite est stable quand son vecteur directeur est dilaté. Trois droites stables
-supplémentaires : matrice diagonale.
-\end{RAIS}
-\begin{OUTIL}
-Théorème~1.13 ; proposition~1.14.
-\end{OUTIL}
-\column{0.57\textwidth}
-\etape{1.} $f(x,y,0)=(x+2y,2x+y,0)\in F$ ; $f(e_3)=-e_3$. $A$ est diagonale par blocs : $\begin{pmatrix}A_1&0\\0&-1\end{pmatrix}$.\\[3pt]
-\pause
-\etape{2.} $A(1,1,0)^T=(3,3,0)^T$ : dilatation de rapport $3$. $A(1,-1,0)^T=(-1,1,0)^T$ : rapport $-1$.\\[3pt]
-\pause
-\etape{3.} $\mathcal B'=\big((1,1,0),(1,-1,0),e_3\big)$ est une base (déterminant non nul), et
-\[\Mat_{\mathcal B'}(f)=\mathrm{diag}(3,-1,-1).\]
-\end{columns}
-\begin{ASTU}
-Ces vecteurs, simplement dilatés, sont les \emph{vecteurs propres} : c'est la notion suivante.
-\end{ASTU}
-\end{frame}
-
-% =====================================================================
-\partie{1.3}{Éléments propres}{Quels vecteurs sont simplement dilatés par $f$ ?}{\rmI}
+\partie{1.1}{Éléments propres}{Quels vecteurs sont simplement dilatés par $f$ ?}{\rmI}
 
 \begin{frame}{Valeurs propres, vecteurs propres, sous-espaces propres}
-\begin{DEF}[Définition \livre{déf.~1.15}]
+\begin{DEF}[Définition \livre{déf.~1.1}]
 \begin{itemize}
 \item $\lambda$ est \emph{valeur propre} de $f$ s'il existe $x\neq0$ tel que $f(x)=\lambda x$ ; $x$ est un \emph{vecteur propre} (\alert{non nul}).
 \item Sous-espace propre : $E_\lambda(f)=\Ker(f-\lambda\Id_E)$. \quad Spectre (dimension finie) : $\Sp(f)$.
@@ -532,7 +275,7 @@ $P\mapsto XP'$ : $X^k$, valeur propre $k$.
 \end{frame}
 
 \begin{frame}{Des vecteurs propres de valeurs distinctes sont libres}
-\begin{PROP}[Théorème \livre{th.~1.18}]
+\begin{PROP}[Théorème \livre{th.~1.4}]
 Pour des valeurs propres \emph{distinctes} $\lambda_1,\dots,\lambda_p$, la somme $E_{\lambda_1}+\dots+E_{\lambda_p}$ est directe.
 Une famille de vecteurs propres de valeurs propres distinctes est libre. En dimension $n$ : au plus $n$ valeurs propres.
 \end{PROP}
@@ -546,7 +289,7 @@ Résoudre $(A-\lambda I_n)X=0$ ;\quad $\dim E_\lambda=n-\rg(A-\lambda I_n)$ \ (t
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 4
-\begin{frame}{\badgeexo{4}Éléments propres sans matrice}
+\begin{frame}{\badgeexo{1}Éléments propres sans matrice}
 \begin{ENONCE}[6 min]
 \begin{enumerate}
 \item Sur $\R_n[X]$, soit $s(P)=P(-X)$. Déterminer ses valeurs propres et ses sous-espaces propres.
@@ -561,7 +304,7 @@ Existe-t-il une base de $\R_2[X]$ formée de vecteurs propres de $D$ ?
 \end{INDICE}
 \end{frame}
 
-\begin{frame}{\badgecor{4}Éléments propres sans matrice}
+\begin{frame}{\badgecor{1}Éléments propres sans matrice}
 \begin{columns}[T]
 \column{0.4\textwidth}
 \begin{RAIS}
@@ -585,12 +328,12 @@ $D$ sera notre premier exemple d'endomorphisme \emph{non diagonalisable}.
 \end{frame}
 
 % =====================================================================
-\partie{1.4}{Polynôme caractéristique}{Comment trouver les valeurs propres d'une matrice ?}{\rmI}
+\partie{1.2}{Polynôme caractéristique}{Comment trouver les valeurs propres d'une matrice ?}{\rmI}
 
 \begin{frame}{Le polynôme caractéristique}
 \[\lambda\in\Sp(A)\iff A-\lambda I_n\text{ non inversible}\iff\det(\lambda I_n-A)=0.\]
 \pause
-\begin{PROP}[\livre{prop.~1.21, th.~1.22}]
+\begin{PROP}[\livre{prop.~1.7, th.~1.8}]
 $\chi_A(x)=\det(xI_n-A)$ est un polynôme \textbf{unitaire} de degré $n$ :
 \[\chi_A(x)=x^n-\tr(A)\,x^{n-1}+\dots+(-1)^n\det A\qquad(n=2 :\ x^2-\tr(A)\,x+\det A).\]
 $\Sp(A)$ = racines de $\chi_A$ \emph{dans $\K$} ; \ semblables $\Rightarrow$ même $\chi$ (on définit $\chi_f$) ;\\
@@ -603,7 +346,7 @@ $\det(A-xI_n)=(-1)^n\chi_A(x)$ : mêmes racines, mais $\chi_A$ est \emph{unitair
 \end{frame}
 
 \begin{frame}{Multiplicité et dimension}
-\begin{PROP}[Théorème \livre{th.~1.24}]
+\begin{PROP}[Théorème \livre{th.~1.10}]
 $m(\lambda)$ : multiplicité de $\lambda$ comme racine de $\chi_f$.\qquad $1\leq\dim E_\lambda(f)\leq m(\lambda)$.
 \end{PROP}
 \pause
@@ -626,7 +369,7 @@ Contrôles : somme des racines $=\tr A$, produit $=\det A$.
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 5
-\begin{frame}{\badgeexo{5}Valeurs propres et dimensions}
+\begin{frame}{\badgeexo{2}Valeurs propres et dimensions}
 \begin{ENONCE}[7 min]
 Soit $K=\begin{pmatrix}1&1&0\\1&1&0\\1&-1&2\end{pmatrix}$.
 \begin{enumerate}
@@ -642,14 +385,14 @@ Dans $xI_3-K$, la troisième colonne n'a qu'un coefficient non nul.
 \end{INDICE}
 \end{frame}
 
-\begin{frame}{\badgecor{5}Valeurs propres et dimensions}
+\begin{frame}{\badgecor{2}Valeurs propres et dimensions}
 \begin{columns}[T]
 \column{0.38\textwidth}
 \begin{RAIS}
 Développer selon la colonne à deux zéros : le facteur $(x-2)$ sort. Puis $\dim E_\lambda=3-\rg(K-\lambda I_3)$.
 \end{RAIS}
 \begin{OUTIL}
-Méthodes~1.1 et~1.2 ; théorème~1.24.
+Méthodes~1.1 et~1.2 ; théorème~1.10.
 \end{OUTIL}
 \column{0.59\textwidth}
 \etape{1.} $\chi_K=(x-2)\dt{x-1&-1\\-1&x-1}=(x-2)\big((x-1)^2-1\big)=x(x-2)^2.$\\
@@ -661,12 +404,12 @@ $K-2I_3=\begin{pmatrix}-1&1&0\\1&-1&0\\1&-1&0\end{pmatrix}$, rang $1$, $\dim E_2
 \etape{3.} $E_2$ : $x=y$, base $(1,1,0)$, $(0,0,1)$. \ $E_0$ : $x+y=0$, $x-y+2z=0$ : $(1,-1,-1)$.
 \end{columns}
 \begin{ASTU}
-$\dim E_0+\dim E_2=3$ : base de vecteurs propres (critère du §1.5).
+$\dim E_0+\dim E_2=3$ : base de vecteurs propres (critère du §1.3).
 \end{ASTU}
 \end{frame}
 
 % =====================================================================
-\partie{1.5}{Diagonalisation}{Quand a-t-on assez de vecteurs propres pour former une base ?}{\rmI}
+\partie{1.3}{Diagonalisation}{Quand a-t-on assez de vecteurs propres pour former une base ?}{\rmI}
 
 \begin{frame}{Diagonalisable : définition et critères}
 \begin{DEF}
@@ -674,7 +417,7 @@ $f$ diagonalisable : il existe une base de \emph{vecteurs propres}.\
 $A$ diagonalisable : $A=PDP^{-1}$, colonnes de $P$ = vecteurs propres, $D$ = valeurs propres \emph{dans le même ordre}.
 \end{DEF}
 \pause
-\begin{PROP}[Critères \livre{th.~1.27}]
+\begin{PROP}[Critères \livre{th.~1.13}]
 $f$ diagonalisable $\iff E=\bigoplus_\lambda E_\lambda\iff\sum_\lambda\dim E_\lambda=n$\\
 \hspace*{2.95cm}$\iff\chi_f$ scindé \textbf{et} $\dim E_\lambda=m(\lambda)$ pour toute valeur propre.
 \end{PROP}
@@ -682,7 +425,7 @@ $f$ diagonalisable $\iff E=\bigoplus_\lambda E_\lambda\iff\sum_\lambda\dim E_\la
 \begin{columns}[T]
 \column{0.5\textwidth}
 \begin{RETENIR}
-$n$ valeurs propres \textbf{distinctes} $\Rightarrow$ diagonalisable \livre{cor.~1.28}. Réciproque fausse ($I_n$).
+$n$ valeurs propres \textbf{distinctes} $\Rightarrow$ diagonalisable \livre{cor.~1.14}. Réciproque fausse ($I_n$).
 \end{RETENIR}
 \column{0.46\textwidth}
 \begin{ASTU}[Réflexe]
@@ -704,7 +447,7 @@ Trois valeurs distinctes : diagonalisable. \ $E_2=\vect(0,1,1)$, $E_4=\vect(1,0,
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 6
-\begin{frame}{\badgeexo{6}Diagonalisable ou non ?}
+\begin{frame}{\badgeexo{3}Diagonalisable ou non ?}
 \begin{ENONCE}[5 min]
 Sans calcul long, dire si chaque matrice est diagonalisable dans $\mathcal M_n(\R)$, puis dans $\mathcal M_n(\C)$.
 \[\text{(a)}\begin{pmatrix}1&1\\0&2\end{pmatrix}\quad\text{(b)}\begin{pmatrix}3&1\\0&3\end{pmatrix}\quad\text{(c)}\begin{pmatrix}0&-1\\1&0\end{pmatrix}\quad
@@ -713,14 +456,14 @@ Sans calcul long, dire si chaque matrice est diagonalisable dans $\mathcal M_n(\
 \end{ENONCE}
 \end{frame}
 
-\begin{frame}{\badgecor{6}Diagonalisable ou non ?}
+\begin{frame}{\badgecor{3}Diagonalisable ou non ?}
 \begin{columns}[T]
 \column{0.38\textwidth}
 \begin{RAIS}
 Avant tout calcul : triangulaire ? valeurs distinctes ? une seule valeur propre ? $\chi$ scindé ? rang $1$ ?
 \end{RAIS}
 \begin{OUTIL}
-Corollaire~1.28 ; réflexe « une seule valeur propre » ; $\chi$ scindé.
+Corollaire~1.14 ; réflexe « une seule valeur propre » ; $\chi$ scindé.
 \end{OUTIL}
 \column{0.59\textwidth}
 \etape{(a)} Triangulaire, valeurs $1\neq2$ : \textbf{oui} (sur $\R$ et $\C$).\\[2pt]
@@ -736,7 +479,7 @@ Corollaire~1.28 ; réflexe « une seule valeur propre » ; $\chi$ scindé.
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 7
-\begin{frame}{\badgeexo{7}Diagonaliser, avec une valeur propre double}
+\begin{frame}{\badgeexo{4}Diagonaliser, avec une valeur propre double}
 \begin{ENONCE}[8 min]
 Diagonaliser $A=\begin{pmatrix}2&0&1\\0&1&0\\1&0&2\end{pmatrix}$ : donner $P$ inversible et $D$ diagonale telles que $A=PDP^{-1}$, puis
 vérifier $AP=PD$ sur une colonne.
@@ -748,7 +491,7 @@ Développer $\chi_A$ selon la deuxième ligne.
 \end{INDICE}
 \end{frame}
 
-\begin{frame}{\badgecor{7}Diagonaliser, avec une valeur propre double}
+\begin{frame}{\badgecor{4}Diagonaliser, avec une valeur propre double}
 \begin{columns}[T]
 \column{0.38\textwidth}
 \begin{RAIS}
@@ -769,10 +512,10 @@ Méthode~1.3 ; critère $\dim E_\lambda=m(\lambda)$.
 \end{frame}
 
 % =====================================================================
-\partie{1.6}{Applications}{Que gagne-t-on à diagonaliser ?}{\rmI}
+\partie{1.4}{Applications}{Que gagne-t-on à diagonaliser ?}{\rmI}
 
 \begin{frame}{Puissances, suites couplées}
-\begin{PROP}[\livre{prop.~1.33}]
+\begin{PROP}[\livre{prop.~1.19}]
 $A=PDP^{-1}\Rightarrow A^k=PD^kP^{-1}$, \ $D^k=\mathrm{diag}(\lambda_1^k,\dots,\lambda_n^k)$ ; \ $k\in\Z$ si $A$ est inversible.
 \end{PROP}
 \pause
@@ -787,7 +530,7 @@ avec $s_{k+1}=3s_k$, $d_{k+1}=-d_k$. \ Donc $u_k=\frac{3^ks_0+(-1)^kd_0}2$.
 \end{frame}
 
 \begin{frame}{Équations matricielles}
-\begin{PROP}[\livre{prop.~1.35}]
+\begin{PROP}[\livre{prop.~1.21}]
 $D$ diagonale à coefficients \textbf{distincts} : $MD=DM\iff M$ diagonale \quad (coefficient $(i,j)$ : $m_{i,j}(d_j-d_i)$).
 \end{PROP}
 \pause
@@ -803,7 +546,7 @@ Polynômes d'endomorphismes ; systèmes $X'=AX$ (ils se traiteraient comme les s
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 8
-\begin{frame}{\badgeexo{8}La suite de Fibonacci}
+\begin{frame}{\badgeexo{5}La suite de Fibonacci}
 \begin{ENONCE}[8 min]
 $F_0=0$, $F_1=1$, $F_{k+2}=F_{k+1}+F_k$. On pose $X_k=\begin{pmatrix}F_k\\F_{k+1}\end{pmatrix}$.
 \begin{enumerate}
@@ -819,7 +562,7 @@ $\chi_A=x^2-x-1$. Toute coordonnée de $X_k$ est combinaison fixe de $\varphi^k$
 \end{INDICE}
 \end{frame}
 
-\begin{frame}{\badgecor{8}La suite de Fibonacci}
+\begin{frame}{\badgecor{5}La suite de Fibonacci}
 \begin{columns}[T]
 \column{0.4\textwidth}
 \begin{RAIS}
@@ -827,7 +570,7 @@ Une récurrence linéaire est un $X_{k+1}=AX_k$. Diagonaliser $A$ montre que $F_
 fixent $\alpha$, $\beta$.
 \end{RAIS}
 \begin{OUTIL}
-$\chi=x^2-\tr\,x+\det$ ; corollaire~1.28 ; $A^k=PD^kP^{-1}$.
+$\chi=x^2-\tr\,x+\det$ ; corollaire~1.14 ; $A^k=PD^kP^{-1}$.
 \end{OUTIL}
 \column{0.57\textwidth}
 \etape{1.} $A=\begin{pmatrix}0&1\\1&1\end{pmatrix}$, $\chi_A=x^2-x-1$, racines $\varphi\neq\psi$ réelles : diagonalisable.\\[3pt]
@@ -842,14 +585,14 @@ La plus grande valeur propre (en module) dicte le comportement à l'infini.
 \end{frame}
 
 % =====================================================================
-\partie{1.7}{Trigonalisation}{Et quand ce n'est pas diagonalisable ?}{\rmI}
+\partie{1.5}{Trigonalisation}{Et quand ce n'est pas diagonalisable ?}{\rmI}
 
 \begin{frame}{Trigonaliser ; trace et déterminant}
-\begin{PROP}[\livre{th.~1.37, prop.~1.38}]
+\begin{PROP}[\livre{th.~1.23, prop.~1.24}]
 Trigonalisable (semblable à une triangulaire) $\iff\chi$ scindé \ (\emph{admis}). Toute matrice de $\Mn{\C}$ est trigonalisable.\\
 Si $\chi_A=\prod(x-\lambda_i)$ (avec multiplicités) :\qquad $\tr A=\sum\lambda_i$,\qquad $\det A=\prod\lambda_i$.
 \end{PROP}
-{\footnotesize\color{Gris}Aucune technique générale de trigonalisation n'est au programme : les exercices la guident (TD, exercice~26).}
+{\footnotesize\color{Gris}Aucune technique générale de trigonalisation n'est au programme : les exercices la guident (TD, exercice~21).}
 \pause
 \begin{columns}[T]
 \column{0.5\textwidth}
@@ -865,7 +608,7 @@ $A^p=0$, $AX=\lambda X$ : $\lambda^pX=0$, donc $\Sp_\C(A)=\{0\}$, $\chi_A=x^n$, 
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 9
-\begin{frame}{\badgeexo{9}Valeurs propres en une ligne}
+\begin{frame}{\badgeexo{6}Valeurs propres en une ligne}
 \begin{ENONCE}[4 min]
 Sans calculer de polynôme caractéristique, donner les valeurs propres (avec multiplicités) et dire si la matrice est diagonalisable :
 \[\text{(a)}\ \begin{pmatrix}1&1&1\\2&2&2\\3&3&3\end{pmatrix}\qquad\text{(b)}\ \begin{pmatrix}1&-1\\1&-1\end{pmatrix}\qquad
@@ -874,14 +617,14 @@ Sans calculer de polynôme caractéristique, donner les valeurs propres (avec mu
 \end{ENONCE}
 \end{frame}
 
-\begin{frame}{\badgecor{9}Valeurs propres en une ligne}
+\begin{frame}{\badgecor{6}Valeurs propres en une ligne}
 \begin{columns}[T]
 \column{0.38\textwidth}
 \begin{RAIS}
 Le rang donne $\dim E_0$ ; la trace donne la somme des valeurs propres, le déterminant leur produit.
 \end{RAIS}
 \begin{OUTIL}
-Proposition~1.38 ; théorème du rang.
+Proposition~1.24 ; théorème du rang.
 \end{OUTIL}
 \column{0.59\textwidth}
 \etape{(a)} Rang $1$ : $\dim E_0=2$, donc $0$ d'ordre $\geq2$ ; la dernière vaut $\tr=6$. Valeurs $0,0,6$ ; $\dim E_0+\dim E_6=3$ :
@@ -894,7 +637,7 @@ Proposition~1.38 ; théorème du rang.
 \end{frame}
 
 % =====================================================================
-\partie{1.8}{Synthèse}{Devant une question d'algèbre linéaire, par quoi commencer ?}{\rmI}
+\partie{1.6}{Synthèse}{Devant une question de réduction, par quoi commencer ?}{\rmI}
 
 \begin{frame}{Quelle méthode ?}
 \small
@@ -902,8 +645,6 @@ Proposition~1.38 ; théorème du rang.
 \begin{tabular}{@{}p{4.6cm}p{9.2cm}@{}}
 \toprule
 \textbf{Question} & \textbf{Méthode}\\\midrule
-$E=F\oplus G$ ? & intersection nulle et somme des dimensions\\
-$F$ stable par $f$ ? & images d'une base de $F$ ; forme triangulaire par blocs\\
 $\lambda$ valeur propre ? $\dim E_\lambda$ ? & $\rg(A-\lambda I_n)<n$ ; \ $\dim E_\lambda=n-\rg(A-\lambda I_n)$\\
 valeurs propres & $\chi_A$ \textbf{factorisé} ; contrôle par $\tr$ et $\det$ ; ou rang, trace, relation ($A^2=I$, $A^p=0$\dots)\\
 diagonalisable ? & distinctes ; sinon $\dim E_\lambda=m(\lambda)$ ; $\chi$ scindé ; « une seule valeur propre »\\
@@ -918,7 +659,6 @@ endomorphisme de polynômes, de fonctions & écrire $f(x)=\lambda x$ directement
 \begin{PIEGE}[Pièges fréquents]
 \begin{itemize}
 \item Vecteur propre \emph{non nul}.
-\item Somme directe de trois sous-espaces : les intersections deux à deux ne suffisent pas.
 \item $\chi$ non scindé sur $\R$ (rotation).
 \item Valeur double $\not\Rightarrow$ non diagonalisable.
 \item Vecteurs propres en \emph{colonnes}, ordre de $D$.
@@ -928,8 +668,8 @@ endomorphisme de polynômes, de fonctions & écrire $f(x)=\lambda x$ directement
 \column{0.48\textwidth}
 \begin{RETENIR}
 \begin{itemize}
-\item Semblables : rang, $\tr$, $\det$, $\chi$ communs.
-\item Stable $\iff$ blocs ; droite stable $\iff$ vecteur propre.
+\item Semblables : même $\chi$, mêmes valeurs propres.
+\item Droite stable $\iff$ vecteur propre.
 \item $\chi_A=\det(xI_n-A)$ ; $1\leq\dim E_\lambda\leq m(\lambda)$.
 \item Diagonalisable $\iff\sum\dim E_\lambda=n$.
 \item $A^k=PD^kP^{-1}$ ; $\tr=\sum\lambda_i$, $\det=\prod\lambda_i$.
@@ -942,8 +682,8 @@ endomorphisme de polynômes, de fonctions & écrire $f(x)=\lambda x$ directement
 \begin{columns}[T]
 \column{0.52\textwidth}
 \begin{enumerate}
-\item \textbf{Relire le livre} (chapitre~2) : démonstrations et exemples rédigés.
-\item \textbf{Apprendre la fiche}.
+\item \textbf{Relire le livret} (chapitre~3) : démonstrations et exemples rédigés.
+\item \textbf{Apprendre la fiche}, puis faire l'\textbf{exercice bilan} (15 min).
 \item \textbf{Cinq problèmes} de la sélection, dans l'ordre :
 \begin{itemize}\small
 \item diagonaliser pour calculer des puissances ;
@@ -952,7 +692,7 @@ endomorphisme de polynômes, de fonctions & écrire $f(x)=\lambda x$ directement
 \item matrices qui commutent ;
 \item l'endomorphisme $M\mapsto AM-MA$.
 \end{itemize}
-\item Puis le \textbf{TD complet} (29 exercices, quatre niveaux).
+\item Puis le \textbf{TD complet} (24 exercices, quatre niveaux).
 \end{enumerate}
 \column{0.42\textwidth}
 \begin{ASTU}[Pour chercher seul]

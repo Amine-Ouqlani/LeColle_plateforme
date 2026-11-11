@@ -1,5 +1,5 @@
 % =====================================================================
-% Le Collé — Algèbre linéaire et réduction : exercices complémentaires du TD
+% Le Collé — Réduction : exercices complémentaires du TD
 % =====================================================================
 
 \begin{exo}{rdn-1}{1}{valeurs propres de matrices $2\times2$}
@@ -34,18 +34,6 @@ $A$ est triangulaire : $\Sp(A)=\{1,2,3\}$, trois valeurs propres distinctes en d
 $(A-I_3)X=0$ : $x+y=0$, $x+y+2z=0$, d'où $E_1=\vect(1,-1,0)$. $(A-2I_3)X=0$ : $x=0$, $y+z=0$ : $E_2=\vect(0,1,-1)$.
 $(A-3I_3)X=0$ : $x=y=0$ : $E_3=\vect(0,0,1)$. Ainsi $A=PDP^{-1}$ avec
 $P=\begin{pmatrix}1&0&0\\-1&1&0\\0&-1&1\end{pmatrix}$, $D=\mathrm{diag}(1,2,3)$.
-\end{corrige}
-
-\begin{exo}{rdn-17}{1}{fonctions paires et impaires}
-Soit $E$ l'espace des fonctions de $\R$ dans $\R$, $\mathcal P$ le sous-espace des fonctions paires et $\mathcal I$ celui des
-fonctions impaires. Montrer que $E=\mathcal P\oplus\mathcal I$. Que donne cette décomposition pour $\exp$ ?
-\end{exo}
-\begin{corrige}{rdn-17}
-\choix{dimension infinie : on revient à la définition (existence et unicité de la décomposition), par analyse-synthèse.}
-\emph{Unicité.} Si $f\in\mathcal P\cap\mathcal I$, $f(-x)=f(x)=-f(x)$, donc $f=0$. \emph{Existence.} Pour $f\in E$, on pose
-$p(x)=\frac{f(x)+f(-x)}2$ (paire) et $i(x)=\frac{f(x)-f(-x)}2$ (impaire) : $f=p+i$. Donc $E=\mathcal P\oplus\mathcal I$.
-Pour $\exp$ : $\exp=\ch+\sh$.
-\gain{l'application $f\mapsto\big(x\mapsto f(-x)\big)$ est une symétrie : $\mathcal P$ et $\mathcal I$ sont ses sous-espaces propres pour $1$ et $-1$.}
 \end{corrige}
 
 \begin{exo}{rdn-4}{2}{la matrice anti-diagonale}

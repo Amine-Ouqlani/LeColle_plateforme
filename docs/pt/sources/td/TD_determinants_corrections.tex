@@ -339,7 +339,7 @@
 
 \begin{document}
 \thispagestyle{plain}
-{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 3}}\par\vspace{0.2em}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 2}}\par\vspace{0.2em}
 {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Déterminants}\par\vspace{0.3em}
 {\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
@@ -487,7 +487,7 @@ $f=\Id$ (symétrie triviale) ; pour $a=-1$, $f=-\Id$ est la symétrie centrale d
 \q{4.} Si $|a|=1$, $a=e^{i\varphi}$ et la matrice est $\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}$ :
 $f$ est la rotation de centre $O$ et d'angle $\varphi=\arg a$.
 \gain{le déterminant tranche la question 2 sans calcul : une réflexion (symétrie par rapport à une droite) a pour
-déterminant $-1$ (proposition~1.11 du livret, $\dim\mathrm{Ker}(s+\Id)=1$), alors que $\det f=|a|^2>0$. Une similitude
+déterminant $-1$ (proposition~1.12 du livret, $\dim\mathrm{Ker}(s+\Id)=1$), alors que $\det f=|a|^2>0$. Une similitude
 $z\mapsto az$ n'est donc jamais une réflexion ; c'est $z\mapsto a\overline z$ ($|a|=1$) qui en donne, avec
 $\det=-|a|^2$.}
 \piege{$\C$ est ici un $\R$-espace vectoriel de dimension $2$ : la trace et le déterminant se calculent sur une matrice
@@ -511,7 +511,7 @@ sont des entiers de produit $1$.
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \correction{19}{Base et déterminant (somme constante)}{td-d6}{énoncé : TD, p.~7}
 \choix{« $n$ vecteurs en dimension $n$, base ? » : on calcule $\det_{\mathcal B}(\mathcal C)$ (théorème~1.10 du livret). La
-matrice a la même somme sur chaque ligne : proposition~1.13 du livret.}
+matrice a la même somme sur chaque ligne : proposition~1.14 du livret.}
 La matrice de $\mathcal C$ dans $\mathcal B$ a des $a$ sur la diagonale et des $b$ ailleurs. Chaque ligne a pour somme
 $a+(n-1)b$ ; $C_1\leftarrow C_1+\dots+C_n$, on sort ce facteur, puis $L_i\leftarrow L_i-L_1$ :
 \[\det_{\mathcal B}(\mathcal C)=\big(a+(n-1)b\big)\dt{1&b&\cdots&b\\0&a-b&&(0)\\\vdots&&\ddots&\\0&(0)&&a-b}=\big(a+(n-1)b\big)(a-b)^{n-1}.\]
@@ -797,7 +797,7 @@ $P(b)=Q(b)$. Comme $\det A_n=P(0)$ et que $P$ est affine, on écrit la droite pa
 $\varphi(u)=u\,Q(a)-a\,Q(u)$, on a $\varphi(a)=0$ et $\det A_n=\frac{\varphi(b)-\varphi(a)}{b-a}\to\varphi'(a)$. D'où, pour $a=b$,
 \[\det A_n=Q(a)-aQ'(a)=\prod_{i=1}^n(\lambda_i-a)+a\sum_{j=1}^n\prod_{i\neq j}(\lambda_i-a).\]
 Contrôle : tous les $\lambda_i$ égaux à $\lambda$ : $(\lambda-a)^n+na(\lambda-a)^{n-1}=(\lambda+(n-1)a)(\lambda-a)^{n-1}$, c'est la
-proposition~1.13 du livret.
+proposition~1.14 du livret.
 \gain{reconnaître un \emph{taux d'accroissement} : une expression $\frac{\varphi(b)-\varphi(a)}{b-a}$ avec $\varphi(a)=0$ tend vers
 $\varphi'(a)$. C'est le sens de « à l'aide d'une dérivée ».}
 \piege{en 3, on ne peut pas faire $b=a$ dans la formule de la question 2 (division par $0$) ; il faut justifier le passage à la

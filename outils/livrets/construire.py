@@ -26,16 +26,18 @@ os.makedirs(BUILD, exist_ok=True)
 
 # ordre pédagogique du parcours PT
 CHAPITRES = [
-    dict(num=1, id='ed', titre='Équations différentielles',
-         livret='livre-equations-differentielles', presentation='presentation-equations-differentielles', fiche='fiche-equations-differentielles'),
-    dict(num=2, id='red', titre='Algèbre linéaire et réduction',
-         livret='livre-reduction', presentation='presentation-reduction', fiche='fiche-reduction'),
-    dict(num=3, id='determinants', titre='Déterminants',
+    dict(num=1, id='al', titre='Algèbre linéaire',
+         livret='livre-algebre-lineaire', presentation='presentation-algebre-lineaire', fiche='fiche-algebre-lineaire'),
+    dict(num=2, id='determinants', titre='Déterminants',
          livret='livre-determinants', presentation='presentation-determinants', fiche='fiche-determinants'),
-    dict(num=4, id='courbes', titre='Courbes paramétrées planes',
+    dict(num=3, id='red', titre='Réduction',
+         livret='livre-reduction', presentation='presentation-reduction', fiche='fiche-reduction'),
+    dict(num=4, id='ed', titre='Équations différentielles',
+         livret='livre-equations-differentielles', presentation='presentation-equations-differentielles', fiche='fiche-equations-differentielles'),
+    dict(num=5, id='courbes', titre='Courbes paramétrées planes',
          livret='livre-courbes', presentation='presentation-courbes', fiche='fiche-courbes-parametrees'),
-    dict(num=5, id='metrique', titre='Propriétés métriques et enveloppes',
-         livret='volume2-metrique-enveloppes', presentation=None, fiche=None),
+    dict(num=6, id='metrique', titre='Propriétés métriques et enveloppes',
+         livret='volume2-metrique-enveloppes', presentation=None, fiche='fiche-metrique-enveloppes'),
 ]
 LIVRET_PT = 'docs/pt/livres/livret-complet-PT.pdf'
 PRES_PT = 'docs/pt/presentations/presentations-completes-PT.pdf'
@@ -153,7 +155,7 @@ COULEURS = r'''\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\d
 def couverture_livret(debuts):
     lignes = '\n'.join(
         r'{\color{BleuClair}\sffamily\bfseries\Huge ' + str(c['num']) + r'} & {\sffamily\bfseries\Large\color{Ink}' + c['titre'] +
-        r'}\newline{\small\color{Gris}livret ' + ('« volume 2 »' if c['id'] == 'metrique' else 'du chapitre') +
+        r'}\newline{\small\color{Gris}livret ' + 'du chapitre' +
         r' · ' + str(npages(os.path.join(BUILD, c['livret'] + '.pdf'))) + r' pages} & {\sffamily\Large\color{Bleu}' + str(d) + r'}\\[0.9cm]'
         for c, d in zip(CHAPITRES, debuts))
     tex = r'''\documentclass[a4paper,11pt]{article}
@@ -274,7 +276,7 @@ def mettre_a_jour_pages():
         chemin = os.path.join(RACINE, f)
         if not os.path.exists(chemin) or not f.endswith('.pdf'): return m.group(0)
         return m.group(1) + str(npages(chemin))
-    s2 = re.sub(r'(fichier: "([^"]+)",(?:\n    [^\n]*)*?\n    pages: )\d+', maj, s)
+    s2 = re.sub(r'("?fichier"?: "([^"]+)",(?:\n    [^\n]*)*?\n    "?pages"?: )\d+', maj, s)
     if s2 != s:
         open(p, 'w', encoding='utf8').write(s2)
         print('documents.js : pages mises à jour')

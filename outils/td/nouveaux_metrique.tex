@@ -132,7 +132,9 @@ On considère $f(t)=(e^t\cos t,\ e^t\sin t)$, $t\in\R$.
 
 \q{2.} $\vv{OM}\cdot f'=e^{2t}\big(\cos t(\cos t-\sin t)+\sin t(\sin t+\cos t)\big)=e^{2t}$, d'où $\cos\big(\vv{OM},f'\big)=\frac{e^{2t}}{e^t\cdot\sqrt2e^t}=\frac1{\sqrt2}$ : l'angle vaut constamment $\frac\pi4$.
 
-\q{3.} $f''=e^t(-2\sin t,\ 2\cos t)$ et $\det(f',f'')=e^{2t}\big(2\cos t(\cos t-\sin t)+2\sin t(\sin t+\cos t)\big)=2e^{2t}$. Donc $\gamma=\frac{2e^{2t}}{2\sqrt2e^{3t}}=\frac{1}{\sqrt2\,e^t}$ et $R=\sqrt2\,e^t$. Avec $\ve N=\frac1{\sqrt2}(-\sin t-\cos t,\ \cos t-\sin t)$ :
+\q{3.} Méthode du programme : $\cos t-\sin t=\sqrt2\cos(t+\frac\pi4)$ et $\sin t+\cos t=\sqrt2\sin(t+\frac\pi4)$, donc
+$f'(t)=\sqrt2e^t\big(\cos(t+\frac\pi4),\sin(t+\frac\pi4)\big)$ : $v=\sqrt2e^t$, $\alpha=t+\frac\pi4$, et $\gamma=\frac{\alpha'(t)}{v}=\frac{1}{\sqrt2\,e^t}$,
+$R=\sqrt2\,e^t$. (Contrôle par la formule hors programme : $\det(f',f'')=2e^{2t}$ et $\frac{2e^{2t}}{(\sqrt2e^t)^3}=\frac1{\sqrt2e^t}$.) Avec $\ve N=\frac1{\sqrt2}(-\sin t-\cos t,\ \cos t-\sin t)$ :
 \[I=M+R\ve N=e^t(\cos t,\sin t)+e^t(-\sin t-\cos t,\ \cos t-\sin t)=e^t(-\sin t,\ \cos t).\]
 $I(t)$ est l'image de $M(t)$ par la rotation de centre $O$ et d'angle $\frac\pi2$ : la développée est une spirale logarithmique, image de la courbe par cette rotation.
 \end{corrige}

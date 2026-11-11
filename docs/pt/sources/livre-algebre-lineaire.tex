@@ -1,0 +1,809 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Algèbre linéaire (compléments de deuxième année)
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — Algèbre linéaire},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% numéro du chapitre dans le parcours PT (affiché), distinct de la numérotation interne
+\newcommand{\grandnum}{\thesection}\newcommand{\ongletcouleur}{Bleu}
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\grandnum}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ongletcouleur}%
+  \edef\ongnum{\grandnum}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+\begin{document}
+\renewcommand{\grandnum}{1}
+\pagenumbering{roman}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[Bleu] (current page.north west) rectangle ([yshift=-15.5cm]current page.north east);
+  \node[anchor=north west,text=white,font=\sffamily\small] at ([xshift=2.6cm,yshift=-3.2cm]current page.north west)
+     {\textls[250]{MATHÉMATIQUES\ \ ·\ \ CPGE PT\ \ ·\ \ DEUXIÈME ANNÉE}};
+  \node[anchor=north west,text=white] at ([xshift=2.5cm,yshift=-4.4cm]current page.north west)
+     {\fontsize{62}{66}\selectfont\scshape Le Collé};
+  \draw[Ocre,line width=1.6pt] ([xshift=2.6cm,yshift=-7.3cm]current page.north west) -- ++(4.2cm,0);
+  \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
+     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Algèbre linéaire};
+  \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Sommes directes, hyperplans, trace\\[0.15cm]Sous-espaces stables et matrices par blocs};
+  \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
+     at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
+     {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{Les compléments d'algèbre linéaire de deuxième année : le langage des chapitres \emph{Déterminants} et \emph{Réduction}.}};
+  \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west) {Ahmed Amine Ouqlani};
+  \draw[Filet] ([xshift=2.6cm,yshift=2.6cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.6cm]current page.south east);
+\end{tikzpicture}
+\end{titlepage}
+\thispagestyle{plain}
+\section*{Avant-propos}
+\markboth{Avant-propos}{}
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+Ce livret ouvre le parcours d'algèbre de deuxième année. Il rassemble les \emph{compléments d'algèbre linéaire} du programme de
+PT : produit et somme de sous-espaces, somme directe, hyperplans, trace, sous-espaces stables et matrices par blocs. Ce sont les
+outils dont ont besoin les deux chapitres suivants : \emph{Déterminants} (chapitre~2) et surtout \emph{Réduction} (chapitre~3),
+qui renvoie ici au lieu de les redémontrer.
+
+La première partie rappelle, sans démonstration, les résultats de première année utilisés ensuite (rang, théorème du rang,
+matrice d'une application linéaire, changement de base) : on la parcourt pour vérifier qu'ils sont acquis. Chaque résultat
+nouveau est énoncé avec ses hypothèses, illustré par un exemple, et chaque partie se termine par des exercices, corrigés à la fin
+du livret. La présentation, la fiche, le TD et la sélection de problèmes du chapitre suivent la même numérotation (§1.1 à §1.6).
+
+\vfill
+{\footnotesize\sffamily\color{Gris}\textcopyright~2026 Ahmed Amine Ouqlani. Tous droits réservés.\par}
+\clearpage
+\thispagestyle{plain}
+\hypertarget{toc}{}
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\ongletstrue
+% =====================================================================
+%                CHAPITRE — ALGÈBRE LINÉAIRE : COMPLÉMENTS
+% =====================================================================
+\clearpage
+\section{Algèbre linéaire}\label{sec:al}
+
+En première année, on a appris à représenter une application linéaire par une matrice. La deuxième année pose une question plus
+fine : comment \emph{découper} un espace en morceaux simples, et comment ce découpage se lit sur la matrice ? Si
+$E=F\oplus G$ et si un endomorphisme $f$ envoie $F$ dans $F$ et $G$ dans $G$, sa matrice dans une base adaptée est formée de deux
+blocs indépendants : on étudie $f$ morceau par morceau. Ce chapitre fournit le vocabulaire de ce découpage (sommes directes,
+hyperplans, sous-espaces stables) et un premier invariant qui ne dépend pas de la base, la trace.
+
+\ouverture{%
+\begin{itemize}[leftmargin=1.1em,itemsep=1pt]
+\item Démontrer qu'une somme est directe ; obtenir une base adaptée et la dimension d'une somme directe.
+\item Reconnaître un projecteur ou une symétrie et en écrire la matrice dans une base adaptée.
+\item Passer d'un hyperplan ou d'un sous-espace à ses équations, et réciproquement.
+\item Utiliser la trace et ses propriétés ; lire des sous-espaces stables sur une matrice par blocs.
+\end{itemize}}{%
+Algèbre linéaire de première année : espaces vectoriels, familles libres et génératrices, bases, dimension, applications
+linéaires et matrices (rappelés au §\ref{ss:rappels}).}{Deux séances}
+
+Dans tout le chapitre, $\K=\R$ ou $\C$ et $E$ est un $\K$-espace vectoriel ; $\LE$ est l'ensemble des endomorphismes de $E$.
+Quand $E$ est de dimension finie, on note $n=\dim E$.
+
+% ---------------------------------------------------------------------
+\subsection{Rappels : applications linéaires et matrices}\label{ss:rappels}
+
+\begin{commencer}
+Ces résultats de première année sont utilisés dans tout le parcours d'algèbre ; ils sont énoncés sans démonstration. Si l'un
+d'eux n'est pas familier, le revoir dans le cours de première année avant de poursuivre.
+\end{commencer}
+
+\begin{proposition}[noyau, image, rang]\label{p:rang}
+Soit $u:E\to F$ linéaire.
+\begin{enumerate}
+\item $\Ker u=\{x\in E,\ u(x)=0\}$ et $\Im u=u(E)$ sont des sous-espaces vectoriels ; $u$ est injective si et seulement si
+$\Ker u=\{0\}$, surjective si et seulement si $\Im u=F$.
+\item Si $(e_1,\dots,e_p)$ engendre $E$, alors $\Im u=\vect\big(u(e_1),\dots,u(e_p)\big)$.
+\item \emph{Théorème du rang.} Si $E$ est de dimension finie, $\dim\Ker u+\rg u=\dim E$, où $\rg u=\dim\Im u$.
+\item Si $\dim E=\dim F$ (finie), en particulier pour un endomorphisme : $u$ injective $\iff$ $u$ surjective $\iff$ $u$ bijective.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[matrices et changement de base]\label{p:chgt}
+Soient $\mathcal B$ une base de $E$ ($\dim E=n$) et $f\in\LE$. La matrice $\Mat_{\mathcal B}(f)$ a pour $j$-ième colonne les coordonnées
+de $f(e_j)$ dans $\mathcal B$ ; le rang de $f$ est celui de sa matrice. Si $\mathcal B'$ est une autre base et $P$ la matrice de
+passage de $\mathcal B$ à $\mathcal B'$ (colonnes : les vecteurs de $\mathcal B'$ en coordonnées dans $\mathcal B$), alors
+\[\Mat_{\mathcal B'}(f)=P^{-1}\,\Mat_{\mathcal B}(f)\,P.\]
+\end{proposition}
+
+\begin{definition}
+Deux matrices $A,B\in\Mn{\K}$ sont \emph{semblables} s'il existe $P\in\GLn{\K}$ telle que $B=P^{-1}AP$ : elles représentent le
+même endomorphisme dans deux bases.
+\end{definition}
+
+\begin{reflexe}
+Tout ce qui ne dépend que de l'endomorphisme, et pas de la base, est commun à deux matrices semblables : le rang, la trace
+(§\ref{ss:trace}), le déterminant (chapitre~2), le polynôme caractéristique et les valeurs propres (chapitre~3). Si deux matrices
+diffèrent par l'un de ces invariants, elles ne sont pas semblables.
+\end{reflexe}
+
+% ---------------------------------------------------------------------
+\subsection{Produit et somme de sous-espaces}\label{ss:sommes}
+
+\subsubsection*{Produit d'espaces vectoriels}
+
+\begin{proposition}[produit]\label{p:produit}
+Si $E_1,\dots,E_p$ sont des $\K$-espaces vectoriels, le produit $E_1\times\dots\times E_p$, muni des opérations coordonnée par
+coordonnée, est un $\K$-espace vectoriel. Si chaque $E_i$ est de dimension finie,
+\[\dim(E_1\times\dots\times E_p)=\dim E_1+\dots+\dim E_p.\]
+\end{proposition}
+
+\begin{proof}
+Pour $p=2$ : si $(a_1,\dots,a_n)$ est une base de $E_1$ et $(b_1,\dots,b_m)$ une base de $E_2$, la famille
+$\big((a_1,0),\dots,(a_n,0),(0,b_1),\dots,(0,b_m)\big)$ est une base de $E_1\times E_2$ : tout couple $(x,y)$ s'écrit
+$(x,0)+(0,y)$, et une combinaison nulle donne, coordonnée par coordonnée, deux combinaisons nulles. Puis récurrence sur $p$.
+\end{proof}
+
+\begin{exemple}
+$\dim(\R^2\times\R_2[X])=2+3=5$. L'ensemble des solutions $(x,y)\in\R\times\R$ d'un système est une partie de $\R^2=\R\times\R$ :
+c'est le premier exemple de produit.
+\end{exemple}
+
+\subsubsection*{Somme de plusieurs sous-espaces, somme directe}
+
+\begin{definition}
+Soient $F_1,\dots,F_p$ des sous-espaces vectoriels de $E$. Leur \emph{somme} est
+$F_1+\dots+F_p=\{x_1+\dots+x_p,\ x_i\in F_i\}$ : c'est un sous-espace vectoriel, le plus petit qui contient tous les $F_i$.
+La somme est \emph{directe}, et l'on note $F_1\oplus\dots\oplus F_p$, si tout vecteur de la somme s'écrit de manière
+\emph{unique} $x_1+\dots+x_p$ avec $x_i\in F_i$.
+\end{definition}
+
+\begin{proposition}[caractérisation]\label{p:directe}
+La somme $F_1+\dots+F_p$ est directe si et seulement si
+\[x_1+\dots+x_p=0\text{ avec }x_i\in F_i\quad\Longrightarrow\quad x_1=\dots=x_p=0.\]
+Pour deux sous-espaces : $F+G$ est directe si et seulement si $F\cap G=\{0\}$.
+\end{proposition}
+
+\begin{proof}
+Si la somme est directe, $0=0+\dots+0$ est l'unique décomposition de $0$. Réciproquement, si $x_1+\dots+x_p=y_1+\dots+y_p$,
+alors $(x_1-y_1)+\dots+(x_p-y_p)=0$ avec $x_i-y_i\in F_i$, donc $x_i=y_i$. Pour $p=2$ : si $u\in F\cap G$, $u+(-u)=0$ avec
+$u\in F$, $-u\in G$, donc $u=0$ ; réciproquement, si $x+y=0$ avec $x\in F$, $y\in G$, alors $x=-y\in F\cap G=\{0\}$.
+\end{proof}
+
+\begin{attention}
+Pour $p\geq3$, il ne suffit pas que les intersections deux à deux soient nulles : dans $\R^2$, les trois droites
+$\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$ se coupent deux à deux en $\{0\}$, mais $(1,0)+(0,1)-(1,1)=0$ : la somme n'est pas directe.
+La seule caractérisation au programme est celle de la proposition~\ref{p:directe}.
+\end{attention}
+
+\begin{theoreme}[base adaptée, dimension]\label{t:adaptee}
+On suppose $E$ de dimension finie. Si la somme $F_1+\dots+F_p$ est directe, la concaténation de bases des $F_i$ est une base
+de $F_1\oplus\dots\oplus F_p$ (base \emph{adaptée}), et
+\[\dim(F_1\oplus\dots\oplus F_p)=\dim F_1+\dots+\dim F_p.\]
+En particulier, $E=F_1\oplus\dots\oplus F_p$ si et seulement si la concaténation de bases des $F_i$ est une base de $E$.
+\end{theoreme}
+
+\begin{proof}
+La famille concaténée engendre la somme. Elle est libre : une combinaison linéaire nulle s'écrit $x_1+\dots+x_p=0$, où $x_i$
+regroupe les termes de la base de $F_i$ ; la somme étant directe, chaque $x_i$ est nul, puis chaque coefficient (base de $F_i$).
+\end{proof}
+
+Pour deux sous-espaces, la première année a fourni la \emph{formule de Grassmann}, $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$, dont
+on déduit la caractérisation pratique des supplémentaires.
+
+\begin{enpratique}
+Pour montrer que $E=F\oplus G$ en dimension finie, il suffit de deux des trois propriétés : $F\cap G=\{0\}$, $F+G=E$,
+$\dim F+\dim G=\dim E$. Le plus souvent : intersection nulle et somme des dimensions.
+\end{enpratique}
+
+\subsubsection*{Projecteurs et symétries}
+
+Une somme directe $E=F\oplus G$ fournit deux endomorphismes : pour $x=x_F+x_G$ (décomposition unique), la \emph{projection}
+$p(x)=x_F$ sur $F$ parallèlement à $G$, et la \emph{symétrie} $s(x)=x_F-x_G$ par rapport à $F$ parallèlement à $G$. Ils sont
+linéaires, et $s=2p-\Id_E$.
+
+\begin{proposition}[caractérisation, rappel]\label{p:projsym}
+Soit $f\in\LE$.
+\begin{enumerate}
+\item $f$ est un projecteur si et seulement si $f\circ f=f$ ; c'est alors la projection sur $\Im f$ parallèlement à $\Ker f$, et
+$E=\Im f\oplus\Ker f$.
+\item $f$ est une symétrie si et seulement si $f\circ f=\Id_E$ ; c'est alors la symétrie par rapport à $\Ker(f-\Id_E)$ parallèlement
+à $\Ker(f+\Id_E)$, et $E=\Ker(f-\Id_E)\oplus\Ker(f+\Id_E)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{enpratique}
+Dans une base adaptée à ces sommes directes, avec $r=\rg p$ et $r=\dim\Ker(s-\Id_E)$ :
+\[\Mat(p)=\begin{pmatrix}I_r&0\\0&0\end{pmatrix},\qquad\Mat(s)=\begin{pmatrix}I_r&0\\0&-I_{n-r}\end{pmatrix}.\]
+Pour calculer $p(x)$, on écrit $x=x_F+x_G$ : on cherche la composante sur $G$ par la condition « $x-x_G\in F$ ».
+\end{enpratique}
+
+\begin{exo}{red-somme}{1}{sommes directes}
+\begin{enumerate}
+\item Dans $\R^3$, on pose $F=\{(x,y,z),\ x+y+z=0\}$ et $G=\vect\big((1,1,1)\big)$. Montrer que $\R^3=F\oplus G$ et décomposer
+$v=(x,y,z)$ selon cette somme.
+\item Dans $\R^3$, les droites $D_1=\vect(1,0,0)$, $D_2=\vect(0,1,0)$, $D_3=\vect(1,1,0)$ sont-elles en somme directe ?
+\end{enumerate}
+\end{exo}
+\begin{exo}{al-proj}{2}{projecteur et symétrie dans $\R^3$}
+Dans $\R^3$, on considère le plan $P$ d'équation $2x-y+z=0$ et la droite $D$ d'équations $y=0$, $x=z$.
+\begin{enumerate}
+\item Donner une base de $P$ et de $D$, puis montrer que $\R^3=P\oplus D$.
+\item Déterminer la matrice, dans la base canonique, de la projection $p$ sur $P$ parallèlement à $D$, puis celle de la symétrie $s$
+par rapport à $P$ parallèlement à $D$. Vérifier que $p\circ p=p$ et $s\circ s=\Id$.
+\end{enumerate}
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Hyperplans et systèmes linéaires}\label{ss:hyperplans}
+
+\begin{definition}
+Un \emph{hyperplan} de $E$ est un sous-espace qui admet une droite comme supplémentaire. En dimension finie $n\geq1$, c'est un
+sous-espace de dimension $n-1$ (théorème~\ref{t:adaptee}).
+\end{definition}
+
+\begin{proposition}\label{p:hyperplan}
+On suppose $E$ de dimension finie $n\geq1$, muni d'une base $\mathcal B$.
+\begin{enumerate}
+\item Les hyperplans de $E$ sont exactement les noyaux des formes linéaires non nulles $\varphi:E\to\K$. En coordonnées dans
+$\mathcal B$, un hyperplan a une équation $a_1x_1+\dots+a_nx_n=0$ avec $(a_1,\dots,a_n)\neq(0,\dots,0)$, unique à un facteur non
+nul près.
+\item Si $H=\Ker\varphi$ et $u\notin H$, alors $E=H\oplus\vect(u)$.
+\item L'intersection de $p$ hyperplans est de dimension au moins $n-p$. Réciproquement, tout sous-espace de dimension $n-p$
+est l'intersection de $p$ hyperplans : il est défini par un système de $p$ équations.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+1. Si $\varphi\neq0$, son image est $\K$ (seul sous-espace non nul de $\K$), donc $\dim\Ker\varphi=n-1$ par le théorème du rang.
+Réciproquement, si $\dim H=n-1$, on complète une base $(e_1,\dots,e_{n-1})$ de $H$ en une base de $E$ par $e_n$, et la forme
+« $n$-ième coordonnée » a pour noyau $H$. En coordonnées, $\varphi(x)=\sum a_ix_i$ avec $a_i=\varphi(e_i)$.
+2. $u\notin H$ donne $H\cap\vect(u)=\{0\}$, et $\dim H+1=n$.
+3. Par récurrence : si $G$ est un sous-espace et $H=\Ker\varphi$, la restriction de $\varphi$ à $G$ a un rang au plus $1$, donc
+$\dim(G\cap H)\geq\dim G-1$. Réciproquement, on complète une base $(e_1,\dots,e_{n-p})$ du sous-espace en une base de $E$ :
+il est défini par la nullité des $p$ dernières coordonnées.
+\end{proof}
+
+\begin{enpratique}
+L'ensemble des solutions d'un système linéaire homogène de $p$ équations à $n$ inconnues est un sous-espace de $\K^n$ de dimension
+$n-r$, où $r$ est le rang du système (théorème du rang appliqué à $X\mapsto AX$) : chaque équation « indépendante » fait perdre
+une dimension. L'ensemble des solutions d'un système \emph{avec second membre} est vide, ou de la forme $X_0+\Ker A$ : un sous-espace
+affine dirigé par l'ensemble des solutions du système homogène. Dans $\R^3$, un plan vectoriel a une équation, une droite vectorielle deux.
+\end{enpratique}
+
+\begin{methode}{Passer d'une base à des équations, et inversement}\label{m:equations}
+\begin{itemize}
+\item Des équations à une base : résoudre le système (inconnues principales en fonction des inconnues libres).
+\item D'une base $(v_1,\dots,v_k)$ de $F$ à des équations : écrire que $x\in F\iff$ le système $x=\lambda_1v_1+\dots+\lambda_kv_k$
+d'inconnues $\lambda_i$ est compatible ; les conditions de compatibilité sont les $n-k$ équations de $F$.
+\end{itemize}
+\end{methode}
+
+\begin{exemple}
+$F=\vect\big((1,2,3,4)\big)$ dans $\R^4$ : $(x,y,z,t)\in F\iff y=2x,\ z=3x,\ t=4x$. Trois équations indépendantes : $F$ est
+l'intersection des trois hyperplans $y-2x=0$, $z-3x=0$, $t-4x=0$ (et $1=4-3$).
+\end{exemple}
+
+\begin{exo}{red-hyp}{2}{hyperplans de $\R^4$}
+Dans $\R^4$, on considère $H_1$ : $x+y+z+t=0$ et $H_2$ : $x-y+z-t=0$, et $u=(1,1,1,1)$.
+\begin{enumerate}
+\item Donner la dimension et une base de $H_1\cap H_2$.
+\item La droite $\vect(u)$ est-elle un supplémentaire de $H_1$ ? de $H_2$ ?
+\end{enumerate}
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Trace}\label{ss:trace}
+
+\begin{definition}
+La \emph{trace} de $A=(a_{i,j})\in\Mn{\K}$ est la somme de ses coefficients diagonaux : $\tr(A)=\sum_{i=1}^na_{i,i}$.
+\end{definition}
+
+\begin{proposition}\label{p:trace}
+\begin{enumerate}
+\item La trace est une forme linéaire non nulle sur $\Mn{\K}$ : son noyau, les matrices de trace nulle, est un hyperplan de
+$\Mn{\K}$, de dimension $n^2-1$.
+\item Pour $A\in\mathcal M_{n,p}(\K)$ et $B\in\mathcal M_{p,n}(\K)$ : $\tr(AB)=\tr(BA)$.
+\item Deux matrices semblables ont la même trace. On définit donc la trace d'un endomorphisme $f$ en dimension finie :
+$\tr(f)=\tr\big(\Mat_{\mathcal B}(f)\big)$, indépendante de la base $\mathcal B$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+2. $\tr(AB)=\sum_{i=1}^n\sum_{k=1}^pa_{i,k}b_{k,i}=\sum_{k=1}^p\sum_{i=1}^nb_{k,i}a_{i,k}=\tr(BA)$.
+3. $\tr(P^{-1}AP)=\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr(A)$, par le point 2.
+\end{proof}
+
+\begin{attention}
+$\tr(AB)\neq\tr(A)\tr(B)$ en général, et $\tr(ABC)=\tr(CAB)$ (permutation circulaire) mais $\tr(ABC)\neq\tr(BAC)$ en général.
+\end{attention}
+
+\begin{exemple}[trace d'un projecteur, d'une symétrie]
+Si $p$ est un projecteur de rang $r$, dans une base adaptée à $E=\Im p\oplus\Ker p$, sa matrice est
+$\mathrm{diag}(I_r,0)$ : $\tr(p)=r=\rg(p)$. Pour une symétrie $s$ : $\tr(s)=\dim\Ker(s-\Id)-\dim\Ker(s+\Id)$.
+\end{exemple}
+
+\begin{exo}{red-trace}{2}{trace}
+\begin{enumerate}
+\item Montrer qu'il n'existe pas de matrices $A,B\in\Mn{\K}$ telles que $AB-BA=I_n$.
+\item Soit $A\in\Mn{\K}$ telle que $A^2=A$. Montrer que $\rg(A)=\tr(A)$.
+\end{enumerate}
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Sous-espaces stables}\label{ss:stables}
+
+\begin{definition}
+Un sous-espace $F$ de $E$ est \emph{stable} par $f\in\LE$ si $f(F)\subset F$. L'application $f_F:F\to F$, $x\mapsto f(x)$, est alors un
+endomorphisme de $F$, l'\emph{endomorphisme induit} par $f$ sur $F$.
+\end{definition}
+
+\begin{proposition}\label{p:stable}
+\begin{enumerate}
+\item Si $F=\vect(e_1,\dots,e_p)$, $F$ est stable par $f$ si et seulement si $f(e_j)\in F$ pour tout $j$ : on vérifie sur une
+famille génératrice.
+\item $\Ker f$ et $\Im f$ sont stables par $f$. Plus généralement, si $f\circ g=g\circ f$, alors $\Ker g$ et $\Im g$ sont stables par $f$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+1. Si $x=\sum\lambda_je_j\in F$, $f(x)=\sum\lambda_jf(e_j)\in F$. 2. Si $g(x)=0$, $g\big(f(x)\big)=f\big(g(x)\big)=0$ : $f(x)\in\Ker g$.
+Si $y=g(x)$, $f(y)=g\big(f(x)\big)\in\Im g$. Pour $g=f$, on obtient la stabilité de $\Ker f$ et $\Im f$.
+\end{proof}
+
+\begin{theoreme}[traduction matricielle]\label{t:blocs}
+On suppose $E$ de dimension finie. Soit $F$ un sous-espace de dimension $p$ et $\mathcal B=(e_1,\dots,e_n)$ une base adaptée à $F$
+($F=\vect(e_1,\dots,e_p)$).
+\begin{enumerate}
+\item $F$ est stable par $f$ si et seulement si $\Mat_{\mathcal B}(f)$ est triangulaire par blocs :
+$\begin{pmatrix}A&B\\0&C\end{pmatrix}$, avec $A\in\mathcal M_p(\K)$ ; $A$ est alors la matrice de l'endomorphisme induit $f_F$.
+\item Si $E=F\oplus G$ et si $\mathcal B$ est adaptée à cette somme, $F$ et $G$ sont stables par $f$ si et seulement si
+$\Mat_{\mathcal B}(f)$ est diagonale par blocs : $\begin{pmatrix}A&0\\0&C\end{pmatrix}$.
+\end{enumerate}
+Dans les deux cas, $\tr f=\tr A+\tr C$.
+\end{theoreme}
+
+\begin{proof}
+La $j$-ième colonne contient les coordonnées de $f(e_j)$. Pour $j\leq p$, $f(e_j)\in F$ si et seulement si ses coordonnées sur
+$e_{p+1},\dots,e_n$ sont nulles : c'est le bloc $0$. Pour 2, on applique 1 à $F$ et à $G$. La trace se lit sur la diagonale.
+\end{proof}
+
+\begin{enpratique}
+Lire une matrice par blocs, c'est lire des sous-espaces stables, et réciproquement. Un zéro en bas à gauche dit : « les $p$
+premiers vecteurs de base engendrent un sous-espace stable ». Les projecteurs et les symétries (§\ref{ss:sommes}) en sont les
+premiers exemples : $\Im p$ et $\Ker p$ sont stables par $p$, et sa matrice est diagonale par blocs. Le chapitre~2 ajoutera
+$\det f=\det A\times\det C$.
+\end{enpratique}
+
+\begin{proposition}[droites stables]\label{p:droite}
+Soit $u\neq0$. La droite $\vect(u)$ est stable par $f$ si et seulement s'il existe $\lambda\in\K$ tel que $f(u)=\lambda u$.
+\end{proposition}
+
+\begin{proof}
+$\vect(u)$ est stable si et seulement si $f(u)\in\vect(u)$, c'est-à-dire $f(u)=\lambda u$ pour un scalaire $\lambda$.
+\end{proof}
+
+Cette dernière proposition ouvre le chapitre \emph{Réduction} : chercher les droites stables, c'est chercher les vecteurs que $f$
+se contente de dilater (les \emph{vecteurs propres}). S'il y en a assez pour former une base, la matrice de $f$ dans cette base
+est diagonale : c'est le cas extrême d'une matrice diagonale par blocs, avec des blocs de taille $1$.
+
+\begin{exo}{red-stable}{2}{lire des blocs}
+Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}3&-1&1\\0&2&0\\1&-1&3\end{pmatrix}$ dans la base canonique
+$(e_1,e_2,e_3)$.
+\begin{enumerate}
+\item Montrer que le plan $F$ d'équation $y=0$ et la droite $G=\vect(u)$, $u=(1,1,0)$, sont stables par $f$.
+\item Montrer que $\R^3=F\oplus G$ et écrire la matrice de $f$ dans la base $(e_1,e_3,u)$. Vérifier sur cette matrice que $\tr A=8$.
+\end{enumerate}
+\end{exo}
+\begin{exo}{al-crochet}{3}{l'endomorphisme $M\mapsto AM-MA$}
+Soit $A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ et $\varphi:\mathcal M_2(\R)\to\mathcal M_2(\R)$, $M\mapsto AM-MA$.
+\begin{enumerate}
+\item Montrer que $\varphi$ est un endomorphisme et que son image est contenue dans l'hyperplan des matrices de trace nulle.
+\item Écrire la matrice de $\varphi$ dans la base canonique $(E_{1,1},E_{1,2},E_{2,1},E_{2,2})$. Déterminer $\Ker\varphi$ et $\Im\varphi$.
+\item Montrer que $\Ker\varphi$ et $\Im\varphi$ sont stables par $\varphi$. Sont-ils supplémentaires ?
+\end{enumerate}
+\end{exo}
+
+% ---------------------------------------------------------------------
+\subsection{Quelle méthode ? Synthèse}\label{ss:synthese-al}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\small
+\begin{tabular}{p{0.38\linewidth}p{0.55\linewidth}}
+\hline
+\textbf{Question} & \textbf{Méthode}\\\hline
+$\dim\Ker u$, $\rg u$ ? & une base de l'image (vecteurs $u(e_j)$), puis le théorème du rang\\
+$F+G$ directe ? & $F\cap G=\{0\}$ (proposition~\ref{p:directe}) ; pour $p\geq3$ sous-espaces : unicité de la décomposition de $0$\\
+$E=F\oplus G$ ? & $F\cap G=\{0\}$ et $\dim F+\dim G=\dim E$ (théorème~\ref{t:adaptee})\\
+$f$ projecteur, symétrie ? & $f\circ f=f$, $f\circ f=\Id$ ; base adaptée à $\Im f\oplus\Ker f$ ou $\Ker(f-\Id)\oplus\Ker(f+\Id)$\\
+calculer une projection & décomposer $x=x_F+x_G$ : la condition $x-x_G\in F$ donne $x_G$\\
+équations d'un sous-espace & condition de compatibilité de $x=\sum\lambda_iv_i$ (méthode~\ref{m:equations}) ; $n-\dim F$ équations\\
+trace & linéaire, $\tr(AB)=\tr(BA)$, invariante par similitude ; $\tr p=\rg p$\\
+$F$ stable par $f$ ? & vérifier $f(e_j)\in F$ sur une base de $F$ ; matrice triangulaire par blocs (théorème~\ref{t:blocs})\\\hline
+\end{tabular}
+\end{center}
+
+\begin{attention}\textbf{Pièges fréquents.}
+\begin{itemize}[leftmargin=1.1em]
+\item Somme directe de trois sous-espaces : les intersections deux à deux ne suffisent pas.
+\item $E=F\oplus G$ demande aussi la somme (ou les dimensions), pas seulement $F\cap G=\{0\}$.
+\item La matrice de passage a pour colonnes les \emph{nouveaux} vecteurs exprimés dans l'\emph{ancienne} base, et
+$\Mat_{\mathcal B'}(f)=P^{-1}AP$, pas $PAP^{-1}$.
+\item $\Ker f$ et $\Im f$ ne sont pas supplémentaires en général (penser à $f\neq0$ avec $f\circ f=0$).
+\item $\tr(AB)\neq\tr A\,\tr B$ ; $\tr(ABC)\neq\tr(BAC)$ en général.
+\end{itemize}
+\end{attention}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=2pt]
+\item Théorème du rang ; $\Mat_{\mathcal B'}(f)=P^{-1}\Mat_{\mathcal B}(f)P$ ; matrices semblables : même rang, même trace.
+\item Somme directe $\iff$ unicité de la décomposition de $0$ ; base adaptée, $\dim\bigoplus F_i=\sum\dim F_i$.
+\item Projecteur $\iff p\circ p=p$, $E=\Im p\oplus\Ker p$ ; symétrie $\iff s\circ s=\Id$.
+\item Hyperplan $=$ noyau d'une forme linéaire non nulle $=$ sous-espace de dimension $n-1$ ; $p$ équations $\Rightarrow$ dimension $\geq n-p$.
+\item $\tr(AB)=\tr(BA)$ ; $F$ stable $\iff$ matrice triangulaire par blocs ; droite stable $\iff$ $f(u)=\lambda u$.
+\end{itemize}
+\end{essentiel}
+
+% =====================================================================
+%                              CORRIGÉS
+% =====================================================================
+\clearpage
+\renewcommand{\ongletcouleur}{Ocre}
+\section{Corrigés}\label{sec:corriges-al}
+
+\begin{corrige}{red-somme}
+\q{1.} Si $v\in F\cap G$, $v=(m,m,m)$ et $3m=0$ : $F\cap G=\{0\}$. De plus $\dim F=2$ (un hyperplan de $\R^3$) et $\dim G=1$ : la
+somme est directe et de dimension $3$, donc $\R^3=F\oplus G$. On cherche $v=w+m(1,1,1)$ avec $w\in F$ : la somme des coordonnées
+de $w$ est nulle, d'où $x+y+z=3m$. Donc
+\[v=\underbrace{\big(x-m,\,y-m,\,z-m\big)}_{\in F}+\underbrace{m(1,1,1)}_{\in G},\qquad m=\frac{x+y+z}3.\]
+\q{2.} Les intersections deux à deux sont nulles, mais $(1,0,0)+(0,1,0)-(1,1,0)=0$ est une décomposition non triviale de $0$ :
+la somme n'est pas directe (proposition~\ref{p:directe}). D'ailleurs $D_1+D_2+D_3$ est le plan $z=0$, de dimension $2<3$.
+\end{corrige}
+
+\begin{corrige}{al-proj}
+\choix{on décompose un vecteur quelconque selon $P\oplus D$ : la condition « $x-x_D\in P$ » donne directement la composante sur $D$.}
+\q{1.} $P$ : $y=2x+z$, de base $\big((1,2,0),(0,1,1)\big)$. $D$ : $(x,0,x)$, de base $w=(1,0,1)$. Comme $2\cdot1-0+1=3\neq0$,
+$w\notin P$ : $P\cap D=\{0\}$, et $\dim P+\dim D=3$, donc $\R^3=P\oplus D$ (c'est aussi la proposition~\ref{p:hyperplan}, point 2).
+\q{2.} Soit $v=(x,y,z)$. On cherche $t$ tel que $v-tw\in P$ : $2(x-t)-y+(z-t)=0$, soit $t=\frac{2x-y+z}3$. Alors
+$p(v)=v-tw$ et $s(v)=2p(v)-v=v-2tw$. Dans la base canonique :
+\[\Mat(p)=\frac13\begin{pmatrix}1&1&-1\\0&3&0\\-2&1&2\end{pmatrix},\qquad\Mat(s)=\frac13\begin{pmatrix}-1&2&-2\\0&3&0\\-4&2&1\end{pmatrix}.\]
+Le calcul direct donne $\Mat(p)^2=\Mat(p)$ et $\Mat(s)^2=I_3$. Contrôles : $\tr p=2=\rg p=\dim P$, et $\tr s=2-1=1$.
+\retenir{pour une projection, on ne cherche que la composante « parallèle » ; la symétrie s'en déduit par $s=2p-\Id$.}
+\end{corrige}
+
+\begin{corrige}{red-hyp}
+\q{1.} En ajoutant et en retranchant les équations : $x+z=0$ et $y+t=0$. Donc $H_1\cap H_2=\{(x,y,-x,-y)\}$, de base
+$\big((1,0,-1,0),(0,1,0,-1)\big)$ : dimension $2=4-2$.
+\q{2.} $u\notin H_1$ ($1+1+1+1=4\neq0$) : $\R^4=H_1\oplus\vect(u)$ (proposition~\ref{p:hyperplan}). En revanche $u\in H_2$
+($1-1+1-1=0$) : $\vect(u)\subset H_2$, ce n'est pas un supplémentaire.
+\end{corrige}
+
+\begin{corrige}{red-trace}
+\q{1.} Par linéarité et $\tr(AB)=\tr(BA)$ : $\tr(AB-BA)=0$, alors que $\tr(I_n)=n\neq0$.
+\q{2.} L'endomorphisme $p$ de $\K^n$ associé à $A$ est un projecteur ; dans une base adaptée à $\K^n=\Im p\oplus\Ker p$, sa matrice
+est $\mathrm{diag}(I_r,0)$ avec $r=\rg(p)$. Donc $A$ est semblable à cette matrice, et $\tr A=r=\rg A$.
+\retenir{la trace ne voit pas l'ordre d'un produit de deux matrices : $\tr(AB-BA)=0$.}
+\end{corrige}
+
+\begin{corrige}{red-stable}
+\q{1.} $f(x,0,z)=(3x+z,\,0,\,x+3z)$ a une deuxième coordonnée nulle : $F$ est stable. $f(u)=A(1,1,0)^T=(2,2,0)=2u$ : $G$ est stable.
+\q{2.} $u\notin F$ (sa deuxième coordonnée vaut $1$) : $\R^3=F\oplus G$. Dans la base $(e_1,e_3,u)$ : $f(e_1)=(3,0,1)=3e_1+e_3$,
+$f(e_3)=(1,0,3)=e_1+3e_3$, $f(u)=2u$, donc
+\[\Mat(f)=\begin{pmatrix}3&1&0\\1&3&0\\0&0&2\end{pmatrix},\qquad\tr A=3+3+2=8.\]
+\retenir{deux sous-espaces stables supplémentaires $\Rightarrow$ matrice diagonale par blocs.}
+\end{corrige}
+
+\begin{corrige}{al-crochet}
+\choix{on calcule l'image de chaque vecteur de la base canonique ; la trace donne le contrôle de l'image.}
+\q{1.} $\varphi(\lambda M+N)=A(\lambda M+N)-(\lambda M+N)A=\lambda\varphi(M)+\varphi(N)$, et $\varphi(M)\in\mathcal M_2(\R)$. Par
+$\tr(AM)=\tr(MA)$, $\tr\varphi(M)=0$ : $\Im\varphi$ est contenue dans l'hyperplan $\Ker\tr$, de dimension $3$.
+\q{2.} $\varphi(E_{1,1})=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$, $\varphi(E_{1,2})=\begin{pmatrix}-1&2\\0&1\end{pmatrix}$,
+$\varphi(E_{2,1})=\begin{pmatrix}1&0\\-2&-1\end{pmatrix}$, $\varphi(E_{2,2})=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, d'où
+\[\Mat(\varphi)=\begin{pmatrix}0&-1&1&0\\-1&2&0&1\\1&0&-2&-1\\0&1&-1&0\end{pmatrix}.\]
+Les colonnes $C_1$ et $C_2$ ne sont pas proportionnelles, $C_4=-C_1$ et $C_3=-2C_1-C_2$ : le rang vaut $2$, donc
+$\dim\Ker\varphi=2$ (théorème du rang). Or $I_2$ et $A$ commutent avec $A$, et ne sont pas proportionnelles : $\Ker\varphi=\vect(I_2,A)$.
+Et $\Im\varphi=\vect\big(\varphi(E_{1,1}),\varphi(E_{1,2})\big)$, un plan contenu dans l'hyperplan des matrices de trace nulle.
+\q{3.} $\Ker\varphi$ et $\Im\varphi$ sont stables par $\varphi$ (proposition~\ref{p:stable}). Une matrice de $\Ker\varphi\cap\Im\varphi$
+s'écrit $aI_2+bA$ avec une trace nulle : $2a=0$ ($\tr A=0$), donc $bA\in\Im\varphi$. Or $A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ n'est
+pas dans $\Im\varphi$ : si $A=\lambda\varphi(E_{1,1})+\mu\varphi(E_{1,2})=\begin{pmatrix}-\mu&-\lambda+2\mu\\\lambda&\mu\end{pmatrix}$,
+le coefficient $(2,1)$ donne $\lambda=1$, le coefficient $(1,1)$ donne $\mu=-1$, et le coefficient $(1,2)$ vaudrait $-3\neq1$. Donc $b=0$ : l'intersection est
+nulle, et $\dim\Ker\varphi+\dim\Im\varphi=4$ : ils sont supplémentaires.
+\retenir{$M\mapsto AM-MA$ : son noyau contient toujours $\vect(I_n,A)$, son image est dans l'hyperplan des matrices de trace nulle.}
+\end{corrige}
+
+\clearpage
+\ongletsfalse
+\section*{Index des méthodes}\label{sec:index}
+\addcontentsline{toc}{section}{Index des méthodes}
+\markboth{Index des méthodes}{}
+{\small\listemethodes}
+\end{document}

@@ -339,7 +339,7 @@
 
 \begin{document}
 \thispagestyle{plain}
-{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 5}}\par\vspace{0.2em}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 6}}\par\vspace{0.2em}
 {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Propriétés métriques des courbes}\par\vspace{0.3em}
 {\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
@@ -464,7 +464,9 @@ $R$ est maximal pour $t=\pi$, au point $(-2,0)$, où $R=\frac43$. Quand $t\to0$,
 
 \q{2.} $\vv{OM}\cdot f'=e^{2t}\big(\cos t(\cos t-\sin t)+\sin t(\sin t+\cos t)\big)=e^{2t}$, d'où $\cos\big(\vv{OM},f'\big)=\frac{e^{2t}}{e^t\cdot\sqrt2e^t}=\frac1{\sqrt2}$ : l'angle vaut constamment $\frac\pi4$.
 
-\q{3.} $f''=e^t(-2\sin t,\ 2\cos t)$ et $\det(f',f'')=e^{2t}\big(2\cos t(\cos t-\sin t)+2\sin t(\sin t+\cos t)\big)=2e^{2t}$. Donc $\gamma=\frac{2e^{2t}}{2\sqrt2e^{3t}}=\frac{1}{\sqrt2\,e^t}$ et $R=\sqrt2\,e^t$. Avec $\ve N=\frac1{\sqrt2}(-\sin t-\cos t,\ \cos t-\sin t)$ :
+\q{3.} Méthode du programme : $\cos t-\sin t=\sqrt2\cos(t+\frac\pi4)$ et $\sin t+\cos t=\sqrt2\sin(t+\frac\pi4)$, donc
+$f'(t)=\sqrt2e^t\big(\cos(t+\frac\pi4),\sin(t+\frac\pi4)\big)$ : $v=\sqrt2e^t$, $\alpha=t+\frac\pi4$, et $\gamma=\frac{\alpha'(t)}{v}=\frac{1}{\sqrt2\,e^t}$,
+$R=\sqrt2\,e^t$. (Contrôle par la formule hors programme : $\det(f',f'')=2e^{2t}$ et $\frac{2e^{2t}}{(\sqrt2e^t)^3}=\frac1{\sqrt2e^t}$.) Avec $\ve N=\frac1{\sqrt2}(-\sin t-\cos t,\ \cos t-\sin t)$ :
 \[I=M+R\ve N=e^t(\cos t,\sin t)+e^t(-\sin t-\cos t,\ \cos t-\sin t)=e^t(-\sin t,\ \cos t).\]
 $I(t)$ est l'image de $M(t)$ par la rotation de centre $O$ et d'angle $\frac\pi2$ : la développée est une spirale logarithmique, image de la courbe par cette rotation.
 \par\hfill\textcolor{BleuClair}{$\square$}\par
@@ -582,7 +584,7 @@ $\left(0,b-\frac{a^2}b\right)$, à la distance $\frac{a^2}b$ de $(0,b)$. Ce sont
 \end{tikzpicture}
 \end{center}
 \gain{les quatre rebroussements de la développée correspondent aux quatre sommets de l'ellipse, où la courbure est
-extrémale : c'est le réflexe du chapitre~1.}
+extrémale : c'est le réflexe de la partie~1.}
 \retenir{développée $=$ enveloppe des normales : équation de la normale, dérivée par rapport au paramètre, système $2\times2$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \correction{23}{Développée de l'astroïde}{met-astro-dev}{énoncé : TD, p.~9}

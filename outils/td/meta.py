@@ -3,8 +3,24 @@
 (exemples du livre mis en exercice, exercices complémentaires)."""
 
 CHAPITRES = {
+  'al': {
+    'num': 1, 'titre': 'Algèbre linéaire', 'court': 'Algèbre linéaire', 'livre': 'al', 'nouveau': True,
+    'parties': [
+      ('I', "Applications directes du cours",
+       "Sommes directes, supplémentaires, hyperplans et leurs équations, projecteurs.",
+       ['aln-1', 'aln-2', 'red-somme', 'red-hyp', 'aln-12', 'rdn-17']),
+      ('II', "Exercices classiques et méthodes incontournables",
+       "Projection et symétrie en coordonnées, trace, rang d'une matrice à paramètres, projecteur donné par sa matrice, blocs.",
+       ['al-proj', 'red-trace', 'aln-5', 'aln-6', 'aln-4', 'red-stable']),
+      ('III', "Exercices de synthèse et approfondissement",
+       "Formule de Grassmann, matrices de rang 1, noyau et image, l'endomorphisme $M\\mapsto AM-MA$, matrices nilpotentes de taille 2.",
+       ['aln-3', 'aln-7', 'aln-8', 'al-crochet', 'aln-11', 'aln-13']),
+      ('IV', "Exercices difficiles et type concours",
+       "Endomorphismes de trace nulle en dimension 2 : symétries et endomorphismes de carré nul.",
+       ['aln-10']),
+    ]},
   'ed': {
-    'num': 1, 'titre': 'Équations différentielles', 'livre': 'ed', 'nouveau': True,
+    'num': 4, 'titre': 'Équations différentielles', 'livre': 'ed', 'nouveau': True,
     'parties': [
       ('I', "Applications directes du cours",
        "Premier ordre, équation caractéristique, seconds membres usuels, problèmes de Cauchy.",
@@ -20,14 +36,14 @@ CHAPITRES = {
        ['edn-12', 'edn-13', 'edn-14', 'edn-15']),
     ]},
   'red': {
-    'num': 2, 'titre': 'Algèbre linéaire et réduction', 'court': 'Réduction', 'livre': 'red', 'nouveau': True,
+    'num': 3, 'titre': 'Réduction', 'court': 'Réduction', 'livre': 'red', 'nouveau': True,
     'parties': [
       ('I', "Applications directes du cours",
-       "Valeurs propres en taille 2, lecture d'une matrice triangulaire, sommes directes, hyperplans, une première diagonalisation.",
-       ['rdn-1', 'rdn-2', 'rdn-3', 'red-somme', 'rdn-17', 'red-hyp', 'red-diag1']),
+       "Valeurs propres en taille 2, lecture d'une matrice triangulaire, vecteurs propres sans matrice, une première diagonalisation.",
+       ['rdn-1', 'rdn-2', 'rdn-3', 'red-elem', 'red-diag1']),
       ('II', "Exercices classiques et méthodes incontournables",
-       "Trace, sous-espaces stables, polynôme caractéristique, diagonalisation selon un paramètre, puissances, symétries.",
-       ['red-trace', 'red-stable', 'red-chi', 'red-elem', 'red-diag2', 'red-puiss', 'rdn-4', 'rdn-5', 'rdn-18', 'rdn-6']),
+       "Polynôme caractéristique, diagonalisation selon un paramètre, puissances, symétries, matrices de transition.",
+       ['red-chi', 'red-diag2', 'red-puiss', 'rdn-4', 'rdn-5', 'rdn-18', 'rdn-6']),
       ('III', "Exercices de synthèse et approfondissement",
        "Matrices de rang 1, nilpotentes, circulantes ; endomorphismes de polynômes et de fonctions ; $AB$ et $BA$ ; racines carrées.",
        ['red-rang1', 'red-nilp', 'rdn-7', 'rdn-8', 'rdn-9', 'rdn-10', 'rdn-11', 'red-racine']),
@@ -36,7 +52,7 @@ CHAPITRES = {
        ['red-trig', 'rdn-12', 'rdn-13', 'rdn-14']),
     ]},
   'determinants': {
-    'num': 3, 'titre': 'Déterminants', 'livre': 'livre6',
+    'num': 2, 'titre': 'Déterminants', 'livre': 'livre6',
     'parties': [
       ('I', "Applications directes du cours",
        "Calculer un petit déterminant, utiliser les opérations sur les lignes et les colonnes, traduire alignement, aire, volume et inversibilité.",
@@ -52,7 +68,7 @@ CHAPITRES = {
        ['n-blocs', 'det-pb', 'td-d10', 'n-diag1', 'n-cauchy']),
     ]},
   'courbes': {
-    'num': 4, 'titre': 'Courbes paramétrées', 'livre': 'livre6',
+    'num': 5, 'titre': 'Courbes paramétrées', 'livre': 'livre6',
     'parties': [
       ('I', "Applications directes du cours",
        "Paramétrer, réduire l'intervalle d'étude, tangentes, points stationnaires, inflexions, asymptotes simples.",
@@ -68,7 +84,7 @@ CHAPITRES = {
        ['ds-pb', 'c-concours', 'c-concours2']),
     ]},
   'metrique': {
-    'num': 5, 'titre': 'Propriétés métriques des courbes', 'court': 'Propriétés métriques', 'livre': 'livre7',
+    'num': 6, 'titre': 'Propriétés métriques des courbes', 'court': 'Propriétés métriques', 'livre': 'livre7',
     'parties': [
       ('I', "Applications directes du cours",
        "Longueur, abscisse curviligne, courbure d'un cercle et d'un graphe, première enveloppe.",
@@ -96,6 +112,35 @@ EXEMPLES = {
 
 # titre, notions, objectif, indication — pour les exercices absents de data/exercices.js
 META = {
+  # ---------------------------------------------------------------- algèbre linéaire
+  'al-proj': (r"Projecteur et symétrie dans $\mathbb R^3$", ["somme directe", "projecteur", "symétrie", "hyperplan"],
+              "Écrire en coordonnées une projection et une symétrie définies géométriquement.", "Chercher $t$ tel que $v-tw\\in P$."),
+  'al-crochet': (r"L'endomorphisme $M\mapsto AM-MA$", ["endomorphisme de matrices", "trace", "noyau et image", "sous-espace stable"],
+                 "Étudier un endomorphisme d'un espace de matrices dans sa base canonique.", "La trace de $AM-MA$ est nulle."),
+  'aln-1': (r"Un hyperplan de $\mathbb K^n$ et une base", ["hyperplan", "forme linéaire", "base"],
+            "Reconnaître un hyperplan et en donner une base.", "Une famille libre de $n-1$ vecteurs de $H$."),
+  'aln-2': (r"Un supplémentaire dans $\mathbb R_2[X]$", ["hyperplan", "supplémentaire", "polynômes"],
+            "Utiliser la caractérisation hyperplan + droite.", "$P\\mapsto P(1)$ est une forme linéaire."),
+  'aln-12': ("Projecteurs associés", ["projecteur", "somme directe"],
+             "Relier les deux projecteurs d'une somme directe.", "Écrire $x=x_F+x_G$."),
+  'aln-5': ("La trace détermine une matrice", ["trace", "base canonique de $\\mathcal M_n$"],
+            "Exploiter $\\mathrm{tr}(AM)$ sur une base.", "Prendre $M=E_{j,i}$."),
+  'aln-6': ("Rang d'une matrice à paramètres", ["rang", "opérations élémentaires", "discussion"],
+            "Calculer un rang en discutant selon des paramètres.", "Commencer par $C_2\\leftarrow C_2-bC_3$."),
+  'aln-4': ("Un projecteur donné par sa matrice", ["projecteur", "rang et trace", "équation d'un plan", "base adaptée"],
+            "Reconnaître un projecteur et le réduire dans une base adaptée.", "Calculer $A^2$."),
+  'aln-3': ("Deux sous-espaces trop grands se coupent", ["formule de Grassmann", "intersection"],
+            "Utiliser la formule de Grassmann.", "$\\dim(F+G)\\leq\\dim E$."),
+  'aln-7': ("Matrices de rang au plus $1$", ["rang", "produit colonne-ligne", "trace"],
+            "Caractériser les matrices de rang $1$.", "Toutes les colonnes sont colinéaires."),
+  'aln-8': ("Une matrice de carré nul", ["noyau et image", "théorème du rang", "base adaptée"],
+            "Comparer noyau et image et choisir une base adaptée.", "Vérifier que $\\mathrm{Im}\\,f\\subset\\mathrm{Ker}\\,f$."),
+  'aln-11': ("Matrices nilpotentes de taille 2", ["trace", "déterminant $2\\times2$", "hyperplan", "sous-espace engendré"],
+             "Relier nilpotence, trace et déterminant en taille 2.", "$M^2-\\mathrm{tr}(M)M+\\det(M)I_2=0$."),
+  'aln-13': ("$AB-BA=I$ en dimension infinie", ["trace", "dimension finie", "polynômes"],
+             "Comprendre le rôle de la dimension finie.", "$(XP)'=P+XP'$."),
+  'aln-10': ("Endomorphismes de $\\mathbb C^2$ de trace nulle", ["symétrie", "trace", "théorème du rang", "base adaptée"],
+             "Classer les endomorphismes de trace nulle en dimension 2.", "$f\\circ f=\\lambda\\mathrm{Id}$ ; poser $s=f/\\alpha$."),
   # ---------------------------------------------------------------- réduction
   'red-somme': (r"Sommes directes dans $\mathbb R^3$", ["somme directe", "décomposition", "hyperplan"],
                 "Prouver une somme directe et décomposer un vecteur ; éviter le piège des intersections deux à deux.", "Intersection nulle et somme des dimensions."),
@@ -103,7 +148,7 @@ META = {
                 "Utiliser la trace comme invariant.", "Prendre la trace des deux membres."),
   'red-hyp': (r"Hyperplans de $\mathbb R^4$", ["hyperplan", "intersection", "supplémentaire"],
               "Calculer une intersection d'hyperplans et reconnaître un supplémentaire.", "Ajouter et retrancher les deux équations."),
-  'red-stable': ("Lire des blocs", ["sous-espace stable", "matrice par blocs", "déterminant", "trace"],
+  'red-stable': ("Lire des blocs", ["sous-espace stable", "matrice par blocs", "base adaptée", "trace"],
                  "Traduire la stabilité en forme matricielle par blocs.", "Calculer l'image d'un vecteur générique du plan."),
   'red-elem': (r"Éléments propres de $P\mapsto(X+1)P'$", ["vecteur propre", "spectre", "endomorphisme de polynômes"],
                "Trouver des vecteurs propres sans matrice.", "Calculer $f\\big((X+1)^k\\big)$."),

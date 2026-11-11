@@ -74,7 +74,7 @@
 \begin{document}
 \thispagestyle{empty}
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
-{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 1}}\par\smallskip
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 4}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Équations différentielles}\par\smallskip
 {\color{white!85!Bleu}\sffamily structure, théorème de Cauchy, méthodes de résolution, pièges et résultats du TD}\vspace{0.4em}}}
 
@@ -94,7 +94,7 @@ désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet. $I$ 
 \end{tabular}}
 
 \vspace{0.6em}
-\pdfbookmark[0]{Chapitre 1 --- Équations différentielles}{chap1}\markboth{Chapitre 1 --- Équations différentielles}{}
+\pdfbookmark[0]{Chapitre 4 --- Équations différentielles}{chap4}\markboth{Chapitre 4 --- Équations différentielles}{}
 \begin{multicols}{2}\raggedcolumns
 % ======================================================================
 \notion{1.1 Structure et théorème de Cauchy}\label{n11}
@@ -247,6 +247,10 @@ $z=ty$ : $z''+z=ty''+2y'+ty$.\quad $z=t^2y$ : $z''=t^2y''+4ty'+2y$.
 \emph{Analyse} : $y=\sum a_nt^n$, dériver terme à terme, décaler les indices, coefficient de $t^n$ nul $\Rightarrow$ récurrence.\\
 \emph{Synthèse} : calculer $a_n$, rayon $R>0$, la somme est solution sur $]-R,R[$ ; reconnaître une fonction usuelle.\\
 $\sum\frac{t^n}{n!}=e^t$ ; $\sum\frac{t^{2n}}{(2n)!}=\ch t$ ; $\sum\frac{(-1)^nt^{2n+1}}{(2n+1)!}=\sin t$ ; $\sum(-1)^nt^n=\frac1{1+t}$.
+\end{METH}
+\begin{METH}{Développer $f$ en série entière \livre{méth.~1.10}}
+Trouver une équation linéaire et des conditions initiales vérifiées par $f$ ; calculer la solution DSE ; conclure par l'unicité de Cauchy.\\
+$(1+x)^\alpha$ : $(1+x)y'=\alpha y$, $y(0)=1$, $a_{n+1}=\frac{\alpha-n}{n+1}a_n$, $R=1$.
 \end{METH}
 \begin{PIEGE}
 Une série entière ne donne en général qu'une partie de $S_H$, et seulement sur $]-R,R[$.

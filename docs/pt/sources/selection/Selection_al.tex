@@ -1,0 +1,556 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — Algèbre linéaire : sélection de 5 problèmes},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}Sélection · Algèbre linéaire}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\makeatletter
+\newcommand{\probleme}[7]{% numéro, étape, titre, difficulté, origine, durée, identifiant
+  \clearpage\phantomsection\label{p:#7}\pdfbookmark[1]{Problème #1 — #2}{p.#7}%
+  {\sffamily\small\color{Gris}\textls[150]{PROBLÈME #1\ \ ·\ \ \MakeUppercase{#2}}}\par\nobreak\vspace{0.15em}
+  {\sffamily\bfseries\LARGE\color{Ink}#3}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  \noindent{\footnotesize\sffamily\color{Gris}Difficulté~\niveau{#4}\quad·\quad durée indicative : #6\quad·\quad #5}\par\nobreak\vspace{0.3em}}
+\newcommand{\fichepb}[3]{% notions, objectifs, prérequis
+  {\small\setlength{\parskip}{0.15em}%
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Notions}}#1\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Objectifs}}#2\par
+  \noindent\hangindent=2.4cm\hangafter=1\makebox[2.4cm][l]{\sffamily\textcolor{Bleu}{Prérequis}}#3\par}
+  \vspace{0.4em}{\color{Filet}\hrule height 0.4pt}\vspace{0.6em}}
+\newcommand{\titresection}[2]{% titre, texte
+  \clearpage\phantomsection\pdfbookmark[0]{#1}{s.#1}%
+  {\sffamily\bfseries\fontsize{24}{28}\selectfont\color{Ink}#1}\par\vspace{0.3em}
+  {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.5em}{\small\color{Gris}#2}\par\vspace{0.6em}}
+\newcommand{\soustitre}[3]{% numéro, titre, label
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Problème~#1}\quad{\sffamily\bfseries\color{Ink}#2}\par\nobreak\vspace{0.3em}}
+\makeatother
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 1}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}Sélection --- Algèbre linéaire}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Cinq problèmes à travailler après le cours}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Ces cinq problèmes sont la sélection principale pour les séances, \emph{après} l'explication du cours.
+Ils vont de la mise en application au niveau des devoirs et des concours ; chacun réunit plusieurs résultats du chapitre.
+Ils complètent le TD complet et le livre, qu'ils ne remplacent pas.
+
+\textbf{Mode d'emploi.} Les traiter dans l'ordre. Pour chaque problème : lire l'en-tête (notions, objectifs, prérequis),
+chercher au brouillon, puis rédiger. En cas de blocage, lire \emph{une seule} indication (page des indications), puis reprendre.
+Ne lire la correction qu'une fois le problème terminé ou après un vrai effort : elle explique le \emph{choix de la méthode}
+avant les calculs. L'origine de chaque problème est indiquée en tête ; les problèmes « d'après » un concours sont des
+adaptations rédigées par Le Collé, pas les énoncés officiels.}
+\vspace{1.2em}
+{\small\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\noindent\begin{tabular}{@{}r>{\raggedright\arraybackslash\sffamily\footnotesize}p{2.9cm}>{\raggedright\arraybackslash}p{6.1cm}ll@{\hspace{6pt}}ccc@{}}
+& & & & & {\footnotesize\sffamily énoncé} & {\footnotesize\sffamily indic.} & {\footnotesize\sffamily corrigé}\\\hline
+1 & \textcolor{Gris}{Mise en application} & Deux plans supplémentaires de $\mathbb R^4$ : projection et symétrie & \niveau{2} & 30\,min & \pageref{p:sel-al-r4} & \pageref{i:sel-al-r4} & \pageref{c:sel-al-r4}\\
+2 & \textcolor{Gris}{Méthodes classiques} & Les polynômes interpolateurs de Lagrange & \niveau{2} & 35\,min & \pageref{p:sel-al-lagrange} & \pageref{i:sel-al-lagrange} & \pageref{c:sel-al-lagrange}\\
+3 & \textcolor{Gris}{Approfondissement} & La trace et les commutateurs & \niveau{3} & 45\,min & \pageref{p:sel-al-trace} & \pageref{i:sel-al-trace} & \pageref{c:sel-al-trace}\\
+4 & \textcolor{Gris}{Problème de synthèse} & Les endomorphismes de carré nul & \niveau{4} & 50\,min & \pageref{p:sel-al-carre} & \pageref{i:sel-al-carre} & \pageref{c:sel-al-carre}\\
+5 & \textcolor{Gris}{Niveau DS / concours} & Somme de deux projecteurs & \niveau{5} & 1\,h & \pageref{p:sel-al-projecteurs} & \pageref{i:sel-al-projecteurs} & \pageref{c:sel-al-projecteurs}\\
+\end{tabular}}
+\probleme{1}{Mise en application}{Deux plans supplémentaires de $\mathbb R^4$ : projection et symétrie}{2}{Problème original Le Collé}{30\,min}{sel-al-r4}
+\fichepb{hyperplans, somme directe, projecteur, symétrie, trace et rang, équations d'un sous-espace.}{Prouver une décomposition en somme directe, puis écrire en coordonnées la projection et la symétrie associées.}{Intersection de $p$ hyperplans ; Caractérisation des supplémentaires ; Projecteurs et symétries.}
+Dans $E=\R^4$, on note $F$ l'ensemble des $(x,y,z,t)$ tels que $x+y+z+t=0$ et $x-y+z-t=0$, et $G=\vect(a,b)$ avec
+$a=(1,1,1,1)$ et $b=(1,-1,1,-1)$.
+\begin{enumerate}
+\item Justifier que $F$ est un sous-espace de dimension au moins $2$, puis en donner une base et la dimension.
+\item Montrer que $E=F\oplus G$.
+\item Soit $p$ la projection sur $F$ parallèlement à $G$. Pour $v=(x,y,z,t)$, on écrit $v=w+\alpha a+\beta b$ avec $w\in F$.
+Calculer $\alpha$ et $\beta$, puis la matrice de $p$ dans la base canonique.
+\item Vérifier que $\tr p=\rg p$. Écrire la matrice de la symétrie $s$ par rapport à $F$ parallèlement à $G$ et décrire $s(x,y,z,t)$.
+\item Donner un système d'équations de $G$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-al-r4} · correction p.~\pageref{c:sel-al-r4}}
+\probleme{2}{Méthodes classiques}{Les polynômes interpolateurs de Lagrange}{2}{Problème classique, d'après le cours de la classe}{35\,min}{sel-al-lagrange}
+\fichepb{isomorphisme, théorème du rang, base, coordonnées, hyperplans.}{Obtenir un isomorphisme par la seule injectivité, et lire des coordonnées comme des valeurs.}{Un polynôme non nul de degré $\leq n$ a au plus $n$ racines ; Théorème du rang ; Hyperplans.}
+Soit $n\in\N$ et $a_0,\dots,a_n$ des réels deux à deux distincts. On considère $\varphi:\R_n[X]\to\R^{n+1}$,
+$P\mapsto\big(P(a_0),\dots,P(a_n)\big)$, et l'on note $(\varepsilon_0,\dots,\varepsilon_n)$ la base canonique de $\R^{n+1}$.
+\begin{enumerate}
+\item Montrer que $\varphi$ est linéaire et injective. En déduire que c'est un isomorphisme.
+\item En déduire que pour tous réels $b_0,\dots,b_n$, il existe un unique polynôme $P$ de degré au plus $n$ tel que $P(a_i)=b_i$
+pour tout $i$.
+\item On pose $L_i=\varphi^{-1}(\varepsilon_i)$. Montrer que $L_i=\prod_{j\neq i}\frac{X-a_j}{a_i-a_j}$.
+\item Montrer que $(L_0,\dots,L_n)$ est une base de $\R_n[X]$ et que les coordonnées de $P$ dans cette base sont $P(a_0),\dots,P(a_n)$.
+\item Pour $i$ fixé, montrer que $H_i=\{P\in\R_n[X],\ P(a_i)=0\}$ est un hyperplan, puis que $\bigcap_{j\neq i}H_j=\vect(L_i)$.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-al-lagrange} · correction p.~\pageref{c:sel-al-lagrange}}
+\probleme{3}{Approfondissement}{La trace et les commutateurs}{3}{Problème original Le Collé}{45\,min}{sel-al-trace}
+\fichepb{trace, hyperplan, base canonique de $\mathcal M_n$, sous-espace engendré.}{Identifier un sous-espace engendré par sa dimension et une base explicite.}{Produit des matrices $E_{i,j}$ ; Hyperplans ; $\mathrm{tr}(AB)=\mathrm{tr}(BA)$.}
+Soit $n\geq2$. On note $\mathcal T=\{M\in\Mn{\K},\ \tr M=0\}$ et $(E_{i,j})$ la base canonique de $\Mn{\K}$ ; on rappelle que
+$E_{i,j}E_{k,l}=E_{i,l}$ si $j=k$, et $0$ sinon.
+\begin{enumerate}
+\item Montrer que $\mathcal T$ est un hyperplan de $\Mn{\K}$, et que les matrices $E_{i,j}$ ($i\neq j$) et $E_{i,i}-E_{n,n}$ ($i<n$) en
+forment une base.
+\item Pour $i\neq j$, calculer $E_{i,i}E_{i,j}-E_{i,j}E_{i,i}$ et $E_{i,j}E_{j,i}-E_{j,i}E_{i,j}$.
+\item On appelle \emph{commutateur} toute matrice de la forme $AB-BA$. Montrer que le sous-espace engendré par les commutateurs est
+exactement $\mathcal T$.
+\item En déduire à nouveau qu'il n'existe pas de matrices $A$, $B$ telles que $AB-BA=I_n$. Existe-t-il $A$, $B$ telles que
+$AB-BA=E_{1,2}$ ?
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-al-trace} · correction p.~\pageref{c:sel-al-trace}}
+\probleme{4}{Problème de synthèse}{Les endomorphismes de carré nul}{4}{Problème original Le Collé}{50\,min}{sel-al-carre}
+\fichepb{noyau et image, théorème du rang, base adaptée, matrice par blocs, trace.}{Construire une base adaptée à une inclusion de sous-espaces et lire la matrice par blocs.}{Théorème du rang ; Théorème de la base incomplète ; Matrice dans une base.}
+Soit $E$ de dimension finie $n\geq1$ et $f\in\LE$ tel que $f\circ f=0$ et $f\neq0$. On note $r=\rg f$.
+\begin{enumerate}
+\item Montrer que $\Im f\subset\Ker f$, puis que $r\leq\frac n2$.
+\item Soit $(v_1,\dots,v_r)$ une famille telle que $\big(f(v_1),\dots,f(v_r)\big)$ soit une base de $\Im f$, que l'on complète en une base
+$\big(f(v_1),\dots,f(v_r),w_1,\dots,w_{n-2r}\big)$ de $\Ker f$. Montrer que
+$\mathcal B=\big(f(v_1),\dots,f(v_r),w_1,\dots,w_{n-2r},v_1,\dots,v_r\big)$ est une base de $E$.
+\item Écrire la matrice de $f$ dans $\mathcal B$ (par blocs) et en déduire $\tr f$.
+\item Exemple : $f$ de matrice $A=\begin{pmatrix}2&-1&1\\2&-1&1\\-2&1&-1\end{pmatrix}$ dans la base canonique de $\R^3$. Vérifier que $A^2=0$
+et donner une base de $\R^3$ dans laquelle la matrice de $f$ n'a qu'un coefficient non nul.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-al-carre} · correction p.~\pageref{c:sel-al-carre}}
+\probleme{5}{Niveau DS / concours}{Somme de deux projecteurs}{5}{Problème classique d'écrit}{1\,h}{sel-al-projecteurs}
+\fichepb{projecteur, composition, somme directe, noyau et image, trace et rang.}{Manipuler des relations entre endomorphismes, puis décrire noyau et image d'une somme.}{Projecteurs : $p\circ p=p$ ; Somme directe de deux sous-espaces ; Rang et trace d'un projecteur.}
+Soit $E$ un $\K$-espace vectoriel de dimension finie, et $p$, $q$ deux projecteurs de $E$.
+\begin{enumerate}
+\item Montrer que $p+q$ est un projecteur si et seulement si $p\circ q+q\circ p=0$.
+\item On suppose $p\circ q+q\circ p=0$. En composant à gauche puis à droite par $p$, montrer que $p\circ q=q\circ p$, puis que
+$p\circ q=q\circ p=0$.
+\item En déduire que $p+q$ est un projecteur si et seulement si $p\circ q=q\circ p=0$.
+\item On suppose cette condition réalisée. Montrer que $\Im(p+q)=\Im p\oplus\Im q$ et $\Ker(p+q)=\Ker p\cap\Ker q$.
+\item Retrouver le résultat $\rg(p+q)=\rg p+\rg q$ à l'aide de la trace.
+\end{enumerate}
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-al-projecteurs} · correction p.~\pageref{c:sel-al-projecteurs}}
+\titresection{Indications}{Une indication par question délicate. N\'en lire qu\'une à la fois, puis reprendre la recherche.}
+\soustitre{1}{Deux plans supplémentaires de $\mathbb R^4$ : projection et symétrie}{i:sel-al-r4}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Ajouter et retrancher les deux équations.
+\item 2. Appliquer les deux équations de $F$ à $\alpha a+\beta b$.
+\item 3. Appliquer $\varphi_1:v\mapsto x+y+z+t$ et $\varphi_2:v\mapsto x-y+z-t$ à l'égalité $v=w+\alpha a+\beta b$.
+\item 4. $s=2p-\mathrm{Id}$.
+\item 5. Deux équations indépendantes vérifiées par $a$ et $b$.
+\end{itemize}
+\soustitre{2}{Les polynômes interpolateurs de Lagrange}{i:sel-al-lagrange}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Un polynôme de degré au plus $n$ qui a $n+1$ racines distinctes est nul.
+\item 3. Calculer $Q_i(a_j)$ pour $j\neq i$ et $j=i$.
+\item 4. Évaluer $P=\sum\lambda_iL_i$ en $a_k$.
+\item 5. Utiliser les coordonnées dans la base $(L_0,\dots,L_n)$.
+\end{itemize}
+\soustitre{3}{La trace et les commutateurs}{i:sel-al-trace}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Compter les matrices proposées ; lire leurs coefficients dans une combinaison nulle.
+\item 2. Utiliser la règle $E_{i,j}E_{k,l}=\delta_{j,k}E_{i,l}$.
+\item 3. Double inclusion : la trace d'un commutateur, puis la question 2.
+\item 4. Quelle est la trace de $I_n$ ?
+\end{itemize}
+\soustitre{4}{Les endomorphismes de carré nul}{i:sel-al-carre}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Calculer $f(y)$ pour $y=f(x)$.
+\item 2. Appliquer $f$ à une combinaison nulle : il ne reste que les $v_i$.
+\item 3. Où $f$ envoie-t-il $v_i$ ?
+\item 4. $A e_1=(2,2,-2)$.
+\end{itemize}
+\soustitre{5}{Somme de deux projecteurs}{i:sel-al-projecteurs}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Développer $(p+q)^2$ : attention, $p\circ q\neq q\circ p$ a priori.
+\item 2. Composer la relation à gauche par $p$, puis à droite par $p$, et soustraire.
+\item 4. Pour $y=p(a)+q(b)$, calculer $(p+q)(y)$.
+\item 5. Pour un projecteur, rang $=$ trace.
+\end{itemize}
+\titresection{Corrections}{Chaque correction commence par le choix de la méthode ; les encadrés résument ce qui resservira. Les renvois « méthode~1.4 du livret » désignent le livret du chapitre.}
+\soustitre{1}{Deux plans supplémentaires de $\mathbb R^4$ : projection et symétrie}{c:sel-al-r4}
+\choix{$F$ est une intersection de deux hyperplans : on obtient sa dimension, puis une projection se calcule en ne cherchant que la
+composante sur $G$.}
+\q{1.} $F$ est l'intersection de deux hyperplans de $\R^4$ : c'est un sous-espace de dimension au moins $4-2=2$. En ajoutant et en
+retranchant les équations : $x+z=0$ et $y+t=0$. Donc $F=\{(x,y,-x,-y)\}=\vect\big((1,0,-1,0),(0,1,0,-1)\big)$, de dimension $2$.
+\q{2.} Si $\alpha a+\beta b\in F$ : la première équation donne $4\alpha=0$, la seconde $4\beta=0$. Donc $F\cap G=\{0\}$ ; comme
+$a$ et $b$ ne sont pas proportionnels, $\dim G=2$, et $\dim F+\dim G=4$ : $E=F\oplus G$.
+\q{3.} Notons $\varphi_1(v)=x+y+z+t$ et $\varphi_2(v)=x-y+z-t$. On a $\varphi_1(a)=4$, $\varphi_1(b)=0$, $\varphi_2(a)=0$,
+$\varphi_2(b)=4$, et $\varphi_1(w)=\varphi_2(w)=0$. En appliquant $\varphi_1$ puis $\varphi_2$ à $v=w+\alpha a+\beta b$ :
+$\alpha=\frac{x+y+z+t}4$, $\beta=\frac{x-y+z-t}4$. Alors $p(v)=v-\alpha a-\beta b=\big(\frac{x-z}2,\frac{y-t}2,\frac{z-x}2,\frac{t-y}2\big)$ et
+\[\Mat(p)=\frac12\begin{pmatrix}1&0&-1&0\\0&1&0&-1\\-1&0&1&0\\0&-1&0&1\end{pmatrix}.\]
+\q{4.} $\tr p=\frac12\times4=2=\dim F=\rg p$. Puis $s=2p-\Id$ : $\Mat(s)=\begin{pmatrix}0&0&-1&0\\0&0&0&-1\\-1&0&0&0\\0&-1&0&0\end{pmatrix}$,
+soit $s(x,y,z,t)=(-z,-t,-x,-y)$. Contrôle : $s\circ s=\Id$, $s(a)=-a$, $s(b)=-b$, et $s$ fixe $(1,0,-1,0)$.
+\q{5.} $a$ et $b$ vérifient $x=z$ et $y=t$ ; ces deux équations indépendantes définissent un sous-espace de dimension $2$ qui contient
+$G$ : c'est $G$.
+\retenir{une forme linéaire nulle sur $F$ « lit » la composante sur $G$ : c'est la façon la plus rapide de calculer une projection.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{2}{Les polynômes interpolateurs de Lagrange}{c:sel-al-lagrange}
+\choix{un isomorphisme entre espaces de même dimension finie s'obtient par l'injectivité seule (théorème du rang).}
+\q{1.} $\varphi(\lambda P+Q)=\lambda\varphi(P)+\varphi(Q)$ coordonnée par coordonnée. Si $\varphi(P)=0$, $P$ a les $n+1$ racines distinctes
+$a_0,\dots,a_n$ et est de degré au plus $n$ : $P=0$. Donc $\Ker\varphi=\{0\}$ ; comme $\dim\R_n[X]=n+1=\dim\R^{n+1}$, $\varphi$ est un
+isomorphisme.
+\q{2.} C'est la surjectivité (existence) et l'injectivité (unicité) de $\varphi$, appliquées à $(b_0,\dots,b_n)$.
+\q{3.} Le polynôme $Q_i=\prod_{j\neq i}\frac{X-a_j}{a_i-a_j}$ est de degré $n$, s'annule en chaque $a_j$, $j\neq i$, et vaut $1$ en $a_i$ :
+$\varphi(Q_i)=\varepsilon_i$, donc $Q_i=L_i$ par injectivité.
+\q{4.} L'image d'une base par un isomorphisme est une base : $(L_0,\dots,L_n)=\varphi^{-1}(\varepsilon_0,\dots,\varepsilon_n)$ est une base.
+Si $P=\sum\lambda_iL_i$, en évaluant en $a_k$ : $P(a_k)=\lambda_k$. Donc $P=\sum_{i=0}^nP(a_i)L_i$.
+\q{5.} $P\mapsto P(a_i)$ est une forme linéaire non nulle ($1\mapsto1$) : $H_i$ est un hyperplan. Si $P\in\bigcap_{j\neq i}H_j$, ses
+coordonnées $P(a_j)$, $j\neq i$, sont nulles : $P=P(a_i)L_i\in\vect(L_i)$ ; réciproquement $L_i$ s'annule en chaque $a_j$, $j\neq i$.
+L'intersection de ces $n$ hyperplans est une droite : sa dimension $1=(n+1)-n$ est la plus petite possible.
+\retenir{coordonnées dans la base de Lagrange $=$ valeurs aux points d'interpolation.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{3}{La trace et les commutateurs}{c:sel-al-trace}
+\q{1.} La trace est une forme linéaire non nulle : $\mathcal T$ est un hyperplan, de dimension $n^2-1$. Les $n^2-n$ matrices $E_{i,j}$
+($i\neq j$) et les $n-1$ matrices $E_{i,i}-E_{n,n}$ sont de trace nulle, au nombre de $n^2-1$. Elles forment une famille libre : dans
+une combinaison nulle, le coefficient $(i,j)$, $i\neq j$, donne le coefficient de $E_{i,j}$, et le coefficient $(i,i)$, $i<n$, celui de
+$E_{i,i}-E_{n,n}$. C'est donc une base de $\mathcal T$.
+\q{2.} $E_{i,i}E_{i,j}=E_{i,j}$ et $E_{i,j}E_{i,i}=0$ ($j\neq i$) : le premier commutateur vaut $E_{i,j}$. Ensuite $E_{i,j}E_{j,i}=E_{i,i}$
+et $E_{j,i}E_{i,j}=E_{j,j}$ : le second vaut $E_{i,i}-E_{j,j}$.
+\q{3.} Tout commutateur est dans $\mathcal T$, car $\tr(AB)=\tr(BA)$ : le sous-espace engendré est contenu dans $\mathcal T$. Par la
+question 2, chaque vecteur de la base de $\mathcal T$ de la question 1 est un commutateur : le sous-espace engendré contient $\mathcal T$.
+\q{4.} $\tr I_n=n\neq0$ : $I_n\notin\mathcal T$, donc $I_n$ n'est pas un commutateur. En revanche $E_{1,2}=E_{1,1}E_{1,2}-E_{1,2}E_{1,1}$.
+\retenir{les commutateurs engendrent exactement l'hyperplan des matrices de trace nulle.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{4}{Les endomorphismes de carré nul}{c:sel-al-carre}
+\choix{tout repose sur $\Im f\subset\Ker f$ et le théorème du rang ; la base est construite « en remontant » de l'image vers ses antécédents.}
+\q{1.} Pour $y=f(x)$, $f(y)=f\circ f(x)=0$ : $\Im f\subset\Ker f$. Donc $r\leq\dim\Ker f=n-r$ (théorème du rang), soit $r\leq\frac n2$.
+\q{2.} $\mathcal B$ a $r+(n-2r)+r=n$ vecteurs ; montrons qu'elle est libre. Si
+$\sum\lambda_if(v_i)+\sum\mu_kw_k+\sum\nu_iv_i=0$, on applique $f$ : les deux premières sommes sont dans $\Ker f$, donc
+$\sum\nu_if(v_i)=0$, et $\nu_i=0$ (base de $\Im f$). Il reste une combinaison nulle de la base de $\Ker f$ : tous les coefficients
+sont nuls. Famille libre de $n$ vecteurs : c'est une base.
+\q{3.} $f$ envoie les $n-r$ premiers vecteurs (dans $\Ker f$) sur $0$ et $v_i$ sur $f(v_i)$, le $i$-ième vecteur de $\mathcal B$ :
+\[\Mat_{\mathcal B}(f)=\begin{pmatrix}0&0&I_r\\0&0&0\\0&0&0\end{pmatrix}\quad\text{(blocs de tailles $r$, $n-2r$, $r$)},\qquad\tr f=0.\]
+\q{4.} Les lignes de $A$ sont proportionnelles à $(2,-1,1)$ et la colonne $(2,2,-2)$ vérifie $2\cdot2-2-2=0$ : $A^2=0$. $\Ker f$ est le
+plan $2x-y+z=0$, $\Im f=\vect(u)$ avec $u=(1,1,-1)$ ; $v=\frac12e_1$ vérifie $f(v)=u$, et $w=(1,2,0)\in\Ker f$ n'est pas colinéaire à
+$u$. Dans la base $(u,w,v)$, la matrice de $f$ a pour seul coefficient non nul un $1$ en position $(1,3)$.
+\retenir{endomorphisme de carré nul : $\Im f\subset\Ker f$, rang au plus $\frac n2$, trace nulle.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\soustitre{5}{Somme de deux projecteurs}{c:sel-al-projecteurs}
+\choix{traduire « projecteur » par $u\circ u=u$, et composer intelligemment par $p$ pour isoler $p\circ q$.}
+\q{1.} $(p+q)^2=p^2+p\circ q+q\circ p+q^2=p+q+(p\circ q+q\circ p)$ : $p+q$ est un projecteur si et seulement si $p\circ q+q\circ p=0$.
+\q{2.} En composant $p\circ q+q\circ p=0$ à gauche par $p$ : $p\circ q+p\circ q\circ p=0$. À droite par $p$ : $p\circ q\circ p+q\circ p=0$.
+Par différence, $p\circ q=q\circ p$. Alors $2p\circ q=0$, donc $p\circ q=q\circ p=0$ (car $2\neq0$ dans $\K$).
+\q{3.} Le sens direct est la question 2, la réciproque la question 1.
+\q{4.} $\Im(p+q)\subset\Im p+\Im q$. Réciproquement, si $y=p(a)+q(b)$, alors $(p+q)(y)=p(a)+q(b)=y$ (car $p\circ q=q\circ p=0$),
+donc $y\in\Im(p+q)$. La somme est directe : si $y\in\Im p\cap\Im q$, $y=p(y)=p\big(q(y)\big)=0$. Enfin $\Ker p\cap\Ker q\subset\Ker(p+q)$,
+et si $p(x)+q(x)=0$, en appliquant $p$ : $p(x)=0$, puis $q(x)=0$.
+\q{5.} Pour un projecteur, rang $=$ trace : $\rg(p+q)=\tr(p+q)=\tr p+\tr q=\rg p+\rg q$, ce qui confirme que la somme
+$\Im p+\Im q$ est directe.
+\retenir{$p+q$ projecteur $\iff p\circ q=q\circ p=0$ ; et pour les projecteurs, la trace calcule le rang.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

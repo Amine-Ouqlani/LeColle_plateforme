@@ -306,7 +306,7 @@
 \providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
 
 \begin{document}
-\renewcommand{\grandnum}{3}
+\renewcommand{\grandnum}{2}
 \pagenumbering{roman}
 
 % ======================= Couverture =======================
@@ -361,6 +361,12 @@ pièges, et ce qu'il faut retenir.
 $n$ de la feuille de TD ; les autres complètent l'entraînement au même niveau. Tous les corrigés sont regroupés à la fin
 du livret. La difficulté est notée de \niveau{1} à \niveau{5}. L'index (page~\pageref{sec:corresp}) indique où
 chaque point du cours et du TD est traité. La numérotation des parties est celle de la fiche et de la présentation.
+
+\paragraph{Place dans le parcours} Ce chapitre suit le chapitre~1, \emph{Algèbre linéaire} (bases adaptées, projecteurs et
+symétries, sous-espaces stables et matrices par blocs), dont il utilise le langage, et prépare le chapitre~3, \emph{Réduction},
+où le polynôme caractéristique est un déterminant. Les techniques de calcul d'ordre $n$ (§1.5) reprennent la feuille de TD de la
+classe : le programme demande surtout de savoir calculer par opérations élémentaires et d'interpréter le résultat ; les
+déterminants de forme particulière sont des méthodes d'exercice, à connaître sans en surcharger l'apprentissage.
 
 \paragraph{Repères}
 \begin{center}
@@ -611,13 +617,26 @@ Pour un endomorphisme défini géométriquement, on calcule $\det f$ dans la bas
 adaptée), jamais dans la base canonique.
 \end{reflexe}
 
+\begin{proposition}[matrice triangulaire par blocs]\label{prop:blocs}
+Si $M=\begin{pmatrix}A&B\\0&C\end{pmatrix}$, avec $A\in\mathcal M_p(\K)$ et $C\in\mathcal M_{n-p}(\K)$ carrées, alors
+$\det M=\det A\times\det C$. En particulier, si un sous-espace $F$ est stable par $f$ (chapitre~1), $\det f=\det f_F\times\det C$,
+où $C$ est le bloc diagonal complémentaire dans une base adaptée à $F$.
+\end{proposition}
+
+\begin{proof}
+Par récurrence sur $p$. On développe selon la première colonne : seuls ses $p$ premiers coefficients peuvent être non nuls. Si
+$p=1$, $\det M=a_{1,1}\det C$. Si $p\geq2$, le mineur associé à $a_{i,1}$ ($i\leq p$) est encore triangulaire par blocs, de blocs
+diagonaux $A_{i,1}$ (mineur de $A$) et $C$ ; par hypothèse de récurrence,
+$\det M=\sum_{i=1}^p(-1)^{i+1}a_{i,1}\det(A_{i,1})\det C=\det A\det C$ (développement de $\det A$ selon sa première colonne).
+\end{proof}
+
 \begin{proposition}\label{prop:proj-sym}
 Soit $E$ de dimension $n$. Un projecteur $p$ vérifie $\det p=1$ si $p=\Id$, $\det p=0$ sinon. Une symétrie $s$ vérifie
 $\det s=(-1)^{\dim\mathrm{Ker}(s+\Id)}=(-1)^{n-\rg(s+\Id)}$.
 \end{proposition}
 
 \begin{proof}
-Dans une base adaptée à $E=\mathrm{Im}\,p\oplus\mathrm{Ker}\,p$, $\Mat(p)=\mathrm{diag}(I_r,0)$. Dans une base adaptée à
+Dans une base adaptée à $E=\mathrm{Im}\,p\oplus\mathrm{Ker}\,p$ (chapitre~1), $\Mat(p)=\mathrm{diag}(I_r,0)$. Dans une base adaptée à
 $E=\mathrm{Ker}(s-\Id)\oplus\mathrm{Ker}(s+\Id)$, $\Mat(s)=\mathrm{diag}(I_r,-I_{n-r})$ ; et $\frac12(s+\Id)$ est le
 projecteur sur $\mathrm{Ker}(s-\Id)$, donc $\rg(s+\Id)=r$.
 \end{proof}

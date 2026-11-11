@@ -1,6 +1,167 @@
 /* Le Collé PT — sélection de 5 problèmes par chapitre (généré par outils/td/integrer_selection.py) */
 window.LC = window.LC || {};
 LC.selection = {
+ "al": {
+  "doc": "selection-al",
+  "problemes": [
+   {
+    "id": "sel-al-r4",
+    "num": 1,
+    "etape": "Mise en application",
+    "titre": "Deux plans supplémentaires de $\\mathbb R^4$ : projection et symétrie",
+    "difficulte": 2,
+    "duree": 30,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "hyperplans",
+     "somme directe",
+     "projecteur",
+     "symétrie",
+     "trace et rang",
+     "équations d'un sous-espace"
+    ],
+    "objectifs": "Prouver une décomposition en somme directe, puis écrire en coordonnées la projection et la symétrie associées.",
+    "prerequis": [
+     "Intersection de $p$ hyperplans",
+     "Caractérisation des supplémentaires",
+     "Projecteurs et symétries"
+    ],
+    "indications": [
+     "1. Ajouter et retrancher les deux équations.",
+     "2. Appliquer les deux équations de $F$ à $\\alpha a+\\beta b$.",
+     "3. Appliquer $\\varphi_1:v\\mapsto x+y+z+t$ et $\\varphi_2:v\\mapsto x-y+z-t$ à l'égalité $v=w+\\alpha a+\\beta b$.",
+     "4. $s=2p-\\mathrm{Id}$.",
+     "5. Deux équations indépendantes vérifiées par $a$ et $b$."
+    ],
+    "page": 2,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "sel-al-lagrange",
+    "num": 2,
+    "etape": "Méthodes classiques",
+    "titre": "Les polynômes interpolateurs de Lagrange",
+    "difficulte": 2,
+    "duree": 35,
+    "origine": "Problème classique, d'après le cours de la classe",
+    "notions": [
+     "isomorphisme",
+     "théorème du rang",
+     "base",
+     "coordonnées",
+     "hyperplans"
+    ],
+    "objectifs": "Obtenir un isomorphisme par la seule injectivité, et lire des coordonnées comme des valeurs.",
+    "prerequis": [
+     "Un polynôme non nul de degré $\\leq n$ a au plus $n$ racines",
+     "Théorème du rang",
+     "Hyperplans"
+    ],
+    "indications": [
+     "1. Un polynôme de degré au plus $n$ qui a $n+1$ racines distinctes est nul.",
+     "3. Calculer $Q_i(a_j)$ pour $j\\neq i$ et $j=i$.",
+     "4. Évaluer $P=\\sum\\lambda_iL_i$ en $a_k$.",
+     "5. Utiliser les coordonnées dans la base $(L_0,\\dots,L_n)$."
+    ],
+    "page": 3,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "sel-al-trace",
+    "num": 3,
+    "etape": "Approfondissement",
+    "titre": "La trace et les commutateurs",
+    "difficulte": 3,
+    "duree": 45,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "trace",
+     "hyperplan",
+     "base canonique de $\\mathcal M_n$",
+     "sous-espace engendré"
+    ],
+    "objectifs": "Identifier un sous-espace engendré par sa dimension et une base explicite.",
+    "prerequis": [
+     "Produit des matrices $E_{i,j}$",
+     "Hyperplans",
+     "$\\mathrm{tr}(AB)=\\mathrm{tr}(BA)$"
+    ],
+    "indications": [
+     "1. Compter les matrices proposées ; lire leurs coefficients dans une combinaison nulle.",
+     "2. Utiliser la règle $E_{i,j}E_{k,l}=\\delta_{j,k}E_{i,l}$.",
+     "3. Double inclusion : la trace d'un commutateur, puis la question 2.",
+     "4. Quelle est la trace de $I_n$ ?"
+    ],
+    "page": 4,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "sel-al-carre",
+    "num": 4,
+    "etape": "Problème de synthèse",
+    "titre": "Les endomorphismes de carré nul",
+    "difficulte": 4,
+    "duree": 50,
+    "origine": "Problème original Le Collé",
+    "notions": [
+     "noyau et image",
+     "théorème du rang",
+     "base adaptée",
+     "matrice par blocs",
+     "trace"
+    ],
+    "objectifs": "Construire une base adaptée à une inclusion de sous-espaces et lire la matrice par blocs.",
+    "prerequis": [
+     "Théorème du rang",
+     "Théorème de la base incomplète",
+     "Matrice dans une base"
+    ],
+    "indications": [
+     "1. Calculer $f(y)$ pour $y=f(x)$.",
+     "2. Appliquer $f$ à une combinaison nulle : il ne reste que les $v_i$.",
+     "3. Où $f$ envoie-t-il $v_i$ ?",
+     "4. $A e_1=(2,2,-2)$."
+    ],
+    "page": 5,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "sel-al-projecteurs",
+    "num": 5,
+    "etape": "Niveau DS / concours",
+    "titre": "Somme de deux projecteurs",
+    "difficulte": 5,
+    "duree": 60,
+    "origine": "Problème classique d'écrit",
+    "notions": [
+     "projecteur",
+     "composition",
+     "somme directe",
+     "noyau et image",
+     "trace et rang"
+    ],
+    "objectifs": "Manipuler des relations entre endomorphismes, puis décrire noyau et image d'une somme.",
+    "prerequis": [
+     "Projecteurs : $p\\circ p=p$",
+     "Somme directe de deux sous-espaces",
+     "Rang et trace d'un projecteur"
+    ],
+    "indications": [
+     "1. Développer $(p+q)^2$ : attention, $p\\circ q\\neq q\\circ p$ a priori.",
+     "2. Composer la relation à gauche par $p$, puis à droite par $p$, et soustraire.",
+     "4. Pour $y=p(a)+q(b)$, calculer $(p+q)(y)$.",
+     "5. Pour un projecteur, rang $=$ trace."
+    ],
+    "page": 6,
+    "pageIndication": 7,
+    "pageCorrige": 10
+   }
+  ]
+ },
  "ed": {
   "doc": "selection-ed",
   "problemes": [
@@ -200,7 +361,7 @@ LC.selection = {
     "titre": "Un endomorphisme de $\\mathbb R_n[X]$",
     "difficulte": 3,
     "duree": 35,
-    "origine": "Exercice complémentaire · TD complet, exercice 21",
+    "origine": "Exercice complémentaire · TD complet, exercice 16",
     "notions": [
      "endomorphisme de polynômes",
      "degré",

@@ -307,7 +307,7 @@
 
 
 \begin{document}
-\renewcommand{\grandnum}{1}
+\renewcommand{\grandnum}{4}
 \pagenumbering{roman}
 \begin{titlepage}
 \thispagestyle{empty}
@@ -705,6 +705,24 @@ Donc $a_{n+1}=-a_n$, $a_n=(-1)^na_0$, de rayon $1$ : $y=\frac{a_0}{1+t}$ sur $]-
 Ces méthodes donnent les solutions sur un intervalle où le coefficient de $y''$ ne s'annule pas. Une série entière n'est
 solution que sur son intervalle de convergence ; elle ne donne en général qu'une partie de $S_H$.
 \end{attention}
+
+\begin{methode}{Développer une fonction en série entière grâce à une équation différentielle}\label{m:dse}
+Le programme demande aussi le chemin inverse : pour développer une fonction $f$ connue,
+\begin{enumerate}
+\item trouver une équation différentielle linéaire, avec conditions initiales, dont $f$ est solution sur un intervalle $I$ contenant $0$ ;
+\item chercher la solution développable en série entière de ce problème (méthode précédente) : récurrence sur les $a_n$, rayon $R>0$ ;
+\item conclure par l'unicité du théorème de Cauchy : $f$ et la somme de la série sont solutions du même problème sur $]-R,R[\cap I$,
+donc elles sont égales.
+\end{enumerate}
+\end{methode}
+
+\begin{exemple}[la série du binôme]
+Soit $\alpha\in\R\setminus\N$ et $f(x)=(1+x)^\alpha$ sur $]-1,1[$ : $(1+x)f'(x)=\alpha f(x)$ et $f(0)=1$. Si $y=\sum a_nx^n$ est solution
+avec $a_0=1$, le coefficient de $x^n$ donne $(n+1)a_{n+1}+na_n=\alpha a_n$, soit $a_{n+1}=\frac{\alpha-n}{n+1}a_n$, d'où
+\[a_n=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}.\]
+Comme $\left|\frac{a_{n+1}}{a_n}\right|=\frac{|\alpha-n|}{n+1}\to1$, le rayon vaut $1$. La somme et $f$ sont solutions sur $]-1,1[$ du même
+problème de Cauchy (premier ordre, $1+x\neq0$) : elles sont égales. Ainsi $(1+x)^\alpha=\sum_{n\geq0}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n$ pour $|x|<1$.
+\end{exemple}
 
 \begin{exo}{ed-poly}{2}{solution polynomiale}
 On considère $(E)$ : $(1+t^2)y''+ty'-y=0$ sur $\R$.

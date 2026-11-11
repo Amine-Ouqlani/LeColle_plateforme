@@ -1,0 +1,197 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb,mathrsfs,stmaryrd}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=1.4cm,right=1.4cm,headheight=12pt,headsep=0.4cm,footskip=0.7cm]{geometry}
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}\definecolor{Fond}{HTML}{F2F4F7}\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}\definecolor{Gris}{HTML}{5E6672}\definecolor{Filet}{HTML}{C5CCD6}
+\usepackage{multicol,enumitem,booktabs,array,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.17,trig format plots=rad}
+\usetikzlibrary{arrows.meta}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.25em}
+\setlength{\columnsep}{0.55cm}\setlength{\columnseprule}{0.3pt}\renewcommand{\columnseprulecolor}{\color{Filet}}
+\setlist{itemsep=0.05em,topsep=0.15em,parsep=0pt,leftmargin=1.1em}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\scriptsize\textbullet}}
+\setlist[enumerate]{label=\textsf{\scriptsize\color{Bleu}\arabic*.},leftmargin=1.3em}
+\linespread{1.02}
+
+\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}\newcommand{\rg}{\operatorname{rg}}\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}\newcommand{\Id}{\operatorname{Id}}\newcommand{\com}{\operatorname{com}}
+\newcommand{\vv}[1]{\overrightarrow{#1}}\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\HP}{{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\livre}[1]{{\sffamily\scriptsize\color{Gris}[#1]}}
+
+% ---------- titres ----------
+\newcommand{\chapitre}[2]{\clearpage\phantomsection\pdfbookmark[0]{#1 --- #2}{chap#1}\markboth{#1 --- #2}{}%
+  \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\color{white}\sffamily\bfseries\Large\strut #1\quad
+  {\normalsize\mdseries #2}}}\par\vspace{0.4em}}
+\newcommand{\notion}[1]{\par\needspace{9\baselineskip}\vspace{0.5em}\phantomsection\pdfbookmark[1]{#1}{\detokenize{#1}}\noindent{\sffamily\bfseries\color{Bleu}\large #1}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{0.1em}}
+\newcommand{\sous}[1]{\par\needspace{6\baselineskip}\vspace{0.25em}\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1}\par\nobreak}
+
+% ---------- encadrés ----------
+\tcbset{base/.style={enhanced,arc=0pt,boxrule=0pt,left=4pt,right=3pt,top=2pt,bottom=2pt,before skip=0.35em,after skip=0.35em,
+  fontupper=\small}}
+\newtcolorbox{DEF}[1][]{base,colback=white,borderline west={1.4pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}DÉFINITION\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newtcolorbox{PROP}[1][]{base,colback=Fond,borderline west={2pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}\ifx\relax#1\relax PROPRIÉTÉ\else #1\fi}\par}}
+\newtcolorbox{FORM}[1][]{base,colback=white,colframe=BleuMoyen,boxrule=0.5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}\ifx\relax#1\relax FORMULES\else #1\fi}\par}}
+\newtcolorbox{METH}[1]{base,colback=white,borderline north={0.8pt}{0pt}{Bleu},borderline south={0.8pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\colorbox{Bleu}{\color{white}MÉTHODE}\ \color{Bleu}#1}\par\smallskip}}
+\newtcolorbox{PIEGE}{base,colback=Brique!5,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
+\newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche Propriétés métriques et enveloppes}
+\fancyfoot[C]{\scriptsize\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\pgfplotsset{mini/.style={axis lines=middle,axis line style={Filet},xtick=\empty,ytick=\empty,width=3.2cm,height=3.2cm,
+  xmin=-1.15,xmax=1.15,ymin=-1.15,ymax=1.15,title style={font=\scriptsize\sffamily,yshift=-0.15cm},samples=80}}
+
+
+\newcommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\hypersetup{pdftitle={Le Collé — fiche de référence : propriétés métriques et enveloppes}}
+\begin{document}
+\thispagestyle{empty}
+\noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 6}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Propriétés métriques et enveloppes}\par\smallskip
+{\color{white!85!Bleu}\sffamily longueur, abscisse curviligne, Frenet, courbure, développée, enveloppes, résultats du TD}\vspace{0.4em}}}
+
+\vspace{0.6em}
+{\small Le livret sert à apprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et mêmes notations que le livret ;
+\livre{prop.~1.5} renvoie au livret, \livre{TD~14} à l'exercice~14 du TD complet. Courbe plane régulière $f(t)=\vv{OM(t)}$, plan
+orienté, repère orthonormé direct. Les questions de régularité ne sont pas à soulever (programme).}
+
+\vspace{0.4em}
+{\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
+1.1 Longueur et abscisse curviligne \dotfill\pageref{n11}\\
+1.2 Repère de Frenet et courbure \dotfill\pageref{n12}\\
+1.3 Rayon, centre, cercle de courbure ; développée \dotfill\pageref{n13}\\
+2.1 Enveloppe d'une famille de droites \dotfill\pageref{n21}\\
+2.2 La développée, enveloppe des normales \dotfill\pageref{n22}\\
+Méthodes, pièges ; résultats du TD \dotfill\pageref{n3}\\
+\end{tabular}}
+
+\vspace{0.6em}
+\pdfbookmark[0]{Chapitre 6 --- Propriétés métriques et enveloppes}{chap6}\markboth{Chapitre 6 --- Propriétés métriques et enveloppes}{}
+\begin{multicols}{2}\raggedcolumns
+% ======================================================================
+\notion{1.1 Longueur et abscisse curviligne}\label{n11}
+\begin{DEF}[\livre{déf.~1.1}]
+Longueur de l'arc $t\in[a,b]$ : $L=\displaystyle\int_a^b\|f'(t)\|\,dt=\int_a^b\sqrt{x'^2+y'^2}\,dt$.\\
+Abscisse curviligne : $s'(t)=\|f'(t)\|$, par exemple $s(t)=\int_{t_0}^t\|f'(u)\|\,du$ (longueur parcourue depuis $M(t_0)$).\\
+Indépendante du paramétrage croissant ; paramétrage normal : vitesse $1$, $\frac{dM}{ds}=\frac{f'}{\|f'\|}$.
+\end{DEF}
+\begin{PIEGE}
+$\sqrt{4\sin^2\frac t2}=2\left|\sin\frac t2\right|$ : la valeur absolue ! Un arc décrit deux fois compte deux fois : intégrer sur un
+arc, puis multiplier (symétries). Astroïde : $\int_0^{2\pi}3\sin t\cos t\,dt=0$, mais $L=6$.
+\end{PIEGE}
+\begin{FORM}[TRIGONOMÉTRIE UTILE]
+$1-\cos t=2\sin^2\frac t2$ ; $\sin t=2\sin\frac t2\cos\frac t2$ ; $\cos t\pm\sin t=\sqrt2\cos(t\mp\frac\pi4)$.
+\end{FORM}
+% ======================================================================
+\notion{1.2 Repère de Frenet et courbure}\label{n12}
+\begin{DEF}[\livre{déf.~1.3, 1.4}]
+$\ve T=\frac{dM}{ds}=\frac{f'}{\|f'\|}=(\cos\alpha,\sin\alpha)$, $\alpha$ angle de la tangente avec $(Ox)$ ;
+$\ve N$ = rotation de $+\frac\pi2$ de $\ve T$ : $(a,b)\mapsto(-b,a)$.\\
+Courbure $\gamma$ : $\dfrac{d\ve T}{ds}=\gamma\ve N$, \ $\dfrac{d\ve N}{ds}=-\gamma\ve T$ (formules de Frenet).
+\end{DEF}
+\begin{PROP}[\livre{prop.~1.5}]
+$\gamma=\dfrac{d\alpha}{ds}=\dfrac{\alpha'(t)}{\|f'(t)\|}$ : vitesse de rotation de la tangente.\\
+$\gamma>0$ : la courbe tourne vers la gauche (côté de $\ve N$) ; droite : $\gamma=0$ ; cercle de rayon $R$ parcouru dans le sens direct : $\gamma=\frac1R$.
+\end{PROP}
+\begin{METH}{Calculer une courbure \livre{méth.~1.1}}
+Écrire $f'(t)=v(t)\big(\cos\alpha(t),\sin\alpha(t)\big)$ avec $v>0$ (angle moitié) ; lire $v=\frac{ds}{dt}$ et $\alpha$ ; $\gamma=\frac{\alpha'}{v}$.
+\end{METH}
+\begin{HPBOX}
+Contrôle : $\gamma=\dfrac{\det(f',f'')}{\|f'\|^3}$ (formule hors programme, utile pour vérifier). Birégulier $\iff\gamma\neq0$ ; inflexion : $\gamma$ change de signe.
+\end{HPBOX}
+% ======================================================================
+\notion{1.3 Rayon, centre, cercle de courbure ; développée}\label{n13}
+\begin{DEF}[\livre{déf.~1.6}]
+Point birégulier ($\gamma\neq0$) : rayon $R=\frac1\gamma$ (algébrique), centre $I=M+R\ve N$, cercle de centre $I$ et de rayon $|R|$,
+tangent à la courbe, du côté vers lequel elle tourne. Développée : ensemble des centres de courbure.
+\end{DEF}
+\begin{FORM}[EXEMPLES DU COURS]
+Parabole $(t,\frac{t^2}2)$ : $R=(1+t^2)^{3/2}$, $I=(-t^3,1+\frac32t^2)$.\\
+Ellipse $(a\cos t,b\sin t)$ : $\gamma=\frac{ab}{(a^2\sin^2t+b^2\cos^2t)^{3/2}}$ ; $R=\frac{b^2}a$, $\frac{a^2}b$ aux sommets.\\
+Cycloïde : $v=2\sin\frac t2$, $\alpha=\frac\pi2-\frac t2$, $\gamma=-\frac1{4\sin(t/2)}$ ; développée : cycloïde translatée de $(\pi,-2)$.
+\end{FORM}
+\begin{ASTU}
+Sur un axe de symétrie (sommet) : courbure extrémale, centre sur l'axe, rebroussement de la développée.
+\end{ASTU}
+% ======================================================================
+\notion{2.1 Enveloppe d'une famille de droites}\label{n21}
+\begin{DEF}[\livre{déf.~2.1}]
+$\mathcal D_t=A(t)+\vect\big(\ve u(t)\big)$ ; on cherche $M(t)=A(t)+\lambda(t)\ve u(t)$ dont la tangente est dirigée par $\ve u(t)$ :
+\[\lambda(t)=\frac{\det(A',\ve u)}{\det(\ve u,\ve u')}.\]
+$M(t)$ : point caractéristique ; position limite de $\mathcal D_t\cap\mathcal D_{t+h}$.
+\end{DEF}
+\begin{METH}{Équation $a(t)x+b(t)y=c(t)$ \livre{méth.~2.1}}
+Résoudre le système formé de l'équation et de sa dérivée par rapport à $t$ ($x$, $y$ fixés) :
+$a'(t)x+b'(t)y=c'(t)$.\\
+Échelle : $x\sin\theta+y\cos\theta=L\sin\theta\cos\theta$ $\to$ astroïde $(L\cos^3\theta,L\sin^3\theta)$.
+\end{METH}
+% ======================================================================
+\notion{2.2 La développée, enveloppe des normales}\label{n22}
+\begin{PROP}[\livre{th.~2.3}]
+La développée d'une courbe birégulière est l'enveloppe de ses normales : le centre de courbure est le point caractéristique de la normale.\\
+Preuve : $P=M+\lambda\ve N$, $\frac{dP}{ds}=(1-\lambda\gamma)\ve T+\lambda'\ve N\parallel\ve N\iff\lambda=R$.
+\end{PROP}
+\begin{METH}{Développée par les normales}
+Normale en $M(t)$ : $\vv{M(t)P}\cdot f'(t)=0$ ; dériver par rapport à $t$ ; résoudre le système $2\times2$.\\
+Ellipse : $ax\sin t-by\cos t=(a^2-b^2)\sin t\cos t$ $\to$ $\big(\frac{a^2-b^2}a\cos^3t,-\frac{a^2-b^2}b\sin^3t\big)$.
+\end{METH}
+% ======================================================================
+\notion{Méthodes, pièges ; résultats du TD}\label{n3}
+{\small\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
+\hline
+\textbf{Question} & \textbf{Méthode}\\\hline
+longueur & $\int\|f'\|$, signe connu sur un arc\\
+$s$, $\ve T$, $\ve N$, $\gamma$ & $f'=v(\cos\alpha,\sin\alpha)$\\
+centre de courbure & $I=M+R\ve N$, $R=\frac1\gamma$\\
+développée & centres de courbure, ou enveloppe des normales\\
+enveloppe & équation + dérivée en $t$\\\hline
+\end{tabular}}
+\begin{PIEGE}
+$\gamma=\alpha'(t)$ : oublier de diviser par $v=\frac{ds}{dt}$. $\ve N$ tourné de $-\frac\pi2$ : signe de $\gamma$ faux. $I=M+R\ve N$, pas
+$M+\gamma\ve N$. Enveloppe : dériver en $t$, pas en $x$.
+\end{PIEGE}
+{\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
+TD2 & cardioïde : $L=8$.\\
+TD3 & cycloïde : $L=8$, $s=4\big(1-\cos\frac t2\big)$.\\
+TD10 & astroïde : $L=6$.\\
+TD11 & ellipse : $R=\frac{b^2}a$ et $\frac{a^2}b$ aux sommets.\\
+TD14 & spirale $e^t(\cos t,\sin t)$ : $\gamma=\frac{e^{-t}}{\sqrt2}$, développée tournée de $\frac\pi2$.\\
+TD16 & échelle : astroïde.\\
+TD17 & segment glissant : $(t^2,(1-t)^2)$, parabole $\sqrt x+\sqrt y=1$.\\
+TD19 & développée de la cycloïde : cycloïde translatée.\\
+TD22 & développée de l'ellipse : astroïde de Lamé.
+\end{tabular}}
+\end{multicols}
+\end{document}

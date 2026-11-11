@@ -307,7 +307,7 @@
 
 
 \begin{document}
-\renewcommand{\grandnum}{2}
+\renewcommand{\grandnum}{3}
 \pagenumbering{roman}
 \begin{titlepage}
 \thispagestyle{empty}
@@ -319,12 +319,12 @@
      {\fontsize{62}{66}\selectfont\scshape Le Collé};
   \draw[Ocre,line width=1.6pt] ([xshift=2.6cm,yshift=-7.3cm]current page.north west) -- ++(4.2cm,0);
   \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
-     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Algèbre linéaire et réduction};
+     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Réduction};
   \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
-     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Sommes directes, sous-espaces stables, trace\\[0.15cm]Éléments propres, diagonalisation, trigonalisation};
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Éléments propres, polynôme caractéristique\\[0.15cm]Diagonalisation, applications, trigonalisation};
   \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
      at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
-     {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{Les compléments d'algèbre linéaire de deuxième année, puis la réduction des endomorphismes et des matrices carrées.}};
+     {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{La réduction des endomorphismes et des matrices carrées, après les chapitres \emph{Algèbre linéaire} et \emph{Déterminants}.}};
   \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west) {Ahmed Amine Ouqlani};
   \draw[Filet] ([xshift=2.6cm,yshift=2.6cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.6cm]current page.south east);
 \end{tikzpicture}
@@ -333,16 +333,16 @@
 \section*{Avant-propos}
 \markboth{Avant-propos}{}
 \providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
-Ce livre accompagne les séances sur l'algèbre linéaire de deuxième année. Il reprend, dans l'ordre et avec les mêmes
+Ce livret accompagne les séances sur la réduction des endomorphismes et des matrices carrées. Il reprend, dans l'ordre et avec les mêmes
 notations, la présentation projetée en séance, et sert de référence pour travailler seul ensuite : chaque résultat y est
 énoncé avec ses hypothèses, chaque méthode est illustrée par un exemple rédigé, et chaque partie se termine par quelques
 exercices, corrigés à la fin du livret.
 
-Le chapitre suit la progression du programme de PT. Les \emph{compléments d'algèbre linéaire} (matrices semblables, sommes
-directes, trace, hyperplans, sous-espaces stables) fournissent le langage ; la \emph{réduction} l'utilise pour répondre à une
-seule question : dans quelle base la matrice d'un endomorphisme est-elle la plus simple ? Éléments propres, polynôme
-caractéristique, critères de diagonalisation, puis applications (puissances, suites, équations matricielles) et trigonalisation.
-Le chapitre \emph{Déterminants} est supposé connu : il sert à calculer les polynômes caractéristiques.
+Le chapitre répond à une seule question : dans quelle base la matrice d'un endomorphisme est-elle la plus simple ? Éléments
+propres, polynôme caractéristique, critères de diagonalisation, puis applications (puissances, suites, équations matricielles)
+et trigonalisation. Il s'appuie sur le chapitre~1, \emph{Algèbre linéaire} (sommes directes, trace, sous-espaces stables et
+matrices par blocs), et sur le chapitre~2, \emph{Déterminants}, qui sert à calculer les polynômes caractéristiques : un encadré
+au début du chapitre rappelle précisément ce qui en est utilisé.
 
 Notations : $\chi_A(x)=\det(xI_n-A)$, $E_\lambda(f)=\Ker(f-\lambda\Id_E)$, $\Sp(f)$, $A=PDP^{-1}$ (colonnes de $P$ : vecteurs propres).
 Les polynômes d'endomorphismes et les systèmes différentiels $X'=AX$ sont hors programme en PT ; les quelques compléments de ce
@@ -360,10 +360,10 @@ Les compléments (TD complet et ses corrections, sélection de cinq problèmes, 
 \pagenumbering{arabic}
 \ongletstrue
 % =====================================================================
-%       CHAPITRE 1 — ALGÈBRE LINÉAIRE : COMPLÉMENTS ET RÉDUCTION
+%                         CHAPITRE — RÉDUCTION
 % =====================================================================
 \clearpage
-\section{Algèbre linéaire et réduction}\label{sec:red}
+\section{Réduction}\label{sec:red}
 
 Un endomorphisme se lit à travers sa matrice ; mais cette matrice dépend de la base choisie, et certaines bases rendent
 tout simple. Prenons l'endomorphisme $f$ de $\R^3$ de matrice, dans la base canonique,
@@ -375,227 +375,33 @@ calcule sans effort.
 
 \emph{Réduire} un endomorphisme, c'est chercher une telle base. Trois questions organisent le chapitre : quels vecteurs sont
 simplement dilatés par $f$ (\emph{vecteurs propres}) ? Comment les trouver (\emph{polynôme caractéristique}) ? Quand en
-trouve-t-on assez pour former une base (\emph{diagonalisation}) ? Les compléments d'algèbre linéaire du début (sommes directes,
-sous-espaces stables, trace) fournissent le langage nécessaire.
+trouve-t-on assez pour former une base (\emph{diagonalisation}) ? Le langage du chapitre~1 (sommes directes, sous-espaces
+stables, matrices par blocs) et le déterminant du chapitre~2 en sont les outils.
 
 \ouverture{%
 \begin{itemize}[leftmargin=1.1em,itemsep=1pt]
-\item Manipuler les sommes directes, les sous-espaces stables, la trace et les hyperplans.
 \item Déterminer les valeurs propres et les sous-espaces propres d'un endomorphisme ou d'une matrice.
 \item Décider si une matrice est diagonalisable, et la diagonaliser ($n=2$ ou $3$).
 \item Utiliser la réduction : puissances, suites récurrentes, équations matricielles ; trace et déterminant en fonction des valeurs propres.
 \end{itemize}}{%
-Algèbre linéaire de première année : bases, dimension, théorème du rang, matrice d'une application linéaire, changement de base ;
-chapitre \emph{Déterminants} ; polynômes (racines, multiplicité, factorisation).}{Trois séances}
+Chapitre~1, \emph{Algèbre linéaire} (rappelé ci-dessous) ; chapitre~2, \emph{Déterminants} ; polynômes (racines, multiplicité,
+factorisation).}{Deux séances}
 
 Dans tout le chapitre, $\K=\R$ ou $\C$, $E$ est un $\K$-espace vectoriel et $f\in\LE$ un endomorphisme de $E$. Quand $E$ est de
 dimension finie, on note $n=\dim E$. Pour une base $\mathcal B$ de $E$, $\Mat_{\mathcal B}(f)$ est la matrice de $f$ dans $\mathcal B$.
 
 % ---------------------------------------------------------------------
-\subsection{Compléments : matrices semblables, sommes directes, trace, hyperplans}\label{ss:complements}
+\begin{commencer}
+\textbf{Ce qui vient du chapitre~1 (Algèbre linéaire).} On utilise sans les redémontrer : le théorème du rang ; le changement de
+base $\Mat_{\mathcal B'}(f)=P^{-1}\Mat_{\mathcal B}(f)P$ et les matrices semblables ; les sommes directes, bases adaptées et
+$\dim(F_1\oplus\dots\oplus F_p)=\sum\dim F_i$ ; les projecteurs et les symétries ; la trace ($\tr(AB)=\tr(BA)$, invariance par
+similitude) ; les sous-espaces stables et la \emph{traduction matricielle} : dans une base adaptée à un sous-espace $F$ de
+dimension $p$, $F$ est stable par $f$ si et seulement si $\Mat(f)=\begin{pmatrix}A&B\\0&C\end{pmatrix}$ avec $A\in\mathcal M_p(\K)$.
+Enfin, la droite $\vect(u)$, $u\neq0$, est stable par $f$ si et seulement si $f(u)=\lambda u$ pour un scalaire $\lambda$ :
+c'est le point de départ de ce chapitre. Du chapitre~2 (Déterminants) : $A$ inversible $\iff\det A\neq0$, et le déterminant
+d'une matrice triangulaire par blocs est le produit des déterminants des blocs diagonaux.
+\end{commencer}
 
-\subsubsection*{Changement de base, matrices semblables}
-
-\begin{proposition}[changement de base]\label{p:chgt}
-Soient $\mathcal B$ et $\mathcal B'$ deux bases de $E$ et $P$ la matrice de passage de $\mathcal B$ à $\mathcal B'$ (ses colonnes
-sont les coordonnées des vecteurs de $\mathcal B'$ dans $\mathcal B$). Si $A=\Mat_{\mathcal B}(f)$ et $A'=\Mat_{\mathcal B'}(f)$, alors
-\[A'=P^{-1}AP.\]
-\end{proposition}
-
-\begin{definition}
-Deux matrices $A,B\in\Mn{\K}$ sont \emph{semblables} s'il existe $P\in\GLn{\K}$ telle que $B=P^{-1}AP$. Deux matrices semblables
-représentent le même endomorphisme dans deux bases.
-\end{definition}
-
-\begin{reflexe}
-Tout ce qui ne dépend que de l'endomorphisme (et pas de la base) est commun à deux matrices semblables : rang, déterminant,
-trace (ci-dessous), polynôme caractéristique et valeurs propres (§\ref{ss:polcar}). Inversement, si deux matrices diffèrent par
-l'un de ces invariants, elles ne sont pas semblables.
-\end{reflexe}
-
-\subsubsection*{Somme de plusieurs sous-espaces, somme directe}
-
-\begin{definition}
-Soient $F_1,\dots,F_p$ des sous-espaces vectoriels de $E$. Leur \emph{somme} est
-$F_1+\dots+F_p=\{x_1+\dots+x_p,\ x_i\in F_i\}$ : c'est un sous-espace vectoriel. La somme est \emph{directe}, et l'on note
-$F_1\oplus\dots\oplus F_p$, si tout vecteur de la somme s'écrit de manière \emph{unique} $x_1+\dots+x_p$ avec $x_i\in F_i$.
-\end{definition}
-
-\begin{proposition}[caractérisation]\label{p:directe}
-La somme $F_1+\dots+F_p$ est directe si et seulement si
-\[x_1+\dots+x_p=0\text{ avec }x_i\in F_i\quad\Longrightarrow\quad x_1=\dots=x_p=0.\]
-Pour deux sous-espaces : $F+G$ est directe si et seulement si $F\cap G=\{0\}$.
-\end{proposition}
-
-\begin{proof}
-Si la somme est directe, $0=0+\dots+0$ est l'unique décomposition de $0$. Réciproquement, si $x_1+\dots+x_p=y_1+\dots+y_p$,
-alors $(x_1-y_1)+\dots+(x_p-y_p)=0$ avec $x_i-y_i\in F_i$, donc $x_i=y_i$. Pour $p=2$ : si $u\in F\cap G$, $u+(-u)=0$ avec
-$u\in F$, $-u\in G$.
-\end{proof}
-
-\begin{attention}
-Pour $p\geq3$, il ne suffit pas que les intersections deux à deux soient nulles : dans $\R^2$, les trois droites
-$\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$ se coupent deux à deux en $\{0\}$, mais $(1,0)+(0,1)-(1,1)=0$ : la somme n'est pas directe.
-La seule caractérisation au programme est celle de la proposition~\ref{p:directe}.
-\end{attention}
-
-\begin{theoreme}[base adaptée, dimension]\label{t:adaptee}
-On suppose $E$ de dimension finie. Si la somme $F_1+\dots+F_p$ est directe, la concaténation de bases des $F_i$ est une base
-de $F_1\oplus\dots\oplus F_p$ (base \emph{adaptée}), et
-\[\dim(F_1\oplus\dots\oplus F_p)=\dim F_1+\dots+\dim F_p.\]
-En particulier, $E=F_1\oplus\dots\oplus F_p$ si et seulement si la concaténation de bases des $F_i$ est une base de $E$.
-\end{theoreme}
-
-\begin{proof}
-La famille concaténée engendre la somme. Elle est libre : une combinaison linéaire nulle s'écrit $x_1+\dots+x_p=0$, où $x_i$
-regroupe les termes de la base de $F_i$ ; la somme étant directe, chaque $x_i$ est nul, puis chaque coefficient (base de $F_i$).
-\end{proof}
-
-\begin{enpratique}
-Pour montrer que $E=F\oplus G$ en dimension finie, il suffit de deux des trois propriétés : $F\cap G=\{0\}$, $F+G=E$,
-$\dim F+\dim G=\dim E$. Le plus souvent : intersection nulle et somme des dimensions.
-\end{enpratique}
-
-\subsubsection*{Trace}
-
-\begin{definition}
-La \emph{trace} de $A=(a_{i,j})\in\Mn{\K}$ est la somme de ses coefficients diagonaux : $\tr(A)=\sum_{i=1}^na_{i,i}$.
-\end{definition}
-
-\begin{proposition}\label{p:trace}
-\begin{enumerate}
-\item La trace est une forme linéaire sur $\Mn{\K}$.
-\item Pour $A\in\mathcal M_{n,p}(\K)$ et $B\in\mathcal M_{p,n}(\K)$ : $\tr(AB)=\tr(BA)$.
-\item Deux matrices semblables ont la même trace. On définit donc la trace d'un endomorphisme $f$ en dimension finie :
-$\tr(f)=\tr\big(\Mat_{\mathcal B}(f)\big)$, indépendante de la base $\mathcal B$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-2. $\tr(AB)=\sum_{i=1}^n\sum_{k=1}^pa_{i,k}b_{k,i}=\sum_{k=1}^p\sum_{i=1}^nb_{k,i}a_{i,k}=\tr(BA)$.
-3. $\tr(P^{-1}AP)=\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr(A)$.
-\end{proof}
-
-\begin{attention}
-$\tr(AB)\neq\tr(A)\tr(B)$ en général, et $\tr(ABC)=\tr(CAB)$ (permutation circulaire) mais $\tr(ABC)\neq\tr(BAC)$ en général.
-\end{attention}
-
-\begin{exemple}[trace d'un projecteur]
-Si $p$ est un projecteur de rang $r$, dans une base adaptée à $E=\Im p\oplus\Ker p$, sa matrice est
-$\mathrm{diag}(I_r,0)$ : $\tr(p)=r=\rg(p)$. Pour une symétrie $s$ : $\tr(s)=\dim\Ker(s-\Id)-\dim\Ker(s+\Id)$.
-\end{exemple}
-
-\subsubsection*{Hyperplans}
-
-\begin{definition}
-Un \emph{hyperplan} de $E$ ($\dim E=n\geq1$) est un sous-espace qui admet une droite comme supplémentaire ; c'est un
-sous-espace de dimension $n-1$.
-\end{definition}
-
-\begin{proposition}\label{p:hyperplan}
-\begin{enumerate}
-\item Les hyperplans de $E$ sont les noyaux des formes linéaires non nulles. Dans une base, un hyperplan a une équation
-$a_1x_1+\dots+a_nx_n=0$ avec $(a_1,\dots,a_n)\neq(0,\dots,0)$, unique à un facteur non nul près.
-\item Si $H=\Ker\varphi$ et $u\notin H$, alors $E=H\oplus\vect(u)$.
-\item L'intersection de $p$ hyperplans est de dimension au moins $n-p$. Réciproquement, tout sous-espace de dimension $n-p$
-est l'intersection de $p$ hyperplans : il est défini par un système de $p$ équations.
-\end{enumerate}
-\end{proposition}
-
-\begin{enpratique}
-L'ensemble des solutions d'un système linéaire homogène de $p$ équations à $n$ inconnues est un sous-espace de dimension
-$n-r$, où $r$ est le rang du système (théorème du rang) : chaque équation « indépendante » fait perdre une dimension.
-Dans $\R^3$, un plan vectoriel a une équation, une droite vectorielle deux.
-\end{enpratique}
-
-\begin{exo}{red-somme}{1}{sommes directes}
-\begin{enumerate}
-\item Dans $\R^3$, on pose $F=\{(x,y,z),\ x+y+z=0\}$ et $G=\vect\big((1,1,1)\big)$. Montrer que $\R^3=F\oplus G$ et décomposer
-$v=(x,y,z)$ selon cette somme.
-\item Dans $\R^3$, les droites $D_1=\vect(1,0,0)$, $D_2=\vect(0,1,0)$, $D_3=\vect(1,1,0)$ sont-elles en somme directe ?
-\end{enumerate}
-\end{exo}
-\begin{exo}{red-trace}{2}{trace}
-\begin{enumerate}
-\item Montrer qu'il n'existe pas de matrices $A,B\in\Mn{\K}$ telles que $AB-BA=I_n$.
-\item Soit $A\in\Mn{\K}$ telle que $A^2=A$. Montrer que $\rg(A)=\tr(A)$.
-\end{enumerate}
-\end{exo}
-\begin{exo}{red-hyp}{2}{hyperplans de $\R^4$}
-Dans $\R^4$, on considère $H_1$ : $x+y+z+t=0$ et $H_2$ : $x-y+z-t=0$, et $u=(1,1,1,1)$.
-\begin{enumerate}
-\item Donner la dimension et une base de $H_1\cap H_2$.
-\item La droite $\vect(u)$ est-elle un supplémentaire de $H_1$ ? de $H_2$ ?
-\end{enumerate}
-\end{exo}
-
-% ---------------------------------------------------------------------
-\subsection{Sous-espaces stables}\label{ss:stables}
-
-\begin{definition}
-Un sous-espace $F$ de $E$ est \emph{stable} par $f$ si $f(F)\subset F$. L'application $f_F:F\to F$, $x\mapsto f(x)$, est alors un
-endomorphisme de $F$, l'\emph{endomorphisme induit} par $f$ sur $F$.
-\end{definition}
-
-\begin{proposition}\label{p:stable}
-\begin{enumerate}
-\item Si $F=\vect(e_1,\dots,e_p)$, $F$ est stable par $f$ si et seulement si $f(e_j)\in F$ pour tout $j$ : on vérifie sur une
-famille génératrice.
-\item $\Ker f$ et $\Im f$ sont stables par $f$. Plus généralement, si $f\circ g=g\circ f$, alors $\Ker g$ et $\Im g$ sont stables par $f$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-2. Si $g(x)=0$, $g\big(f(x)\big)=f\big(g(x)\big)=0$ : $f(x)\in\Ker g$. Si $y=g(x)$, $f(y)=g\big(f(x)\big)\in\Im g$. Pour $g=f$, on
-obtient la stabilité de $\Ker f$ et $\Im f$.
-\end{proof}
-
-\begin{theoreme}[traduction matricielle]\label{t:blocs}
-On suppose $E$ de dimension finie. Soit $F$ un sous-espace de dimension $p$ et $\mathcal B=(e_1,\dots,e_n)$ une base adaptée à $F$
-($F=\vect(e_1,\dots,e_p)$).
-\begin{enumerate}
-\item $F$ est stable par $f$ si et seulement si $\Mat_{\mathcal B}(f)$ est triangulaire par blocs :
-$\begin{pmatrix}A&B\\0&C\end{pmatrix}$, avec $A\in\mathcal M_p(\K)$ ; $A$ est alors la matrice de l'endomorphisme induit $f_F$.
-\item Si $E=F\oplus G$ et si $\mathcal B$ est adaptée à cette somme, $F$ et $G$ sont stables par $f$ si et seulement si
-$\Mat_{\mathcal B}(f)$ est diagonale par blocs : $\begin{pmatrix}A&0\\0&C\end{pmatrix}$.
-\end{enumerate}
-Dans les deux cas, $\det f=\det A\times\det C$ et $\tr f=\tr A+\tr C$.
-\end{theoreme}
-
-\begin{proof}
-La $j$-ième colonne contient les coordonnées de $f(e_j)$. Pour $j\leq p$, $f(e_j)\in F$ si et seulement si ses coordonnées sur
-$e_{p+1},\dots,e_n$ sont nulles : c'est le bloc $0$. Le déterminant d'une matrice triangulaire par blocs est le produit des
-déterminants des blocs diagonaux (développer selon les premières colonnes, chapitre \emph{Déterminants}).
-\end{proof}
-
-\begin{enpratique}
-Lire une matrice par blocs, c'est lire des sous-espaces stables, et réciproquement. Un zéro en bas à gauche dit : « les $p$
-premiers vecteurs de base engendrent un sous-espace stable ». Un projecteur et une symétrie sont les premiers exemples :
-\[p\text{ projecteur : }E=\Im p\oplus\Ker p,\quad\Mat(p)=\begin{pmatrix}I_r&0\\0&0\end{pmatrix};\]
-\[s\text{ symétrie : }E=\Ker(s-\Id)\oplus\Ker(s+\Id),\quad\Mat(s)=\begin{pmatrix}I_r&0\\0&-I_{n-r}\end{pmatrix}.\]
-\end{enpratique}
-
-\begin{proposition}[droites stables]\label{p:droite}
-Soit $u\neq0$. La droite $\vect(u)$ est stable par $f$ si et seulement s'il existe $\lambda\in\K$ tel que $f(u)=\lambda u$.
-\end{proposition}
-
-\begin{proof}
-$\vect(u)$ est stable si et seulement si $f(u)\in\vect(u)$, c'est-à-dire $f(u)=\lambda u$ pour un scalaire $\lambda$.
-\end{proof}
-
-Cette dernière proposition fait la transition : chercher les droites stables, c'est chercher les vecteurs que $f$ se contente de
-dilater. S'il y en a assez pour former une base, la matrice de $f$ dans cette base est diagonale.
-
-\begin{exo}{red-stable}{2}{lire des blocs}
-Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}3&-1&1\\0&2&0\\1&-1&3\end{pmatrix}$ dans la base canonique
-$(e_1,e_2,e_3)$.
-\begin{enumerate}
-\item Montrer que le plan $F$ d'équation $y=0$ et la droite $G=\vect(u)$, $u=(1,1,0)$, sont stables par $f$.
-\item Montrer que $\R^3=F\oplus G$ et écrire la matrice de $f$ dans la base $(e_1,e_3,u)$. En déduire $\det A$ et $\tr A$.
-\end{enumerate}
-\end{exo}
-
-% ---------------------------------------------------------------------
 \subsection{Éléments propres}\label{ss:propres}
 
 \begin{definition}
@@ -616,7 +422,7 @@ injective, et $E_0(f)=\Ker f$. Chaque sous-espace propre est stable par $f$ (sur
 
 \begin{exemple}[la dérivation]\label{ex:derivation}
 Sur $E=\mathcal C^\infty(\R,\R)$, soit $D:y\mapsto y'$. L'équation $D(y)=\lambda y$ est l'équation différentielle $y'=\lambda y$,
-dont les solutions sont $t\mapsto Ke^{\lambda t}$ (chapitre \emph{Équations différentielles}). Tout réel $\lambda$ est valeur propre,
+dont les solutions sont $t\mapsto Ke^{\lambda t}$ (équation résolue en première année, reprise au chapitre~4). Tout réel $\lambda$ est valeur propre,
 et $E_\lambda(D)=\vect(t\mapsto e^{\lambda t})$ est une droite. En dimension infinie, il peut y avoir une infinité de valeurs propres.
 \end{exemple}
 
@@ -710,7 +516,7 @@ En particulier, si $\lambda$ est une valeur propre simple, $\dim E_\lambda(f)=1$
 
 \begin{proof}
 Soit $d=\dim E_\lambda(f)\geq1$. Dans une base adaptée à $E_\lambda(f)$, qui est stable, la matrice de $f$ est
-$\begin{pmatrix}\lambda I_d&B\\0&C\end{pmatrix}$ (théorème~\ref{t:blocs}). Alors $\chi_f(x)=(x-\lambda)^d\chi_C(x)$ : $(x-\lambda)^d$
+$\begin{pmatrix}\lambda I_d&B\\0&C\end{pmatrix}$ (chapitre~1, traduction matricielle de la stabilité). Alors $\chi_f(x)=(x-\lambda)^d\chi_C(x)$ : $(x-\lambda)^d$
 divise $\chi_f$, donc $d\leq m(\lambda)$.
 \end{proof}
 
@@ -766,7 +572,7 @@ Soit $f\in\LE$, $\dim E=n$. Les propriétés suivantes sont équivalentes :
 
 \begin{proof}
 La somme des sous-espaces propres est directe (théorème~\ref{t:somme-propres}) ; sa dimension est donc $\sum\dim E_\lambda$
-(théorème~\ref{t:adaptee}). (1)$\Rightarrow$(2) : une base de vecteurs propres est contenue dans la somme, qui vaut donc $E$.
+(chapitre~1, base adaptée à une somme directe). (1)$\Rightarrow$(2) : une base de vecteurs propres est contenue dans la somme, qui vaut donc $E$.
 (2)$\Leftrightarrow$(3) : un sous-espace de dimension $n$ est $E$. (2)$\Rightarrow$(1) : une base adaptée à la somme directe est
 formée de vecteurs propres. (3)$\Leftrightarrow$(4) : on a toujours $\sum\dim E_\lambda\leq\sum m(\lambda)\leq\deg\chi_f=n$
 (théorème~\ref{t:dim-mult}) ; il y a égalité partout si et seulement si $\sum m(\lambda)=n$ ($\chi_f$ scindé) et
@@ -881,7 +687,7 @@ même équation avec $D$, beaucoup plus simple (exercice~\ref{e:red-racine}).
 
 \begin{plusloin}
 Le système différentiel $X'=AX$ (hors programme en PT) se traite comme les suites : avec $A=PDP^{-1}$ et $Y=P^{-1}X$, on obtient
-$Y'=DY$, c'est-à-dire $n$ équations $y_i'=\lambda_iy_i$ indépendantes, résolues au chapitre \emph{Équations différentielles}.
+$Y'=DY$, c'est-à-dire $n$ équations $y_i'=\lambda_iy_i$ indépendantes, résolues en première année (rappel au chapitre~4).
 \end{plusloin}
 
 \begin{exo}{red-puiss}{2}{puissances et suites}
@@ -960,8 +766,6 @@ base de $\R^3$ et donner une matrice triangulaire semblable à $T$.
 \begin{tabular}{p{0.38\linewidth}p{0.55\linewidth}}
 \hline
 \textbf{Question} & \textbf{Méthode}\\\hline
-$E=F\oplus G$ ? & $F\cap G=\{0\}$ et $\dim F+\dim G=\dim E$ (théorème~\ref{t:adaptee})\\
-$F$ stable par $f$ ? & vérifier $f(e_j)\in F$ sur une base de $F$ ; matrice triangulaire par blocs (théorème~\ref{t:blocs})\\
 $\lambda$ valeur propre ? & $\rg(A-\lambda I_n)<n$, ou $\det(A-\lambda I_n)=0$ ; $\dim E_\lambda=n-\rg(A-\lambda I_n)$\\
 valeurs propres & $\chi_A$ factorisé (méthode~\ref{m:polcar}) ; contrôles par la trace et le déterminant\\
 diagonalisable ? & valeurs propres distinctes ; sinon $\dim E_\lambda=m(\lambda)$ pour chaque valeur multiple (méthode~\ref{m:diag})\\
@@ -974,7 +778,6 @@ endomorphisme sur des polynômes, des fonctions & écrire $f(x)=\lambda x$ direc
 \begin{attention}\textbf{Pièges fréquents.}
 \begin{itemize}[leftmargin=1.1em]
 \item Un vecteur propre est \emph{non nul} ; $E_\lambda$ contient aussi $0$.
-\item Somme directe de trois sous-espaces : les intersections deux à deux ne suffisent pas.
 \item Oublier de vérifier que $\chi_A$ est scindé sur $\R$ avant de conclure (rotation).
 \item Croire qu'une valeur propre double empêche la diagonalisation : il faut comparer $\dim E_\lambda$ et $m(\lambda)$.
 \item Mettre dans $P$ les vecteurs propres en lignes, ou dans un ordre différent de celui de $D$.
@@ -984,8 +787,7 @@ endomorphisme sur des polynômes, des fonctions & écrire $f(x)=\lambda x$ direc
 
 \begin{essentiel}
 \begin{itemize}[leftmargin=1.1em,itemsep=2pt]
-\item Matrices semblables : même rang, trace, déterminant, polynôme caractéristique.
-\item $F$ stable $\iff$ matrice triangulaire par blocs dans une base adaptée ; droite stable $\iff$ vecteur propre.
+\item Droite stable $\iff$ vecteur propre ; deux matrices semblables ont même polynôme caractéristique.
 \item $\chi_A(x)=\det(xI_n-A)$ ; $\Sp(A)$ = racines ; $1\leq\dim E_\lambda\leq m(\lambda)$.
 \item Diagonalisable $\iff\sum\dim E_\lambda=n\iff\chi$ scindé et $\dim E_\lambda=m(\lambda)$ ; $n$ valeurs propres distinctes suffisent.
 \item $A^k=PD^kP^{-1}$ ; $\tr A=\sum\lambda_i$, $\det A=\prod\lambda_i$ quand $\chi_A$ est scindé.
@@ -998,38 +800,6 @@ endomorphisme sur des polynômes, des fonctions & écrire $f(x)=\lambda x$ direc
 \clearpage
 \renewcommand{\ongletcouleur}{Ocre}
 \section{Corrigés}\label{sec:corriges-red}
-
-\begin{corrige}{red-somme}
-\q{1.} Si $v\in F\cap G$, $v=(m,m,m)$ et $3m=0$ : $F\cap G=\{0\}$. De plus $\dim F=2$ (un hyperplan de $\R^3$) et $\dim G=1$ : la
-somme est directe et de dimension $3$, donc $\R^3=F\oplus G$. On cherche $v=w+m(1,1,1)$ avec $w\in F$ : la somme des coordonnées
-de $w$ est nulle, d'où $x+y+z=3m$. Donc
-\[v=\underbrace{\big(x-m,\,y-m,\,z-m\big)}_{\in F}+\underbrace{m(1,1,1)}_{\in G},\qquad m=\frac{x+y+z}3.\]
-\q{2.} Les intersections deux à deux sont nulles, mais $(1,0,0)+(0,1,0)-(1,1,0)=0$ est une décomposition non triviale de $0$ :
-la somme n'est pas directe (proposition~\ref{p:directe}). D'ailleurs $D_1+D_2+D_3$ est le plan $z=0$, de dimension $2<3$.
-\end{corrige}
-
-\begin{corrige}{red-trace}
-\q{1.} Par linéarité et $\tr(AB)=\tr(BA)$ : $\tr(AB-BA)=0$, alors que $\tr(I_n)=n\neq0$.
-\q{2.} L'endomorphisme $p$ de $\K^n$ associé à $A$ est un projecteur ; dans une base adaptée à $\K^n=\Im p\oplus\Ker p$, sa matrice
-est $\mathrm{diag}(I_r,0)$ avec $r=\rg(p)$. Donc $A$ est semblable à cette matrice, et $\tr A=r=\rg A$.
-\retenir{la trace ne voit pas l'ordre d'un produit de deux matrices : $\tr(AB-BA)=0$.}
-\end{corrige}
-
-\begin{corrige}{red-hyp}
-\q{1.} En ajoutant et en retranchant les équations : $x+z=0$ et $y+t=0$. Donc $H_1\cap H_2=\{(x,y,-x,-y)\}$, de base
-$\big((1,0,-1,0),(0,1,0,-1)\big)$ : dimension $2=4-2$.
-\q{2.} $u\notin H_1$ ($1+1+1+1=4\neq0$) : $\R^4=H_1\oplus\vect(u)$ (proposition~\ref{p:hyperplan}). En revanche $u\in H_2$
-($1-1+1-1=0$) : $\vect(u)\subset H_2$, ce n'est pas un supplémentaire.
-\end{corrige}
-
-\begin{corrige}{red-stable}
-\q{1.} $f(x,0,z)=(3x+z,\,0,\,x+3z)$ a une deuxième coordonnée nulle : $F$ est stable. $f(u)=A(1,1,0)^T=(2,2,0)=2u$ : $G$ est stable
-($u$ est un vecteur propre).
-\q{2.} $u\notin F$ (sa deuxième coordonnée vaut $1$) : $\R^3=F\oplus G$. Dans la base $(e_1,e_3,u)$ : $f(e_1)=(3,0,1)=3e_1+e_3$,
-$f(e_3)=(1,0,3)=e_1+3e_3$, $f(u)=2u$, donc
-\[\Mat(f)=\begin{pmatrix}3&1&0\\1&3&0\\0&0&2\end{pmatrix},\qquad\det A=(9-1)\times2=16,\qquad\tr A=3+3+2=8.\]
-\retenir{deux sous-espaces stables supplémentaires $\Rightarrow$ matrice diagonale par blocs.}
-\end{corrige}
 
 \begin{corrige}{red-elem}
 \q{1.} $f$ est linéaire (dérivation, produit par un polynôme fixé) et, si $\deg P\leq n$, $\deg\big((X+1)P'\big)\leq1+(n-1)=n$.

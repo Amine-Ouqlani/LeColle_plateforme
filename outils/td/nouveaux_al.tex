@@ -1,0 +1,188 @@
+% =====================================================================
+% Le Collé — Algèbre linéaire : exercices complémentaires du TD
+% (plusieurs sont adaptés du TD « Matrices » et du cours « Espaces vectoriels : compléments » de la classe)
+% =====================================================================
+
+\begin{exo}{aln-1}{1}{un hyperplan de $\K^n$ et une base}
+Soit $n\geq2$, $(e_1,\dots,e_n)$ la base canonique de $\K^n$ et $H=\{(x_1,\dots,x_n)\in\K^n,\ x_1+\dots+x_n=0\}$.
+\begin{enumerate}
+\item Déterminer la dimension de $H$.
+\item Pour $1\leq i\leq n-1$, on pose $f_i=e_i-e_n$. Montrer que $(f_1,\dots,f_{n-1})$ est une base de $H$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-1}
+\choix{$H$ est le noyau d'une forme linéaire non nulle : c'est un hyperplan ; il suffit ensuite d'une famille libre de bon cardinal.}
+\q{1.} $\varphi:(x_i)\mapsto\sum x_i$ est une forme linéaire non nulle ($\varphi(e_1)=1$) : $H=\Ker\varphi$ est un hyperplan, $\dim H=n-1$.
+\q{2.} Chaque $f_i$ est dans $H$ ($1-1=0$). Si $\sum_{i=1}^{n-1}\lambda_if_i=0$, la $i$-ième coordonnée vaut $\lambda_i=0$ pour $i\leq n-1$ :
+la famille est libre. Elle a $n-1=\dim H$ vecteurs : c'est une base de $H$.
+\retenir{famille libre de $\dim H$ vecteurs de $H$ : base de $H$, sans vérifier qu'elle engendre.}
+\end{corrige}
+
+\begin{exo}{aln-2}{1}{un supplémentaire dans $\R_2[X]$}
+Soit $F=\{P\in\R_2[X],\ P(1)=0\}$. Montrer que $\R_2[X]=\vect(1)\oplus F$ et décomposer un polynôme $P$ selon cette somme.
+\end{exo}
+\begin{corrige}{aln-2}
+$P\mapsto P(1)$ est une forme linéaire non nulle sur $\R_2[X]$ : $F$ est un hyperplan, de dimension $2$. Le polynôme constant $1$
+n'est pas dans $F$, donc $\R_2[X]=F\oplus\vect(1)$ (un hyperplan et une droite qui n'y est pas contenue). Décomposition :
+$P=P(1)+\big(P-P(1)\big)$, avec $P(1)\in\vect(1)$ et $P-P(1)\in F$.
+\retenir{hyperplan $+$ droite non contenue dans l'hyperplan $=$ supplémentaires.}
+\end{corrige}
+
+\begin{exo}{aln-12}{1}{projecteurs associés}
+Soient $F$ et $G$ deux sous-espaces supplémentaires de $E$, $p$ la projection sur $F$ parallèlement à $G$ et $q$ la projection sur
+$G$ parallèlement à $F$. Montrer que $p+q=\Id_E$, $p\circ q=q\circ p=0$, $\Ker p=\Im q$ et $\Ker q=\Im p$.
+\end{exo}
+\begin{corrige}{aln-12}
+Pour $x=x_F+x_G$ (décomposition unique), $p(x)=x_F$ et $q(x)=x_G$ : $p(x)+q(x)=x$. Ensuite $q(x)\in G$, donc $p\big(q(x)\big)=0$ ;
+de même $q\circ p=0$. Enfin $\Ker p=G=\Im q$ et $\Ker q=F=\Im p$.
+\retenir{une décomposition $E=F\oplus G$ donne deux projecteurs de somme $\Id_E$.}
+\end{corrige}
+
+\begin{exo}{rdn-17}{1}{fonctions paires et impaires}
+Soit $E$ l'espace des fonctions de $\R$ dans $\R$, $\mathcal P$ le sous-espace des fonctions paires et $\mathcal I$ celui des
+fonctions impaires. Montrer que $E=\mathcal P\oplus\mathcal I$. Que donne cette décomposition pour $\exp$ ?
+\end{exo}
+\begin{corrige}{rdn-17}
+\choix{dimension infinie : on revient à la définition (existence et unicité de la décomposition), par analyse-synthèse.}
+\emph{Unicité.} Si $f\in\mathcal P\cap\mathcal I$, $f(-x)=f(x)=-f(x)$, donc $f=0$. \emph{Existence.} Pour $f\in E$, on pose
+$p(x)=\frac{f(x)+f(-x)}2$ (paire) et $i(x)=\frac{f(x)-f(-x)}2$ (impaire) : $f=p+i$. Donc $E=\mathcal P\oplus\mathcal I$.
+Pour $\exp$ : $\exp=\ch+\sh$.
+\gain{l'application $s:f\mapsto\big(x\mapsto f(-x)\big)$ vérifie $s\circ s=\Id_E$ : c'est une symétrie, et $\mathcal P=\Ker(s-\Id_E)$,
+$\mathcal I=\Ker(s+\Id_E)$. La décomposition est celle de la proposition sur les symétries.}
+\end{corrige}
+
+\begin{exo}{aln-5}{2}{la trace détermine une matrice}
+Soient $A,B\in\Mn{\K}$. Montrer que $\tr(AM)=\tr(BM)$ pour tout $M\in\Mn{\K}$ si et seulement si $A=B$.
+\end{exo}
+\begin{corrige}{aln-5}
+\choix{tester la relation sur les matrices de la base canonique.}
+Le sens réciproque est clair. Pour $M=E_{j,i}$, la matrice $AE_{j,i}$ a pour $i$-ième colonne la $j$-ième colonne de $A$ et des
+colonnes nulles ailleurs : son seul coefficient diagonal éventuellement non nul est en position $(i,i)$, et vaut $a_{i,j}$. Donc
+$\tr(AE_{j,i})=a_{i,j}$, et l'hypothèse donne $a_{i,j}=b_{i,j}$ pour tous $i,j$.
+\retenir{$\tr(AE_{j,i})=a_{i,j}$ : les formes $M\mapsto\tr(AM)$ suffisent à retrouver $A$.}
+\end{corrige}
+
+\begin{exo}{aln-6}{2}{rang d'une matrice à paramètres}
+Déterminer, selon les valeurs des réels $a$ et $b$, le rang de $M=\begin{pmatrix}a&b&1\\1&ab&1\\1&b&a\end{pmatrix}$.
+\end{exo}
+\begin{corrige}{aln-6}
+\choix{opérations élémentaires sur les lignes et les colonnes, qui ne changent pas le rang ; on discute aux valeurs qui annulent un pivot.}
+$C_2\leftarrow C_2-bC_3$ donne les colonnes $(a,1,1)$, $(0,ab-b,b-ab)=b(a-1)(0,1,-1)$ et $(1,1,a)$.
+\begin{itemize}
+\item Si $a=1$ : les trois lignes de $M$ sont égales à $(1,b,1)$ : $\rg M=1$.
+\item Si $a\neq1$ et $b=0$ : la deuxième colonne est nulle, et $(a,1,1)$, $(1,1,a)$ ne sont pas proportionnelles ($a\neq1$) : $\rg M=2$.
+\item Si $a\neq1$ et $b\neq0$ : $\rg M$ est le rang de la matrice de lignes $(a,0,1)$, $(1,1,1)$, $(1,-1,a)$. On prend $(1,1,1)$
+comme pivot : $L_1\leftarrow L_1-aL_2$ et $L_3\leftarrow L_3-L_2$ donnent $(0,-a,1-a)$ et $(0,-2,a-1)$. Ces deux lignes sont
+proportionnelles si et seulement si $-a(a-1)+2(1-a)=-(a-1)(a+2)=0$, soit $a=-2$. Donc $\rg M=2$ si $a=-2$, et $\rg M=3$ sinon.
+\end{itemize}
+\gain{au chapitre~2, on obtiendra d'un coup $\det M=b(a-1)^2(a+2)$, qui donne les cas de rang $3$.}
+\end{corrige}
+
+\begin{exo}{aln-4}{2}{un projecteur donné par sa matrice}
+Soit $u$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1/2&1&-1/2\\0&1&0\\-1/2&1&1/2\end{pmatrix}$ dans la base canonique.
+\begin{enumerate}
+\item Montrer que $u$ est un projecteur. Quel est son rang ?
+\item Déterminer une base de $\Ker u$ et de $\Im u$, puis une équation cartésienne de $\Im u$.
+\item Déterminer $P$ inversible telle que $P^{-1}AP=\mathrm{diag}(0,1,1)$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-4}
+\q{1.} Le calcul donne $A^2=A$ : $u$ est un projecteur, et $\rg u=\tr A=\frac12+1+\frac12=2$.
+\q{2.} $\Ker u$ : $\frac x2+y-\frac z2=0$, $y=0$, d'où $x=z$ : $\Ker u=\vect(1,0,1)$. $\Im u$ est engendrée par les colonnes, par
+exemple $(1,0,-1)$ (le double de la première) et $(1,1,1)$, non proportionnelles : c'est une base. Un vecteur $(a,b,c)$ orthogonal
+aux deux, $(1,-2,1)$, donne l'équation $x-2y+z=0$ (les deux vecteurs la vérifient, et $\dim\Im u=2$).
+\q{3.} Pour un projecteur, $\R^3=\Ker u\oplus\Im u$ et $u$ vaut $0$ sur $\Ker u$, $\Id$ sur $\Im u$. Dans la base adaptée
+$\big((1,0,1),(1,0,-1),(1,1,1)\big)$, la matrice de $u$ est $\mathrm{diag}(0,1,1)$ : $P=\begin{pmatrix}1&1&1\\0&0&1\\1&-1&1\end{pmatrix}$.
+\retenir{projecteur : rang $=$ trace, et la base adaptée à $\Ker\oplus\Im$ donne la matrice $\mathrm{diag}(0,\dots,0,1,\dots,1)$.}
+\end{corrige}
+
+\begin{exo}{aln-3}{2}{deux sous-espaces trop grands se coupent}
+Soient $F$ et $G$ deux sous-espaces d'un espace $E$ de dimension finie tels que $\dim F+\dim G>\dim E$. Montrer que
+$F\cap G\neq\{0\}$. Application : deux plans vectoriels de $\R^3$ ont toujours une droite en commun.
+\end{exo}
+\begin{corrige}{aln-3}
+Par la formule de Grassmann, $\dim(F\cap G)=\dim F+\dim G-\dim(F+G)\geq\dim F+\dim G-\dim E>0$. Deux plans de $\R^3$ :
+$2+2>3$, donc leur intersection est de dimension au moins $1$.
+\end{corrige}
+
+\begin{exo}{aln-7}{3}{matrices de rang au plus $1$}
+Soit $M\in\Mn{\R}$. Montrer que $\rg M\leq1$ si et seulement s'il existe deux colonnes $U,V\in\mathcal M_{n,1}(\R)$ telles que
+$M=UV^T$. Montrer alors que $M^2=\tr(M)\,M$.
+\end{exo}
+\begin{corrige}{aln-7}
+Si $M=UV^T$, la $j$-ième colonne de $M$ est $v_jU$ : toutes les colonnes sont dans $\vect(U)$, et $\rg M\leq1$. Réciproquement, si
+$\rg M=0$, $M=0=0\cdot V^T$ ; si $\rg M=1$, l'image est une droite $\vect(U)$, chaque colonne s'écrit $v_jU$, et $M=UV^T$ avec
+$V=(v_j)$. Enfin $V^TU=\sum_iv_iu_i=\tr(UV^T)$ est un scalaire, donc $M^2=U(V^TU)V^T=\tr(M)\,M$.
+\retenir{une matrice de rang $1$ est un produit « colonne $\times$ ligne », et $M^2=\tr(M)\,M$.}
+\end{corrige}
+
+\begin{exo}{aln-8}{3}{une matrice de carré nul}
+Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1&1&-1\\-3&-3&3\\-2&-2&2\end{pmatrix}$ dans la base canonique.
+\begin{enumerate}
+\item Déterminer une base de $\Ker f$ et de $\Im f$. Comparer ces deux sous-espaces ; que vaut $f\circ f$ ?
+\item Déterminer une base de $\R^3$ dans laquelle la matrice de $f$ n'a qu'un coefficient non nul.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-8}
+\q{1.} Les trois lignes sont proportionnelles à $(1,1,-1)$ : $\rg f=1$, et $\Ker f$ est le plan $x+y-z=0$, de base
+$\big((-1,1,0),(1,0,1)\big)$. $\Im f=\vect(u)$, $u=(1,-3,-2)$. Comme $1-3+2=0$, $u\in\Ker f$ : $\Im f\subset\Ker f$, donc $f\circ f=0$.
+\q{2.} $f(e_1)=u$. Dans la base $(u,k,e_1)$ avec $k=(1,0,1)$ : $(u,k)$ est une base de $\Ker f$ et $e_1\notin\Ker f$, c'est donc une
+base de $\R^3$. Comme $f(u)=f(k)=0$ et $f(e_1)=u$, la matrice de $f$ a pour seul coefficient non nul un $1$ en position $(1,3)$.
+\retenir{$\Ker f$ et $\Im f$ ne sont pas toujours supplémentaires : ici $\Im f\subset\Ker f$.}
+\end{corrige}
+
+\begin{exo}{aln-11}{3}{matrices nilpotentes de taille $2$}
+Une matrice $A\in\mathcal M_2(\R)$ est \emph{nilpotente} s'il existe $k\geq1$ tel que $A^k=0$. On note $\mathcal N$ l'ensemble de ces matrices.
+\begin{enumerate}
+\item Montrer que toute $M\in\mathcal M_2(\R)$ vérifie $M^2-\tr(M)\,M+\det(M)\,I_2=0$.
+\item Montrer que $A\in\mathcal N$ si et seulement si $\tr A=0$ et $\det A=0$.
+\item Montrer que $\vect(\mathcal N)$ est l'hyperplan des matrices de trace nulle.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-11}
+\q{1.} Avec $M=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ : $M^2=\begin{pmatrix}a^2+bc&b(a+d)\\c(a+d)&d^2+bc\end{pmatrix}$, et
+$M^2-(a+d)M=\begin{pmatrix}bc-ad&0\\0&bc-ad\end{pmatrix}=-\det(M)I_2$.
+\q{2.} Si $\tr A=\det A=0$, la question 1 donne $A^2=0$. Réciproquement, si $A^k=0$ : $(\det A)^k=\det(A^k)=0$ (déterminant d'un
+produit de matrices $2\times2$), donc $\det A=0$, puis $A^2=\tr(A)A$ et, par récurrence, $A^k=\tr(A)^{k-1}A$. Si $A\neq0$, cela impose
+$\tr A=0$ ; si $A=0$, c'est clair.
+\q{3.} $\mathcal N$ est contenu dans l'hyperplan $\Ker\tr$, de dimension $3$, qui est un sous-espace : $\vect(\mathcal N)\subset\Ker\tr$.
+Réciproquement, $E_{1,2}$, $E_{2,1}$ et $\begin{pmatrix}1&1\\-1&-1\end{pmatrix}$ sont nilpotentes (trace et déterminant nuls) et
+engendrent $\Ker\tr$ : la troisième moins la première plus la deuxième donne $\mathrm{diag}(1,-1)$.
+\retenir{en taille $2$, $M^2-\tr(M)M+\det(M)I_2=0$ : un calcul direct, très utile.}
+\end{corrige}
+
+\begin{exo}{aln-13}{3}{$AB-BA=I$ en dimension infinie}
+Sur $E=\R[X]$, on considère $D:P\mapsto P'$ et $M:P\mapsto XP$.
+\begin{enumerate}
+\item Montrer que $D\circ M-M\circ D=\Id_E$.
+\item Pourquoi cela ne contredit-il pas le fait qu'il n'existe pas de matrices $A,B\in\Mn{\R}$ telles que $AB-BA=I_n$ ?
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-13}
+\q{1.} $(D\circ M)(P)=(XP)'=P+XP'$ et $(M\circ D)(P)=XP'$ : la différence vaut $P$.
+\q{2.} L'argument de la trace ($\tr(AB-BA)=0\neq n$) n'a de sens qu'en dimension finie. Ici $E$ est de dimension infinie, et $M$ ne
+laisse stable aucun $\R_n[X]$ (elle augmente le degré) : on ne peut pas se ramener à des matrices.
+\retenir{les résultats sur la trace supposent la dimension finie.}
+\end{corrige}
+
+\begin{exo}{aln-10}{4}{endomorphismes de $\C^2$ de trace nulle}
+Soit $f$ un endomorphisme de $\C^2$ tel que $\tr f=0$.
+\begin{enumerate}
+\item Montrer que $f\circ f$ est une homothétie ; on note $\lambda$ son rapport.
+\item On suppose $\lambda\neq0$. Montrer qu'il existe $\alpha\in\C$ et une symétrie $s$ de $\C^2$ telles que $f=\alpha s$, puis une base de
+$\C^2$ dans laquelle la matrice de $f$ est $\begin{pmatrix}0&\alpha\\\alpha&0\end{pmatrix}$.
+\item On suppose $\lambda=0$ et $f\neq0$. Montrer qu'il existe une base de $\C^2$ dans laquelle la matrice de $f$ est $\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
+\end{enumerate}
+\end{exo}
+\begin{corrige}{aln-10}
+\choix{la relation $M^2-\tr(M)M+\det(M)I_2=0$ (exercice sur les matrices nilpotentes) ramène tout à $f\circ f=\lambda\Id$.}
+\q{1.} Avec $M$ la matrice de $f$ dans une base : $\tr M=0$ donne $M^2=-\det(M)I_2$, soit $f\circ f=\lambda\Id$ avec $\lambda=-\det f$.
+\q{2.} Soit $\alpha\in\C$ tel que $\alpha^2=\lambda$ ($\alpha\neq0$) et $s=\frac1\alpha f$ : $s\circ s=\frac{\lambda}{\alpha^2}\Id=\Id$, donc
+$s$ est une symétrie et $f=\alpha s$. Comme $\tr s=0$, $s\neq\pm\Id$ (de traces $\pm2$) : $\Ker(s-\Id)=\vect(e_1)$ et
+$\Ker(s+\Id)=\vect(e_2)$ sont deux droites supplémentaires. Dans la base $(e_1+e_2,e_1-e_2)$, $s$ échange les deux vecteurs, sa matrice
+est $\begin{pmatrix}0&1\\1&0\end{pmatrix}$, et celle de $f$ est $\begin{pmatrix}0&\alpha\\\alpha&0\end{pmatrix}$.
+\q{3.} $f\circ f=0$ donne $\Im f\subset\Ker f$ ; comme $f\neq0$, $\rg f\geq1$, et le théorème du rang impose $\rg f=\dim\Ker f=1$, donc
+$\Im f=\Ker f$. Soit $v\notin\Ker f$ : $\big(f(v),v\big)$ est libre ($f(v)\in\Ker f$, $v\notin\Ker f$), c'est une base, et
+$f\big(f(v)\big)=0$, $f(v)=1\cdot f(v)$ : la matrice est $\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
+\retenir{en dimension $2$, une trace nulle donne $f\circ f=\lambda\Id$ : symétrie à un facteur près, ou carré nul.}
+\end{corrige}

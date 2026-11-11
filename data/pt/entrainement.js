@@ -10,7 +10,7 @@ LC.entrainement = [
     id: "devoir-type", type: "devoir", titre: "Problème type devoir surveillé",
     chapitres: ["courbes"], duree: 90, niveau: 4,
     origine: "Le Collé (livre, §2.8)",
-    description: "Une étude complète : dérivées factorisées, tangentes, point stationnaire par développement, position globale, asymptotes, courbe asymptote, inflexion. À faire sans le livre, puis à corriger avec la fiche avant de lire le corrigé.",
+    description: "Une étude complète : dérivées factorisées, tangentes, point stationnaire par développement, position globale, asymptotes, courbe asymptote (hors programme PT), inflexion. À faire sans le livre, puis à corriger avec la fiche avant de lire le corrigé.",
     enonce: { doc: "td-courbes", page: 12 }, corrige: { doc: "td-courbes-corrections", page: 20 }
   },
   {
@@ -24,7 +24,7 @@ LC.entrainement = [
     id: "eb-determinants", type: "examen", titre: "Examen blanc 1 — Déterminants",
     chapitres: ["determinants"], duree: 90, niveau: 4,
     origine: "Composé par Le Collé à partir d'annales de la Banque PT",
-    description: "Comatrice, endomorphismes de $\\R^2$, aire d'un triangle.",
+    description: "Comatrice (hors programme PT), endomorphismes de $\\R^2$, aire d'un triangle.",
     parties: [
       { annale: "bpt-2019-b-2", questions: "Q1, Q3, Q4", points: 10, detail: "Q1 : 3 · Q3 : 4 · Q4 : 3" },
       { annale: "bpt-2018-b-1", questions: "Q1 à Q6", points: 7, detail: "Q1 : 2 · Q2–Q3 : 2 · Q4–Q5 : 2 · Q6 : 1" },
@@ -46,7 +46,7 @@ LC.entrainement = [
     id: "eb-metrique", type: "examen", titre: "Examen blanc 3 — Courbes et propriétés métriques",
     chapitres: ["courbes", "metrique"], duree: 120, niveau: 4,
     origine: "Composé par Le Collé à partir d'annales de la Banque PT",
-    description: "La deltoïde (symétries, rebroussement, longueur, développée) et les courbes en polaires (spirale, cissoïde, enveloppe).",
+    description: "La deltoïde (symétries, rebroussement, longueur, développée) et des courbes données en polaires (spirale, cissoïde, enveloppe). Les coordonnées polaires sont hors programme en PT : cette partie est un entraînement facultatif.",
     parties: [
       { annale: "bpt-2021-b-2", questions: "Q2 à Q4(b)", points: 10, detail: "Q2 : 1 · Q3(a)–(c) : 2 · (d)–(f) : 2 · (g)(h) : 2 · (i) : 1,5 · Q4(a)(b) : 1,5" },
       { annale: "bpt-2024-b-2", questions: "Parties C et D", points: 10, detail: "C1–C2 : 3 · C3 : 2 · C4–C5 : 2 · D1–D4 : 3" }

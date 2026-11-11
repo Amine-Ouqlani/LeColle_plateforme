@@ -306,7 +306,7 @@
 \providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
 
 \begin{document}
-\renewcommand{\grandnum}{5}
+\renewcommand{\grandnum}{6}
 \pagenumbering{roman}
 
 % ======================= Couverture =======================
@@ -340,7 +340,7 @@
   \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
      at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
      {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]
-      \textcolor{Gris}{Le complément métrique du livret \emph{Courbes paramétrées planes} (chapitre~4) :
+      \textcolor{Gris}{Le complément métrique du livret \emph{Courbes paramétrées planes} (chapitre~5) :
       cours, méthodes et exercices corrigés.}};
   \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west)
      {Ahmed Amine Ouqlani};
@@ -352,7 +352,7 @@
 \section*{Avant-propos}
 \markboth{Avant-propos}{}
 
-Ce livret (chapitre~5 du parcours PT) complète le livret \emph{Courbes paramétrées planes} (chapitre~4) et en reprend la forme. Il couvre la fin du programme de PT
+Ce livret (chapitre~6 du parcours PT) complète le livret \emph{Courbes paramétrées planes} (chapitre~5) et en reprend la forme. Il couvre la fin du programme de PT
 sur les courbes : longueur et abscisse curviligne, repère de Frenet, courbure, rayon, centre et cercle de courbure, développée,
 enveloppe d'une famille de droites. Le programme privilégie la vision géométrique : chaque formule est donc accompagnée de
 son origine et de son interprétation, et les questions de régularité ne sont pas soulevées. Les notations ($f(t)=\vv{OM(t)}$,
@@ -499,7 +499,7 @@ grand ; en une inflexion, $R$ devient infini.
 
 \begin{exemple}[développée de la parabole]
 $f(t)=\left(t,\frac{t^2}2\right)$ : $f'=(1,t)$, $v=\sqrt{1+t^2}$, $\ve N=\frac{(-t,1)}{\sqrt{1+t^2}}$, et
-$\gamma=\frac{\det(f',f'')}{v^3}=\frac1{(1+t^2)^{3/2}}$. Donc $R=(1+t^2)^{3/2}$ et
+l'angle de la tangente est $\alpha=\arctan t$, d'où $\gamma=\frac{\alpha'(t)}{v}=\frac{1}{1+t^2}\cdot\frac1{\sqrt{1+t^2}}=\frac1{(1+t^2)^{3/2}}$. Donc $R=(1+t^2)^{3/2}$ et
 \[I=M+R\ve N=\left(t,\tfrac{t^2}2\right)+(1+t^2)(-t,1)=\left(-t^3,\ 1+\tfrac32t^2\right) :\]
 la développée est une parabole semi-cubique, qui présente un rebroussement en $(0,1)$, centre de courbure au sommet ($R=1$).
 \end{exemple}
@@ -735,7 +735,7 @@ $\left(0,b-\frac{a^2}b\right)$, à la distance $\frac{a^2}b$ de $(0,b)$. Ce sont
 \end{tikzpicture}
 \end{center}
 \gain{les quatre rebroussements de la développée correspondent aux quatre sommets de l'ellipse, où la courbure est
-extrémale : c'est le réflexe du chapitre~1.}
+extrémale : c'est le réflexe de la partie~1.}
 \retenir{développée $=$ enveloppe des normales : équation de la normale, dérivée par rapport au paramètre, système $2\times2$.}
 \end{corrige}
 \clearpage
