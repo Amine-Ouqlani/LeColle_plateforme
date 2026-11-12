@@ -127,9 +127,10 @@ $('#contenu').innerHTML = `
   <section class="etape" id="etape-5"><h3><span class="etape-num">5</span>Se préparer aux évaluations</h3>
     <p>En temps limité, sans documents : un devoir ou un examen blanc, et les questions de concours sur ce chapitre.</p>
     ${evaluations ? `<ul class="list">${evaluations}</ul>` : ''}
-    ${!evaluations && !annalesChap ? '<p class="muted">Pas encore d\'annales sélectionnées pour ce chapitre : les exercices de niveau IV du TD et le cinquième problème de la sélection en tiennent lieu.</p>' : ''}
-    ${annalesChap ? `<details class="plus"><summary>Annales de concours sur ce chapitre <span class="tag">(${QUESTIONS.length} questions)</span></summary><ul class="list">${annalesChap}</ul>
+    ${annalesChap ? `<details class="plus"><summary>Questions de concours corrigées sur ce chapitre <span class="tag">(${QUESTIONS.length} questions)</span></summary><ul class="list">${annalesChap}</ul>
       <p class="muted" style="margin-top:8px"><a href="annales.html?ch=${C.id}">Les mêmes questions, classées par notion →</a></p></details>` : ''}
+    <p style="margin-top:12px"><a href="annales.html?theme=${C.id}">Les sujets officiels de la Banque PT qui portent sur ce chapitre →</a><br>
+      <a href="annales.html?vue=classiques&ch=${C.id}">Les exercices classiques du chapitre →</a></p>
   </section>
 
   <nav class="pager" aria-label="Chapitre précédent ou suivant">${prev ? `<a href="chapitre.html?id=${prev.id}"><span class="tag">← Chapitre ${prev.num}</span>${prev.titre}</a>` : '<span></span>'}${next ? `<a class="next" href="chapitre.html?id=${next.id}"><span class="tag">Chapitre ${next.num} →</span>${next.titre}</a>` : ''}</nav>`;

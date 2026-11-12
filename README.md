@@ -78,7 +78,9 @@ Les questions d'annales sont indexées par chapitre et par notion dans `data/pt/
 - **Un document PT** : déposer le PDF (et sa source) dans `docs/pt/`, puis ajouter une entrée dans `data/pt/documents.js`.
 - **Un chapitre** : copier un bloc de `data/pt/chapitres.js` (sections du cours avec leurs numéros de page PDF, fiche, présentation, erreurs fréquentes, questions flash). Il apparaît automatiquement dans le menu, l'accueil et la recherche.
 - **Un exercice** : une entrée dans `data/pt/exercices.js` (niveau 1 à 4, notions, prérequis, objectif, indication, page de l'énoncé et du corrigé).
-- **Une annale** : une entrée dans `data/pt/annales.js` et un fichier `contenu/pt/annales/<id>.html` (modèle : un des fichiers existants ; formules entre `$…$` ou `\[…\]`).
+- **Un sujet officiel** : une ligne `S(année, épreuve, rapport ?, corrigés, parties)` dans `data/pt/sujets.js` (parties : intitulé, thèmes de `LC.themes`, résumé). `node outils/verifier.js` contrôle les thèmes, les doublons et le rattachement des parties corrigées.
+- **Un classique** : `[identifiant d'exercice du TD, nom d'usage]` dans `data/pt/classiques.js` (exercices d'entraînement Le Collé, jamais présentés comme des sujets de concours).
+- **Une partie d'annale corrigée pas à pas** : une entrée dans `data/pt/annales.js` et un fichier `contenu/pt/annales/<id>.html` (modèle : un des fichiers existants ; formules entre `$…$` ou `\[…\]`).
 - **Un examen blanc** : une entrée dans `data/pt/entrainement.js` (extraits d'annales, durée, barème).
 
 Puis vérifier : `node outils/verifier.js`.
@@ -86,6 +88,6 @@ Puis vérifier : `node outils/verifier.js`.
 ## Sources et droits
 
 - Livres, fiches, présentation, exercices et corrections : © Le Collé — Ahmed Amine Ouqlani.
-- Annales : sujets officiels de la Banque PT (épreuve de Mathématiques B), **non hébergés ici** ; liens vers WikiPrépa. Les résumés de questions et les corrections sont rédigés par Le Collé.
+- Annales : sujets officiels de la Banque PT (Mathématiques A, B, C, sessions 2014 à 2026), **non hébergés ici** ; liens vers WikiPrépa (sujets, rapports du jury) et prepas.org (corrigés de l'UPS). Les résumés de parties, les résumés de questions et les corrections pas à pas sont rédigés par Le Collé.
 - Mise en page inspirée du template *vCard — Personal portfolio* (codewithsadee, licence MIT).
 - pdf.js (Mozilla, Apache 2.0) et KaTeX (MIT) sont embarqués dans `assets/vendor/` avec leurs licences.

@@ -56,7 +56,7 @@ LC.entrainement = [
     id: "eb-synthese", type: "examen", titre: "Examen blanc 4 — Synthèse type concours",
     chapitres: ["determinants", "courbes", "metrique"], duree: 180, niveau: 4,
     origine: "Composé par Le Collé à partir d'annales de la Banque PT",
-    description: "Trois parties indépendantes couvrant les trois chapitres, dans les conditions d'une épreuve de 3 heures.",
+    description: "Trois parties indépendantes couvrant les trois chapitres, en 3 heures (une épreuve réelle en dure 4).",
     parties: [
       { annale: "bpt-2024-b-2", questions: "Exercice 2 complet", points: 8, detail: "A : 1 · B : 3 · C : 2,5 · D : 1,5" },
       { annale: "bpt-2019-b-2", questions: "Q1, Q3, Q4", points: 6, detail: "Q1 : 2 · Q3 : 2 · Q4 : 2" },
