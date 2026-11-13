@@ -141,6 +141,9 @@
 \newcommand{\sh}{\operatorname{sh}}\newcommand{\ch}{\operatorname{ch}}
 \title{Le Collé --- Équations différentielles}
 
+% NIVEAU DU CHAPITRE (même interrupteur que le livret) : \PTfalse = programme de PTSI seulement ;
+% \PTtrue = version complète de PT. Le contenu de PT est conservé dans les blocs \ifPT ... \fi.
+\newif\ifPT \ifdefined\VERSIONPT \PTtrue \else \PTfalse \fi
 \begin{document}
 
 % ---------------------------------------------------------------- titre
@@ -153,8 +156,8 @@
     {Équations différentielles\\ linéaires};
   \fill[Ocre] ([xshift=1cm,yshift=-4.6cm]current page.north west) rectangle ([xshift=4cm,yshift=-4.65cm]current page.north west);
   \node[anchor=north west,text=white!80!Bleu,font=\normalsize,text width=12.5cm] at ([xshift=1cm,yshift=-5cm]current page.north west)
-    {Présentation pour expliquer, avec sept exercices à chercher en séance ;\\ le \textbf{livre} pour relire, la \textbf{fiche} pour réviser.
-     Mêmes parties (§1.1 à §1.5), mêmes notations.};
+    {Présentation pour expliquer, avec \ifPT sept\else quatre\fi{} exercices à chercher en séance ;\\ le \textbf{livre} pour relire, la \textbf{fiche} pour réviser.
+     Mêmes parties (§1.1 à §\ifPT1.5\else1.4\fi), mêmes notations.};
 \end{tikzpicture}
 \end{frame}
 
@@ -178,6 +181,7 @@
 \end{frame}
 
 % ---------------------------------------------------------------- plan
+\ifPT
 \begin{frame}{Plan de la séance (2 h)}
 \begin{columns}[T]
 \column{0.55\textwidth}
@@ -199,10 +203,37 @@ Chaque exercice : 3 à 8 min de recherche, puis la correction.
 \vspace{0.2cm}
 {\small\color{Gris}Après la séance : relire le livre, apprendre la fiche, puis les \textbf{cinq problèmes}, puis le TD.}
 \end{frame}
+\else
+\begin{frame}{Plan de la séance (1 h 30)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}l l r@{}}
+\textbf{\color{Bleu}1.1} & Structure, théorème de Cauchy & \color{Vert}Ex.~1\\
+\textbf{\color{Bleu}1.2} & Premier ordre & \color{Vert}Ex.~2\\
+\textbf{\color{Bleu}1.3} & Second ordre, coefficients constants & \color{Vert}Ex.~3, 4\\
+\textbf{\color{Bleu}1.4} & Quelle méthode ? Synthèse &
+\end{tabular}
+\column{0.4\textwidth}
+\begin{ASTU}[Rythme suggéré]
+\small 1.1 : 20 min\\ 1.2 : 30 min\\ 1.3--1.4 : 40 min\\[3pt]
+Chaque exercice : 3 à 8 min de recherche, puis la correction.
+\end{ASTU}
+\end{columns}
+\vspace{0.2cm}
+{\small\color{Gris}Après la séance : relire le livre, apprendre la fiche, puis les \textbf{cinq problèmes}, puis le TD.}
+\end{frame}
+\fi
 
 \chapitre{Chapitre 4 · Équations différentielles}
+\ifPT
 \newcommand{\rmI}{\rmitem{1.1}{Structure, théorème de Cauchy}\rmitem{1.2}{Premier ordre, recollement}\rmitem{1.3}{Second ordre, coefficients constants}
   \rmitem{1.4}{Second ordre, coefficients continus}\rmitem{1.5}{Quelle méthode ? Synthèse}}
+\else
+\newcommand{\rmI}{\rmitem{1.1}{Structure, théorème de Cauchy}\rmitem{1.2}{Premier ordre}\rmitem{1.3}{Second ordre, coefficients constants}
+  \rmitem{1.4}{Quelle méthode ? Synthèse}}
+\fi
 
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
@@ -249,15 +280,20 @@ Chaque exercice : 3 à 8 min de recherche, puis la correction.
 
 \begin{frame}{Définition et forme normalisée}
 \begin{DEF}
+\ifPT
 $I$ intervalle, $a,b,c$ \alert{continues} sur $I$ à valeurs dans $\K=\R$ ou $\C$.
 \[(E)\quad y'+a(t)y=b(t)\qquad\text{ou}\qquad(E)\quad y''+a(t)y'+b(t)y=c(t).\]
+\else
+$I$ intervalle, $\K=\R$ ou $\C$. Premier ordre : $a,b$ \alert{continues} sur $I$ ; second ordre : $a,b\in\K$ \alert{constants}, $c$ continue.
+\[(E)\quad y'+a(t)y=b(t)\qquad\text{ou}\qquad(E)\quad y''+ay'+by=c(t).\]
+\fi
 Solution : fonction dérivable (deux fois dérivable) sur $I$ qui vérifie $(E)$ \emph{en tout point de $I$}.
 $(H)$ : l'équation \emph{homogène} associée (second membre remplacé par $0$).
 \end{DEF}
 \pause
 \begin{PIEGE}[Normaliser, sur un intervalle]
-$\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$ : on divise par $\alpha(t)$ \alert{seulement sur un intervalle où $\alpha$ ne s'annule
-pas}. Exemple : $ty'+y=\ln t$ se normalise sur $\R_+^*$ en $y'+\frac1ty=\frac{\ln t}t$. Les points où $\alpha$ s'annule : §1.2, recollement.
+\ifPT$\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$\else$\alpha(t)y'+\beta(t)y=\gamma(t)$\fi{} : on divise par $\alpha(t)$ \alert{seulement sur un intervalle où $\alpha$ ne s'annule
+pas}. Exemple : $ty'+y=\ln t$ se normalise sur $\R_+^*$ en $y'+\frac1ty=\frac{\ln t}t$. \ifPT Les points où $\alpha$ s'annule : §1.2, recollement.\else On résout sur chaque intervalle où $\alpha$ ne s'annule pas.\fi
 \end{PIEGE}
 \end{frame}
 
@@ -265,7 +301,7 @@ pas}. Exemple : $ty'+y=\ln t$ se normalise sur $\R_+^*$ en $y'+\frac1ty=\frac{\l
 \begin{columns}[c]
 \column{0.57\textwidth}
 \begin{PROP}[Structure \livre{prop.~1.2}]
-$L(y)=y''+a(t)y'+b(t)y$ est \emph{linéaire}.
+\ifPT$L(y)=y''+a(t)y'+b(t)y$\else$L(y)=y''+ay'+by$\fi{} est \emph{linéaire}.
 \begin{enumerate}
 \item $S_H=\mathrm{Ker}\,L$ est un espace vectoriel.
 \item Superposition : $L(y_1)=c_1$, $L(y_2)=c_2\Rightarrow L(y_1+y_2)=c_1+c_2$.
@@ -313,7 +349,7 @@ Doute ? $\dt{y_1(t_0)&y_2(t_0)\\y_1'(t_0)&y_2'(t_0)}\neq0$ \ (chapitre Détermin
 % ---------------------------------------------------------------- EXERCICE 1
 \begin{frame}{\badgeexo{1}Retrouver toutes les solutions sans l'équation}
 \begin{ENONCE}[5 min]
-Les trois fonctions \ $y_1(t)=t$, \ $y_2(t)=t+e^{t}$, \ $y_3(t)=t+e^{-t}$ \ sont solutions sur $\R$ d'une même équation $(E)$ : $y''+a(t)y'+b(t)y=c(t)$, avec $a,b,c$ continues.
+Les trois fonctions \ $y_1(t)=t$, \ $y_2(t)=t+e^{t}$, \ $y_3(t)=t+e^{-t}$ \ sont solutions sur $\R$ d'une même équation $(E)$ : \ifPT$y''+a(t)y'+b(t)y=c(t)$, avec $a,b,c$ continues\else$y''+ay'+by=c(t)$, avec $a,b$ réels et $c$ continue\fi.
 \begin{enumerate}
 \item Sans chercher $(E)$, déterminer toutes ses solutions.
 \item Déterminer la solution telle que $y(0)=1$ et $y'(0)=0$.
@@ -354,7 +390,11 @@ Toujours fixer les constantes \emph{après} avoir écrit la solution générale 
 \end{frame}
 
 % =====================================================================
+\ifPT
 \partie{1.2}{Premier ordre, recollement}{Comment résoudre $y'+a(t)y=b(t)$, et que faire quand le coefficient de $y'$ s'annule ?}{\rmI}
+\else
+\partie{1.2}{Premier ordre}{Comment résoudre $y'+a(t)y=b(t)$ quand $a$ et $b$ sont continues ?}{\rmI}
+\fi
 
 \begin{frame}{L'équation homogène du premier ordre}
 \begin{PROP}[Théorème \livre{th.~1.5}]
@@ -442,7 +482,7 @@ Quand le second membre est \emph{solution de l'équation homogène}, la forme «
 degré, ou l'on fait varier la constante.
 \end{RAIS}
 \begin{OUTIL}
-Méthode~1.2 : solution évidente, forme $Q(t)e^{mt}$, variation de la constante.
+Méthode~1.1 : solution évidente, forme $Q(t)e^{mt}$, variation de la constante.
 \end{OUTIL}
 \column{0.57\textwidth}
 \etape{(a)} $Ce^{-t}$ est solution de $(H)$ : on cherche $y=(\alpha t+\beta)e^{-t}$, il reste $\alpha=1$ : $y=(t+K)e^{-t}$.\\[3pt]
@@ -473,6 +513,7 @@ $f$ continue et $f(x)=1+\displaystyle\int_0^xtf(t)\,dt$ pour tout $x$.
 {\small\color{Gris}Variante avec $1+x$ au lieu de $1$ : exercice~14 du TD.}
 \end{frame}
 
+\ifPT
 \begin{frame}{Quand le coefficient de $y'$ s'annule : recoller}
 \begin{METH}{Recoller des solutions en $t_0$, où $\alpha(t_0)=0$ \livre{méth.~1.3}}
 \begin{enumerate}
@@ -546,6 +587,7 @@ un \emph{plan} vectoriel.
 \end{columns}
 \end{frame}
 
+\fi
 % =====================================================================
 \partie{1.3}{Second ordre, coefficients constants}{Comment résoudre $y''+ay'+by=c(t)$ quand $a$ et $b$ sont des constantes ?}{\rmI}
 
@@ -553,7 +595,7 @@ un \emph{plan} vectoriel.
 \textbf{Idée :} chercher des solutions $e^{rt}$ de $y''+ay'+by=0$ :
 \[(e^{rt})''+a(e^{rt})'+b\,e^{rt}=(r^2+ar+b)\,e^{rt}=0\iff r^2+ar+b=0.\]
 \pause
-\begin{PROP}[Théorème \livre{th.~1.11}]
+\begin{PROP}[Théorème \livre{th.~\ifPT1.11\else1.10\fi}]
 \begin{tabular}{@{}lll@{}}
 \textbf{Cas complexe} & $r_1\neq r_2$ : $Ae^{r_1t}+Be^{r_2t}$ & racine double $r$ : $(A+Bt)e^{rt}$\\[3pt]
 \textbf{Cas réel}, $\Delta=a^2-4b$ & $\Delta>0$ : $Ae^{r_1t}+Be^{r_2t}$ & $\Delta=0$ : $(A+Bt)e^{rt}$\\
@@ -566,7 +608,7 @@ $z=A+Bt$. Les deux solutions sont non proportionnelles : elles engendrent le pla
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 4
-\begin{frame}{\badgeexo{4}Un oscillateur amorti}
+\begin{frame}{\badgeexo{\ifPT4\else3\fi}Un oscillateur amorti}
 \begin{ENONCE}[4 min]
 Déterminer la solution réelle de
 \[y''+4y'+13y=0,\qquad y(0)=0,\quad y'(0)=3,\]
@@ -575,7 +617,7 @@ puis décrire son allure quand $t\to+\infty$.
 \end{ENONCE}
 \end{frame}
 
-\begin{frame}{\badgecor{4}Un oscillateur amorti}
+\begin{frame}{\badgecor{\ifPT4\else3\fi}Un oscillateur amorti}
 \begin{columns}[T]
 \column{0.5\textwidth}
 \etape{1.} $r^2+4r+13=0$, \ $\Delta=-36$, \ $r=-2\pm3i$.\\
@@ -602,7 +644,7 @@ Partie réelle des racines $\to$ amortissement ;\\ partie imaginaire $\to$ pulsa
 \end{frame}
 
 \begin{frame}{Second membre $P(t)e^{mt}$}
-\begin{METH}{Solution particulière \livre{méth.~1.4}}
+\begin{METH}{Solution particulière \livre{méth.~\ifPT1.4\else1.3\fi}}
 Chercher $y=Q(t)e^{mt}$, avec \ $\deg Q=\deg P+\big(\text{multiplicité de $m$ comme racine : }0,\ 1\text{ ou }2\big)$.\\[2pt]
 En reportant :\qquad $Q''+(2m+a)Q'+(m^2+am+b)Q=P.$
 \end{METH}
@@ -653,7 +695,7 @@ $\lambda,\omega>0$, discriminant réduit $\lambda^2-\omega^2$ :
 \end{frame}
 
 % ---------------------------------------------------------------- EXERCICE 5
-\begin{frame}{\badgeexo{5}Quelle forme pour la solution particulière ?}
+\begin{frame}{\badgeexo{\ifPT5\else4\fi}Quelle forme pour la solution particulière ?}
 \begin{ENONCE}[8 min]
 Pour chaque équation, donner la \emph{forme} de la solution particulière à chercher, puis la calculer.
 \[\text{(a)}\ \ y''-y=te^t\qquad\text{(b)}\ \ y''+2y'+y=e^{-t}\qquad\text{(c)}\ \ y''+y=\cos2t\]
@@ -665,14 +707,14 @@ Racines : (a) $\pm1$ ; (b) $-1$ double ; (c) $\pm i$. Comparer avec $m=1$, $m=-1
 \end{INDICE}
 \end{frame}
 
-\begin{frame}{\badgecor{5}Quelle forme pour la solution particulière ?}
+\begin{frame}{\badgecor{\ifPT5\else4\fi}Quelle forme pour la solution particulière ?}
 \begin{columns}[T]
 \column{0.38\textwidth}
 \begin{RAIS}
 On ne calcule rien avant d'avoir comparé $m$ aux racines : c'est la multiplicité qui fixe $\deg Q$.
 \end{RAIS}
 \begin{OUTIL}
-Méthode~1.4 : $\deg Q=\deg P+$ multiplicité.
+Méthode~\ifPT1.4\else1.3\fi{} : $\deg Q=\deg P+$ multiplicité.
 \end{OUTIL}
 \column{0.59\textwidth}
 \etape{(a)} $m=1$ racine simple, $\deg Q=2$. $a=0$, $b=-1$ : $Q''+2Q'=t$.\\
@@ -687,6 +729,7 @@ En (b), chercher $Ce^{-t}$ ou $Cte^{-t}$ conduit à $0=1$ : ce sont des solution
 \end{PIEGE}
 \end{frame}
 
+\ifPT
 \begin{frame}{Second membre quelconque : variation de la constante}
 \begin{METH}{Variation de la constante au second ordre \livre{méth.~1.5}}
 Prendre $\varphi$ solution de $(H)$ \alert{qui ne s'annule pas} sur $I$ (souvent $e^{rt}$) et chercher $y=\lambda(t)\varphi(t)$.
@@ -870,8 +913,14 @@ Exceptionnellement, la série entière donne tout $S_H$ : deux constantes libres
 \end{frame}
 
 % =====================================================================
+\fi
+\ifPT
 \partie{1.5}{Quelle méthode ? Synthèse}{Devant une équation, par quoi commencer ?}{\rmI}
+\else
+\partie{1.4}{Quelle méthode ? Synthèse}{Devant une équation, par quoi commencer ?}{\rmI}
+\fi
 
+\ifPT
 \begin{frame}{Quelle méthode ?}
 \small
 \renewcommand{\arraystretch}{1.3}
@@ -886,6 +935,21 @@ $f$ sous $\int_{x_0}^x$ & dériver, condition initiale en $x_0$\\
 $f'(x)=f(-x)$, \dots & dériver, puis vérifier la \emph{réciproque}\\\bottomrule
 \end{tabular}
 \end{frame}
+\else
+\begin{frame}{Quelle méthode ?}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{5.2cm}p{8.6cm}@{}}
+\toprule
+\textbf{Équation} & \textbf{Méthode}\\\midrule
+$y'+a(t)y=b(t)$ & $Ke^{-A}$ ; solution évidente, forme du second membre, ou variation de la constante\\
+$\alpha(t)y'+\beta(t)y=\gamma(t)$ & normaliser sur chaque intervalle où $\alpha$ ne s'annule pas\\
+$y''+ay'+by=c(t)$, $a,b$ constants & équation caractéristique ; $P(t)e^{mt}$ ; superposition\\
+$f$ sous $\int_{x_0}^x$ & dériver, condition initiale en $x_0$\\
+$f'(x)=f(-x)$, \dots & dériver, puis vérifier la \emph{réciproque}\\\bottomrule
+\end{tabular}
+\end{frame}
+\fi
 
 \begin{frame}{Pièges et essentiel}
 \begin{columns}[T]
@@ -897,17 +961,17 @@ $f'(x)=f(-x)$, \dots & dériver, puis vérifier la \emph{réciproque}\\\bottomru
 \item $\sin$ au second membre : partie \emph{imaginaire}.
 \item Conditions initiales avant d'ajouter $y_p$.
 \item Diviser par un coefficient qui s'annule.
-\item Affirmer l'unicité d'une solution recollée.
+\ifPT\item Affirmer l'unicité d'une solution recollée.\fi
 \end{itemize}
 \end{PIEGE}
 \column{0.48\textwidth}
 \begin{RETENIR}
 \begin{itemize}
-\item $S_E=y_p+S_H$ ; $\dim S_H=1$ ou $2$ si l'équation est normalisée.
+\item $S_E=y_p+S_H$ ; $\dim S_H=1$ ou $2$\ifPT{} si l'équation est normalisée\fi.
 \item Cauchy : une ou deux conditions en $t_0$.
 \item Ordre 1 : $Ke^{-A}$ ; $\lambda'=b\,e^{A}$.
 \item Constants : $r^2+ar+b=0$ ; $\deg Q=\deg P+$ multiplicité.
-\item Continus : deux solutions non proportionnelles ; $y=\lambda\varphi$.
+\ifPT\item Continus : deux solutions non proportionnelles ; $y=\lambda\varphi$.\fi
 \end{itemize}
 \end{RETENIR}
 \end{columns}
@@ -921,20 +985,32 @@ $f'(x)=f(-x)$, \dots & dériver, puis vérifier la \emph{réciproque}\\\bottomru
 \item \textbf{Apprendre la fiche} : formules, méthodes, pièges.
 \item \textbf{Cinq problèmes} de la sélection, dans l'ordre :
 \begin{itemize}\small
+\ifPT
 \item régimes transitoire et permanent ;
 \item solution polynomiale et $t=\sh x$ ;
 \item changement de fonction et recollement ;
 \item trois méthodes pour une même équation ;
 \item solutions périodiques d'un oscillateur forcé.
+\else
+\item régimes transitoire et permanent ;
+\item résonance : quand les solutions sont-elles bornées ? ;
+\item une équation fonctionnelle ;
+\item développement limité d'une solution ;
+\item solutions périodiques d'un oscillateur forcé.
+\fi
 \end{itemize}
-\item Puis le \textbf{TD complet} (28 exercices, quatre niveaux).
+\item Puis le \textbf{TD complet} (\ifPT28\else17\fi{} exercices, quatre niveaux).
 \end{enumerate}
 \column{0.44\textwidth}
 \begin{ASTU}[Pour chercher seul]
 Lire l'en-tête du problème, chercher au brouillon, ne lire qu'\emph{une} indication en cas de blocage, la correction à la fin.
 \end{ASTU}
 \begin{HPBOX}
+\ifPT
 Systèmes $X'=AX$, ordre $\geq3$ : hors programme PT. L'équation d'Euler n'est traitée qu'avec l'indication $t=e^x$.
+\else
+Second ordre à coefficients non constants, recollement, variation de la constante au second ordre : cours de deuxième année, vu plus tard.
+\fi
 \end{HPBOX}
 \end{columns}
 \end{frame}

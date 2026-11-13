@@ -154,7 +154,7 @@
     {Algèbre linéaire};
   \fill[Ocre] ([xshift=1cm,yshift=-4.6cm]current page.north west) rectangle ([xshift=4cm,yshift=-4.65cm]current page.north west);
   \node[anchor=north west,text=white!80!Bleu,font=\normalsize,text width=12.5cm] at ([xshift=1cm,yshift=-5cm]current page.north west)
-    {Présentation pour expliquer, avec quatre exercices à chercher en séance ;\\ le \textbf{livret} pour relire, la \textbf{fiche} pour réviser.
+    {Présentation pour expliquer, avec cinq exercices à chercher en séance ;\\ le \textbf{livret} pour relire, la \textbf{fiche} pour réviser.
      Mêmes parties (§1.1 à §1.6), mêmes notations.};
 \end{tikzpicture}
 \end{frame}
@@ -187,7 +187,7 @@
 \small
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{@{}l l r@{}}
-\textbf{\color{Bleu}1.1} & Rappels : rang, changement de base & \\
+\textbf{\color{Bleu}1.1} & Espaces, applications linéaires, matrices & \color{Vert}Ex.~R\\
 \textbf{\color{Bleu}1.2} & Produit, somme directe, projecteurs & \color{Vert}Ex.~1\\
 \textbf{\color{Bleu}1.3} & Hyperplans et systèmes & \\
 \textbf{\color{Bleu}1.4} & Trace & \color{Vert}Ex.~2\\
@@ -204,7 +204,7 @@ Somme directe $\to$ base adaptée $\to$ sous-espaces stables $\to$ matrice par b
 \end{frame}
 
 \chapitre{Chapitre 1 · Algèbre linéaire}
-\newcommand{\rmI}{\rmitem{1.1}{Rappels}\rmitem{1.2}{Produit, somme directe, projecteurs}\rmitem{1.3}{Hyperplans et systèmes}
+\newcommand{\rmI}{\rmitem{1.1}{Espaces, applications linéaires, matrices}\rmitem{1.2}{Produit, somme directe, projecteurs}\rmitem{1.3}{Hyperplans et systèmes}
   \rmitem{1.4}{Trace}\rmitem{1.5}{Sous-espaces stables}\rmitem{1.6}{Synthèse}}
 
 \begin{frame}[plain]
@@ -237,16 +237,109 @@ quand $f$ \textbf{respecte}-il le découpage (stabilité) ?
 \end{frame}
 
 % =====================================================================
-\partie{1.1}{Rappels}{Qu'est-ce qui ne dépend pas de la base ?}{\rmI}
+\partie{1.1}{Espaces, applications linéaires, matrices}{Comment représenter une application linéaire, et qu'est-ce qui ne dépend pas de la base ?}{\rmI}
 
-\begin{frame}{Rappels : rang, changement de base, matrices semblables}
+\begin{frame}{Calcul matriciel et systèmes}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{PROP}[Règles de calcul \livre{R.2, R.3}]
+\small $(AB)_{i,j}=\sum_ka_{i,k}b_{k,j}$ ; \ $AB\neq BA$ en général ; \ $(AB)^T=B^TA^T$.\\
+Binôme $\sum\binom mkA^kB^{m-k}$ \alert{si $AB=BA$}.\\
+$(AB)^{-1}=B^{-1}A^{-1}$ ; \ $AB=I_n\Rightarrow B=A^{-1}$.\\
+Triangulaire inversible $\iff$ aucun zéro sur la diagonale.
+\end{PROP}
+\column{0.46\textwidth}
+\begin{PROP}[Systèmes \livre{R.4}]
+\small $AX=B$ : opérations sur les \emph{lignes} (pivot de Gauss) $\to$ système équivalent.\\
+Compatible : solutions $X_0+\{Y,\ AY=0\}$.
+\end{PROP}
+\pause
+\begin{METH}{Inverser une matrice \livre{méth.~R.1}}
+\small Résoudre $AX=Y$ : si $X=BY$ pour tout $Y$, alors $A^{-1}=B$.\\
+Ou : pivot sur $(A\,|\,I_n)$ jusqu'à $(I_n\,|\,A^{-1})$.
+\end{METH}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Familles, bases, dimension}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{DEF}
+\small \emph{Génératrice} : $\vect(x_i)=E$. \ \emph{Libre} : $\sum\lambda_ix_i=0\Rightarrow$ tous les $\lambda_i$ nuls.\\
+\emph{Base} : libre et génératrice ; coordonnées uniques.\\
+$\vect(x_1,\dots,x_p)$ : le plus petit sous-espace contenant les $x_i$.
+\end{DEF}
+\begin{PROP}[Dimension \livre{th.~R.10}]
+\small Base extraite, base incomplète. Dans un espace engendré par $n$ vecteurs, $n+1$ vecteurs sont liés.\\
+$\dim\K^n=n$, \ $\dim\K_n[X]=n+1$, \ $\dim\mathcal M_{n,p}(\K)=np$.
+\end{PROP}
+\column{0.46\textwidth}
+\begin{PROP}[En dimension $n$ \livre{R.11, R.12}]
+\small $n$ vecteurs : base $\iff$ libre $\iff$ génératrice.\\
+$\rg(x_1,\dots,x_p)=\dim\vect(x_i)$.\\
+$F\subset E$ : $\dim F\leq\dim E$, égalité $\iff F=E$.\\
+Grassmann : $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$.
+\end{PROP}
+\pause
+\begin{RETENIR}
+\small En dimension connue, \textbf{une seule vérification} : libre \emph{ou} génératrice.
+\end{RETENIR}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Applications linéaires}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{PROP}[Noyau, image \livre{prop.~R.15}]
+\small $u$ injective $\iff\Ker u=\{0\}$. \ $(e_j)$ génératrice $\Rightarrow\Im u=\vect\big(u(e_j)\big)$.\\
+\textbf{Théorème du rang} : $\dim\Ker u+\rg u=\dim E$.\\
+$\rg(v\circ u)\leq\min(\rg u,\rg v)$.
+\end{PROP}
+\column{0.46\textwidth}
+\begin{PROP}[Image d'une base \livre{R.16}]
+\small $u$ est déterminée par les $u(e_i)$. Injective / surjective / bijective $\iff\big(u(e_i)\big)$ libre / génératrice / base.\\
+$E\simeq F\iff\dim E=\dim F$.
+\end{PROP}
+\end{columns}
+\pause
+\begin{PROP}[Équation linéaire \livre{R.17}]
+\small $u(x)=a$ : aucune solution, ou $x_0+\Ker u$. \ Systèmes $AX=B$, équations différentielles ($S_E=y_p+S_H$), suites
+arithmético-géométriques : même structure.
+\end{PROP}
+\end{frame}
+
+\begin{frame}{Matrices, rang, systèmes}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{PROP}[Matrice d'une application \livre{R.18}]
+\small Colonne $j$ : coordonnées de $u(e_j)$. \ $Y=AX$.\\
+$\Mat(v\circ u)=\Mat(v)\Mat(u)$ ; \ $u$ bijective $\iff\Mat(u)$ inversible.
+\end{PROP}
+\begin{PROP}[Rang d'une matrice \livre{R.19}]
+\small $\Im A=\vect(\text{colonnes})$, \ $\rg A^T=\rg A$.\\
+$A\in\Mn{\K}$ : inversible $\iff\Ker A=\{0\}\iff\rg A=n$.
+\end{PROP}
+\column{0.46\textwidth}
+\begin{PROP}[Systèmes \livre{R.23}]
+\small $\{AX=0\}=\Ker A$, de dimension $p-\rg A$.\\
+$AX=B$ compatible $\iff B\in\Im A$.\\
+$A$ inversible : $X=A^{-1}B$ (Cramer).
+\end{PROP}
+\pause
+\begin{METH}{Rang, noyau, image \livre{méth.~R.3}}
+\small Échelonner : rang $=$ nombre de pivots. Noyau : $AX=0$, contrôler $\dim=p-\rg A$. Image : colonnes des pivots.
+\end{METH}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Ce qui ne dépend pas de la base}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\begin{PROP}[Rang \livre{prop.~1.1}]
+\begin{PROP}[Rang \livre{prop.~R.15}]
 $\dim\Ker u+\rg u=\dim E$.\\ En dimension égale : injective $\iff$ surjective $\iff$ bijective.
 \end{PROP}
 \column{0.48\textwidth}
-\begin{PROP}[Changement de base \livre{prop.~1.2}]
+\begin{PROP}[Changement de base \livre{prop.~R.21}]
 $P$ matrice de passage de $\mathcal B$ à $\mathcal B'$ (colonnes : vecteurs de $\mathcal B'$ en coordonnées dans $\mathcal B$) :
 \[\Mat_{\mathcal B'}(f)=P^{-1}\,\Mat_{\mathcal B}(f)\,P.\]
 \end{PROP}
@@ -261,23 +354,64 @@ Deux matrices qui diffèrent par un invariant ne sont \emph{pas} semblables. (La
 \end{RETENIR}
 \end{frame}
 
+% ---------------------------------------------------------------- EXERCICE R
+\begin{frame}{\badgeexo{R}Changer de base pour calculer $A^k$}
+\begin{ENONCE}[8 min]
+$f$ a pour matrice $A=\begin{pmatrix}3&-2\\1&0\end{pmatrix}$ dans la base canonique de $\R^2$ ; \ $u_1=(1,1)$, \ $u_2=(2,1)$.
+\begin{enumerate}
+\item Montrer que $\mathcal B'=(u_1,u_2)$ est une base ; écrire la matrice de passage $P$ et calculer $P^{-1}$.
+\item Calculer $f(u_1)$ et $f(u_2)$, puis la matrice $D$ de $f$ dans $\mathcal B'$.
+\item En déduire $A^k$.
+\end{enumerate}
+\objectif{base, matrice de passage, inverse et changement de base : la réduction commence ici.}
+\end{ENONCE}
+\pause
+\begin{INDICE}
+$A=PDP^{-1}$, donc $A^k=PD^kP^{-1}$.
+\end{INDICE}
+\end{frame}
+
+\begin{frame}{\badgecor{R}Changer de base pour calculer $A^k$}
+\begin{columns}[T]
+\column{0.4\textwidth}
+\begin{RAIS}
+Dans une base bien choisie, la matrice devient diagonale ; ses puissances se calculent coefficient par coefficient, puis on revient
+à la base canonique.
+\end{RAIS}
+\begin{OUTIL}
+Changement de base (prop.~R.21), inverse d'une matrice $2\times2$ (R.3).
+\end{OUTIL}
+\column{0.57\textwidth}
+\etape{1.} $u_1$, $u_2$ non colinéaires : base de $\R^2$. \ $P=\begin{pmatrix}1&2\\1&1\end{pmatrix}$, $\det=-1$,
+$P^{-1}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}$.\\[3pt]
+\pause
+\etape{2.} $f(u_1)=(1,1)=u_1$, \ $f(u_2)=(4,2)=2u_2$ : \ $D=\begin{pmatrix}1&0\\0&2\end{pmatrix}=P^{-1}AP$.\\[3pt]
+\pause
+\etape{3.} $A^k=PD^kP^{-1}=\begin{pmatrix}2^{k+1}-1&2-2^{k+1}\\2^k-1&2-2^k\end{pmatrix}$.\\[2pt]
+{\footnotesize\color{Gris}Contrôle : $k=1$ redonne $A$, $k=0$ redonne $I_2$.}
+\end{columns}
+\begin{ASTU}
+Trouver les vecteurs $u$ tels que $f(u)$ soit colinéaire à $u$ : c'est exactement la question du chapitre~3.
+\end{ASTU}
+\end{frame}
+
 % =====================================================================
 \partie{1.2}{Produit, somme directe, projecteurs}{Comment découper un espace en morceaux ?}{\rmI}
 
 \begin{frame}{Produit, somme de plusieurs sous-espaces, somme directe}
-\noindent{\small\textbf{Produit} \livre{prop.~1.4} : $\dim(E_1\times\dots\times E_p)=\dim E_1+\dots+\dim E_p$ (bases mises bout à bout).}\par\vspace{-1pt}
+\noindent{\small\textbf{Produit} \livre{prop.~1.1} : $\dim(E_1\times\dots\times E_p)=\dim E_1+\dots+\dim E_p$ (bases mises bout à bout).}\par\vspace{-1pt}
 \begin{columns}[T]
 \column{0.58\textwidth}
 \begin{DEF}
 $F_1+\dots+F_p=\{x_1+\dots+x_p,\ x_i\in F_i\}$.\\
 Somme \emph{directe} $F_1\oplus\dots\oplus F_p$ : décomposition \emph{unique}.
 \end{DEF}
-\begin{PROP}[Caractérisation \livre{prop.~1.7}]
+\begin{PROP}[Caractérisation \livre{prop.~1.4}]
 Directe $\iff$ \big($x_1+\dots+x_p=0$, $x_i\in F_i\Rightarrow$ tous nuls\big).\\
 Pour deux : $F\cap G=\{0\}$.
 \end{PROP}
 \pause
-\begin{PROP}[Base adaptée \livre{th.~1.8}]
+\begin{PROP}[Base adaptée \livre{th.~1.5}]
 Somme directe : bases concaténées $=$ base ;\ $\dim\bigoplus F_i=\sum\dim F_i$.
 \end{PROP}
 \column{0.38\textwidth}
@@ -336,7 +470,7 @@ Si $v=w+m(1,1,1)$, $w\in F$ : $(x-m)-(y-m)+2(z-m)=0$, donc
 $E=F\oplus G$, $x=x_F+x_G$ : projection $p(x)=x_F$ sur $F$ parallèlement à $G$ ; symétrie $s(x)=x_F-x_G$ ; \ $s=2p-\Id$.
 \end{DEF}
 \column{0.46\textwidth}
-\begin{PROP}[Caractérisation \livre{prop.~1.9}]
+\begin{PROP}[Caractérisation \livre{prop.~1.6}]
 $p\circ p=p$ $\iff$ projecteur, sur $\Im p$ parallèlement à $\Ker p$.\\
 $s\circ s=\Id$ $\iff$ symétrie, par rapport à $\Ker(s-\Id)$ parallèlement à $\Ker(s+\Id)$.
 \end{PROP}
@@ -361,7 +495,7 @@ $G=\vect(w)$ : $t$ tel que $x-tw\in F$ ; $p(x)=x-tw$, $s(x)=x-2tw$.
 \begin{DEF}
 Hyperplan de $E$ ($\dim E=n$) : sous-espace qui admet une droite comme supplémentaire ; dimension $n-1$.
 \end{DEF}
-\begin{PROP}[\livre{prop.~1.11}]
+\begin{PROP}[\livre{prop.~1.8}]
 \begin{itemize}
 \item Hyperplans $=$ noyaux des formes linéaires non nulles : une équation $a_1x_1+\dots+a_nx_n=0$.
 \item $H=\Ker\varphi$, $u\notin H$ $\Rightarrow$ $E=H\oplus\vect(u)$ \quad (exercice~1).
@@ -403,7 +537,7 @@ Système homogène de rang $r$ à $n$ inconnues : solutions de dimension $n-r$. 
 \begin{DEF}
 $\tr(A)=\sum_{i=1}^na_{i,i}$ : somme des coefficients diagonaux.
 \end{DEF}
-\begin{PROP}[\livre{prop.~1.14}]
+\begin{PROP}[\livre{prop.~1.11}]
 \begin{itemize}
 \item $\tr$ est une forme linéaire : $\Ker\tr$ est un hyperplan ;
 \item $\tr(AB)=\tr(BA)$ ;
@@ -472,7 +606,7 @@ Rang, trace (et déterminant) invariants par similitude.
 \begin{DEF}
 $F$ est \emph{stable} par $f$ si $f(F)\subset F$. L'endomorphisme induit $f_F:F\to F$, $x\mapsto f(x)$.
 \end{DEF}
-\begin{PROP}[\livre{prop.~1.17}]
+\begin{PROP}[\livre{prop.~1.14}]
 \begin{itemize}
 \item $F=\vect(e_1,\dots,e_p)$ stable $\iff f(e_j)\in F$ pour tout $j$ : on vérifie sur une base.
 \item $\Ker f$ et $\Im f$ sont stables par $f$ ; si $f\circ g=g\circ f$, $\Ker g$ et $\Im g$ sont stables par $f$.
@@ -485,7 +619,7 @@ $F$ est \emph{stable} par $f$ si $f(F)\subset F$. L'endomorphisme induit $f_F:F\
 \begin{frame}{Traduction matricielle : des blocs}
 \begin{columns}[c]
 \column{0.58\textwidth}
-\begin{PROP}[Théorème \livre{th.~1.18}]
+\begin{PROP}[Théorème \livre{th.~1.15}]
 Base adaptée à $F$ ($p$ premiers vecteurs dans $F$) :
 \[F\text{ stable}\iff\Mat(f)=\begin{pmatrix}A&B\\0&C\end{pmatrix}.\]
 $E=F\oplus G$, les deux stables $\iff\begin{pmatrix}A&0\\0&C\end{pmatrix}$.\\
@@ -512,7 +646,7 @@ $p^2=p$ : $\mathrm{diag}(I_r,0)$ dans $\Im p\oplus\Ker p$.\\
 $s^2=\Id$ : $\mathrm{diag}(I_r,-I_{n-r})$ dans $\Ker(s-\Id)\oplus\Ker(s+\Id)$.
 \end{FORM}
 \column{0.38\textwidth}
-\begin{PROP}[Droite stable \livre{prop.~1.19}]
+\begin{PROP}[Droite stable \livre{prop.~1.16}]
 $\vect(u)$ stable $\iff f(u)=\lambda u$.
 \end{PROP}
 \end{columns}
@@ -647,7 +781,7 @@ $F$ stable par $f$ ? & images d'une base de $F$ ; forme triangulaire par blocs\\
 \item les endomorphismes de carré nul ;
 \item somme de deux projecteurs.
 \end{itemize}
-\item Puis le \textbf{TD complet} (19 exercices, quatre niveaux).
+\item Puis le \textbf{TD complet} (22 exercices, quatre niveaux).
 \end{enumerate}
 \column{0.42\textwidth}
 \begin{ASTU}[Pour chercher seul]

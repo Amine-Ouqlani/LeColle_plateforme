@@ -12,9 +12,9 @@ LC.documents = {
     "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 6",
     "type": "complet",
     "fichier": "docs/pt/livres/livret-complet-PT.pdf",
-    "pages": 115,
+    "pages": 117,
     "version": "v1",
-    "maj": "2026-11-07",
+    "maj": "2026-11-13",
     "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
   },
   "presentations-pt": {
@@ -22,9 +22,9 @@ LC.documents = {
     "sousTitre": "Toutes les présentations des chapitres 1 à 5",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT.pdf",
-    "pages": 446,
+    "pages": 429,
     "version": "v1",
-    "maj": "2026-11-07",
+    "maj": "2026-11-13",
     "description": "Les présentations de tous les chapitres réunies en un seul PDF, avec un sommaire et des signets. En séance, on utilise la présentation du chapitre."
   },
   "presentations-pt-statique": {
@@ -32,9 +32,9 @@ LC.documents = {
     "sousTitre": "Une page par diapositive, pour réviser ou imprimer",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT-sans-animations.pdf",
-    "pages": 218,
+    "pages": 210,
     "version": "v1",
-    "maj": "2026-11-07",
+    "maj": "2026-11-13",
     "description": "La même présentation complète, chaque diapositive dans son état final."
   },
   /* ---- Chapitre 1 — Algèbre linéaire ---- */
@@ -44,21 +44,21 @@ LC.documents = {
     "type": "cours",
     "fichier": "docs/pt/livres/livre-algebre-lineaire.pdf",
     "source": "docs/pt/sources/livre-algebre-lineaire.tex",
-    "pages": 15,
+    "pages": 22,
     "version": "v1",
-    "maj": "2026-11-11",
-    "description": "Rappels de première année (rang, changement de base), produit et somme de sous-espaces, somme directe et base adaptée, projecteurs et symétries, hyperplans et systèmes linéaires, trace, sous-espaces stables et matrices par blocs. Exercices corrigés à la fin."
+    "maj": "2026-11-13",
+    "description": "Rappels de tout le programme de première année (calcul matriciel, systèmes, familles et dimension, applications linéaires, rang, matrices et changement de base), produit et somme de sous-espaces, somme directe et base adaptée, projecteurs et symétries, hyperplans et systèmes linéaires, trace, sous-espaces stables et matrices par blocs. Exercices corrigés à la fin."
   },
   "presentation-al": {
     "titre": "Présentation — Algèbre linéaire",
-    "sousTitre": "Chapitre 1 · Support de séance · 4 exercices intégrés",
+    "sousTitre": "Chapitre 1 · Support de séance · 5 exercices intégrés",
     "type": "presentation",
     "fichier": "docs/pt/presentations/presentation-algebre-lineaire.pdf",
     "source": "docs/pt/sources/presentation-algebre-lineaire.tex",
-    "pages": 50,
+    "pages": 63,
     "version": "v1",
-    "maj": "2026-11-11",
-    "description": "Les diapositives de la séance, avec 4 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+    "maj": "2026-11-13",
+    "description": "Les diapositives de la séance, avec 5 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
   },
   "presentation-al-statique": {
     "titre": "Présentation — Algèbre linéaire (sans animations)",
@@ -66,9 +66,9 @@ LC.documents = {
     "type": "presentation",
     "fichier": "docs/pt/presentations/presentation-algebre-lineaire-sans-animations.pdf",
     "source": "docs/pt/sources/presentation-algebre-lineaire.tex",
-    "pages": 30,
+    "pages": 36,
     "version": "v1",
-    "maj": "2026-11-11",
+    "maj": "2026-11-13",
     "description": "La même présentation, chaque diapositive dans son état final."
   },
   "fiche-al": {
@@ -79,8 +79,8 @@ LC.documents = {
     "source": "docs/pt/sources/fiche-algebre-lineaire.tex",
     "pages": 2,
     "version": "v1",
-    "maj": "2026-11-11",
-    "description": "Rappels, produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, choix de la méthode, pièges et résultats du TD."
+    "maj": "2026-11-13",
+    "description": "Rappels de première année (calcul matriciel, dimension, rang, matrices, changement de base), produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, choix de la méthode, pièges et résultats du TD."
   },
   "bilan-al": {
     "titre": "Exercice bilan — Algèbre linéaire",
@@ -212,21 +212,21 @@ LC.documents = {
     "type": "cours",
     "fichier": "docs/pt/livres/livre-equations-differentielles.pdf",
     "source": "docs/pt/sources/livre-equations-differentielles.tex",
-    "pages": 16,
+    "pages": 11,
     "version": "v1",
-    "maj": "2026-11-07",
-    "description": "Structure des solutions et théorème de Cauchy linéaire, premier ordre et recollement, second ordre à coefficients constants, second ordre à coefficients continus (solution polynomiale, solution connue, changement de variable, série entière). Exercices corrigés à la fin."
+    "maj": "2026-11-13",
+    "description": "Programme de première année (PTSI) : structure des solutions et théorème de Cauchy, premier ordre (variation de la constante, équations intégrales), second ordre à coefficients constants (seconds membres usuels, résonance, superposition). Exercices corrigés à la fin. Les compléments de PT seront ajoutés quand ils auront été vus en classe."
   },
   "presentation-ed": {
     "titre": "Présentation — Équations différentielles",
-    "sousTitre": "Chapitre 4 · Support de séance (2 h) · 7 exercices intégrés",
+    "sousTitre": "Chapitre 4 · Support de séance (1 h 30) · 4 exercices intégrés",
     "type": "presentation",
     "fichier": "docs/pt/presentations/presentation-equations-differentielles.pdf",
     "source": "docs/pt/sources/presentation-equations-differentielles.tex",
-    "pages": 86,
+    "pages": 56,
     "version": "v1",
-    "maj": "2026-11-07",
-    "description": "Les diapositives de la séance, avec 7 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+    "maj": "2026-11-13",
+    "description": "Les diapositives de la séance, avec 4 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
   },
   "presentation-ed-statique": {
     "titre": "Présentation — Équations différentielles (sans animations)",
@@ -234,9 +234,9 @@ LC.documents = {
     "type": "presentation",
     "fichier": "docs/pt/presentations/presentation-equations-differentielles-sans-animations.pdf",
     "source": "docs/pt/sources/presentation-equations-differentielles.tex",
-    "pages": 44,
+    "pages": 30,
     "version": "v1",
-    "maj": "2026-11-07",
+    "maj": "2026-11-13",
     "description": "La même présentation, chaque diapositive dans son état final."
   },
   "fiche-ed": {
@@ -245,10 +245,10 @@ LC.documents = {
     "type": "fiche",
     "fichier": "docs/pt/fiches/fiche-equations-differentielles.pdf",
     "source": "docs/pt/sources/fiche-equations-differentielles.tex",
-    "pages": 3,
+    "pages": 2,
     "version": "v1",
-    "maj": "2026-11-07",
-    "description": "Structure et théorème de Cauchy, premier ordre et recollement, coefficients constants, coefficients continus, choix de la méthode, pièges et résultats du TD."
+    "maj": "2026-11-13",
+    "description": "Programme de première année : structure et théorème de Cauchy, premier ordre, second ordre à coefficients constants, choix de la méthode, pièges et résultats du TD."
   },
   "bilan-ed": {
     "titre": "Exercice bilan — Équations différentielles",
@@ -258,7 +258,7 @@ LC.documents = {
     "source": "docs/pt/sources/exercices-bilan.tex",
     "pages": 3,
     "version": "v1",
-    "maj": "2026-11-11",
+    "maj": "2026-11-13",
     "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
   },
   /* ---- Chapitre 5 — Courbes paramétrées planes ---- */
@@ -376,79 +376,79 @@ LC.documents = {
   },
   /* ---- Sélections de 5 problèmes (générées par td/integrer_selection.py) ---- */
   "selection-al": {
-    "titre": "Sélection — Algèbre linéaire",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_al.pdf",
-    "source": "docs/pt/sources/selection/Selection_al.tex",
-    "pages": 10,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
-  },
-  "selection-determinants": {
-    "titre": "Sélection — Déterminants",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_determinants.pdf",
-    "source": "docs/pt/sources/selection/Selection_determinants.tex",
-    "pages": 13,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
-  },
-  "selection-red": {
-    "titre": "Sélection — Réduction",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_red.pdf",
-    "source": "docs/pt/sources/selection/Selection_red.tex",
-    "pages": 11,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+    titre: "Sélection — Algèbre linéaire",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_al.pdf",
+    source: "docs/pt/sources/selection/Selection_al.tex",
+    pages: 10,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
   },
   "selection-ed": {
-    "titre": "Sélection — Équations différentielles",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_ed.pdf",
-    "source": "docs/pt/sources/selection/Selection_ed.tex",
-    "pages": 10,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+    titre: "Sélection — Équations différentielles",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_ed.pdf",
+    source: "docs/pt/sources/selection/Selection_ed.tex",
+    pages: 10,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
+  "selection-red": {
+    titre: "Sélection — Réduction",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_red.pdf",
+    source: "docs/pt/sources/selection/Selection_red.tex",
+    pages: 11,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
+  "selection-determinants": {
+    titre: "Sélection — Déterminants",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_determinants.pdf",
+    source: "docs/pt/sources/selection/Selection_determinants.tex",
+    pages: 13,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
   },
   "selection-courbes": {
-    "titre": "Sélection — Courbes paramétrées",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_courbes.pdf",
-    "source": "docs/pt/sources/selection/Selection_courbes.tex",
-    "pages": 15,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+    titre: "Sélection — Courbes paramétrées",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_courbes.pdf",
+    source: "docs/pt/sources/selection/Selection_courbes.tex",
+    pages: 15,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
   },
   "selection-metrique": {
-    "titre": "Sélection — Propriétés métriques des courbes",
-    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
-    "type": "selection",
-    "fichier": "docs/pt/selection/Selection_metrique.pdf",
-    "source": "docs/pt/sources/selection/Selection_metrique.tex",
-    "pages": 11,
-    "version": "v1",
-    "maj": "2026-11-06",
-    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+    titre: "Sélection — Propriétés métriques des courbes",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_metrique.pdf",
+    source: "docs/pt/sources/selection/Selection_metrique.tex",
+    pages: 11,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
   },
   /* ---- TD (générés par td/build_td.py) ---- */
   "td-al": {
     "titre": "TD — Algèbre linéaire",
-    "sousTitre": "Chapitre 1 · 19 exercices · énoncés",
+    "sousTitre": "Chapitre 1 · 22 exercices · énoncés",
     "type": "td",
     "fichier": "docs/pt/td/TD_al.pdf",
     "source": "docs/pt/sources/td/TD_al.tex",
-    "pages": 8,
+    "pages": 9,
     "version": "v1",
     "maj": "2026-11-07",
     "description": "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
@@ -459,18 +459,18 @@ LC.documents = {
     "type": "td",
     "fichier": "docs/pt/td/TD_al_corrections.pdf",
     "source": "docs/pt/sources/td/TD_al_corrections.tex",
-    "pages": 7,
+    "pages": 8,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Les corrections détaillées des 19 exercices du TD, dans le même ordre et avec les mêmes numéros."
+    "description": "Les corrections détaillées des 22 exercices du TD, dans le même ordre et avec les mêmes numéros."
   },
   "td-ed": {
     "titre": "TD — Équations différentielles",
-    "sousTitre": "Chapitre 4 · 28 exercices · énoncés",
+    "sousTitre": "Chapitre 4 · 17 exercices · énoncés",
     "type": "td",
     "fichier": "docs/pt/td/TD_ed.pdf",
     "source": "docs/pt/sources/td/TD_ed.tex",
-    "pages": 9,
+    "pages": 7,
     "version": "v1",
     "maj": "2026-11-07",
     "description": "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
@@ -481,10 +481,10 @@ LC.documents = {
     "type": "td",
     "fichier": "docs/pt/td/TD_ed_corrections.pdf",
     "source": "docs/pt/sources/td/TD_ed_corrections.tex",
-    "pages": 9,
+    "pages": 5,
     "version": "v1",
     "maj": "2026-11-07",
-    "description": "Les corrections détaillées des 28 exercices du TD, dans le même ordre et avec les mêmes numéros."
+    "description": "Les corrections détaillées des 17 exercices du TD, dans le même ordre et avec les mêmes numéros."
   },
   "td-red": {
     "titre": "TD — Réduction",

@@ -272,6 +272,14 @@
 % onglets de chapitre sur le bord droit
 \usepackage{eso-pic}
 \newif\ifonglets \ongletsfalse
+% ---------------------------------------------------------------------------------------------
+% NIVEAU DU CHAPITRE. \PTfalse : programme de première année (PTSI) seulement, version actuelle du site.
+% \PTtrue : version complète de PT (second ordre à coefficients continus, recollement, variation de la
+% constante au second ordre, séries entières). Rien n'est supprimé : le contenu de PT est dans les blocs \ifPT ... \fi.
+% Pour le réintroduire : remplacer \PTfalse par \PTtrue (même ligne dans la présentation, la fiche,
+% l'exercice bilan) et passer PT = True dans outils/td/meta.py et outils/td/selection.py.
+\newif\ifPT \ifdefined\VERSIONPT \PTtrue \else \PTfalse \fi
+% ---------------------------------------------------------------------------------------------
 \newcommand{\dessineronglet}{%
   \edef\ongcol{\ongletcouleur}%
   \edef\ongnum{\grandnum}%
@@ -321,7 +329,7 @@
   \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
      at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Équations différentielles};
   \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
-     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Équations linéaires du premier et du second ordre\\[0.15cm]Coefficients constants et coefficients continus};
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Équations linéaires du premier et du second ordre\\[0.15cm]\ifPT Coefficients constants et coefficients continus\else Coefficients constants · programme de première année (PTSI)\fi};
   \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
      at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
      {\textcolor{Bleu}{\bfseries Cours, méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{Le premier chapitre de l'année : la structure des solutions, les méthodes de résolution, et le théorème de Cauchy linéaire.}};
@@ -337,6 +345,7 @@ notations, la présentation projetée en séance, et sert de référence pour tr
 énoncé avec ses hypothèses, chaque méthode est illustrée par un exemple rédigé, et chaque partie se termine par quelques
 exercices, corrigés à la fin du livret.
 
+\ifPT
 Le programme de PT prolonge la première année : les équations du premier ordre et du second ordre à coefficients constants
 sont supposées connues, mais elles sont reprises ici en entier, car elles servent dans toutes les autres méthodes.
 La nouveauté de deuxième année est l'équation du second ordre à \emph{coefficients continus}
@@ -347,6 +356,18 @@ La recherche de solutions développables en série entière (§1.4) suppose conn
 si ce n'est pas encore le cas, on peut la laisser de côté sans gêner la suite. Les notions hors programme sont signalées \HP.
 Les compléments (TD complet et ses corrections, sélection de cinq problèmes, fiche de référence) suivent la même numérotation.
 
+\else
+Cette version du livret suit le \emph{programme de première année} (PTSI) : équations du premier ordre $y'+a(t)y=b(t)$ à
+coefficients continus, et équations du second ordre à \emph{coefficients constants} $y''+ay'+by=c(t)$. C'est la base sur
+laquelle s'appuie le cours de deuxième année ; elle est reprise ici en entier, avec la structure de l'ensemble des solutions
+(espaces vectoriels, dimension), le théorème de Cauchy et les méthodes de recherche d'une solution particulière.
+
+Les compléments de PT (second ordre à coefficients continus, recollement, variation de la constante au second ordre,
+solutions développables en série entière) seront ajoutés quand ils auront été vus en classe. Les notions hors programme sont
+signalées \HP. Les compléments (TD complet et ses corrections, sélection de cinq problèmes, fiche de référence) suivent la
+même numérotation.
+
+\fi
 \vfill
 {\footnotesize\sffamily\color{Gris}\textcopyright~2026 Ahmed Amine Ouqlani. Tous droits réservés.\par}
 \clearpage
@@ -368,6 +389,7 @@ ses solutions a une structure très simple : une solution particulière, plus to
 membre, qui forment un espace vectoriel de dimension $1$ (premier ordre) ou $2$ (second ordre). Tout le chapitre consiste à
 exploiter cette structure : trouver l'espace des solutions homogènes, puis une seule solution particulière.
 
+\ifPT
 \ouverture{%
 \begin{itemize}[leftmargin=1.1em,itemsep=1pt]
 \item Connaître la structure de l'ensemble des solutions et le théorème de Cauchy linéaire.
@@ -377,6 +399,17 @@ exploiter cette structure : trouver l'espace des solutions homogènes, puis une 
 \end{itemize}}{%
 Dérivation, primitives usuelles, intégration par parties ; nombres complexes, exponentielle complexe ; espaces vectoriels
 (sous-espace, dimension) ; pour le §1.4, séries entières.}{Deux séances}
+\else
+\ouverture{%
+\begin{itemize}[leftmargin=1.1em,itemsep=1pt]
+\item Connaître la structure de l'ensemble des solutions et le théorème de Cauchy.
+\item Résoudre une équation du premier ordre : équation homogène, variation de la constante.
+\item Résoudre une équation du second ordre à coefficients constants pour les seconds membres usuels.
+\item Utiliser le principe de superposition et résoudre un problème de Cauchy.
+\end{itemize}}{%
+Dérivation, primitives usuelles, intégration par parties ; nombres complexes, exponentielle complexe ; espaces vectoriels
+(sous-espace, dimension).}{Une séance}
+\fi
 
 Dans tout le chapitre, $I$ est un intervalle de $\R$ non réduit à un point et $\K=\R$ ou $\C$.
 
@@ -384,19 +417,28 @@ Dans tout le chapitre, $I$ est un intervalle de $\R$ non réduit à un point et 
 \subsection{Vocabulaire et structure des solutions}\label{ss:structure}
 
 \begin{definition}
+\ifPT
 Une \emph{équation différentielle linéaire scalaire} d'ordre $1$, resp.\ $2$, est une équation de la forme
 \[(E)\quad y'+a(t)y=b(t),\qquad\text{resp.}\qquad (E)\quad y''+a(t)y'+b(t)y=c(t),\]
-où $a$, $b$ (et $c$) sont des fonctions \emph{continues} de $I$ dans $\K$. Une \emph{solution} est une fonction $y$ dérivable
+où $a$, $b$ (et $c$) sont des fonctions \emph{continues} de $I$ dans $\K$.
+\else
+Une \emph{équation différentielle linéaire} du premier ordre, resp.\ du second ordre à coefficients constants, est une
+équation de la forme
+\[(E)\quad y'+a(t)y=b(t),\qquad\text{resp.}\qquad (E)\quad y''+ay'+by=c(t),\]
+où $a$, $b$ sont des fonctions \emph{continues} de $I$ dans $\K$ au premier ordre, et où, au second ordre, $a,b\in\K$ sont
+des constantes et $c$ est une fonction continue de $I$ dans $\K$.
+\fi Une \emph{solution} est une fonction $y$ dérivable
 (resp.\ deux fois dérivable) sur $I$ qui vérifie l'égalité en tout point de $I$. Le \emph{second membre} est $b$ (resp.\ $c$) ;
 l'\emph{équation homogène associée} $(H)$ est obtenue en le remplaçant par $0$.
 \end{definition}
 
-On rencontre souvent l'équation sous la forme $\alpha(t)y'+\beta(t)y=\gamma(t)$, ou $\alpha(t)y''+\dots$ : on ne peut la mettre
+On rencontre souvent l'équation sous la forme $\alpha(t)y'+\beta(t)y=\gamma(t)$\ifPT, ou $\alpha(t)y''+\dots$\fi{} : on ne peut la mettre
 sous la forme ci-dessus (forme \emph{normalisée}) qu'en divisant par $\alpha(t)$, donc \emph{sur un intervalle où $\alpha$ ne
-s'annule pas}. Les points où $\alpha$ s'annule sont traités à part (§\ref{ss:recollement}).
+s'annule pas}. \ifPT Les points où $\alpha$ s'annule sont traités à part (§\ref{ss:recollement}).\else On résout alors
+l'équation sur chacun des intervalles où $\alpha$ ne s'annule pas.\fi
 
 \begin{proposition}[structure]\label{p:structure}
-Soit $L(y)=y''+a(t)y'+b(t)y$ (ou $L(y)=y'+a(t)y$ au premier ordre).
+Soit \ifPT$L(y)=y''+a(t)y'+b(t)y$\else$L(y)=y''+ay'+by$\fi{} (ou $L(y)=y'+a(t)y$ au premier ordre).
 \begin{enumerate}
 \item $L$ est linéaire : $L(\lambda y+\mu z)=\lambda L(y)+\mu L(z)$. L'ensemble $S_H$ des solutions de $(H)$ est donc un
 \emph{espace vectoriel} (le noyau de $L$).
@@ -421,7 +463,7 @@ en morceaux simples.
 Soit $t_0\in I$.
 \begin{itemize}
 \item Ordre $1$ : pour tout $y_0\in\K$, il existe une unique solution de $y'+a(t)y=b(t)$ sur $I$ telle que $y(t_0)=y_0$.
-\item Ordre $2$ : pour tous $y_0,y_1\in\K$, il existe une unique solution de $y''+a(t)y'+b(t)y=c(t)$ sur $I$ telle que
+\item Ordre $2$ : pour tous $y_0,y_1\in\K$, il existe une unique solution de \ifPT$y''+a(t)y'+b(t)y=c(t)$\else$y''+ay'+by=c(t)$\fi{} sur $I$ telle que
 $y(t_0)=y_0$ et $y'(t_0)=y_1$.
 \end{itemize}
 \end{theoreme}
@@ -516,6 +558,7 @@ Si l'inconnue apparaît sous une intégrale $\int_{x_0}^x$, dériver pour obteni
 condition initiale en $x=x_0$. Conclure par équivalence (ou vérifier que la solution trouvée convient).
 \end{methode}
 
+\ifPT
 \subsubsection*{Recollement}\label{ss:recollement}
 
 \begin{methode}{Recoller des solutions}\label{m:recollement}
@@ -539,6 +582,8 @@ $\frac{y(t)}t=t+K_\pm$ tend vers $K_\pm$. La dérivabilité impose $K_+=K_-$ : \
 \end{itemize}
 \end{exemple}
 
+\fi
+
 \begin{exo}{ed-o1}{1}{solutions particulières}
 Résoudre sur $\R$ : (a) $y'+y=\sin t$ ; (b) $y'-2y=e^t\sin(2t)$ ; (c) $y'+y=te^{-t}$.
 \end{exo}
@@ -548,6 +593,7 @@ Résoudre sur $\left]-\frac\pi2,\frac\pi2\right[$ le problème $\cos(t)\,y'+\sin
 \begin{exo}{ed-integ}{2}{équation intégrale}
 Déterminer les fonctions $f$ continues sur $\R$ telles que, pour tout réel $x$, $f(x)-\displaystyle\int_0^x tf(t)\,dt=1+x$.
 \end{exo}
+\ifPT
 \begin{exo}{ed-recol}{3}{recollement}
 On considère $(E)$ : $|t|\,y'-y=t^2$.
 \begin{enumerate}
@@ -555,6 +601,7 @@ On considère $(E)$ : $|t|\,y'-y=t^2$.
 \item Déterminer les solutions de $(E)$ sur $\R$.
 \end{enumerate}
 \end{exo}
+\fi
 
 % ---------------------------------------------------------------------
 \subsection{Second ordre à coefficients constants}\label{ss:constants}
@@ -620,6 +667,7 @@ régime \emph{apériodique} si $\lambda>\omega$ (deux exponentielles décroissan
 \emph{pseudo-périodique} si $\lambda<\omega$ (oscillations de pulsation $\sqrt{\omega^2-\lambda^2}$ amorties par $e^{-\lambda t}$).
 \end{enpratique}
 
+\ifPT
 \begin{methode}{Variation de la constante au second ordre}\label{m:var2}
 Si le second membre n'a pas la forme $P(t)e^{mt}$, prendre une solution $\varphi$ de $(H)$ qui ne s'annule pas sur $I$
 (par exemple $e^{rt}$) et chercher $y=\lambda(t)\varphi(t)$. En reportant, le terme en $\lambda$ disparaît et on obtient une
@@ -631,6 +679,12 @@ $y''-2y'+y=\frac{2te^t}{1+t^2}$. Racine double $1$, $\varphi(t)=e^t$. Avec $y=\l
 $\lambda''=\frac{2t}{1+t^2}$, $\lambda'=\ln(1+t^2)+C$, et par intégration par parties
 $\lambda=t\ln(1+t^2)-2t+2\arctan t+Ct+D$. Solutions : $y=\big(t\ln(1+t^2)-2t+2\arctan t\big)e^t+(Ct+D)e^t$.
 \end{exemple}
+\else
+\begin{attention}
+Pour un second membre qui n'est pas de l'une de ces formes, il n'y a pas de méthode générale en première année : l'énoncé
+guide le calcul (voir par exemple le problème du TD sur les solutions périodiques d'un oscillateur forcé).
+\end{attention}
+\fi
 
 \begin{exo}{ed-c1}{1}{équations homogènes}
 Résoudre sur $\R$ : (a) $y''-3y'+2y=0$ ; (b) $y''+2y'+y=0$ ; (c) $y''+y'+y=0$ (solutions réelles).
@@ -642,6 +696,7 @@ Résoudre sur $\R$ : (a) $y''+4y'+4y=\sin t$ ; (b) $y''-2y'+y=e^{mt}$, selon le 
 Déterminer la solution de $y''+y=\sin t$ telle que $y(0)=0$ et $y'(0)=0$. Est-elle bornée sur $\R$ ?
 \end{exo}
 
+\ifPT
 % ---------------------------------------------------------------------
 \subsection{Second ordre à coefficients continus}\label{ss:continus}
 
@@ -729,6 +784,7 @@ Comme $\left|\frac{a_{n+1}}{a_n}\right|=\frac{|\alpha-n|}{n+1}\to1$, le rayon va
 problème de Cauchy (premier ordre, $1+x\neq0$) : elles sont égales. Ainsi $(1+x)^\alpha=\sum_{n\geq0}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n$ pour $|x|<1$.
 \end{exemple}
 
+\ifPT
 \begin{exo}{ed-poly}{2}{solution polynomiale}
 On considère $(E)$ : $(1+t^2)y''+ty'-y=0$ sur $\R$.
 \begin{enumerate}
@@ -737,6 +793,8 @@ On considère $(E)$ : $(1+t^2)y''+ty'-y=0$ sur $\R$.
 \item Déterminer la solution telle que $y(0)=1$ et $y'(0)=1$.
 \end{enumerate}
 \end{exo}
+\fi
+\ifPT
 \begin{exo}{ed-abaisse}{3}{une solution connue}
 On considère $(E)$ : $(t+1)y''-(t+2)y'+y=0$ sur $]-1,+\infty[$.
 \begin{enumerate}
@@ -744,14 +802,19 @@ On considère $(E)$ : $(t+1)y''-(t+2)y'+y=0$ sur $]-1,+\infty[$.
 \item En déduire toutes les solutions de $(E)$.
 \end{enumerate}
 \end{exo}
+\fi
+\ifPT
 \begin{exo}{ed-se}{3}{série entière}
 Déterminer la solution développable en série entière du problème $y''-2ty'-2y=0$, $y(0)=1$, $y'(0)=0$, et l'exprimer à l'aide
 des fonctions usuelles.
 \end{exo}
+\fi
 
+\fi
 % ---------------------------------------------------------------------
 \subsection{Quelle méthode ? Synthèse}\label{ss:synthese}
 
+\ifPT
 \begin{center}
 \renewcommand{\arraystretch}{1.35}
 \small
@@ -765,6 +828,20 @@ $\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$ & suivre l'indication : solution 
 inconnue sous une intégrale & dériver (méthode~\ref{m:integrale})\\\hline
 \end{tabular}
 \end{center}
+\else
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\small
+\begin{tabular}{p{0.38\linewidth}p{0.55\linewidth}}
+\hline
+\textbf{Équation} & \textbf{Méthode}\\\hline
+$y'+a(t)y=b(t)$ & homogène $Ke^{-A}$ ; particulière évidente, de la forme du second membre, ou variation de la constante (méthode~\ref{m:part1})\\
+$y''+ay'+by=c(t)$, $a,b$ constants & équation caractéristique ; second membre $P(t)e^{mt}$ (méthode~\ref{m:part2}) ; superposition si le second membre est une somme\\
+$\alpha(t)y'+\beta(t)y=\gamma(t)$ & normaliser sur chaque intervalle où $\alpha$ ne s'annule pas\\
+inconnue sous une intégrale & dériver (méthode~\ref{m:integrale})\\\hline
+\end{tabular}
+\end{center}
+\fi
 
 \begin{attention}\textbf{Pièges fréquents.}
 \begin{itemize}[leftmargin=1.1em]
@@ -772,18 +849,20 @@ inconnue sous une intégrale & dériver (méthode~\ref{m:integrale})\\\hline
 \item Oublier la résonance : si $m$ est racine, la forme $Ce^{mt}$ ne peut pas marcher.
 \item Prendre la partie réelle au lieu de la partie imaginaire (second membre en $\sin$).
 \item Fixer les constantes avec les conditions initiales \emph{avant} d'avoir ajouté la solution particulière.
-\item Diviser par un coefficient qui s'annule sans le signaler, ou affirmer l'unicité d'une solution recollée sans vérifier.
+\item Diviser par un coefficient qui s'annule sans le signaler\ifPT, ou affirmer l'unicité d'une solution recollée sans vérifier\fi.
 \end{itemize}
 \end{attention}
 
 \begin{essentiel}
 \begin{itemize}[leftmargin=1.1em,itemsep=2pt]
-\item $S_E=y_p+S_H$ ; $S_H$ est une droite (ordre 1) ou un plan (ordre 2) dès que le coefficient dominant ne s'annule pas.
+\item $S_E=y_p+S_H$ ; $S_H$ est une droite (ordre 1) ou un plan (ordre 2)\ifPT{} dès que le coefficient dominant ne s'annule pas\fi.
 \item Cauchy : une condition $y(t_0)$ à l'ordre 1, deux conditions $y(t_0),y'(t_0)$ à l'ordre 2, déterminent une unique solution.
 \item Ordre 1 : $y=Ke^{-A(t)}$, puis variation de la constante $\lambda'=b\,e^{A}$.
 \item Coefficients constants : $r^2+ar+b=0$ ; second membre $P(t)e^{mt}$, degré augmenté de la multiplicité de $m$.
+\ifPT
 \item Coefficients continus : deux solutions non proportionnelles de $(H)$ suffisent ; une solution connue $\varphi$ ramène au
 premier ordre par $y=\lambda\varphi$.
+\fi
 \end{itemize}
 \end{essentiel}
 
@@ -824,6 +903,7 @@ sous forme intégrale :
 \retenir{une primitive sans expression usuelle s'écrit $\int_{x_0}^x$ ; la borne $x_0$ est choisie pour que la condition initiale soit simple.}
 \end{corrige}
 
+\ifPT
 \begin{corrige}{ed-recol}
 \q{1.} Sur $\R_+^*$ : $ty'-y=t^2$, soit $y'-\frac yt=t$. Homogène : $Kt$ ; $y=t^2$ convient. Solutions : $y=t^2+K_+t$.
 Sur $\R_-^*$ : $-ty'-y=t^2$, soit $y'+\frac yt=-t$. Homogène : $\frac Kt$ ; on cherche $y=\alpha t^2$ : $2\alpha t+\alpha t=-t$,
@@ -835,6 +915,7 @@ impose $K_+=0$. Réciproquement, la fonction $y$ égale à $t^2$ sur $\R_+$ et �
 ($y'(0)=0$), et l'équation est vérifiée en $0$ ($0-0=0$). Il y a donc une unique solution sur $\R$.
 \retenir{continuité, puis dérivabilité, puis vérification de l'équation au point de raccord.}
 \end{corrige}
+\fi
 
 \begin{corrige}{ed-c1}
 (a) $r^2-3r+2=(r-1)(r-2)$ : $y=Ae^t+Be^{2t}$. (b) $(r+1)^2$ : $y=(A+Bt)e^{-t}$.
@@ -855,6 +936,7 @@ D'après l'exemple de résonance, $y=-\frac t2\cos t+A\cos t+B\sin t$. $y(0)=A=0
 $y'(0)=B-\frac12=0$. La solution est $y=\frac{\sin t-t\cos t}2$. Elle n'est pas bornée : $y(2k\pi)=-k\pi\to-\infty$.
 \end{corrige}
 
+\ifPT
 \begin{corrige}{ed-poly}
 \q{1.} Pour $y$ de degré $n$, le coefficient de $t^n$ est $\big(n(n-1)+n-1\big)a_n=(n^2-1)a_n$ : $n=1$ (le cas constant donne
 $y=0$). Avec $y=at+b$ : $at-at-b=0$, donc $b=0$. Solutions polynomiales : $y=at$.
@@ -866,7 +948,9 @@ $z=A\sh x+B\ch x$, d'où $y=At+B\sqrt{1+t^2}$.
 \q{3.} $y(0)=B=1$ et $y'(0)=A=1$ : $y=t+\sqrt{1+t^2}$.
 \retenir{le changement de variable proposé transforme $1+t^2$ en $\ch^2x$ : l'équation devient à coefficients constants.}
 \end{corrige}
+\fi
 
+\ifPT
 \begin{corrige}{ed-abaisse}
 \q{1.} $y=e^{rt}$ : $(t+1)r^2-(t+2)r+1=0$ pour tout $t$, soit $r^2-r=0$ et $r^2-2r+1=0$ : $r=1$. Donc $\varphi(t)=e^t$.
 
@@ -876,7 +960,9 @@ D'où $\mu=K(t+1)e^{-t}$, puis $\lambda=-K(t+2)e^{-t}+D$ (vérifier : $\big((t+2
 Solutions : $y=a(t+2)+be^t$, $(a,b)\in\R^2$.
 \gain{on peut vérifier directement que $t+2$ est solution : $0-(t+2)+(t+2)=0$.}
 \end{corrige}
+\fi
 
+\ifPT
 \begin{corrige}{ed-se}
 \choix{analyse-synthèse : relation de récurrence par identification, puis rayon de convergence.}
 Avec $y=\sum a_nt^n$ : $\sum(n+2)(n+1)a_{n+2}t^n-\sum2na_nt^n-\sum2a_nt^n=0$, d'où $(n+2)(n+1)a_{n+2}=2(n+1)a_n$, soit
@@ -884,5 +970,6 @@ $a_{n+2}=\frac2{n+2}a_n$. Avec $a_1=y'(0)=0$, les termes impairs sont nuls ; $a_
 Donc $y=\sum\frac{t^{2p}}{p!}=e^{t^2}$, de rayon infini. Vérification : $y'=2te^{t^2}$, $y''=(2+4t^2)e^{t^2}$ et
 $y''-2ty'-2y=0$.
 \end{corrige}
+\fi
 
 \end{document}

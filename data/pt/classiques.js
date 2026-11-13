@@ -20,10 +20,13 @@ LC.classiques = {
     ["red-rang1", "La matrice dont tous les coefficients valent 1"], ["rdn-12", "Matrices de rang 1"], ["red-nilp", "Matrices nilpotentes"],
     ["rdn-7", "Matrices circulantes"], ["rdn-5", "La transposition"], ["rdn-6", "Matrice de transition"],
     ["rdn-10", "$AB$ et $BA$"], ["red-racine", "Racines carrées d'une matrice"], ["red-trig", "Trigonaliser une matrice"]],
-  ed: [["edn-9", "Variation de la constante au second ordre"], ["edn-8", "Résonance"], ["edn-15", "Oscillateur forcé : solutions périodiques"],
-    ["ed-integ", "Équation intégrale"], ["edn-18", "Équation fonctionnelle"], ["ed-recol", "Recollement de solutions"],
-    ["ed-abaisse", "Une solution connue, puis toutes"], ["edn-10", "Équation d'Euler"], ["ed-se", "Solution développable en série entière"],
-    ["edn-14", "Trois méthodes pour une même équation"]],
+  /* Équations différentielles : programme de PTSI (version actuelle du chapitre). Classiques de PT mis en réserve, à
+     rétablir avec le chapitre complet : ["edn-9", "Variation de la constante au second ordre"], ["ed-recol", "Recollement de solutions"],
+     ["ed-abaisse", "Une solution connue, puis toutes"], ["edn-10", "Équation d'Euler"], ["ed-se", "Solution développable en série entière"],
+     ["edn-14", "Trois méthodes pour une même équation"] */
+  ed: [["edn-17", "Variation de la constante au premier ordre"], ["ed-integ", "Équation intégrale"], ["edn-18", "Équation fonctionnelle"],
+    ["edn-3", "Racine double, second membre polynôme-exponentielle"], ["edn-5", "Superposition"], ["edn-8", "Résonance"],
+    ["edn-4", "Oscillateur amorti : problème de Cauchy"], ["edn-7", "Développement limité d'une solution"], ["edn-15", "Oscillateur forcé : solutions périodiques"]],
   courbes: [["td-c4", "Cardioïde"], ["c-cycloide", "Cycloïde"], ["c-astro", "Astroïde"], ["td-c5", "Lemniscate de Bernoulli"],
     ["td-c8", "Cubique (folium) de Descartes"], ["td-c3", "Cissoïde de Dioclès"], ["c-stroph", "Strophoïde"], ["c-limacon", "Limaçon de Pascal"],
     ["ex-liss", "Courbe de Lissajous"], ["c-develop", "Développante du cercle"], ["td-c7", "Rebroussement de seconde espèce"], ["ds-pb", "Étude complète, type devoir surveillé"]],

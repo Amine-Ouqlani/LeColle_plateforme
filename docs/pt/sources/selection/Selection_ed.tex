@@ -379,9 +379,9 @@ adaptations rédigées par Le Collé, pas les énoncés officiels.}
 {\small\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\noindent\begin{tabular}{@{}r>{\raggedright\arraybackslash\sffamily\footnotesize}p{2.9cm}>{\raggedright\arraybackslash}p{6.1cm}ll@{\hspace{6pt}}ccc@{}}
 & & & & & {\footnotesize\sffamily énoncé} & {\footnotesize\sffamily indic.} & {\footnotesize\sffamily corrigé}\\\hline
 1 & \textcolor{Gris}{Mise en application} & Régime transitoire et régime permanent & \niveau{2} & 35\,min & \pageref{p:sel-ed-regimes} & \pageref{i:sel-ed-regimes} & \pageref{c:sel-ed-regimes}\\
-2 & \textcolor{Gris}{Méthodes classiques} & Solution polynomiale et changement de variable & \niveau{2} & 35\,min & \pageref{p:ed-poly} & \pageref{i:ed-poly} & \pageref{c:ed-poly}\\
-3 & \textcolor{Gris}{Approfondissement} & Changement de fonction et recollement & \niveau{4} & 45\,min & \pageref{p:edn-12} & \pageref{i:edn-12} & \pageref{c:edn-12}\\
-4 & \textcolor{Gris}{Problème de synthèse} & Trois méthodes pour une même équation & \niveau{5} & 50\,min & \pageref{p:edn-14} & \pageref{i:edn-14} & \pageref{c:edn-14}\\
+2 & \textcolor{Gris}{Méthodes classiques} & Résonance : quand les solutions sont-elles bornées ? & \niveau{3} & 25\,min & \pageref{p:edn-8} & \pageref{i:edn-8} & \pageref{c:edn-8}\\
+3 & \textcolor{Gris}{Approfondissement} & Une équation fonctionnelle & \niveau{3} & 20\,min & \pageref{p:edn-18} & \pageref{i:edn-18} & \pageref{c:edn-18}\\
+4 & \textcolor{Gris}{Problème de synthèse} & Développement limité d'une solution & \niveau{3} & 30\,min & \pageref{p:edn-7} & \pageref{i:edn-7} & \pageref{c:edn-7}\\
 5 & \textcolor{Gris}{Niveau DS / concours} & Solutions périodiques d'un oscillateur forcé & \niveau{5} & 1\,h & \pageref{p:edn-15} & \pageref{i:edn-15} & \pageref{c:edn-15}\\
 \end{tabular}}
 \probleme{1}{Mise en application}{Régime transitoire et régime permanent}{2}{Problème original Le Collé}{35\,min}{sel-ed-regimes}
@@ -399,36 +399,21 @@ adaptations rédigées par Le Collé, pas les énoncés officiels.}
 \item On prend $\lambda=\frac12$ et l'on considère $(E_2)$ : $y''+y'+y=\cos t$. Déterminer une solution particulière, puis montrer que toutes les solutions de $(E_2)$ se rapprochent d'une même fonction périodique : leur différence avec elle tend vers $0$ en $+\infty$.
 \end{enumerate}
 \par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:sel-ed-regimes} · correction p.~\pageref{c:sel-ed-regimes}}
-\probleme{2}{Méthodes classiques}{Solution polynomiale et changement de variable}{2}{Livret, exercice 1.8 · TD complet, exercice~16}{35\,min}{ed-poly}
-\fichepb{solution polynomiale, changement de variable, théorème de Cauchy, problème de Cauchy.}{Résoudre une équation à coefficients variables par deux méthodes guidées, et contrôler le résultat par la dimension de l'espace des solutions.}{Théorème de Cauchy linéaire ; Dérivée d'une composée ; Fonctions hyperboliques.}
-On considère $(E)$ : $(1+t^2)y''+ty'-y=0$ sur $\R$.
-\begin{enumerate}
-\item Déterminer les solutions polynomiales de $(E)$.
-\item Résoudre $(E)$ en posant $t=\sh x$.
-\item Déterminer la solution telle que $y(0)=1$ et $y'(0)=1$.
-\end{enumerate}
-\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:ed-poly} · correction p.~\pageref{c:ed-poly}}
-\probleme{3}{Approfondissement}{Changement de fonction et recollement}{4}{Exercice complémentaire · TD complet, exercice~25}{45\,min}{edn-12}
-\fichepb{changement de fonction, coefficients constants, recollement, série entière.}{Ramener une équation à coefficients variables à une équation à coefficients constants, puis étudier les solutions au point où le coefficient dominant s'annule.}{Dérivée d'un produit ; Développements limités usuels ; Séries entières usuelles.}
-On considère $(E)$ : $t^2y''+4ty'+(2-t^2)y=1$.
-\begin{enumerate}
-\item On pose $z(t)=t^2y(t)$. Montrer que $y$ est solution de $(E)$ sur un intervalle si et seulement si $z''-z=1$.
-\item Résoudre $(E)$ sur $\R_+^*$ et sur $\R_-^*$.
-\item Montrer que $(E)$ admet une unique solution sur $\R$.
-\end{enumerate}
-\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:edn-12} · correction p.~\pageref{c:edn-12}}
-\probleme{4}{Problème de synthèse}{Trois méthodes pour une même équation}{5}{Exercice complémentaire · TD complet, exercice~27}{50\,min}{edn-14}
-\fichepb{série entière, changement de fonction, recollement, théorème de Cauchy, dimension de l'espace des solutions.}{Croiser trois méthodes sur une même équation, et comprendre pourquoi l'espace des solutions sur $\R$ peut être une droite.}{Séries entières : produit par $t$, dérivation ; Théorème de Cauchy linéaire.}
-On considère $(E)$ : $ty''+2y'+ty=0$.
-\begin{enumerate}
-\item Déterminer les solutions de $(E)$ développables en série entière au voisinage de $0$, et reconnaître leur somme.
-\item On pose $z(t)=ty(t)$. Montrer que $y$ est solution de $(E)$ sur un intervalle si et seulement si $z''+z=0$.
-\item En déduire les solutions de $(E)$ sur $\R_+^*$ et sur $\R_-^*$.
-\item Déterminer les solutions de $(E)$ sur $\R$. Forment-elles un plan vectoriel ? Pourquoi le théorème de Cauchy ne
-s'applique-t-il pas ?
-\end{enumerate}
-\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:edn-14} · correction p.~\pageref{c:edn-14}}
-\probleme{5}{Niveau DS / concours}{Solutions périodiques d'un oscillateur forcé}{5}{Exercice complémentaire · TD complet, exercice~28}{1\,h}{edn-15}
+\probleme{2}{Méthodes classiques}{Résonance : quand les solutions sont-elles bornées ?}{3}{Exercice complémentaire · TD complet, exercice~14}{25\,min}{edn-8}
+\fichepb{équation caractéristique, passage aux complexes, résonance, discussion selon un paramètre.}{Choisir la forme de la solution particulière selon que $i$ est racine ou non, et en tirer le comportement des solutions.}{Équation caractéristique ; Second membre $e^{mt}$ : degré selon la multiplicité de $m$.}
+Soit $\omega>0$. Résoudre $y''+\omega^2y=\cos t$, en distinguant $\omega\neq1$ et $\omega=1$. Dans quel cas toutes les solutions
+sont-elles bornées ?
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:edn-8} · correction p.~\pageref{c:edn-8}}
+\probleme{3}{Approfondissement}{Une équation fonctionnelle}{3}{Exercice complémentaire · TD complet, exercice~15}{20\,min}{edn-18}
+\fichepb{dériver une relation, équation du second ordre, condition nécessaire et réciproque.}{Se ramener à une équation différentielle, puis ne garder que les solutions de l'équation de départ.}{Équation $y''+y=0$ ; Dérivée de $x\mapsto f(-x)$.}
+Déterminer les fonctions $f$ dérivables sur $\R$ telles que, pour tout réel $x$, $f'(x)=f(-x)$.
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:edn-18} · correction p.~\pageref{c:edn-18}}
+\probleme{4}{Problème de synthèse}{Développement limité d'une solution}{3}{Exercice complémentaire · TD complet, exercice~16}{30\,min}{edn-7}
+\fichepb{premier ordre, développement limité, identification de coefficients.}{Obtenir le développement limité d'une solution sans la calculer, à partir de l'équation.}{Formule de Taylor-Young ; Développement limité de $\sin$.}
+Soit $f$ la solution sur $]-\infty,1[$ de $2(t-1)y'+y=\sin(2t)+t^2$ telle que $f(0)=0$. Sans résoudre l'équation, déterminer le
+développement limité de $f$ à l'ordre $4$ en $0$.
+\par\vspace{0.8em}\noindent\hfill{\scriptsize\sffamily\color{Gris}indications p.~\pageref{i:edn-7} · correction p.~\pageref{c:edn-7}}
+\probleme{5}{Niveau DS / concours}{Solutions périodiques d'un oscillateur forcé}{5}{Exercice complémentaire · TD complet, exercice~17}{1\,h}{edn-15}
 \fichepb{intégrale fonction de sa borne, problème de Cauchy, périodicité, résonance.}{Exprimer une solution par une intégrale, puis caractériser l'existence de solutions périodiques, comme dans un problème de concours.}{Dérivée de $x\mapsto\int_0^xg$ ; Intégrale d'une fonction périodique sur une période.}
 Soit $f$ une fonction continue sur $\R$ et l'équation $(E)$ : $y''+y=f(t)$.
 \begin{enumerate}
@@ -449,23 +434,19 @@ le sont.
 \item 5. Toutes les exponentielles ont une partie réelle strictement négative.
 \item 6. $i^2+i+1=i$ : $z=\frac{e^{it}}i$.
 \end{itemize}
-\soustitre{2}{Solution polynomiale et changement de variable}{i:ed-poly}
-\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Chercher le degré $n$ par le terme dominant, puis les coefficients.
-\item 2. Poser $z(x)=y(\sh x)$ : $z'(x)=\ch x\,y'(\sh x)$, puis dériver encore ; on doit obtenir $z''-z=0$.
-\item 2. Pour revenir à $t$ : $\ch x=\sqrt{1+t^2}$ et $e^{x}=t+\sqrt{1+t^2}$.
-\item 3. Les conditions en $0$ portent sur $y(0)=z(0)$ et $y'(0)=z'(0)$.
+\soustitre{2}{Résonance : quand les solutions sont-elles bornées ?}{i:edn-8}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item Résoudre $z''+\omega^2z=e^{it}$ : $i$ est-il racine de $r^2+\omega^2=0$ ?
+\item Si $\omega=1$ : chercher $z=Q(t)e^{it}$ avec $\deg Q=1$ ; $Q''+2iQ'=1$.
+\item Second membre $\cos t$ : prendre la partie \emph{réelle}.
 \end{itemize}
-\soustitre{3}{Changement de fonction et recollement}{i:edn-12}
-\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Calculer $z'$ et $z''$, et comparer $z''-z$ au premier membre de $(E)$.
-\item 2. $z''-z=1$ : une constante est solution particulière.
-\item 3. Développer le numérateur en $0$ : la limite n'est finie que si le numérateur est un $O(t^2)$.
-\item 3. Pour la dérivabilité en $0$, écrire $\frac{\ch t-1}{t^2}$ comme somme d'une série entière.
+\soustitre{3}{Une équation fonctionnelle}{i:edn-18}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item Montrer que $f$ est deux fois dérivable, puis dériver la relation.
+\item $f''=-f$ n'est qu'une condition nécessaire : reporter $A\cos+B\sin$ dans la relation de départ.
 \end{itemize}
-\soustitre{4}{Trois méthodes pour une même équation}{i:edn-14}
-\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Écrire chaque terme sous la forme $\sum(\dots)t^n$ ; la relation lie $a_{n+1}$ à $a_{n-1}$.
-\item 1. $\sum\frac{(-1)^pt^{2p+1}}{(2p+1)!}=\sin t$.
-\item 2. $z'=y+ty'$.
-\item 4. Pour quelles constantes la solution a-t-elle une limite finie en $0$ ?
+\soustitre{4}{Développement limité d'une solution}{i:edn-7}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item Justifier que $f$ est de classe $\mathcal C^\infty$ : $f'$ s'exprime à l'aide de $f$.
+\item Écrire $f=\sum a_kt^k+o(t^5)$ et identifier le coefficient de $t^k$ dans $2(t-1)f'+f$.
+\item $a_0=f(0)=0$ ; on trouve successivement $a_1$, $a_2$, $a_3$, $a_4$.
 \end{itemize}
 \soustitre{5}{Solutions périodiques d'un oscillateur forcé}{i:edn-15}
 \begin{itemize}[leftmargin=1.2em,itemsep=0.25em]\item 1. Développer $\sin(t-u)=\sin t\cos u-\cos t\sin u$ et sortir de l'intégrale ce qui ne dépend pas de $u$.
@@ -496,43 +477,31 @@ $\operatorname{Re}\left(\frac{1-i}2e^{it}\right)=\frac{\cos t+\sin t}2$. Solutio
 \q{6.} On résout $z''+z'+z=e^{it}$ : $i$ n'est pas racine ($i^2+i+1=i\neq0$), $z=\frac{e^{it}}i=-ie^{it}$, de partie réelle $\sin t$. Donc $y_p=\sin t$ et, d'après 4 et 5 ($\lambda=\frac12$), toute solution s'écrit $y=\sin t+h(t)$ avec $h$ solution de $(H_{1/2})$, qui tend vers $0$ : $y(t)-\sin t\to0$.
 \retenir{équation linéaire à coefficients constants, amortie, forcée par un signal périodique : la solution générale de l'équation homogène est le régime transitoire, la solution particulière périodique est le régime permanent.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\soustitre{2}{Solution polynomiale et changement de variable}{c:ed-poly}
-\q{1.} Pour $y$ de degré $n$, le coefficient de $t^n$ est $\big(n(n-1)+n-1\big)a_n=(n^2-1)a_n$ : $n=1$ (le cas constant donne
-$y=0$). Avec $y=at+b$ : $at-at-b=0$, donc $b=0$. Solutions polynomiales : $y=at$.
-
-\q{2.} $t=\sh x$ est une bijection $\mathcal C^2$ de $\R$ sur $\R$, de réciproque $\mathcal C^2$. Avec $z(x)=y(\sh x)$ :
-$z'=\ch x\,y'(\sh x)$, $z''=\ch^2x\,y''(\sh x)+\sh x\,y'(\sh x)$. Comme $1+\sh^2x=\ch^2x$, l'équation devient $z''-z=0$ :
-$z=A\sh x+B\ch x$, d'où $y=At+B\sqrt{1+t^2}$.
-
-\q{3.} $y(0)=B=1$ et $y'(0)=A=1$ : $y=t+\sqrt{1+t^2}$.
-\retenir{le changement de variable proposé transforme $1+t^2$ en $\ch^2x$ : l'équation devient à coefficients constants.}
+\soustitre{2}{Résonance : quand les solutions sont-elles bornées ?}{c:edn-8}
+$S_H=\{A\cos\omega t+B\sin\omega t\}$. On résout $z''+\omega^2z=e^{it}$.
+\begin{itemize}
+\item $\omega\neq1$ : $i$ n'est pas racine de $r^2+\omega^2$, $z=\frac{e^{it}}{\omega^2-1}$, d'où $y_p=\frac{\cos t}{\omega^2-1}$.
+Toutes les solutions sont bornées.
+\item $\omega=1$ : $i$ est racine simple, $z=Q(t)e^{it}$ avec $Q''+2iQ'=1$, $Q=-\frac i2t$ ; $y_p=\operatorname{Re}z=\frac t2\sin t$.
+Aucune solution n'est bornée (le terme $\frac t2\sin t$ ne l'est pas).
+\end{itemize}
+\retenir{excitation à la pulsation propre : résonance, amplitude non bornée.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\soustitre{3}{Changement de fonction et recollement}{c:edn-12}
-\q{1.} $z'=2ty+t^2y'$ et $z''=2y+4ty'+t^2y''$, donc $t^2y''+4ty'+(2-t^2)y=z''-z$.
-
-\q{2.} $z''-z=1$ : $z=-1+A\ch t+B\sh t$. Sur chaque demi-droite, $y=\frac{-1+A_\pm\ch t+B_\pm\sh t}{t^2}$.
-
-\q{3.} Une solution sur $\R$ est continue en $0$. Quand $t\to0^+$, $-1+A_+\ch t+B_+\sh t=(A_+-1)+B_+t+O(t^2)$ : la limite de $y$ n'est
-finie que si $A_+=1$ et $B_+=0$ ; de même à gauche. Il reste $y(t)=\frac{\ch t-1}{t^2}$ pour $t\neq0$, et $y(0)=\frac12$ (limite).
-Cette fonction est la somme de la série entière $\sum\frac{t^{2n}}{(2n+2)!}$, de rayon infini : elle est de classe
-$\mathcal C^\infty$ sur $\R$, et l'équation en $0$ s'écrit $2\cdot\frac12=1$. Il y a donc une unique solution sur $\R$.
+\soustitre{3}{Une équation fonctionnelle}{c:edn-18}
+\choix{on se ramène à une équation différentielle en dérivant la relation.}
+Soit $f$ une solution. Comme $x\mapsto f(-x)$ est dérivable, $f'$ l'est : $f$ est deux fois dérivable et
+$f''(x)=-f'(-x)=-f(x)$. Donc $f=A\cos+B\sin$. Réciproquement, $f'(x)=-A\sin x+B\cos x$ et $f(-x)=A\cos x-B\sin x$ :
+l'égalité pour tout $x$ équivaut à $B=A$. Les solutions sont les fonctions $x\mapsto A(\cos x+\sin x)$.
+\piege{l'équation $f''=-f$ n'est qu'une condition \emph{nécessaire} : la réciproque élimine une constante.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\soustitre{4}{Trois méthodes pour une même équation}{c:edn-14}
-\q{1.} Avec $y=\sum a_nt^n$ : $ty''=\sum(n+1)na_{n+1}t^n$, $2y'=\sum2(n+1)a_{n+1}t^n$, $ty=\sum a_{n-1}t^n$ ($n\geq1$). Le coefficient
-constant donne $2a_1=0$ ; pour $n\geq1$, $(n+1)(n+2)a_{n+1}+a_{n-1}=0$. Les termes impairs sont nuls, et
-$a_{2p}=\frac{(-1)^pa_0}{(2p+1)!}$ (récurrence). Rayon infini, et $y=a_0\sum\frac{(-1)^pt^{2p}}{(2p+1)!}=a_0\frac{\sin t}t$ ($t\neq0$),
-prolongée par $a_0$ en $0$.
-
-\q{2.} $z'=y+ty'$, $z''=2y'+ty''$, donc $z''+z=ty''+2y'+ty$.
-
-\q{3.} $z=A\cos t+B\sin t$, donc $y=\frac{A\cos t+B\sin t}t$ sur chaque demi-droite (constantes $A_\pm$, $B_\pm$).
-
-\q{4.} Pour qu'une solution ait une limite finie en $0$, il faut $A_+=A_-=0$ (sinon $\frac{A\cos t}t$ diverge). Il reste
-$y=B_\pm\frac{\sin t}t$, de limite $B_\pm$ : la continuité impose $B_+=B_-=B$. La fonction $B\frac{\sin t}t$ (prolongée par $B$) est la
-somme d'une série entière de rayon infini, donc $\mathcal C^\infty$, et elle est solution sur $\R$ (question~1). Les solutions sur
-$\R$ forment une \emph{droite} vectorielle, et non un plan : le coefficient $t$ de $y''$ s'annule en $0$, l'équation ne se
-normalise pas sur $\R$ et le théorème de Cauchy ne s'y applique pas (par exemple, aucune solution ne vérifie $y(0)=0$, $y'(0)=1$).
-\retenir{trois méthodes (série entière, changement de fonction, recollement) qui se recoupent et se contrôlent mutuellement.}
+\soustitre{4}{Développement limité d'une solution}{c:edn-7}
+\choix{on n'a pas besoin de $f$ : l'équation fournit une relation entre les coefficients du développement.}
+Sur $]-\infty,1[$, $f'=\frac{\sin2t+t^2-f}{2(t-1)}$ ; par récurrence, $f$ est de classe $\mathcal C^\infty$, donc admet un
+développement $f(t)=\sum_{k=0}^5a_kt^k+o(t^5)$, et $f'(t)=\sum_{k=1}^5ka_kt^{k-1}+o(t^4)$. Le coefficient de $t^k$ dans
+$2tf'-2f'+f$ est $(2k+1)a_k-2(k+1)a_{k+1}$, et $\sin2t+t^2=2t+t^2-\frac43t^3+o(t^4)$. Avec $a_0=f(0)=0$ :
+\[a_0-2a_1=0,\quad3a_1-4a_2=2,\quad5a_2-6a_3=1,\quad7a_3-8a_4=-\tfrac43,\]
+d'où $a_1=0$, $a_2=-\frac12$, $a_3=-\frac7{12}$, $a_4=-\frac{11}{32}$ :
+\[f(t)=-\frac{t^2}2-\frac{7t^3}{12}-\frac{11t^4}{32}+o(t^4).\]
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \soustitre{5}{Solutions périodiques d'un oscillateur forcé}{c:edn-15}
 \q{1.} $y_0(t)=\sin t\int_0^tf(u)\cos u\,du-\cos t\int_0^tf(u)\sin u\,du$. En dérivant (produit et intégrale de borne variable),

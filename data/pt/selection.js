@@ -198,90 +198,81 @@ LC.selection = {
     "pageCorrige": 8
    },
    {
-    "id": "ed-poly",
+    "id": "edn-8",
     "num": 2,
     "etape": "Méthodes classiques",
-    "titre": "Solution polynomiale et changement de variable",
-    "difficulte": 2,
-    "duree": 35,
-    "origine": "Livret, exercice 1.8 · TD complet, exercice 16",
+    "titre": "Résonance : quand les solutions sont-elles bornées ?",
+    "difficulte": 3,
+    "duree": 25,
+    "origine": "Exercice complémentaire · TD complet, exercice 14",
     "notions": [
-     "solution polynomiale",
-     "changement de variable",
-     "théorème de Cauchy",
-     "problème de Cauchy"
+     "équation caractéristique",
+     "passage aux complexes",
+     "résonance",
+     "discussion selon un paramètre"
     ],
-    "objectifs": "Résoudre une équation à coefficients variables par deux méthodes guidées, et contrôler le résultat par la dimension de l'espace des solutions.",
+    "objectifs": "Choisir la forme de la solution particulière selon que $i$ est racine ou non, et en tirer le comportement des solutions.",
     "prerequis": [
-     "Théorème de Cauchy linéaire",
-     "Dérivée d'une composée",
-     "Fonctions hyperboliques"
+     "Équation caractéristique",
+     "Second membre $e^{mt}$ : degré selon la multiplicité de $m$"
     ],
     "indications": [
-     "1. Chercher le degré $n$ par le terme dominant, puis les coefficients.",
-     "2. Poser $z(x)=y(\\sh x)$ : $z'(x)=\\ch x y'(\\sh x)$, puis dériver encore ; on doit obtenir $z''-z=0$.",
-     "2. Pour revenir à $t$ : $\\ch x=\\sqrt{1+t^2}$ et $e^{x}=t+\\sqrt{1+t^2}$.",
-     "3. Les conditions en $0$ portent sur $y(0)=z(0)$ et $y'(0)=z'(0)$."
+     "Résoudre $z''+\\omega^2z=e^{it}$ : $i$ est-il racine de $r^2+\\omega^2=0$ ?",
+     "Si $\\omega=1$ : chercher $z=Q(t)e^{it}$ avec $\\deg Q=1$ ; $Q''+2iQ'=1$.",
+     "Second membre $\\cos t$ : prendre la partie réelle."
     ],
     "page": 3,
     "pageIndication": 7,
     "pageCorrige": 9
    },
    {
-    "id": "edn-12",
+    "id": "edn-18",
     "num": 3,
     "etape": "Approfondissement",
-    "titre": "Changement de fonction et recollement",
-    "difficulte": 4,
-    "duree": 45,
-    "origine": "Exercice complémentaire · TD complet, exercice 25",
+    "titre": "Une équation fonctionnelle",
+    "difficulte": 3,
+    "duree": 20,
+    "origine": "Exercice complémentaire · TD complet, exercice 15",
     "notions": [
-     "changement de fonction",
-     "coefficients constants",
-     "recollement",
-     "série entière"
+     "dériver une relation",
+     "équation du second ordre",
+     "condition nécessaire et réciproque"
     ],
-    "objectifs": "Ramener une équation à coefficients variables à une équation à coefficients constants, puis étudier les solutions au point où le coefficient dominant s'annule.",
+    "objectifs": "Se ramener à une équation différentielle, puis ne garder que les solutions de l'équation de départ.",
     "prerequis": [
-     "Dérivée d'un produit",
-     "Développements limités usuels",
-     "Séries entières usuelles"
+     "Équation $y''+y=0$",
+     "Dérivée de $x\\mapsto f(-x)$"
     ],
     "indications": [
-     "1. Calculer $z'$ et $z''$, et comparer $z''-z$ au premier membre de $(E)$.",
-     "2. $z''-z=1$ : une constante est solution particulière.",
-     "3. Développer le numérateur en $0$ : la limite n'est finie que si le numérateur est un $O(t^2)$.",
-     "3. Pour la dérivabilité en $0$, écrire $\\frac{\\ch t-1}{t^2}$ comme somme d'une série entière."
+     "Montrer que $f$ est deux fois dérivable, puis dériver la relation.",
+     "$f''=-f$ n'est qu'une condition nécessaire : reporter $A\\cos+B\\sin$ dans la relation de départ."
     ],
     "page": 4,
     "pageIndication": 7,
     "pageCorrige": 9
    },
    {
-    "id": "edn-14",
+    "id": "edn-7",
     "num": 4,
     "etape": "Problème de synthèse",
-    "titre": "Trois méthodes pour une même équation",
-    "difficulte": 5,
-    "duree": 50,
-    "origine": "Exercice complémentaire · TD complet, exercice 27",
+    "titre": "Développement limité d'une solution",
+    "difficulte": 3,
+    "duree": 30,
+    "origine": "Exercice complémentaire · TD complet, exercice 16",
     "notions": [
-     "série entière",
-     "changement de fonction",
-     "recollement",
-     "théorème de Cauchy",
-     "dimension de l'espace des solutions"
+     "premier ordre",
+     "développement limité",
+     "identification de coefficients"
     ],
-    "objectifs": "Croiser trois méthodes sur une même équation, et comprendre pourquoi l'espace des solutions sur $\\R$ peut être une droite.",
+    "objectifs": "Obtenir le développement limité d'une solution sans la calculer, à partir de l'équation.",
     "prerequis": [
-     "Séries entières : produit par $t$, dérivation",
-     "Théorème de Cauchy linéaire"
+     "Formule de Taylor-Young",
+     "Développement limité de $\\sin$"
     ],
     "indications": [
-     "1. Écrire chaque terme sous la forme $\\sum(\\dots)t^n$ ; la relation lie $a_{n+1}$ à $a_{n-1}$.",
-     "1. $\\sum\\frac{(-1)^pt^{2p+1}}{(2p+1)!}=\\sin t$.",
-     "2. $z'=y+ty'$.",
-     "4. Pour quelles constantes la solution a-t-elle une limite finie en $0$ ?"
+     "Justifier que $f$ est de classe $\\mathcal C^\\infty$ : $f'$ s'exprime à l'aide de $f$.",
+     "Écrire $f=\\sum a_kt^k+o(t^5)$ et identifier le coefficient de $t^k$ dans $2(t-1)f'+f$.",
+     "$a_0=f(0)=0$ ; on trouve successivement $a_1$, $a_2$, $a_3$, $a_4$."
     ],
     "page": 5,
     "pageIndication": 7,
@@ -294,7 +285,7 @@ LC.selection = {
     "titre": "Solutions périodiques d'un oscillateur forcé",
     "difficulte": 5,
     "duree": 60,
-    "origine": "Exercice complémentaire · TD complet, exercice 28",
+    "origine": "Exercice complémentaire · TD complet, exercice 17",
     "notions": [
      "intégrale fonction de sa borne",
      "problème de Cauchy",
@@ -314,7 +305,7 @@ LC.selection = {
     ],
     "page": 6,
     "pageIndication": 7,
-    "pageCorrige": 10
+    "pageCorrige": 9
    }
   ]
  },

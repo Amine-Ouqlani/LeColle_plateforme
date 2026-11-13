@@ -343,7 +343,7 @@
 {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Équations différentielles}\par\vspace{0.3em}
 {\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
-{\small Corrections détaillées des 28 exercices du TD, dans le même ordre et avec les mêmes numéros.
+{\small Corrections détaillées des 17 exercices du TD, dans le même ordre et avec les mêmes numéros.
 Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
 resservira. Les renvois « méthode~1.3 du livret » désignent le cours.
 \textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
@@ -421,14 +421,7 @@ $\frac{K'(t)}{\sqrt{1+t^2}}=\frac1{1+t^2}$, soit $K'=\frac1{\sqrt{1+t^2}}$, $K=\
 \[y=\frac{\argsh t+C}{\sqrt{1+t^2}}=\frac{\ln\big(t+\sqrt{1+t^2}\big)+C}{\sqrt{1+t^2}}.\]
 \retenir{en variation de la constante, les termes en $K$ se simplifient toujours : il ne reste que $K'\varphi=$ second membre.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{13}{Variation de la constante au second ordre}{edn-9}{énoncé : TD, p.~5}
-\choix{le second membre n'est pas de la forme $P(t)e^{mt}$ : variation de la constante, avec une solution de $(H)$ qui ne s'annule pas sur l'intervalle, $\varphi=\cos$.}
-Avec $y=\lambda\cos t$ : $y''+y=\lambda''\cos t-2\lambda'\sin t$, d'où, pour $\mu=\lambda'$ : $\mu'-2\tan(t)\,\mu=\frac1{\cos^2t}$.
-Homogène : $\mu=\frac K{\cos^2t}$ ; variation : $\mu=\frac{C(t)}{\cos^2t}$ avec $C'=1$. Donc $\lambda'=\frac{t+K}{\cos^2t}$ et, par parties,
-$\lambda=(t+K)\tan t+\ln(\cos t)+D$. Solutions :
-\[y=t\sin t+\cos t\,\ln(\cos t)+K\sin t+D\cos t.\]
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{14}{Une équation intégrale}{ed-integ}{énoncé : TD, p.~5}
+\correction{13}{Une équation intégrale}{ed-integ}{énoncé : TD, p.~5}
 \choix{l'inconnue est sous une intégrale de borne variable : on dérive (méthode~1.2 du livret).}
 Si $f$ convient, $f(x)=1+x+\int_0^xtf(t)\,dt$ est dérivable, $f'(x)=1+xf(x)$, et $f(0)=1$. Réciproquement, une solution de ce
 problème de Cauchy, intégrée de $0$ à $x$, vérifie l'équation de départ. On résout $y'-xy=1$ : l'homogène donne $Ke^{x^2/2}$ ;
@@ -437,7 +430,7 @@ sous forme intégrale :
 \[f(x)=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}\,du\right).\]
 \retenir{une primitive sans expression usuelle s'écrit $\int_{x_0}^x$ ; la borne $x_0$ est choisie pour que la condition initiale soit simple.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{15}{Résonance selon la pulsation}{edn-8}{énoncé : TD, p.~5}
+\correction{14}{Résonance selon la pulsation}{edn-8}{énoncé : TD, p.~5}
 $S_H=\{A\cos\omega t+B\sin\omega t\}$. On résout $z''+\omega^2z=e^{it}$.
 \begin{itemize}
 \item $\omega\neq1$ : $i$ n'est pas racine de $r^2+\omega^2$, $z=\frac{e^{it}}{\omega^2-1}$, d'où $y_p=\frac{\cos t}{\omega^2-1}$.
@@ -447,65 +440,15 @@ Aucune solution n'est bornée (le terme $\frac t2\sin t$ ne l'est pas).
 \end{itemize}
 \retenir{excitation à la pulsation propre : résonance, amplitude non bornée.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{16}{Solution polynomiale et changement de variable}{ed-poly}{énoncé : TD, p.~5}
-\q{1.} Pour $y$ de degré $n$, le coefficient de $t^n$ est $\big(n(n-1)+n-1\big)a_n=(n^2-1)a_n$ : $n=1$ (le cas constant donne
-$y=0$). Avec $y=at+b$ : $at-at-b=0$, donc $b=0$. Solutions polynomiales : $y=at$.
-
-\q{2.} $t=\sh x$ est une bijection $\mathcal C^2$ de $\R$ sur $\R$, de réciproque $\mathcal C^2$. Avec $z(x)=y(\sh x)$ :
-$z'=\ch x\,y'(\sh x)$, $z''=\ch^2x\,y''(\sh x)+\sh x\,y'(\sh x)$. Comme $1+\sh^2x=\ch^2x$, l'équation devient $z''-z=0$ :
-$z=A\sh x+B\ch x$, d'où $y=At+B\sqrt{1+t^2}$.
-
-\q{3.} $y(0)=B=1$ et $y'(0)=A=1$ : $y=t+\sqrt{1+t^2}$.
-\retenir{le changement de variable proposé transforme $1+t^2$ en $\ch^2x$ : l'équation devient à coefficients constants.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
 \partie{III}{Exercices de synthèse et approfondissement}{}
-\correction{17}{Recollement avec une valeur absolue}{ed-recol}{énoncé : TD, p.~6}
-\q{1.} Sur $\R_+^*$ : $ty'-y=t^2$, soit $y'-\frac yt=t$. Homogène : $Kt$ ; $y=t^2$ convient. Solutions : $y=t^2+K_+t$.
-Sur $\R_-^*$ : $-ty'-y=t^2$, soit $y'+\frac yt=-t$. Homogène : $\frac Kt$ ; on cherche $y=\alpha t^2$ : $2\alpha t+\alpha t=-t$,
-$\alpha=-\frac13$. Solutions : $y=-\frac{t^2}3+\frac{K_-}t$.
-
-\q{2.} Soit $y$ solution sur $\R$. Elle est continue en $0$ : la limite à gauche n'est finie que si $K_-=0$, et alors elle vaut
-$0$ ; donc $y(0)=0$. À droite, $\frac{y(t)}t=t+K_+\to K_+$ ; à gauche, $\frac{y(t)}t=-\frac t3\to0$. La dérivabilité en $0$
-impose $K_+=0$. Réciproquement, la fonction $y$ égale à $t^2$ sur $\R_+$ et à $-\frac{t^2}3$ sur $\R_-$ est dérivable en $0$
-($y'(0)=0$), et l'équation est vérifiée en $0$ ($0-0=0$). Il y a donc une unique solution sur $\R$.
-\retenir{continuité, puis dérivabilité, puis vérification de l'équation au point de raccord.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{18}{Recollement : une infinité de solutions}{edn-6}{énoncé : TD, p.~6}
-\q{1.} Sur $\R_+^*$ ou $\R_-^*$ : $y'-\frac2ty=t^2$. Homogène : $e^{2\ln|t|}=t^2$, donc $Kt^2$ ; $y=t^3$ convient
-($3t^3-2t^3=t^3$). Solutions : $y=t^3+K_\pm t^2$ sur chaque demi-droite.
-
-\q{2.} Soit $y$ solution sur $\R$. Les deux expressions tendent vers $0$ en $0$ : $y(0)=0$. Les taux d'accroissement
-$\frac{y(t)}t=t^2+K_\pm t$ tendent tous deux vers $0$ : $y$ est dérivable en $0$, $y'(0)=0$, \emph{quels que soient} $K_+$ et $K_-$.
-L'équation en $0$ s'écrit $0-0=0$ : elle est vérifiée. Les solutions sur $\R$ sont donc les fonctions égales à $t^3+K_+t^2$ pour
-$t\geq0$ et à $t^3+K_-t^2$ pour $t\leq0$, avec $K_+$, $K_-$ arbitraires.
-Ce n'est pas une contradiction : le coefficient de $y'$ s'annule en $0$, et le théorème de Cauchy ne s'applique que sur un
-intervalle où l'équation se normalise.
-\retenir{au point de raccord, il peut y avoir aucune, une seule ou une infinité de solutions.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{19}{Une solution exponentielle, puis toutes}{ed-abaisse}{énoncé : TD, p.~6}
-\q{1.} $y=e^{rt}$ : $(t+1)r^2-(t+2)r+1=0$ pour tout $t$, soit $r^2-r=0$ et $r^2-2r+1=0$ : $r=1$. Donc $\varphi(t)=e^t$.
-
-\q{2.} $\varphi$ ne s'annule pas : on pose $y=\lambda e^t$. Alors $y'=(\lambda'+\lambda)e^t$, $y''=(\lambda''+2\lambda'+\lambda)e^t$ et
-l'équation devient $(t+1)\lambda''+t\lambda'=0$, soit $\mu'=-\frac t{t+1}\mu=\left(-1+\frac1{t+1}\right)\mu$ pour $\mu=\lambda'$.
-D'où $\mu=K(t+1)e^{-t}$, puis $\lambda=-K(t+2)e^{-t}+D$ (vérifier : $\big((t+2)e^{-t}\big)'=-(t+1)e^{-t}$).
-Solutions : $y=a(t+2)+be^t$, $(a,b)\in\R^2$.
-\gain{on peut vérifier directement que $t+2$ est solution : $0-(t+2)+(t+2)=0$.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{20}{Une équation d'Euler}{edn-10}{énoncé : TD, p.~7}
-$x\mapsto e^x$ est une bijection $\mathcal C^2$ de $\R$ sur $\R_+^*$, de réciproque $\ln$. Avec $z(x)=y(e^x)$ :
-$z'=e^xy'(e^x)$, $z''=e^{2x}y''(e^x)+e^xy'(e^x)$, donc $t^2y''=z''-z'$ et $ty'=z'$. L'équation devient
-$z''-4z'+4z=e^{2x}$ : racine double $2$, $Q''=1$, $z=\left(\frac{x^2}2+A+Bx\right)e^{2x}$. En revenant à $t$ :
-\[y=t^2\left(\frac{(\ln t)^2}2+A+B\ln t\right).\]
-\retenir{équation d'Euler $t^2y''+aty'+by$ : $t=e^x$ donne $t^2y''=z''-z'$, $ty'=z'$.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{21}{Une équation fonctionnelle}{edn-18}{énoncé : TD, p.~7}
+\correction{15}{Une équation fonctionnelle}{edn-18}{énoncé : TD, p.~6}
 \choix{on se ramène à une équation différentielle en dérivant la relation.}
 Soit $f$ une solution. Comme $x\mapsto f(-x)$ est dérivable, $f'$ l'est : $f$ est deux fois dérivable et
 $f''(x)=-f'(-x)=-f(x)$. Donc $f=A\cos+B\sin$. Réciproquement, $f'(x)=-A\sin x+B\cos x$ et $f(-x)=A\cos x-B\sin x$ :
 l'égalité pour tout $x$ équivaut à $B=A$. Les solutions sont les fonctions $x\mapsto A(\cos x+\sin x)$.
 \piege{l'équation $f''=-f$ n'est qu'une condition \emph{nécessaire} : la réciproque élimine une constante.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{22}{Développement limité d'une solution}{edn-7}{énoncé : TD, p.~7}
+\correction{16}{Développement limité d'une solution}{edn-7}{énoncé : TD, p.~6}
 \choix{on n'a pas besoin de $f$ : l'équation fournit une relation entre les coefficients du développement.}
 Sur $]-\infty,1[$, $f'=\frac{\sin2t+t^2-f}{2(t-1)}$ ; par récurrence, $f$ est de classe $\mathcal C^\infty$, donc admet un
 développement $f(t)=\sum_{k=0}^5a_kt^k+o(t^5)$, et $f'(t)=\sum_{k=1}^5ka_kt^{k-1}+o(t^4)$. Le coefficient de $t^k$ dans
@@ -514,64 +457,8 @@ $2tf'-2f'+f$ est $(2k+1)a_k-2(k+1)a_{k+1}$, et $\sin2t+t^2=2t+t^2-\frac43t^3+o(t
 d'où $a_1=0$, $a_2=-\frac12$, $a_3=-\frac7{12}$, $a_4=-\frac{11}{32}$ :
 \[f(t)=-\frac{t^2}2-\frac{7t^3}{12}-\frac{11t^4}{32}+o(t^4).\]
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{23}{Solution développable en série entière}{ed-se}{énoncé : TD, p.~7}
-\choix{analyse-synthèse : relation de récurrence par identification, puis rayon de convergence.}
-Avec $y=\sum a_nt^n$ : $\sum(n+2)(n+1)a_{n+2}t^n-\sum2na_nt^n-\sum2a_nt^n=0$, d'où $(n+2)(n+1)a_{n+2}=2(n+1)a_n$, soit
-$a_{n+2}=\frac2{n+2}a_n$. Avec $a_1=y'(0)=0$, les termes impairs sont nuls ; $a_0=1$ et $a_{2p}=\frac2{2p}a_{2p-2}=\frac1{p!}$.
-Donc $y=\sum\frac{t^{2p}}{p!}=e^{t^2}$, de rayon infini. Vérification : $y'=2te^{t^2}$, $y''=(2+4t^2)e^{t^2}$ et
-$y''-2ty'-2y=0$.
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{24}{Série entière et fonctions hyperboliques}{edn-11}{énoncé : TD, p.~7}
-\q{1.} Avec $y=\sum a_nt^n$ : le coefficient de $t^n$ est $4(n+1)na_{n+1}+2(n+1)a_{n+1}-a_n=2(n+1)(2n+1)a_{n+1}-a_n$. Donc
-$a_{n+1}=\frac{a_n}{(2n+2)(2n+1)}$ et $a_n=\frac{a_0}{(2n)!}$. Le rapport $\left|\frac{a_{n+1}}{a_n}\right|$ tend vers $0$ : rayon infini.
-Les solutions développables en série entière sont $y=a_0\sum\frac{t^n}{(2n)!}$.
-
-\q{2.} Pour $t\geq0$, $\sum\frac{t^n}{(2n)!}=\sum\frac{(\sqrt t)^{2n}}{(2n)!}=\ch\sqrt t$ ; pour $t\leq0$, avec $t=-u^2$,
-$\sum\frac{(-1)^nu^{2n}}{(2n)!}=\cos\sqrt{-t}$.
-\gain{reconnaître $(2n)!$ au dénominateur : ce sont les termes pairs de $\exp$, $\ch$ ou $\cos$.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
 \partie{IV}{Exercices difficiles et type concours}{}
-\correction{25}{Changement de fonction et recollement}{edn-12}{énoncé : TD, p.~8}
-\q{1.} $z'=2ty+t^2y'$ et $z''=2y+4ty'+t^2y''$, donc $t^2y''+4ty'+(2-t^2)y=z''-z$.
-
-\q{2.} $z''-z=1$ : $z=-1+A\ch t+B\sh t$. Sur chaque demi-droite, $y=\frac{-1+A_\pm\ch t+B_\pm\sh t}{t^2}$.
-
-\q{3.} Une solution sur $\R$ est continue en $0$. Quand $t\to0^+$, $-1+A_+\ch t+B_+\sh t=(A_+-1)+B_+t+O(t^2)$ : la limite de $y$ n'est
-finie que si $A_+=1$ et $B_+=0$ ; de même à gauche. Il reste $y(t)=\frac{\ch t-1}{t^2}$ pour $t\neq0$, et $y(0)=\frac12$ (limite).
-Cette fonction est la somme de la série entière $\sum\frac{t^{2n}}{(2n+2)!}$, de rayon infini : elle est de classe
-$\mathcal C^\infty$ sur $\R$, et l'équation en $0$ s'écrit $2\cdot\frac12=1$. Il y a donc une unique solution sur $\R$.
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{26}{Une solution polynomiale, puis l'autre}{edn-13}{énoncé : TD, p.~8}
-\q{1.} Coefficient de $t^n$ : $\big(-n(n-1)-2n+2\big)a_n=-(n-1)(n+2)a_n$ : $n=1$. Avec $y=at+b$ : $-2at+2at+2b=0$, $b=0$. Solutions polynomiales : $y=at$.
-
-\q{2.} $y=t\lambda$ : $y'=\lambda+t\lambda'$, $y''=2\lambda'+t\lambda''$. En reportant, les termes en $\lambda$ disparaissent :
-$(1-t^2)t\lambda''+\big(2(1-t^2)-2t^2\big)\lambda'=0$. Pour $\mu=\lambda'$ : $\mu'=-\frac{2-4t^2}{t(1-t^2)}\mu$. La décomposition
-$\frac{2-4t^2}{t(1-t^2)}=\frac2t-\frac1{1-t}+\frac1{1+t}$ donne $\mu=\frac K{t^2(1-t^2)}=K\left(\frac1{t^2}+\frac1{2(1-t)}+\frac1{2(1+t)}\right)$.
-
-\q{3.} En intégrant : $\lambda=K\left(-\frac1t+\frac12\ln\frac{1+t}{1-t}\right)+a$, et $y=t\lambda=at+K\left(\frac t2\ln\frac{1+t}{1-t}-1\right)$.
-Cette fonction est définie et deux fois dérivable sur $]-1,1[$ tout entier et l'on vérifie qu'elle est solution (ou on invoque
-l'unicité de Cauchy de part et d'autre de $0$). Les deux solutions $t$ et $\frac t2\ln\frac{1+t}{1-t}-1$ ne sont pas
-proportionnelles : elles engendrent le plan $S_H$.
-\retenir{une solution connue $\varphi$ (même si elle s'annule en un point) : $y=\lambda\varphi$ ramène au premier ordre sur les intervalles où $\varphi\neq0$.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{27}{Trois méthodes pour une même équation}{edn-14}{énoncé : TD, p.~8}
-\q{1.} Avec $y=\sum a_nt^n$ : $ty''=\sum(n+1)na_{n+1}t^n$, $2y'=\sum2(n+1)a_{n+1}t^n$, $ty=\sum a_{n-1}t^n$ ($n\geq1$). Le coefficient
-constant donne $2a_1=0$ ; pour $n\geq1$, $(n+1)(n+2)a_{n+1}+a_{n-1}=0$. Les termes impairs sont nuls, et
-$a_{2p}=\frac{(-1)^pa_0}{(2p+1)!}$ (récurrence). Rayon infini, et $y=a_0\sum\frac{(-1)^pt^{2p}}{(2p+1)!}=a_0\frac{\sin t}t$ ($t\neq0$),
-prolongée par $a_0$ en $0$.
-
-\q{2.} $z'=y+ty'$, $z''=2y'+ty''$, donc $z''+z=ty''+2y'+ty$.
-
-\q{3.} $z=A\cos t+B\sin t$, donc $y=\frac{A\cos t+B\sin t}t$ sur chaque demi-droite (constantes $A_\pm$, $B_\pm$).
-
-\q{4.} Pour qu'une solution ait une limite finie en $0$, il faut $A_+=A_-=0$ (sinon $\frac{A\cos t}t$ diverge). Il reste
-$y=B_\pm\frac{\sin t}t$, de limite $B_\pm$ : la continuité impose $B_+=B_-=B$. La fonction $B\frac{\sin t}t$ (prolongée par $B$) est la
-somme d'une série entière de rayon infini, donc $\mathcal C^\infty$, et elle est solution sur $\R$ (question~1). Les solutions sur
-$\R$ forment une \emph{droite} vectorielle, et non un plan : le coefficient $t$ de $y''$ s'annule en $0$, l'équation ne se
-normalise pas sur $\R$ et le théorème de Cauchy ne s'y applique pas (par exemple, aucune solution ne vérifie $y(0)=0$, $y'(0)=1$).
-\retenir{trois méthodes (série entière, changement de fonction, recollement) qui se recoupent et se contrôlent mutuellement.}
-\par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{28}{Solutions périodiques d'un oscillateur forcé}{edn-15}{énoncé : TD, p.~9}
+\correction{17}{Solutions périodiques d'un oscillateur forcé}{edn-15}{énoncé : TD, p.~7}
 \q{1.} $y_0(t)=\sin t\int_0^tf(u)\cos u\,du-\cos t\int_0^tf(u)\sin u\,du$. En dérivant (produit et intégrale de borne variable),
 les termes $\sin t\,f(t)\cos t-\cos t\,f(t)\sin t$ s'annulent : $y_0'(t)=\cos t\int_0^tf\cos+\sin t\int_0^tf\sin$. En dérivant
 encore : $y_0''=-y_0+f(t)(\cos^2t+\sin^2t)=-y_0+f$. Enfin $y_0(0)=y_0'(0)=0$.

@@ -91,3 +91,19 @@ Puis vérifier : `node outils/verifier.js`.
 - Annales : sujets officiels de la Banque PT (Mathématiques A, B, C, sessions 2014 à 2026), **non hébergés ici** ; liens vers WikiPrépa (sujets, rapports du jury) et prepas.org (corrigés de l'UPS). Les résumés de parties, les résumés de questions et les corrections pas à pas sont rédigés par Le Collé.
 - Mise en page inspirée du template *vCard — Personal portfolio* (codewithsadee, licence MIT).
 - pdf.js (Mozilla, Apache 2.0) et KaTeX (MIT) sont embarqués dans `assets/vendor/` avec leurs licences.
+
+## Niveau du chapitre « Équations différentielles » (PTSI / PT)
+
+Le chapitre 4 est actuellement limité au **programme de première année (PTSI)** : premier ordre, second ordre à coefficients
+constants. Le contenu de deuxième année (second ordre à coefficients continus, recollement, variation de la constante au second
+ordre, séries entières) n'est pas supprimé : il est conservé dans des blocs `\ifPT … \fi` des sources, dans les plans `ED_PT`
+(TD) et `_ED_PT` (sélection), en commentaire dans `data/pt/classiques.js`, et la fiche du chapitre de PT est dans
+`outils/reserve-pt/chapitre-ed-pt.json`. Pour le réintroduire :
+
+1. remplacer `\PTfalse` par `\PTtrue` dans `livre-equations-differentielles.tex`, `presentation-equations-differentielles.tex`,
+   `fiche-equations-differentielles.tex` et `exercices-bilan.tex` (ou compiler avec `\def\VERSIONPT{}`) ;
+2. mettre `PT = True` dans `outils/td/meta.py` ;
+3. remettre l'entrée `ed` de `data/pt/chapitres.js` à partir de `outils/reserve-pt/chapitre-ed-pt.json` et les classiques en réserve ;
+4. relancer la chaîne de construction (livrets, TD, sélection, intégration, bilans).
+
+Avec `\PTtrue`, le livret, la présentation et la fiche sont identiques, au texte près, aux versions de PT d'avant la séparation.

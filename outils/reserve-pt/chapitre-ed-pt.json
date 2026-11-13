@@ -1,0 +1,177 @@
+{
+  "id": "ed",
+  "num": 4,
+  "bilan": {
+    "doc": "bilan-ed",
+    "corrige": 2,
+    "duree": 15
+  },
+  "titre": "Équations différentielles",
+  "accroche": "Une solution particulière, plus toutes les solutions sans second membre : premier ordre, second ordre à coefficients constants puis continus, théorème de Cauchy linéaire.",
+  "statut": "complet",
+  "td": {
+    "doc": "td-ed",
+    "corrections": "td-ed-corrections"
+  },
+  "prerequis": [
+    "Dérivation, primitives usuelles, intégration par parties.",
+    "Nombres complexes, exponentielle complexe.",
+    "Espaces vectoriels : sous-espace, dimension.",
+    "Pour le §1.4 : séries entières."
+  ],
+  "cours": {
+    "doc": "livre-ed",
+    "debut": 4,
+    "fin": 13,
+    "sections": [
+      {
+        "num": "1.1",
+        "titre": "Vocabulaire et structure des solutions",
+        "page": 4
+      },
+      {
+        "num": "1.2",
+        "titre": "Équations du premier ordre, recollement",
+        "page": 6
+      },
+      {
+        "num": "1.3",
+        "titre": "Second ordre à coefficients constants",
+        "page": 8
+      },
+      {
+        "num": "1.4",
+        "titre": "Second ordre à coefficients continus",
+        "page": 10
+      },
+      {
+        "num": "1.5",
+        "titre": "Quelle méthode ? Synthèse",
+        "page": 12
+      }
+    ],
+    "corriges": {
+      "debut": 14,
+      "fin": 16
+    }
+  },
+  "fiche": {
+    "doc": "fiche-ed",
+    "debut": 1,
+    "fin": 3,
+    "sections": [
+      {
+        "num": "1.1",
+        "titre": "Structure et théorème de Cauchy",
+        "page": 1
+      },
+      {
+        "num": "1.2",
+        "titre": "Premier ordre, recollement",
+        "page": 1
+      },
+      {
+        "num": "1.3",
+        "titre": "Second ordre à coefficients constants",
+        "page": 2
+      },
+      {
+        "num": "1.4",
+        "titre": "Second ordre à coefficients continus",
+        "page": 2
+      },
+      {
+        "num": "1.5",
+        "titre": "Quelle méthode ? Pièges",
+        "page": 3
+      },
+      {
+        "num": "1.6",
+        "titre": "Résultats du TD",
+        "page": 3
+      }
+    ]
+  },
+  "presentation": {
+    "doc": "presentation-ed",
+    "debut": 1,
+    "fin": 86,
+    "statique": {
+      "doc": "presentation-ed-statique",
+      "debut": 1,
+      "fin": 44
+    },
+    "exercices": 7,
+    "sections": [
+      {
+        "num": "1.1",
+        "titre": "Structure, théorème de Cauchy",
+        "page": 5,
+        "pageStatique": 5
+      },
+      {
+        "num": "1.2",
+        "titre": "Premier ordre, recollement",
+        "page": 20,
+        "pageStatique": 12
+      },
+      {
+        "num": "1.3",
+        "titre": "Second ordre, coefficients constants",
+        "page": 42,
+        "pageStatique": 22
+      },
+      {
+        "num": "1.4",
+        "titre": "Second ordre, coefficients continus",
+        "page": 61,
+        "pageStatique": 31
+      },
+      {
+        "num": "1.5",
+        "titre": "Quelle méthode ? Synthèse",
+        "page": 83,
+        "pageStatique": 41
+      }
+    ]
+  },
+  "erreurs": [
+    "Prendre une primitive de $a$ sans avoir normalisé l'équation (diviser par le coefficient de $y'$), ou se tromper de signe dans $Ke^{-A(t)}$.",
+    "Chercher une solution particulière $Ce^{mt}$ alors que $m$ est racine de l'équation caractéristique (résonance) : le degré de $Q$ augmente de la multiplicité.",
+    "Second membre en $\\sin(\\omega t)$ : prendre la partie réelle au lieu de la partie imaginaire.",
+    "Fixer les constantes avec les conditions initiales avant d'avoir ajouté la solution particulière.",
+    "Diviser par un coefficient qui s'annule sans le signaler, puis appliquer le théorème de Cauchy en ce point.",
+    "Recollement : oublier de vérifier la dérivabilité et l'équation au point de raccord, ou affirmer l'unicité sans preuve.",
+    "Série entière : oublier le rayon de convergence, ou croire qu'elle donne toujours toutes les solutions."
+  ],
+  "flash": [
+    {
+      "q": "Structure de l'ensemble des solutions de $y''+a(t)y'+b(t)y=c(t)$ ?",
+      "r": "$S_E=y_p+S_H$, où $S_H$ est un plan vectoriel ($a,b,c$ continues sur un intervalle)."
+    },
+    {
+      "q": "Solutions de $y'+a(t)y=0$ sur un intervalle ?",
+      "r": "$y=Ke^{-A(t)}$, $A$ primitive de $a$."
+    },
+    {
+      "q": "Variation de la constante au premier ordre : que reste-t-il ?",
+      "r": "Avec $y=\\lambda(t)e^{-A(t)}$ : $\\lambda'(t)=b(t)e^{A(t)}$."
+    },
+    {
+      "q": "$y''-2y'+y=e^t$ : quelle forme pour $y_p$ ?",
+      "r": "$1$ est racine double : $y=Q(t)e^t$ avec $Q''=1$, soit $y_p=\\frac{t^2}2e^t$."
+    },
+    {
+      "q": "Solutions réelles de $y''+2y'+5y=0$ ?",
+      "r": "$r=-1\\pm2i$ : $y=e^{-t}(A\\cos2t+B\\sin2t)$."
+    },
+    {
+      "q": "On connaît une solution $\\varphi$ de $(H)$ qui ne s'annule pas. Que faire ?",
+      "r": "Poser $y=\\lambda\\varphi$ : on obtient une équation du premier ordre en $\\lambda'$."
+    },
+    {
+      "q": "Combien de conditions initiales pour un problème de Cauchy du second ordre ?",
+      "r": "Deux : $y(t_0)$ et $y'(t_0)$."
+    }
+  ]
+}

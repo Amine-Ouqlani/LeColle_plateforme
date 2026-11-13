@@ -71,6 +71,9 @@
 
 \newcommand{\sh}{\operatorname{sh}}\newcommand{\ch}{\operatorname{ch}}\DeclareMathOperator{\argsh}{argsh}
 \hypersetup{pdftitle={Le Collé — fiche de référence : équations différentielles}}
+% NIVEAU DU CHAPITRE (même interrupteur que le livret) : \PTfalse = programme de PTSI seulement ;
+% \PTtrue = version complète de PT. Le contenu de PT est conservé dans les blocs \ifPT ... \fi.
+\newif\ifPT \ifdefined\VERSIONPT \PTtrue \else \PTfalse \fi
 \begin{document}
 \thispagestyle{empty}
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
@@ -81,16 +84,23 @@
 \vspace{0.6em}
 {\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Elle reprend tout le cours
 du chapitre avec les mêmes numéros de parties et les mêmes notations que la présentation et le livre. Les renvois \livre{th.~1.3}
-désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet. $I$ est un intervalle non réduit à un point, $\K=\R$ ou $\C$.}
+désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet.\ifPT\else{} Programme de première année (PTSI).\fi $I$ est un intervalle non réduit à un point, $\K=\R$ ou $\C$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
 1.1 Structure et théorème de Cauchy \dotfill\pageref{n11}\\
+\ifPT
 1.2 Premier ordre, recollement \dotfill\pageref{n12}\\
 1.3 Second ordre à coefficients constants \dotfill\pageref{n13}\\
 1.4 Second ordre à coefficients continus \dotfill\pageref{n14}\\
 1.5 Quelle méthode ? Pièges \dotfill\pageref{n15}\\
 1.6 Résultats du TD \dotfill\pageref{n16}\\
+\else
+1.2 Premier ordre \dotfill\pageref{n12}\\
+1.3 Second ordre à coefficients constants \dotfill\pageref{n13}\\
+1.4 Quelle méthode ? Pièges \dotfill\pageref{n15}\\
+1.5 Résultats du TD \dotfill\pageref{n16}\\
+\fi
 \end{tabular}}
 
 \vspace{0.6em}
@@ -100,9 +110,15 @@ désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet. $I$ 
 \notion{1.1 Structure et théorème de Cauchy}\label{n11}
 
 \begin{DEF}[\livre{déf.~1.1}]
+\ifPT
 Ordre 1 : $(E)$ $y'+a(t)y=b(t)$. Ordre 2 : $(E)$ $y''+a(t)y'+b(t)y=c(t)$, avec $a,b,c$ \emph{continues} sur $I$ (forme
 \emph{normalisée}). $(H)$ : même équation avec second membre nul.\\
 $\alpha(t)y''+\beta(t)y'+\gamma(t)y=\delta(t)$ se normalise en divisant par $\alpha$, \emph{seulement là où $\alpha\neq0$}.
+\else
+Ordre 1 : $(E)$ $y'+a(t)y=b(t)$, $a,b$ \emph{continues} sur $I$ (forme \emph{normalisée}). Ordre 2 : $(E)$ $y''+ay'+by=c(t)$,
+$a,b$ \emph{constants}, $c$ continue. $(H)$ : même équation avec second membre nul.\\
+$\alpha(t)y'+\beta(t)y=\gamma(t)$ se normalise en divisant par $\alpha$, \emph{seulement là où $\alpha\neq0$}.
+\fi
 \end{DEF}
 
 \begin{PROP}[STRUCTURE \livre{prop.~1.2}]
@@ -130,7 +146,7 @@ $\dt{y_1(t_0)&y_2(t_0)\\y_1'(t_0)&y_2'(t_0)}\neq0$.
 \end{METH}
 
 % ======================================================================
-\notion{1.2 Premier ordre, recollement}\label{n12}
+\notion{1.2 Premier ordre\ifPT, recollement\fi}\label{n12}
 
 \begin{FORM}[ÉQUATION HOMOGÈNE \livre{th.~1.5}]
 $A$ primitive de $a$ sur $I$ : solutions de $y'+a(t)y=0$ :
@@ -161,6 +177,7 @@ Conclure par équivalence (ou vérifier).\\
 Ex. : $f(x)=1+\int_0^xtf(t)\,dt\iff f'=xf$, $f(0)=1\iff f=e^{x^2/2}$.
 \end{METH}
 
+\ifPT
 \begin{METH}{Recoller en $t_0$ où $\alpha(t_0)=0$ \livre{méth.~1.3}}
 \begin{enumerate}
 \item Résoudre de chaque côté : constantes $K_-$, $K_+$.
@@ -176,10 +193,11 @@ $ty'=1$ : $\ln|t|+K_\pm$ ; aucune solution sur $\R$.\\
 $ty'-2y=t^3$ : $t^3+K_\pm t^2$, $K_+,K_-$ libres \livre{TD~18}.
 \end{FORM}
 
+\fi
 % ======================================================================
 \notion{1.3 Second ordre à coefficients constants}\label{n13}
 
-\begin{FORM}[ÉQUATION CARACTÉRISTIQUE \livre{th.~1.11}]
+\begin{FORM}[ÉQUATION CARACTÉRISTIQUE \livre{th.~\ifPT1.11\else1.10\fi}]
 $y''+ay'+by=0$ ;\ $e^{rt}$ solution $\iff r^2+ar+b=0$.\\
 $\K=\C$ : $r_1\neq r_2$ : $Ae^{r_1t}+Be^{r_2t}$ ;\ racine double $r$ : $(A+Bt)e^{rt}$.\\
 $a,b$ réels, solutions réelles, $\Delta=a^2-4b$ :\\
@@ -190,7 +208,7 @@ $\Delta<0$, $r=\alpha\pm i\beta$ & $e^{\alpha t}\big(A\cos\beta t+B\sin\beta t\b
 \end{tabular}
 \end{FORM}
 
-\begin{METH}{Second membre $P(t)e^{mt}$ \livre{méth.~1.4}}
+\begin{METH}{Second membre $P(t)e^{mt}$ \livre{méth.~\ifPT1.4\else1.3\fi}}
 $y=Q(t)e^{mt}$, $\deg Q=\deg P+$ (multiplicité de $m$ : $0$, $1$ ou $2$).\\
 En reportant :
 \[Q''+(2m+a)Q'+(m^2+am+b)Q=P.\]
@@ -206,6 +224,7 @@ $y''+2\lambda y'+\omega^2y=0$ ($\lambda,\omega>0$) : $\lambda>\omega$ apériodiq
 pseudo-périodique, pulsation $\sqrt{\omega^2-\lambda^2}$, amortie par $e^{-\lambda t}$.
 \end{FORM}
 
+\ifPT
 \begin{METH}{Variation de la constante, ordre 2 \livre{méth.~1.5}}
 Second membre d'une autre forme : $\varphi$ solution de $(H)$ \emph{ne s'annulant pas} sur $I$ ($e^{rt}$, ou $\cos$ sur
 $]-\frac\pi2,\frac\pi2[$), $y=\lambda\varphi$ : équation du \emph{premier ordre} en $\lambda'$, puis intégrer.\\
@@ -256,7 +275,9 @@ $(1+x)^\alpha$ : $(1+x)y'=\alpha y$, $y(0)=1$, $a_{n+1}=\frac{\alpha-n}{n+1}a_n$
 Une série entière ne donne en général qu'une partie de $S_H$, et seulement sur $]-R,R[$.
 \end{PIEGE}
 
+\fi
 % ======================================================================
+\ifPT
 \notion{1.5 Quelle méthode ? Pièges}\label{n15}
 {\small\renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}@{}}
@@ -284,7 +305,35 @@ Systèmes différentiels $X'=AX$, équations d'ordre $n\geq3$, wronskien comme o
 L'équation d'Euler n'est au programme qu'avec l'indication $t=e^x$.
 \end{HPBOX}
 
+\else
+\notion{1.4 Quelle méthode ? Pièges}\label{n15}
+{\small\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}@{}}
+\hline
+\textbf{Équation} & \textbf{Méthode}\\\hline
+$y'+a(t)y=b(t)$ & $Ke^{-A}$ ; évidente, forme du second membre, ou variation\\
+$\alpha(t)y'+\beta(t)y=\gamma(t)$ & normaliser sur chaque intervalle où $\alpha\neq0$\\
+$y''+ay'+by=c(t)$ & caractéristique ; $P(t)e^{mt}$ ; superposition\\
+$f$ sous $\int_0^x$ & dériver\\
+$f'(x)=f(-x)$, etc. & dériver, puis \emph{réciproque}\\\hline
+\end{tabular}}
+
+\begin{PIEGE}
+Normaliser avant la primitive ; signe de $e^{-A}$.\\
+Résonance : si $m$ est racine, $Ce^{mt}$ ne marche pas.\\
+$\sin$ au second membre : partie \emph{imaginaire}.\\
+Conditions initiales \emph{après} avoir ajouté $y_p$.\\
+Diviser par un coefficient qui s'annule sans le dire.
+\end{PIEGE}
+
+\begin{HPBOX}
+Programme de première année. Second ordre à coefficients non constants, recollement, variation de la constante au second
+ordre : cours de deuxième année, ajoutés plus tard.
+\end{HPBOX}
+
+\fi
 % ======================================================================
+\ifPT
 \notion{1.6 Résultats du TD}\label{n16}
 {\small
 \renewcommand{\arraystretch}{1.12}
@@ -306,5 +355,23 @@ TD27 & $ty''+2y'+ty=0$ : sur $\R$, la droite $\frac{\sin t}t$.\\
 TD28 & $y''+y=f$ ($2\pi$-pér.) : solutions périodiques $\iff\int_0^{2\pi}f\cos=\int_0^{2\pi}f\sin=0$.
 \end{tabular}}
 
+\else
+\notion{1.5 Résultats du TD}\label{n16}
+{\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
+TD2 & $y'-2y=e^t\sin2t$ : $y_p=-\frac{e^t}5(\sin2t+2\cos2t)$ ; $y'+y=te^{-t}$ : $\frac{t^2}2e^{-t}$.\\
+TD6 & $\cos t\,y'+\sin t\,y=1$, $y(0)=2$ : $y=\sin t+2\cos t$.\\
+TD8 & $y''+y=\sin t$, $y(0)=y'(0)=0$ : $\frac{\sin t-t\cos t}2$, non bornée.\\
+TD10 & $y''-4y'+4y=(t+1)e^{2t}$ : $Q''=t+1$, $y_p=\left(\frac{t^3}6+\frac{t^2}2\right)e^{2t}$.\\
+TD12 & $(1+t^2)y'+ty=1$ : $y=\frac{\argsh t+C}{\sqrt{1+t^2}}$.\\
+TD13 & $f=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}du\right)$.\\
+TD14 & $y''+\omega^2y=\cos t$ : tout est borné si $\omega\neq1$ ; $\frac t2\sin t$ si $\omega=1$.\\
+TD15 & $f'(x)=f(-x)$ : $f=A(\cos+\sin)$.\\
+TD16 & $f(t)=-\frac{t^2}2-\frac{7t^3}{12}-\frac{11t^4}{32}+o(t^4)$.\\
+TD17 & $y''+y=f$ ($2\pi$-pér.) : solutions périodiques $\iff\int_0^{2\pi}f\cos=\int_0^{2\pi}f\sin=0$.
+\end{tabular}}
+
+\fi
 \end{multicols}
 \end{document}

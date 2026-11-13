@@ -343,45 +343,79 @@
 {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Algèbre linéaire}\par\vspace{0.3em}
 {\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
-{\small Corrections détaillées des 19 exercices du TD, dans le même ordre et avec les mêmes numéros.
+{\small Corrections détaillées des 22 exercices du TD, dans le même ordre et avec les mêmes numéros.
 Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
 resservira. Les renvois « méthode~1.3 du livret » désignent le cours.
 \textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
 
 \partie{I}{Applications directes du cours}{}
-\correction{1}{Un hyperplan de $\mathbb K^n$ et une base}{aln-1}{énoncé : TD, p.~2}
+\correction{1}{Base et coordonnées}{al-r-base}{énoncé : TD, p.~2}
+\q{1.} Si $au_1+bu_2+cu_3=0$ : $a+c=0$, $a+b=0$, $b+c=0$. Donc $c=-a$, $b=-a$, puis $b+c=-2a=0$ : $a=b=c=0$. La famille est
+libre, et c'est une famille de $3=\dim\R^3$ vecteurs : c'est une base (proposition~R.11 du livret).
+
+\q{2.} On cherche $(a,b,c)$ avec $a+c=2$, $a+b=3$, $b+c=1$. En additionnant : $2(a+b+c)=6$, soit $a+b+c=3$ ; d'où $b=3-2=1$,
+$c=3-3=0$, $a=3-1=2$. Les coordonnées de $v$ dans $\mathcal B'$ sont $(2,1,0)$ : $v=2u_1+u_2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{2}{Noyau, image et théorème du rang}{al-r-rang}{énoncé : TD, p.~2}
+\q{1.} Les colonnes sont les images des vecteurs de la base canonique :
+$A=\begin{pmatrix}1&1&-1\\1&2&0\\0&1&1\end{pmatrix}$.
+
+\q{2.} $\Ker f$ : $x+y-z=0$, $x+2y=0$, $y+z=0$. Les deux dernières équations donnent $x=-2y$, $z=-y$, et la première est
+alors vérifiée ($-2y+y+y=0$). Donc $\Ker f=\vect\big((-2,1,-1)\big)$, de dimension $1$.\\
+$\Im f$ est engendrée par les colonnes $C_1=(1,1,0)$, $C_2=(1,2,1)$, $C_3=(-1,0,1)$ ; le vecteur du noyau donne la relation
+$-2C_1+C_2-C_3=0$, donc $C_3\in\vect(C_1,C_2)$, et $C_1$, $C_2$ ne sont pas colinéaires : $(C_1,C_2)$ est une base de $\Im f$.
+Théorème du rang : $\dim\Ker f+\rg f=1+2=3=\dim\R^3$.
+
+\q{3.} $\Ker f\neq\{0\}$ : $f$ n'est pas injective ; $\rg f=2<3$ : elle n'est pas surjective (ce qui était prévisible : pour un
+endomorphisme en dimension finie, les deux vont ensemble). Une équation $\alpha x+\beta y+\gamma z=0$ de $\Im f$ doit être vérifiée
+par $C_1$ et $C_2$ : $\alpha+\beta=0$, $\alpha+2\beta+\gamma=0$ ; avec $\alpha=1$ : $\beta=-1$, $\gamma=1$. Donc
+$\Im f$ : $x-y+z=0$ (et $C_3$ la vérifie bien).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{3}{Inverse et changement de base}{al-r-chgt}{énoncé : TD, p.~2}
+\q{1.} $u_1$ et $u_2$ ne sont pas colinéaires : c'est une famille libre de $2$ vecteurs de $\R^2$, donc une base.
+$P=\begin{pmatrix}1&2\\1&1\end{pmatrix}$, $1\times1-2\times1=-1\neq0$, et
+$P^{-1}=\dfrac1{-1}\begin{pmatrix}1&-2\\-1&1\end{pmatrix}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}$.
+
+\q{2.} $f(u_1)=(3-2,\,1)=(1,1)=u_1$ et $f(u_2)=(6-2,\,2)=(4,2)=2u_2$. Donc $D=\begin{pmatrix}1&0\\0&2\end{pmatrix}$. Vérification :
+$AP=\begin{pmatrix}1&4\\1&2\end{pmatrix}$ et $P^{-1}(AP)=\begin{pmatrix}-1+2&-4+4\\1-1&4-2\end{pmatrix}=D$.
+
+\q{3.} $A=PDP^{-1}$, donc $A^k=PD^kP^{-1}$ (les $P^{-1}P$ intermédiaires se simplifient), avec $D^k=\begin{pmatrix}1&0\\0&2^k\end{pmatrix}$ :
+\[A^k=\begin{pmatrix}1&2^{k+1}\\1&2^k\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}=\begin{pmatrix}2^{k+1}-1&2-2^{k+1}\\2^k-1&2-2^k\end{pmatrix}.\]
+Contrôle : $k=1$ redonne $A$, $k=0$ redonne $I_2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{4}{Un hyperplan de $\mathbb K^n$ et une base}{aln-1}{énoncé : TD, p.~3}
 \choix{$H$ est le noyau d'une forme linéaire non nulle : c'est un hyperplan ; il suffit ensuite d'une famille libre de bon cardinal.}
 \q{1.} $\varphi:(x_i)\mapsto\sum x_i$ est une forme linéaire non nulle ($\varphi(e_1)=1$) : $H=\Ker\varphi$ est un hyperplan, $\dim H=n-1$.
 \q{2.} Chaque $f_i$ est dans $H$ ($1-1=0$). Si $\sum_{i=1}^{n-1}\lambda_if_i=0$, la $i$-ième coordonnée vaut $\lambda_i=0$ pour $i\leq n-1$ :
 la famille est libre. Elle a $n-1=\dim H$ vecteurs : c'est une base de $H$.
 \retenir{famille libre de $\dim H$ vecteurs de $H$ : base de $H$, sans vérifier qu'elle engendre.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{2}{Un supplémentaire dans $\mathbb R_2[X]$}{aln-2}{énoncé : TD, p.~2}
+\correction{5}{Un supplémentaire dans $\mathbb R_2[X]$}{aln-2}{énoncé : TD, p.~3}
 $P\mapsto P(1)$ est une forme linéaire non nulle sur $\R_2[X]$ : $F$ est un hyperplan, de dimension $2$. Le polynôme constant $1$
 n'est pas dans $F$, donc $\R_2[X]=F\oplus\vect(1)$ (un hyperplan et une droite qui n'y est pas contenue). Décomposition :
 $P=P(1)+\big(P-P(1)\big)$, avec $P(1)\in\vect(1)$ et $P-P(1)\in F$.
 \retenir{hyperplan $+$ droite non contenue dans l'hyperplan $=$ supplémentaires.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{3}{Sommes directes dans $\mathbb R^3$}{red-somme}{énoncé : TD, p.~2}
+\correction{6}{Sommes directes dans $\mathbb R^3$}{red-somme}{énoncé : TD, p.~3}
 \q{1.} Si $v\in F\cap G$, $v=(m,m,m)$ et $3m=0$ : $F\cap G=\{0\}$. De plus $\dim F=2$ (un hyperplan de $\R^3$) et $\dim G=1$ : la
 somme est directe et de dimension $3$, donc $\R^3=F\oplus G$. On cherche $v=w+m(1,1,1)$ avec $w\in F$ : la somme des coordonnées
 de $w$ est nulle, d'où $x+y+z=3m$. Donc
 \[v=\underbrace{\big(x-m,\,y-m,\,z-m\big)}_{\in F}+\underbrace{m(1,1,1)}_{\in G},\qquad m=\frac{x+y+z}3.\]
 \q{2.} Les intersections deux à deux sont nulles, mais $(1,0,0)+(0,1,0)-(1,1,0)=0$ est une décomposition non triviale de $0$ :
-la somme n'est pas directe (proposition~1.7 du livret). D'ailleurs $D_1+D_2+D_3$ est le plan $z=0$, de dimension $2<3$.
+la somme n'est pas directe (proposition~1.4 du livret). D'ailleurs $D_1+D_2+D_3$ est le plan $z=0$, de dimension $2<3$.
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{4}{Hyperplans de $\mathbb R^4$}{red-hyp}{énoncé : TD, p.~3}
+\correction{7}{Hyperplans de $\mathbb R^4$}{red-hyp}{énoncé : TD, p.~3}
 \q{1.} En ajoutant et en retranchant les équations : $x+z=0$ et $y+t=0$. Donc $H_1\cap H_2=\{(x,y,-x,-y)\}$, de base
 $\big((1,0,-1,0),(0,1,0,-1)\big)$ : dimension $2=4-2$.
-\q{2.} $u\notin H_1$ ($1+1+1+1=4\neq0$) : $\R^4=H_1\oplus\vect(u)$ (proposition~1.11 du livret). En revanche $u\in H_2$
+\q{2.} $u\notin H_1$ ($1+1+1+1=4\neq0$) : $\R^4=H_1\oplus\vect(u)$ (proposition~1.8 du livret). En revanche $u\in H_2$
 ($1-1+1-1=0$) : $\vect(u)\subset H_2$, ce n'est pas un supplémentaire.
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{5}{Projecteurs associés}{aln-12}{énoncé : TD, p.~3}
+\correction{8}{Projecteurs associés}{aln-12}{énoncé : TD, p.~4}
 Pour $x=x_F+x_G$ (décomposition unique), $p(x)=x_F$ et $q(x)=x_G$ : $p(x)+q(x)=x$. Ensuite $q(x)\in G$, donc $p\big(q(x)\big)=0$ ;
 de même $q\circ p=0$. Enfin $\Ker p=G=\Im q$ et $\Ker q=F=\Im p$.
 \retenir{une décomposition $E=F\oplus G$ donne deux projecteurs de somme $\Id_E$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{6}{Fonctions paires et impaires}{rdn-17}{énoncé : TD, p.~3}
+\correction{9}{Fonctions paires et impaires}{rdn-17}{énoncé : TD, p.~4}
 \choix{dimension infinie : on revient à la définition (existence et unicité de la décomposition), par analyse-synthèse.}
 \emph{Unicité.} Si $f\in\mathcal P\cap\mathcal I$, $f(-x)=f(x)=-f(x)$, donc $f=0$. \emph{Existence.} Pour $f\in E$, on pose
 $p(x)=\frac{f(x)+f(-x)}2$ (paire) et $i(x)=\frac{f(x)-f(-x)}2$ (impaire) : $f=p+i$. Donc $E=\mathcal P\oplus\mathcal I$.
@@ -390,30 +424,30 @@ Pour $\exp$ : $\exp=\ch+\sh$.
 $\mathcal I=\Ker(s+\Id_E)$. La décomposition est celle de la proposition sur les symétries.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \partie{II}{Exercices classiques et méthodes incontournables}{}
-\correction{7}{Projecteur et symétrie dans $\mathbb R^3$}{al-proj}{énoncé : TD, p.~4}
+\correction{10}{Projecteur et symétrie dans $\mathbb R^3$}{al-proj}{énoncé : TD, p.~5}
 \choix{on décompose un vecteur quelconque selon $P\oplus D$ : la condition « $x-x_D\in P$ » donne directement la composante sur $D$.}
 \q{1.} $P$ : $y=2x+z$, de base $\big((1,2,0),(0,1,1)\big)$. $D$ : $(x,0,x)$, de base $w=(1,0,1)$. Comme $2\cdot1-0+1=3\neq0$,
-$w\notin P$ : $P\cap D=\{0\}$, et $\dim P+\dim D=3$, donc $\R^3=P\oplus D$ (c'est aussi la proposition~1.11 du livret, point 2).
+$w\notin P$ : $P\cap D=\{0\}$, et $\dim P+\dim D=3$, donc $\R^3=P\oplus D$ (c'est aussi la proposition~1.8 du livret, point 2).
 \q{2.} Soit $v=(x,y,z)$. On cherche $t$ tel que $v-tw\in P$ : $2(x-t)-y+(z-t)=0$, soit $t=\frac{2x-y+z}3$. Alors
 $p(v)=v-tw$ et $s(v)=2p(v)-v=v-2tw$. Dans la base canonique :
 \[\Mat(p)=\frac13\begin{pmatrix}1&1&-1\\0&3&0\\-2&1&2\end{pmatrix},\qquad\Mat(s)=\frac13\begin{pmatrix}-1&2&-2\\0&3&0\\-4&2&1\end{pmatrix}.\]
 Le calcul direct donne $\Mat(p)^2=\Mat(p)$ et $\Mat(s)^2=I_3$. Contrôles : $\tr p=2=\rg p=\dim P$, et $\tr s=2-1=1$.
 \retenir{pour une projection, on ne cherche que la composante « parallèle » ; la symétrie s'en déduit par $s=2p-\Id$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{8}{Deux propriétés de la trace}{red-trace}{énoncé : TD, p.~4}
+\correction{11}{Deux propriétés de la trace}{red-trace}{énoncé : TD, p.~5}
 \q{1.} Par linéarité et $\tr(AB)=\tr(BA)$ : $\tr(AB-BA)=0$, alors que $\tr(I_n)=n\neq0$.
 \q{2.} L'endomorphisme $p$ de $\K^n$ associé à $A$ est un projecteur ; dans une base adaptée à $\K^n=\Im p\oplus\Ker p$, sa matrice
 est $\mathrm{diag}(I_r,0)$ avec $r=\rg(p)$. Donc $A$ est semblable à cette matrice, et $\tr A=r=\rg A$.
 \retenir{la trace ne voit pas l'ordre d'un produit de deux matrices : $\tr(AB-BA)=0$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{9}{La trace détermine une matrice}{aln-5}{énoncé : TD, p.~4}
+\correction{12}{La trace détermine une matrice}{aln-5}{énoncé : TD, p.~5}
 \choix{tester la relation sur les matrices de la base canonique.}
 Le sens réciproque est clair. Pour $M=E_{j,i}$, la matrice $AE_{j,i}$ a pour $i$-ième colonne la $j$-ième colonne de $A$ et des
 colonnes nulles ailleurs : son seul coefficient diagonal éventuellement non nul est en position $(i,i)$, et vaut $a_{i,j}$. Donc
 $\tr(AE_{j,i})=a_{i,j}$, et l'hypothèse donne $a_{i,j}=b_{i,j}$ pour tous $i,j$.
 \retenir{$\tr(AE_{j,i})=a_{i,j}$ : les formes $M\mapsto\tr(AM)$ suffisent à retrouver $A$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{10}{Rang d'une matrice à paramètres}{aln-6}{énoncé : TD, p.~5}
+\correction{13}{Rang d'une matrice à paramètres}{aln-6}{énoncé : TD, p.~6}
 \choix{opérations élémentaires sur les lignes et les colonnes, qui ne changent pas le rang ; on discute aux valeurs qui annulent un pivot.}
 $C_2\leftarrow C_2-bC_3$ donne les colonnes $(a,1,1)$, $(0,ab-b,b-ab)=b(a-1)(0,1,-1)$ et $(1,1,a)$.
 \begin{itemize}
@@ -425,7 +459,7 @@ proportionnelles si et seulement si $-a(a-1)+2(1-a)=-(a-1)(a+2)=0$, soit $a=-2$.
 \end{itemize}
 \gain{au chapitre~2, on obtiendra d'un coup $\det M=b(a-1)^2(a+2)$, qui donne les cas de rang $3$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{11}{Un projecteur donné par sa matrice}{aln-4}{énoncé : TD, p.~5}
+\correction{14}{Un projecteur donné par sa matrice}{aln-4}{énoncé : TD, p.~6}
 \q{1.} Le calcul donne $A^2=A$ : $u$ est un projecteur, et $\rg u=\tr A=\frac12+1+\frac12=2$.
 \q{2.} $\Ker u$ : $\frac x2+y-\frac z2=0$, $y=0$, d'où $x=z$ : $\Ker u=\vect(1,0,1)$. $\Im u$ est engendrée par les colonnes, par
 exemple $(1,0,-1)$ (le double de la première) et $(1,1,1)$, non proportionnelles : c'est une base. Un vecteur $(a,b,c)$ orthogonal
@@ -434,7 +468,7 @@ aux deux, $(1,-2,1)$, donne l'équation $x-2y+z=0$ (les deux vecteurs la vérifi
 $\big((1,0,1),(1,0,-1),(1,1,1)\big)$, la matrice de $u$ est $\mathrm{diag}(0,1,1)$ : $P=\begin{pmatrix}1&1&1\\0&0&1\\1&-1&1\end{pmatrix}$.
 \retenir{projecteur : rang $=$ trace, et la base adaptée à $\Ker\oplus\Im$ donne la matrice $\mathrm{diag}(0,\dots,0,1,\dots,1)$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{12}{Lire des blocs}{red-stable}{énoncé : TD, p.~5}
+\correction{15}{Lire des blocs}{red-stable}{énoncé : TD, p.~6}
 \q{1.} $f(x,0,z)=(3x+z,\,0,\,x+3z)$ a une deuxième coordonnée nulle : $F$ est stable. $f(u)=A(1,1,0)^T=(2,2,0)=2u$ : $G$ est stable.
 \q{2.} $u\notin F$ (sa deuxième coordonnée vaut $1$) : $\R^3=F\oplus G$. Dans la base $(e_1,e_3,u)$ : $f(e_1)=(3,0,1)=3e_1+e_3$,
 $f(e_3)=(1,0,3)=e_1+3e_3$, $f(u)=2u$, donc
@@ -442,24 +476,24 @@ $f(e_3)=(1,0,3)=e_1+3e_3$, $f(u)=2u$, donc
 \retenir{deux sous-espaces stables supplémentaires $\Rightarrow$ matrice diagonale par blocs.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \partie{III}{Exercices de synthèse et approfondissement}{}
-\correction{13}{Deux sous-espaces trop grands se coupent}{aln-3}{énoncé : TD, p.~6}
+\correction{16}{Deux sous-espaces trop grands se coupent}{aln-3}{énoncé : TD, p.~7}
 Par la formule de Grassmann, $\dim(F\cap G)=\dim F+\dim G-\dim(F+G)\geq\dim F+\dim G-\dim E>0$. Deux plans de $\R^3$ :
 $2+2>3$, donc leur intersection est de dimension au moins $1$.
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{14}{Matrices de rang au plus $1$}{aln-7}{énoncé : TD, p.~6}
+\correction{17}{Matrices de rang au plus $1$}{aln-7}{énoncé : TD, p.~7}
 Si $M=UV^T$, la $j$-ième colonne de $M$ est $v_jU$ : toutes les colonnes sont dans $\vect(U)$, et $\rg M\leq1$. Réciproquement, si
 $\rg M=0$, $M=0=0\cdot V^T$ ; si $\rg M=1$, l'image est une droite $\vect(U)$, chaque colonne s'écrit $v_jU$, et $M=UV^T$ avec
 $V=(v_j)$. Enfin $V^TU=\sum_iv_iu_i=\tr(UV^T)$ est un scalaire, donc $M^2=U(V^TU)V^T=\tr(M)\,M$.
 \retenir{une matrice de rang $1$ est un produit « colonne $\times$ ligne », et $M^2=\tr(M)\,M$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{15}{Une matrice de carré nul}{aln-8}{énoncé : TD, p.~6}
+\correction{18}{Une matrice de carré nul}{aln-8}{énoncé : TD, p.~7}
 \q{1.} Les trois lignes sont proportionnelles à $(1,1,-1)$ : $\rg f=1$, et $\Ker f$ est le plan $x+y-z=0$, de base
 $\big((-1,1,0),(1,0,1)\big)$. $\Im f=\vect(u)$, $u=(1,-3,-2)$. Comme $1-3+2=0$, $u\in\Ker f$ : $\Im f\subset\Ker f$, donc $f\circ f=0$.
 \q{2.} $f(e_1)=u$. Dans la base $(u,k,e_1)$ avec $k=(1,0,1)$ : $(u,k)$ est une base de $\Ker f$ et $e_1\notin\Ker f$, c'est donc une
 base de $\R^3$. Comme $f(u)=f(k)=0$ et $f(e_1)=u$, la matrice de $f$ a pour seul coefficient non nul un $1$ en position $(1,3)$.
 \retenir{$\Ker f$ et $\Im f$ ne sont pas toujours supplémentaires : ici $\Im f\subset\Ker f$.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{16}{L'endomorphisme $M\mapsto AM-MA$}{al-crochet}{énoncé : TD, p.~7}
+\correction{19}{L'endomorphisme $M\mapsto AM-MA$}{al-crochet}{énoncé : TD, p.~8}
 \choix{on calcule l'image de chaque vecteur de la base canonique ; la trace donne le contrôle de l'image.}
 \q{1.} $\varphi(\lambda M+N)=A(\lambda M+N)-(\lambda M+N)A=\lambda\varphi(M)+\varphi(N)$, et $\varphi(M)\in\mathcal M_2(\R)$. Par
 $\tr(AM)=\tr(MA)$, $\tr\varphi(M)=0$ : $\Im\varphi$ est contenue dans l'hyperplan $\Ker\tr$, de dimension $3$.
@@ -469,14 +503,14 @@ $\varphi(E_{2,1})=\begin{pmatrix}1&0\\-2&-1\end{pmatrix}$, $\varphi(E_{2,2})=\be
 Les colonnes $C_1$ et $C_2$ ne sont pas proportionnelles, $C_4=-C_1$ et $C_3=-2C_1-C_2$ : le rang vaut $2$, donc
 $\dim\Ker\varphi=2$ (théorème du rang). Or $I_2$ et $A$ commutent avec $A$, et ne sont pas proportionnelles : $\Ker\varphi=\vect(I_2,A)$.
 Et $\Im\varphi=\vect\big(\varphi(E_{1,1}),\varphi(E_{1,2})\big)$, un plan contenu dans l'hyperplan des matrices de trace nulle.
-\q{3.} $\Ker\varphi$ et $\Im\varphi$ sont stables par $\varphi$ (proposition~1.17 du livret). Une matrice de $\Ker\varphi\cap\Im\varphi$
+\q{3.} $\Ker\varphi$ et $\Im\varphi$ sont stables par $\varphi$ (proposition~1.14 du livret). Une matrice de $\Ker\varphi\cap\Im\varphi$
 s'écrit $aI_2+bA$ avec une trace nulle : $2a=0$ ($\tr A=0$), donc $bA\in\Im\varphi$. Or $A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ n'est
 pas dans $\Im\varphi$ : si $A=\lambda\varphi(E_{1,1})+\mu\varphi(E_{1,2})=\begin{pmatrix}-\mu&-\lambda+2\mu\\\lambda&\mu\end{pmatrix}$,
 le coefficient $(2,1)$ donne $\lambda=1$, le coefficient $(1,1)$ donne $\mu=-1$, et le coefficient $(1,2)$ vaudrait $-3\neq1$. Donc $b=0$ : l'intersection est
 nulle, et $\dim\Ker\varphi+\dim\Im\varphi=4$ : ils sont supplémentaires.
 \retenir{$M\mapsto AM-MA$ : son noyau contient toujours $\vect(I_n,A)$, son image est dans l'hyperplan des matrices de trace nulle.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{17}{Matrices nilpotentes de taille 2}{aln-11}{énoncé : TD, p.~7}
+\correction{20}{Matrices nilpotentes de taille 2}{aln-11}{énoncé : TD, p.~8}
 \q{1.} Avec $M=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ : $M^2=\begin{pmatrix}a^2+bc&b(a+d)\\c(a+d)&d^2+bc\end{pmatrix}$, et
 $M^2-(a+d)M=\begin{pmatrix}bc-ad&0\\0&bc-ad\end{pmatrix}=-\det(M)I_2$.
 \q{2.} Si $\tr A=\det A=0$, la question 1 donne $A^2=0$. Réciproquement, si $A^k=0$ : $(\det A)^k=\det(A^k)=0$ (déterminant d'un
@@ -487,14 +521,14 @@ Réciproquement, $E_{1,2}$, $E_{2,1}$ et $\begin{pmatrix}1&1\\-1&-1\end{pmatrix}
 engendrent $\Ker\tr$ : la troisième moins la première plus la deuxième donne $\mathrm{diag}(1,-1)$.
 \retenir{en taille $2$, $M^2-\tr(M)M+\det(M)I_2=0$ : un calcul direct, très utile.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
-\correction{18}{$AB-BA=I$ en dimension infinie}{aln-13}{énoncé : TD, p.~7}
+\correction{21}{$AB-BA=I$ en dimension infinie}{aln-13}{énoncé : TD, p.~8}
 \q{1.} $(D\circ M)(P)=(XP)'=P+XP'$ et $(M\circ D)(P)=XP'$ : la différence vaut $P$.
 \q{2.} L'argument de la trace ($\tr(AB-BA)=0\neq n$) n'a de sens qu'en dimension finie. Ici $E$ est de dimension infinie, et $M$ ne
 laisse stable aucun $\R_n[X]$ (elle augmente le degré) : on ne peut pas se ramener à des matrices.
 \retenir{les résultats sur la trace supposent la dimension finie.}
 \par\hfill\textcolor{BleuClair}{$\square$}\par
 \partie{IV}{Exercices difficiles et type concours}{}
-\correction{19}{Endomorphismes de $\mathbb C^2$ de trace nulle}{aln-10}{énoncé : TD, p.~8}
+\correction{22}{Endomorphismes de $\mathbb C^2$ de trace nulle}{aln-10}{énoncé : TD, p.~9}
 \choix{la relation $M^2-\tr(M)M+\det(M)I_2=0$ (exercice sur les matrices nilpotentes) ramène tout à $f\circ f=\lambda\Id$.}
 \q{1.} Avec $M$ la matrice de $f$ dans une base : $\tr M=0$ donne $M^2=-\det(M)I_2$, soit $f\circ f=\lambda\Id$ avec $\lambda=-\det f$.
 \q{2.} Soit $\alpha\in\C$ tel que $\alpha^2=\lambda$ ($\alpha\neq0$) et $s=\frac1\alpha f$ : $s\circ s=\frac{\lambda}{\alpha^2}\Id=\Id$, donc

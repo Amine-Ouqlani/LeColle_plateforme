@@ -367,6 +367,7 @@ hyperplans, sous-espaces stables) et un premier invariant qui ne dépend pas de 
 
 \ouverture{%
 \begin{itemize}[leftmargin=1.1em,itemsep=1pt]
+\item Maîtriser l'algèbre linéaire de première année : bases, dimension, rang, matrices, changement de base (§\ref{ss:rappels}).
 \item Démontrer qu'une somme est directe ; obtenir une base adaptée et la dimension d'une somme directe.
 \item Reconnaître un projecteur ou une symétrie et en écrire la matrice dans une base adaptée.
 \item Passer d'un hyperplan ou d'un sous-espace à ses équations, et réciproquement.
@@ -379,41 +380,318 @@ Dans tout le chapitre, $\K=\R$ ou $\C$ et $E$ est un $\K$-espace vectoriel ; $\L
 Quand $E$ est de dimension finie, on note $n=\dim E$.
 
 % ---------------------------------------------------------------------
-\subsection{Rappels : applications linéaires et matrices}\label{ss:rappels}
+\subsection{Rappels de première année}\label{ss:rappels}
+% Numérotation propre aux rappels (R.1, R.2, ...) ; la numérotation du chapitre reprend à 1.1 au §1.2.
+\renewcommand{\thedefinition}{R.\arabic{definition}}
+\makeatletter\renewcommand{\thetcb@cnt@methode}{R.\arabic{tcb@cnt@methode}}\makeatother
+\renewcommand{\theexo}{R.\arabic{exo}}
 
 \begin{commencer}
-Ces résultats de première année sont utilisés dans tout le parcours d'algèbre ; ils sont énoncés sans démonstration. Si l'un
-d'eux n'est pas familier, le revoir dans le cours de première année avant de poursuivre.
+Cette partie rassemble tout le programme d'algèbre linéaire de première année (PTSI) : calcul matriciel et systèmes, espaces
+vectoriels et dimension, applications linéaires, matrices et changements de base. Ces résultats sont utilisés dans tout le
+parcours d'algèbre ; ils sont énoncés sans démonstration (numérotés R.1, R.2\dots). Les sommes directes, les supplémentaires,
+les projecteurs et les symétries, également vus en première année, sont repris au §\ref{ss:sommes} pour un nombre quelconque de
+sous-espaces. Le déterminant fait l'objet du chapitre~2.
 \end{commencer}
+
+\subsubsection*{Calcul matriciel et systèmes linéaires}
+
+\begin{definition}[opérations sur les matrices]
+$\mathcal M_{n,p}(\K)$ est l'ensemble des matrices à $n$ lignes et $p$ colonnes ; $E_{i,j}$ désigne la matrice dont le seul
+coefficient non nul est un $1$ en position $(i,j)$ (\emph{matrice élémentaire}). Pour $A\in\mathcal M_{n,p}(\K)$ et
+$B\in\mathcal M_{p,q}(\K)$, le produit $AB\in\mathcal M_{n,q}(\K)$ a pour coefficients
+\[(AB)_{i,j}=\sum_{k=1}^pa_{i,k}b_{k,j}.\]
+La \emph{transposée} $A^T\in\mathcal M_{p,n}(\K)$ est définie par $(A^T)_{i,j}=a_{j,i}$.
+\end{definition}
+
+\begin{proposition}[règles de calcul]\label{r:calcul}
+\begin{enumerate}
+\item Le produit est associatif et bilinéaire ; $I_nA=AI_p=A$. Il n'est pas commutatif, et $AB=0$ n'entraîne pas $A=0$ ou $B=0$.
+\item $(A^T)^T=A$, $(\lambda A+\mu B)^T=\lambda A^T+\mu B^T$ et $(AB)^T=B^TA^T$.
+\item \emph{Formule du binôme.} Si $A,B\in\Mn{\K}$ \emph{commutent} ($AB=BA$), pour tout $m\in\N$ :
+$\displaystyle(A+B)^m=\sum_{k=0}^m\binom mkA^kB^{m-k}$.
+\item Les matrices diagonales, triangulaires supérieures, triangulaires inférieures forment des sous-espaces stables par
+produit ; les coefficients diagonaux d'un produit de deux matrices triangulaires supérieures sont les produits des coefficients
+diagonaux. $A$ est \emph{symétrique} si $A^T=A$, \emph{antisymétrique} si $A^T=-A$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[matrices inversibles]\label{r:inverse}
+$A\in\Mn{\K}$ est \emph{inversible} s'il existe $B\in\Mn{\K}$ telle que $AB=BA=I_n$ ; on note $B=A^{-1}$ et $\GLn{\K}$ l'ensemble
+des matrices inversibles (le \emph{groupe linéaire}).
+\begin{enumerate}
+\item Si $A,B\in\GLn{\K}$ : $AB\in\GLn{\K}$ et $(AB)^{-1}=B^{-1}A^{-1}$ ; $A^T\in\GLn{\K}$ et $(A^T)^{-1}=(A^{-1})^T$.
+\item Il suffit d'une seule des deux égalités : si $AB=I_n$, alors $A$ et $B$ sont inversibles et $B=A^{-1}$.
+\item Une matrice triangulaire est inversible si et seulement si ses coefficients diagonaux sont tous non nuls.
+\item $\begin{pmatrix}a&b\\c&d\end{pmatrix}$ est inversible si et seulement si $ad-bc\neq0$, et son inverse est
+$\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[opérations élémentaires et systèmes]\label{r:systemes}
+\begin{enumerate}
+\item Les opérations élémentaires sur les lignes ($L_i\leftrightarrow L_j$ ; $L_i\leftarrow\lambda L_i$ avec $\lambda\neq0$ ;
+$L_i\leftarrow L_i+\lambda L_j$ avec $i\neq j$) reviennent à multiplier \emph{à gauche} par une matrice inversible ; sur les
+colonnes, à multiplier \emph{à droite}.
+\item Un système linéaire s'écrit $AX=B$, avec $A\in\mathcal M_{n,p}(\K)$, $X\in\mathcal M_{p,1}(\K)$ l'inconnue et
+$B\in\mathcal M_{n,1}(\K)$. Des opérations élémentaires sur les lignes du système le transforment en un système
+\emph{équivalent} (algorithme du pivot de Gauss).
+\item Si le système est \emph{compatible} (il a au moins une solution $X_0$), ses solutions sont les $X_0+Y$, où $Y$ décrit
+l'ensemble des solutions du système homogène $AY=0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{methode}{Calculer l'inverse d'une matrice}\label{m:inverse}
+\begin{itemize}
+\item \emph{Par un système :} résoudre $AX=Y$ d'inconnue $X$ pour $Y$ quelconque ; si l'on trouve $X=BY$ pour tout $Y$, alors
+$A$ est inversible et $A^{-1}=B$.
+\item \emph{Par le pivot :} appliquer à $I_n$ les opérations sur les lignes qui transforment $A$ en $I_n$ ; on obtient $A^{-1}$.
+Si l'on fait apparaître une ligne nulle, $A$ n'est pas inversible.
+\item \emph{Par un polynôme annulateur :} si $A^2+aA+bI_n=0$ avec $b\neq0$, alors $A\big(-\tfrac1b(A+aI_n)\big)=I_n$.
+\end{itemize}
+\end{methode}
+
+\begin{exemple}
+Soit $A=\begin{pmatrix}1&1&0\\0&1&1\\0&0&1\end{pmatrix}$. Le système $AX=Y$ s'écrit $x_1+x_2=y_1$, $x_2+x_3=y_2$, $x_3=y_3$ ; en
+remontant : $x_3=y_3$, $x_2=y_2-y_3$, $x_1=y_1-y_2+y_3$. Donc $A$ est inversible et
+$A^{-1}=\begin{pmatrix}1&-1&1\\0&1&-1\\0&0&1\end{pmatrix}$.
+\end{exemple}
+
+\subsubsection*{Espaces vectoriels, familles de vecteurs}
+
+\begin{definition}[espaces et sous-espaces vectoriels]
+Les espaces vectoriels de référence sont $\K^n$, $\mathcal M_{n,p}(\K)$, $\K[X]$ et $\K_n[X]$ (polynômes de degré au plus $n$),
+l'espace des fonctions d'un ensemble $\Omega$ dans $\K$ (ou dans un espace vectoriel), et l'espace $\K^\N$ des suites. Une
+\emph{combinaison linéaire} de $x_1,\dots,x_p$ est un vecteur $\lambda_1x_1+\dots+\lambda_px_p$. Une partie $F$ de $E$ est un
+\emph{sous-espace vectoriel} si $0\in F$ et si $\lambda x+\mu y\in F$ pour tous $x,y\in F$ et $\lambda,\mu\in\K$.
+\end{definition}
+
+\begin{proposition}[sous-espace engendré]\label{r:vect}
+\begin{enumerate}
+\item Une intersection de sous-espaces vectoriels est un sous-espace vectoriel (une réunion, en général, non).
+\item $\vect(x_1,\dots,x_p)$, l'ensemble des combinaisons linéaires de $x_1,\dots,x_p$, est un sous-espace vectoriel : c'est
+le plus petit qui contient $x_1,\dots,x_p$ (tout sous-espace qui contient les $x_i$ le contient).
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}[familles libres, génératrices, bases]
+Une famille $(x_1,\dots,x_p)$ de $E$ est
+\begin{itemize}
+\item \emph{génératrice} si $\vect(x_1,\dots,x_p)=E$ ;
+\item \emph{libre} si $\lambda_1x_1+\dots+\lambda_px_p=0$ entraîne $\lambda_1=\dots=\lambda_p=0$ ; \emph{liée} sinon ;
+\item une \emph{base} si elle est libre et génératrice : tout $x\in E$ s'écrit alors de manière unique
+$x=\lambda_1x_1+\dots+\lambda_px_p$, et $(\lambda_1,\dots,\lambda_p)$ sont les \emph{coordonnées} de $x$.
+\end{itemize}
+Bases canoniques : $(e_1,\dots,e_n)$ pour $\K^n$, $(E_{i,j})$ pour $\mathcal M_{n,p}(\K)$, $(1,X,\dots,X^n)$ pour $\K_n[X]$.
+\end{definition}
+
+\begin{proposition}[familles libres]\label{r:libres}
+\begin{enumerate}
+\item Une famille est liée si et seulement si l'un de ses vecteurs est combinaison linéaire des autres.
+\item Si $(x_1,\dots,x_p)$ est libre et $x_{p+1}\notin\vect(x_1,\dots,x_p)$, alors $(x_1,\dots,x_{p+1})$ est libre.
+\item Une famille de polynômes non nuls de degrés deux à deux distincts est libre ; si $\deg P_k=k$ pour $0\leq k\leq n$,
+$(P_0,\dots,P_n)$ est une base de $\K_n[X]$ (base \emph{échelonnée en degré}).
+\end{enumerate}
+\end{proposition}
+
+\begin{methode}{Montrer qu'une famille est libre, ou est une base}\label{m:libre}
+Écrire une combinaison linéaire nulle et en déduire, par un système, que tous les coefficients sont nuls. En dimension $n$, une
+famille de $n$ vecteurs est une base dès qu'elle est libre (ou dès qu'elle est génératrice) : une seule vérification suffit
+(proposition~\ref{r:base}). Dans $\K^n$, on peut aussi calculer le rang de la matrice des vecteurs en colonnes, ou un
+déterminant (chapitre~2).
+\end{methode}
+
+\subsubsection*{Dimension finie}
+
+\begin{theoreme}[bases et dimension]\label{r:dim}
+On suppose que $E$ possède une famille génératrice finie ($E$ est \emph{de dimension finie}).
+\begin{enumerate}
+\item \emph{Base extraite.} De toute famille génératrice de $E$, on peut extraire une base de $E$.
+\item \emph{Base incomplète.} Toute famille libre de $E$ peut être complétée en une base de $E$ (à l'aide de vecteurs d'une
+famille génératrice donnée).
+\item Dans un espace engendré par $n$ vecteurs, toute famille de $n+1$ vecteurs est liée. Par suite, toutes les bases de $E$ ont
+le même nombre d'éléments, la \emph{dimension} de $E$.
+\end{enumerate}
+$\dim\K^n=n$, \ $\dim\K_n[X]=n+1$, \ $\dim\mathcal M_{n,p}(\K)=np$, \ $\dim\mathcal L(E,F)=\dim E\times\dim F$.
+\end{theoreme}
+
+\begin{proposition}[familles en dimension $n$]\label{r:base}
+Si $\dim E=n$ : une famille libre a au plus $n$ vecteurs, une famille génératrice au moins $n$, et pour une famille de
+\emph{$n$ vecteurs},
+\[\text{base}\iff\text{libre}\iff\text{génératrice}.\]
+Le \emph{rang} d'une famille est $\rg(x_1,\dots,x_p)=\dim\vect(x_1,\dots,x_p)$ ; il vaut au plus $p$, avec égalité si et
+seulement si la famille est libre.
+\end{proposition}
+
+\begin{proposition}[sous-espaces et dimension]\label{r:sev}
+Soient $F$ et $G$ deux sous-espaces de $E$, de dimension finie.
+\begin{enumerate}
+\item $\dim F\leq\dim E$, avec égalité si et seulement si $F=E$.
+\item \emph{Formule de Grassmann :} $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$.
+\item Tout sous-espace $F$ de $E$ possède au moins un supplémentaire (en général, une infinité).
+\item $E=F\oplus G$ si et seulement si $F\cap G=\{0\}$ et $\dim F+\dim G=\dim E$.
+\end{enumerate}
+\end{proposition}
+
+\begin{exemple}[espaces de solutions]
+Les ensembles suivants sont des espaces vectoriels de dimension finie, dont on connaît la dimension :
+\begin{itemize}
+\item les solutions sur un intervalle de $y'+a(t)y=0$ ($a$ continue) : dimension $1$ ;
+\item les solutions de $y''+ay'+by=0$ ($a,b$ constants) : dimension $2$ (chapitre~4) ;
+\item les suites vérifiant $u_{n+2}=au_{n+1}+bu_n$ : dimension $2$, car $u\mapsto(u_0,u_1)$ est un isomorphisme sur $\K^2$.
+\end{itemize}
+\end{exemple}
+
+\subsubsection*{Applications linéaires}
+
+\begin{definition}[applications linéaires]
+$u:E\to F$ est \emph{linéaire} si $u(\lambda x+\mu y)=\lambda u(x)+\mu u(y)$ ; leur ensemble $\mathcal L(E,F)$ est un espace
+vectoriel, et la composée de deux applications linéaires est linéaire ($v\circ u$ est bilinéaire en $(u,v)$). Un
+\emph{isomorphisme} est une application linéaire bijective (sa réciproque est linéaire) ; un \emph{endomorphisme} est un élément
+de $\LE=\mathcal L(E,E)$, un \emph{automorphisme} un endomorphisme bijectif, et $\mathrm{GL}(E)$ est l'ensemble des
+automorphismes. On note $\Id_E$ l'identité, $\lambda\Id_E$ les homothéties, et $u^k=u\circ\dots\circ u$ ($u^0=\Id_E$ ; $k\in\Z$
+si $u\in\mathrm{GL}(E)$).
+\end{definition}
 
 \begin{proposition}[noyau, image, rang]\label{p:rang}
 Soit $u:E\to F$ linéaire.
 \begin{enumerate}
-\item $\Ker u=\{x\in E,\ u(x)=0\}$ et $\Im u=u(E)$ sont des sous-espaces vectoriels ; $u$ est injective si et seulement si
+\item L'image directe et l'image réciproque d'un sous-espace par $u$ sont des sous-espaces. En particulier,
+$\Ker u=\{x\in E,\ u(x)=0\}$ et $\Im u=u(E)$ sont des sous-espaces vectoriels ; $u$ est injective si et seulement si
 $\Ker u=\{0\}$, surjective si et seulement si $\Im u=F$.
 \item Si $(e_1,\dots,e_p)$ engendre $E$, alors $\Im u=\vect\big(u(e_1),\dots,u(e_p)\big)$.
-\item \emph{Théorème du rang.} Si $E$ est de dimension finie, $\dim\Ker u+\rg u=\dim E$, où $\rg u=\dim\Im u$.
+\item \emph{Théorème du rang.} Si $E$ est de dimension finie, $\dim\Ker u+\rg u=\dim E$, où $\rg u=\dim\Im u$. Plus précisément,
+tout supplémentaire de $\Ker u$ dans $E$ est isomorphe à $\Im u$ (par la restriction de $u$).
+\item $\rg(v\circ u)\leq\min(\rg u,\rg v)$ ; composer par un isomorphisme (à gauche ou à droite) ne change pas le rang.
 \item Si $\dim E=\dim F$ (finie), en particulier pour un endomorphisme : $u$ injective $\iff$ $u$ surjective $\iff$ $u$ bijective.
+Un endomorphisme inversible à gauche (ou à droite) est donc inversible.
 \end{enumerate}
 \end{proposition}
 
-\begin{proposition}[matrices et changement de base]\label{p:chgt}
-Soient $\mathcal B$ une base de $E$ ($\dim E=n$) et $f\in\LE$. La matrice $\Mat_{\mathcal B}(f)$ a pour $j$-ième colonne les coordonnées
-de $f(e_j)$ dans $\mathcal B$ ; le rang de $f$ est celui de sa matrice. Si $\mathcal B'$ est une autre base et $P$ la matrice de
-passage de $\mathcal B$ à $\mathcal B'$ (colonnes : les vecteurs de $\mathcal B'$ en coordonnées dans $\mathcal B$), alors
-\[\Mat_{\mathcal B'}(f)=P^{-1}\,\Mat_{\mathcal B}(f)\,P.\]
+\begin{proposition}[une application linéaire est déterminée par une base]\label{r:base-image}
+Soit $(e_1,\dots,e_n)$ une base de $E$.
+\begin{enumerate}
+\item Pour toute famille $(f_1,\dots,f_n)$ de $F$, il existe une unique $u\in\mathcal L(E,F)$ telle que $u(e_i)=f_i$ pour tout $i$.
+\item $u$ est injective (resp.\ surjective, bijective) si et seulement si $\big(u(e_1),\dots,u(e_n)\big)$ est libre
+(resp.\ génératrice de $F$, une base de $F$).
+\item Deux espaces de dimension finie sont isomorphes si et seulement s'ils ont la même dimension.
+\item Si $E=F_1\oplus F_2$, deux applications linéaires définies sur $F_1$ et sur $F_2$ se prolongent de manière unique en une
+application linéaire définie sur $E$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[équations linéaires]\label{r:equations}
+Soient $u\in\mathcal L(E,F)$ et $a\in F$. L'ensemble des solutions de l'équation $u(x)=a$ est soit vide, soit de la forme
+\[x_0+\Ker u=\{x_0+h,\ h\in\Ker u\},\]
+où $x_0$ est une solution particulière. Exemples : un système $AX=B$ (proposition~\ref{r:systemes}) ; une équation
+différentielle linéaire, $S_E=y_p+S_H$ (chapitre~4) ; une suite arithmético-géométrique $u_{n+1}=au_n+b$ ($a\neq1$), somme de la
+suite constante $\frac b{1-a}$ et d'une suite géométrique de raison $a$.
+\end{proposition}
+
+\subsubsection*{Matrices et applications linéaires}
+
+\begin{proposition}[matrice d'une application linéaire]\label{r:matrice}
+Soient $\mathcal B=(e_1,\dots,e_p)$ une base de $E$ et $\mathcal C$ une base de $F$ ($\dim F=n$). La matrice
+$\Mat_{\mathcal B,\mathcal C}(u)\in\mathcal M_{n,p}(\K)$ a pour $j$-ième colonne les coordonnées de $u(e_j)$ dans $\mathcal C$.
+\begin{enumerate}
+\item Si $X$ est la colonne des coordonnées de $x$ dans $\mathcal B$ et $Y$ celle de $u(x)$ dans $\mathcal C$, alors $Y=AX$.
+\item $u\mapsto\Mat_{\mathcal B,\mathcal C}(u)$ est un isomorphisme de $\mathcal L(E,F)$ sur $\mathcal M_{n,p}(\K)$ ; la matrice d'une
+composée est le produit des matrices : $\Mat(v\circ u)=\Mat(v)\Mat(u)$ (dans des bases compatibles).
+\item $u$ est un isomorphisme si et seulement si sa matrice (carrée) est inversible, et $\Mat(u^{-1})=\Mat(u)^{-1}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[noyau, image et rang d'une matrice]\label{r:rang-matrice}
+On identifie $\mathcal M_{p,1}(\K)$ à $\K^p$. L'application $X\mapsto AX$ est l'application linéaire \emph{canoniquement
+associée} à $A\in\mathcal M_{n,p}(\K)$ ; son noyau, son image et son rang sont ceux de $A$.
+\begin{enumerate}
+\item $\Im A$ est engendrée par les colonnes de $A$ ; les lignes de $A$ fournissent un système d'équations de $\Ker A$.
+\item Le rang de $A$ est le rang de la famille de ses colonnes, et le rang de toute application linéaire représentée par $A$.
+\item Les opérations élémentaires sur les colonnes conservent l'image et le rang ; sur les lignes, le noyau et le rang.
+\item $\rg(A^T)=\rg A$ (admis).
+\item Pour $A\in\Mn{\K}$ : $A$ inversible $\iff\Ker A=\{0\}\iff\rg A=n\iff$ les colonnes de $A$ forment une base de $\K^n$.
+\end{enumerate}
+\end{proposition}
+
+\begin{methode}{Calculer un rang, un noyau, une image}\label{m:rang}
+\begin{itemize}
+\item \emph{Rang :} par des opérations élémentaires, se ramener à une matrice échelonnée ; le rang est le nombre de pivots
+(lignes non nulles).
+\item \emph{Noyau :} résoudre le système $AX=0$ ; sa dimension est $p-\rg A$ (théorème du rang), ce qui permet de contrôler le
+résultat.
+\item \emph{Image :} elle est engendrée par les colonnes ; on en extrait une base de $\rg A$ colonnes non colinéaires
+(par exemple celles des pivots).
+\end{itemize}
+\end{methode}
+
+\begin{exemple}
+$A=\begin{pmatrix}1&2&1\\2&4&0\\1&2&-1\end{pmatrix}$. La deuxième colonne vaut deux fois la première, et les colonnes $C_1$, $C_3$
+ne sont pas colinéaires : $\rg A=2$ et $\Im A=\vect\big((1,2,1),(1,0,-1)\big)$. Par le théorème du rang, $\dim\Ker A=1$ ; comme
+$2C_1-C_2=0$, $\Ker A=\vect\big((2,-1,0)\big)$.
+\end{exemple}
+
+\begin{proposition}[changement de base]\label{p:chgt}
+Soient $\mathcal B$ et $\mathcal B'$ deux bases de $E$ ($\dim E=n$). La matrice de passage $P=P_{\mathcal B\to\mathcal B'}$ a pour
+colonnes les coordonnées des vecteurs de $\mathcal B'$ dans $\mathcal B$ ; elle est inversible, d'inverse $P_{\mathcal B'\to\mathcal B}$.
+\begin{enumerate}
+\item Si $X$ et $X'$ sont les coordonnées d'un même vecteur dans $\mathcal B$ et $\mathcal B'$, alors $X=PX'$.
+\item Pour $f\in\LE$ : $\Mat_{\mathcal B'}(f)=P^{-1}\,\Mat_{\mathcal B}(f)\,P$. Le rang de $f$ est celui de n'importe laquelle de ses
+matrices.
+\item Plus généralement, pour $u\in\mathcal L(E,F)$, si $Q$ est la matrice de passage entre deux bases de $F$ :
+$A'=Q^{-1}AP$.
+\end{enumerate}
 \end{proposition}
 
 \begin{definition}
 Deux matrices $A,B\in\Mn{\K}$ sont \emph{semblables} s'il existe $P\in\GLn{\K}$ telle que $B=P^{-1}AP$ : elles représentent le
-même endomorphisme dans deux bases.
+même endomorphisme dans deux bases. Chercher une base où la matrice d'un endomorphisme est simple, c'est chercher une matrice
+simple semblable à une matrice donnée : c'est l'objet du chapitre~3.
 \end{definition}
+
+\begin{proposition}[systèmes linéaires et rang]\label{r:cramer}
+Soit $A\in\mathcal M_{n,p}(\K)$.
+\begin{enumerate}
+\item L'ensemble des solutions de $AX=0$ est $\Ker A$, de dimension $p-\rg A$.
+\item Le système $AX=B$ est compatible si et seulement si $B\in\Im A$.
+\item Si $A\in\GLn{\K}$ (système \emph{de Cramer}), $AX=B$ a une unique solution, $X=A^{-1}B$.
+\end{enumerate}
+\end{proposition}
 
 \begin{reflexe}
 Tout ce qui ne dépend que de l'endomorphisme, et pas de la base, est commun à deux matrices semblables : le rang, la trace
 (§\ref{ss:trace}), le déterminant (chapitre~2), le polynôme caractéristique et les valeurs propres (chapitre~3). Si deux matrices
 diffèrent par l'un de ces invariants, elles ne sont pas semblables.
 \end{reflexe}
+
+\begin{exo}{al-r-base}{1}{base et coordonnées}
+Dans $\R^3$, on pose $u_1=(1,1,0)$, $u_2=(0,1,1)$, $u_3=(1,0,1)$.
+\begin{enumerate}
+\item Montrer que $\mathcal B'=(u_1,u_2,u_3)$ est une base de $\R^3$.
+\item Déterminer les coordonnées de $v=(2,3,1)$ dans $\mathcal B'$.
+\end{enumerate}
+\end{exo}
+\begin{exo}{al-r-rang}{2}{noyau, image et théorème du rang}
+Soit $f:\R^3\to\R^3$, $f(x,y,z)=(x+y-z,\ x+2y,\ y+z)$.
+\begin{enumerate}
+\item Écrire la matrice $A$ de $f$ dans la base canonique.
+\item Déterminer une base de $\Ker f$ et une base de $\Im f$, et vérifier le théorème du rang.
+\item $f$ est-elle injective ? surjective ? Donner une équation de $\Im f$.
+\end{enumerate}
+\end{exo}
+\begin{exo}{al-r-chgt}{2}{inverse et changement de base}
+Soit $f$ l'endomorphisme de $\R^2$ de matrice $A=\begin{pmatrix}3&-2\\1&0\end{pmatrix}$ dans la base canonique, et
+$u_1=(1,1)$, $u_2=(2,1)$.
+\begin{enumerate}
+\item Montrer que $\mathcal B'=(u_1,u_2)$ est une base de $\R^2$ et calculer la matrice de passage $P$ et son inverse.
+\item Calculer $f(u_1)$ et $f(u_2)$, puis la matrice $D$ de $f$ dans $\mathcal B'$. Vérifier que $D=P^{-1}AP$.
+\item En déduire $A^k$ pour $k\in\N$.
+\end{enumerate}
+\end{exo}
+
+% fin des rappels : la numérotation du chapitre reprend
+\renewcommand{\thedefinition}{\thesection.\arabic{definition}}\setcounter{definition}{0}
+\makeatletter\renewcommand{\thetcb@cnt@methode}{\thesection.\arabic{tcb@cnt@methode}}\setcounter{tcb@cnt@methode}{0}\makeatother
+\renewcommand{\theexo}{\thesection.\arabic{exo}}\setcounter{exo}{0}
 
 % ---------------------------------------------------------------------
 \subsection{Produit et somme de sous-espaces}\label{ss:sommes}
@@ -476,8 +754,8 @@ La famille concaténée engendre la somme. Elle est libre : une combinaison lin�
 regroupe les termes de la base de $F_i$ ; la somme étant directe, chaque $x_i$ est nul, puis chaque coefficient (base de $F_i$).
 \end{proof}
 
-Pour deux sous-espaces, la première année a fourni la \emph{formule de Grassmann}, $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$, dont
-on déduit la caractérisation pratique des supplémentaires.
+Pour deux sous-espaces, la première année a fourni la \emph{formule de Grassmann}, $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$
+(proposition~\ref{r:sev}), dont on déduit la caractérisation pratique des supplémentaires.
 
 \begin{enpratique}
 Pour montrer que $E=F\oplus G$ en dimension finie, il suffit de deux des trois propriétés : $F\cap G=\{0\}$, $F+G=E$,
@@ -739,6 +1017,43 @@ $\Mat_{\mathcal B'}(f)=P^{-1}AP$, pas $PAP^{-1}$.
 \clearpage
 \renewcommand{\ongletcouleur}{Ocre}
 \section{Corrigés}\label{sec:corriges-al}
+
+\begin{corrige}{al-r-base}
+\q{1.} Si $au_1+bu_2+cu_3=0$ : $a+c=0$, $a+b=0$, $b+c=0$. Donc $c=-a$, $b=-a$, puis $b+c=-2a=0$ : $a=b=c=0$. La famille est
+libre, et c'est une famille de $3=\dim\R^3$ vecteurs : c'est une base (proposition~\ref{r:base}).
+
+\q{2.} On cherche $(a,b,c)$ avec $a+c=2$, $a+b=3$, $b+c=1$. En additionnant : $2(a+b+c)=6$, soit $a+b+c=3$ ; d'où $b=3-2=1$,
+$c=3-3=0$, $a=3-1=2$. Les coordonnées de $v$ dans $\mathcal B'$ sont $(2,1,0)$ : $v=2u_1+u_2$.
+\end{corrige}
+
+\begin{corrige}{al-r-rang}
+\q{1.} Les colonnes sont les images des vecteurs de la base canonique :
+$A=\begin{pmatrix}1&1&-1\\1&2&0\\0&1&1\end{pmatrix}$.
+
+\q{2.} $\Ker f$ : $x+y-z=0$, $x+2y=0$, $y+z=0$. Les deux dernières équations donnent $x=-2y$, $z=-y$, et la première est
+alors vérifiée ($-2y+y+y=0$). Donc $\Ker f=\vect\big((-2,1,-1)\big)$, de dimension $1$.\\
+$\Im f$ est engendrée par les colonnes $C_1=(1,1,0)$, $C_2=(1,2,1)$, $C_3=(-1,0,1)$ ; le vecteur du noyau donne la relation
+$-2C_1+C_2-C_3=0$, donc $C_3\in\vect(C_1,C_2)$, et $C_1$, $C_2$ ne sont pas colinéaires : $(C_1,C_2)$ est une base de $\Im f$.
+Théorème du rang : $\dim\Ker f+\rg f=1+2=3=\dim\R^3$.
+
+\q{3.} $\Ker f\neq\{0\}$ : $f$ n'est pas injective ; $\rg f=2<3$ : elle n'est pas surjective (ce qui était prévisible : pour un
+endomorphisme en dimension finie, les deux vont ensemble). Une équation $\alpha x+\beta y+\gamma z=0$ de $\Im f$ doit être vérifiée
+par $C_1$ et $C_2$ : $\alpha+\beta=0$, $\alpha+2\beta+\gamma=0$ ; avec $\alpha=1$ : $\beta=-1$, $\gamma=1$. Donc
+$\Im f$ : $x-y+z=0$ (et $C_3$ la vérifie bien).
+\end{corrige}
+
+\begin{corrige}{al-r-chgt}
+\q{1.} $u_1$ et $u_2$ ne sont pas colinéaires : c'est une famille libre de $2$ vecteurs de $\R^2$, donc une base.
+$P=\begin{pmatrix}1&2\\1&1\end{pmatrix}$, $1\times1-2\times1=-1\neq0$, et
+$P^{-1}=\dfrac1{-1}\begin{pmatrix}1&-2\\-1&1\end{pmatrix}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}$.
+
+\q{2.} $f(u_1)=(3-2,\,1)=(1,1)=u_1$ et $f(u_2)=(6-2,\,2)=(4,2)=2u_2$. Donc $D=\begin{pmatrix}1&0\\0&2\end{pmatrix}$. Vérification :
+$AP=\begin{pmatrix}1&4\\1&2\end{pmatrix}$ et $P^{-1}(AP)=\begin{pmatrix}-1+2&-4+4\\1-1&4-2\end{pmatrix}=D$.
+
+\q{3.} $A=PDP^{-1}$, donc $A^k=PD^kP^{-1}$ (les $P^{-1}P$ intermédiaires se simplifient), avec $D^k=\begin{pmatrix}1&0\\0&2^k\end{pmatrix}$ :
+\[A^k=\begin{pmatrix}1&2^{k+1}\\1&2^k\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}=\begin{pmatrix}2^{k+1}-1&2-2^{k+1}\\2^k-1&2-2^k\end{pmatrix}.\]
+Contrôle : $k=1$ redonne $A$, $k=0$ redonne $I_2$.
+\end{corrige}
 
 \begin{corrige}{red-somme}
 \q{1.} Si $v\in F\cap G$, $v=(m,m,m)$ et $3m=0$ : $F\cap G=\{0\}$. De plus $\dim F=2$ (un hyperplan de $\R^3$) et $\dim G=1$ : la

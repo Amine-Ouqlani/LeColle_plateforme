@@ -16,6 +16,9 @@
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true]{hyperref}
 
 % ---------- version : \proftrue (énoncé + corrigé + grille) / \proffalse (énoncés seuls) ----------
+% Niveau du chapitre « Équations différentielles » (même interrupteur que le livret) : \PTfalse = programme de PTSI ;
+% \PTtrue = version complète de PT. L'exercice bilan de PT est conservé dans le bloc \ifPT ... \fi.
+\newif\ifPT \ifdefined\VERSIONPT \PTtrue \else \PTfalse \fi
 \newif\ifprof
 \providecommand{\VERSION}{prof}
 \def\tmpprof{prof}\ifx\VERSION\tmpprof\proftrue\else\proffalse\fi
@@ -140,19 +143,19 @@ Le plan et l'espace sont rapportés à leurs bases canoniques.
 \ifprof
 \corrige
 \q{1.a)} \emph{Faux}. Deux droites distinctes de $\R^3$ ont une intersection nulle, mais leur somme est un plan. Il faut aussi
-$\dim F+\dim G=\dim E$ (ou $F+G=E$) \prop{th.~1.8}.
+$\dim F+\dim G=\dim E$ (ou $F+G=E$) \prop{th.~1.5}.
 
 \q{1.b)} \emph{Faux}. $\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$ : $(1,0)+(0,1)-(1,1)=0$ est une décomposition non triviale de $0$
-\prop{prop.~1.7}. (Leur somme est $\R^2$, de dimension $2<3$.)
+\prop{prop.~1.4}. (Leur somme est $\R^2$, de dimension $2<3$.)
 
-\q{1.c)} \emph{Vrai} \prop{prop.~1.9}. $x=p(x)+\big(x-p(x)\big)$ avec $p(x)\in\Im p$ et $p\big(x-p(x)\big)=p(x)-p(x)=0$ ; et si
+\q{1.c)} \emph{Vrai} \prop{prop.~1.6}. $x=p(x)+\big(x-p(x)\big)$ avec $p(x)\in\Im p$ et $p\big(x-p(x)\big)=p(x)-p(x)=0$ ; et si
 $y\in\Im p\cap\Ker p$, $y=p(z)$ donne $y=p(p(z))=p(y)=0$.
 
-\q{1.d)} \emph{Vrai} \prop{prop.~1.14}. $\tr(P^{-1}AP)=\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr A$.
+\q{1.d)} \emph{Vrai} \prop{prop.~1.11}. $\tr(P^{-1}AP)=\tr\big((P^{-1}A)P\big)=\tr\big(P(P^{-1}A)\big)=\tr A$.
 
 \q{1.e)} \emph{Faux}. $f$ de matrice $\begin{pmatrix}0&1\\0&0\end{pmatrix}$ : $\Ker f=\Im f=\vect(e_1)$.
 
-\q{2.a)} $1-1+1=1\neq0$ : $u\notin P$, donc $P\cap D=\{0\}$ ; et $\dim P+\dim D=2+1=3$ : $\R^3=P\oplus D$ \prop{prop.~1.11}.
+\q{2.a)} $1-1+1=1\neq0$ : $u\notin P$, donc $P\cap D=\{0\}$ ; et $\dim P+\dim D=2+1=3$ : $\R^3=P\oplus D$ \prop{prop.~1.8}.
 
 \q{2.b)} Pour $v=(x,y,z)$, on cherche $t$ tel que $v-tu\in P$ : $(x-t)-(y-t)+(z-t)=0$, soit $t=x-y+z$. Alors $p(v)=v-tu$ et
 \[\Mat(p)=I_3-\begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}1&-1&1\end{pmatrix}=\begin{pmatrix}0&1&-1\\-1&2&-1\\-1&1&0\end{pmatrix}.\]
@@ -164,7 +167,7 @@ compatibilité sont $z=x$ et $t=y$. Il faut $4-\dim F=2$ équations \prop{méth.
 
 \q{4.} $f(x,0,z)=(2x+z,\,0,\,x+2z)$ : deuxième coordonnée nulle, $F$ est stable. $f(e_2)=3e_2$ : la droite est stable. Dans la base
 $(e_1,e_3,e_2)$ : $f(e_1)=2e_1+e_3$, $f(e_3)=e_1+2e_3$, $f(e_2)=3e_2$, d'où la matrice diagonale par blocs
-$\begin{pmatrix}2&1&0\\1&2&0\\0&0&3\end{pmatrix}$ \prop{th.~1.18}.
+$\begin{pmatrix}2&1&0\\1&2&0\\0&0&3\end{pmatrix}$ \prop{th.~1.15}.
 
 \q{5.} $A$ est la matrice d'un projecteur, donc $\rg A=\tr A=0$ : $A=0$.
 
@@ -363,6 +366,7 @@ seulement si $a=0$ : $B_a$ est diagonalisable si et seulement si $a=0$ (et $B_0$
 % ======================================================================
 %  CHAPITRE 4 — ÉQUATIONS DIFFÉRENTIELLES
 % ======================================================================
+\ifPT
 \bilan{4}{Équations différentielles}{15 min}
 Toutes les fonctions sont à valeurs réelles.
 
@@ -466,6 +470,93 @@ et $\gamma=\alpha$. Les solutions polynomiales sont les $y=\alpha(1+t^2)$, $\alp
 \bottomrule
 \end{tabularx}
 \end{GRILLE}
+\fi
+\else
+\bilan{4}{Équations différentielles}{15 min}
+Toutes les fonctions sont à valeurs réelles. Programme de première année.
+
+\begin{enumerate}
+\item Soient $a$, $b$ deux réels, $c$ une fonction continue sur un intervalle $I$, et $(E)\colon y''+ay'+by=c(t)$,
+      d'équation homogène associée $(H)$.
+  \begin{enumerate}
+  \item Énoncer le théorème de Cauchy pour $(E)$.
+  \item Quelle est la dimension de l'ensemble $S_H$ des solutions de $(H)$ ? Si $y_p$ est une solution de $(E)$, décrire
+        l'ensemble $S_E$ des solutions de $(E)$.
+  \end{enumerate}
+\item Résoudre sur $\R$ l'équation $(1+t^2)\,y'+2t\,y=1$.
+\item Déterminer les fonctions $f$ continues sur $\R$ telles que, pour tout réel $x$, $f(x)=2\displaystyle\int_0^xf(t)\,dt+x$.
+\item
+  \begin{enumerate}
+  \item Déterminer les solutions réelles de $y''-2y'+5y=0$.
+  \item Déterminer la solution de $y''-3y'+2y=e^{t}$ vérifiant $y(0)=0$ et $y'(0)=0$.
+  \end{enumerate}
+\item Résoudre sur $\R$ l'équation $y''+4y=\sin(2t)$.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \prop{th.~1.3} Pour tout $t_0\in I$ et tout $(y_0,y_1)\in\R^2$, il existe une \emph{unique} solution $y$ de $(E)$
+\emph{sur $I$} telle que $y(t_0)=y_0$ et $y'(t_0)=y_1$. Les hypothèses comptent : coefficients $a$, $b$ constants, second
+membre $c$ \emph{continu sur $I$} ; à l'ordre 2, il faut \emph{deux} conditions initiales.
+
+\q{1.b)} \prop{cor.~1.4, prop.~1.2} $S_H$ est un espace vectoriel de dimension $2$ : l'application $h\mapsto\big(h(t_0),h'(t_0)\big)$
+est un isomorphisme de $S_H$ sur $\R^2$ (linéaire, bijective par le théorème de Cauchy). Et $S_E=y_p+S_H=\{y_p+h,\ h\in S_H\}$ :
+ce n'est pas un espace vectoriel (si $c\neq0$), mais un ensemble affine.
+
+\q{2.} $1+t^2$ ne s'annule pas : on normalise sur $\R$ tout entier,
+\[y'+\frac{2t}{1+t^2}\,y=\frac1{1+t^2}.\]
+\begin{itemize}
+\item Homogène \prop{th.~1.5} : $A(t)=\ln(1+t^2)$ est une primitive de $\frac{2t}{1+t^2}$ (forme $\frac{u'}u$), donc
+      $S_H=\big\{t\mapsto\frac K{1+t^2},\ K\in\R\big\}$.
+\item Variation de la constante \prop{méth.~1.1} : $y=\dfrac{\lambda(t)}{1+t^2}$ ; il reste
+      $\lambda'(t)=b(t)e^{A(t)}=\dfrac1{1+t^2}\,(1+t^2)=1$, donc $\lambda(t)=t$ convient.
+\end{itemize}
+Les solutions sont les fonctions $y(t)=\dfrac{t+K}{1+t^2}$, $K\in\R$.
+\emph{Remarque} : on pouvait aussi voir $(1+t^2)y'+2ty=\big((1+t^2)y\big)'$.
+
+\q{3.} \prop{méth.~1.2} \emph{Analyse.} Si $f$ convient, $x\mapsto\int_0^xf(t)\,dt$ est dérivable (primitive de la fonction
+continue $f$), donc $f$ l'est, et en dérivant : $f'(x)=2f(x)+1$ ; de plus $f(0)=0$. L'équation $y'-2y=1$ a pour solutions
+$Ke^{2x}-\frac12$ (homogène $Ke^{2x}$, constante $-\frac12$ évidente) ; $f(0)=0$ donne $K=\frac12$ :
+\[f(x)=\frac{e^{2x}-1}2.\]
+\emph{Synthèse.} Pour cette $f$, la fonction $g(x)=f(x)-2\int_0^xf(t)\,dt-x$ vérifie $g'=f'-2f-1=0$ et $g(0)=0$ : elle est
+nulle. Il y a donc une unique solution.
+
+\q{4.a)} \prop{th.~1.10} $r^2-2r+5=0$, $\Delta=-16$, $r=1\pm2i$ : $y(t)=e^{t}\big(A\cos2t+B\sin2t\big)$, $(A,B)\in\R^2$.
+
+\q{4.b)} $r^2-3r+2=(r-1)(r-2)$ : $S_H=\{Ae^{t}+Be^{2t}\}$. Le second membre est $e^{mt}$ avec $m=1$, \emph{racine simple} : on
+cherche $y_p=Q(t)e^{t}$ avec $\deg Q=1$ \prop{méth.~1.3}. En reportant :
+$Q''+(2m+a)Q'+(m^2+am+b)Q=1$ avec $a=-3$, $b=2$, $m=1$, soit $Q''-Q'=1$ : $Q(t)=-t$. Donc $y_p(t)=-te^{t}$.\\
+Solution générale : $y=Ae^{t}+Be^{2t}-te^{t}$, puis $y'=Ae^{t}+2Be^{2t}-(1+t)e^{t}$.\\
+$y(0)=A+B=0$ et $y'(0)=A+2B-1=0$ donnent $B=1$, $A=-1$ :
+\[y(t)=e^{2t}-(1+t)\,e^{t}.\]
+
+\q{5.} \prop{th.~1.10, méth.~1.3} $r^2+4=0$, $r=\pm2i$ : $S_H=\{A\cos2t+B\sin2t\}$. On résout $z''+4z=e^{2it}$ ; $2i$ est
+\emph{racine simple}, donc $z=Q(t)e^{2it}$ avec $\deg Q=1$ et $Q''+4iQ'=1$ : $Q(t)=\frac t{4i}=-\frac{it}4$. Le second membre
+$\sin(2t)$ est la partie imaginaire de $e^{2it}$ et les coefficients sont réels :
+$y_p=\operatorname{Im}\Big(-\frac{it}4(\cos2t+i\sin2t)\Big)=-\frac t4\cos2t$. Les solutions sont
+\[y(t)=-\frac t4\cos(2t)+A\cos(2t)+B\sin(2t),\qquad(A,B)\in\R^2.\]
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Théorème de Cauchy : deux conditions initiales à l'ordre 2, hypothèses. &
+  Oubli de $y'(t_0)$ : confusion ordre 1/ordre 2. Oubli de « $c$ continue sur $I$ » : hypothèses non comprises.\\
+1.b & Structure : $S_H$ espace vectoriel de dimension 2, $S_E=y_p+S_H$. &
+  « $S_E$ est un espace vectoriel » ou « dimension 1 » : structure linéaire et rôle de Cauchy non assimilés.\\
+2 & Normalisation, primitive $\frac{u'}u$, solution $Ke^{-A}$, variation de la constante. &
+  $K(1+t^2)$ au lieu de $\frac K{1+t^2}$ : signe de $e^{-A}$. Erreur sur $\lambda'$ : formule $\lambda'=be^{A}$ mal sue.\\
+3 & Équation intégrale : dériver, lire la condition initiale en $0$, conclure. &
+  Constante $K$ laissée libre : condition $f(0)=0$ oubliée. Dérivation sans justifier que $f$ est dérivable.\\
+4.a & Équation caractéristique, cas $\Delta<0$, forme réelle. &
+  $e^{2t}(\dots\cos t)$ : rôles de $\alpha$ et $\beta$ inversés dans $\alpha\pm i\beta$.\\
+4.b & Second membre $e^{mt}$ avec $m$ racine simple ; conditions initiales après $y_p$. &
+  Essai $y_p=Ce^{t}$ : résonance non repérée. Conditions initiales sur $S_H$ seul : ordre des étapes de la méthode.\\
+5 & Second membre trigonométrique, résonance, passage aux complexes. &
+  Essai $C\sin2t$ : résonance non repérée. Partie réelle au lieu de la partie imaginaire.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
 \fi
 \fi
 \ifnum\numexpr\CHAP*(\CHAP-5)\relax=0

@@ -129,7 +129,9 @@ $('#contenu').innerHTML = `
     ${evaluations ? `<ul class="list">${evaluations}</ul>` : ''}
     ${annalesChap ? `<details class="plus"><summary>Questions de concours corrigées sur ce chapitre <span class="tag">(${QUESTIONS.length} questions)</span></summary><ul class="list">${annalesChap}</ul>
       <p class="muted" style="margin-top:8px"><a href="annales.html?ch=${C.id}">Les mêmes questions, classées par notion →</a></p></details>` : ''}
-    <p style="margin-top:12px"><a href="annales.html?theme=${C.id}">Les sujets officiels de la Banque PT qui portent sur ce chapitre →</a><br>
+    <p style="margin-top:12px">${C.programme === 'PTSI'
+      ? '<span class="muted">Les sujets de concours sur ce chapitre utilisent le cours de deuxième année : ils viendront avec la suite du chapitre.</span>'
+      : `<a href="annales.html?theme=${C.id}">Les sujets officiels de la Banque PT qui portent sur ce chapitre →</a>`}<br>
       <a href="annales.html?vue=classiques&ch=${C.id}">Les exercices classiques du chapitre →</a></p>
   </section>
 

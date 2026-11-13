@@ -17,55 +17,54 @@ LC.chapitres = [
       "duree": 13
     },
     "titre": "Algèbre linéaire",
-    "accroche": "Découper un espace en morceaux simples et lire ce découpage sur une matrice : sommes directes, projecteurs, hyperplans, trace, sous-espaces stables et matrices par blocs.",
+    "accroche": "Les outils de première année (bases, dimension, rang, matrices, changement de base), puis découper un espace en morceaux simples et lire ce découpage sur une matrice : sommes directes, projecteurs, hyperplans, trace, sous-espaces stables.",
     "statut": "complet",
     "td": {
       "doc": "td-al",
       "corrections": "td-al-corrections"
     },
     "prerequis": [
-      "Algèbre linéaire de première année : familles libres et génératrices, bases, dimension.",
-      "Applications linéaires et matrices, rang (rappelés au §1.1)."
+      "Algèbre linéaire de première année : tout le programme de PTSI est rappelé au §1.1 (énoncés R.1 à R.23, avec méthodes et exercices)."
     ],
     "cours": {
       "doc": "livre-al",
       "sections": [
         {
           "num": "1.1",
-          "titre": "Rappels : applications linéaires et matrices",
+          "titre": "Rappels de première année",
           "page": 4
         },
         {
           "num": "1.2",
           "titre": "Produit et somme de sous-espaces ; projecteurs",
-          "page": 5
+          "page": 11
         },
         {
           "num": "1.3",
           "titre": "Hyperplans et systèmes linéaires",
-          "page": 7
+          "page": 13
         },
         {
           "num": "1.4",
           "titre": "Trace",
-          "page": 8
+          "page": 14
         },
         {
           "num": "1.5",
           "titre": "Sous-espaces stables",
-          "page": 9
+          "page": 15
         },
         {
           "num": "1.6",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 11
+          "page": 16
         }
       ],
       "debut": 4,
-      "fin": 11,
+      "fin": 17,
       "corriges": {
-        "debut": 12,
-        "fin": 14
+        "debut": 18,
+        "fin": 21
       }
     },
     "fiche": {
@@ -73,7 +72,7 @@ LC.chapitres = [
       "sections": [
         {
           "num": "1.1",
-          "titre": "Rappels : applications linéaires et matrices",
+          "titre": "Rappels de première année",
           "page": 1
         },
         {
@@ -89,12 +88,12 @@ LC.chapitres = [
         {
           "num": "1.4",
           "titre": "Trace",
-          "page": 1
+          "page": 2
         },
         {
           "num": "1.5",
           "titre": "Sous-espaces stables",
-          "page": 1
+          "page": 2
         },
         {
           "num": "1.6",
@@ -110,49 +109,49 @@ LC.chapitres = [
       "statique": {
         "doc": "presentation-al-statique",
         "debut": 1,
-        "fin": 30
+        "fin": 36
       },
-      "exercices": 4,
+      "exercices": 5,
       "sections": [
         {
           "num": "1.1",
-          "titre": "Rappels",
+          "titre": "Espaces, applications linéaires, matrices",
           "page": 7,
           "pageStatique": 6
         },
         {
           "num": "1.2",
           "titre": "Produit, somme directe, projecteurs",
-          "page": 10,
-          "pageStatique": 8
+          "page": 23,
+          "pageStatique": 14
         },
         {
           "num": "1.3",
           "titre": "Hyperplans et systèmes",
-          "page": 20,
-          "pageStatique": 13
+          "page": 33,
+          "pageStatique": 19
         },
         {
           "num": "1.4",
           "titre": "Trace",
-          "page": 24,
-          "pageStatique": 16
+          "page": 37,
+          "pageStatique": 22
         },
         {
           "num": "1.5",
           "titre": "Sous-espaces stables",
-          "page": 33,
-          "pageStatique": 20
+          "page": 46,
+          "pageStatique": 26
         },
         {
           "num": "1.6",
           "titre": "Synthèse",
-          "page": 42,
-          "pageStatique": 25
+          "page": 55,
+          "pageStatique": 31
         }
       ],
       "debut": 1,
-      "fin": 50
+      "fin": 63
     },
     "erreurs": [
       "Conclure qu'une somme de trois sous-espaces est directe parce que les intersections deux à deux sont nulles.",
@@ -572,7 +571,8 @@ LC.chapitres = [
       "duree": 15
     },
     "titre": "Équations différentielles",
-    "accroche": "Une solution particulière, plus toutes les solutions sans second membre : premier ordre, second ordre à coefficients constants puis continus, théorème de Cauchy linéaire.",
+    "programme": "PTSI",
+    "accroche": "Une solution particulière, plus toutes les solutions sans second membre : premier ordre, second ordre à coefficients constants, théorème de Cauchy. Programme de première année (PTSI) ; les compléments de PT viendront ensuite.",
     "statut": "complet",
     "td": {
       "doc": "td-ed",
@@ -581,13 +581,12 @@ LC.chapitres = [
     "prerequis": [
       "Dérivation, primitives usuelles, intégration par parties.",
       "Nombres complexes, exponentielle complexe.",
-      "Espaces vectoriels : sous-espace, dimension.",
-      "Pour le §1.4 : séries entières."
+      "Espaces vectoriels : sous-espace, dimension."
     ],
     "cours": {
       "doc": "livre-ed",
       "debut": 4,
-      "fin": 13,
+      "fin": 9,
       "sections": [
         {
           "num": "1.1",
@@ -596,34 +595,29 @@ LC.chapitres = [
         },
         {
           "num": "1.2",
-          "titre": "Équations du premier ordre, recollement",
+          "titre": "Équations du premier ordre",
           "page": 6
         },
         {
           "num": "1.3",
           "titre": "Second ordre à coefficients constants",
-          "page": 8
+          "page": 7
         },
         {
           "num": "1.4",
-          "titre": "Second ordre à coefficients continus",
-          "page": 10
-        },
-        {
-          "num": "1.5",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 12
+          "page": 9
         }
       ],
       "corriges": {
-        "debut": 14,
-        "fin": 16
+        "debut": 10,
+        "fin": 11
       }
     },
     "fiche": {
       "doc": "fiche-ed",
       "debut": 1,
-      "fin": 3,
+      "fin": 2,
       "sections": [
         {
           "num": "1.1",
@@ -632,7 +626,7 @@ LC.chapitres = [
         },
         {
           "num": "1.2",
-          "titre": "Premier ordre, recollement",
+          "titre": "Premier ordre",
           "page": 1
         },
         {
@@ -642,31 +636,26 @@ LC.chapitres = [
         },
         {
           "num": "1.4",
-          "titre": "Second ordre à coefficients continus",
+          "titre": "Quelle méthode ? Pièges",
           "page": 2
         },
         {
           "num": "1.5",
-          "titre": "Quelle méthode ? Pièges",
-          "page": 3
-        },
-        {
-          "num": "1.6",
           "titre": "Résultats du TD",
-          "page": 3
+          "page": 2
         }
       ]
     },
     "presentation": {
       "doc": "presentation-ed",
       "debut": 1,
-      "fin": 86,
+      "fin": 56,
       "statique": {
         "doc": "presentation-ed-statique",
         "debut": 1,
-        "fin": 44
+        "fin": 30
       },
-      "exercices": 7,
+      "exercices": 4,
       "sections": [
         {
           "num": "1.1",
@@ -676,27 +665,21 @@ LC.chapitres = [
         },
         {
           "num": "1.2",
-          "titre": "Premier ordre, recollement",
+          "titre": "Premier ordre",
           "page": 20,
           "pageStatique": 12
         },
         {
           "num": "1.3",
           "titre": "Second ordre, coefficients constants",
-          "page": 42,
-          "pageStatique": 22
+          "page": 36,
+          "pageStatique": 19
         },
         {
           "num": "1.4",
-          "titre": "Second ordre, coefficients continus",
-          "page": 61,
-          "pageStatique": 31
-        },
-        {
-          "num": "1.5",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 83,
-          "pageStatique": 41
+          "page": 53,
+          "pageStatique": 27
         }
       ]
     },
@@ -705,14 +688,12 @@ LC.chapitres = [
       "Chercher une solution particulière $Ce^{mt}$ alors que $m$ est racine de l'équation caractéristique (résonance) : le degré de $Q$ augmente de la multiplicité.",
       "Second membre en $\\sin(\\omega t)$ : prendre la partie réelle au lieu de la partie imaginaire.",
       "Fixer les constantes avec les conditions initiales avant d'avoir ajouté la solution particulière.",
-      "Diviser par un coefficient qui s'annule sans le signaler, puis appliquer le théorème de Cauchy en ce point.",
-      "Recollement : oublier de vérifier la dérivabilité et l'équation au point de raccord, ou affirmer l'unicité sans preuve.",
-      "Série entière : oublier le rayon de convergence, ou croire qu'elle donne toujours toutes les solutions."
+      "Diviser par un coefficient qui s'annule sans le signaler : on ne résout que sur un intervalle où il ne s'annule pas."
     ],
     "flash": [
       {
-        "q": "Structure de l'ensemble des solutions de $y''+a(t)y'+b(t)y=c(t)$ ?",
-        "r": "$S_E=y_p+S_H$, où $S_H$ est un plan vectoriel ($a,b,c$ continues sur un intervalle)."
+        "q": "Structure de l'ensemble des solutions de $y''+ay'+by=c(t)$ ($a,b$ constants, $c$ continue) ?",
+        "r": "$S_E=y_p+S_H$, où $S_H$ est un plan vectoriel."
       },
       {
         "q": "Solutions de $y'+a(t)y=0$ sur un intervalle ?",
@@ -729,10 +710,6 @@ LC.chapitres = [
       {
         "q": "Solutions réelles de $y''+2y'+5y=0$ ?",
         "r": "$r=-1\\pm2i$ : $y=e^{-t}(A\\cos2t+B\\sin2t)$."
-      },
-      {
-        "q": "On connaît une solution $\\varphi$ de $(H)$ qui ne s'annule pas. Que faire ?",
-        "r": "Poser $y=\\lambda\\varphi$ : on obtient une équation du premier ordre en $\\lambda'$."
       },
       {
         "q": "Combien de conditions initiales pour un problème de Cauchy du second ordre ?",

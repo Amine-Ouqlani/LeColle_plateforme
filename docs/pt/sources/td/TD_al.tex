@@ -343,7 +343,7 @@
 {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Algèbre linéaire}\par\vspace{0.3em}
 {\sffamily\Large\color{BleuMoyen}Énoncés}\par\vspace{0.4em}
 {\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
-{\small Ce livret rassemble 19 exercices, classés en quatre parties, du plus direct au plus exigeant.
+{\small Ce livret rassemble 22 exercices, classés en quatre parties, du plus direct au plus exigeant.
 Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours), complétés par des
 \textbf{exercices complémentaires}, absents du livret. L'origine de chaque exercice est indiquée en haut à droite :
 \emph{« Livret, exercice~1.5 »} ou \emph{« Exercice complémentaire »}. La difficulté va de \niveau{1} à \niveau{5}.
@@ -351,66 +351,93 @@ Les corrections sont dans un livret séparé, \texttt{TD\_al\_corrections.pdf} ;
 
 \vspace{0.6em}{\sffamily\bfseries\color{Bleu}Sommaire}\par\vspace{0.2em}{\small\setlength{\parskip}{1.5pt}\setlength{\columnsep}{1.2cm}\begin{multicols}{2}\raggedcolumns
 \vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}I. Applications directes du cours\end{minipage}\hfill\pageref{partie:I}\par\vspace{0.15em}
-\sommaireligne{1}{Un hyperplan de $\mathbb K^n$ et une base}{aln-1}
-\sommaireligne{2}{Un supplémentaire dans $\mathbb R_2[X]$}{aln-2}
-\sommaireligne{3}{Sommes directes dans $\mathbb R^3$}{red-somme}
-\sommaireligne{4}{Hyperplans de $\mathbb R^4$}{red-hyp}
-\sommaireligne{5}{Projecteurs associés}{aln-12}
-\sommaireligne{6}{Fonctions paires et impaires}{rdn-17}
+\sommaireligne{1}{Base et coordonnées}{al-r-base}
+\sommaireligne{2}{Noyau, image et théorème du rang}{al-r-rang}
+\sommaireligne{3}{Inverse et changement de base}{al-r-chgt}
+\sommaireligne{4}{Un hyperplan de $\mathbb K^n$ et une base}{aln-1}
+\sommaireligne{5}{Un supplémentaire dans $\mathbb R_2[X]$}{aln-2}
+\sommaireligne{6}{Sommes directes dans $\mathbb R^3$}{red-somme}
+\sommaireligne{7}{Hyperplans de $\mathbb R^4$}{red-hyp}
+\sommaireligne{8}{Projecteurs associés}{aln-12}
+\sommaireligne{9}{Fonctions paires et impaires}{rdn-17}
 \vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}II. Exercices classiques et méthodes incontournables\end{minipage}\hfill\pageref{partie:II}\par\vspace{0.15em}
-\sommaireligne{7}{Projecteur et symétrie dans $\mathbb R^3$}{al-proj}
-\sommaireligne{8}{Deux propriétés de la trace}{red-trace}
-\sommaireligne{9}{La trace détermine une matrice}{aln-5}
-\sommaireligne{10}{Rang d'une matrice à paramètres}{aln-6}
-\sommaireligne{11}{Un projecteur donné par sa matrice}{aln-4}
-\sommaireligne{12}{Lire des blocs}{red-stable}
+\sommaireligne{10}{Projecteur et symétrie dans $\mathbb R^3$}{al-proj}
+\sommaireligne{11}{Deux propriétés de la trace}{red-trace}
+\sommaireligne{12}{La trace détermine une matrice}{aln-5}
+\sommaireligne{13}{Rang d'une matrice à paramètres}{aln-6}
+\sommaireligne{14}{Un projecteur donné par sa matrice}{aln-4}
+\sommaireligne{15}{Lire des blocs}{red-stable}
 \vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}III. Exercices de synthèse et approfondissement\end{minipage}\hfill\pageref{partie:III}\par\vspace{0.15em}
-\sommaireligne{13}{Deux sous-espaces trop grands se coupent}{aln-3}
-\sommaireligne{14}{Matrices de rang au plus $1$}{aln-7}
-\sommaireligne{15}{Une matrice de carré nul}{aln-8}
-\sommaireligne{16}{L'endomorphisme $M\mapsto AM-MA$}{al-crochet}
-\sommaireligne{17}{Matrices nilpotentes de taille 2}{aln-11}
-\sommaireligne{18}{$AB-BA=I$ en dimension infinie}{aln-13}
+\sommaireligne{16}{Deux sous-espaces trop grands se coupent}{aln-3}
+\sommaireligne{17}{Matrices de rang au plus $1$}{aln-7}
+\sommaireligne{18}{Une matrice de carré nul}{aln-8}
+\sommaireligne{19}{L'endomorphisme $M\mapsto AM-MA$}{al-crochet}
+\sommaireligne{20}{Matrices nilpotentes de taille 2}{aln-11}
+\sommaireligne{21}{$AB-BA=I$ en dimension infinie}{aln-13}
 \vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}IV. Exercices difficiles et type concours\end{minipage}\hfill\pageref{partie:IV}\par\vspace{0.15em}
-\sommaireligne{19}{Endomorphismes de $\mathbb C^2$ de trace nulle}{aln-10}
+\sommaireligne{22}{Endomorphismes de $\mathbb C^2$ de trace nulle}{aln-10}
 \end{multicols}}
 \clearpage
-\partie{I}{Applications directes du cours}{Sommes directes, supplémentaires, hyperplans et leurs équations, projecteurs.}
-\exercice{1}{1}{Un hyperplan de $\mathbb K^n$ et une base}{Exercice complémentaire}{hyperplan, forme linéaire, base}{aln-1}{1}
+\partie{I}{Applications directes du cours}{Rappels de première année (base, rang, changement de base), sommes directes, supplémentaires, hyperplans et leurs équations, projecteurs.}
+\exercice{1}{1}{Base et coordonnées}{Livret, exercice R.1}{famille libre, base, coordonnées, rappels de première année}{al-r-base}{1}
+Dans $\R^3$, on pose $u_1=(1,1,0)$, $u_2=(0,1,1)$, $u_3=(1,0,1)$.
+\begin{enumerate}
+\item Montrer que $\mathcal B'=(u_1,u_2,u_3)$ est une base de $\R^3$.
+\item Déterminer les coordonnées de $v=(2,3,1)$ dans $\mathcal B'$.
+\end{enumerate}
+\place
+\exercice{2}{2}{Noyau, image et théorème du rang}{Livret, exercice R.2}{noyau, image, rang, rappels de première année}{al-r-rang}{1}
+Soit $f:\R^3\to\R^3$, $f(x,y,z)=(x+y-z,\ x+2y,\ y+z)$.
+\begin{enumerate}
+\item Écrire la matrice $A$ de $f$ dans la base canonique.
+\item Déterminer une base de $\Ker f$ et une base de $\Im f$, et vérifier le théorème du rang.
+\item $f$ est-elle injective ? surjective ? Donner une équation de $\Im f$.
+\end{enumerate}
+\place
+\exercice{3}{2}{Inverse et changement de base}{Livret, exercice R.3}{matrice de passage, inverse, changement de base, puissances}{al-r-chgt}{2}
+Soit $f$ l'endomorphisme de $\R^2$ de matrice $A=\begin{pmatrix}3&-2\\1&0\end{pmatrix}$ dans la base canonique, et
+$u_1=(1,1)$, $u_2=(2,1)$.
+\begin{enumerate}
+\item Montrer que $\mathcal B'=(u_1,u_2)$ est une base de $\R^2$ et calculer la matrice de passage $P$ et son inverse.
+\item Calculer $f(u_1)$ et $f(u_2)$, puis la matrice $D$ de $f$ dans $\mathcal B'$. Vérifier que $D=P^{-1}AP$.
+\item En déduire $A^k$ pour $k\in\N$.
+\end{enumerate}
+\place
+\exercice{4}{1}{Un hyperplan de $\mathbb K^n$ et une base}{Exercice complémentaire}{hyperplan, forme linéaire, base}{aln-1}{2}
 Soit $n\geq2$, $(e_1,\dots,e_n)$ la base canonique de $\K^n$ et $H=\{(x_1,\dots,x_n)\in\K^n,\ x_1+\dots+x_n=0\}$.
 \begin{enumerate}
 \item Déterminer la dimension de $H$.
 \item Pour $1\leq i\leq n-1$, on pose $f_i=e_i-e_n$. Montrer que $(f_1,\dots,f_{n-1})$ est une base de $H$.
 \end{enumerate}
 \place
-\exercice{2}{1}{Un supplémentaire dans $\mathbb R_2[X]$}{Exercice complémentaire}{hyperplan, supplémentaire, polynômes}{aln-2}{1}
+\exercice{5}{1}{Un supplémentaire dans $\mathbb R_2[X]$}{Exercice complémentaire}{hyperplan, supplémentaire, polynômes}{aln-2}{2}
 Soit $F=\{P\in\R_2[X],\ P(1)=0\}$. Montrer que $\R_2[X]=\vect(1)\oplus F$ et décomposer un polynôme $P$ selon cette somme.
 \place
-\exercice{3}{1}{Sommes directes dans $\mathbb R^3$}{Livret, exercice 1.1}{somme directe, décomposition, hyperplan}{red-somme}{2}
+\exercice{6}{1}{Sommes directes dans $\mathbb R^3$}{Livret, exercice 1.1}{somme directe, décomposition, hyperplan}{red-somme}{3}
 \begin{enumerate}
 \item Dans $\R^3$, on pose $F=\{(x,y,z),\ x+y+z=0\}$ et $G=\vect\big((1,1,1)\big)$. Montrer que $\R^3=F\oplus G$ et décomposer
 $v=(x,y,z)$ selon cette somme.
 \item Dans $\R^3$, les droites $D_1=\vect(1,0,0)$, $D_2=\vect(0,1,0)$, $D_3=\vect(1,1,0)$ sont-elles en somme directe ?
 \end{enumerate}
 \place
-\exercice{4}{2}{Hyperplans de $\mathbb R^4$}{Livret, exercice 1.3}{hyperplan, intersection, supplémentaire}{red-hyp}{2}
+\exercice{7}{2}{Hyperplans de $\mathbb R^4$}{Livret, exercice 1.3}{hyperplan, intersection, supplémentaire}{red-hyp}{3}
 Dans $\R^4$, on considère $H_1$ : $x+y+z+t=0$ et $H_2$ : $x-y+z-t=0$, et $u=(1,1,1,1)$.
 \begin{enumerate}
 \item Donner la dimension et une base de $H_1\cap H_2$.
 \item La droite $\vect(u)$ est-elle un supplémentaire de $H_1$ ? de $H_2$ ?
 \end{enumerate}
 \place
-\exercice{5}{1}{Projecteurs associés}{Exercice complémentaire}{projecteur, somme directe}{aln-12}{2}
+\exercice{8}{1}{Projecteurs associés}{Exercice complémentaire}{projecteur, somme directe}{aln-12}{3}
 Soient $F$ et $G$ deux sous-espaces supplémentaires de $E$, $p$ la projection sur $F$ parallèlement à $G$ et $q$ la projection sur
 $G$ parallèlement à $F$. Montrer que $p+q=\Id_E$, $p\circ q=q\circ p=0$, $\Ker p=\Im q$ et $\Ker q=\Im p$.
 \place
-\exercice{6}{1}{Fonctions paires et impaires}{Exercice complémentaire}{somme directe, dimension infinie, symétrie}{rdn-17}{2}
+\exercice{9}{1}{Fonctions paires et impaires}{Exercice complémentaire}{somme directe, dimension infinie, symétrie}{rdn-17}{3}
 Soit $E$ l'espace des fonctions de $\R$ dans $\R$, $\mathcal P$ le sous-espace des fonctions paires et $\mathcal I$ celui des
 fonctions impaires. Montrer que $E=\mathcal P\oplus\mathcal I$. Que donne cette décomposition pour $\exp$ ?
 \place
 \clearpage
 \partie{II}{Exercices classiques et méthodes incontournables}{Projection et symétrie en coordonnées, trace, rang d'une matrice à paramètres, projecteur donné par sa matrice, blocs.}
-\exercice{7}{2}{Projecteur et symétrie dans $\mathbb R^3$}{Livret, exercice 1.2}{somme directe, projecteur, symétrie, hyperplan}{al-proj}{3}
+\exercice{10}{2}{Projecteur et symétrie dans $\mathbb R^3$}{Livret, exercice 1.2}{somme directe, projecteur, symétrie, hyperplan}{al-proj}{4}
 Dans $\R^3$, on considère le plan $P$ d'équation $2x-y+z=0$ et la droite $D$ d'équations $y=0$, $x=z$.
 \begin{enumerate}
 \item Donner une base de $P$ et de $D$, puis montrer que $\R^3=P\oplus D$.
@@ -418,19 +445,19 @@ Dans $\R^3$, on considère le plan $P$ d'équation $2x-y+z=0$ et la droite $D$ d
 par rapport à $P$ parallèlement à $D$. Vérifier que $p\circ p=p$ et $s\circ s=\Id$.
 \end{enumerate}
 \place
-\exercice{8}{2}{Deux propriétés de la trace}{Livret, exercice 1.4}{trace, $\mathrm{tr}(AB)=\mathrm{tr}(BA)$, projecteur}{red-trace}{3}
+\exercice{11}{2}{Deux propriétés de la trace}{Livret, exercice 1.4}{trace, $\mathrm{tr}(AB)=\mathrm{tr}(BA)$, projecteur}{red-trace}{4}
 \begin{enumerate}
 \item Montrer qu'il n'existe pas de matrices $A,B\in\Mn{\K}$ telles que $AB-BA=I_n$.
 \item Soit $A\in\Mn{\K}$ telle que $A^2=A$. Montrer que $\rg(A)=\tr(A)$.
 \end{enumerate}
 \place
-\exercice{9}{2}{La trace détermine une matrice}{Exercice complémentaire}{trace, base canonique de $\mathcal M_n$}{aln-5}{3}
+\exercice{12}{2}{La trace détermine une matrice}{Exercice complémentaire}{trace, base canonique de $\mathcal M_n$}{aln-5}{4}
 Soient $A,B\in\Mn{\K}$. Montrer que $\tr(AM)=\tr(BM)$ pour tout $M\in\Mn{\K}$ si et seulement si $A=B$.
 \place
-\exercice{10}{2}{Rang d'une matrice à paramètres}{Exercice complémentaire}{rang, opérations élémentaires, discussion}{aln-6}{4}
+\exercice{13}{2}{Rang d'une matrice à paramètres}{Exercice complémentaire}{rang, opérations élémentaires, discussion}{aln-6}{5}
 Déterminer, selon les valeurs des réels $a$ et $b$, le rang de $M=\begin{pmatrix}a&b&1\\1&ab&1\\1&b&a\end{pmatrix}$.
 \place
-\exercice{11}{2}{Un projecteur donné par sa matrice}{Exercice complémentaire}{projecteur, rang et trace, équation d'un plan, base adaptée}{aln-4}{4}
+\exercice{14}{2}{Un projecteur donné par sa matrice}{Exercice complémentaire}{projecteur, rang et trace, équation d'un plan, base adaptée}{aln-4}{5}
 Soit $u$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1/2&1&-1/2\\0&1&0\\-1/2&1&1/2\end{pmatrix}$ dans la base canonique.
 \begin{enumerate}
 \item Montrer que $u$ est un projecteur. Quel est son rang ?
@@ -438,7 +465,7 @@ Soit $u$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1/2&1&-1/2\\0&1&
 \item Déterminer $P$ inversible telle que $P^{-1}AP=\mathrm{diag}(0,1,1)$.
 \end{enumerate}
 \place
-\exercice{12}{2}{Lire des blocs}{Livret, exercice 1.5}{sous-espace stable, matrice par blocs, base adaptée, trace}{red-stable}{4}
+\exercice{15}{2}{Lire des blocs}{Livret, exercice 1.5}{sous-espace stable, matrice par blocs, base adaptée, trace}{red-stable}{5}
 Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}3&-1&1\\0&2&0\\1&-1&3\end{pmatrix}$ dans la base canonique
 $(e_1,e_2,e_3)$.
 \begin{enumerate}
@@ -448,22 +475,22 @@ $(e_1,e_2,e_3)$.
 \place
 \clearpage
 \partie{III}{Exercices de synthèse et approfondissement}{Formule de Grassmann, matrices de rang 1, noyau et image, l'endomorphisme $M\mapsto AM-MA$, matrices nilpotentes de taille 2.}
-\exercice{13}{2}{Deux sous-espaces trop grands se coupent}{Exercice complémentaire}{formule de Grassmann, intersection}{aln-3}{5}
+\exercice{16}{2}{Deux sous-espaces trop grands se coupent}{Exercice complémentaire}{formule de Grassmann, intersection}{aln-3}{6}
 Soient $F$ et $G$ deux sous-espaces d'un espace $E$ de dimension finie tels que $\dim F+\dim G>\dim E$. Montrer que
 $F\cap G\neq\{0\}$. Application : deux plans vectoriels de $\R^3$ ont toujours une droite en commun.
 \place
-\exercice{14}{3}{Matrices de rang au plus $1$}{Exercice complémentaire}{rang, produit colonne-ligne, trace}{aln-7}{5}
+\exercice{17}{3}{Matrices de rang au plus $1$}{Exercice complémentaire}{rang, produit colonne-ligne, trace}{aln-7}{6}
 Soit $M\in\Mn{\R}$. Montrer que $\rg M\leq1$ si et seulement s'il existe deux colonnes $U,V\in\mathcal M_{n,1}(\R)$ telles que
 $M=UV^T$. Montrer alors que $M^2=\tr(M)\,M$.
 \place
-\exercice{15}{3}{Une matrice de carré nul}{Exercice complémentaire}{noyau et image, théorème du rang, base adaptée}{aln-8}{5}
+\exercice{18}{3}{Une matrice de carré nul}{Exercice complémentaire}{noyau et image, théorème du rang, base adaptée}{aln-8}{6}
 Soit $f$ l'endomorphisme de $\R^3$ de matrice $A=\begin{pmatrix}1&1&-1\\-3&-3&3\\-2&-2&2\end{pmatrix}$ dans la base canonique.
 \begin{enumerate}
 \item Déterminer une base de $\Ker f$ et de $\Im f$. Comparer ces deux sous-espaces ; que vaut $f\circ f$ ?
 \item Déterminer une base de $\R^3$ dans laquelle la matrice de $f$ n'a qu'un coefficient non nul.
 \end{enumerate}
 \place
-\exercice{16}{3}{L'endomorphisme $M\mapsto AM-MA$}{Livret, exercice 1.6}{endomorphisme de matrices, trace, noyau et image, sous-espace stable}{al-crochet}{6}
+\exercice{19}{3}{L'endomorphisme $M\mapsto AM-MA$}{Livret, exercice 1.6}{endomorphisme de matrices, trace, noyau et image, sous-espace stable}{al-crochet}{7}
 Soit $A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ et $\varphi:\mathcal M_2(\R)\to\mathcal M_2(\R)$, $M\mapsto AM-MA$.
 \begin{enumerate}
 \item Montrer que $\varphi$ est un endomorphisme et que son image est contenue dans l'hyperplan des matrices de trace nulle.
@@ -471,7 +498,7 @@ Soit $A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ et $\varphi:\mathcal M_2(\R)\to\m
 \item Montrer que $\Ker\varphi$ et $\Im\varphi$ sont stables par $\varphi$. Sont-ils supplémentaires ?
 \end{enumerate}
 \place
-\exercice{17}{3}{Matrices nilpotentes de taille 2}{Exercice complémentaire}{trace, déterminant $2\times2$, hyperplan, sous-espace engendré}{aln-11}{6}
+\exercice{20}{3}{Matrices nilpotentes de taille 2}{Exercice complémentaire}{trace, déterminant $2\times2$, hyperplan, sous-espace engendré}{aln-11}{7}
 Une matrice $A\in\mathcal M_2(\R)$ est \emph{nilpotente} s'il existe $k\geq1$ tel que $A^k=0$. On note $\mathcal N$ l'ensemble de ces matrices.
 \begin{enumerate}
 \item Montrer que toute $M\in\mathcal M_2(\R)$ vérifie $M^2-\tr(M)\,M+\det(M)\,I_2=0$.
@@ -479,7 +506,7 @@ Une matrice $A\in\mathcal M_2(\R)$ est \emph{nilpotente} s'il existe $k\geq1$ te
 \item Montrer que $\vect(\mathcal N)$ est l'hyperplan des matrices de trace nulle.
 \end{enumerate}
 \place
-\exercice{18}{3}{$AB-BA=I$ en dimension infinie}{Exercice complémentaire}{trace, dimension finie, polynômes}{aln-13}{7}
+\exercice{21}{3}{$AB-BA=I$ en dimension infinie}{Exercice complémentaire}{trace, dimension finie, polynômes}{aln-13}{8}
 Sur $E=\R[X]$, on considère $D:P\mapsto P'$ et $M:P\mapsto XP$.
 \begin{enumerate}
 \item Montrer que $D\circ M-M\circ D=\Id_E$.
@@ -488,7 +515,7 @@ Sur $E=\R[X]$, on considère $D:P\mapsto P'$ et $M:P\mapsto XP$.
 \place
 \clearpage
 \partie{IV}{Exercices difficiles et type concours}{Endomorphismes de trace nulle en dimension 2 : symétries et endomorphismes de carré nul.}
-\exercice{19}{4}{Endomorphismes de $\mathbb C^2$ de trace nulle}{Exercice complémentaire}{symétrie, trace, théorème du rang, base adaptée}{aln-10}{7}
+\exercice{22}{4}{Endomorphismes de $\mathbb C^2$ de trace nulle}{Exercice complémentaire}{symétrie, trace, théorème du rang, base adaptée}{aln-10}{8}
 Soit $f$ un endomorphisme de $\C^2$ tel que $\tr f=0$.
 \begin{enumerate}
 \item Montrer que $f\circ f$ est une homothétie ; on note $\lambda$ son rapport.

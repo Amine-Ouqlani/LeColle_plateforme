@@ -81,12 +81,12 @@
 
 \vspace{0.6em}
 {\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
-mêmes notations que la présentation et le livret ; \livre{th.~1.8} renvoie au livret, \livre{TD~9} à l'exercice~9 du TD complet.
+mêmes notations que la présentation et le livret ; \livre{th.~1.5} renvoie au livret, \livre{TD~12} à l'exercice~12 du TD complet.
 $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
-1.1 Rappels : applications linéaires et matrices \dotfill\pageref{n11}\\
+1.1 Rappels de première année \dotfill\pageref{n11}\\
 1.2 Produit et somme de sous-espaces ; projecteurs \dotfill\pageref{n12}\\
 1.3 Hyperplans et systèmes linéaires \dotfill\pageref{n13}\\
 1.4 Trace \dotfill\pageref{n14}\\
@@ -98,21 +98,47 @@ $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 \pdfbookmark[0]{Chapitre 1 --- Algèbre linéaire}{chap1}\markboth{Chapitre 1 --- Algèbre linéaire}{}
 \begin{multicols}{2}\raggedcolumns
 % ======================================================================
-\notion{1.1 Rappels : applications linéaires et matrices}\label{n11}
-\begin{PROP}[RANG \livre{prop.~1.1}]
+\notion{1.1 Rappels de première année}\label{n11}
+\begin{FORM}[CALCUL MATRICIEL \livre{R.1--R.4}]
+$(AB)_{i,j}=\sum_ka_{i,k}b_{k,j}$ ; $AB\neq BA$ en général ; $(AB)^T=B^TA^T$.\\
+Binôme si $AB=BA$. $(AB)^{-1}=B^{-1}A^{-1}$ ; $AB=I_n\Rightarrow B=A^{-1}$.\\
+Triangulaire inversible $\iff$ diagonale sans zéro. $\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.\\
+$AX=B$ compatible : solutions $X_0+\Ker A$. Pivot : opérations sur les lignes.
+\end{FORM}
+\begin{FORM}[FAMILLES ET DIMENSION \livre{R.9--R.12}]
+Base extraite, base incomplète ; $n+1$ vecteurs dans un espace engendré par $n$ : liés.\\
+$\dim\K^n=n$, $\dim\K_n[X]=n+1$, $\dim\mathcal M_{n,p}=np$, $\dim\mathcal L(E,F)=\dim E\dim F$.\\
+$\dim E=n$ : $n$ vecteurs, base $\iff$ libre $\iff$ génératrice.\\
+$\rg(x_1,\dots,x_p)=\dim\vect(x_i)\leq p$ ($=p\iff$ libre). Degrés distincts : libre.\\
+$F\subset E$ : $\dim F\leq\dim E$, égalité $\iff F=E$.
+\end{FORM}
+\begin{PROP}[RANG \livre{prop.~R.15}]
 $\Ker u$, $\Im u$ sous-espaces ; $u$ injective $\iff\Ker u=\{0\}$.\\
 $(e_j)$ génératrice $\Rightarrow\Im u=\vect\big(u(e_j)\big)$.\\
 \emph{Théorème du rang} : $\dim\Ker u+\rg u=\dim E$.\\
-$\dim E=\dim F$ : injective $\iff$ surjective $\iff$ bijective.
+$\rg(v\circ u)\leq\min(\rg u,\rg v)$ ; inchangé par composition avec un isomorphisme.\\
+$\dim E=\dim F$ : injective $\iff$ surjective $\iff$ bijective.\\
+$u$ déterminée par $u(e_i)$ ; injective / surjective / bijective $\iff\big(u(e_i)\big)$ libre / génératrice / base \livre{R.16}.\\
+$u(x)=a$ : aucune solution, ou $x_0+\Ker u$ \livre{R.17}.
 \end{PROP}
-\begin{FORM}[CHANGEMENT DE BASE \livre{prop.~1.2}]
-$P$ = matrice de passage de $\mathcal B$ à $\mathcal B'$ (colonnes : $\mathcal B'$ dans $\mathcal B$) :
+\begin{FORM}[MATRICES \livre{R.18--R.23}]
+Colonne $j$ : coordonnées de $u(e_j)$ ; $Y=AX$ ; $\Mat(v\circ u)=\Mat(v)\Mat(u)$.\\
+$\Im A=\vect(\text{colonnes})$ ; $\rg A^T=\rg A$ ; $\dim\Ker A=p-\rg A$.\\
+$A\in\Mn{\K}$ inversible $\iff\Ker A=\{0\}\iff\rg A=n$.\\
+$AX=B$ compatible $\iff B\in\Im A$ ; $A$ inversible : $X=A^{-1}B$.
+\end{FORM}
+\begin{FORM}[CHANGEMENT DE BASE \livre{prop.~R.21}]
+$P$ = matrice de passage de $\mathcal B$ à $\mathcal B'$ (colonnes : $\mathcal B'$ dans $\mathcal B$), $X=PX'$ :
 \[\Mat_{\mathcal B'}(f)=P^{-1}\Mat_{\mathcal B}(f)\,P.\]
 $A$, $B$ \emph{semblables} : $B=P^{-1}AP$. Mêmes rang, trace (§1.4), déterminant (ch.~2), polynôme caractéristique (ch.~3).
 \end{FORM}
+\begin{METH}{Inverse, rang, noyau \livre{méth.~R.1, R.3}}
+Inverse : résoudre $AX=Y$, ou pivot sur $(A\,|\,I_n)$.\\
+Rang : échelonner, compter les pivots. Noyau : $AX=0$, contrôler $\dim=p-\rg A$. Image : colonnes des pivots.
+\end{METH}
 % ======================================================================
 \notion{1.2 Produit et somme de sous-espaces ; projecteurs}\label{n12}
-\begin{PROP}[PRODUIT, SOMME DIRECTE \livre{prop.~1.4, 1.7, th.~1.8}]
+\begin{PROP}[PRODUIT, SOMME DIRECTE \livre{prop.~1.1, 1.4, th.~1.5}]
 $\dim(E_1\times\dots\times E_p)=\sum\dim E_i$.\\
 $F_1+\dots+F_p$ directe $\iff$ ($x_1+\dots+x_p=0$, $x_i\in F_i\Rightarrow$ tous nuls). $p=2$ : $F\cap G=\{0\}$.\\
 Base adaptée : concaténation des bases ; $\dim\bigoplus F_i=\sum\dim F_i$.\\
@@ -122,14 +148,14 @@ Grassmann : $\dim(F+G)=\dim F+\dim G-\dim(F\cap G)$.
 \begin{PIEGE}
 $p\geq3$ : intersections deux à deux nulles $\not\Rightarrow$ directe ($\vect(1,0)$, $\vect(0,1)$, $\vect(1,1)$).
 \end{PIEGE}
-\begin{FORM}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.9}]
+\begin{FORM}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.6}]
 $p\circ p=p$ : projection sur $\Im p$ parallèlement à $\Ker p$, $E=\Im p\oplus\Ker p$, $\Mat=\mathrm{diag}(I_r,0)$.\\
 $s\circ s=\Id$ : $E=\Ker(s-\Id)\oplus\Ker(s+\Id)$, $\Mat=\mathrm{diag}(I_r,-I_{n-r})$ ; $s=2p-\Id$.\\
-Calcul de $p(x)$ sur $F$ parallèlement à $G=\vect(w)$ : $t$ tel que $x-tw\in F$, $p(x)=x-tw$ \livre{TD~7}.
+Calcul de $p(x)$ sur $F$ parallèlement à $G=\vect(w)$ : $t$ tel que $x-tw\in F$, $p(x)=x-tw$ \livre{TD~10}.
 \end{FORM}
 % ======================================================================
 \notion{1.3 Hyperplans et systèmes linéaires}\label{n13}
-\begin{PROP}[HYPERPLANS \livre{prop.~1.11}]
+\begin{PROP}[HYPERPLANS \livre{prop.~1.8}]
 Hyperplan : supplémentaire d'une droite ; dimension $n-1$ ; $=\Ker\varphi$, $\varphi$ forme linéaire non nulle ; équation
 $a_1x_1+\dots+a_nx_n=0$, unique à un facteur près.\\
 $u\notin H\Rightarrow E=H\oplus\vect(u)$.\\
@@ -142,11 +168,11 @@ Système homogène de rang $r$ : solutions de dimension $n-r$ ; avec second memb
 \end{METH}
 % ======================================================================
 \notion{1.4 Trace}\label{n14}
-\begin{FORM}[PROPRIÉTÉS \livre{prop.~1.14}]
+\begin{FORM}[PROPRIÉTÉS \livre{prop.~1.11}]
 $\tr A=\sum a_{i,i}$ : forme linéaire ; $\Ker\tr$ hyperplan de $\Mn{\K}$.\\
 $\tr(AB)=\tr(BA)$ ; $\tr(P^{-1}AP)=\tr A$ ; $\tr f$ indépendante de la base.\\
 Projecteur : $\tr p=\rg p$. Symétrie : $\tr s=\dim\Ker(s-\Id)-\dim\Ker(s+\Id)$.\\
-$AB-BA=I_n$ impossible \livre{TD~8} (en dimension finie seulement, \livre{TD~18}).
+$AB-BA=I_n$ impossible \livre{TD~11} (en dimension finie seulement, \livre{TD~21}).
 \end{FORM}
 \begin{PIEGE}
 $\tr(AB)\neq\tr A\,\tr B$ ; $\tr(ABC)=\tr(CAB)$ mais $\neq\tr(BAC)$ en général.
@@ -157,10 +183,10 @@ $\tr(AB)\neq\tr A\,\tr B$ ; $\tr(ABC)=\tr(CAB)$ mais $\neq\tr(BAC)$ en général
 $F$ stable : $f(F)\subset F$ ; induit $f_F\in\mathcal L(F)$. Vérifier $f(e_j)\in F$ sur une base de $F$.\\
 $f\circ g=g\circ f\Rightarrow\Ker g$, $\Im g$ stables par $f$ ; $\Ker f$, $\Im f$ stables par $f$.
 \end{DEF}
-\begin{PROP}[BLOCS \livre{th.~1.18}]
+\begin{PROP}[BLOCS \livre{th.~1.15}]
 Base adaptée à $F$ ($\dim F=p$) : $F$ stable $\iff\Mat(f)=\begin{pmatrix}A&B\\0&C\end{pmatrix}$, $A=\Mat(f_F)$.\\
 $E=F\oplus G$, les deux stables $\iff\begin{pmatrix}A&0\\0&C\end{pmatrix}$ ; $\tr f=\tr A+\tr C$.\\
-Droite $\vect(u)$ stable $\iff f(u)=\lambda u$ \livre{prop.~1.19} : point de départ de la réduction (ch.~3).
+Droite $\vect(u)$ stable $\iff f(u)=\lambda u$ \livre{prop.~1.16} : point de départ de la réduction (ch.~3).
 \end{PROP}
 % ======================================================================
 \notion{1.6 Quelle méthode ? Pièges ; résultats du TD}\label{n16}
@@ -177,21 +203,21 @@ $F$ stable ? & images d'une base de $F$ ; blocs\\\hline
 \end{tabular}}
 \begin{PIEGE}
 $E=F\oplus G$ demande aussi la somme ou les dimensions. $\Ker f$ et $\Im f$ ne sont pas supplémentaires en général
-($f^2=0$, \livre{TD~15}). Matrice de passage : colonnes = \emph{nouveaux} vecteurs dans l'\emph{ancienne} base.
+($f^2=0$, \livre{TD~18}). Matrice de passage : colonnes = \emph{nouveaux} vecteurs dans l'\emph{ancienne} base.
 \end{PIEGE}
 {\small
 \renewcommand{\arraystretch}{1.12}
 \begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD1 & $\{\sum x_i=0\}$ : hyperplan, base $(e_i-e_n)_{i<n}$.\\
-TD3 & $\R^3=\{x+y+z=0\}\oplus\vect(1,1,1)$, $m=\frac{x+y+z}3$.\\
-TD7 & projection sur $2x-y+z=0$ parallèlement à $\vect(1,0,1)$ : $t=\frac{2x-y+z}3$.\\
-TD9 & $\tr(AE_{j,i})=a_{i,j}$ : $\tr(AM)=\tr(BM)\ \forall M\iff A=B$.\\
-TD10 & rang de $\begin{pmatrix}a&b&1\\1&ab&1\\1&b&a\end{pmatrix}$ : $1$ si $a=1$ ; $2$ si $b=0$ ou $a=-2$ ; $3$ sinon.\\
-TD11 & $A^2=A$, $\rg A=\tr A=2$ ; $\Im$ : $x-2y+z=0$.\\
-TD14 & $\rg M\leq1\iff M=UV^T$ ; alors $M^2=\tr(M)M$.\\
-TD16 & $M\mapsto AM-MA$ : $\Ker\supset\vect(I,A)$, $\Im\subset\Ker\tr$.\\
-TD17 & $M^2-\tr(M)M+\det(M)I_2=0$ ; nilpotente $\iff\tr=\det=0$.\\
-TD19 & $\tr f=0$ en dim.~2 : $f^2=\lambda\Id$ ; $f=\alpha s$ ou $\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
+TD4 & $\{\sum x_i=0\}$ : hyperplan, base $(e_i-e_n)_{i<n}$.\\
+TD6 & $\R^3=\{x+y+z=0\}\oplus\vect(1,1,1)$, $m=\frac{x+y+z}3$.\\
+TD10 & projection sur $2x-y+z=0$ parallèlement à $\vect(1,0,1)$ : $t=\frac{2x-y+z}3$.\\
+TD12 & $\tr(AE_{j,i})=a_{i,j}$ : $\tr(AM)=\tr(BM)\ \forall M\iff A=B$.\\
+TD13 & rang de $\begin{pmatrix}a&b&1\\1&ab&1\\1&b&a\end{pmatrix}$ : $1$ si $a=1$ ; $2$ si $b=0$ ou $a=-2$ ; $3$ sinon.\\
+TD14 & $A^2=A$, $\rg A=\tr A=2$ ; $\Im$ : $x-2y+z=0$.\\
+TD17 & $\rg M\leq1\iff M=UV^T$ ; alors $M^2=\tr(M)M$.\\
+TD19 & $M\mapsto AM-MA$ : $\Ker\supset\vect(I,A)$, $\Im\subset\Ker\tr$.\\
+TD20 & $M^2-\tr(M)M+\det(M)I_2=0$ ; nilpotente $\iff\tr=\det=0$.\\
+TD22 & $\tr f=0$ en dim.~2 : $f^2=\lambda\Id$ ; $f=\alpha s$ ou $\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
 \end{tabular}}
 \end{multicols}
 \end{document}

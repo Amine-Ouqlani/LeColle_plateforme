@@ -2,26 +2,27 @@
 """Plan des TD et métadonnées des exercices qui ne sont pas encore dans data/exercices.js
 (exemples du livre mis en exercice, exercices complémentaires)."""
 
-CHAPITRES = {
-  'al': {
-    'num': 1, 'titre': 'Algèbre linéaire', 'court': 'Algèbre linéaire', 'livre': 'al', 'nouveau': True,
-    'parties': [
+# Niveau du chapitre « Équations différentielles » : False = programme de PTSI seulement (version actuelle du site),
+# True = version complète de PT. Les deux plans sont conservés ; mettre aussi \PTtrue dans les sources LaTeX du chapitre.
+PT = False
+
+ED_PTSI = [
       ('I', "Applications directes du cours",
-       "Sommes directes, supplémentaires, hyperplans et leurs équations, projecteurs.",
-       ['aln-1', 'aln-2', 'red-somme', 'red-hyp', 'aln-12', 'rdn-17']),
+       "Premier ordre, équation caractéristique, seconds membres usuels, problèmes de Cauchy.",
+       ['edn-1', 'ed-o1', 'edn-2', 'ed-c1', 'edn-16', 'ed-cauchy1', 'edn-4', 'ed-c3']),
       ('II', "Exercices classiques et méthodes incontournables",
-       "Projection et symétrie en coordonnées, trace, rang d'une matrice à paramètres, projecteur donné par sa matrice, blocs.",
-       ['al-proj', 'red-trace', 'aln-5', 'aln-6', 'aln-4', 'red-stable']),
+       "Racine double, superposition, variation de la constante, équation intégrale, résonance.",
+       ['ed-c2', 'edn-3', 'edn-5', 'edn-17', 'ed-integ', 'edn-8']),
       ('III', "Exercices de synthèse et approfondissement",
-       "Formule de Grassmann, matrices de rang 1, noyau et image, l'endomorphisme $M\\mapsto AM-MA$, matrices nilpotentes de taille 2.",
-       ['aln-3', 'aln-7', 'aln-8', 'al-crochet', 'aln-11', 'aln-13']),
+       "Équation fonctionnelle, développement limité d'une solution.",
+       ['edn-18', 'edn-7']),
       ('IV', "Exercices difficiles et type concours",
-       "Endomorphismes de trace nulle en dimension 2 : symétries et endomorphismes de carré nul.",
-       ['aln-10']),
-    ]},
-  'ed': {
-    'num': 4, 'titre': 'Équations différentielles', 'livre': 'ed', 'nouveau': True,
-    'parties': [
+       "Une solution écrite comme une intégrale, et la question des solutions périodiques.",
+       ['edn-15']),
+    ]
+
+# Plan complet de PT (réserve : ed-recol, edn-6, edn-9, ed-poly, ed-abaisse, edn-10, ed-se, edn-11, edn-12, edn-13, edn-14)
+ED_PT = [
       ('I', "Applications directes du cours",
        "Premier ordre, équation caractéristique, seconds membres usuels, problèmes de Cauchy.",
        ['edn-1', 'ed-o1', 'edn-2', 'ed-c1', 'edn-16', 'ed-cauchy1', 'edn-4', 'ed-c3']),
@@ -34,7 +35,28 @@ CHAPITRES = {
       ('IV', "Exercices difficiles et type concours",
        "Plusieurs méthodes à combiner sur une même équation, dans l'esprit des épreuves écrites.",
        ['edn-12', 'edn-13', 'edn-14', 'edn-15']),
+    ]
+
+CHAPITRES = {
+  'al': {
+    'num': 1, 'titre': 'Algèbre linéaire', 'court': 'Algèbre linéaire', 'livre': 'al', 'nouveau': True,
+    'parties': [
+      ('I', "Applications directes du cours",
+       "Rappels de première année (base, rang, changement de base), sommes directes, supplémentaires, hyperplans et leurs équations, projecteurs.",
+       ['al-r-base', 'al-r-rang', 'al-r-chgt', 'aln-1', 'aln-2', 'red-somme', 'red-hyp', 'aln-12', 'rdn-17']),
+      ('II', "Exercices classiques et méthodes incontournables",
+       "Projection et symétrie en coordonnées, trace, rang d'une matrice à paramètres, projecteur donné par sa matrice, blocs.",
+       ['al-proj', 'red-trace', 'aln-5', 'aln-6', 'aln-4', 'red-stable']),
+      ('III', "Exercices de synthèse et approfondissement",
+       "Formule de Grassmann, matrices de rang 1, noyau et image, l'endomorphisme $M\\mapsto AM-MA$, matrices nilpotentes de taille 2.",
+       ['aln-3', 'aln-7', 'aln-8', 'al-crochet', 'aln-11', 'aln-13']),
+      ('IV', "Exercices difficiles et type concours",
+       "Endomorphismes de trace nulle en dimension 2 : symétries et endomorphismes de carré nul.",
+       ['aln-10']),
     ]},
+  'ed': {
+    'num': 4, 'titre': 'Équations différentielles', 'livre': 'ed', 'nouveau': True,
+    'parties': ED_PT if PT else ED_PTSI},
   'red': {
     'num': 3, 'titre': 'Réduction', 'court': 'Réduction', 'livre': 'red', 'nouveau': True,
     'parties': [
@@ -113,6 +135,12 @@ EXEMPLES = {
 # titre, notions, objectif, indication — pour les exercices absents de data/exercices.js
 META = {
   # ---------------------------------------------------------------- algèbre linéaire
+  'al-r-base': ("Base et coordonnées", ["famille libre", "base", "coordonnées", "rappels de première année"],
+                "Montrer qu'une famille est une base en dimension connue, et calculer des coordonnées.", "Une famille libre de $3$ vecteurs de $\\mathbb R^3$ suffit."),
+  'al-r-rang': ("Noyau, image et théorème du rang", ["noyau", "image", "rang", "rappels de première année"],
+                "Calculer un noyau et une image, et contrôler par le théorème du rang.", "Le vecteur du noyau donne une relation entre les colonnes."),
+  'al-r-chgt': ("Inverse et changement de base", ["matrice de passage", "inverse", "changement de base", "puissances"],
+                "Revoir la formule de changement de base et l'utiliser pour calculer des puissances.", "$A=PDP^{-1}$, donc $A^k=PD^kP^{-1}$."),
   'al-proj': (r"Projecteur et symétrie dans $\mathbb R^3$", ["somme directe", "projecteur", "symétrie", "hyperplan"],
               "Écrire en coordonnées une projection et une symétrie définies géométriquement.", "Chercher $t$ tel que $v-tw\\in P$."),
   'al-crochet': (r"L'endomorphisme $M\mapsto AM-MA$", ["endomorphisme de matrices", "trace", "noyau et image", "sous-espace stable"],
