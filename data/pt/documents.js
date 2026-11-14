@@ -353,15 +353,26 @@ LC.documents = {
   },
   /* ---- Autres documents ---- */
   "revision": {
-    "titre": "Fiche de révision personnalisée — devoir de courbes",
-    "sousTitre": "Diagnostic du DS, méthodes et devoir entièrement corrigé",
+    "titre": "Livret de révision — devoir de courbes",
+    "sousTitre": "Diagnostic du DS, une question par page, devoir corrigé",
     "type": "devoir",
     "fichier": "docs/pt/fiches/fiche-revision-ds-courbes.pdf",
     "source": "docs/pt/sources/fiche-revision-ds-courbes.tex",
-    "pages": 9,
+    "pages": 11,
+    "version": "v3",
+    "maj": "2026-11-14",
+    "description": "Construit à partir du devoir surveillé de courbes paramétrées : le diagnostic, les outils, une correction rapide des questions réussies, puis une page par question non traitée (ce qu'on demande, l'idée, la rédaction)."
+  },
+  "dl3": {
+    "titre": "DL — Bases et familles cycliques",
+    "sousTitre": "Retour sur le devoir libre 3 (endomorphismes cycliques) · une question par page",
+    "type": "devoir",
+    "fichier": "docs/pt/fiches/dl3-bases-familles-cycliques.pdf",
+    "source": "docs/pt/sources/dl3-bases-familles-cycliques.tex",
+    "pages": 11,
     "version": "v1",
-    "maj": "2026-11-04",
-    "description": "Construite à partir du devoir surveillé de courbes paramétrées : pour chaque question, ce qu'il faut savoir, la méthode, et la correction rédigée comme dans une copie."
+    "maj": "2026-11-14",
+    "description": "Les questions du DL 3 qui ont résisté (II.4.a, II.4.b, III.3 à III.6), dans l'ordre du sujet : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Pour chacune : ce qu'on demande, l'idée, la rédaction. Trois exercices corrigés."
   },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",

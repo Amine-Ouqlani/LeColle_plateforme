@@ -17,8 +17,15 @@ LC.entrainement = [
     id: "ds-classe", type: "devoir", titre: "Devoir surveillé de la classe — correction et diagnostic",
     chapitres: ["courbes"], duree: 120, niveau: 4,
     origine: "DS de la classe ; correction Le Collé",
-    description: "La fiche de révision reprend chaque question du devoir de courbes paramétrées : ce qu'il fallait savoir, la méthode, la correction rédigée, puis les priorités de travail.",
-    enonce: { doc: "revision", page: 1 }, corrige: { doc: "revision", page: 2 }
+    description: "Le diagnostic du devoir de courbes paramétrées, puis une page par question non traitée : ce qu'on demande, l'idée à voir, la rédaction pas à pas. Les questions réussies sont corrigées rapidement.",
+    enonce: { doc: "revision", page: 2 }, corrige: { doc: "revision", page: 5 }
+  },
+  {
+    id: "dl3", type: "devoir", titre: "DL — Bases et familles cycliques",
+    chapitres: ["red"], duree: 120, niveau: 4,
+    origine: "DL 3 de la classe ; correction Le Collé",
+    description: "Les questions difficiles du devoir libre sur les endomorphismes cycliques : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Une question par page : ce qu'on demande, l'idée, la rédaction.",
+    enonce: { doc: "dl3", page: 2 }, corrige: { doc: "dl3", page: 4 }
   },
   {
     id: "eb-determinants", type: "examen", titre: "Examen blanc 1 — Déterminants",

@@ -60,7 +60,7 @@ CH.forEach(c => {
   ids.forEach(i => vu.add(i));
   groupes.push([`Chapitre ${c.num} — ${c.titre}`, ids]);
 });
-const autres = ['revision', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
+const autres = ['revision', 'dl3', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
 const sel = Object.keys(D).filter(k => k.startsWith('selection-'));
 sel.forEach(i => vu.add(i)); groupes.push(['Sélections de 5 problèmes (générées par td/integrer_selection.py)', CH.map(c => 'selection-' + c.id).filter(k => D[k])]);
 const td = Object.keys(D).filter(k => !vu.has(k));

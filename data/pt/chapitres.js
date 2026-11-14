@@ -891,43 +891,39 @@ LC.chapitres = [
       "sections": [
         {
           "titre": "Diagnostic du devoir",
-          "page": 1
-        },
-        {
-          "titre": "Outils de calcul indispensables",
           "page": 2
         },
         {
-          "titre": "Étude générale, tangentes, pente",
-          "page": 2
-        },
-        {
-          "titre": "Point stationnaire : nature, tangente, position",
-          "page": 3
-        },
-        {
-          "titre": "Position globale par rapport à une droite",
+          "titre": "1.1 Les outils",
           "page": 4
         },
         {
-          "titre": "Branches infinies et asymptotes",
+          "titre": "1.2 Questions 1 et 2(a) à 2(d) : correction rapide",
           "page": 5
         },
         {
-          "titre": "Courbe asymptote (hors programme)",
+          "titre": "1.3 Question 2(e) — Position globale",
           "page": 6
         },
         {
-          "titre": "Points d'inflexion",
+          "titre": "1.4 Question 3 — Les asymptotes",
           "page": 7
         },
         {
-          "titre": "Le dessin",
+          "titre": "1.5 Question 4 — Courbe asymptote (hors programme)",
           "page": 8
         },
         {
-          "titre": "Pièges récapitulatifs et priorités",
+          "titre": "1.6 Question 5 — Le point d'inflexion",
           "page": 9
+        },
+        {
+          "titre": "1.7 Question 6 — Le tracé",
+          "page": 10
+        },
+        {
+          "titre": "1.8 Bilan",
+          "page": 11
         }
       ]
     },

@@ -49,8 +49,8 @@ $('#contenu').innerHTML = `
   <h3>Par chapitre</h3>
   <ol class="dl-chap">${parChapitre}</ol>
 
-  <details class="plus" id="autres"><summary>Autres documents <span class="tag">(${statiques.length + 2})</span></summary>
-    <ul class="list">${statiques.map(ligneDoc).join('')}${['revision', 'archive'].map(ligneDoc).join('')}</ul>
+  <details class="plus" id="autres"><summary>Autres documents <span class="tag">(${statiques.length + 3})</span></summary>
+    <ul class="list">${statiques.map(ligneDoc).join('')}${['revision', 'dl3', 'archive'].map(ligneDoc).join('')}</ul>
   </details>
   <details class="plus"><summary>Sources LaTeX <span class="tag">(${sources.length})</span></summary>
     <ul class="list">${sources.map(s => `<li class="row"><div class="main"><a href="${s}" download>${s.split('/').pop()}</a></div></li>`).join('')}</ul>

@@ -52,18 +52,20 @@
 \usepackage{titlesec,titletoc}
 \usepackage{fancyhdr,lastpage,etoolbox}
 \usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
-            pdftitle={Le Collé — Déterminants et courbes paramétrées},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+            pdftitle={Le Collé — Courbes paramétrées : réussir le devoir},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
 
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
 \numberwithin{table}{section}
 
 % ---------- Titres ----------
+% numéro du chapitre dans le parcours PT (affiché), distinct de la numérotation interne
+\newcommand{\grandnum}{\thesection}\newcommand{\ongletcouleur}{Bleu}
 % Chapitres (sections) : grand numéro, titre en linéale, filet ocre
 \titleformat{\section}[display]
   {\normalfont\sffamily\color{Ink}}
   {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
-   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\grandnum}}
   {0.4em}
   {\fontsize{25}{30}\selectfont\bfseries}
   [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
@@ -88,14 +90,14 @@
 
 % ---------- Table des matières ----------
 \titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
-  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+  {}{}{\hfill\contentspage}[\addvspace{0.2em}]
 \titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
   {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
 
 % ---------- En-têtes et pieds de page ----------
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
 \fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
 \fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
 \fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
@@ -271,8 +273,8 @@
 \usepackage{eso-pic}
 \newif\ifonglets \ongletsfalse
 \newcommand{\dessineronglet}{%
-  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
-  \edef\ongnum{\the\value{section}}%
+  \edef\ongcol{\ongletcouleur}%
+  \edef\ongnum{\grandnum}%
   \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
   \begin{tikzpicture}[remember picture,overlay]
   \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
@@ -302,337 +304,262 @@
 \newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
 \newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
 \providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
-% ---------- mise en forme propre à la fiche ----------
-\titleformat{\section}[block]{\needspace{8\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
-  {\colorbox{Bleu}{\color{white}\,\thesection\,}}{0.6em}{}[\vspace{-0.3em}{\color{Ocre}\rule{\linewidth}{0.8pt}}]
-\titlespacing*{\section}{0pt}{1.6em}{0.8em}
-\renewcommand{\sectionmark}[1]{\markboth{Fiche de révision --- #1}{}}
+
+\providecommand{\Ker}{\operatorname{Ker}}
 \newcommand{\statut}[1]{{\sffamily\footnotesize\bfseries #1}}
 \newcommand{\ok}{\textcolor{BleuMoyen}{\statut{traitée}}}
 \newcommand{\nt}{\textcolor{Brique}{\statut{non traitée}}}
 \newcommand{\av}{\textcolor{Ocre}{\statut{à vérifier}}}
-\newcommand{\livre}[1]{{\footnotesize\sffamily\color{Gris}[livre : #1]}}
-
+\newcommand{\livre}[1]{{\footnotesize\sffamily\color{Gris}[livret : #1]}}
+\newcommand{\Etp}[1]{\par\medskip\noindent{\sffamily\bfseries\small\color{Bleu}#1}\enspace\ignorespaces}
+\newtcolorbox{etapesbox}{enhanced,breakable,blanker,borderline west={1.6pt}{0pt}{BleuMoyen},left=10pt,right=0pt,top=0pt,bottom=2pt,before skip=0.8em,after skip=0.6em,before upper={\setlength{\parskip}{4pt}}}
+\newtcolorbox{enoncebox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=8pt,right=8pt,top=6pt,bottom=6pt,before skip=0.6em,after skip=0.6em}
+\newcommand{\Enonce}[1]{\begin{enoncebox}{\sffamily\bfseries\footnotesize\color{Bleu}CE QU'ON DEMANDE}\par\smallskip #1\end{enoncebox}}
+\newtcolorbox{ideebox}{enhanced,breakable,colback=BleuClair!18,colframe=BleuClair!18,borderline west={2.4pt}{0pt}{Bleu},arc=0pt,boxrule=0pt,left=10pt,right=8pt,top=6pt,bottom=6pt,before skip=0.6em,after skip=0.8em}
+\newcommand{\Idee}[1]{\begin{ideebox}{\sffamily\bfseries\footnotesize\color{Bleu}L'IDÉE}\par\smallskip #1\end{ideebox}}
+\newtcolorbox{conclbox}{enhanced,breakable,blanker,borderline west={1.6pt}{0pt}{Ocre},left=8pt,top=2pt,bottom=2pt,before skip=1em,after skip=0.6em}
+\newcommand{\Conclusion}[1]{\begin{conclbox}{\sffamily\bfseries\footnotesize\color{Ocre}CONCLUSION}\quad #1\end{conclbox}}
+\newcommand{\Redaction}{\par\medskip\noindent{\sffamily\bfseries\footnotesize\color{BleuMoyen}LA RÉDACTION}\par}
+\newcommand{\Outil}[2]{\begin{enoncebox}{\sffamily\bfseries\small\color{Bleu}#1}\par\smallskip #2\end{enoncebox}}
 \begin{document}
-\pagestyle{fancy}
+\renewcommand{\grandnum}{1}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[Bleu] (current page.north west) rectangle ([yshift=-15.5cm]current page.north east);
+  \node[anchor=north west,text=white,font=\sffamily\small] at ([xshift=2.6cm,yshift=-3.2cm]current page.north west)
+     {\textls[250]{MATHÉMATIQUES\ \ ·\ \ CPGE PT\ \ ·\ \ DEUXIÈME ANNÉE}};
+  \node[anchor=north west,text=white] at ([xshift=2.5cm,yshift=-4.4cm]current page.north west)
+     {\fontsize{62}{66}\selectfont\scshape Le Collé};
+  \draw[Ocre,line width=1.6pt] ([xshift=2.6cm,yshift=-7.3cm]current page.north west) -- ++(4.2cm,0);
+  \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
+     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Courbes paramétrées : réussir le devoir};
+  \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Retour sur le devoir surveillé de la classe\\[0.15cm]Diagnostic, méthodes et correction};
+  \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
+     at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
+     {\textcolor{Bleu}{\bfseries Méthodes et devoir entièrement corrigé}\\[0.3cm]\textcolor{Gris}{Pour chaque question du devoir : ce qu'il fallait savoir, la méthode, et la correction rédigée comme dans une copie.}};
+  \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west) {Ahmed Amine Ouqlani};
+  \draw[Filet] ([xshift=2.6cm,yshift=2.6cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.6cm]current page.south east);
+\end{tikzpicture}
+\end{titlepage}
 
-% ======================= Titre =======================
 \thispagestyle{plain}
-\begin{tcolorbox}[enhanced,colback=Bleu,colframe=Bleu,arc=0pt,boxrule=0pt,left=14pt,right=14pt,top=12pt,bottom=12pt]
-{\color{white}\sffamily\small\textls[200]{LE COLLÉ\quad·\quad FICHE DE RÉVISION PERSONNALISÉE}}\par\medskip
-{\color{white}\sffamily\bfseries\LARGE Courbes paramétrées : réussir le devoir}\par\medskip
-{\color{white!85!Bleu}\sffamily Diagnostic du devoir surveillé, connaissances et méthodes à maîtriser, devoir entièrement corrigé}
-\end{tcolorbox}
+\section*{Avant-propos}
+\markboth{Avant-propos}{}
+Ce livret reprend le devoir surveillé de courbes paramétrées (courbe $x=\frac1t+\ln(2+t)$, $y=t+\frac1t$). Il insiste sur les
+questions qui n'ont pas été traitées ; les questions réussies sont corrigées rapidement.
 
-\paragraph{Mode d'emploi} La fiche part du devoir (exercice 3, courbe $x=\frac1t+\ln(2+t)$, $y=t+\frac1t$) et rassemble, pour
-chaque question, ce qu'il faut savoir et savoir faire. Les renvois \livre{\S\,x.y} indiquent où se trouve le passage dans le
-livre \emph{Déterminants, courbes paramétrées planes} ; la fiche se suffit cependant à elle-même. Chaque section se termine par
-la correction de la question correspondante du devoir, rédigée comme on l'attend dans une copie.
-
-% =====================================================================
-\section{Diagnostic du devoir}
-
-\paragraph{Ce que montre la copie} Le document transmis est l'énoncé annoté par l'élève ; il ne contient pas ses réponses
-rédigées. Les questions 1(a) à 1(d) et 2(a) à 2(d) sont surlignées ; la question 2(c) porte une marque différente ; toutes les
-questions à partir de 2(e) portent une marque au crayon. Le diagnostic ci-dessous retient l'interprétation la plus probable :
-\emph{surligné = traité, marqué au crayon = non traité ou non abouti}. Il est à confirmer avec la copie corrigée, en particulier
-pour l'exactitude des questions traitées.
-
+\subsection*{Diagnostic du devoir}
+D'après l'énoncé annoté (à confirmer avec la copie corrigée) :
 \begin{center}
 \renewcommand{\arraystretch}{1.25}\small
-\begin{tabular}{>{\raggedright}p{0.3\linewidth}>{\centering}p{0.13\linewidth}>{\raggedright}p{0.3\linewidth}>{\centering\arraybackslash}p{0.12\linewidth}}
+\begin{tabular}{@{}>{\raggedright}p{0.36\linewidth}>{\centering}p{0.14\linewidth}>{\raggedright}p{0.3\linewidth}r@{}}
 \toprule
-Question & Statut & Notion en jeu & Fiche\\\midrule
-1(a) variations & \ok & dérivées factorisées, limites & \S\ref{sec:etude}\\
-1(b)(c) tangentes verticale, horizontale & \ok & point régulier, tangente & \S\ref{sec:etude}\\
-1(d) tangente de pente $9$ & \ok & pente $\frac{y'}{x'}$ & \S\ref{sec:etude}\\
-2(a)(b) DL en $-1$, nature de $C$ & \ok & point stationnaire, $(p,q)$ & \S\ref{sec:local}\\
-2(c) tangente $T_C$ & \av & tangente en un point stationnaire & \S\ref{sec:local}\\
-2(d) position locale & \ok & signe du terme en $h^q$ & \S\ref{sec:local}\\\midrule
-2(e) position globale & \nt & signe de $\varphi(t)=ax+by+c$ & \S\ref{sec:global}\\
-3(a)(b) asymptotes & \nt & branches infinies & \S\ref{sec:branches}\\
-4 asymptote exponentielle & \nt & courbe asymptote \HP & \S\ref{sec:courbeasy}\\
-5(a)(b)(c) point d'inflexion & \nt & $\det(f',f'')$, factorisation de la vitesse & \S\ref{sec:inflexion}\\
-6 dessin & \nt & synthèse du tracé & \S\ref{sec:dessin}\\\bottomrule
+\textbf{Question} & \textbf{Statut} & \textbf{Notion} & \textbf{Page}\\\midrule
+1 variations, tangentes, pente $9$ & \ok & dérivées factorisées & \pageref{q:reussies}\\
+2(a)(b)(d) point stationnaire & \ok & développement en $-1+h$ & \pageref{q:reussies}\\
+2(c) tangente $T_C$ & \av & tangente en un point stationnaire & \pageref{q:reussies}\\\midrule
+2(e) position globale & \nt & signe de $\varphi(t)$ & \pageref{q:2e}\\
+3 asymptotes & \nt & branches infinies & \pageref{q:3}\\
+4 courbe asymptote \HP & \nt & choix du point $P_t$ & \pageref{q:4}\\
+5 point d'inflexion & \nt & $\det(f',f'')$ & \pageref{q:5}\\
+6 tracé & \nt & synthèse & \pageref{q:6}\\\bottomrule
 \end{tabular}
 \end{center}
 
-\paragraph{Analyse}
-\begin{itemize}
-\item \emph{Ce qui est acquis (à confirmer)} : l'étude « locale » mécanique --- dériver, factoriser, dresser un tableau,
-      développer en $t_0+h$, lire $p$ et $q$. Ces questions suivent un algorithme ; on y consacre peu de place, sauf pour fiabiliser
-      les calculs.
-\item \emph{Ce qui est connu mais pas appliqué} : les asymptotes (question 3). La méthode est au cœur du cours ; ne pas l'avoir
-      traitée signale soit un manque de temps (tout ce qui suit 2(d) est vide), soit une difficulté à passer de « $\lim\frac yx$ » au
-      développement asymptotique d'une expression avec $\ln$. Les deux causes se travaillent : gestion du temps et calcul.
-\item \emph{Ce qui n'est probablement pas connu} : la position \emph{globale} par une fonction auxiliaire $\varphi$, la notion de
-      courbe asymptote (hors programme), la recherche d'inflexion par $\det(f',f'')$ et la factorisation de la vitesse. Ce sont des
-      raisonnements à apprendre, pas seulement des calculs ; la fiche leur donne le plus de place.
-\item \emph{Une compétence transversale} : le devoir est construit en chaîne (la pente $9$ de 1(d) est celle de la tangente au
-      point d'inflexion de 5(c) ; les asymptotes servent au dessin). Repérer ces liens fait gagner du temps et contrôle les résultats.
+\begin{itemize}[leftmargin=1.2em,itemsep=3pt]
+\item \textbf{Acquis :} l'étude locale (dériver, factoriser, développer en $t_0+h$, lire $p$ et $q$).
+\item \textbf{À travailler :} tout ce qui suit 2(d). Ce sont surtout des raisonnements nouveaux (position globale, inflexion), et
+une méthode du cours pas encore automatique (asymptotes).
+\item \textbf{Aussi :} la gestion du temps. Les questions 3 et 5 ne dépendent pas de la question 2 : on peut les traiter même
+si on bloque avant.
 \end{itemize}
 
+\paragraph{Comment lire} Une question par page, toujours dans le même ordre : \textbf{ce qu'on demande}, \textbf{l'idée} (à lire
+en premier), puis \textbf{la rédaction} en petits blocs.
+
+\vfill
+\renewcommand{\contentsname}{Sommaire}
+\hypertarget{toc}{}
+\tableofcontents
+\clearpage
+\ongletstrue
 % =====================================================================
-\section{Outils de calcul indispensables}\label{sec:outils}
+\section{Courbes paramétrées : le devoir}\label{sec:ds}
 
-Le devoir repose sur quelques développements limités en $0$ (rappels de première année, utilisés mais non rédigés dans le
-livre) :
-\[\frac1{1+u}=1-u+u^2-u^3+o(u^3),\quad\ \ln(1+u)=u-\frac{u^2}2+\frac{u^3}3+o(u^3),\quad\ e^u=1+u+\frac{u^2}2+o(u^2).\]
+Dans tout le livret, $f(t)=\big(x(t),y(t)\big)$ avec $x(t)=\frac1t+\ln(2+t)$ et $y(t)=t+\frac1t$, pour $t>-2$, $t\neq0$. On
+note $M(t)$ ou $M_t$ le point de paramètre $t$.
 
-\begin{methode}{Développer en un point $t_0\neq0$ ou à l'infini}\label{meth:dlt0}
-\begin{enumerate}
-\item \emph{En $t_0$} : poser $t=t_0+h$ et \emph{faire apparaître la forme $1+u$}, avec $u\to0$ :
-      $\frac1{-1+h}=-\frac1{1-h}$, $\ln(2+t)=\ln(1+h)$ si $t_0=-1$.
-\item \emph{En $\pm\infty$} : factoriser le terme dominant, $\ln(t+2)=\ln t+\ln\left(1+\frac2t\right)$, $e^{1/t}=1+\frac1t+o\left(\frac1t\right)$.
-\item Développer chaque coordonnée \emph{au même ordre}, puis regrouper par puissances.
-\end{enumerate}
-\end{methode}
+\subsection{Les outils}\label{q:outils}
 
-\begin{attention}
-$\frac1{-1+h}\neq-1+h$ : c'est $-(1+h+h^2+h^3)+o(h^3)$. L'erreur de signe sur ce type de terme fausse tout le reste de la
-question 2 : on vérifie toujours le terme constant ($x(-1)$, $y(-1)$) avant de continuer.
-\end{attention}
+\Outil{Outil 1 — Développements limités}{%
+\[\frac1{1+u}=1-u+u^2-u^3+o(u^3),\quad \ln(1+u)=u-\frac{u^2}2+\frac{u^3}3+o(u^3),\quad e^u=1+u+o(u).\]
+En $t_0$ : on pose $t=t_0+h$ et on fait apparaître la forme $1+u$. Attention : $\frac1{-1+h}=-\frac1{1-h}=-(1+h+h^2+h^3)+o(h^3)$.}
 
-% =====================================================================
-\section{Étude générale, tangentes, pente}\label{sec:etude}
+\Outil{Outil 2 — Tangente}{%
+En un point régulier ($f'(t_0)\neq\ve0$), la tangente est dirigée par $f'(t_0)$ : horizontale si $y'=0$, verticale si $x'=0$,
+de pente $\frac{y'}{x'}$ sinon.\par
+En un point stationnaire ($f'(t_0)=\ve0$), on développe $f(t_0+h)=f(t_0)+h^p\ve a+h^q\ve b+\dots$ : la tangente est dirigée par
+$\ve a$, et la nature se lit sur les parités de $p$ et $q$ ($p$ pair, $q$ impair : rebroussement de première espèce).}
 
-\begin{definition}
-$M(t_0)$ est \emph{régulier} si $f'(t_0)=(x'(t_0),y'(t_0))\neq\ve0$, \emph{stationnaire} sinon. En un point régulier, la tangente
-est la droite $M(t_0)+\vect(f'(t_0))$ \livre{th.~2.3}.
-\end{definition}
+\Outil{Outil 3 — Position par rapport à une droite}{%
+Pour $\mathcal D:\alpha x+\beta y+\gamma=0$, on pose $\varphi(t)=\alpha x(t)+\beta y(t)+\gamma$. Le signe de $\varphi(t)$ dit de
+quel côté de $\mathcal D$ est $M(t)$ ; $\varphi(t)=0$ veut dire que $M(t)$ est sur $\mathcal D$.}
 
-\begin{proposition}
-En un point régulier : tangente \emph{horizontale} $\iff y'(t_0)=0$ ; \emph{verticale} $\iff x'(t_0)=0$. Si $x'(t_0)\neq0$, la
-pente est $p(t_0)=\frac{y'(t_0)}{x'(t_0)}$.
-\end{proposition}
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Questions 1 et 2(a) à 2(d) : correction rapide}\label{q:reussies}
 
-\emph{Pourquoi} : si $x'(t_0)\neq0$, $x$ est strictement monotone près de $t_0$, la courbe y est le graphe d'une fonction $g$,
-$y(t)=g(x(t))$, et en dérivant, $y'=g'(x)\,x'$ : la pente $g'$ vaut $\frac{y'}{x'}$.
-
-\begin{methode}{Étude générale}
-\begin{enumerate}
-\item Domaine ; valeurs interdites et bornes (ici $-2$ et $0$).
-\item Dériver, \emph{réduire au même dénominateur, factoriser} ; les signes se lisent sur les facteurs affines.
-\item Points stationnaires = zéros communs de $x'$ et $y'$ ; tangentes horizontales et verticales = zéros d'une seule dérivée.
-\item Valeurs aux zéros et limites aux bornes, puis tableau conjoint.
-\item Pente $m$ imposée : résoudre $p(t)=m$ \emph{après simplification} de $\frac{y'}{x'}$ ; vérifier que la solution est un point
-      régulier.
-\end{enumerate}
-\end{methode}
-
-\begin{attention}
-« $x'=0$ donc tangente verticale » est faux en un point stationnaire : en $t=-1$, $x'$ \emph{et} $y'$ s'annulent. On vérifie
-toujours l'autre dérivée.
-\end{attention}
-
-\paragraph{Correction --- question 1}
-\[x'(t)=-\frac1{t^2}+\frac1{2+t}=\frac{t^2-t-2}{t^2(t+2)}=\frac{(t-2)(t+1)}{t^2(t+2)},\qquad y'(t)=1-\frac1{t^2}=\frac{(t-1)(t+1)}{t^2}.\]
-Sur le domaine, $t^2>0$ et $t+2>0$ : les signes sont ceux de $(t-2)(t+1)$ et $(t-1)(t+1)$, ce qui donne le tableau de l'énoncé.
-Valeurs : $x(-1)=-1$, $y(-1)=-2$ ; $x(1)=1+\ln3$, $y(1)=2$ ; $x(2)=\frac12+\ln4$, $y(2)=\frac52$. Limites : quand $t\to-2^+$,
-$x\to-\infty$ ($\ln(2+t)\to-\infty$) et $y\to-\frac52$ ; quand $t\to0^\pm$, $x$ et $y$ tendent vers $\pm\infty$ ; quand $t\to+\infty$,
-$x,y\to+\infty$.
-\begin{itemize}
-\item (b) $x'=0$, $y'\neq0$ : $t=2$ ($t=-1$ annule les deux). $A=M(2)=\left(\frac12+\ln4,\frac52\right)\approx(1{,}9\,;2{,}5)$.
-\item (c) $y'=0$, $x'\neq0$ : $t=1$. $B=M(1)=(1+\ln3,2)\approx(2{,}1\,;2)$.
-\item (d) Pour $t\notin\{-1,2\}$, $p(t)=\frac{(t-1)(t+1)}{t^2}\cdot\frac{t^2(t+2)}{(t-2)(t+1)}=\frac{(t-1)(t+2)}{t-2}$. Alors
-      $p(t)=9\iff t^2+t-2=9t-18\iff(t-4)^2=0$ : $t=4$, $H=M(4)=\left(\frac14+\ln6,\frac{17}4\right)\approx(2{,}0\,;4{,}25)$. La racine
-      \emph{double} n'est pas un hasard : voir \S\ref{sec:inflexion}.
+\paragraph{Question 1}
+\[x'(t)=\frac{(t-2)(t+1)}{t^2(t+2)},\qquad y'(t)=\frac{(t-1)(t+1)}{t^2}.\]
+Sur le domaine, $t^2>0$ et $t+2>0$ : les signes sont ceux des facteurs affines.
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item (b) $x'=0$ et $y'\neq0$ : $t=2$ ($t=-1$ annule les deux). $A=M(2)=\left(\frac12+\ln4,\frac52\right)$.
+\item (c) $y'=0$ et $x'\neq0$ : $t=1$. $B=M(1)=(1+\ln3,2)$.
+\item (d) Pour $t\notin\{-1,2\}$, $\frac{y'}{x'}=\frac{(t-1)(t+2)}{t-2}$, et $\frac{y'}{x'}=9\iff(t-4)^2=0$ : $t=4$,
+$H=M(4)=\left(\frac14+\ln6,\frac{17}4\right)$.
 \end{itemize}
 
-% =====================================================================
-\section{Point stationnaire : nature, tangente, position locale}\label{sec:local}
-
-\begin{theoreme}[\livre{th.~2.5}]
-Soit $p$ le plus petit entier $\geq1$ tel que $f^{(p)}(t_0)\neq\ve0$, et $q$ le plus petit entier $>p$ tel que
-$(f^{(p)}(t_0),f^{(q)}(t_0))$ soit libre. La tangente en $M(t_0)$ est dirigée par $f^{(p)}(t_0)$, et
-\begin{center}
-\begin{tabular}{c|cc}
- & $q$ pair & $q$ impair\\\hline
-$p$ impair & point ordinaire & inflexion\\
-$p$ pair & rebroussement 2\textsuperscript{e} espèce & rebroussement 1\textsuperscript{re} espèce
-\end{tabular}
-\end{center}
-\end{theoreme}
-
-\emph{Pourquoi} : dans le repère $(M(t_0),f^{(p)}(t_0),f^{(q)}(t_0))$, les coordonnées de $M(t_0+h)$ sont équivalentes à
-$\frac{h^p}{p!}$ et $\frac{h^q}{q!}$ (les termes intermédiaires sont colinéaires au premier et ne changent que la première
-coordonnée). La première change de signe avec $h$ si et seulement si $p$ est impair (la courbe « traverse » ou « revient ») ; la
-seconde si et seulement si $q$ est impair (la courbe traverse ou non sa tangente).
-
-\begin{methode}{Étudier un point stationnaire}\label{meth:stat}
-\begin{enumerate}
-\item Poser $t=t_0+h$, développer $x$ et $y$ (méthode~\ref{meth:dlt0}).
-\item Écrire $f(t_0+h)=f(t_0)+h^p\,\ve a+\dots+h^q\,\ve b+o(h^q)$ et s'arrêter au premier vecteur $\ve b$ \emph{non colinéaire} à
-      $\ve a$ : on le vérifie par $\det(\ve a,\ve b)\neq0$.
-\item Tangente : $M(t_0)+\vect(\ve a)$ ; équation $\det\big(\vv{M(t_0)M},\ve a\big)=0$.
-\item Position locale : avec $\mathcal T:\alpha x+\beta y+\gamma=0$, la quantité $\varphi(t_0+h)=\alpha x+\beta y+\gamma$ est
-      équivalente à $c\,h^q$ ; son signe donne le côté.
-\end{enumerate}
-\end{methode}
-
-\begin{attention}
-En un point stationnaire, la tangente n'est \emph{pas} dirigée par $f'(t_0)=\ve0$ : on ne peut pas écrire
-$\det\big(\vv{M(t_0)M},f'(t_0)\big)=0$ (ce serait l'équation $0=0$). C'est le vecteur $\ve a$ du développement qui la dirige.
-\end{attention}
-
-\paragraph{Correction --- question 2}
-(a) Avec $t=-1+h$ : $\frac1t=-\frac1{1-h}=-1-h-h^2-h^3+o(h^3)$ et $\ln(2+t)=\ln(1+h)=h-\frac{h^2}2+\frac{h^3}3+o(h^3)$. Donc
-\[x=-1-\tfrac32h^2-\tfrac23h^3+o(h^3),\qquad y=-1+h+\tfrac1t=-2-h^2-h^3+o(h^3),\]
+\paragraph{Question 2(a)(b)} Avec $t=-1+h$ et l'outil 1 :
 \[f(-1+h)=(-1,-2)+h^2\left(-\tfrac32,-1\right)+h^3\left(-\tfrac23,-1\right)+o(h^3).\]
-(b) $\ve a=\left(-\frac32,-1\right)$, $\ve b=\left(-\frac23,-1\right)$, $\det(\ve a,\ve b)=\frac32-\frac23=\frac56\neq0$ : $p=2$, $q=3$,
-$C$ est un \emph{rebroussement de première espèce}.\\
-(c) $T_C$ est dirigée par $\ve a$, donc par $(3,2)$ : $\det\big((x+1,y+2),(3,2)\big)=2(x+1)-3(y+2)=0$, soit $2x-3y=4$.\\
-(d) $\varphi=2x-3y-4$ : $\varphi(-1+h)=-2-3h^2-\frac43h^3+6+3h^2+3h^3-4+o(h^3)=\frac53h^3+o(h^3)$. Pour $h>0$, $\varphi>0$, soit
-$y<\frac{2x-4}3$ : la courbe est \emph{sous} $T_C$ ; pour $h<0$, au-dessus. Elle traverse sa tangente, comme attendu pour un
-rebroussement de première espèce.
+$\ve a=\left(-\frac32,-1\right)$ et $\ve b=\left(-\frac23,-1\right)$ ne sont pas colinéaires ($\det(\ve a,\ve b)=\frac56\neq0$) :
+$p=2$, $q=3$, $C=M(-1)$ est un rebroussement de première espèce.
 
-% =====================================================================
-\section{Position globale par rapport à une droite}\label{sec:global}
+\paragraph{Question 2(c), à vérifier sur la copie}
+\Idee{En $C$, $f'(-1)=\ve0$ : on ne peut pas s'en servir pour diriger la tangente. C'est le vecteur $\ve a$ du développement
+qui la dirige (outil 2).}
+$\ve a$ est colinéaire à $(3,2)$ : $\det\big((x+1,y+2),(3,2)\big)=0$ donne $T_C:\ 2x-3y=4$.
 
-C'est la question 2(e), non traitée. L'idée est simple : la position d'un point par rapport à une droite se lit sur le signe
-d'une seule expression.
+\paragraph{Question 2(d)} Avec $\varphi=2x-3y-4$ : $\varphi(-1+h)=\frac53h^3+o(h^3)$. Ce terme change de signe avec $h$ : la courbe
+traverse sa tangente en $C$, comme pour tout rebroussement de première espèce.
 
-\begin{proposition}
-Soit $\mathcal D:\alpha x+\beta y+\gamma=0$ et $\varphi(t)=\alpha x(t)+\beta y(t)+\gamma$. Le point $M(t)$ est sur $\mathcal D$ si
-$\varphi(t)=0$, dans le demi-plan $\alpha x+\beta y+\gamma>0$ si $\varphi(t)>0$, dans l'autre si $\varphi(t)<0$. Si $\beta<0$
-(comme pour $2x-3y-4$), $\varphi>0$ signifie « au-dessous » de la droite.
-\end{proposition}
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Question 2(e) — Position globale par rapport à \texorpdfstring{$T_C$}{TC}}\label{q:2e}
 
-\begin{methode}{Position globale}\label{meth:global}
-\begin{enumerate}
-\item Former $\varphi(t)$, la simplifier.
-\item Étudier $\varphi$ comme une fonction numérique : dérivée \emph{factorisée}, tableau de variations, valeurs et limites.
-\item \emph{Astuce} : si $\mathcal D$ est la tangente en $M(t_0)$, alors $\varphi(t_0)=0$ et $\varphi'(t_0)=0$ ($t_0$ est racine au moins
-      double) : $(t-t_0)$ se factorise dans $\varphi'$, ce qui guide la factorisation.
-\item Conclure : intervalles où $\varphi>0$, $\varphi<0$, et points communs.
-\end{enumerate}
-\end{methode}
+\Enonce{Étudier la position de la courbe par rapport à sa tangente $T_C:\ 2x-3y-4=0$, pour toutes les valeurs de $t$.}
 
-\paragraph{Correction --- question 2(e)}
-$\varphi(t)=2x-3y-4=2\ln(2+t)-3t-\frac1t-4$, et
-\[\varphi'(t)=\frac2{2+t}-3+\frac1{t^2}=\frac{-3t^3-4t^2+t+2}{t^2(t+2)}=-\frac{(t+1)^2(3t-2)}{t^2(t+2)}.\]
-(La racine double $-1$, prévue par l'astuce, permet de diviser $-3t^3-4t^2+t+2$ par $(t+1)^2$.) Sur $]-2,0[$, $3t-2<0$ donc
-$\varphi'\geq0$ : $\varphi$ croît et s'annule en $-1$ : $\varphi<0$ sur $]-2,-1[$, $\varphi>0$ sur $]-1,0[$. Sur $]0,+\infty[$, $\varphi$ croît
-jusqu'en $\frac23$ puis décroît, de maximum $\varphi\left(\frac23\right)=2\ln\frac83-\frac{15}2\approx-5{,}5<0$. Conclusion : $\mathcal C$
-ne rencontre $T_C$ qu'en $C$ ; elle est au-dessus de $T_C$ pour $t\in\,]-2,-1[\,\cup\,]0,+\infty[$ et au-dessous pour $t\in\,]-1,0[$.
+\Idee{En 2(d), on a regardé ce qui se passe près de $C$ seulement. Ici, on veut le côté de $T_C$ pour \emph{tous} les $t$. On
+pose $\varphi(t)=2x(t)-3y(t)-4$ (outil 3) et on étudie $\varphi$ comme une fonction ordinaire : dérivée, tableau, signe.}
 
-% =====================================================================
-\section{Branches infinies et asymptotes}\label{sec:branches}
+\Redaction
+\begin{etapesbox}
+\Etp{On forme $\varphi$ et on dérive.} $\varphi(t)=2\ln(2+t)-3t-\frac1t-4$, donc
+\[\varphi'(t)=\frac2{2+t}-3+\frac1{t^2}=\frac{-3t^3-4t^2+t+2}{t^2(t+2)}.\]
 
-\begin{definition}[\livre{\S\,2.5}]
-Si $\|\vv{OM(t)}\|\to+\infty$ quand $t\to t_0$ (borne ou valeur interdite), une droite $\mathcal D$ est \emph{asymptote} si
-$d(M(t),\mathcal D)\to0$.
-\end{definition}
+\Etp{On factorise le numérateur.} $T_C$ est la tangente en $t=-1$ : on sait d'avance que $\varphi(-1)=0$ et $\varphi'(-1)=0$.
+Donc $-1$ est racine du numérateur, et même racine double. On divise par $(t+1)^2$ :
+\[\varphi'(t)=-\frac{(t+1)^2(3t-2)}{t^2(t+2)}.\]
 
-\emph{Pourquoi la méthode} : pour $\mathcal D:y=\alpha x+\beta$, $d(M,\mathcal D)=\frac{|y-\alpha x-\beta|}{\sqrt{1+\alpha^2}}$ ; elle
-tend vers $0$ si et seulement si $y-\alpha x\to\beta$, et en divisant par $x\to\infty$, cela impose $\frac yx\to\alpha$.
+\Etp{Sur $]-2,0[$.} $3t-2<0$, donc $\varphi'\geq0$ : $\varphi$ est croissante et s'annule en $-1$. Ainsi $\varphi<0$ sur
+$]-2,-1[$ et $\varphi>0$ sur $]-1,0[$.
 
-\begin{methode}{Branches infinies}\label{meth:branches}
-Pour \emph{chaque} borne et \emph{chaque} valeur interdite :
-\begin{enumerate}
-\item limites de $x$ et $y$ ; $x\to\pm\infty$, $y\to b$ : asymptote horizontale $y=b$ ; $x\to a$, $y\to\pm\infty$ : verticale $x=a$ ;
-\item si $x$ et $y$ sont infinis : $\alpha=\lim\frac yx$ ; si $\alpha$ est fini non nul, $\beta=\lim(y-\alpha x)$ ; si $\beta$ est fini,
-      asymptote $y=\alpha x+\beta$, sinon branche parabolique ; si $\frac yx\to\pm\infty$ ou $0$, branche parabolique de direction $(Oy)$
-      ou $(Ox)$ ;
-\item position : signe de $y-\alpha x-\beta$, par un développement (ou par la monotonie).
-\end{enumerate}
-\end{methode}
+\Etp{Sur $]0,+\infty[$.} $\varphi$ croît jusqu'en $\frac23$, puis décroît. Son maximum est
+$\varphi\left(\frac23\right)=2\ln\frac83-\frac{15}2\approx-5{,}5<0$ : $\varphi<0$ partout.
 
-\begin{attention}
-$\lim\frac yx=1$ ne prouve pas que la droite $y=x+\dots$ est asymptote : il faut $\lim(y-x)$. Et ne pas oublier la borne $-2$ : le
-domaine n'est pas $\R^*$.
-\end{attention}
+\Etp{On traduit en position.} $\varphi>0$ s'écrit $3y<2x-4$ : la courbe est sous $T_C$. $\varphi<0$ : elle est au-dessus.
+\end{etapesbox}
+\Conclusion{La courbe ne rencontre $T_C$ qu'en $C$. Elle est au-dessus de $T_C$ pour $t\in\,]-2,-1[\,\cup\,]0,+\infty[$ et
+au-dessous pour $t\in\,]-1,0[$.}
 
-\paragraph{Correction --- question 3}
-(a) Quand $t\to0$, $x$ et $y$ sont infinis ; $\frac yx=\frac{t^2+1}{1+t\ln(2+t)}\to1$ ; $y-x=t-\ln(2+t)\to-\ln2$ : asymptote
-$\Delta_0:y=x-\ln2$. Position : $y-x+\ln2=t-\ln\left(1+\frac t2\right)=\frac t2+o(t)$ : la courbe est au-dessus de $\Delta_0$ quand
-$t\to0^+$ (côté $x\to+\infty$), au-dessous quand $t\to0^-$.\\
-(b) Quand $t\to-2^+$ ($a=-2$), $x\to-\infty$ et $y\to-\frac52$ : asymptote horizontale $\Delta_a:y=-\frac52$. Comme $y$ est
-strictement croissante sur $]-2,-1]$, $y>-\frac52$ : la courbe est au-dessus.
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Question 3 — Les asymptotes}\label{q:3}
 
-% =====================================================================
-\section{Courbe asymptote (hors programme)}\label{sec:courbeasy}
+\Enonce{(a) Étudier la branche infinie quand $t\to0$ : asymptote $\Delta_0$ et position. (b) Même question quand $t\to-2^+$.}
 
-\begin{definition}[\livre{encadré hors programme, \S\,2.5}]
-Une courbe $\mathcal E$ est asymptote à $\mathcal C$ quand $t\to t_0$ si $d(M(t),\mathcal E)\to0$. Pour le prouver, il suffit
-d'exhiber un point $P_t\in\mathcal E$ tel que $M(t)P_t\to0$ (car $d(M(t),\mathcal E)\leq M(t)P_t$).
-\end{definition}
+\Idee{Une droite $y=\alpha x+\beta$ est asymptote quand $y-\alpha x-\beta\to0$. On cherche donc $\alpha=\lim\frac yx$, puis
+$\beta=\lim(y-\alpha x)$. La position se lit sur le signe de $y-\alpha x-\beta$. On le fait à \emph{chaque} borne du domaine,
+sans oublier $-2$.}
 
-\begin{methode}{Choisir le point $P_t$}
-\begin{enumerate}
-\item Point de \emph{même abscisse} $P_t=\big(x(t),g(x(t))\big)$ pour $\mathcal E:y=g(x)$ : il suffit que $y(t)-g(x(t))\to0$.
-      Adapté aux paraboles et aux courbes « peu pentues ».
-\item Point de \emph{même ordonnée} $P_t=\big(g^{-1}(y(t)),y(t)\big)$ : il suffit que $x(t)-g^{-1}(y(t))\to0$. Adapté aux courbes
-      très pentues, comme une exponentielle ($g^{-1}=\ln$).
-\end{enumerate}
-\end{methode}
+\Redaction
+\begin{etapesbox}
+\Etp{(a) Quand $t\to0$, la pente $\alpha$.} $x$ et $y$ tendent vers l'infini. On calcule
+$\frac yx=\frac{t^2+1}{1+t\ln(2+t)}\to1$ : $\alpha=1$.
 
-\begin{attention}
-Ici, le point de même abscisse \emph{ne marche pas} : $e^{x(t)}-2-y(t)=(2+t)e^{1/t}-2-t-\frac1t\to1\neq0$. C'est le point de même
-ordonnée qu'il faut choisir. (Conséquence : toute courbe $y=e^x+c$ vérifierait la même propriété ; la notion est moins rigide que
-celle d'asymptote droite.)
-\end{attention}
+\Etp{L'ordonnée à l'origine $\beta$.} $y-x=t-\ln(2+t)\to-\ln2$ : $\beta=-\ln2$. La droite $\Delta_0:\ y=x-\ln2$ est asymptote.
 
-\paragraph{Correction --- question 4}
-Pour $t>0$, $y(t)+2>0$ ; le point $P_t=\big(\ln(y(t)+2),y(t)\big)$ est sur $\mathcal E$ et a la même ordonnée que $M_t$, donc
-\[M_tP_t=\left|x(t)-\ln\big(y(t)+2\big)\right|=\left|\frac1t+\ln\frac{t+2}{t+2+\frac1t}\right|\xrightarrow[t\to+\infty]{}0+\ln1=0.\]
+\Etp{La position.} $y-x+\ln2=t-\ln\left(1+\frac t2\right)=\frac t2+o(t)$. Ce terme a le signe de $t$ : la courbe est au-dessus
+de $\Delta_0$ quand $t\to0^+$, au-dessous quand $t\to0^-$.
 
-% =====================================================================
-\section{Points d'inflexion}\label{sec:inflexion}
+\Etp{(b) Quand $t\to-2^+$.} $x\to-\infty$ car $\ln(2+t)\to-\infty$, et $y\to-\frac52$ : la droite $\Delta_a:\ y=-\frac52$ est
+asymptote horizontale. $y$ est strictement croissante sur $]-2,-1]$, donc $y>-\frac52$ : la courbe est au-dessus.
+\end{etapesbox}
+\Conclusion{$\Delta_0:\ y=x-\ln2$ quand $t\to0$, et $\Delta_a:\ y=-\frac52$ quand $t\to-2^+$.}
 
-\paragraph{D'où vient le critère \livre{\S\,2.4}} Pour un graphe $y=g(x)$, la courbe est au-dessus de ses tangentes là où
-$g''>0$, au-dessous là où $g''<0$, et une inflexion est un point où $g''$ change de signe. Près d'un point régulier où $x'\neq0$,
-$y(t)=g(x(t))$ ; en dérivant deux fois,
-\[y'=g'(x)\,x',\qquad y''=g''(x)\,x'^2+g'(x)\,x''\qquad\Longrightarrow\qquad g''\big(x(t)\big)=\frac{\det\big(f'(t),f''(t)\big)}{x'(t)^3}.\]
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Question 4 — Une courbe asymptote \HP}\label{q:4}
 
-\begin{proposition}
-En un point régulier $M(t_0)$ : $M(t_0)$ est un point d'inflexion si et seulement si $\det(f',f'')$ change de signe en $t_0$. En
-particulier, $\det\big(f'(t_0),f''(t_0)\big)=0$ est une condition \emph{nécessaire}. De plus la pente $p=\frac{y'}{x'}$ vérifie
-$p'=\frac{\det(f',f'')}{x'^2}$ : elle est extrémale aux points d'inflexion à tangente non verticale.
-\end{proposition}
+\Enonce{Montrer que la courbe $\mathcal E:\ y=e^x-2$ est asymptote à la courbe quand $t\to+\infty$.}
 
-\begin{methode}{Rechercher les inflexions}\label{meth:infl}
-\begin{enumerate}
-\item \emph{Factoriser la vitesse} : si $f'=\lambda\,\ve g$ avec $\lambda$ scalaire non nul, alors $f''=\lambda'\ve g+\lambda\ve g'$ et
-      \[\det(f',f'')=\lambda\lambda'\underbrace{\det(\ve g,\ve g)}_{=0}+\lambda^2\det(\ve g,\ve g')=\lambda^2\det(\ve g,\ve g').\]
-      On étudie $\det(\ve g,\ve g')$, beaucoup plus simple : $\ve g$ est la vitesse débarrassée de ses facteurs communs.
-\item Résoudre $\det(\ve g,\ve g')=0$ aux points réguliers (là où $\lambda\neq0$).
-\item Confirmer par le changement de signe ($\lambda^2>0$ ne change pas le signe).
-\end{enumerate}
-\end{methode}
+\Idee{Il suffit de trouver un point $P_t$ de $\mathcal E$ dont la distance à $M_t$ tend vers $0$. Le point de même abscisse
+ne marche pas ici : l'exponentielle monte trop vite. On prend le point de \emph{même ordonnée}.}
 
-\begin{attention}
-Ce n'est pas $f''=\ve0$ qui caractérise une inflexion, mais la \emph{colinéarité} de $f''$ et $f'$. Et « $\det=0$ » seul ne suffit pas :
-il faut le changement de signe (ou une étude locale).
-\end{attention}
+\Redaction
+\begin{etapesbox}
+\Etp{Le point $P_t$.} Le point de $\mathcal E$ d'ordonnée $y(t)$ a pour abscisse $\ln\big(y(t)+2\big)$ (on a $y(t)+2>0$ pour
+$t>0$). On pose $P_t=\big(\ln(y(t)+2),\,y(t)\big)$.
 
-\paragraph{Correction --- question 5}
-(a) Pour $t>-2$, $t\notin\{-1,0\}$ : $\ve g(t)=\frac{t^2(t+2)}{t+1}f'(t)=\big(t-2,(t-1)(t+2)\big)=(t-2,t^2+t-2)$. Ainsi
-$f'=\lambda\ve g$ avec $\lambda(t)=\frac{t+1}{t^2(t+2)}\neq0$, et $\det(f',f'')=\lambda^2\det(\ve g,\ve g')$. Si $M_t$ est un point
-d'inflexion (point régulier, donc $t\neq-1$), $\det(f',f'')=0$, donc $\det(\ve g,\ve g')=0$.\\
-(b) $\ve g'=(1,2t+1)$ et $\det(\ve g,\ve g')=(t-2)(2t+1)-(t^2+t-2)=t^2-4t=t(t-4)$. Seul candidat : $t=4$ ; le déterminant y change
-de signe (racine simple), donc $N=M(4)$ est l'unique point d'inflexion.\\
-(c) $N=M(4)=H$ : c'est le point de la question 1(d), et ce n'est pas un hasard (la pente est extrémale à l'inflexion, d'où la
-racine double de $p(t)=9$). $T_N$ a pour pente $9$ et passe par $\left(\frac14+\ln6,\frac{17}4\right)$ :
-\[T_N:\ y=9x+2-9\ln6\ \approx9x-14{,}1.\]
+\Etp{La distance.} $M_t$ et $P_t$ ont la même ordonnée, donc
+\[M_tP_t=\left|x(t)-\ln\big(y(t)+2\big)\right|=\left|\frac1t+\ln\frac{t+2}{t+2+\frac1t}\right|.\]
 
-% =====================================================================
-\section{Le dessin}\label{sec:dessin}
+\Etp{La limite.} Quand $t\to+\infty$, $\frac1t\to0$ et la fraction tend vers $1$, donc $M_tP_t\to0$.
+\end{etapesbox}
+\Conclusion{$\mathcal E$ est asymptote à la courbe quand $t\to+\infty$.}
 
-\begin{methode}{Construire le tracé}
-\begin{enumerate}
-\item Choisir l'échelle d'après les valeurs remarquables ; tracer les asymptotes en pointillés.
-\item Placer les points nommés avec un petit segment de tangente (verticale en $A$, horizontale en $B$, $T_C$, $T_N$).
-\item Relier en suivant le tableau : le signe de $(x',y')$ donne la direction ($(-,-)$ : vers le bas à gauche, etc.).
-\item Respecter les positions : côté de chaque asymptote, côté de $T_C$, rebroussement en $C$.
-\end{enumerate}
-\end{methode}
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Question 5 — Le point d'inflexion}\label{q:5}
 
-\paragraph{Correction --- question 6} Avec $\ln3\approx1{,}1$ et $\ln2\approx0{,}7$ : $A\approx(1{,}9\,;2{,}5)$,
-$B\approx(2{,}1\,;2)$, $C=(-1,-2)$, $N=H\approx(2{,}0\,;4{,}25)$.
+\Enonce{(a) Montrer que si $M_t$ est un point d'inflexion, alors $\det(\ve g,\ve g')=0$, où $\ve g(t)=(t-2,\,t^2+t-2)$.
+(b) Trouver le point d'inflexion $N$. (c) Donner la tangente $T_N$.}
+
+\Idee{En un point régulier, il y a inflexion quand $\det(f',f'')$ s'annule \emph{en changeant de signe}. Calculer $f''$
+directement est long. On factorise d'abord la vitesse : $f'=\lambda\ve g$ avec $\lambda$ scalaire. Alors
+$\det(f',f'')=\lambda^2\det(\ve g,\ve g')$, et on étudie seulement $\det(\ve g,\ve g')$.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{(a) On factorise la vitesse.} D'après la question 1, $f'(t)=\lambda(t)\,\ve g(t)$ avec
+$\lambda(t)=\frac{t+1}{t^2(t+2)}$, non nul en un point régulier.
+
+\Etp{Pourquoi $\lambda^2$.} En dérivant, $f''=\lambda'\ve g+\lambda\ve g'$. Dans $\det(f',f'')$, le terme $\det(\ve g,\ve g)$
+est nul, il reste $\det(f',f'')=\lambda^2\det(\ve g,\ve g')$. En un point d'inflexion, $\det(f',f'')=0$, donc
+$\det(\ve g,\ve g')=0$.
+
+\Etp{(b) On calcule.} $\ve g'=(1,2t+1)$, donc $\det(\ve g,\ve g')=(t-2)(2t+1)-(t^2+t-2)=t(t-4)$. Seul candidat : $t=4$. C'est une
+racine simple, donc le déterminant change de signe : $N=M(4)$ est bien un point d'inflexion.
+
+\Etp{(c) La tangente.} $N=M(4)=H$ : c'est le point de la question 1(d), donc la pente vaut $9$. $T_N$ passe par
+$\left(\frac14+\ln6,\frac{17}4\right)$.
+\end{etapesbox}
+\Conclusion{$N=M(4)=H$ et $T_N:\ y=9x+2-9\ln6$.}
+
+\paragraph{Lien avec 1(d)} À un point d'inflexion, la pente de la tangente est extrémale. C'est pour cela que l'équation
+« pente $=9$ » avait une racine double en $t=4$.
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Question 6 — Le tracé}\label{q:6}
+
+\Idee{On ne trace pas « au hasard » : on place d'abord ce que le devoir a trouvé (asymptotes, points nommés avec leurs
+tangentes), puis on relie en suivant le tableau de variations et les positions.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{On place.} Les asymptotes $\Delta_0$, $\Delta_a$, la courbe $\mathcal E$ en pointillés. Puis $C=(-1,-2)$,
+$A\approx(1{,}9\,;2{,}5)$ (tangente verticale), $B\approx(2{,}1\,;2)$ (tangente horizontale), $N\approx(2{,}0\,;4{,}25)$.
+
+\Etp{On relie.} Pour $t\in\,]-2,-1]$, la courbe vient de la gauche au-dessus de $\Delta_a$ et monte jusqu'au rebroussement $C$.
+Pour $t\in\,]-1,0[$, elle repart vers le bas à gauche, sous $\Delta_0$. Pour $t>0$, elle descend le long de $\Delta_0$ jusqu'à $B$,
+remonte vers $A$, puis traverse $T_N$ en $N$ et longe $\mathcal E$.
+\end{etapesbox}
+
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[courbe,width=0.8\linewidth,height=0.8\linewidth,axis equal image=false,xmin=-7,xmax=6,ymin=-7.5,ymax=9.5,
+\begin{axis}[courbe,width=0.72\linewidth,height=0.72\linewidth,axis equal image=false,xmin=-7,xmax=6,ymin=-7.5,ymax=9.5,
   xtick={-4,-2,2,4},ytick={-6,-4,-2,2,4,6,8},restrict x to domain=-7:6,restrict y to domain=-7.5:9.5]
 \addplot[asy,domain=-6.8:6,samples=2]{x-0.6931};
 \addplot[asy,domain=-7:-0.5,samples=2]{-2.5};
@@ -653,44 +580,28 @@ $B\approx(2{,}1\,;2)$, $C=(-1,-2)$, $N=H\approx(2{,}0\,;4{,}25)$.
 \end{axis}
 \end{tikzpicture}
 \end{center}
-Pour $t\in\,]-2,-1]$, la courbe vient de la gauche au-dessus de $\Delta_a$ et monte jusqu'au rebroussement $C$ ; pour $t\in\,]-1,0[$,
-elle repart vers le bas à gauche le long de $\Delta_0$ (au-dessous). Pour $t>0$, elle descend de l'infini le long de $\Delta_0$
-(au-dessus) jusqu'à $B$, remonte vers la gauche jusqu'à $A$ (tangente verticale), puis s'élève en traversant $T_N$ en $N$ et longe
-$\mathcal E$.
 
-% =====================================================================
-\section{Pièges récapitulatifs}
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Bilan}\label{q:bilan}
 
-\begin{itemize}
-\item Oublier la valeur interdite ou la borne du domaine ($-2$) : une asymptote manque.
-\item « $x'=0$ donc tangente verticale » en un point stationnaire.
-\item Erreur de signe dans $\frac1{t_0+h}$ ; développer les deux coordonnées à des ordres différents.
-\item S'arrêter à un vecteur colinéaire au premier ; ne pas vérifier $\det(\ve a,\ve b)\neq0$.
-\item Écrire la tangente en un point stationnaire avec $f'(t_0)=\ve0$.
-\item Conclure à une asymptote avec $\lim\frac yx$ seul.
-\item Chercher les inflexions en dérivant $f'$ sans la factoriser ; confondre $f''=\ve0$ et $\det(f',f'')=0$.
-\item Négliger les liens entre questions : la pente $9$ (1d) est celle de l'inflexion (5c) ; la position locale (2d) doit
-      concorder avec la position globale (2e).
-\end{itemize}
-
-% =====================================================================
-\section{Priorités de travail}
-
-\begin{enumerate}
-\item \textbf{Branches infinies (question 3).} Notion du programme, présente à chaque devoir et nécessaire au dessin : la
-      méthode doit devenir automatique. Insister sur les développements asymptotiques avec $\ln$ et sur l'examen de \emph{toutes} les
-      bornes. Entraînement : TD~8 et TD~10 du livre.
-\item \textbf{Points d'inflexion par $\det(f',f'')$ (question 5).} Comprendre l'origine du critère ($g''$), puis automatiser la
-      factorisation de la vitesse. Entraînement : TD~6 et problème type DS du livre.
-\item \textbf{Position globale (question 2e).} Raisonnement court mais nouveau : former $\varphi$, l'étudier comme une fonction,
-      utiliser la racine double au point de tangence.
-\item \textbf{Gestion du temps et lecture globale de l'énoncé.} Tout ce qui suit 2(d) est resté vide : faire les questions
-      indépendantes (asymptotes, inflexion) avant de bloquer, et repérer les liens entre questions. S'entraîner en temps limité sur
-      le problème type DS (1\,h\,30).
-\item \textbf{Fiabilité des calculs locaux (questions 1 et 2).} À vérifier sur la copie : signes des dérivées, développement en
-      $t_0+h$, équation de $T_C$ (la marque sur 2(c) suggère une difficulté). Toujours contrôler par une valeur connue.
-\item \textbf{Courbe asymptote (question 4, hors programme).} En dernier : savoir choisir le point $P_t$ (même ordonnée pour une
-      exponentielle).
+\subsubsection*{Priorités de travail}
+\begin{enumerate}[itemsep=3pt]
+\item \textbf{Asymptotes (question 3).} Présentes dans chaque devoir : la méthode doit devenir automatique. Entraînement :
+TD~8 et TD~10 du livret.
+\item \textbf{Inflexion (question 5).} Factoriser la vitesse, puis étudier $\det(\ve g,\ve g')$. Entraînement : TD~6.
+\item \textbf{Position globale (question 2(e)).} Former $\varphi$ et l'étudier comme une fonction.
+\item \textbf{Gestion du temps.} Traiter les questions indépendantes avant de bloquer. S'entraîner sur le problème type DS
+(1\,h\,30).
 \end{enumerate}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
+\item En un point stationnaire, la tangente est dirigée par le premier vecteur non nul du développement.
+\item Position par rapport à une droite : signe de $\varphi(t)=\alpha x(t)+\beta y(t)+\gamma$, étudiée comme une fonction.
+\item Asymptote : $\lim\frac yx$, puis $\lim(y-\alpha x)$, à chaque borne du domaine.
+\item Inflexion : $\det(f',f'')$ change de signe ; factoriser la vitesse d'abord.
+\end{itemize}
+\end{essentiel}
 
 \end{document}

@@ -1,0 +1,648 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Algèbre linéaire (compléments de deuxième année)
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — DL 3 : bases et familles cycliques},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% numéro du chapitre dans le parcours PT (affiché), distinct de la numérotation interne
+\newcommand{\grandnum}{\thesection}\newcommand{\ongletcouleur}{Bleu}
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\grandnum}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ongletcouleur}%
+  \edef\ongnum{\grandnum}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+\providecommand{\Ker}{\operatorname{Ker}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+\newcommand{\va}{\vec a}\newcommand{\vb}{\vec b}\newcommand{\vz}{\vec 0}\newcommand{\dd}[1]{\vec\delta_{#1}}
+\newcommand{\Qc}{\mathcal Q}
+\newcommand{\Etp}[1]{\par\medskip\noindent{\sffamily\bfseries\small\color{Bleu}#1}\enspace\ignorespaces}
+\newtcolorbox{etapesbox}{enhanced,breakable,blanker,borderline west={1.6pt}{0pt}{BleuMoyen},left=10pt,right=0pt,top=0pt,bottom=2pt,before skip=0.8em,after skip=0.6em,before upper={\setlength{\parskip}{4pt}}}
+\newtcolorbox{enoncebox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=8pt,right=8pt,top=6pt,bottom=6pt,before skip=0.6em,after skip=0.6em}
+\newcommand{\Enonce}[1]{\begin{enoncebox}{\sffamily\bfseries\footnotesize\color{Bleu}CE QU'ON DEMANDE}\par\smallskip #1\end{enoncebox}}
+\newtcolorbox{ideebox}{enhanced,breakable,colback=BleuClair!18,colframe=BleuClair!18,borderline west={2.4pt}{0pt}{Bleu},arc=0pt,boxrule=0pt,left=10pt,right=8pt,top=6pt,bottom=6pt,before skip=0.6em,after skip=0.8em}
+\newcommand{\Idee}[1]{\begin{ideebox}{\sffamily\bfseries\footnotesize\color{Bleu}L'IDÉE}\par\smallskip #1\end{ideebox}}
+\newtcolorbox{conclbox}{enhanced,breakable,blanker,borderline west={1.6pt}{0pt}{Ocre},left=8pt,top=2pt,bottom=2pt,before skip=1em,after skip=0.6em}
+\newcommand{\Conclusion}[1]{\begin{conclbox}{\sffamily\bfseries\footnotesize\color{Ocre}CONCLUSION}\quad #1\end{conclbox}}
+\newcommand{\Redaction}{\par\medskip\noindent{\sffamily\bfseries\footnotesize\color{BleuMoyen}LA RÉDACTION}\par}
+\newcommand{\Outil}[2]{\begin{enoncebox}{\sffamily\bfseries\small\color{Bleu}#1}\par\smallskip #2\end{enoncebox}}
+\begin{document}
+\renewcommand{\grandnum}{1}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[Bleu] (current page.north west) rectangle ([yshift=-15.5cm]current page.north east);
+  \node[anchor=north west,text=white,font=\sffamily\small] at ([xshift=2.6cm,yshift=-3.2cm]current page.north west)
+     {\textls[250]{MATHÉMATIQUES\ \ ·\ \ CPGE PT\ \ ·\ \ DEUXIÈME ANNÉE}};
+  \node[anchor=north west,text=white] at ([xshift=2.5cm,yshift=-4.4cm]current page.north west)
+     {\fontsize{62}{66}\selectfont\scshape Le Collé};
+  \draw[Ocre,line width=1.6pt] ([xshift=2.6cm,yshift=-7.3cm]current page.north west) -- ++(4.2cm,0);
+  \node[anchor=north west,text=white,font=\sffamily\Large\bfseries,align=left]
+     at ([xshift=2.6cm,yshift=-8.0cm]current page.north west) {Bases et familles cycliques};
+  \node[anchor=north west,text=white!90!Bleu,font=\sffamily\large,align=left]
+     at ([xshift=2.6cm,yshift=-9.0cm]current page.north west) {Retour sur le devoir libre 3\\[0.15cm]Endomorphismes cycliques};
+  \node[anchor=north west,text=Ink,font=\sffamily\small,align=left,text width=12cm]
+     at ([xshift=2.6cm,yshift=-17.4cm]current page.north west)
+     {\textcolor{Bleu}{\bfseries Méthodes et exercices corrigés}\\[0.3cm]\textcolor{Gris}{Démontrer qu'une famille est une base, écrire la matrice d'un endomorphisme dans une base bien choisie : les méthodes du DL, pour les prochains devoirs.}};
+  \node[anchor=south west,text=Ink,font=\sffamily\large] at ([xshift=2.6cm,yshift=3.0cm]current page.south west) {Ahmed Amine Ouqlani};
+  \draw[Filet] ([xshift=2.6cm,yshift=2.6cm]current page.south west) -- ([xshift=-2.4cm,yshift=2.6cm]current page.south east);
+\end{tikzpicture}
+\end{titlepage}
+
+
+\thispagestyle{plain}
+\section*{Avant-propos}
+\markboth{Avant-propos}{}
+Ce livret reprend uniquement les questions du DL~3 qui ont posé problème, dans l'ordre du sujet. Presque toutes demandent la
+même chose : \emph{démontrer qu'une famille est une base}.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{8.6cm}r@{}}
+\toprule
+\textbf{Question} & \textbf{Ce qu'il fallait trouver} & \textbf{Page}\\\midrule
+II.4.a & Réutiliser la partie II et traiter les deux sens & \pageref{q:ii4a}\\
+II.4.b & Appliquer la partie II à $M^T$ & \pageref{q:ii4b}\\
+III.3 & Écrire $g(\va)$, $g^2(\va)$ avec les vecteurs propres & \pageref{q:iii3}\\
+III.4 & Calculer $g^3(\va)$ & \pageref{q:iii4}\\
+III.5 & Résoudre $(R-\lambda I_3)X=0$ & \pageref{q:iii5}\\
+III.6 & Reprendre III.3 avec un vecteur quelconque & \pageref{q:iii6}\\\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Comment lire} Une question par page, toujours dans le même ordre :
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{Ce qu'on demande} : l'énoncé ;
+\item \textbf{L'idée} : ce qu'il faut voir avant d'écrire, à lire en premier ;
+\item \textbf{La rédaction} : la preuve, découpée en petits blocs.
+\end{itemize}
+Les outils de la page~\pageref{q:outils} servent partout. Trois exercices courts, corrigés, terminent le livret.
+
+\vfill
+\renewcommand{\contentsname}{Sommaire}
+\hypertarget{toc}{}
+\tableofcontents
+\clearpage
+\ongletstrue
+% =====================================================================
+\section{Bases et familles cycliques}\label{sec:dl}
+\renewcommand{\grandnum}{1}
+
+Dans tout le livret, $E$ est de dimension $n$ et $f\in\mathcal L(E)$. On note $f^2=f\circ f$, $f^3=f\circ f\circ f$, etc.
+
+\subsection{Les outils}\label{q:outils}
+
+\Outil{Outil 1 — Base en dimension $n$}{%
+Une famille de $n$ vecteurs dans un espace de dimension $n$ est une base dès qu'elle est \emph{libre}. On n'a donc jamais à
+prouver qu'elle est génératrice.
+
+Pour prouver qu'elle est libre, on écrit : « soient $c_1,\dots,c_n$ tels que $c_1\vec u_1+\dots+c_n\vec u_n=\vz$ », et on
+montre que tous les $c_i$ sont nuls.}
+
+\Outil{Outil 2 — Deux résultats sur la liberté}{%
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Une famille qui contient $\vz$ est liée : ce n'est jamais une base.
+\item Des vecteurs propres associés à des valeurs propres distinctes forment une famille libre.
+\end{itemize}}
+
+\Outil{Outil 3 — Endomorphisme ou matrice : c'est pareil}{%
+Si $A$ est la matrice de $f$ dans une base, et $X$ la colonne des coordonnées de $\vec x$ dans cette base, alors les
+coordonnées de $f(\vec x)$ sont $AX$, et celles de $f^2(\vec x)$ sont $A^2X$.
+
+Dans $\R^3$ avec la base canonique, le vecteur $(x,y,z)$ et sa colonne de coordonnées ont les mêmes nombres. C'est pour cela
+qu'on peut calculer $\varphi(\va)$ comme $M\va$, et dire « $\varphi^3=0$ » ou « $M^3=0$ » : c'est la même phrase.
+Attention : dans une autre base, la matrice n'est plus $M$.}
+
+\Outil{Outil 4 — « Trouver tous les vecteurs tels que… soit une base »}{%
+C'est une équivalence, donc il y a deux choses à prouver : quand la condition est vraie, c'est une base ; quand elle est
+fausse, la famille est liée.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{II.4.a — Tous les \texorpdfstring{$\va$}{a} qui donnent une base}\label{q:ii4a}
+
+\Enonce{$\varphi$ est l'endomorphisme de $\R^3$ de matrice $M$. Trouver tous les $\va\in\R^3$ tels que
+$\Qc=(\va,\varphi(\va),\varphi^2(\va))$ soit une base de $\R^3$.}
+
+\Idee{La question II.1 a déjà fait le travail : si $f^3=0$ et $f^2(\va)\neq\vz$, la famille est une base. Il suffit de
+vérifier que $\varphi$ remplit ces conditions, puis de regarder ce qui se passe quand $\varphi^2(\va)=\vz$.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{On vérifie que $\varphi^3=0$.} D'après la partie I, $M=PTP^{-1}$. En élevant au cube, les $P^{-1}P$ du milieu se
+simplifient : $M^3=PT^3P^{-1}$. Or $T^3=0$, donc $M^3=0$, c'est-à-dire $\varphi^3=0$ (outil 3).
+
+\Etp{Premier cas : $\varphi^2(\va)\neq\vz$.} Les hypothèses de II.1 sont vérifiées, donc $\Qc$ est une base.
+
+\Etp{Second cas : $\varphi^2(\va)=\vz$.} Le dernier vecteur de $\Qc$ est nul. Une famille qui contient $\vz$ est liée
+(outil 2) : $\Qc$ n'est pas une base.
+
+\Etp{On traduit la condition.} Pour $\va=(x,y,z)$, on calcule
+\[\varphi^2(\va)=M^2\va=\begin{pmatrix}0&0&0\\2&2&-2\\2&2&-2\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix}
+=\begin{pmatrix}0\\2(x+y-z)\\2(x+y-z)\end{pmatrix}.\]
+Ce vecteur est nul exactement quand $x+y-z=0$.
+\end{etapesbox}
+\Conclusion{$\Qc$ est une base si et seulement si $x+y-z\neq0$.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{II.4.b — \texorpdfstring{$M$}{M} est semblable à \texorpdfstring{$M^T$}{tM}}\label{q:ii4b}
+
+\Enonce{Montrer que $M$ est semblable à $M^T$, et que $H=M+2I_3$ est semblable à $H^T$.}
+
+\Idee{La partie II montre que toute matrice $B$ de taille 3 avec $B^3=0$ et $B^2\neq0$ est semblable à $T$. Si $M$ et $M^T$
+sont toutes les deux semblables à $T$, elles sont semblables entre elles.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{$M$ est semblable à $T$.} C'est la partie I : $M=PTP^{-1}$.
+
+\Etp{$M^T$ est semblable à $T$.} On vérifie les deux conditions pour $M^T$, en utilisant $(AB)^T=B^TA^T$ :
+$(M^T)^3=(M^3)^T=0$, et $(M^T)^2=(M^2)^T\neq0$ car $M^2\neq0$. Par la partie II, il existe $S$ inversible telle que
+$M^T=STS^{-1}$.
+
+\Etp{On relie les deux.} De $M=PTP^{-1}$ on tire $T=P^{-1}MP$. On remplace dans l'expression de $M^T$ :
+\[M^T=S\,P^{-1}MP\,S^{-1}=Q^{-1}MQ\qquad\text{avec } Q=PS^{-1}.\]
+Donc $M$ et $M^T$ sont semblables.
+
+\Etp{Pour $H$.} On garde la même $Q$. Comme $Q^{-1}I_3Q=I_3$ :
+\[H^T=M^T+2I_3=Q^{-1}MQ+2\,Q^{-1}I_3Q=Q^{-1}(M+2I_3)Q=Q^{-1}HQ.\]
+\end{etapesbox}
+\Conclusion{$M$ est semblable à $M^T$ et $H$ est semblable à $H^T$, avec la même matrice $Q$.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{III.3 — La famille \texorpdfstring{$(\va,g(\va),g^2(\va))$}{(a,g(a),g2(a))} est une base}\label{q:iii3}
+
+\Enonce{$g\in\mathcal L(\C^3)$ a trois valeurs propres distinctes $\lambda_1,\lambda_2,\lambda_3$, de vecteurs propres
+$\dd1,\dd2,\dd3$. On pose $\va=\dd1+\dd2+\dd3$. Montrer que $\Qc=(\va,g(\va),g^2(\va))$ est une base de $\C^3$.}
+
+\Idee{Ici $g$ n'est pas nilpotent : la méthode de II.1 ne marche plus. Mais dans la base $(\dd1,\dd2,\dd3)$, $g$ est très
+simple : il multiplie la $i$-ième coordonnée par $\lambda_i$. On écrit tout dans cette base, et une relation entre les
+vecteurs de $\Qc$ donne un polynôme qui a trop de racines.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{Ce qu'il suffit de prouver.} $\Qc$ a 3 vecteurs et $\dim\C^3=3$ : il suffit de prouver qu'elle est libre (outil 1).
+
+\Etp{La base de travail.} Les $\dd i$ sont des vecteurs propres pour des valeurs propres distinctes, donc ils sont libres
+(outil 2). Ce sont trois vecteurs libres de $\C^3$ : ils forment une base.
+
+\Etp{On calcule $g(\va)$ et $g^2(\va)$.} Comme $g(\dd i)=\lambda_i\dd i$, par linéarité :
+\[g(\va)=\lambda_1\dd1+\lambda_2\dd2+\lambda_3\dd3,\qquad g^2(\va)=\lambda_1^2\dd1+\lambda_2^2\dd2+\lambda_3^2\dd3.\]
+
+\Etp{On écrit la relation.} Soient $c_0,c_1,c_2$ tels que $c_0\va+c_1g(\va)+c_2g^2(\va)=\vz$. On remplace, puis on regroupe
+ce qui multiplie chaque $\dd i$ :
+\[(c_0+c_1\lambda_1+c_2\lambda_1^2)\dd1+(c_0+c_1\lambda_2+c_2\lambda_2^2)\dd2+(c_0+c_1\lambda_3+c_2\lambda_3^2)\dd3=\vz.\]
+La famille $(\dd i)$ est libre, donc les trois parenthèses sont nulles.
+
+\Etp{On conclut avec un polynôme.} Posons $P(X)=c_0+c_1X+c_2X^2$. Les trois parenthèses disent que $P(\lambda_1)=P(\lambda_2)
+=P(\lambda_3)=0$. Un polynôme de degré au plus 2 qui a trois racines distinctes est le polynôme nul : $c_0=c_1=c_2=0$.
+\end{etapesbox}
+\Conclusion{$\Qc$ est libre et a 3 vecteurs : c'est une base de $\C^3$.}
+
+\paragraph{Autre rédaction, plus courte} Dans la base $(\dd i)$, les coordonnées de $\va$, $g(\va)$, $g^2(\va)$ sont
+$(1,1,1)$, $(\lambda_1,\lambda_2,\lambda_3)$, $(\lambda_1^2,\lambda_2^2,\lambda_3^2)$. Leur déterminant est un Vandermonde :
+\[\det\begin{pmatrix}1&\lambda_1&\lambda_1^2\\1&\lambda_2&\lambda_2^2\\1&\lambda_3&\lambda_3^2\end{pmatrix}
+=(\lambda_2-\lambda_1)(\lambda_3-\lambda_1)(\lambda_3-\lambda_2)\neq0.\]
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{III.4 — La matrice de \texorpdfstring{$g$}{g} dans \texorpdfstring{$\Qc$}{Q}}\label{q:iii4}
+
+\Enonce{Montrer que la matrice de $g$ dans $\Qc=(\va,g(\va),g^2(\va))$ est
+\[R=\begin{pmatrix}0&0&\alpha\\1&0&\beta\\0&1&\gamma\end{pmatrix},\qquad\text{où }\chi_g(x)=x^3-\gamma x^2-\beta x-\alpha.\]}
+
+\Idee{La colonne $j$ contient les coordonnées de l'image du $j$-ième vecteur de base. Dans $\Qc$, $g$ envoie chaque vecteur sur
+le suivant : les deux premières colonnes sont immédiates. Seule la dernière demande un calcul : écrire $g^3(\va)$ avec
+$\va$, $g(\va)$, $g^2(\va)$.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{Les deux premières colonnes.} $g(\va)$ est le deuxième vecteur de $\Qc$ : ses coordonnées sont $(0,1,0)$. De même
+$g\big(g(\va)\big)=g^2(\va)$ est le troisième : coordonnées $(0,0,1)$.
+
+\Etp{Ce qu'il reste à montrer.} L'image du troisième vecteur est $g^3(\va)$. Il faut prouver que
+$g^3(\va)=\alpha\va+\beta g(\va)+\gamma g^2(\va)$.
+
+\Etp{On passe par les vecteurs propres.} Comme en III.3, $g^3(\va)=\lambda_1^3\dd1+\lambda_2^3\dd2+\lambda_3^3\dd3$. Chaque
+$\lambda_i$ est racine de $\chi_g$, donc $\lambda_i^3=\gamma\lambda_i^2+\beta\lambda_i+\alpha$. On remplace et on regroupe :
+\[g^3(\va)=\gamma\big(\textstyle\sum\lambda_i^2\dd i\big)+\beta\big(\sum\lambda_i\dd i\big)+\alpha\big(\sum\dd i\big)
+=\gamma g^2(\va)+\beta g(\va)+\alpha\va.\]
+\end{etapesbox}
+\Conclusion{La troisième colonne est $(\alpha,\beta,\gamma)$ : la matrice de $g$ dans $\Qc$ est $R$.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{III.5 — Les sous-espaces propres dans \texorpdfstring{$\Qc$}{Q}}\label{q:iii5}
+
+\Enonce{Donner les sous-espaces propres de $g$, en coordonnées dans la base $\Qc$.}
+
+\Idee{« Dans la base $\Qc$ » veut dire : avec les coordonnées dans $\Qc$, donc avec la matrice $R$ (outil 3). On résout
+$(R-\lambda_iI_3)X=0$ en partant de la dernière ligne, qui est la plus simple.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{Le système.} Avec $X=(x,y,z)$, l'équation $(R-\lambda_iI_3)X=0$ s'écrit
+\[\begin{cases}-\lambda_ix+\alpha z=0\\ x-\lambda_iy+\beta z=0\\ y+(\gamma-\lambda_i)z=0.\end{cases}\]
+
+\Etp{On résout de bas en haut.} La troisième ligne donne $y=(\lambda_i-\gamma)z$. On reporte dans la deuxième :
+$x=\lambda_iy-\beta z=(\lambda_i^2-\gamma\lambda_i-\beta)z$.
+
+\Etp{La première ligne est automatique.} En remplaçant $x$ :
+$-\lambda_ix+\alpha z=-(\lambda_i^3-\gamma\lambda_i^2-\beta\lambda_i-\alpha)z=-\chi_g(\lambda_i)z=0.$
+Elle n'impose rien de plus : $z$ est libre, et l'espace propre est une droite.
+
+\Etp{On simplifie.} D'après III.1, $\gamma=\lambda_1+\lambda_2+\lambda_3$ et
+$\beta=-(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)$. Si $\{i,j,k\}=\{1,2,3\}$, on trouve
+$\lambda_i-\gamma=-(\lambda_j+\lambda_k)$ et $\lambda_i^2-\gamma\lambda_i-\beta=\lambda_j\lambda_k$.
+\end{etapesbox}
+\Conclusion{$E_{\lambda_i}=\vect\big((\lambda_j\lambda_k,\ -(\lambda_j+\lambda_k),\ 1)\big)$, en coordonnées dans $\Qc$.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{III.6 — Tous les \texorpdfstring{$\vb$}{b} qui donnent une base}\label{q:iii6}
+
+\Enonce{Trouver tous les $\vb\in\C^3$ tels que $(\vb,g(\vb),g^2(\vb))$ soit une base de $\C^3$.}
+
+\Idee{On refait le calcul de III.3 avec $\vb=b_1\dd1+b_2\dd2+b_3\dd3$. Chaque équation est maintenant multipliée par un $b_i$.
+Si tous les $b_i$ sont non nuls, on retrouve III.3. Si un $b_i$ est nul, on perd une équation, et on peut fabriquer une
+relation.}
+
+\Redaction
+\begin{etapesbox}
+\Etp{Le calcul.} Comme en III.3, $g^k(\vb)=b_1\lambda_1^k\dd1+b_2\lambda_2^k\dd2+b_3\lambda_3^k\dd3$. Si
+$c_0\vb+c_1g(\vb)+c_2g^2(\vb)=\vz$, on regroupe selon les $\dd i$ ; avec $P(X)=c_0+c_1X+c_2X^2$, on obtient
+\[b_1P(\lambda_1)=0,\qquad b_2P(\lambda_2)=0,\qquad b_3P(\lambda_3)=0.\]
+
+\Etp{Si $b_1$, $b_2$, $b_3$ sont tous non nuls.} On divise chaque égalité par $b_i$ : $P$ s'annule en $\lambda_1$,
+$\lambda_2$, $\lambda_3$. Comme en III.3, $P=0$ : la famille est libre, c'est une base.
+
+\Etp{Si l'un des $b_i$ est nul,} par exemple $b_1=0$. La première égalité est vraie quel que soit $P$. Il suffit donc que $P$
+s'annule en $\lambda_2$ et $\lambda_3$ : on prend $P(X)=(X-\lambda_2)(X-\lambda_3)$, c'est-à-dire
+$c_0=\lambda_2\lambda_3$, $c_1=-(\lambda_2+\lambda_3)$, $c_2=1$. Les trois égalités sont vraies, donc
+$c_0\vb+c_1g(\vb)+c_2g^2(\vb)=\vz$, avec $c_2=1\neq0$ : la famille est liée.
+\end{etapesbox}
+\Conclusion{Ce sont les $\vb=b_1\dd1+b_2\dd2+b_3\dd3$ avec $b_1$, $b_2$, $b_3$ tous non nuls.}
+
+% ---------------------------------------------------------------------
+\clearpage
+\subsection{Bilan}\label{q:bilan}
+
+\begin{reflexe}
+Pour prouver qu'une famille est libre, regarder la forme des vecteurs :
+\begin{center}\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{7.2cm}@{}}
+\toprule
+\textbf{Les vecteurs sont…} & \textbf{On fait…}\\\midrule
+des $f^k(\va)$ avec $f^n=0$ & on applique $f^{n-1}$, puis $f^{n-2}$… (II.1)\\
+écrits avec des vecteurs propres & on regroupe selon les vecteurs propres, puis polynôme (III.3)\\
+des vecteurs numériques & on calcule un déterminant\\\bottomrule
+\end{tabular}
+\end{center}
+\end{reflexe}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
+\item $n$ vecteurs en dimension $n$ : il suffit de prouver qu'ils sont libres.
+\item « Tous les vecteurs tels que… » : deux sens à prouver.
+\item $g^k\big(\sum b_i\dd i\big)=\sum b_i\lambda_i^k\dd i$, et chaque $\lambda_i$ vérifie $\chi_g(\lambda_i)=0$.
+\item Endomorphisme et matrice disent la même chose dans une base fixée.
+\end{itemize}
+\end{essentiel}
+
+\serie{Pour s'entraîner}
+
+\begin{exo}{ii4a}{2}{comme II.4.a}
+Soit $f\in\mathcal L(E)$ avec $\dim E=3$, $f^3=0$ et $f^2\neq0$. Montrer que $(\vec x,f(\vec x),f^2(\vec x))$ est une base de $E$ si et
+seulement si $\vec x\notin\Ker f^2$.
+\end{exo}
+
+\begin{exo}{dim2}{2}{comme III.6}
+$(\vec e_1,\vec e_2)$ est une base de $E$ et $f\in\mathcal L(E)$ vérifie $f(\vec e_1)=\vec e_1$, $f(\vec e_2)=-\vec e_2$. Trouver
+tous les $\vec u\in E$ tels que $(\vec u,f(\vec u))$ soit une base de $E$.
+\end{exo}
+
+\begin{exo}{param}{2}{déterminant}
+Pour quelles valeurs de $m\in\R$ les vecteurs $(1,1,m)$, $(1,m,1)$, $(m,1,1)$ forment-ils une base de $\R^3$ ?
+\end{exo}
+
+% =====================================================================
+\clearpage
+\renewcommand{\ongletcouleur}{Ocre}
+\section*{Corrigés}\addcontentsline{toc}{section}{Corrigés}\markboth{Corrigés}{}
+
+\begin{corrige}{ii4a}
+\emph{Si $\vec x\notin\Ker f^2$.} La famille a $3$ vecteurs en dimension $3$ : on prouve qu'elle est libre. Soit
+$c_0\vec x+c_1f(\vec x)+c_2f^2(\vec x)=\vz$. On applique $f^2$ : comme $f^3=f^4=0$, il reste $c_0f^2(\vec x)=\vz$, et
+$f^2(\vec x)\neq\vz$, donc $c_0=0$. On applique ensuite $f$ : il reste $c_1f^2(\vec x)=\vz$, donc $c_1=0$. Enfin
+$c_2f^2(\vec x)=\vz$ donne $c_2=0$. C'est une base.
+
+\emph{Si $\vec x\in\Ker f^2$}, la famille contient $f^2(\vec x)=\vz$, donc elle est liée.
+\end{corrige}
+
+\begin{corrige}{dim2}
+On écrit $\vec u=x\vec e_1+y\vec e_2$ ; alors $f(\vec u)=x\vec e_1-y\vec e_2$. En coordonnées,
+$\det\begin{pmatrix}x&x\\y&-y\end{pmatrix}=-2xy$. C'est une base si et seulement si $x\neq0$ et $y\neq0$ : exactement comme en
+III.6, aucune coordonnée sur les vecteurs propres ne doit être nulle.
+\end{corrige}
+
+\begin{corrige}{param}
+\[\det\begin{pmatrix}1&1&m\\1&m&1\\m&1&1\end{pmatrix}=-(m-1)^2(m+2).\]
+C'est une base si et seulement si $m\neq1$ et $m\neq-2$.
+\end{corrige}
+
+\end{document}
