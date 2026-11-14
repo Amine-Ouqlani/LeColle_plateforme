@@ -64,7 +64,7 @@ const annalesChap = Object.entries(parAnnale).sort((a, b) => annale(b[0]).annee 
   const a = annale(id);
   return ligne(`<a href="annale.html?id=${id}">${a.concours} ${a.annee} — ${a.titre}</a>`, `${a.epreuve}, ${a.partie} · questions ${qs.map(q => q.label).join(', ')}`, `<a href="${a.liens.sujet}" target="_blank" rel="noopener">Sujet</a>`);
 }).join('');
-const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">${s.titre}</a>`, `${dureeTexte(s.duree)} · ${s.type === 'examen' ? 'examen blanc, extraits d\'annales' : 'devoir'}`,
+const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">${s.titre}</a>`, `${dureeTexte(s.duree)} · ${s.type === 'examen' ? (s.parties ? 'examen blanc, extraits d\'annales' : 'examen blanc') : 'devoir'}`,
   s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">Sujet</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : '')).join('');
 
 /* ---------------------------------------------------------------- page */

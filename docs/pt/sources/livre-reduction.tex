@@ -571,12 +571,35 @@ Soit $f\in\LE$, $\dim E=n$. Les propriétés suivantes sont équivalentes :
 \end{theoreme}
 
 \begin{proof}
-La somme des sous-espaces propres est directe (théorème~\ref{t:somme-propres}) ; sa dimension est donc $\sum\dim E_\lambda$
-(chapitre~1, base adaptée à une somme directe). (1)$\Rightarrow$(2) : une base de vecteurs propres est contenue dans la somme, qui vaut donc $E$.
-(2)$\Leftrightarrow$(3) : un sous-espace de dimension $n$ est $E$. (2)$\Rightarrow$(1) : une base adaptée à la somme directe est
-formée de vecteurs propres. (3)$\Leftrightarrow$(4) : on a toujours $\sum\dim E_\lambda\leq\sum m(\lambda)\leq\deg\chi_f=n$
-(théorème~\ref{t:dim-mult}) ; il y a égalité partout si et seulement si $\sum m(\lambda)=n$ ($\chi_f$ scindé) et
-$\dim E_\lambda=m(\lambda)$ pour tout $\lambda$.
+On note $\lambda_1,\dots,\lambda_p$ les valeurs propres distinctes de $f$, $E_i=E_{\lambda_i}(f)$, $d_i=\dim E_i$ et
+$m_i=m(\lambda_i)$.
+
+\etape{Préliminaire : la somme $F=E_1+\dots+E_p$} D'après le théorème~\ref{t:somme-propres}, cette somme est directe. Si on
+choisit une base de chaque $E_i$ et qu'on les met bout à bout, on obtient donc une base de $F$ (chapitre~1, base adaptée à une
+somme directe). Cette base est formée de vecteurs propres de $f$, et
+\[\dim F=d_1+\dots+d_p.\]
+
+\etape{(1) $\Rightarrow$ (2)} Soit $\mathcal B$ une base de $E$ formée de vecteurs propres de $f$. Chaque vecteur de $\mathcal B$
+est dans l'un des $E_i$, donc dans $F$. Le sous-espace $F$ contient une base de $E$, donc toutes ses combinaisons linéaires :
+$F=E$. Comme la somme est directe, $E=E_1\oplus\dots\oplus E_p$.
+
+\etape{(2) $\Rightarrow$ (1)} Si $E=F$, la base de $F$ construite dans le préliminaire est une base de $E$ formée de vecteurs
+propres : $f$ est diagonalisable.
+
+\etape{(2) $\Leftrightarrow$ (3)} $F$ est un sous-espace de $E$, et un sous-espace a la même dimension que $E$ si et seulement
+s'il est égal à $E$. Donc $F=E\iff\dim F=n\iff d_1+\dots+d_p=n$.
+
+\etape{(3) $\Leftrightarrow$ (4)} On compare trois nombres. D'une part $d_i\leq m_i$ pour tout $i$ (théorème~\ref{t:dim-mult}).
+D'autre part, $(x-\lambda_1)^{m_1}\cdots(x-\lambda_p)^{m_p}$ divise $\chi_f$, qui est de degré $n$ ; donc $m_1+\dots+m_p\leq n$,
+avec égalité si et seulement si $\chi_f=\prod_i(x-\lambda_i)^{m_i}$ (deux polynômes unitaires de même degré, l'un divisant
+l'autre, sont égaux), c'est-à-dire si et seulement si $\chi_f$ est scindé. On a donc toujours
+\[\sum_{i=1}^pd_i\ \leq\ \sum_{i=1}^pm_i\ \leq\ n.\]
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Si (3) est vraie, le premier et le dernier nombre sont égaux, donc les deux inégalités sont des égalités. La seconde
+donne : $\chi_f$ est scindé. La première s'écrit $\sum_i(m_i-d_i)=0$ ; c'est une somme de termes positifs, donc chaque terme est
+nul : $d_i=m_i$ pour tout $i$. C'est (4).
+\item Si (4) est vraie, $\sum_id_i=\sum_im_i$, et $\sum_im_i=n$ car $\chi_f$ est scindé : c'est (3).\qedhere
+\end{itemize}
 \end{proof}
 
 \begin{corollaire}\label{c:distinctes}

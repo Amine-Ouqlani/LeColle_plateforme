@@ -1,7 +1,9 @@
 /* =====================================================================
    Le Collé — entraînement : devoirs et examens blancs
-   Les examens blancs sont composés par Le Collé à partir d'extraits
+   Les examens blancs 1 à 4 sont composés par Le Collé à partir d'extraits
    d'annales officielles (sujets sur WikiPrépa) ; le barème est indicatif.
+   L'examen blanc d'algèbre linéaire et déterminants est un sujet original
+   (sujet et corrigé : docs/pt/examens/, source unique examen-al-determinants.tex).
    ===================================================================== */
 window.LC = window.LC || {};
 
@@ -24,8 +26,22 @@ LC.entrainement = [
     id: "dl3", type: "devoir", titre: "DL — Bases et familles cycliques",
     chapitres: ["red"], duree: 120, niveau: 4,
     origine: "DL 3 de la classe ; correction Le Collé",
-    description: "Les questions difficiles du devoir libre sur les endomorphismes cycliques : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Une question par page : ce qu'on demande, l'idée, la rédaction.",
+    description: "Les questions difficiles du devoir libre sur les endomorphismes cycliques : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Une question par page : ce qu'on demande, l'explication, puis la rédaction sur la copie.",
     enonce: { doc: "dl3", page: 2 }, corrige: { doc: "dl3", page: 4 }
+  },
+  {
+    id: "eb-al-det", type: "examen", titre: "Examen blanc — Algèbre linéaire et déterminants",
+    chapitres: ["al", "determinants"], duree: 180, niveau: 4,
+    origine: "Sujet original Le Collé, au niveau du programme de PTSI",
+    description: "Un devoir complet en conditions réelles : bases dans $\\R^3$, dans un sous-espace de $\\R^4$, dans $\\R_2[X]$ et sans coordonnées ; supplémentaires et projecteur ; déterminants par opérations, Vandermonde, matrice antisymétrique ; problème sur une matrice nilpotente (famille $(x,Ax,A^2x)$, comme dans le DL 3). Le corrigé explique le choix de chaque méthode et dit quoi revoir.",
+    enonce: { doc: "eb-al-det-sujet", page: 1 }, corrige: { doc: "eb-al-det-corrige", page: 1 },
+    bareme: [
+      { titre: "Exercice 1 — Vrai ou faux", points: 3, detail: "6 affirmations à 0,5" },
+      { titre: "Exercice 2 — Familles libres, génératrices, bases", points: 5, detail: "A : 1,5 · B : 1,25 · C : 1,25 · D : 1" },
+      { titre: "Exercice 3 — Sous-espaces supplémentaires et projecteur", points: 3.5, detail: "Q1 : 0,5 · Q2 : 1,25 · Q3 : 0,75 · Q4 : 1" },
+      { titre: "Exercice 4 — Calculs de déterminants", points: 4, detail: "Q1 : 1,5 · Q2 : 1,5 · Q3 : 1" },
+      { titre: "Problème — Une matrice nilpotente", points: 4.5, detail: "Q1 : 0,5 · Q2 : 1 · Q3 : 1 · Q4 : 0,5 · Q5 : 1 · Q6 : 0,5" }
+    ]
   },
   {
     id: "eb-determinants", type: "examen", titre: "Examen blanc 1 — Déterminants",

@@ -12,12 +12,13 @@ const ETAPES = [
 ];
 
 const sujet = s => {
-  const total = s.parties ? s.parties.reduce((t, p) => t + p.points, 0) : null;
+  const total = s.parties ? s.parties.reduce((t, p) => t + p.points, 0) : s.bareme ? s.bareme.reduce((t, b) => t + b.points, 0) : null;
   const liens = s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">Sujet</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : '';
   const parties = s.parties ? `<details class="plus"><summary>Composition et barème</summary><ol class="small">${s.parties.map(p => {
     const a = LC.annales.find(x => x.id === p.annale);
     return `<li><a href="annale.html?id=${a.id}">${a.concours} ${a.annee}, ${a.partie}</a> — ${p.questions} <span class="tag">(${String(p.points).replace('.', ',')} pts : ${p.detail})</span></li>`;
-  }).join('')}</ol></details>` : '';
+  }).join('')}</ol></details>` : s.bareme ? `<details class="plus"><summary>Composition et barème</summary><ol class="small">${s.bareme.map(b =>
+    `<li>${b.titre} <span class="tag">(${String(b.points).replace('.', ',')} pts : ${b.detail})</span></li>`).join('')}</ol></details>` : '';
   return `<li id="${s.id}"><div class="row"><div class="main">${s.titre}<br><span class="tag">${dureeTexte(s.duree)}${total ? ` · noté sur ${total}` : ''} · ${s.chapitres.map(id => chap(id).titre).join(', ')}</span></div><div class="side">${liens}</div></div>
     <p class="small muted" style="margin-top:4px">${s.description}</p>${parties}</li>`;
 };

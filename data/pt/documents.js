@@ -12,7 +12,7 @@ LC.documents = {
     "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 6",
     "type": "complet",
     "fichier": "docs/pt/livres/livret-complet-PT.pdf",
-    "pages": 117,
+    "pages": 118,
     "version": "v1",
     "maj": "2026-11-13",
     "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
@@ -156,7 +156,7 @@ LC.documents = {
     "type": "cours",
     "fichier": "docs/pt/livres/livre-reduction.pdf",
     "source": "docs/pt/sources/livre-reduction.tex",
-    "pages": 16,
+    "pages": 17,
     "version": "v1",
     "maj": "2026-11-07",
     "description": "Éléments propres, polynôme caractéristique, diagonalisation et ses applications (puissances, suites, équations matricielles), trigonalisation. S'appuie sur les chapitres Algèbre linéaire et Déterminants. Exercices corrigés à la fin."
@@ -372,7 +372,29 @@ LC.documents = {
     "pages": 11,
     "version": "v1",
     "maj": "2026-11-14",
-    "description": "Les questions du DL 3 qui ont résisté (II.4.a, II.4.b, III.3 à III.6), dans l'ordre du sujet : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Pour chacune : ce qu'on demande, l'idée, la rédaction. Trois exercices corrigés."
+    "description": "Les questions du DL 3 qui ont résisté (II.4.a, II.4.b, III.3 à III.6), dans l'ordre du sujet : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Pour chacune : ce qu'on demande, l'explication, puis la rédaction telle qu'on l'écrit sur la copie. Trois exercices corrigés."
+  },
+  "eb-al-det-sujet": {
+    "titre": "Examen blanc — Algèbre linéaire et déterminants (sujet)",
+    "sousTitre": "3 heures · 4 exercices et un problème · noté sur 20",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/eb-al-det-sujet.pdf",
+    "source": "docs/pt/sources/examen-al-determinants.tex",
+    "pages": 3,
+    "version": "v1",
+    "maj": "2026-11-14",
+    "description": "Sujet original : familles libres, génératrices et bases dans des situations variées, sous-espaces supplémentaires et projecteur, calculs et propriétés des déterminants, et un problème sur une matrice nilpotente."
+  },
+  "eb-al-det-corrige": {
+    "titre": "Examen blanc — Algèbre linéaire et déterminants (corrigé)",
+    "sousTitre": "Corrigé détaillé, choix des méthodes, pièges, grille de diagnostic",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/eb-al-det-corrige.pdf",
+    "source": "docs/pt/sources/examen-al-determinants.tex",
+    "pages": 9,
+    "version": "v1",
+    "maj": "2026-11-14",
+    "description": "Toutes les questions corrigées, avec pour chacune le choix de la méthode, les erreurs fréquentes, les méthodes alternatives et le lien avec le DL 3. Une grille indique quoi revoir selon les points perdus."
   },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",

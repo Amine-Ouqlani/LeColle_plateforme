@@ -399,7 +399,7 @@ LC.chapitres = [
     "cours": {
       "doc": "livre-red",
       "debut": 4,
-      "fin": 13,
+      "fin": 14,
       "sections": [
         {
           "num": "1.1",
@@ -419,22 +419,22 @@ LC.chapitres = [
         {
           "num": "1.4",
           "titre": "Applications de la diagonalisation",
-          "page": 10
+          "page": 11
         },
         {
           "num": "1.5",
           "titre": "Trigonalisation",
-          "page": 11
+          "page": 12
         },
         {
           "num": "1.6",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 12
+          "page": 13
         }
       ],
       "corriges": {
-        "debut": 14,
-        "fin": 16
+        "debut": 15,
+        "fin": 17
       }
     },
     "fiche": {
