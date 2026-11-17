@@ -1,0 +1,550 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Séries numériques (corrections)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Séries numériques · corrections}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 7}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Séries numériques}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Corrections détaillées des 25 exercices du TD, dans le même ordre et avec les mêmes numéros.
+Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
+resservira. Les renvois « méthode~1.3 du livret » désignent le cours.
+\textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
+
+\partie{I}{Applications directes du cours}{}
+\correction{1}{Suites classiques}{sn-1}{énoncé : TD, p.~2}
+\q{1.} Point fixe : $c=-c+2$, $c=1$. La suite $(u_n-1)$ est géométrique de raison $-1$ : $u_n-1=(-1)^n(u_0-1)$, donc
+$u_n=1-(-1)^n$ (la suite vaut $0,2,0,2,\dots$).
+\q{2.} $r^2+r+1=0$ a pour racines $e^{\pm2i\pi/3}$ ($\rho=1$, $\theta=\frac{2\pi}3$) : $u_n=A\cos\frac{2n\pi}3+B\sin\frac{2n\pi}3$.
+$u_0=1$ donne $A=1$ ; $u_1=-\frac12+\frac{\sqrt3}2B=2$ donne $B=\frac5{\sqrt3}$. Donc $u_n=\cos\frac{2n\pi}3+\frac{5}{\sqrt3}\sin\frac{2n\pi}3$.
+Contrôle : $u_2=-u_1-u_0=-3$ et la formule donne $-\frac12-\frac52=-3$.
+\q{3.} $r^2-3r+2=(r-1)(r-2)$ : $u_n=A+B\,2^n$, avec $A+B=0$ et $A+2B=1$, donc $u_n=2^n-1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{2}{Équivalents}{sn-2}{énoncé : TD, p.~2}
+\q{(a)} $\sqrt{n^2+n+1}-n=\frac{n+1}{\sqrt{n^2+n+1}+n}\sim\frac n{2n}=\frac12$ : la suite tend vers $\frac12$ (équivalent : la constante $\frac12$).
+\q{(b)} $\sin\frac{n\pi}{n+1}=\sin\left(\pi-\frac\pi{n+1}\right)=\sin\frac\pi{n+1}\sim\frac\pi n$.
+\q{(c)} $\sqrt n\left(\sqrt{1+\frac{(-1)^n}n}-1\right)=\sqrt n\left(\frac{(-1)^n}{2n}+O\left(\frac1{n^2}\right)\right)\sim\frac{(-1)^n}{2\sqrt n}$.
+\q{(d)} $\ln\left(1+\frac1n\right)\sim\frac1n$.
+\piege{en (a), « $\sqrt{n^2+n+1}\sim n$ » ne permet pas de conclure : on ne soustrait pas des équivalents. On multiplie par la quantité conjuguée.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{3}{Théorème des gendarmes}{sn-3}{énoncé : TD, p.~2}
+\q{1.} Pour $1\leq k\leq n$ : $\frac1{\sqrt{n^2+n}}\leq\frac1{\sqrt{n^2+k}}\leq\frac1{\sqrt{n^2+1}}$. On somme les $n$ termes :
+$\frac n{\sqrt{n^2+n}}\leq u_n\leq\frac n{\sqrt{n^2+1}}$, et les deux bornes tendent vers $1$ : $u_n\to1$.
+\q{2.} $kx-1<\lfloor kx\rfloor\leq kx$. On somme : $x\frac{n(n+1)}2-n<\sum_{k=1}^n\lfloor kx\rfloor\leq x\frac{n(n+1)}2$, puis on divise par $n^2$ :
+les deux bornes tendent vers $\frac x2$, donc $v_n\to\frac x2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{4}{Un développement asymptotique de $(1+\frac1n)^n$}{s-equiv}{énoncé : TD, p.~2}
+$\left(1+\frac1n\right)^n=e^{x_n}$ avec $x_n=n\ln\left(1+\frac1n\right)=n\left(\frac1n-\frac1{2n^2}+o\left(\frac1{n^2}\right)\right)=1-\frac1{2n}+o\left(\frac1n\right)$.
+Donc $x_n\to1$ et, par continuité de $\exp$, $\left(1+\frac1n\right)^n\to e$. Ensuite
+$\left(1+\frac1n\right)^n-e=e\left(e^{x_n-1}-1\right)$ avec $x_n-1\to0$, et $e^y-1\sim y$ quand $y\to0$ :
+$\left(1+\frac1n\right)^n-e\sim e(x_n-1)\sim-\frac e{2n}$.
+\piege{écrire $\left(1+\frac1n\right)^n\sim e^{1}$ « car $n\ln(1+\frac1n)\sim1$ » donne la limite, mais rien sur l'écart : on ne
+compose pas les équivalents par $\exp$. Il faut le développement de $x_n-1$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{5}{Télescopages}{s-tele}{énoncé : TD, p.~3}
+\q{1.} $\frac1{n(n+1)(n+2)}=\frac1{2n}-\frac1{n+1}+\frac1{2(n+2)}=\frac12\left(\frac1{n(n+1)}-\frac1{(n+1)(n+2)}\right)$. C'est
+$a_n-a_{n+1}$ avec $a_n=\frac1{2n(n+1)}\to0$, donc la série converge et $\sum_{n=1}^{+\infty}\frac1{n(n+1)(n+2)}=a_1-0=\frac14$.
+
+\q{2.} $\ln\left(1+\frac1n\right)=\ln(n+1)-\ln n$ : $S_n=\sum_{k=1}^n\ln\left(1+\frac1k\right)=\ln(n+1)\to+\infty$, la série diverge.
+Comme $\ln\left(1+\frac1n\right)\sim\frac1n\geq0$, on retrouve au passage la divergence de $\sum\frac1n$.
+
+\q{3.} $\ln\left(1-\frac1{n^2}\right)=\ln\frac{(n-1)(n+1)}{n^2}=\big(\ln(n+1)-\ln n\big)-\big(\ln n-\ln(n-1)\big)$. Donc
+$\sum_{k=2}^n\ln\left(1-\frac1{k^2}\right)=\big(\ln(n+1)-\ln2\big)-\big(\ln n-\ln1\big)=\ln\frac{n+1}n-\ln2\to-\ln2$. La série converge, de
+somme $-\ln2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{6}{Somme par éléments simples}{sn-5}{énoncé : TD, p.~3}
+$\frac1{n(n+2)}=\frac12\left(\frac1n-\frac1{n+2}\right)$. Les termes se simplifient de deux en deux :
+$\sum_{k=1}^n\frac1{k(k+2)}=\frac12\left(1+\frac12-\frac1{n+1}-\frac1{n+2}\right)\to\frac34$. La série converge et sa somme vaut $\frac34$.
+\gain{écrire les premiers et les derniers termes pour voir ce qui reste : ici $\frac11$, $\frac12$ d'un côté, $\frac1{n+1}$, $\frac1{n+2}$ de l'autre.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{7}{Nature de séries à termes positifs}{s-nature}{énoncé : TD, p.~3}
+Tous les termes sont positifs.
+\q{(a)} $\frac{n^2+1}{n^4+3}\sim\frac1{n^2}$ : convergente (Riemann, $2>1$).
+\q{(b)} $\frac1{\sqrt{n(n+1)}}\sim\frac1n$ : divergente.
+\q{(c)} $1-\cos\frac1n\sim\frac1{2n^2}$ : convergente.
+\q{(d)} $\ln n=o(e^n)$, donc $\frac1{\ln n+e^n}\sim e^{-n}=\left(\frac1e\right)^n$ : convergente (géométrique de raison $\frac1e<1$).
+\q{(e)} $n^2\cdot n^2e^{-\sqrt n}=e^{4\ln n-\sqrt n}\to0$ car $\ln n=o(\sqrt n)$ ; donc $n^2e^{-\sqrt n}=o\left(\frac1{n^2}\right)$ : convergente.
+\q{(f)} $\frac{\ln n}n\geq\frac1n$ pour $n\geq3$ : divergente par comparaison.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{8}{Nature : comparaison, équivalents, d'Alembert}{sn-4}{énoncé : TD, p.~3}
+\q{(a)} $\frac{u_{n+1}}{u_n}=2\left(\frac n{n+1}\right)^n=2\left(1+\frac1n\right)^{-n}\to\frac2e<1$ : convergente (d'Alembert).
+\q{(b)} $\frac{u_{n+1}}{u_n}=\frac13\left(1+\frac1n\right)^4\to\frac13$ : convergente.
+\q{(c)} $\sin x=x+O(x^3)$ et $\ln(1-x)=-x-\frac{x^2}2+O(x^3)$ : $u_n=-\frac1{2n^2}+O\left(\frac1{n^3}\right)\sim-\frac1{2n^2}$. Le terme est
+\emph{négatif} à partir d'un rang ; $-u_n\sim\frac1{2n^2}\geq0$ : convergente.
+\q{(d)} $n\sin\frac1n\to1\neq0$ : divergence grossière.
+\q{(e)} $\sin(e^{-3n})\sim e^{-3n}$, terme d'une série géométrique de raison $e^{-3}<1$ : convergente.
+\q{(f)} $n^{-2/3}\left[\left(1-\frac1{n^2}\right)^{-1/3}-\left(1+\frac1{n^2}\right)^{-1/3}\right]=n^{-2/3}\left(\frac2{3n^2}+O\left(\frac1{n^4}\right)\right)\sim\frac2{3n^{8/3}}$ :
+convergente ($\frac83>1$).
+\q{(g)} $0<\cos^2n\leq1$ (et $\cos n\neq0$ car $n$ n'est pas de la forme $\frac\pi2+k\pi$), donc $u_n\geq\frac1{\sqrt n}$ : divergente par
+comparaison.
+\retenir{une série de signe constant \emph{négatif} se traite comme une série à termes positifs : on étudie $\sum(-u_n)$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{II}{Exercices classiques et méthodes incontournables}{}
+\correction{9}{Constante d'Euler par suites adjacentes}{s-gamma}{énoncé : TD, p.~4}
+$v_{n+1}-v_n=\frac1{n}-\ln\left(1+\frac1n\right)\geq0$ (avec $\ln(1+x)\leq x$). Et
+$u_{n+1}-u_n=\frac1{n+1}-\ln\frac{n+1}n=\frac1{n+1}+\ln\left(1-\frac1{n+1}\right)\leq\frac1{n+1}-\frac1{n+1}=0$. Enfin
+$u_n-v_n=\frac1n\to0$ : les suites sont adjacentes et convergent vers $\gamma$. Comme $(v_n)$ croît, $\gamma\geq v_2=1+\frac12-\ln2-\frac12=1-\ln2>0$.
+Enfin $u_n-\gamma\to0$ s'écrit $H_n=\ln n+\gamma+o(1)$. (Numériquement $\gamma\approx0{,}5772$.)
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{10}{Une suite étudiée par une série}{s-gamma2}{énoncé : TD, p.~4}
+Pour $n\geq2$, $u_n-u_{n-1}=\frac1n+\ln\left(1-\frac1n\right)=\frac1n-\frac1n-\frac1{2n^2}+o\left(\frac1{n^2}\right)\sim-\frac1{2n^2}$.
+Le terme $u_{n-1}-u_n\sim\frac1{2n^2}$ est positif à partir d'un rang, et $\sum\frac1{n^2}$ converge : la série $\sum(u_n-u_{n-1})$
+converge, donc la suite $(u_n)$ converge (théorème~1.14 du livret).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{11}{Règle de d'Alembert}{s-dal}{énoncé : TD, p.~4}
+\q{1.} $\frac{u_{n+1}}{u_n}=\frac a{n+1}\to0<1$ : la série converge, donc son terme général tend vers $0$ : $\frac{a^n}{n!}\to0$,
+c'est-à-dire $a^n=o(n!)$.
+\q{2.} $\frac{u_{n+1}}{u_n}=\frac{(2n+2)(2n+1)}{4(n+1)^2}=\frac{2n+1}{2n+2}\to1$ : cas douteux. Avec l'équivalent admis,
+$u_n\sim\frac1{\sqrt\pi}\cdot\frac1{n^{1/2}}\geq0$ : la série diverge (Riemann, $\frac12\leq1$).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{12}{Série géométrique dérivée}{sn-6}{énoncé : TD, p.~5}
+\q{1.} $\sum_{k=0}^nx^k=\frac{1-x^{n+1}}{1-x}$. On dérive les deux membres :
+$\sum_{k=1}^nkx^{k-1}=\frac{-(n+1)x^n(1-x)+(1-x^{n+1})}{(1-x)^2}=\frac{1-(n+1)x^n+nx^{n+1}}{(1-x)^2}$.
+\q{2.} Si $|x|<1$, $nx^n\to0$ et $(n+1)x^n\to0$ (croissances comparées), d'où la limite $\frac1{(1-x)^2}$.
+\q{3.} $\sum k3^{-k}=\frac13\sum k\left(\frac13\right)^{k-1}=\frac13\cdot\frac1{(2/3)^2}=\frac34$ et $\sum(-1)^k3^{-k}=\frac1{1+\frac13}=\frac34$. Les
+deux séries convergent, donc la série étudiée aussi (linéarité), et sa somme vaut $\frac34-\frac34=0$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{13}{Séries de Bertrand}{sn-8}{énoncé : TD, p.~5}
+\q{1.} $f(t)=\frac1{t(\ln t)^2}$ est continue, positive, décroissante sur $[2,+\infty[$ (produit de fonctions positives croissantes au
+dénominateur), et $\int_2^X f=\left[-\frac1{\ln t}\right]_2^X=\frac1{\ln2}-\frac1{\ln X}\to\frac1{\ln2}$ : l'intégrale converge, donc la série aussi.
+\q{2.} $g(t)=\frac1{t\ln t}$ est décroissante sur $[2,+\infty[$ et $\int_2^ng=\ln\ln n-\ln\ln2$. L'encadrement du théorème série-intégrale
+donne $\int_2^{n+1}g\leq\sum_{k=2}^ng(k)\leq g(2)+\int_2^ng$, soit $\ln\ln(n+1)-\ln\ln2\leq\sum_{k=2}^n\frac1{k\ln k}\leq\frac1{2\ln2}+\ln\ln n-\ln\ln2$.
+Les deux bornes sont équivalentes à $\ln\ln n$ (car $\ln(n+1)\sim\ln n$, donc $\ln\ln(n+1)-\ln\ln n\to0$).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{14}{La série harmonique alternée}{s-alt}{énoncé : TD, p.~5}
+\q{1.} $a_n=\frac1n$ est positive, décroissante, de limite nulle : la série converge. Pour $t\in[0,1]$,
+$\sum_{k=0}^{n-1}(-t)^k=\frac1{1+t}-\frac{(-t)^n}{1+t}$. On intègre sur $[0,1]$ :
+\[\sum_{k=0}^{n-1}\frac{(-1)^k}{k+1}=\ln2-(-1)^n\int_0^1\frac{t^n}{1+t}\,dt,\qquad\text{et}\qquad0\leq\int_0^1\frac{t^n}{1+t}\,dt\leq\int_0^1t^n\,dt=\frac1{n+1}\to0.\]
+Le membre de gauche est $\sum_{j=1}^{n}\frac{(-1)^{j+1}}j$ : il tend vers $\ln2$.
+\q{2.} Par le théorème~1.32 du livret, $|R_n|\leq a_{n+1}=\frac1{n+1}$. Il suffit que $\frac1{n+1}\leq10^{-3}$ : $n=999$ termes.
+C'est une convergence lente.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{15}{Une série semi-convergente}{sn-9}{énoncé : TD, p.~5}
+\q{1.} $f(t)=\frac{\ln t}t$ a pour dérivée $\frac{1-\ln t}{t^2}\leq0$ sur $[e,+\infty[$ : $f$ décroît sur $[3,+\infty[$. Avec $\int_3^nf=\frac{(\ln n)^2-(\ln3)^2}2$,
+l'encadrement série-intégrale donne $\sum_{k=3}^n\frac{\ln k}k=\frac{(\ln n)^2}2+O(1)$ (les deux bornes diffèrent de quantités bornées), d'où
+l'équivalent ; les deux premiers termes ne changent rien.
+\q{2.} $a_n=\frac{\ln n}n\geq0$ tend vers $0$ et décroît pour $n\geq3$ : la série converge (critère, à partir du rang 3). Elle ne converge pas
+absolument, car $\sum_{k\leq n}\frac{\ln k}k\to+\infty$ d'après 1.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{16}{Produit de Cauchy de séries géométriques}{s-cauchy}{énoncé : TD, p.~6}
+\q{1.} $\left(\sum\frac1{2^n}\right)^2=2^2=4$ et $\sum\frac1{4^n}=\frac1{1-\frac14}=\frac43$ : le produit des sommes n'est pas la somme
+des produits. Le produit de Cauchy, lui, donne $\sum\frac{n+1}{2^n}=\frac1{(1-\frac12)^2}=4$.
+\q{2.} $\sum_{n\geq0}nx^n=\sum_{n\geq0}(n+1)x^n-\sum_{n\geq0}x^n=\frac1{(1-x)^2}-\frac1{1-x}=\frac x{(1-x)^2}$ (linéarité,
+les deux séries convergent). Pour $x=\frac12$ : $\sum_{n=0}^{+\infty}\frac n{2^n}=2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{III}{Exercices de synthèse et approfondissement}{}
+\correction{17}{Équivalent du reste d'une série de Riemann}{s-reste}{énoncé : TD, p.~7}
+$f(t)=t^{-\alpha}$ est décroissante sur $[1,+\infty[$ : pour $k\geq2$, $\int_k^{k+1}f\leq f(k)\leq\int_{k-1}^kf$. On somme pour $k$ de
+$n+1$ à $N$ :
+\[\int_{n+1}^{N+1}\frac{dt}{t^\alpha}\leq\sum_{k=n+1}^N\frac1{k^\alpha}\leq\int_n^N\frac{dt}{t^\alpha}.\]
+Quand $N\to+\infty$ : $\frac1{(\alpha-1)(n+1)^{\alpha-1}}\leq R_n\leq\frac1{(\alpha-1)n^{\alpha-1}}$. Les deux bornes sont équivalentes
+à $\frac1{(\alpha-1)n^{\alpha-1}}$ (car $(n+1)^{\alpha-1}\sim n^{\alpha-1}$), d'où le résultat par encadrement.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{18}{Développements asymptotiques}{s-asympt}{énoncé : TD, p.~7}
+\q{(a)} $\ln(1+x)=x-\frac{x^2}2+O(x^3)$ avec $x=\frac{(-1)^n}{\sqrt n}$ : $u_n=\frac{(-1)^n}{\sqrt n}-\frac1{2n}+O\left(\frac1{n^{3/2}}\right)$.
+Série convergente (critère) $+$ série divergente $+$ série absolument convergente : \textbf{divergente}.
+\q{(b)} $u_n=\frac{(-1)^n}n\cdot\frac1{1+\frac{(-1)^n}n}=\frac{(-1)^n}n-\frac1{n^2}+O\left(\frac1{n^3}\right)$ : somme de trois séries
+convergentes, \textbf{convergente}. (Le critère ne s'applique pas directement : $|u_n|=\frac1{n+(-1)^n}$ n'est pas décroissante.)
+\q{(c)} Si $\alpha\leq0$, $u_n\not\to0$ : divergence grossière. Si $0<\alpha\leq1$, $\frac1{n^\alpha}$ décroît vers $0$ : convergente
+par le critère, mais pas absolument. Si $\alpha>1$ : absolument convergente.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{19}{La famille $\sum\frac1{n^\alpha\ln n}$}{sn-16}{énoncé : TD, p.~7}
+\q{$\alpha>1$.} On choisit $\beta$ avec $1<\beta<\alpha$ : $n^\beta\cdot\frac1{n^\alpha\ln n}=\frac1{n^{\alpha-\beta}\ln n}\to0$, donc le terme est
+$o\left(\frac1{n^\beta}\right)$ : convergente.
+\q{$\alpha<1$.} $n\cdot\frac1{n^\alpha\ln n}=\frac{n^{1-\alpha}}{\ln n}\to+\infty$ (croissances comparées) : le terme dépasse $\frac1n$ à partir d'un rang,
+divergente.
+\q{$\alpha=1$.} $\sum\frac1{n\ln n}$ diverge par comparaison avec une intégrale ($\int_2^X\frac{dt}{t\ln t}=\ln\ln X-\ln\ln2\to+\infty$).
+\gain{l'astuce du $\beta$ intermédiaire est la façon standard de « absorber » un logarithme.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{20}{Somme d'une série alternée par une intégrale}{sn-7}{énoncé : TD, p.~8}
+\q{1.} $\frac1{3n+1}$ est positive, décroissante, de limite nulle : critère des séries alternées.
+\q{2.} $\sum_{k=0}^n(-t^3)^k=\frac{1-(-t^3)^{n+1}}{1+t^3}$ ; on intègre sur $[0,1]$, avec $\int_0^1(-1)^kt^{3k}\,dt=\frac{(-1)^k}{3k+1}$.
+\q{3.} $\left|\int_0^1\frac{(-t^3)^{n+1}}{1+t^3}\,dt\right|\leq\int_0^1t^{3n+3}\,dt=\frac1{3n+4}\to0$. Ensuite $\alpha=\frac13$, $\beta=-\frac13$,
+$\gamma=\frac23$ : $\frac{-t+2}{t^2-t+1}=-\frac12\cdot\frac{2t-1}{t^2-t+1}+\frac32\cdot\frac1{(t-\frac12)^2+\frac34}$. D'où
+\[\int_0^1\frac{dt}{1+t^3}=\frac13\ln2-\frac16\big[\ln(t^2-t+1)\big]_0^1+\frac12\cdot\frac2{\sqrt3}\left[\arctan\frac{2t-1}{\sqrt3}\right]_0^1=\frac{\ln2}3+\frac\pi{3\sqrt3}.\]
+(Numériquement $0{,}8356\dots$, vérifié.)
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{21}{Une série définie par récurrence}{sn-11}{énoncé : TD, p.~8}
+\q{1.} $u_1=\frac{1+u_0^2}2\in\left[\frac12,1\right[$, et si $u_n\in[0,1[$, alors $u_{n+1}\in\left[\frac12,1\right[$. Ensuite
+$u_{n+1}-u_n=\frac{(1-u_n)^2}2\geq0$. Croissante et majorée par $1$, $(u_n)$ converge vers $\ell$ avec $\ell=\frac{1+\ell^2}2$, soit $\ell=1$.
+\q{2.} $w_{n+1}=1-\frac{1+(1-w_n)^2}2=w_n-\frac{w_n^2}2$. Donc $w_n^2=2(w_n-w_{n+1})$ : série télescopique, convergente car $(w_n)$ converge
+(vers $0$), de somme $2w_0$.
+\q{3.} $\ln\frac{w_{n+1}}{w_n}=\ln w_{n+1}-\ln w_n$ et $\ln w_n\to-\infty$ : la série télescopique diverge. Or
+$\ln\frac{w_{n+1}}{w_n}=\ln\left(1-\frac{w_n}2\right)\sim-\frac{w_n}2$, de signe constant (négatif) : $\sum w_n$ a la même nature, elle
+\textbf{diverge}.
+\retenir{une suite $(a_n)$ et la série $\sum(a_{n+1}-a_n)$ ont même nature : c'est un outil pour étudier des suites définies par récurrence.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{22}{Une série trigonométrique surprenante}{sn-12}{énoncé : TD, p.~8}
+\q{1.} $0<2-\sqrt3<1$, donc $x_n=(2-\sqrt3)^n\pi\in\,]0,\pi[$ pour $n\geq1$ et $u_n>0$. De plus $u_n\sim(2-\sqrt3)^n\pi$, terme d'une série géométrique
+convergente : la série converge.
+\q{2.} $A_n=\sum_k\binom nk2^{n-k}\big((-\sqrt3)^k+(\sqrt3)^k\big)$ : les termes d'indice $k$ impair s'annulent, ceux d'indice $k=2j$ valent
+$2\binom n{2j}2^{n-2j}3^j$. $A_n$ est un entier pair.
+\q{3.} $(2+\sqrt3)^n\pi=A_n\pi-(2-\sqrt3)^n\pi$, et $A_n$ est pair : $v_n=\sin\big(-(2-\sqrt3)^n\pi\big)=-u_n$. La série $\sum v_n$
+\textbf{converge}, alors que $(2+\sqrt3)^n\to+\infty$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{IV}{Exercices difficiles et type concours}{}
+\correction{23}{Reste d'une série alternée}{sn-13}{énoncé : TD, p.~9}
+\q{1.} $R_n-R_{n+1}=\frac{(-1)^{n+1}}{n+1}$. Ensuite $R_{n+1}=\sum_{k=n+1}^{+\infty}\frac{(-1)^{k+1}}{k+1}$ (changement d'indice), donc
+$R_n+R_{n+1}=\sum_{k\geq n+1}(-1)^k\left(\frac1k-\frac1{k+1}\right)=\sum_{k\geq n+1}\frac{(-1)^k}{k(k+1)}$. C'est le reste d'une série alternée dont le
+terme $\frac1{k(k+1)}$ décroît vers $0$ : il est majoré en valeur absolue par son premier terme $\frac1{(n+1)(n+2)}$.
+\q{2.} $2R_n=(R_n-R_{n+1})+(R_n+R_{n+1})=\frac{(-1)^{n+1}}{n+1}+O\left(\frac1{n^2}\right)$, donc $R_n=\frac{(-1)^{n+1}}{2(n+1)}+O\left(\frac1{n^2}\right)$ et
+$R_n\sim\frac{(-1)^{n+1}}{2n}$. La série $\sum R_n$ est la somme d'une série alternée convergente et d'une série absolument convergente :
+elle converge.
+\piege{conclure « $\sum R_n$ converge car $R_n\sim\frac{(-1)^{n+1}}{2n}$ » : l'équivalent ne suffit pas pour une série de signe variable. C'est le
+développement $\frac{(-1)^{n+1}}{2(n+1)}+O(\frac1{n^2})$ qui permet de conclure.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{24}{Un produit de Cauchy qui diverge}{sn-14}{énoncé : TD, p.~9}
+$\sum u_n$ converge par le critère des séries alternées. $w_n=\sum_{p=0}^n\frac{(-1)^p(-1)^{n-p}}{\sqrt{(p+1)(n-p+1)}}=(-1)^n\sum_{p=0}^n\frac1{\sqrt{(p+1)(n-p+1)}}$.
+Par l'inégalité $ab\leq\left(\frac{a+b}2\right)^2$, $(p+1)(n-p+1)\leq\left(\frac{n+2}2\right)^2$, donc chacun des $n+1$ termes est
+$\geq\frac2{n+2}$ et $|w_n|\geq\frac{2(n+1)}{n+2}\geq1$. Le produit de Cauchy \textbf{diverge grossièrement}.
+\retenir{le théorème du produit de Cauchy demande la convergence \emph{absolue} : cet exemple montre qu'on ne peut pas s'en passer.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{25}{La suite $u_{n+1}=\sin u_n$}{sn-15}{énoncé : TD, p.~9}
+\q{1.} Si $u_n\in\,]0,\pi[$, alors $u_{n+1}=\sin u_n\in\,]0,1]\subset\,]0,\pi[$. Comme $\sin x\leq x$ sur $\R_+$, $u_{n+1}\leq u_n$ : la suite décroît,
+minorée par $0$, elle converge vers $\ell\in[0,1]$ avec $\sin\ell=\ell$, soit $\ell=0$.
+\q{2.} Soit $\varepsilon>0$ et $N$ tel que $|x_k-\ell|\leq\varepsilon$ pour $k>N$. Pour $n>N$ :
+$\left|\frac1n\sum_{k=1}^n(x_k-\ell)\right|\leq\frac1n\sum_{k=1}^N|x_k-\ell|+\frac{n-N}n\varepsilon$. Le premier terme tend vers $0$ ($N$ fixé), donc
+il est $\leq\varepsilon$ pour $n$ grand : la moyenne est à moins de $2\varepsilon$ de $\ell$.
+\q{3.} Avec $x=u_n\to0$ : $\frac1{\sin^2x}-\frac1{x^2}=\frac{x^2-\sin^2x}{x^2\sin^2x}$, et $\sin^2x=x^2-\frac{x^4}3+o(x^4)$, donc le quotient vaut
+$\frac{x^4/3+o(x^4)}{x^4+o(x^4)}\to\frac13$. Par Cesàro, $\frac1n\sum_{k=0}^{n-1}\left(\frac1{u_{k+1}^2}-\frac1{u_k^2}\right)=\frac1n\left(\frac1{u_n^2}-\frac1{u_0^2}\right)\to\frac13$,
+donc $\frac1{u_n^2}\sim\frac n3$ et $u_n\sim\sqrt{\frac3n}$.
+\q{4.} Termes positifs : $u_n\sim\frac{\sqrt3}{n^{1/2}}$ (divergente), $u_n^2\sim\frac3n$ (divergente), $u_n^3\sim\frac{3\sqrt3}{n^{3/2}}$ (convergente).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

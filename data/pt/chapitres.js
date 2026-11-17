@@ -1083,5 +1083,187 @@ LC.chapitres = [
       "debut": 1,
       "fin": 2
     }
+  },
+  {
+    "id": "series",
+    "num": 7,
+    "bilan": {
+      "doc": "bilan-series",
+      "corrige": 2,
+      "duree": 15
+    },
+    "titre": "Séries numériques",
+    "accroche": "Donner un sens à $u_0+u_1+u_2+\\cdots$ et décider de la convergence sans calculer la somme : séries de référence, comparaison, convergence absolue, séries alternées.",
+    "statut": "complet",
+    "prerequis": [
+      "Suites réelles et complexes : limites, théorème de la limite monotone, suites adjacentes (rappelés au §1.1).",
+      "Développements limités usuels en $0$, équivalents, croissances comparées.",
+      "Intégrale d'une fonction continue sur un segment, primitives usuelles."
+    ],
+    "cours": {
+      "doc": "livre-series",
+      "debut": 4,
+      "fin": 17,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Rappels sur les suites numériques",
+          "page": 4
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries : définitions et premiers exemples",
+          "page": 7
+        },
+        {
+          "num": "1.3",
+          "titre": "Séries à termes positifs",
+          "page": 9
+        },
+        {
+          "num": "1.4",
+          "titre": "Convergence absolue, séries alternées",
+          "page": 13
+        },
+        {
+          "num": "1.5",
+          "titre": "Produit de Cauchy",
+          "page": 15
+        },
+        {
+          "num": "1.6",
+          "titre": "Quelle méthode ? Synthèse",
+          "page": 16
+        }
+      ],
+      "corriges": {
+        "debut": 18,
+        "fin": 20
+      }
+    },
+    "fiche": {
+      "doc": "fiche-series",
+      "debut": 1,
+      "fin": 2,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Rappels sur les suites",
+          "page": 1
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries : définitions, premiers exemples",
+          "page": 1
+        },
+        {
+          "num": "1.3",
+          "titre": "Séries à termes positifs",
+          "page": 1
+        },
+        {
+          "num": "1.4",
+          "titre": "Convergence absolue, séries alternées",
+          "page": 1
+        },
+        {
+          "num": "1.5",
+          "titre": "Produit de Cauchy",
+          "page": 2
+        },
+        {
+          "num": "1.6",
+          "titre": "Quelle méthode ? Pièges ; résultats du TD",
+          "page": 2
+        }
+      ]
+    },
+    "presentation": {
+      "doc": "presentation-series",
+      "debut": 1,
+      "fin": 79,
+      "statique": {
+        "doc": "presentation-series-statique",
+        "debut": 1,
+        "fin": 36
+      },
+      "exercices": 5,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Rappels sur les suites",
+          "page": 7,
+          "pageStatique": 4
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries : définitions, premiers exemples",
+          "page": 21,
+          "pageStatique": 10
+        },
+        {
+          "num": "1.3",
+          "titre": "Séries à termes positifs",
+          "page": 35,
+          "pageStatique": 16
+        },
+        {
+          "num": "1.4",
+          "titre": "Convergence absolue, séries alternées",
+          "page": 53,
+          "pageStatique": 23
+        },
+        {
+          "num": "1.5",
+          "titre": "Produit de Cauchy",
+          "page": 67,
+          "pageStatique": 29
+        },
+        {
+          "num": "1.6",
+          "titre": "Synthèse",
+          "page": 71,
+          "pageStatique": 31
+        }
+      ]
+    },
+    "erreurs": [
+      "Conclure à la convergence parce que $u_n\\to0$ : c'est une condition nécessaire, pas suffisante ($\\sum\\frac1n$ diverge).",
+      "Utiliser un équivalent pour une série dont le terme n'est pas de signe constant.",
+      "Appliquer la règle de d'Alembert à une fraction rationnelle, ou conclure quand la limite vaut $1$.",
+      "Écrire $\\sum_{n=0}^{+\\infty}u_n$ avant d'avoir prouvé la convergence.",
+      "Oublier de vérifier la décroissance dans le critère des séries alternées.",
+      "Additionner ou composer des équivalents ($e^{n+1}\\not\\sim e^n$)."
+    ],
+    "flash": [
+      {
+        "q": "$u_n\\to0$ suffit-il pour que $\\sum u_n$ converge ?",
+        "r": "Non : $\\frac1n\\to0$ et $\\sum\\frac1n$ diverge. C'est seulement une condition nécessaire."
+      },
+      {
+        "q": "Pour quels $\\alpha$ la série $\\sum\\frac1{n^\\alpha}$ converge-t-elle ?",
+        "r": "Pour $\\alpha>1$ (séries de Riemann)."
+      },
+      {
+        "q": "$\\sum q^n$ : nature et somme ?",
+        "r": "Converge si et seulement si $|q|<1$ ; somme $\\frac1{1-q}$."
+      },
+      {
+        "q": "Théorème des équivalents : quelle hypothèse ne pas oublier ?",
+        "r": "Le signe constant : $u_n\\sim v_n$ avec $v_n\\geq0$."
+      },
+      {
+        "q": "Critère des séries alternées : hypothèses et majoration du reste ?",
+        "r": "$a_n\\geq0$ décroissante de limite nulle ; $|R_n|\\leq a_{n+1}$."
+      },
+      {
+        "q": "Comparaison série-intégrale : encadrement de base ?",
+        "r": "$f$ décroissante : $f(k+1)\\leq\\int_k^{k+1}f\\leq f(k)$."
+      },
+      {
+        "q": "Produit de Cauchy : condition pour que la somme soit le produit des sommes ?",
+        "r": "Les deux séries sont absolument convergentes."
+      }
+    ]
   }
 ];

@@ -719,4 +719,65 @@ donne $x=t$ et $y=2t^2-t^2=t^2$. Le point caractéristique est $(t,t^2)$ ; l'env
 \end{GRILLE}
 \fi
 \fi
+\ifnum\numexpr\CHAP*(\CHAP-7)\relax=0
+% ======================================================================
+%  CHAPITRE 7 — SÉRIES NUMÉRIQUES
+% ======================================================================
+\bilan{7}{Séries numériques}{15 min}
+
+\begin{enumerate}
+\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
+  \begin{enumerate}
+  \item Si $u_n\to0$, alors $\sum u_n$ converge.
+  \item Si $\sum u_n$ converge et $\sum v_n$ diverge, alors $\sum(u_n+v_n)$ diverge.
+  \item Si $u_n\sim v_n$, alors $\sum u_n$ et $\sum v_n$ ont la même nature.
+  \item Si $\sum u_n$ converge absolument, alors $\sum u_n^2$ converge.
+  \item Si $u_n>0$ et $\frac{u_{n+1}}{u_n}\to1$, alors $\sum u_n$ diverge.
+  \end{enumerate}
+\item Déterminer la nature des séries de terme général :
+  \[\text{(a)}\ \sqrt{n+1}-\sqrt n\qquad\text{(b)}\ \frac{n^3}{2^n}\qquad\text{(c)}\ \ln\left(1+\frac1{n^2}\right)\qquad\text{(d)}\ \frac{(-1)^n}{\ln n}\ (n\geq2).\]
+\item Montrer que $\sum_{n\geq2}\frac1{n^2-1}$ converge et calculer sa somme.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \emph{Faux.} $\frac1n\to0$ et $\sum\frac1n$ diverge \prop{th.~1.12, 1.23}.
+
+\q{1.b)} \emph{Vrai.} Sinon $v_n=(u_n+v_n)-u_n$ serait le terme d'une série convergente \prop{prop.~1.11}.
+
+\q{1.c)} \emph{Faux} sans hypothèse de signe : $\frac{(-1)^n}{\sqrt n}+\frac1n\sim\frac{(-1)^n}{\sqrt n}$, la première série diverge, la seconde
+converge. C'est vrai si $v_n\geq0$ \prop{th.~1.20}.
+
+\q{1.d)} \emph{Vrai.} $|u_n|\to0$, donc $|u_n|\leq1$ à partir d'un rang et $0\leq u_n^2\leq|u_n|$ : comparaison.
+
+\q{1.e)} \emph{Faux.} $u_n=\frac1{n^2}$ : $\frac{u_{n+1}}{u_n}\to1$ et la série converge. Le cas $\ell=1$ ne permet pas de conclure \prop{th.~1.25}.
+
+\q{2.a)} $\sqrt{n+1}-\sqrt n=\frac1{\sqrt{n+1}+\sqrt n}\sim\frac1{2\sqrt n}\geq0$ : \emph{divergente} (Riemann, $\frac12\leq1$). Ou : série télescopique,
+$S_n=\sqrt{n+1}-1\to+\infty$.
+
+\q{2.b)} D'Alembert : $\frac{u_{n+1}}{u_n}=\frac12\left(1+\frac1n\right)^3\to\frac12<1$ : \emph{convergente}.
+
+\q{2.c)} $\ln\left(1+\frac1{n^2}\right)\sim\frac1{n^2}\geq0$ : \emph{convergente}.
+
+\q{2.d)} $\frac1{\ln n}$ est positive, décroissante, de limite nulle : \emph{convergente} par le critère des séries alternées \prop{th.~1.32}. Elle
+ne converge pas absolument : $\frac1{\ln n}\geq\frac1n$.
+
+\q{3.} $\frac1{n^2-1}=\frac12\left(\frac1{n-1}-\frac1{n+1}\right)$. Les termes se simplifient de deux en deux :
+$\sum_{k=2}^n\frac1{k^2-1}=\frac12\left(1+\frac12-\frac1n-\frac1{n+1}\right)\to\frac34$. La série converge, de somme $\frac34$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Condition nécessaire $u_n\to0$. & « Vrai » : confusion entre condition nécessaire et suffisante (erreur la plus grave du chapitre).\\
+1.b & Linéarité. & Pas de preuve : raisonnement par l'absurde non maîtrisé.\\
+1.c & Hypothèse de signe dans le théorème des équivalents. & « Vrai » : le théorème est appliqué sans ses hypothèses.\\
+1.d & Comparaison, $u_n\to0$. & Pas d'idée : lien entre convergence et terme général non fait.\\
+1.e & Cas douteux de d'Alembert. & « Vrai » : la règle est mal sue.\\
+2 & Choix de l'outil : équivalent, d'Alembert, critère des séries alternées. & Mauvais outil (d'Alembert sur une fraction) ou équivalent pour un signe variable.\\
+3 & Décomposition en éléments simples, télescopage. & Somme fausse : simplification de deux en deux mal suivie.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+\fi
 \end{document}

@@ -942,5 +942,157 @@ LC.selection = {
     "pageCorrige": 10
    }
   ]
+ },
+ "series": {
+  "doc": "selection-series",
+  "problemes": [
+   {
+    "id": "s-nature",
+    "num": 1,
+    "etape": "Mise en application",
+    "titre": "Nature de séries à termes positifs",
+    "difficulte": 2,
+    "duree": 25,
+    "origine": "Livret, exercice 1.5 · TD complet, exercice 7",
+    "notions": [
+     "équivalents",
+     "Riemann",
+     "série géométrique",
+     "croissances comparées"
+    ],
+    "objectifs": "Choisir, pour chaque terme général, un équivalent ou une comparaison qui ramène à une série de référence.",
+    "prerequis": [
+     "Développements limités usuels",
+     "Séries de Riemann et géométriques",
+     "Théorème des équivalents (termes positifs)"
+    ],
+    "indications": [
+     "(a)(b)(c) Garder les termes dominants ; $1-\\cos x\\sim\\frac{x^2}2$.",
+     "(d) $\\ln n=o(e^n)$ : quel est le terme dominant du dénominateur ?",
+     "(e) Montrer que $n^2\\cdot n^2e^{-\\sqrt n}\\to0$ en passant à l'exponentielle.",
+     "(f) Comparer $\\frac{\\ln n}n$ à $\\frac1n$."
+    ],
+    "page": 2,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "sn-7",
+    "num": 2,
+    "etape": "Méthodes classiques",
+    "titre": "Somme d'une série alternée par une intégrale",
+    "difficulte": 3,
+    "duree": 35,
+    "origine": "Exercice complémentaire · TD complet, exercice 20",
+    "notions": [
+     "séries alternées",
+     "série géométrique",
+     "intégration",
+     "éléments simples"
+    ],
+    "objectifs": "Prouver la convergence par le critère, puis calculer la somme en écrivant chaque terme comme une intégrale.",
+    "prerequis": [
+     "Critère des séries alternées",
+     "Somme géométrique finie",
+     "Primitives de $\\frac1{1+t}$ et $\\frac1{t^2+a^2}$"
+    ],
+    "indications": [
+     "1. Vérifier les trois hypothèses du critère.",
+     "2. $\\frac{(-1)^k}{3k+1}=\\int_0^1(-t^3)^k dt$ ; sommer la progression géométrique.",
+     "3. Majorer le reste intégral par $\\int_0^1t^{3n+3} dt$ ; pour l'intégrale, mettre $t^2-t+1$ sous forme canonique."
+    ],
+    "page": 3,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "sn-11",
+    "num": 3,
+    "etape": "Approfondissement",
+    "titre": "Une série définie par récurrence",
+    "difficulte": 3,
+    "duree": 40,
+    "origine": "Exercice complémentaire · TD complet, exercice 21",
+    "notions": [
+     "suite récurrente",
+     "série télescopique",
+     "équivalents",
+     "signe constant"
+    ],
+    "objectifs": "Étudier une suite récurrente puis la nature de séries associées, en utilisant le lien entre une suite et la série de ses différences.",
+    "prerequis": [
+     "Théorème de la limite monotone",
+     "Séries télescopiques",
+     "Théorème des équivalents"
+    ],
+    "indications": [
+     "1. $u_{n+1}-u_n=\\frac{(1-u_n)^2}2$.",
+     "2. Écrire $w_n^2$ comme $2(w_n-w_{n+1})$.",
+     "3. $\\ln\\frac{w_{n+1}}{w_n}=\\ln w_{n+1}-\\ln w_n$, et $\\ln\\left(1-\\frac{w_n}2\\right)\\sim-\\frac{w_n}2$."
+    ],
+    "page": 4,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "sn-15",
+    "num": 4,
+    "etape": "Problème de synthèse",
+    "titre": "La suite $u_{n+1}=\\sin u_n$",
+    "difficulte": 4,
+    "duree": 45,
+    "origine": "Exercice complémentaire · TD complet, exercice 25",
+    "notions": [
+     "suite récurrente",
+     "lemme de Cesàro",
+     "développement limité",
+     "équivalent",
+     "Riemann"
+    ],
+    "objectifs": "Obtenir un équivalent d'une suite récurrente par la méthode classique « $\\frac1{u_{n+1}^\\alpha}-\\frac1{u_n^\\alpha}$ a une limite », puis en déduire la nature de séries.",
+    "prerequis": [
+     "Développement limité de $\\sin$",
+     "Définition de la limite avec $\\varepsilon$",
+     "Séries de Riemann"
+    ],
+    "indications": [
+     "1. $\\sin x\\leq x$ sur $\\R_+$ ; limite : point fixe de $\\sin$.",
+     "2. Couper la somme en $k\\leq N$ et $k>N$.",
+     "3. Développer $\\sin^2x$ à l'ordre 4 ; appliquer Cesàro aux différences.",
+     "4. Élever l'équivalent aux puissances $1$, $2$, $3$."
+    ],
+    "page": 5,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "sn-13",
+    "num": 5,
+    "etape": "Niveau DS / concours",
+    "titre": "Reste d'une série alternée",
+    "difficulte": 4,
+    "duree": 45,
+    "origine": "Exercice complémentaire · TD complet, exercice 23",
+    "notions": [
+     "reste",
+     "séries alternées",
+     "développement asymptotique",
+     "semi-convergence"
+    ],
+    "objectifs": "Obtenir un équivalent du reste d'une série alternée, puis étudier la série des restes : le type de raisonnement des épreuves écrites.",
+    "prerequis": [
+     "Critère des séries alternées et majoration du reste",
+     "Développement asymptotique d'un terme de signe variable"
+    ],
+    "indications": [
+     "1. Écrire $R_{n+1}$ avec l'indice décalé, puis regrouper terme à terme.",
+     "2. $2R_n=(R_n-R_{n+1})+(R_n+R_{n+1})$.",
+     "3. Un équivalent ne suffit pas pour un signe variable : garder le $O\\left(\\frac1{n^2}\\right)$."
+    ],
+    "page": 6,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   }
+  ]
  }
 };

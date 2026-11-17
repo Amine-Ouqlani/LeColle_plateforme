@@ -18,11 +18,11 @@ os.makedirs(BUILD, exist_ok=True)
 S = os.path.normpath(os.path.join(ICI, '..', '..', 'docs', 'pt', 'sources'))
 BL = os.path.normpath(os.path.join(ICI, '..', 'livrets', 'build'))   # .aux produits par outils/livrets/construire.py
 LIVRETS = {'determinants': 'livre-determinants', 'courbes': 'livre-courbes', 'metrique': 'volume2-metrique-enveloppes',
-           'ed': 'livre-equations-differentielles', 'red': 'livre-reduction', 'al': 'livre-algebre-lineaire'}
+           'ed': 'livre-equations-differentielles', 'red': 'livre-reduction', 'al': 'livre-algebre-lineaire', 'series': 'livre-series'}
 SOURCES = [f'{S}/{f}.tex' for f in LIVRETS.values()] + \
-          [f'{ICI}/nouveaux_{c}.tex' for c in ('det', 'courbes', 'metrique', 'ed', 'red', 'al')]
+          [f'{ICI}/nouveaux_{c}.tex' for c in ('det', 'courbes', 'metrique', 'ed', 'red', 'al', 'series')]
 # exercices des livrets écrits après la séance 1 : identifiant du livre -> source
-COURS_SRC = {'ed': f'{S}/livre-equations-differentielles.tex', 'red': f'{S}/livre-reduction.tex', 'al': f'{S}/livre-algebre-lineaire.tex'}
+COURS_SRC = {'ed': f'{S}/livre-equations-differentielles.tex', 'red': f'{S}/livre-reduction.tex', 'al': f'{S}/livre-algebre-lineaire.tex', 'series': f'{S}/livre-series.tex'}
 
 # ------------------------------------------------------------------ lecture des sources
 def groupe(s, i):
@@ -65,8 +65,8 @@ def aux(path):
     return d
 AUX = {'livre6': {**aux(f'{BL}/livre-determinants.aux'), **aux(f'{BL}/livre-courbes.aux')},
        'livre7': aux(f'{BL}/volume2-metrique-enveloppes.aux'),
-       'ed': aux(f'{BL}/livre-equations-differentielles.aux'), 'red': aux(f'{BL}/livre-reduction.aux'), 'al': aux(f'{BL}/livre-algebre-lineaire.aux')}
-NOM_LIVRE = {'livre6': 'du livret', 'livre7': 'du livret', 'ed': 'du livret', 'red': 'du livret', 'al': 'du livret'}
+       'ed': aux(f'{BL}/livre-equations-differentielles.aux'), 'red': aux(f'{BL}/livre-reduction.aux'), 'al': aux(f'{BL}/livre-algebre-lineaire.aux'), 'series': aux(f'{BL}/livre-series.aux')}
+NOM_LIVRE = {'livre6': 'du livret', 'livre7': 'du livret', 'ed': 'du livret', 'red': 'du livret', 'al': 'du livret', 'series': 'du livret'}
 
 ANCIENS = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'), encoding='utf8'))}
 

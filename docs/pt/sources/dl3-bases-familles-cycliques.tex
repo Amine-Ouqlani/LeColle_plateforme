@@ -317,6 +317,8 @@
 \newcommand{\Idee}[1]{\begin{ideebox}{\sffamily\bfseries\footnotesize\color{Bleu}L'IDÉE}\par\smallskip #1\end{ideebox}}
 \newtcolorbox{conclbox}{enhanced,breakable,blanker,borderline west={1.6pt}{0pt}{Ocre},left=8pt,top=2pt,bottom=2pt,before skip=1em,after skip=0.6em}
 \newcommand{\Conclusion}[1]{\begin{conclbox}{\sffamily\bfseries\footnotesize\color{Ocre}CONCLUSION}\quad #1\end{conclbox}}
+\newtcolorbox{exemplebox}{enhanced,breakable,colback=Ocre!7,colframe=Ocre!7,borderline west={2pt}{0pt}{Ocre},arc=0pt,boxrule=0pt,left=10pt,right=8pt,top=6pt,bottom=6pt,before skip=0.8em,after skip=0.6em}
+\newcommand{\Exemple}[1]{\begin{exemplebox}{\sffamily\bfseries\footnotesize\color{Ocre}POUR VOIR, AVEC DES NOMBRES}\par\smallskip #1\end{exemplebox}}
 \newcommand{\Explication}{\par\medskip\noindent{\sffamily\bfseries\footnotesize\color{Bleu}L'EXPLICATION}\par}
 \newtcolorbox{copie}{enhanced,breakable,colback=white,colframe=BleuMoyen!45,boxrule=0.6pt,arc=2pt,left=10pt,right=10pt,top=8pt,bottom=8pt,before skip=1.1em,after skip=0.8em,
   title={\sffamily\bfseries\footnotesize LA RÉDACTION},attach boxed title to top left={xshift=8pt,yshift=-2.2mm},
@@ -463,16 +465,22 @@ Ainsi $\varphi^2(\va)=\vz\iff x+y-z=0$.
 \Explication
 \begin{etapesbox}
 \Etp{Que veut dire « semblable » ?} $A$ et $B$ sont semblables s'il existe $Q$ inversible avec $B=Q^{-1}AQ$. Il faut donc
-trouver une telle $Q$ entre $M$ et $M^T$.
+\emph{fabriquer} une matrice $Q$ entre $M$ et $M^T$.
 
-\Etp{Quel résultat utiliser ?} La partie II montre que toute matrice $B$ de taille 3 avec $B^3=0$ et $B^2\neq0$ est semblable
-à $T$. On sait déjà que $M$ est semblable à $T$ (partie I). Si on montre que $M^T$ l'est aussi, on « passe par $T$ » pour relier
-$M$ et $M^T$.
+\Etp{L'idée en une ligne.} \[M\sim T\quad\text{et}\quad M^T\sim T\qquad\Longrightarrow\qquad M\sim M^T.\]
+C'est comme « $a=b$ et $c=b$, donc $a=c$ » : on passe par $T$.
 
-\Etp{Pourquoi $M^T$ vérifie-t-elle les hypothèses ?} La transposée d'un produit se calcule en inversant l'ordre, donc
-$(M^T)^3=(M^3)^T$ et $(M^T)^2=(M^2)^T$. La transposée de $0$ est $0$, et la transposée d'une matrice non nulle est non nulle.
+\Etp{Pourquoi $M^T\sim T$ ?} La partie II montre que toute matrice $B$ de taille 3 avec $B^3=0$ et $B^2\neq0$ est semblable
+à $T$. On vérifie ces deux conditions pour $M^T$. La transposée d'un produit inverse l'ordre ; pour une puissance, cela ne
+change rien : $(M^T)^3=(M^3)^T=0$ et $(M^T)^2=(M^2)^T$. Enfin, la transposée d'une matrice non nulle n'est pas nulle.
 
-\Etp{Et pour $H$ ?} $H=M+2I_3$. La même $Q$ marche, car $Q^{-1}I_3Q=I_3$ : la partie $2I_3$ ne bouge pas.
+\Etp{Comment fabriquer $Q$ ?} On a deux égalités : $M=PTP^{-1}$ et $M^T=STS^{-1}$. De la première, on isole $T$ :
+$T=P^{-1}MP$. On le remplace dans la seconde :
+\[M^T=S\,\big(P^{-1}MP\big)\,S^{-1}.\]
+On pose $Q=PS^{-1}$. L'inverse d'un produit inverse l'ordre : $Q^{-1}=SP^{-1}$. L'égalité s'écrit donc $M^T=Q^{-1}MQ$.
+
+\Etp{Et pour $H$ ?} L'astuce est d'écrire $2I_3=Q^{-1}(2I_3)Q$ : la matrice identité ne change pas quand on la « conjugue ».
+La même $Q$ marche donc pour $H=M+2I_3$.
 \end{etapesbox}
 
 \begin{copie}
@@ -572,15 +580,37 @@ donc
 \Etp{Que veut dire « dans la base $\Qc$ » ?} On donne les vecteurs propres par leurs coordonnées dans $\Qc$. Or, dans $\Qc$, la
 matrice de $g$ est $R$ (III.4). On résout donc $RX=\lambda_iX$, c'est-à-dire $(R-\lambda_iI_3)X=0$ (outil 3).
 
-\Etp{Par où commencer ?} La dernière ligne du système ne contient que $y$ et $z$ : on exprime $y$ en fonction de $z$. La
-deuxième donne alors $x$ en fonction de $z$.
+\Etp{Par où commencer ?} La dernière ligne du système ne contient que $y$ et $z$ : elle donne $y=(\lambda_i-\gamma)z$. La
+deuxième donne alors $x=\lambda_iy-\beta z=(\lambda_i^2-\gamma\lambda_i-\beta)z$.
 
-\Etp{Et la première ligne ?} En remplaçant $x$, on retrouve exactement $-\chi_g(\lambda_i)z$, qui est nul. Elle n'ajoute donc
-aucune condition : $z$ reste libre, et l'espace propre est une droite. C'est normal, car $\lambda_i$ est une valeur propre.
+\Etp{D'où vient la troisième équation ?} Ce n'est pas une nouvelle équation : c'est la première ligne $-\lambda_ix+\alpha z=0$,
+dans laquelle on remplace $x$ :
+\[-\lambda_i(\lambda_i^2-\gamma\lambda_i-\beta)z+\alpha z=-\big(\lambda_i^3-\gamma\lambda_i^2-\beta\lambda_i-\alpha\big)z=-\chi_g(\lambda_i)\,z.\]
+La parenthèse est exactement $\chi_g(\lambda_i)$, puisque $\chi_g(x)=x^3-\gamma x^2-\beta x-\alpha$.
 
-\Etp{Pourquoi simplifier ?} Le vecteur trouvé s'écrit avec $\beta$ et $\gamma$. Les relations de III.1 entre coefficients et
-racines donnent une forme plus lisible, avec seulement les deux autres valeurs propres.
+\Etp{Pourquoi est-elle toujours vraie ?} $\lambda_i$ est une valeur propre, donc une racine de $\chi_g$ : $\chi_g(\lambda_i)=0$.
+L'équation s'écrit $0\times z=0$, vraie pour tout $z$. Elle n'impose rien : $z$ est libre, et l'espace propre est une droite.
+C'était prévisible : si les trois équations imposaient chacune une condition, la seule solution serait $X=0$, alors qu'une valeur
+propre a des vecteurs propres non nuls.
+
+\Etp{D'où viennent $\gamma$ et $\beta$ ?} On développe $\chi_g(x)=(x-\lambda_1)(x-\lambda_2)(x-\lambda_3)$ :
+\[\chi_g(x)=x^3-(\lambda_1+\lambda_2+\lambda_3)x^2+(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)x-\lambda_1\lambda_2\lambda_3.\]
+On compare avec $x^3-\gamma x^2-\beta x-\alpha$ : $\gamma=\lambda_1+\lambda_2+\lambda_3$ et
+$\beta=-(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)$.
+
+\Etp{Le calcul, pour $i=1$.} On remplace $\gamma$ et $\beta$, et les termes s'annulent deux par deux :
+\[\lambda_1-\gamma=\lambda_1-\lambda_1-\lambda_2-\lambda_3=-(\lambda_2+\lambda_3),\]
+\[\lambda_1^2-\gamma\lambda_1-\beta=\lambda_1^2-\lambda_1^2-\lambda_1\lambda_2-\lambda_1\lambda_3+\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3=\lambda_2\lambda_3.\]
+Donc $E_{\lambda_1}=\vect\big((\lambda_2\lambda_3,\,-(\lambda_2+\lambda_3),\,1)\big)$. Pour $\lambda_2$ et $\lambda_3$, c'est le même
+calcul en échangeant les rôles : on garde toujours les \emph{deux autres} valeurs propres.
 \end{etapesbox}
+
+\Exemple{Avec $\lambda_1=1$, $\lambda_2=2$, $\lambda_3=3$ : $\chi_g(x)=(x-1)(x-2)(x-3)=x^3-6x^2+11x-6$, donc $\gamma=6$,
+$\beta=-11$, $\alpha=6$ et
+\[R=\begin{pmatrix}0&0&6\\1&0&-11\\0&1&6\end{pmatrix}.\]
+Pour $\lambda_1=1$, la formule donne le vecteur $(2\times3,\,-(2+3),\,1)=(6,-5,1)$. On vérifie :
+$R\begin{pmatrix}6\\-5\\1\end{pmatrix}=\begin{pmatrix}6\\6+0-11\\-5+6\end{pmatrix}=\begin{pmatrix}6\\-5\\1\end{pmatrix}$ : c'est bien un
+vecteur propre pour la valeur propre $1$. Et la première ligne est automatiquement vraie : $-1\times6+6\times1=0$.}
 
 \begin{copie}
 D'après III.4, on résout $(R-\lambda_iI_3)X=0$ avec $X=(x,y,z)$ :
@@ -604,18 +634,40 @@ $\{i,j,k\}=\{1,2,3\}$, on obtient $\lambda_i-\gamma=-(\lambda_j+\lambda_k)$ et $
 \Explication
 \begin{etapesbox}
 \Etp{Quel lien avec III.3 ?} En III.3, $\va=\dd1+\dd2+\dd3$ : toutes ses coordonnées valent $1$. Ici $\vb$ est quelconque :
-$\vb=b_1\dd1+b_2\dd2+b_3\dd3$. On refait le même calcul, et chaque équation est multipliée par un $b_i$.
+$\vb=b_1\dd1+b_2\dd2+b_3\dd3$. Comme $g(\dd i)=\lambda_i\dd i$, appliquer $g$ multiplie chaque coordonnée par son $\lambda_i$ :
+\[g(\vb)=b_1\lambda_1\dd1+b_2\lambda_2\dd2+b_3\lambda_3\dd3,\qquad g^2(\vb)=b_1\lambda_1^2\dd1+b_2\lambda_2^2\dd2+b_3\lambda_3^2\dd3.\]
 
-\Etp{Quand tous les $b_i$ sont non nuls ?} On divise par $b_i$ et on retrouve exactement III.3 : $P$ a trois racines, donc
-$P=0$, et la famille est une base.
+\Etp{D'où vient le polynôme ?} On écrit une combinaison et on regroupe selon les $\dd i$ :
+\begin{align*}c_0\vb+c_1g(\vb)+c_2g^2(\vb)={}&b_1\big(c_0+c_1\lambda_1+c_2\lambda_1^2\big)\dd1+b_2\big(c_0+c_1\lambda_2+c_2\lambda_2^2\big)\dd2\\&+b_3\big(c_0+c_1\lambda_3+c_2\lambda_3^2\big)\dd3.\end{align*}
+La parenthèse a toujours la même forme $c_0+c_1\lambda+c_2\lambda^2$ ; seul $\lambda$ change. On lui donne un nom :
+$P=c_0+c_1X+c_2X^2$, et la parenthèse est $P(\lambda_i)$. Le polynôme n'est pas une nouvelle idée : c'est une notation pour
+cette parenthèse.
 
-\Etp{Quand un $b_i$ est nul ?} L'équation correspondante devient $0=0$ : elle ne dit plus rien. Il ne reste que deux conditions
-sur $P$, et un polynôme de degré 2 peut très bien avoir deux racines. On en construit un, ce qui donne une relation non nulle :
-la famille est liée.
+\Etp{Si $b_1$, $b_2$, $b_3$ sont tous non nuls.} On veut prouver que la famille est libre, donc on suppose la combinaison
+nulle. Les $\dd i$ sont libres, donc $b_iP(\lambda_i)=0$ pour chaque $i$. On divise par $b_i\neq0$ : $P(\lambda_1)=P(\lambda_2)=
+P(\lambda_3)=0$. Un polynôme de degré au plus 2 qui a trois racines est nul : $c_0=c_1=c_2=0$. C'est exactement III.3.
+
+\Etp{Si $b_1=0$ : l'objectif change.} On ne veut plus montrer que c'est libre ; on veut montrer que c'est \emph{lié}. Il faut donc
+\emph{trouver} des $c_0,c_1,c_2$ pas tous nuls qui donnent $\vz$. Comme $b_1=0$, le premier terme vaut $0$ quel que soit $P$. Il
+suffit donc que $P(\lambda_2)=0$ et $P(\lambda_3)=0$.
+
+\Etp{Comment choisir $P$ ?} On ne résout rien : on fabrique le polynôme qui s'annule là où on veut,
+\[P=(X-\lambda_2)(X-\lambda_3)=X^2-(\lambda_2+\lambda_3)X+\lambda_2\lambda_3.\]
+On lit ses coefficients : $c_0=\lambda_2\lambda_3$, $c_1=-(\lambda_2+\lambda_3)$, $c_2=1$. Les trois termes sont nuls, et
+$c_2=1\neq0$ : c'est une relation non triviale, la famille est liée.
+
+\Etp{L'intuition.} Si $b_1=0$, alors $\vb$, $g(\vb)$, $g^2(\vb)$ n'ont jamais de composante sur $\dd1$ : ils restent tous dans
+$\vect(\dd2,\dd3)$, qui est un plan. Trois vecteurs dans un plan sont forcément liés.
 
 \Etp{Pourquoi deux sens ?} C'est encore « trouver tous les vecteurs » : il faut prouver la base dans un cas, et la liaison
 dans l'autre (outil 4).
 \end{etapesbox}
+
+\Exemple{Avec $\lambda_1=1$, $\lambda_2=2$, $\lambda_3=3$ et $\vb=\dd2+\dd3$ (donc $b_1=0$). En coordonnées dans
+$(\dd1,\dd2,\dd3)$ : $\vb=(0,1,1)$, $g(\vb)=(0,2,3)$, $g^2(\vb)=(0,4,9)$. On prend $P=(X-2)(X-3)=X^2-5X+6$, donc
+$c_0=6$, $c_1=-5$, $c_2=1$ :
+\[6(0,1,1)-5(0,2,3)+(0,4,9)=(0,\ 6-10+4,\ 6-15+9)=(0,0,0).\]
+La relation non triviale $6\vb-5g(\vb)+g^2(\vb)=\vz$ montre que la famille est liée.}
 
 \begin{copie}
 Soit $\vb=b_1\dd1+b_2\dd2+b_3\dd3$. Par linéarité, $g^k(\vb)=\sum_{i=1}^3b_i\lambda_i^k\dd i$. Pour $c_0,c_1,c_2\in\C$ et

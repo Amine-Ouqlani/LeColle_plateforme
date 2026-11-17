@@ -9,20 +9,20 @@ LC.documents = {
   /* ---- Documents complets ---- */
   "livret-pt": {
     "titre": "Livret complet PT",
-    "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 6",
+    "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 7",
     "type": "complet",
     "fichier": "docs/pt/livres/livret-complet-PT.pdf",
-    "pages": 118,
+    "pages": 138,
     "version": "v1",
     "maj": "2026-11-13",
-    "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
+    "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
   },
   "presentations-pt": {
     "titre": "Présentations complètes PT",
-    "sousTitre": "Toutes les présentations des chapitres 1 à 5",
+    "sousTitre": "Toutes les présentations (chapitres 1 à 5 et 7)",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT.pdf",
-    "pages": 429,
+    "pages": 508,
     "version": "v1",
     "maj": "2026-11-13",
     "description": "Les présentations de tous les chapitres réunies en un seul PDF, avec un sommaire et des signets. En séance, on utilise la présentation du chapitre."
@@ -32,7 +32,7 @@ LC.documents = {
     "sousTitre": "Une page par diapositive, pour réviser ou imprimer",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT-sans-animations.pdf",
-    "pages": 210,
+    "pages": 246,
     "version": "v1",
     "maj": "2026-11-13",
     "description": "La même présentation complète, chaque diapositive dans son état final."
@@ -351,6 +351,62 @@ LC.documents = {
     "maj": "2026-11-11",
     "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
   },
+  /* ---- Chapitre 7 — Séries numériques ---- */
+  "livre-series": {
+    "titre": "Séries numériques",
+    "sousTitre": "Chapitre 7 · livret : cours, méthodes, exercices corrigés",
+    "type": "cours",
+    "fichier": "docs/pt/livres/livre-series.pdf",
+    "source": "docs/pt/sources/livre-series.tex",
+    "pages": 20,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Rappels sur les suites (comparaison, développements limités), séries de référence (géométriques, télescopiques, exponentielle), séries à termes positifs (comparaison, équivalents, comparaison série-intégrale, Riemann, d'Alembert), convergence absolue, séries alternées, produit de Cauchy. Démonstrations, figures et exercices corrigés."
+  },
+  "presentation-series": {
+    "titre": "Présentation — Séries numériques",
+    "sousTitre": "Chapitre 7 · Support de trois séances · 5 exercices intégrés",
+    "type": "presentation",
+    "fichier": "docs/pt/presentations/presentation-series.pdf",
+    "source": "docs/pt/sources/presentation-series.tex",
+    "pages": 79,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Les diapositives de la séance, avec 5 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+  },
+  "presentation-series-statique": {
+    "titre": "Présentation — Séries numériques (sans animations)",
+    "sousTitre": "Une page par diapositive",
+    "type": "presentation",
+    "fichier": "docs/pt/presentations/presentation-series-sans-animations.pdf",
+    "source": "docs/pt/sources/presentation-series.tex",
+    "pages": 36,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "La même présentation, chaque diapositive dans son état final."
+  },
+  "fiche-series": {
+    "titre": "Fiche de référence — Séries numériques",
+    "sousTitre": "Chapitre 7 · imprimable",
+    "type": "fiche",
+    "fichier": "docs/pt/fiches/fiche-series.pdf",
+    "source": "docs/pt/sources/fiche-series.tex",
+    "pages": 2,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, choix de la méthode, pièges et résultats du TD."
+  },
+  "bilan-series": {
+    "titre": "Exercice bilan — Séries numériques",
+    "sousTitre": "Chapitre 7 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    "type": "bilan",
+    "fichier": "docs/pt/bilans/bilan-series.pdf",
+    "source": "docs/pt/sources/exercices-bilan.tex",
+    "pages": 2,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
   /* ---- Autres documents ---- */
   "revision": {
     "titre": "Livret de révision — devoir de courbes",
@@ -369,9 +425,9 @@ LC.documents = {
     "type": "devoir",
     "fichier": "docs/pt/fiches/dl3-bases-familles-cycliques.pdf",
     "source": "docs/pt/sources/dl3-bases-familles-cycliques.tex",
-    "pages": 11,
-    "version": "v1",
-    "maj": "2026-11-14",
+    "pages": 13,
+    "version": "v2",
+    "maj": "2026-11-17",
     "description": "Les questions du DL 3 qui ont résisté (II.4.a, II.4.b, III.3 à III.6), dans l'ordre du sujet : démontrer qu'une famille est une base, matrice dans une base cyclique, sous-espaces propres. Pour chacune : ce qu'on demande, l'explication, puis la rédaction telle qu'on l'écrit sur la copie. Trois exercices corrigés."
   },
   "eb-al-det-sujet": {
@@ -395,6 +451,28 @@ LC.documents = {
     "version": "v1",
     "maj": "2026-11-14",
     "description": "Toutes les questions corrigées, avec pour chacune le choix de la méthode, les erreurs fréquentes, les méthodes alternatives et le lien avec le DL 3. Une grille indique quoi revoir selon les points perdus."
+  },
+  "ent-red-guide": {
+    "titre": "Entraînement — Réduction : guide de séance",
+    "sousTitre": "Banque PT 2018, Mathématiques A · séance du samedi 21 novembre 2026",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ent-red-guide.pdf",
+    "source": "docs/pt/sources/entrainement-reduction-bpt2018.tex",
+    "pages": 3,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Provenance et choix du sujet (comparaison de cinq sujets de la Banque PT), adéquation au programme de PT, déroulé de la séance, contenu de chaque question et indications graduées. Le sujet officiel est consultable sur WikiPrépa."
+  },
+  "ent-red-corrige": {
+    "titre": "Entraînement — Réduction : corrigé Le Collé",
+    "sousTitre": "Banque PT 2018, Mathématiques A, problème d'algèbre · corrigé non officiel",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ent-red-corrige.pdf",
+    "source": "docs/pt/sources/entrainement-reduction-bpt2018.tex",
+    "pages": 4,
+    "version": "v1",
+    "maj": "2026-11-17",
+    "description": "Corrigé détaillé des parties I, II et III, rédigé par Le Collé (non officiel) : choix de la méthode, pièges, résultats à retenir. Calculs vérifiés par calcul formel."
   },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",
@@ -470,6 +548,17 @@ LC.documents = {
     fichier: "docs/pt/selection/Selection_metrique.pdf",
     source: "docs/pt/sources/selection/Selection_metrique.tex",
     pages: 11,
+    version: "v1",
+    maj: "2026-11-06",
+    description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
+  "selection-series": {
+    titre: "Sélection — Séries numériques",
+    sousTitre: "5 problèmes après le cours : énoncés, indications, corrections",
+    type: "selection",
+    fichier: "docs/pt/selection/Selection_series.pdf",
+    source: "docs/pt/sources/selection/Selection_series.tex",
+    pages: 9,
     version: "v1",
     maj: "2026-11-06",
     description: "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
@@ -606,5 +695,27 @@ LC.documents = {
     "version": "v1",
     "maj": "2026-11-07",
     "description": "Les corrections détaillées des 24 exercices du TD, dans le même ordre et avec les mêmes numéros."
+  },
+  "td-series": {
+    "titre": "TD — Séries numériques",
+    "sousTitre": "Chapitre 7 · 25 exercices · énoncés",
+    "type": "td",
+    "fichier": "docs/pt/td/TD_series.pdf",
+    "source": "docs/pt/sources/td/TD_series.tex",
+    "pages": 9,
+    "version": "v1",
+    "maj": "2026-11-07",
+    "description": "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+  },
+  "td-series-corrections": {
+    "titre": "TD — Séries numériques : corrections",
+    "sousTitre": "Chapitre 7 · corrections détaillées",
+    "type": "td",
+    "fichier": "docs/pt/td/TD_series_corrections.pdf",
+    "source": "docs/pt/sources/td/TD_series_corrections.tex",
+    "pages": 8,
+    "version": "v1",
+    "maj": "2026-11-07",
+    "description": "Les corrections détaillées des 25 exercices du TD, dans le même ordre et avec les mêmes numéros."
   }
 };

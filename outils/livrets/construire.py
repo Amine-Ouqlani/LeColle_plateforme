@@ -38,6 +38,8 @@ CHAPITRES = [
          livret='livre-courbes', presentation='presentation-courbes', fiche='fiche-courbes-parametrees'),
     dict(num=6, id='metrique', titre='Propriétés métriques et enveloppes',
          livret='volume2-metrique-enveloppes', presentation=None, fiche='fiche-metrique-enveloppes'),
+    dict(num=7, id='series', titre='Séries numériques',
+         livret='livre-series', presentation='presentation-series', fiche='fiche-series'),
 ]
 LIVRET_PT = 'docs/pt/livres/livret-complet-PT.pdf'
 PRES_PT = 'docs/pt/presentations/presentations-completes-PT.pdf'

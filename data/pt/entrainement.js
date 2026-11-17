@@ -4,10 +4,28 @@
    d'annales officielles (sujets sur WikiPrépa) ; le barème est indicatif.
    L'examen blanc d'algèbre linéaire et déterminants est un sujet original
    (sujet et corrigé : docs/pt/examens/, source unique examen-al-determinants.tex).
+   L'entraînement de réduction (séance du 21 novembre 2026) renvoie au sujet
+   officiel de la Banque PT 2018 sur WikiPrépa (non hébergé, droits d'auteur) ;
+   guide de séance et corrigé Le Collé : docs/pt/examens/ent-red-*.pdf.
    ===================================================================== */
 window.LC = window.LC || {};
 
 LC.entrainement = [
+  {
+    id: "ent-red-2026-11-21", type: "concours", typeTexte: "Sujet de concours PT", theme: "Réduction",
+    titre: "Entraînement – Réduction des endomorphismes et des matrices",
+    seance: "Samedi 21 novembre 2026", objectif: "Préparation approfondie au prochain DS.",
+    chapitres: ["red"], duree: 180, niveau: 4,
+    origine: "Banque PT 2018, Mathématiques A (filière PT), problème d'algèbre linéaire, parties I à III",
+    description: "Un vrai sujet de concours : Banque PT 2018, épreuve de Mathématiques A, problème d'algèbre (parties I, II et III ; l'exercice de probabilités est écarté). Diagonalisation de deux matrices liées par $A^2=B$, diagonalisabilité dans $\\mathbb R$ ou dans $\\mathbb C$ (rotations), changement de base, polynômes annulateurs, sous-espaces stables et restrictions, $f^2$ diagonalisable. Ouvrir le sujet officiel, puis le guide de séance (indications graduées) ; le corrigé Le Collé (non officiel) en dernier.",
+    sujetExterne: { label: "Sujet officiel", url: "https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2018.pdf" },
+    enonce: { doc: "ent-red-guide", page: 1, label: "Guide de séance" }, corrige: { doc: "ent-red-corrige", page: 1 },
+    ressources: [
+      { label: "Page du sujet sur WikiPrépa", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2018", detail: "sujet officiel et liens vers les corrigés de professeurs (UPS)" },
+      { label: "Livret de réduction", doc: "livre-red", page: 1, detail: "critères de diagonalisabilité, §1.3" },
+      { label: "Complément : trigonalisation (Banque PT 2026, Maths A, partie A)", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026", detail: "absente du sujet de 2018" }
+    ]
+  },
   {
     id: "devoir-type", type: "devoir", titre: "Problème type devoir surveillé",
     chapitres: ["courbes"], duree: 90, niveau: 4,

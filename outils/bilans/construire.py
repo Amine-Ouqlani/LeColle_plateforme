@@ -17,7 +17,7 @@ RACINE = Path(__file__).resolve().parents[2]
 SOURCE = RACINE / 'docs/pt/sources/exercices-bilan.tex'
 BUILD = RACINE / 'outils/bilans/build'
 SORTIE = RACINE / 'docs/pt/bilans'
-CHAPITRES = {1: 'al', 2: 'determinants', 3: 'red', 4: 'ed', 5: 'courbes', 6: 'metrique'}
+CHAPITRES = {1: 'al', 2: 'determinants', 3: 'red', 4: 'ed', 5: 'courbes', 6: 'metrique', 7: 'series'}
 
 
 def compiler(nom, version, chap):

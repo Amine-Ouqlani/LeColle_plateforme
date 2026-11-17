@@ -290,3 +290,7 @@ a.dl::after, .dl-chips a::after { content: " ↓"; }
 .filtres label { max-width: 100%; }
 .filtres select { max-width: min(100%, 19em); }
 @media (max-width: 600px) { .filtres select#f-theme { max-width: calc(100vw - 110px); } .row .side { flex-wrap: wrap; gap: 4px 16px; } }
+
+/* séance programmée (entraînement) */
+.badge-seance { display: inline-block; padding: 1px 8px; border: 1px solid var(--accent); border-radius: 3px;
+  color: var(--accent); font-size: 13.5px; font-weight: 600; margin-right: 4px; }

@@ -27,6 +27,28 @@ nouveau('fiche-metrique', { titre: 'Fiche de référence — Propriétés métri
   fichier: 'docs/pt/fiches/fiche-metrique-enveloppes.pdf', source: 'docs/pt/sources/fiche-metrique-enveloppes.tex',
   description: "Longueur et abscisse curviligne, repère de Frenet et courbure, rayon et centre de courbure, développée, enveloppes, choix de la méthode, pièges et résultats du TD." });
 
+nouveau('livre-series', { titre: 'Séries numériques', sousTitre: 'Chapitre 7 · livret : cours, méthodes, exercices corrigés', type: 'cours',
+  fichier: 'docs/pt/livres/livre-series.pdf', source: 'docs/pt/sources/livre-series.tex',
+  description: "Rappels sur les suites (comparaison, développements limités), séries de référence (géométriques, télescopiques, exponentielle), séries à termes positifs (comparaison, équivalents, comparaison série-intégrale, Riemann, d'Alembert), convergence absolue, séries alternées, produit de Cauchy. Démonstrations, figures et exercices corrigés." });
+nouveau('presentation-series', { titre: 'Présentation — Séries numériques', sousTitre: 'Chapitre 7 · Support de trois séances · 5 exercices intégrés', type: 'presentation',
+  fichier: 'docs/pt/presentations/presentation-series.pdf', source: 'docs/pt/sources/presentation-series.tex',
+  description: "Les diapositives de la séance, avec 5 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)." });
+nouveau('presentation-series-statique', { titre: 'Présentation — Séries numériques (sans animations)', sousTitre: 'Une page par diapositive', type: 'presentation',
+  fichier: 'docs/pt/presentations/presentation-series-sans-animations.pdf', source: 'docs/pt/sources/presentation-series.tex',
+  description: "La même présentation, chaque diapositive dans son état final." });
+nouveau('fiche-series', { titre: 'Fiche de référence — Séries numériques', sousTitre: 'Chapitre 7 · imprimable', type: 'fiche',
+  fichier: 'docs/pt/fiches/fiche-series.pdf', source: 'docs/pt/sources/fiche-series.tex',
+  description: "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, choix de la méthode, pièges et résultats du TD." });
+nouveau('bilan-series', { titre: 'Exercice bilan — Séries numériques', sousTitre: 'Chapitre 7 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
+  fichier: 'docs/pt/bilans/bilan-series.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
+  description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
+nouveau('ent-red-guide', { titre: 'Entraînement — Réduction : guide de séance', sousTitre: 'Banque PT 2018, Mathématiques A · séance du samedi 21 novembre 2026', type: 'devoir',
+  fichier: 'docs/pt/examens/ent-red-guide.pdf', source: 'docs/pt/sources/entrainement-reduction-bpt2018.tex',
+  description: "Provenance et choix du sujet (comparaison de cinq sujets de la Banque PT), adéquation au programme de PT, déroulé de la séance, contenu de chaque question et indications graduées. Le sujet officiel est consultable sur WikiPrépa." });
+nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le Collé', sousTitre: 'Banque PT 2018, Mathématiques A, problème d\'algèbre · corrigé non officiel', type: 'devoir',
+  fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction-bpt2018.tex',
+  description: "Corrigé détaillé des parties I, II et III, rédigé par Le Collé (non officiel) : choix de la méthode, pièges, résultats à retenir. Calculs vérifiés par calcul formel." });
+
 // titres et sous-titres : numéros de chapitre du nouvel ordre
 const num = Object.fromEntries(CH.map(c => [c.id, c.num]));
 D['livre-red'].titre = 'Réduction';
@@ -37,9 +59,9 @@ D['presentation-red'].description = D['presentation-red'].description.replace('9
 D['presentation-red-statique'].titre = 'Présentation — Réduction (sans animations)';
 D['fiche-red'].titre = 'Fiche de référence — Réduction';
 D['fiche-red'].description = "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges et résultats du TD.";
-D['livret-pt'].sousTitre = "Tous les cours, dans l'ordre des chapitres 1 à 6";
-D['livret-pt'].description = "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py).";
-D['presentations-pt'].sousTitre = 'Toutes les présentations des chapitres 1 à 5';
+D['livret-pt'].sousTitre = "Tous les cours, dans l'ordre des chapitres 1 à 7";
+D['livret-pt'].description = "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py).";
+D['presentations-pt'].sousTitre = 'Toutes les présentations (chapitres 1 à 5 et 7)';
 D['volume2'].sousTitre = D['volume2'].sousTitre.replace(/Chapitre \d/, 'Chapitre ' + num.metrique);
 const doc2chap = {};
 CH.forEach(c => {
@@ -60,7 +82,7 @@ CH.forEach(c => {
   ids.forEach(i => vu.add(i));
   groupes.push([`Chapitre ${c.num} — ${c.titre}`, ids]);
 });
-const autres = ['revision', 'dl3', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
+const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-guide', 'ent-red-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
 const sel = Object.keys(D).filter(k => k.startsWith('selection-'));
 sel.forEach(i => vu.add(i)); groupes.push(['Sélections de 5 problèmes (générées par td/integrer_selection.py)', CH.map(c => 'selection-' + c.id).filter(k => D[k])]);
 const td = Object.keys(D).filter(k => !vu.has(k));
