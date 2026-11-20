@@ -64,8 +64,9 @@ const annalesChap = Object.entries(parAnnale).sort((a, b) => annale(b[0]).annee 
   const a = annale(id);
   return ligne(`<a href="annale.html?id=${id}">${a.concours} ${a.annee} — ${a.titre}</a>`, `${a.epreuve}, ${a.partie} · questions ${qs.map(q => q.label).join(', ')}`, `<a href="${a.liens.sujet}" target="_blank" rel="noopener">Sujet</a>`);
 }).join('');
+const lienX = l => l.url ? `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>` : `<a href="${lecteurUrl(l.doc, l.page || 1)}">${l.label}</a>`;
 const evaluations = SUJETS.map(s => ligne(`<a href="entrainement.html#${s.id}">${s.titre}</a>`, `${dureeTexte(s.duree)} · ${s.typeTexte ? s.typeTexte.charAt(0).toLowerCase() + s.typeTexte.slice(1) : s.type === 'examen' ? (s.parties ? 'examen blanc, extraits d\'annales' : 'examen blanc') : 'devoir'}${s.seance ? ' · séance du ' + s.seance.toLowerCase() : ''}`,
-  (s.sujetExterne ? `<a href="${s.sujetExterne.url}" target="_blank" rel="noopener">${s.sujetExterne.label}</a>` : '') +
+  s.liens ? s.liens.map(lienX).join('') : (s.sujetExterne ? `<a href="${s.sujetExterne.url}" target="_blank" rel="noopener">${s.sujetExterne.label}</a>` : '') +
   (s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">${s.enonce.label || 'Sujet'}</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : ''))).join('');
 
 /* ---------------------------------------------------------------- page */

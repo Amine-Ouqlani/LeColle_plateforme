@@ -4,26 +4,33 @@
    d'annales officielles (sujets sur WikiPrépa) ; le barème est indicatif.
    L'examen blanc d'algèbre linéaire et déterminants est un sujet original
    (sujet et corrigé : docs/pt/examens/, source unique examen-al-determinants.tex).
-   L'entraînement de réduction (séance du 21 novembre 2026) renvoie au sujet
-   officiel de la Banque PT 2018 sur WikiPrépa (non hébergé, droits d'auteur) ;
-   guide de séance et corrigé Le Collé : docs/pt/examens/ent-red-*.pdf.
+   L'entraînement de réduction (séance du 21 novembre 2026) renvoie aux sujets
+   officiels de la Banque PT 2018 et 2015 sur WikiPrépa (non hébergés, droits
+   d'auteur) ; corrigé Le Collé : docs/pt/examens/ent-red-corrige.pdf.
+   Champ « liens » : liste de liens (url externe ou doc/page du lecteur).
    ===================================================================== */
 window.LC = window.LC || {};
 
 LC.entrainement = [
   {
-    id: "ent-red-2026-11-21", type: "concours", typeTexte: "Sujet de concours PT", theme: "Réduction",
+    id: "ent-red-2026-11-21", type: "concours", typeTexte: "Sujets de concours PT", theme: "Réduction",
     titre: "Entraînement – Réduction des endomorphismes et des matrices",
     seance: "Samedi 21 novembre 2026", objectif: "Préparation approfondie au prochain DS.",
-    chapitres: ["red"], duree: 180, niveau: 4,
-    origine: "Banque PT 2018, Mathématiques A (filière PT), problème d'algèbre linéaire, parties I à III",
-    description: "Un vrai sujet de concours : Banque PT 2018, épreuve de Mathématiques A, problème d'algèbre (parties I, II et III ; l'exercice de probabilités est écarté). Diagonalisation de deux matrices liées par $A^2=B$, diagonalisabilité dans $\\mathbb R$ ou dans $\\mathbb C$ (rotations), changement de base, polynômes annulateurs, sous-espaces stables et restrictions, $f^2$ diagonalisable. Ouvrir le sujet officiel, puis le guide de séance (indications graduées) ; le corrigé Le Collé (non officiel) en dernier.",
-    sujetExterne: { label: "Sujet officiel", url: "https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2018.pdf" },
-    enonce: { doc: "ent-red-guide", page: 1, label: "Guide de séance" }, corrige: { doc: "ent-red-corrige", page: 1 },
+    chapitres: ["red"], duree: 240, niveau: 4,
+    origine: "Banque PT 2018 et 2015, Mathématiques A (filière PT), problèmes d'algèbre linéaire, parties I à III",
+    description: "Deux vrais sujets de concours, problèmes d'algèbre de l'épreuve de Mathématiques A de la Banque PT (les exercices de probabilités sont écartés). 2018 : diagonalisation de deux matrices liées par $A^2=B$, diagonalisabilité dans $\\mathbb R$ ou dans $\\mathbb C$ (rotations), polynômes annulateurs, sous-espaces stables, $f^2$ diagonalisable. 2015 : famille $(x,f(x),f^2(x),\\dots)$ et relation polynomiale, plus petit sous-espace stable contenant un vecteur, sous-espaces stables d'un endomorphisme diagonalisable (dans la continuité du DL 3). Lire d'abord le sujet officiel ; le corrigé Le Collé (non officiel) en dernier.",
+    liens: [
+      { label: "Sujet 2018", url: "https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2018.pdf" },
+      { label: "Sujet 2015", url: "https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2015.pdf" },
+      { label: "Corrigé 2018", doc: "ent-red-corrige", page: 1 },
+      { label: "Corrigé 2015", doc: "ent-red-corrige", page: 5 }
+    ],
     ressources: [
-      { label: "Page du sujet sur WikiPrépa", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2018", detail: "sujet officiel et liens vers les corrigés de professeurs (UPS)" },
+      { label: "Page du sujet 2018 sur WikiPrépa", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2018", detail: "sujet officiel et corrigés de professeurs (UPS)" },
+      { label: "Page du sujet 2015 sur WikiPrépa", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2015", detail: "sujet officiel et corrigés de professeurs (UPS)" },
       { label: "Livret de réduction", doc: "livre-red", page: 1, detail: "critères de diagonalisabilité, §1.3" },
-      { label: "Complément : trigonalisation (Banque PT 2026, Maths A, partie A)", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026", detail: "absente du sujet de 2018" }
+      { label: "DL — Bases et familles cycliques", doc: "dl3", page: 1, detail: "même argument polynomial qu'en 2015, partie III" },
+      { label: "Complément : trigonalisation (Banque PT 2026, Maths A, partie A)", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026", detail: "absente des deux sujets" }
     ]
   },
   {

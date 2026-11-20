@@ -42,12 +42,9 @@ nouveau('fiche-series', { titre: 'Fiche de référence — Séries numériques',
 nouveau('bilan-series', { titre: 'Exercice bilan — Séries numériques', sousTitre: 'Chapitre 7 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
   fichier: 'docs/pt/bilans/bilan-series.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
   description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
-nouveau('ent-red-guide', { titre: 'Entraînement — Réduction : guide de séance', sousTitre: 'Banque PT 2018, Mathématiques A · séance du samedi 21 novembre 2026', type: 'devoir',
-  fichier: 'docs/pt/examens/ent-red-guide.pdf', source: 'docs/pt/sources/entrainement-reduction-bpt2018.tex',
-  description: "Provenance et choix du sujet (comparaison de cinq sujets de la Banque PT), adéquation au programme de PT, déroulé de la séance, contenu de chaque question et indications graduées. Le sujet officiel est consultable sur WikiPrépa." });
-nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le Collé', sousTitre: 'Banque PT 2018, Mathématiques A, problème d\'algèbre · corrigé non officiel', type: 'devoir',
-  fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction-bpt2018.tex',
-  description: "Corrigé détaillé des parties I, II et III, rédigé par Le Collé (non officiel) : choix de la méthode, pièges, résultats à retenir. Calculs vérifiés par calcul formel." });
+nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le Collé', sousTitre: 'Banque PT 2018 et 2015, Mathématiques A, problèmes d\'algèbre · corrigé non officiel', type: 'devoir',
+  fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction.tex',
+  description: "Corrigés détaillés, rédigés par Le Collé (non officiels), des problèmes d'algèbre de la Banque PT 2018 (page 1) et 2015 (page 5), Mathématiques A : choix de la méthode, pièges, résultats à retenir, liens avec le DL 3. Calculs vérifiés par calcul formel." });
 
 // titres et sous-titres : numéros de chapitre du nouvel ordre
 const num = Object.fromEntries(CH.map(c => [c.id, c.num]));
@@ -82,7 +79,7 @@ CH.forEach(c => {
   ids.forEach(i => vu.add(i));
   groupes.push([`Chapitre ${c.num} — ${c.titre}`, ids]);
 });
-const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-guide', 'ent-red-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
+const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
 const sel = Object.keys(D).filter(k => k.startsWith('selection-'));
 sel.forEach(i => vu.add(i)); groupes.push(['Sélections de 5 problèmes (générées par td/integrer_selection.py)', CH.map(c => 'selection-' + c.id).filter(k => D[k])]);
 const td = Object.keys(D).filter(k => !vu.has(k));

@@ -11,9 +11,10 @@ const ETAPES = [
   ['etape-5', 'Se préparer aux évaluations', 'devoirs, examens blancs, annales']
 ];
 
+const lienX = l => l.url ? `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>` : `<a href="${lecteurUrl(l.doc, l.page || 1)}">${l.label}</a>`;
 const sujet = s => {
   const total = s.parties ? s.parties.reduce((t, p) => t + p.points, 0) : s.bareme ? s.bareme.reduce((t, b) => t + b.points, 0) : null;
-  const liens = (s.sujetExterne ? `<a href="${s.sujetExterne.url}" target="_blank" rel="noopener">${s.sujetExterne.label}</a>` : '') +
+  const liens = s.liens ? s.liens.map(lienX).join('') : (s.sujetExterne ? `<a href="${s.sujetExterne.url}" target="_blank" rel="noopener">${s.sujetExterne.label}</a>` : '') +
     (s.enonce ? `<a href="${lecteurUrl(s.enonce.doc, s.enonce.page)}">${s.enonce.label || 'Sujet'}</a><a href="${lecteurUrl(s.corrige.doc, s.corrige.page)}">Corrigé</a>` : '');
   const infos = (s.seance || s.objectif) ? `<p class="small" style="margin-top:4px">${s.seance ? `<span class="badge-seance">Séance du ${s.seance.charAt(0).toLowerCase() + s.seance.slice(1)}</span> ` : ''}${s.typeTexte ? `<b>${s.typeTexte}</b>` : ''}${s.theme ? ` · thème : ${s.theme}` : ''}${s.objectif ? `<br><span class="muted">Objectif : ${s.objectif}</span>` : ''}</p>` : '';
   const ressources = s.ressources ? `<details class="plus"><summary>Ressources complémentaires</summary><ul class="small">${s.ressources.map(r =>

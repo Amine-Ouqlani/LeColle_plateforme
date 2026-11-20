@@ -1,5 +1,4 @@
-% Entraînement — Réduction (Banque PT 2018, Maths A) — Le Collé
-% Compiler tel quel : le guide. Pour le corrigé : pdflatex -jobname=ent-red-corrige "\def\CORRIGE{}\input{entrainement-reduction-bpt2018.tex}"
+% Entraînement — Réduction (Banque PT 2018 et 2015, Maths A) — corrigé Le Collé (non officiel)
 \documentclass[a4paper,11pt]{article}
 
 % ============================================================
@@ -315,14 +314,17 @@
 % =====================================================================
 \providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}
 \providecommand{\Id}{\mathrm{Id}}
-\fancyfoot[L]{}\fancyhead[L]{\footnotesize\sffamily\color{Gris}Entraînement · Réduction · Banque PT 2018, Maths A\ifdefined\CORRIGE\ · corrigé\fi}
+\fancyfoot[L]{}\fancyhead[L]{\footnotesize\sffamily\color{Gris}Entraînement · Réduction · Banque PT 2018 et 2015, Maths A · corrigé Le Collé}
 \newcommand{\Partie}[1]{\par\needspace{5\baselineskip}\vspace{1.1em}\noindent
   {\sffamily\bfseries\large\color{Bleu}#1}\par\vspace{2pt}{\color{Filet}\rule{\linewidth}{0.4pt}}\par\smallskip}
 \newcommand{\Q}[1]{\par\needspace{3\baselineskip}\medskip\noindent{\sffamily\bfseries\color{Bleu}#1}\enspace}
 \newcommand{\Demande}[1]{{\small\color{Gris}\emph{#1}}\par\smallskip}
+\newcommand{\lienDL}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Lien avec le DL.}\ #1\par}
 \newcommand{\Ind}[2]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1}\ #2\par}
 \newcommand{\WP}{https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2018}
 \newcommand{\WPsujet}{https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2018.pdf}
+\newcommand{\WPb}{https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2015}
+\newcommand{\WPbsujet}{https://wikiprepa.fr/concours/data/banque-pt_maths-a_pt_2015.pdf}
 \setlist[enumerate,1]{label=\arabic*.,leftmargin=1.6em,itemsep=3pt,topsep=3pt}
 
 \begin{document}
@@ -336,7 +338,7 @@
 \node[anchor=north west,text=white,font=\sffamily\bfseries\LARGE,inner sep=0] at ([xshift=2.2cm,yshift=-1.75cm]current page.north west)
   {Réduction des endomorphismes et des matrices};
 \node[anchor=north west,text=white,font=\sffamily\normalsize,inner sep=0] at ([xshift=2.2cm,yshift=-2.75cm]current page.north west)
-  {Banque PT 2018 · Mathématiques A · \ifdefined\CORRIGE corrigé Le Collé (non officiel)\else guide de séance\fi};
+  {Banque PT 2018 et 2015 · Mathématiques A · corrigé Le Collé (non officiel)};
 \node[anchor=north east,text=white,font=\sffamily\scshape\large,inner sep=0] at ([xshift=-2.2cm,yshift=-1.05cm]current page.north east)
   {Le Collé};
 \node[anchor=north east,text=white,font=\sffamily\small,inner sep=0] at ([xshift=-2.2cm,yshift=-2.8cm]current page.north east)
@@ -346,24 +348,25 @@
 
 \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=10pt,right=10pt,top=8pt,bottom=8pt]
 \small
-\textbf{\sffamily\color{Bleu}Le sujet.} Banque PT, session 2018, épreuve de \emph{Mathématiques A} (filière PT, 4 heures,
-calculatrice interdite). On traite le \textbf{problème d'algèbre linéaire}, parties I, II et III ; l'exercice de probabilités qui
-suit est écarté (hors thème).
-
-\textbf{\sffamily\color{Bleu}Où le lire.} Le sujet officiel n'est pas reproduit ici (droits d'auteur) :
-\href{\WPsujet}{sujet original en PDF} sur WikiPrépa (\href{\WP}{page du sujet}). Les questions ci-dessous en donnent seulement le
-contenu, pour se repérer.
-
-\textbf{\sffamily\color{Bleu}Le corrigé.} Le corrigé Le Collé est un document séparé : il n'est pas officiel. Des corrigés de
-professeurs (UPS) sont aussi référencés sur la page du sujet.
+\textbf{\sffamily\color{Bleu}Les sujets.} Deux épreuves de \emph{Mathématiques A} de la Banque PT (filière PT, 4 heures,
+calculatrice interdite), dont on traite le \textbf{problème d'algèbre linéaire} ; les exercices de probabilités sont écartés.
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=2pt]
+\item \textbf{Session 2018}, parties I à III : diagonalisation, $\R$ ou $\C$, polynômes annulateurs, sous-espaces stables
+(\href{\WPsujet}{sujet en PDF}, \href{\WP}{page du sujet}). La partie II utilise les rotations de $\R^3$.
+\item \textbf{Session 2015}, parties I à III : familles $(x,f(x),f^2(x),\dots)$, sous-espace engendré par les itérés, relation
+polynomiale, sous-espaces stables d'un endomorphisme diagonalisable (\href{\WPbsujet}{sujet en PDF}, \href{\WPb}{page du sujet}).
+\end{itemize}
+\textbf{\sffamily\color{Bleu}Ce document.} Le sujet officiel n'est pas reproduit (droits d'auteur) : le lire d'abord sur WikiPrépa.
+Ce corrigé est rédigé par Le Collé ; il n'est pas officiel. Des corrigés de professeurs (UPS) sont référencés sur les pages des
+sujets. Chaque réponse commence par la méthode choisie et la raison de ce choix ; les calculs ont été vérifiés par calcul formel.
 \end{tcolorbox}
 
-\ifdefined\CORRIGE
 % =====================================================================
 %                              CORRIGÉ
 % =====================================================================
-\paragraph{Avant de lire} Chaque réponse commence par la méthode choisie et la raison de ce choix. Les calculs ont été vérifiés
-par calcul formel. On note $\Id$ pour $\Id_E$, et $E_\lambda(f)=\Ker(f-\lambda\Id)$.
+On note $\Id$ pour $\Id_E$, et $E_\lambda(f)=\Ker(f-\lambda\Id)$.
+
+\section*{Banque PT 2018 — Mathématiques A}\addcontentsline{toc}{section}{Banque PT 2018}\label{s:2018}
 
 \Partie{Partie I — Deux matrices de $\mathcal M_3(\R)$}
 
@@ -481,80 +484,126 @@ la plus importante du sujet.}
 \end{itemize}
 \end{essentiel}
 
-\else
+
 % =====================================================================
-%                          GUIDE DE SÉANCE
-% =====================================================================
-\markboth{Guide de séance}{}
-\subsection*{Objectif de la séance}
-Préparer le prochain devoir surveillé de réduction sur un vrai sujet de concours : diagonaliser des matrices, raisonner dans
-$\R$ et dans $\C$, et surtout manipuler les \emph{polynômes annulateurs} et les \emph{sous-espaces stables}, qui font la
-différence dans les dernières questions.
+\clearpage
+\section*{Banque PT 2015 — Mathématiques A}\label{s:2015}
+\markboth{Banque PT 2015}{}
+Ce problème prolonge directement le DL~3 : familles $(x,f(x),f^2(x),\dots)$, relation polynomiale, et le même argument
+« un polynôme qui a trop de racines est nul ».
 
-\subsection*{Pourquoi ce sujet}
-Plusieurs sujets de la Banque PT riches en réduction ont été comparés :
-\begin{center}\small\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{7.2cm}>{\raggedright\arraybackslash}p{3.3cm}@{}}
-\toprule
-\textbf{Sujet} & \textbf{Contenu en réduction} & \textbf{Avis}\\\midrule
-\textbf{2018, Maths A} & diagonalisation, $A^2=B$, $\R$ ou $\C$, changement de base, polynômes annulateurs, sous-espaces stables, $f^2$ diagonalisable & \textbf{retenu} : le plus complet et le plus progressif\\
-2015, Maths A & familles $(f^k(x))$, relation polynomiale, sous-espaces stables d'un endomorphisme diagonalisable & excellent mais très abstrait ; à garder pour plus tard (lien avec le DL~3)\\
-2019, Maths A & matrices antisymétriques, $\Ker f\oplus\Im f$ & demande beaucoup de géométrie euclidienne\\
-2023, Maths A & matrices unipotentes, racines carrées & surtout du calcul matriciel\\
-2026, Maths A, partie A & diagonalisation et trigonalisation $2\times2$, rôle du discriminant & trop court seul ; bon complément\\\bottomrule
-\end{tabular}
-\end{center}
+\Partie{Partie I — Un endomorphisme de $\R^4$}
 
-\subsection*{Adéquation au programme de PT}
-\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
-\item Parties I et III : entièrement au programme (éléments propres, critères de diagonalisabilité, sous-espaces stables). Les
-polynômes annulateurs sont guidés pas à pas : aucun théorème hors programme n'est nécessaire.
-\item Partie II : utilise les rotations de $\R^3$ (géométrie euclidienne). II.1 se traite avec la seule matrice de rotation
-d'axe $e_3$. \textbf{II.2 est facultative} si le chapitre d'espaces euclidiens n'a pas encore été vu.
+\Q{I.1} \choix{une famille de trois vecteurs est liée dès qu'on trouve une relation non triviale : on cherche $f^2(e_1)$ comme
+combinaison de $e_1$ et $f(e_1)$.}
+$f(e_1)$ est la première colonne de $A$ : $f(e_1)=(-7,9,7,-4)$. Puis $f^2(e_1)=Af(e_1)=(-30,-90,-70,40)$. On constate que
+$f^2(e_1)=-10f(e_1)-100e_1$ (première coordonnée : $70-100=-30$ ; les autres : $-90$, $-70$, $40$). Donc
+$f^2(e_1)+10f(e_1)+100e_1=0$ : \textbf{la famille est liée}.
+\gain{deviner la relation : $e_1$ n'a de composante que sur la première coordonnée, donc les trois dernières coordonnées de
+$f^2(e_1)$ et de $f(e_1)$ doivent être proportionnelles : $(-90,-70,40)=-10\,(9,7,-4)$.}
+
+\Q{I.2} $f(e_2)=(-16,-3,-4,-7)$ et $f^2(e_2)=(160,-70,40,70)$. De même, $f^2(e_2)=-10f(e_2)-100e_2$ : la famille est liée.
+
+\Q{I.3} \choix{4 vecteurs en dimension 4 : un déterminant non nul suffit.}
+\begin{align*}\det(e_1,f(e_1),e_2,f(e_2))&=\begin{vmatrix}1&-7&0&-16\\0&9&1&-3\\0&7&0&-4\\0&-4&0&-7\end{vmatrix}
+=\begin{vmatrix}9&1&-3\\7&0&-4\\-4&0&-7\end{vmatrix}\\&=-1\times\begin{vmatrix}7&-4\\-4&-7\end{vmatrix}=-(-49-16)=65\neq0.\end{align*}
+(Développement selon la première colonne, puis selon la deuxième colonne.) \textbf{$\mathcal B$ est une base de $\R^4$.}
+
+\Q{I.4} \choix{une application linéaire nulle sur une base est nulle.}
+Soit $g=f^2+10f+100\Id$, linéaire. $g(e_1)=0$ et $g(e_2)=0$ (questions 1 et 2). Comme $g$ commute avec $f$ (c'est un polynôme
+en $f$), $g(f(e_1))=f(g(e_1))=0$ et de même $g(f(e_2))=0$. $g$ est nulle sur la base $\mathcal B$, donc $g=0$ : pour tout $x$,
+$f^2(x)+10f(x)+100x=0$.
+
+\Q{I.5} $f(e_1)$ est le 2\textsuperscript{e} vecteur de $\mathcal B$ ; $f(f(e_1))=-100e_1-10f(e_1)$ ; de même pour $e_2$ :
+\[\Mat_{\mathcal B}(f)=\begin{pmatrix}0&-100&0&0\\1&-10&0&0\\0&0&0&-100\\0&0&1&-10\end{pmatrix}.\]
+\lienDL{c'est une matrice « compagnon » par blocs, comme la matrice $R$ du DL dans une base cyclique.}
+
+\Q{I.6} \choix{trouver les valeurs propres possibles grâce au polynôme annulateur.}
+Si $f(x)=\lambda x$ avec $x\neq0$, la question 4 donne $(\lambda^2+10\lambda+100)x=0$, donc $\lambda^2+10\lambda+100=0$. Le
+discriminant vaut $100-400<0$ : $f$ n'a \textbf{aucune valeur propre réelle}. \textbf{$A$ n'est pas diagonalisable dans $\R$.}
+\retenir{toute valeur propre est racine de tout polynôme annulateur. Dans $\C$, les racines $-5\pm5i\sqrt3$ sont distinctes, et
+le résultat de 2018 III.3 (deux racines distinctes) montre que $A$ est diagonalisable dans $\C$.}
+
+\Partie{Partie II — Le sous-espace engendré par les itérés d'un vecteur}
+
+\Q{II.1} Pour $y=\sum c_nx_n\in E_x$ (somme finie), $f(y)=\sum c_nx_{n+1}\in E_x$ par linéarité : $E_x$ est stable par $f$.
+
+\Q{II.2} Par récurrence : $x_0=x\in F$, et si $x_n\in F$, alors $x_{n+1}=f(x_n)\in F$ car $F$ est stable. Tous les $x_n$ sont dans
+le sous-espace $F$, donc aussi leurs combinaisons linéaires : $E_x\subset F$.
+\retenir{$E_x$ est le plus petit sous-espace stable par $f$ qui contient $x$.}
+
+\Q{II.3(a)} $(x_0)$ est libre car $x\neq0$, et une famille libre de $\R^d$ a au plus $d$ vecteurs. L'ensemble des entiers $k\geq1$
+tels que $(x_0,\dots,x_{k-1})$ soit libre est non vide et majoré par $d$ : il a un plus grand élément $p$, avec $1\leq p\leq d$.
+
+\Q{II.3(b)} Par maximalité de $p$, $(x_0,\dots,x_p)$ est liée, alors que $(x_0,\dots,x_{p-1})$ est libre : $x_p$ est combinaison
+linéaire de $x_0,\dots,x_{p-1}$ (résultat du cours : on ajoute un vecteur à une famille libre et elle devient liée).
+\piege{dire seulement « la famille est liée, donc $x_p$ est combinaison des autres ». Il faut la liberté de $(x_0,\dots,x_{p-1})$ :
+dans une relation $\sum_{i\leq p}c_ix_i=0$ non triviale, $c_p\neq0$, sinon la relation porterait sur la famille libre.}
+
+\Q{II.3(c)} Pour $i\leq p-2$, $f(x_i)=x_{i+1}\in E'_x$ ; et $f(x_{p-1})=x_p\in E'_x$ par (b). Les images des vecteurs générateurs
+sont dans $E'_x$ : il est stable.
+
+\Q{II.3(d)} $E'_x$ contient $x$ et est stable : par II.2, $E_x\subset E'_x$. L'inclusion inverse est claire. Donc $E_x=E'_x$, et
+$\mathcal B_p$ engendre $E_x$ et est libre : c'est une base de $E_x$, et $\dim E_x=p$.
+
+\Q{II.4} $\hat f(x_i)=x_{i+1}$ pour $i\leq p-2$ et $\hat f(x_{p-1})=\sum a_ix_i$ :
+\[\Mat_{\mathcal B_p}(\hat f)=\begin{pmatrix}0&&&a_0\\1&\ddots&&a_1\\&\ddots&0&\vdots\\&&1&a_{p-1}\end{pmatrix}.\]
+
+\Q{II.5} \choix{appliquer la relation au vecteur $x$ : chaque $\hat f^k(x)$ est un vecteur de la base.}
+Si $\sum_{k=0}^{p-1}c_k\hat f^k=0$, on l'applique à $x_0$ : $\sum c_kx_k=0$, et $\mathcal B_p$ est libre, donc tous les $c_k$ sont nuls.
+
+\Q{II.6(a)} On a $x_k=\hat f^k(x_0)$, et les puissances de $\hat f$ commutent :
+$\hat f^p(x_k)=\hat f^k\big(\hat f^p(x_0)\big)=\hat f^k(x_p)=\hat f^k\Big(\sum_ia_ix_i\Big)=\sum_ia_i\hat f^k\big(\hat f^i(x_0)\big)=\sum_ia_i\hat f^i(x_k)$.
+
+\Q{II.6(b)} L'endomorphisme $\hat f^p-\sum_ia_i\hat f^i$ est nul sur chaque $x_k$, donc sur la base $\mathcal B_p$ : il est nul.
+
+\Partie{Partie III — Sous-espaces stables d'un endomorphisme diagonalisable}
+
+\Q{III.1(a)} $f$ est diagonalisable, donc $E=E_1\oplus\dots\oplus E_p$ : tout $x$ s'écrit de façon \textbf{unique} $x=\sum x_i$
+avec $x_i\in E_i$.
+
+\Q{III.1(b)} Les $x_i$ ($i\leq q$) sont non nuls et sont des vecteurs propres associés à des valeurs propres distinctes : la
+famille est libre (cours).
+
+\Q{III.1(c)} $f(x_i)=\lambda_ix_i$, donc $f^k(x_i)=\lambda_i^kx_i$ et $f^k(x)=\sum_{i=1}^q\lambda_i^kx_i$ (pour tout $k$).
+
+\Q{III.1(d)} \choix{c'est exactement le calcul du DL, III.3 : on regroupe selon les vecteurs propres.}
+$\sum_{j=1}^q\alpha_jf^{j-1}(x)=\sum_{i=1}^q\Big(\sum_{j=1}^q\alpha_j\lambda_i^{j-1}\Big)x_i=\sum_{i=1}^qP(\lambda_i)x_i=0$. Par (b),
+$P(\lambda_i)=0$ pour $i=1,\dots,q$.
+
+\Q{III.1(e)} $P$ est de degré au plus $q-1$ et a $q$ racines distinctes : $P=0$, donc tous les $\alpha_j$ sont nuls. La famille
+est libre.
+
+\Q{III.1(f)} D'après (c), les $f^k(x)$ sont tous dans $V=\vect(x_1,\dots,x_q)$. $V$ contient $x$ et est stable par $f$ (engendré
+par des vecteurs propres), donc $E_x\subset V$ (II.2). Par ailleurs $\vect(x,\dots,f^{q-1}(x))\subset E_x$, et ce sous-espace est de
+dimension $q$ par (e), comme $V$. Donc $\vect(x,\dots,f^{q-1}(x))=E_x=V$. Comme $x_i=0$ pour $i>q$,
+$V=\vect(x_1,\dots,x_p)$.
+
+\Q{III.2} $F$ est stable et contient $x$ : $E_x\subset F$ (II.2). Or $x_i\in E_x$ (III.1(f)), donc $x_i\in F\cap E_i=F_i$.
+\retenir{un sous-espace stable par un endomorphisme diagonalisable contient les « composantes propres » de chacun de ses
+vecteurs : $F=\bigoplus_i(F\cap E_i)$.}
+
+\Q{III.3(a)} $\chi_B(x)=x(x-1)(x-2)$ : trois valeurs propres distinctes en dimension 3, \textbf{$f$ est diagonalisable}.
+
+\Q{III.3(b)} $E_0=\vect\big((1,-1,0)\big)$, $E_1=\vect\big((1,-1,-1)\big)$, $E_2=\vect\big((0,1,1)\big)$. (Contrôle :
+$B(1,-1,-1)^T=(1,-1,-1)^T$ et $B(0,1,1)^T=(0,2,2)^T$.)
+
+\Q{III.3(c)} \choix{par III.2, un sous-espace stable $F$ vérifie $F\subset F_0+F_1+F_2\subset F$, donc $F=F_0\oplus F_1\oplus F_2$ ;
+chaque $F_i\subset E_i$ est une droite ou $\{0\}$.}
+Chaque $F_i$ vaut $\{0\}$ ou $E_i$ ; réciproquement, toute somme de sous-espaces propres est stable. Les sous-espaces stables
+sont donc les $2^3=8$ sous-espaces : $\{0\}$ ; les trois droites propres $E_0$, $E_1$, $E_2$ ; les trois plans $E_0\oplus E_1$,
+$E_0\oplus E_2$, $E_1\oplus E_2$ ; et $\R^3$.
+\piege{oublier des plans, ou en ajouter : un plan stable contient forcément deux droites propres.}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
+\item Une relation $P(f)=0$ donne les valeurs propres possibles : les racines de $P$.
+\item $E_x=\vect(x,f(x),\dots)$ est le plus petit sous-espace stable contenant $x$ ; sa dimension est le premier $p$ où la famille
+devient liée.
+\item Regrouper selon les vecteurs propres, puis « un polynôme de degré $<q$ avec $q$ racines est nul » : le même argument que
+dans le DL~3.
+\item Sous-espaces stables d'un endomorphisme à valeurs propres simples : les sommes de droites propres.
 \end{itemize}
+\end{essentiel}
 
-\subsection*{Déroulé proposé (3 heures)}
-\begin{center}\small\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{@{}lll@{}}\toprule
-\textbf{Temps} & \textbf{Questions} & \textbf{Ce qu'on travaille}\\\midrule
-0:00 – 0:10 & — & rappels : critères, $Q(PDP^{-1})=PQ(D)P^{-1}$\\
-0:10 – 0:50 & Partie I & calcul de $\chi$, sous-espaces propres, $A=PDP^{-1}$\\
-0:50 – 1:20 & II.1 (puis II.2) & diagonalisable dans $\R$ ou dans $\C$\\
-1:20 – 2:30 & Partie III & polynômes annulateurs, sommes directes, stabilité\\
-2:30 – 3:00 & bilan & correction des erreurs, fiche « à retenir »\\\bottomrule
-\end{tabular}
-\end{center}
-
-% ---------------------------------------------------------------------
-\Partie{Les questions, et des indications graduées}
-Lire d'abord la question sur le sujet original. N'ouvrir une indication qu'après dix minutes de recherche.
-
-\Q{Partie I.} Deux matrices $A$ et $B$ de $\mathcal M_3(\R)$.
-\Demande{Diagonalisabilité de $A$ et $B$ ; calcul de $A^2$ ; écriture $A=PDP^{-1}$ ; diagonalisabilité de $B$ « sans calcul ».}
-\Ind{Indication 1.}{$\chi_A$ a trois racines simples. Pour $B$, développer $\det(xI_3-B)$ selon la ligne qui contient deux zéros.}
-\Ind{Indication 2.}{Racine double de $\chi_B$ : calculer le rang de $B-\lambda I_3$.}
-\Ind{Indication 3.}{Comparer $A^2$ et $B$, puis élever $A=PDP^{-1}$ au carré.}
-
-\Q{Partie II.} Rotations de $\R^3$.
-\Demande{Nature de $f^2$ et matrice $C$ pour la rotation d'axe $e_3$ et d'angle $\frac\pi2$ ; diagonalisabilité de $C$ et $C^2$ dans $\R$
-et dans $\C$ ; base orthonormée directe adaptée à un axe $w$, matrices d'une rotation dans deux bases.}
-\Ind{Indication 1.}{Écrire les images de $e_1,e_2,e_3$ ; $\chi_C$ a un facteur $x^2+1$.}
-\Ind{Indication 2.}{(II.2) Choisir $u$ orthogonal à $w$ « à vue », puis $v=\bar w\wedge u$. Dans $(u,v,\bar w)$, la matrice est $C$.}
-
-\Q{Partie III.} Polynômes annulateurs.
-\Demande{$f\circ g=0\Rightarrow\Im g\subset\Ker f$ ; si $f$ est diagonalisable, $\prod(f-\lambda_k\Id)=0$ ; si
-$(f-\alpha\Id)(f-\beta\Id)=0$ avec $\alpha\neq\beta$, alors $E=\Ker(f-\alpha\Id)\oplus\Ker(f-\beta\Id)$ et $f$ est diagonalisable ;
-si $f^2$ est diagonalisable à valeurs propres strictement positives, $f$ l'est aussi.}
-\Ind{Indication 1.}{(2b) Les facteurs commutent : placer le bon facteur en premier. (2c) Prendre une base de vecteurs propres.}
-\Ind{Indication 2.}{(3a) Identifier les coefficients de $f$ et de $\Id$. (3c) Utiliser la question 1.}
-\Ind{Indication 3.}{(4a) $f$ commute avec $f^2$. (4c) Appliquer la question 3 à la restriction $f_k$, avec $\alpha=-\mu_k$, $\beta=\mu_k$.}
-
-\Partie{Pour aller plus loin}
-\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
-\item \textbf{Trigonalisation}, absente de ce sujet : Banque PT 2026, Maths A, partie A (diagonalisation et trigonalisation de
-matrices $2\times2$, rôle du discriminant), sur
-\href{https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026}{WikiPrépa}.
-\item \textbf{Puissances de matrices} : livret de réduction, §1.4, et les cinq problèmes du chapitre (étape 3).
-\end{itemize}
-\fi
 \end{document}
