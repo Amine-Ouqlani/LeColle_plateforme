@@ -23,7 +23,7 @@ const carte = r => {
   const acts = r.actions.map(([t, h, sec]) => `<a href="${h}"${sec ? ' class="sec"' : ''}>${t}</a>`).join('');
   return `<li class="carte" id="res-${r.cle}"><p class="carte-tete"><b>${r.nom}</b><span class="tag">${d.pages} p.</span></p>
     <p class="carte-desc">${r.desc}</p>
-    <p class="carte-actions">${acts}<a class="dl" href="${d.fichier}" download="${nomFichier(d)}" aria-label="Télécharger le PDF : ${r.nom}">PDF</a></p></li>`;
+    <p class="carte-actions">${acts}<a class="dl" href="${urlFichier(d.fichier)}" download="${nomFichier(d)}" aria-label="Télécharger le PDF : ${r.nom}">PDF</a></p></li>`;
 };
 const groupe = g => RES.filter(r => r.groupe === g).map(carte).join('');
 const sansFiche = !C.fiche && C.cours.index

@@ -15,7 +15,7 @@
   document.title = `${D.titre} — Le Collé ${(D.filiere || 'pt').toUpperCase()}`;
 
   // icônes de la barre
-  $('#rd-dl').href = D.fichier;
+  $('#rd-dl').href = urlFichier(D.fichier);
   const fil = D.filiere || 'pt';
   document.body.dataset.filiere = fil;
   $('#rd-title').textContent = `${fil.toUpperCase()} · ${D.titre}`;
@@ -24,11 +24,11 @@
   if (document.referrer && new URL(document.referrer).origin === location.origin && !/lecteur\.html/.test(document.referrer)) $('#rd-back').href = document.referrer;
   if (slides) { $('#rd-zin').hidden = true; $('#rd-zout').hidden = true; } else { $('#rd-fs').hidden = true; }
 
-  if (!window.pdfjsLib) { $('#rd-loading').innerHTML = `Le lecteur n'a pas pu démarrer. <a href="${D.fichier}">Ouvrir le PDF</a>`; return; }
+  if (!window.pdfjsLib) { $('#rd-loading').innerHTML = `Le lecteur n'a pas pu démarrer. <a href="${urlFichier(D.fichier)}">Ouvrir le PDF</a>`; return; }
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js';
   let pdf;
-  try { pdf = await pdfjsLib.getDocument(D.fichier).promise; }
-  catch (e) { $('#rd-loading').innerHTML = `Impossible de charger le document. <a href="${D.fichier}">Télécharger le PDF</a>`; return; }
+  try { pdf = await pdfjsLib.getDocument(urlFichier(D.fichier)).promise; }
+  catch (e) { $('#rd-loading').innerHTML = `Impossible de charger le document. <a href="${urlFichier(D.fichier)}">Télécharger le PDF</a>`; return; }
 
   const N = pdf.numPages;
   const debut = Math.max(1, Number(params.get('debut')) || 1);

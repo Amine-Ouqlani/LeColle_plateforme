@@ -37,5 +37,6 @@ for (const s of LC.entrainement) { (s.parties || []).forEach(p => LC.annales.fin
   for (const a of LC.annales) { const s = LC.sujets.find(x => x.id === a.id.replace(/-\d+$/, '')); if (!s) err.push('annale sans sujet ' + a.id); else if (s.sujet !== a.liens.sujet) err.push('lien de sujet différent ' + a.id); }
   for (const [c, l] of Object.entries(LC.classiques)) { LC.chapitres.some(x => x.id === c) || err.push('classiques : chapitre inconnu ' + c);
     for (const [id] of l) { const e = LC.exercices.find(x => x.id === id); if (!e) err.push('classique inconnu ' + id); else if (e.chapitre !== c) err.push('classique mal rangé ' + id); } } }
+try { require('child_process').execFileSync('node', [__dirname + '/empreintes.js', '--verifier'], { stdio: 'pipe' }); } catch (e) { err.push('empreintes des PDF périmées : lancer node outils/empreintes.js'); }
 console.log(err.length ? err.join('\n') : `OK — ${LC.chapitres.length} chapitres, ${LC.exercices.length} exercices, ${LC.sujets.length} sujets officiels, ${LC.annales.length} parties corrigées (${LC.questionsAnnales.length} questions), ${Object.values(LC.selection).reduce((t, x) => t + x.problemes.length, 0)} problèmes sélectionnés, ${LC.entrainement.length} sujets, ${Object.keys(LC.documents).length} documents, ${mp.LC.ouvragesMP.length} ouvrages MP`);
 process.exit(err.length ? 1 : 0);

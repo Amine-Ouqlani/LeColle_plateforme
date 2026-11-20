@@ -19,7 +19,7 @@ const chapitres = LC.chapitres.map(c => {
 }).join('');
 
 /* documents : un PDF par ressource et par chapitre, dans l'ordre des pages de chapitre */
-const pdf = (id, nom) => { const d = doc(id); return `<a href="${d.fichier}" download="${nomFichier(d)}" title="${esc(d.titre)} · ${d.pages} pages">${nom}</a>`; };
+const pdf = (id, nom) => { const d = doc(id); return `<a href="${urlFichier(d.fichier)}" download="${nomFichier(d)}" title="${esc(d.titre)} · ${d.pages} pages">${nom}</a>`; };
 const parChapitre = LC.chapitres.map(c => `<li><span class="n">${c.num}</span><div>
     <a class="t" href="chapitre.html?id=${c.id}#ressources">${c.titre}</a>
     <p class="dl-chips">${ressourcesChapitre(c).map(r => pdf(r.doc, r.court || r.nom)).join('')}</p></div></li>`).join('');

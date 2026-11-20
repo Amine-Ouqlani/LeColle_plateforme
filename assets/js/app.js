@@ -53,7 +53,14 @@ const nomFichier = d => {
   const base = d.fichier.split('/').pop();
   return /^le-colle-(pt|mp)/.test(base) ? base : `le-colle-${filiereDoc(d)}-${base}`;
 };
-const lienPdf = (d, texte = 'PDF') => `<a class="dl" href="${d.fichier}" download="${nomFichier(d)}">${texte}</a>`;
+/* adresse d'un PDF avec son empreinte (data/empreintes.js) : un document mis à jour change d'adresse,
+   le navigateur ne peut donc pas resservir l'ancienne version depuis son cache */
+const urlFichier = f => { const h = ((window.LC || {}).empreintes || {})[f]; return h ? `${f}?v=${h}` : f; };
+const lienPdf = (d, texte = 'PDF') => `<a class="dl" href="${urlFichier(d.fichier)}" download="${nomFichier(d)}">${texte}</a>`;
+
+/* application installable : le service worker ne garde rien hors ligne ; il redemande chaque fichier
+   au serveur (revalidation), pour que les mises à jour du site apparaissent tout de suite */
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 
 /* en-tête et pied de page communs : filière toujours visible (repère de couleur + étiquette) */
 const FILIERES = {

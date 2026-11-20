@@ -107,3 +107,13 @@ ordre, séries entières) n'est pas supprimé : il est conservé dans des blocs 
 4. relancer la chaîne de construction (livrets, TD, sélection, intégration, bilans).
 
 Avec `\PTtrue`, le livret, la présentation et la fiche sont identiques, au texte près, aux versions de PT d'avant la séparation.
+
+## Application installable
+
+Le site s'installe comme une application (`manifest.webmanifest`, icônes dans `assets/img/icone-*.png`).
+Le service worker `sw.js` ne garde **rien hors ligne** : il redemande chaque fichier au serveur avec
+revalidation, pour que les mises à jour soient visibles immédiatement.
+
+Les liens vers les PDF portent une empreinte (`?v=…`, fichier `data/empreintes.js`) : un document modifié
+change d'adresse, aucun cache ne peut resservir l'ancienne version. **Après toute mise à jour de PDF :**
+`node outils/empreintes.js` (le contrôle `node outils/verifier.js` signale des empreintes périmées).
