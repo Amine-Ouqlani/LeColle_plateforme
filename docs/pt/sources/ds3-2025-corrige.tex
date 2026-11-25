@@ -1,0 +1,714 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Algèbre linéaire (compléments de deuxième année)
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={DS 3 du 1er décembre 2025 — corrigé},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% numéro du chapitre dans le parcours PT (affiché), distinct de la numérotation interne
+\newcommand{\grandnum}{\thesection}\newcommand{\ongletcouleur}{Bleu}
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\grandnum}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ongletcouleur}%
+  \edef\ongnum{\grandnum}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+
+% =====================================================================
+%  Sujet de l'année dernière — DS 3 du lundi 1er décembre 2025 — corrigé Le Collé
+% =====================================================================
+\providecommand{\Sp}{\operatorname{Sp}}\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}
+\fancyfoot[L]{}\fancyhead[L]{\footnotesize\sffamily\color{Gris}Sujet de l'année dernière · DS 3 du 1er décembre 2025 · corrigé Le Collé}
+\newcommand{\Partie}[1]{\par\needspace{5\baselineskip}\vspace{1.1em}\noindent
+  {\sffamily\bfseries\large\color{Bleu}#1}\par\vspace{2pt}{\color{Filet}\rule{\linewidth}{0.4pt}}\par\smallskip}
+\newcommand{\Q}[1]{\par\needspace{3\baselineskip}\medskip\noindent{\sffamily\bfseries\color{Bleu}#1}\enspace}
+\newcommand{\col}[3]{\begin{pmatrix}#1\\#2\\#3\end{pmatrix}}
+\newcommand{\vu}{\vec u}
+\setlist[enumerate,1]{label=\arabic*.,leftmargin=1.6em,itemsep=3pt,topsep=3pt}
+
+\begin{document}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\begin{tikzpicture}[remember picture,overlay]
+\fill[Bleu] (current page.north west) rectangle ([yshift=-4.2cm]current page.north east);
+\node[anchor=north west,text=white,font=\sffamily\footnotesize,inner sep=0] at ([xshift=2.2cm,yshift=-1.1cm]current page.north west)
+  {\textls[120]{MATHÉMATIQUES · CPGE PT · SUJET DE L'ANNÉE DERNIÈRE}};
+\node[anchor=north west,text=white,font=\sffamily\bfseries\LARGE,inner sep=0] at ([xshift=2.2cm,yshift=-1.75cm]current page.north west)
+  {Sous-espaces stables · Constante d'Apéry};
+\node[anchor=north west,text=white,font=\sffamily\normalsize,inner sep=0] at ([xshift=2.2cm,yshift=-2.75cm]current page.north west)
+  {Devoir surveillé n\textsuperscript{o}\,3 · lundi 1\textsuperscript{er} décembre 2025 · corrigé Le Collé};
+\node[anchor=north east,text=white,font=\sffamily\scshape\large,inner sep=0] at ([xshift=-2.2cm,yshift=-1.05cm]current page.north east)
+  {Le Collé};
+\node[anchor=north east,text=white,font=\sffamily\small,inner sep=0] at ([xshift=-2.2cm,yshift=-2.8cm]current page.north east)
+  {Corrigé détaillé};
+\end{tikzpicture}
+\vspace*{2.9cm}
+
+\begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=10pt,right=10pt,top=8pt,bottom=8pt]
+\small
+\textbf{\sffamily\color{Bleu}Le sujet.} DS 3 de la classe, l'an dernier. \textbf{Exercice 1} : recherche des plans et droites
+stables d'un endomorphisme de $\R^3$ (réduction, transposée, trigonalisation, symétries et projections). \textbf{Exercice 2} :
+la constante d'Apéry $\zeta(3)$ (séries numériques, comparaison série-intégrale, intégrales généralisées, équation différentielle
+et séries entières).
+
+\textbf{\sffamily\color{Bleu}Ce document.} Corrigé rédigé par Le Collé, non officiel, avec le niveau de rédaction attendu
+au concours : chaque argument du cours est cité au moment où il sert. Les encadrés « Choix de la méthode », « Piège » et
+« À retenir » ne font pas partie de la copie ; ils expliquent la démarche. Tous les calculs ont été vérifiés par calcul formel.
+\end{tcolorbox}
+
+On note $\mathcal B$ la base canonique de $\R^3$, $E_\lambda(u)=\Ker(u-\lambda\Id)$ et, pour un vecteur $\vu$, $U$ sa colonne de
+coordonnées dans $\mathcal B$.
+
+% =====================================================================
+\section*{Exercice 1 — Recherche des sous-espaces stables}\addcontentsline{toc}{section}{Exercice 1}
+
+\Partie{Partie I — Résultats généraux dans $\R^3$}
+
+Dans toute la partie, $\mathcal P : ax+by+cz=0$ est un plan stable par $\varphi$ et $N=\col abc$. Comme $\mathcal P$ est un plan,
+$(a,b,c)\neq(0,0,0)$, donc $N\neq0$.
+
+\Q{I.1} Pour tout $x\in\R$, $xI_3-A^T=(xI_3-A)^T$ et une matrice a même déterminant que sa transposée :
+\[\chi_{A^T}(x)=\det\big((xI_3-A)^T\big)=\det(xI_3-A)=\chi_A(x).\]
+$A$ et $A^T$ ont le même polynôme caractéristique. Les valeurs propres étant les racines de $\chi$, \textbf{$\Sp(A)=\Sp(A^T)$}.
+\piege{ce raisonnement donne les mêmes valeurs propres, pas les mêmes sous-espaces propres. La suite montre justement que les
+vecteurs propres de $A^T$ décrivent les \emph{plans} stables, et non les droites.}
+
+\Q{I.2} $\vu=(x,y,z)$ appartient à $\mathcal P$ si et seulement si $ax+by+cz=0$, c'est-à-dire
+\[\vu\in\mathcal P\iff U^TN=0 .\]
+
+\Q{I.3} Soit $\vu\in\mathcal P$. Par stabilité, $\varphi(\vu)\in\mathcal P$ ; sa colonne est $AU$. D'après I.2 :
+\[(AU)^TN=0,\quad\text{soit}\quad U^T(A^TN)=0 .\]
+
+\Q{I.4} \choix{on décompose $A^TN$ selon $\R^3=\mathcal P\oplus\vect(N)$, puis on teste I.3 sur la composante dans $\mathcal P$.}
+\emph{La somme est directe.} $N\notin\mathcal P$ car $N^TN=a^2+b^2+c^2>0$ ; donc $\mathcal P\cap\vect(N)=\{0\}$, et
+$\dim\mathcal P+\dim\vect(N)=3$. Ainsi $\R^3=\mathcal P\oplus\vect(N)$.
+
+\emph{Décomposition.} Il existe donc $\vec p\in\mathcal P$, de colonne $P_0$, et $\lambda\in\R$ tels que $A^TN=P_0+\lambda N$.
+
+\emph{Conclusion.} On applique I.3 à $\vu=\vec p\in\mathcal P$, et I.2 donne $P_0^TN=0$ :
+\[0=P_0^T(A^TN)=P_0^TP_0+\lambda\,P_0^TN=\|P_0\|^2 .\]
+Donc $P_0=0$ et $A^TN=\lambda N$ avec $N\neq0$ : \textbf{$N$ est un vecteur propre de $A^T$}.
+\retenir{le vecteur normal d'un plan stable par $\varphi$ est un vecteur propre de $A^T$. Autre rédaction possible : I.3 dit que
+$A^TN$ est orthogonal à $\mathcal P$, et $\mathcal P^\perp=\vect(N)$ ; donc $A^TN$ est colinéaire à $N$.}
+
+\Q{I.5} \emph{Une valeur propre réelle.} $\chi_{A^T}$ est un polynôme réel de degré $3$ (impair). Ses limites en $-\infty$ et
+$+\infty$ sont $-\infty$ et $+\infty$ ; continu, il s'annule (théorème des valeurs intermédiaires). Soit $\lambda$ une racine réelle et
+$N=\col abc\neq0$ tel que $A^TN=\lambda N$.
+
+\emph{Le plan associé est stable.} Soit $\mathcal P : ax+by+cz=0$, un plan car $N\neq0$. Pour $\vu\in\mathcal P$ :
+\[(AU)^TN=U^T(A^TN)=\lambda\,U^TN=0,\]
+donc $\varphi(\vu)\in\mathcal P$ par I.2. \textbf{$\varphi$ possède au moins un plan stable.}
+\retenir{avec I.4 : les plans stables par $\varphi$ sont exactement les plans $N^TU=0$ où $N$ est un vecteur propre de $A^T$.
+Deux vecteurs propres colinéaires donnent le même plan : compter les plans stables, c'est compter les \emph{droites} de vecteurs
+propres de $A^T$.}
+
+\Q{I.6} D'après I.1 et I.5, $\lambda\in\Sp(A^T)=\Sp(A)$. Soit $\vec v\neq\vec 0$ tel que $\varphi(\vec v)=\lambda\vec v$, et
+$D=\vect(\vec v)$. Pour $\vu=\mu\vec v\in D$, $\varphi(\vu)=\mu\lambda\vec v\in D$ : \textbf{la droite $D$ est stable par $\varphi$}.
+\retenir{une droite $\vect(\vec v)$ est stable si et seulement si $\vec v$ est un vecteur propre. Droites stables : vecteurs propres de
+$A$ ; plans stables : vecteurs propres de $A^T$.}
+
+% ---------------------------------------------------------------------
+\Partie{Partie II — Un plan stable unique}
+
+$M=\begin{pmatrix}3&1&2\\1&1&0\\-1&1&2\end{pmatrix}$.
+
+\Q{II.1(a)} On développe selon la troisième colonne :
+\[\chi_f(x)=\begin{vmatrix}x-3&-1&-2\\-1&x-1&0\\1&-1&x-2\end{vmatrix}
+=-2\begin{vmatrix}-1&x-1\\1&-1\end{vmatrix}+(x-2)\begin{vmatrix}x-3&-1\\-1&x-1\end{vmatrix}.\]
+Le premier mineur vaut $2-x$, le second $x^2-4x+2$. Donc
+\[\chi_f(x)=2(x-2)+(x-2)(x^2-4x+2)=(x-2)(x^2-4x+4)=(x-2)^3 .\]
+\textbf{$\Sp(f)=\{2\}$}, valeur propre triple.
+
+\Q{II.1(b)} \emph{Par l'absurde}, supposons $f$ diagonalisable. Sa matrice dans une base de vecteurs propres est diagonale, de
+coefficients diagonaux dans $\Sp(f)=\{2\}$ : c'est $2I_3$. Alors $M=P(2I_3)P^{-1}=2I_3$, ce qui est faux. \textbf{$f$ n'est pas
+diagonalisable.}
+
+$\chi_f=(x-2)^3$ est scindé sur $\R$ : \textbf{$f$ est trigonalisable} (théorème du cours).
+\gain{autre preuve : $M-2I_3\neq0$, donc $\dim E_2(f)\leq2<3=m(2)$.}
+
+\Q{II.2(a)} $M\col11{-1}=\col22{-2}=2\col11{-1}$ et $\vec a\neq\vec 0$ : \textbf{$\vec a$ est un vecteur propre de $f$, associé à $2$}.
+
+\Q{II.2(b)} $(E)$ s'écrit $(M-2I_3)U=\col11{-1}$ :
+\[\left\{\begin{aligned}x+y+2z&=1\\x-y&=1\\-x+y&=-1\end{aligned}\right.
+\iff\left\{\begin{aligned}x&=1+y\\z&=-y\end{aligned}\right.\]
+Les solutions sont les vecteurs $(1+t,\ t,\ -t)$, $t\in\R$ (une droite affine dirigée par $\vec a$). Dans le plan $x=0$ : $t=-1$,
+\[\vec b=(0,-1,1).\]
+
+\Q{II.2(c)} \choix{on lit $T$ colonne par colonne : $f(\vec a)=2\vec a$, $f(\vec b)=\vec a+2\vec b$, $f(\vec c)=\vec b+2\vec c$. Les deux
+premières égalités sont acquises ; il reste à résoudre $(M-2I_3)C=B$.}
+$(M-2I_3)C=\col0{-1}1$ s'écrit $x+y+2z=0$ et $x-y=-1$, soit $x=y-1$ et $z=\frac12-y$. Avec $y=\frac12$ :
+\[\vec c=\Big(-\tfrac12,\ \tfrac12,\ 0\Big).\]
+\emph{C'est une base} :
+$\begin{vmatrix}1&0&-\frac12\\1&-1&\frac12\\-1&1&0\end{vmatrix}
+=1\cdot\big(0-\tfrac12\big)-0+\big(-\tfrac12\big)(1-1)=-\tfrac12\neq0 .$
+Dans $\mathcal C=(\vec a,\vec b,\vec c)$, les trois égalités ci-dessus donnent exactement $\Mat_{\mathcal C}(f)=T$.
+\piege{prendre $\vec c$ au hasard hors de $\vect(\vec a,\vec b)$ donne une base, mais pas la matrice $T$ : avec $\vec c=(0,0,\frac12)$,
+on obtient un coefficient $1$ en position $(1,3)$.}
+
+\Q{II.2(d)} Formule de changement de base, avec $P=P_{\mathcal B\to\mathcal C}$ :
+\[P=\begin{pmatrix}1&0&-\frac12\\1&-1&\frac12\\-1&1&0\end{pmatrix},\qquad M=PTP^{-1},\qquad
+P^{-1}=\begin{pmatrix}1&1&1\\1&1&2\\0&2&2\end{pmatrix}.\]
+(Contrôle : $PP^{-1}=I_3$.)
+
+\Q{II.3(a)} $\chi_{M^T}=\chi_M=(x-2)^3$ (I.1), donc $\Sp(M^T)=\{2\}$. Avec $M^T-2I_3=\begin{pmatrix}1&1&-1\\1&-1&1\\2&0&0\end{pmatrix}$ :
+la troisième ligne donne $x=0$, puis $y-z=0$. Donc
+\[E_2(M^T)=\vect\big((0,1,1)\big),\quad\text{droite}.\]
+
+\Q{II.3(b)} D'après I.4 et I.5, un plan $ax+by+cz=0$ est stable si et seulement si $(a,b,c)$ est un vecteur propre de $M^T$,
+c'est-à-dire $(a,b,c)=\mu(0,1,1)$ avec $\mu\neq0$. Toutes ces équations définissent le même plan : \textbf{$f$ a un unique plan
+stable},
+\[\mathcal P : y+z=0 .\]
+
+\Q{II.3(c)} $\vec a=(1,1,-1)$ et $\vec b=(0,-1,1)$ vérifient $y+z=0$ et ne sont pas colinéaires : $\mathcal H=(\vec a,\vec b)$ est
+une base de $\mathcal P$. Comme $f(\vec a)=2\vec a$ et $f(\vec b)=\vec a+2\vec b$ :
+\[\Mat_{\mathcal H}(f_{|\mathcal P})=\begin{pmatrix}2&1\\0&2\end{pmatrix}.\]
+\retenir{dans une base trigonalisante $(\vec e_1,\vec e_2,\vec e_3)$, les sous-espaces $\vect(\vec e_1)$ et $\vect(\vec e_1,\vec e_2)$ sont
+toujours stables. Ici, c'est le seul plan stable.}
+
+% ---------------------------------------------------------------------
+\Partie{Partie III — Trois plans stables}
+
+$K=\begin{pmatrix}3&5&-2\\0&-2&0\\4&4&-3\end{pmatrix}$.
+
+\Q{III.1} On développe selon la deuxième ligne :
+\[\chi_g(x)=(x+2)\begin{vmatrix}x-3&2\\-4&x+3\end{vmatrix}=(x+2)(x^2-9+8)=(x+2)(x+1)(x-1).\]
+$g$ a trois valeurs propres distinctes $-2,-1,1$, entières et dans $\ient{-2}{2}$. En dimension $3$, \textbf{$g$ est diagonalisable}
+(trois valeurs propres distinctes). Sous-espaces propres, chacun de dimension $1$ :
+\begin{gather*}E_{-2}=\vect(\vec u_{-2}),\qquad E_{-1}=\vect(\vec u_{-1}),\qquad E_1=\vect(\vec u_1),\\
+\vec u_{-2}=(1,-1,0),\qquad \vec u_{-1}=(1,0,2),\qquad \vec u_1=(1,0,1).\end{gather*}
+(Contrôles : $K\vec u_{-2}=(-2,2,0)$, $K\vec u_{-1}=(-1,0,-2)$, $K\vec u_1=(1,0,1)$.)
+
+\Q{III.2(a)} \choix{dans la base propre $\mathcal U=(\vec u_{-2},\vec u_{-1},\vec u_1)$, on cherche une matrice diagonale de
+coefficients $\pm1$ (symétrie) moins une matrice diagonale de coefficients $0$ ou $1$ (projection).}
+\[\operatorname{diag}(-2,-1,1)=\operatorname{diag}(-1,-1,1)-\operatorname{diag}(1,0,0).\]
+Soit $s$ et $p$ les endomorphismes de matrices $\operatorname{diag}(-1,-1,1)$ et $\operatorname{diag}(1,0,0)$ dans $\mathcal U$. Alors
+$s^2=\Id$ ($s$ est une symétrie), $p^2=p$ ($p$ est une projection) et $g=s-p$, car les trois endomorphismes coïncident sur la base
+$\mathcal U$. Dans $\mathcal B$, avec $Q=(\vec u_{-2}\,|\,\vec u_{-1}\,|\,\vec u_1)$ :
+\[S=\begin{pmatrix}3&4&-2\\0&-1&0\\4&4&-3\end{pmatrix},\qquad \Pi=\begin{pmatrix}0&-1&0\\0&1&0\\0&0&0\end{pmatrix},\qquad
+S-\Pi=K .\]
+(Contrôles : $S^2=I_3$ et $\Pi^2=\Pi$.)
+
+\Q{III.2(b)} \emph{$s$} est la symétrie par rapport à $\Ker(s-\Id)=E_1=\vect\big((1,0,1)\big)$, parallèlement à
+$\Ker(s+\Id)=E_{-2}\oplus E_{-1}=\vect\big((1,-1,0),(1,0,2)\big)$, plan d'équation $-2x-2y+z=0$.
+
+\emph{$p$} est la projection sur $\Im p=E_{-2}=\vect\big((1,-1,0)\big)$, parallèlement à $\Ker p=E_{-1}\oplus E_1=\vect\big((1,0,2),(1,0,1)\big)$,
+plan d'équation $y=0$.
+
+\Q{III.3(a)} $\chi_{K^T}=\chi_K$ : $K^T$ a trois valeurs propres distinctes, donc trois sous-espaces propres de dimension $1$, soit
+exactement trois droites de vecteurs propres. D'après I.4 et I.5, chaque plan stable correspond à une de ces droites (vecteur
+normal), et deux droites distinctes donnent des plans distincts (vecteurs normaux non colinéaires). \textbf{$g$ possède exactement
+trois plans stables.} Avec $K^T=\begin{pmatrix}3&0&4\\5&-2&4\\-2&0&-3\end{pmatrix}$ :
+\[E_{-2}(K^T)=\vect\big((0,1,0)\big),\quad E_{-1}(K^T)=\vect\big((1,1,-1)\big),\quad E_1(K^T)=\vect\big((-2,-2,1)\big).\]
+Les trois plans stables sont donc
+\[\mathcal P_1 : y=0,\qquad \mathcal P_2 : x+y-z=0,\qquad \mathcal P_3 : -2x-2y+z=0 .\]
+
+\Q{III.3(b)} On teste les vecteurs propres de $g$ dans chaque équation :
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
+\item $\vec u_{-1}=(1,0,2)$ et $\vec u_1=(1,0,1)$ vérifient $y=0$ : $\mathcal P_1=E_{-1}\oplus E_1$ ;
+\item $\vec u_{-2}=(1,-1,0)$ et $\vec u_1$ vérifient $x+y-z=0$ : $\mathcal P_2=E_{-2}\oplus E_1$ ;
+\item $\vec u_{-2}$ et $\vec u_{-1}$ vérifient $-2x-2y+z=0$ : $\mathcal P_3=E_{-2}\oplus E_{-1}$.
+\end{itemize}
+\textbf{Les plans stables sont les sommes de deux des trois droites stables} $E_{-2}$, $E_{-1}$, $E_1$.
+\retenir{pour un endomorphisme à trois valeurs propres simples, les plans stables sont les $\binom32=3$ sommes de deux droites
+propres. On retrouve aussi que $\Ker p$ et $\Ker(s+\Id)$ sont stables.}
+
+% ---------------------------------------------------------------------
+\Partie{Partie IV — Combien de plans stables ?}
+
+$L=\begin{pmatrix}2&1&1\\0&2&0\\0&0&2\end{pmatrix}$.
+
+\Q{IV.1} $L$ est triangulaire : $\chi_L=(x-2)^3$ et $\Sp(L)=\{2\}$. $L-2I_3=\begin{pmatrix}0&1&1\\0&0&0\\0&0&0\end{pmatrix}$ est de rang
+$1$, donc $\dim E_2(L)=2<3$. \textbf{$L$ n'est pas diagonalisable} (sinon on aurait $L=2I_3$, comme en II.1(b)).
+
+\Q{IV.2} $L^T-2I_3=\begin{pmatrix}0&0&0\\1&0&0\\1&0&0\end{pmatrix}$, donc $E_2(L^T)=\{(0,\beta,\gamma)\}=\vect\big((0,1,0),(0,0,1)\big)$ est un
+\emph{plan}. Par I.4 et I.5, les plans stables sont les plans
+\[\mathcal P_{\beta,\gamma} : \beta y+\gamma z=0,\qquad (\beta,\gamma)\neq(0,0).\]
+Deux couples non proportionnels donnent deux plans distincts : \textbf{$h$ possède une infinité de plans stables}, exactement les
+plans contenant $\vect(\vec e_1)$.
+\gain{vérification directe : $h(\vu)=2\vu+(y+z)\vec e_1$. Un plan contenant $\vec e_1$ est donc stable.}
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
+\item Droites stables : $\vect(\vec v)$ avec $\vec v$ vecteur propre de $A$. Plans stables : $N^TU=0$ avec $N$ vecteur propre de $A^T$.
+\item Nombre de plans stables = nombre de droites dans les sous-espaces propres de $A^T$ : $1$ (partie II), $3$ (partie III),
+une infinité (partie IV, sous-espace propre de dimension $2$).
+\item Trigonaliser : poser $f(\vec a)=2\vec a$, $f(\vec b)=\vec a+2\vec b$, $f(\vec c)=\vec b+2\vec c$ et résoudre des systèmes
+$(M-2I)X=Y$.
+\item Diagonalisable avec une seule valeur propre $\lambda$ $\iff$ égale à $\lambda I_n$.
+\end{itemize}
+\end{essentiel}
+
+% =====================================================================
+\section*{Exercice 2 — $\zeta(3)$ ou constante d'Apéry}\addcontentsline{toc}{section}{Exercice 2}
+
+\Partie{1. Convergence et calcul}
+
+\Q{1(a)} \emph{Méthode 1 : convergence absolue.} $\Big|\frac{(-1)^{n-1}}{n^3}\Big|=\frac1{n^3}$ et $\sum\frac1{n^3}$ converge (série de
+Riemann, $3>1$). La série converge absolument, donc converge.
+
+\emph{Méthode 2 : critère des séries alternées.} La série est alternée et $\big(\frac1{n^3}\big)$ décroît et tend vers $0$ : elle
+converge.
+
+\Q{1(b)} Les deux séries convergent ; par linéarité,
+\[\zeta(3)-\eta(3)=\sum_{n=1}^{+\infty}\frac{1-(-1)^{n-1}}{n^3}.\]
+Le numérateur vaut $0$ si $n$ est impair et $2$ si $n$ est pair. En posant $n=2k$ :
+\[\zeta(3)-\eta(3)=\sum_{k=1}^{+\infty}\frac{2}{8k^3}=\frac14\zeta(3),\qquad\text{donc}\qquad \boxed{\eta(3)=\tfrac34\,\zeta(3).}\]
+
+\Partie{2. Majoration du reste d'ordre $N$}
+
+\Q{2(a)} $t\mapsto\frac1{t^3}$ est décroissante sur $[1,+\infty[$. Pour $k\geq2$ et $t\in[k-1,k]$, $\frac1{k^3}\leq\frac1{t^3}$ ; en
+intégrant sur $[k-1,k]$ :
+\[\frac1{k^3}\leq\int_{k-1}^{k}\frac{dt}{t^3}.\]
+On somme pour $k$ de $N+1$ à $M$, puis on fait tendre $M$ vers $+\infty$ (l'intégrale converge) :
+\[0\leq\zeta(3)-\sum_{k=1}^{N}\frac1{k^3}=\sum_{k=N+1}^{+\infty}\frac1{k^3}\leq\int_N^{+\infty}\frac{dt}{t^3}=\Big[-\frac1{2t^2}\Big]_N^{+\infty}=\frac1{2N^2}.\]
+La minoration vient de ce que les termes du reste sont positifs.
+
+\Q{2(b)} D'après le critère des séries alternées (1(a)), le reste est majoré en valeur absolue par son premier terme :
+\[\Big|\eta(3)-\sum_{k=1}^{N}\frac{(-1)^{k-1}}{k^3}\Big|\leq\frac1{(N+1)^3}\leq\frac1{N^3}.\]
+
+\Q{2(c)} \choix{le reste alterné est en $\frac1{N^3}$, beaucoup plus petit que $\frac1{2N^2}$. On calcule donc $\eta(3)$ et on utilise
+$\zeta(3)=\frac43\eta(3)$.}
+Avec $\eta_N=\sum_{k=1}^N\frac{(-1)^{k-1}}{k^3}$, l'erreur sur $\frac43\eta_N$ vaut au plus $\frac4{3N^3}$.
+\[\frac4{3N^3}\leq10^{-6}\iff N^3\geq\tfrac43\cdot10^6\iff N\geq110{,}06\ldots,\quad\text{donc } N=111 .\]
+En sommant directement $\zeta(3)$, il faudrait $\frac1{2N^2}\leq10^{-6}$, soit $N=708$ termes.
+\begin{center}
+\begin{minipage}{0.8\linewidth}\small
+\begin{verbatim}
+def zeta3(eps=1e-6):
+    N = 1
+    while 4 / (3 * N**3) > eps:   # erreur garantie
+        N += 1
+    eta = 0
+    for k in range(1, N + 1):
+        eta += (-1)**(k - 1) / k**3
+    return 4 * eta / 3            # zeta(3) = 4/3 eta(3)
+
+print(zeta3())   # 1.20205738...  (N = 111)
+\end{verbatim}
+\end{minipage}
+\end{center}
+\gain{pour aller plus loin : la comparaison série-intégrale donne aussi $\zeta(3)-\zeta_N\geq\frac1{2(N+1)^2}$. Le milieu de
+l'encadrement obtenu approche $\zeta(3)$ à $\frac{2N+1}{4N^2(N+1)^2}$ près : $N=79$ suffit.}
+
+\Partie{3. Expression de $\zeta(3)$ avec une intégrale généralisée}
+
+\Q{3(a)} $f:x\mapsto\frac{x^2}{e^x-1}$ est continue et positive sur $]0,+\infty[$.
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
+\item \emph{En $0$} : $e^x-1\sim x$, donc $f(x)\sim x\to0$ ; $f$ se prolonge par continuité en $0$ (intégrale faussement impropre).
+\item \emph{En $+\infty$} : $x^2f(x)=\frac{x^4}{e^x-1}\to0$ (croissances comparées), donc $f(x)=o\big(\frac1{x^2}\big)$, et
+$\int_1^{+\infty}\frac{dx}{x^2}$ converge (Riemann).
+\end{itemize}
+Par comparaison de fonctions positives, \textbf{$I$ converge}.
+
+\Q{3(b)} Pour $x>0$, $e^{-x}\neq1$ ; somme géométrique :
+\[\sum_{k=1}^Ne^{-kx}=e^{-x}\frac{1-e^{-Nx}}{1-e^{-x}}=\frac{1-e^{-Nx}}{e^x-1},\quad\text{donc}\quad
+\sum_{k=1}^Ne^{-kx}+\frac{e^{-Nx}}{e^x-1}=\frac1{e^x-1}.\]
+
+\Q{3(c)} Soit $k\in\N^*$ et $A>0$. On intègre par parties sur le segment $[0,A]$, deux fois ($u=x^2$ puis $u=x$, $v=-\frac{e^{-kx}}k$) :
+\[\int_0^Ax^2e^{-kx}dx=\Big[-\frac{x^2e^{-kx}}k\Big]_0^A+\frac2k\int_0^Axe^{-kx}dx,\qquad
+\int_0^Axe^{-kx}dx=\Big[-\frac{xe^{-kx}}k\Big]_0^A+\frac1k\int_0^Ae^{-kx}dx .\]
+Quand $A\to+\infty$, $A^2e^{-kA}\to0$ et $Ae^{-kA}\to0$ (croissances comparées), et $\int_0^Ae^{-kx}dx\to\frac1k$. Donc
+\[\int_0^{+\infty}x^2e^{-kx}dx=\frac2k\cdot\frac1{k^2}=\boxed{\frac2{k^3}}.\]
+
+\Q{3(d)} Pour $x\geq0$, $e^x=\sum_{n\geq0}\frac{x^n}{n!}\geq1+x+\frac{x^2}2$ (termes positifs), donc $e^x-1\geq\frac{x^2}2$. Pour $x>0$ :
+\[0\leq\delta(x)=\frac{x^2}{e^x-1}\leq2 .\]
+(En $0$, $\delta$ se prolonge par $0$.) \textbf{$\delta$ est bornée sur $[0,+\infty[$.}
+
+\Q{3(e)} $0\leq\delta(x)e^{-Nx}\leq2e^{-Nx}$, intégrable sur $[0,+\infty[$ : l'intégrale converge et
+\[0\leq\int_0^{+\infty}\delta(x)e^{-Nx}dx\leq2\int_0^{+\infty}e^{-Nx}dx=\frac2N\xrightarrow[N\to+\infty]{}0 .\]
+
+\Q{3(f)} Par 3(c), $\sum_{k=1}^N\int_0^{+\infty}x^2e^{-kx}dx=\sum_{k=1}^N\frac2{k^3}$. On multiplie 3(b) par $x^2$ :
+\[\frac{x^2}{e^x-1}=\sum_{k=1}^Nx^2e^{-kx}+\delta(x)e^{-Nx}\qquad(x>0).\]
+Toutes ces intégrales convergent (3(a), 3(c), 3(e)) ; par linéarité,
+\[I=\sum_{k=1}^N\frac2{k^3}+\int_0^{+\infty}\delta(x)e^{-Nx}dx .\]
+Quand $N\to+\infty$, par 3(e) : \[\boxed{I=2\zeta(3)}\approx2{,}404 .\]
+\piege{intervertir directement $\int$ et $\sum_{k=1}^{+\infty}$ n'est pas justifié avec le programme de PT : on travaille avec une
+somme \emph{finie} et un reste qu'on contrôle.}
+
+\Partie{4. Équation différentielle et série entière}
+
+Rappel : pour $|x|<1$, $-\ln(1-x)=\sum_{n\geq1}\frac{x^n}n$. Donc $\varphi(x)=\sum_{n\geq1}\frac{x^{n-1}}n$ sur $]-1,1[$, la valeur en
+$0$ étant bien $1$ : \textbf{$\varphi$ est développable en série entière, donc $\mathcal C^\infty$ sur $]-1,1[$}.
+
+\Q{4(a)} On note $a_n=\frac1{n^3}$.
+\begin{enumerate}[label=\emph{Méthode \arabic*.},leftmargin=0pt,itemindent=*,itemsep=3pt]
+\item \emph{D'Alembert.} $\frac{a_{n+1}}{a_n}=\big(\frac n{n+1}\big)^3\to1$, donc $R=1$.
+\item \emph{Bornitude.} Pour $r\leq1$, $\frac{r^n}{n^3}\leq1$ : la suite est bornée et $R\geq1$. Pour $r>1$, $\frac{r^n}{n^3}\to+\infty$
+(croissances comparées) : la suite n'est pas bornée et $R\leq1$. Donc $R=1$.
+\item \emph{Séries de même rayon.} $\sum n^\alpha a_nx^n$ a le même rayon que $\sum a_nx^n$ pour tout réel $\alpha$ ; avec $\alpha=3$, on
+obtient $\sum x^n$, de rayon $1$. Donc $R=1$.
+\end{enumerate}
+
+\Q{4(b)} Sur $]0,1[$, $x\neq0$ : $(E)\iff y'+\frac1xy=\frac{\varphi(x)}x$. L'équation homogène a pour solutions $x\mapsto\frac Kx$.
+On cherche $y=\frac{K(x)}x$ avec $K$ dérivable :
+\[xy'+y=x\Big(\frac{K'(x)}x-\frac{K(x)}{x^2}\Big)+\frac{K(x)}x=K'(x),\]
+donc $K'=\varphi$. Avec $\Phi(x)=\int_0^x\varphi(t)\,dt$ ($\varphi$ est continue sur $]-1,1[$), les solutions sur $]0,1[$ sont
+\[y(x)=\frac{\Phi(x)+C}{x},\qquad C\in\R .\]
+
+\Q{4(c)} \emph{Analyse.} Le même calcul sur $]-1,0[$ donne $y(x)=\frac{\Phi(x)+C'}x$. Soit $y$ une solution de classe $\mathcal C^1$
+sur $]-1,1[$. Elle est continue en $0$, donc bornée au voisinage de $0$. Or $\Phi(x)\to0$ : si $C\neq0$, $y(x)\sim\frac Cx$ n'est
+pas bornée en $0^+$. Donc $C=0$, et de même $C'=0$. En $x=0$, $(E)$ donne $y(0)=\varphi(0)=1$.
+
+\emph{Synthèse.} Soit $y_0(x)=\frac{\Phi(x)}x$ pour $x\neq0$ et $y_0(0)=1$. En intégrant terme à terme la série de $\varphi$,
+\[y_0(x)=\sum_{n\geq1}\frac{x^{n-1}}{n^2}\quad\text{sur }]-1,1[,\]
+série entière de rayon $1$ : $y_0$ est $\mathcal C^\infty$, et elle vérifie $(E)$ sur $]0,1[$, sur $]-1,0[$ et en $0$.
+
+\textbf{$(E)$ a une unique solution $\mathcal C^1$ sur $]-1,1[$}, à savoir $y_0$.
+
+\emph{Le théorème de Cauchy linéaire} s'applique à une équation $y'=a(x)y+b(x)$, avec $a$ et $b$ continues sur l'intervalle. Ici le
+coefficient de $y'$ s'annule en $0\in\,]-1,1[$ : on ne peut pas mettre $(E)$ sous forme résolue sur $]-1,1[$. La conclusion du
+théorème est d'ailleurs fausse : le problème $y(0)=y_0$ n'a pas de solution si $y_0\neq1$.
+
+\Q{4(d)} D'après 4(a), $S$ est dérivable (terme à terme) sur $]-1,1[$ et $S'(x)=\sum_{n\geq1}\frac{x^{n-1}}{n^2}$. Donc
+\[xS'(x)=\sum_{n\geq1}\frac{x^n}{n^2},\qquad\big(xS'(x)\big)'=\sum_{n\geq1}\frac{x^{n-1}}n=\varphi(x).\]
+Comme $\big(xS'\big)'=xS''+S'$, \textbf{$y=S'$ est solution de $(E)$ sur $]-1,1[$}, et elle est de classe $\mathcal C^1$ (somme d'une
+série entière).
+
+\Q{4(e)} Par unicité (4(c)), $S'=y_0$. Pour $x\in\,]-1,1[\setminus\{0\}$ :
+\[S'(x)=\frac{\Phi(x)}x=-\frac1x\int_0^x\frac{\ln(1-t)}t\,dt .\]
+
+\Q{4(f)} Pour $t\in\,]-1,1[\setminus\{0\}$, $\ln(1-t)$ et $t$ sont de signes contraires, donc $\varphi(t)>0$ ; et $\varphi(0)=1>0$.
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
+\item Si $x\in\,]0,1[$ : $\Phi(x)>0$ et $x>0$, donc $S'(x)>0$.
+\item Si $x\in\,]-1,0[$ : $\Phi(x)=-\int_x^0\varphi<0$ et $x<0$, donc $S'(x)>0$.
+\item $S'(0)=1>0$.
+\end{itemize}
+$S$ est strictement croissante sur $]-1,1[$, donc sur $[-1,1]$ (continuité admise). Valeurs aux bornes :
+$S(1)=\zeta(3)$ et $S(-1)=\sum\frac{(-1)^n}{n^3}=-\eta(3)=-\frac34\zeta(3)$.
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{c|ccccc}
+$x$ & $-1$ & & $0$ & & $1$\\\hline
+$S'(x)$ & & $+$ & $1$ & $+$ & \\\hline
+$S(x)$ & $-\frac34\zeta(3)$ & $\nearrow$ & $0$ & $\nearrow$ & $\zeta(3)$
+\end{tabular}
+\end{center}
+Le maximum de $S$ sur $[-1,1]$ est $\zeta(3)$, atteint en $1$.
+
+\Q{4(g)} Soit $G(u)=\int_0^u\frac{\ln(1-t)}t\,dt$, de classe $\mathcal C^1$ sur $[0,1[$ avec $G'(u)=\frac{\ln(1-u)}u$, $G(0)=0$. Pour
+$x\in\,]0,1[$, par 4(e) et $S(0)=0$ :
+\[S(x)=\int_0^xS'(u)\,du=-\int_0^x\frac{G(u)}u\,du\]
+(intégrale faussement impropre : $\frac{G(u)}u\to G'(0)=-1$). On intègre par parties sur $[\varepsilon,x]$, avec $\ln$ primitive de
+$\frac1u$ :
+\[\int_\varepsilon^x\frac{G(u)}u\,du=\Big[G(u)\ln u\Big]_\varepsilon^x-\int_\varepsilon^x\frac{\ln u\,\ln(1-u)}u\,du .\]
+Quand $\varepsilon\to0^+$ : $G(\varepsilon)\sim-\varepsilon$, donc $G(\varepsilon)\ln\varepsilon\to0$ ; et $\frac{\ln u\ln(1-u)}u\sim-\ln u$, intégrable en
+$0$. D'où
+\[\boxed{S(x)=\int_0^x\frac{\ln t\,\ln(1-t)}t\,dt-\ln x\int_0^x\frac{\ln(1-t)}t\,dt .}\]
+\piege{faire l'intégration par parties directement sur $]0,x]$ sans vérifier la limite du crochet en $0$.}
+
+\Q{4(h)} On fait tendre $x$ vers $1^-$ dans 4(g).
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
+\item $S(x)\to S(1)=\zeta(3)$ par continuité de $S$ sur $[-1,1]$ (admise).
+\item $\int_0^1\frac{\ln(1-t)}t\,dt$ converge : en $1$, $\frac{\ln(1-t)}t\sim\ln(1-t)$, et $\int_0^1\ln s\,ds$ converge. Donc $G(x)\to G(1)$,
+réel, et $\ln x\cdot G(x)\to0\cdot G(1)=0$.
+\item $\int_0^1\frac{\ln t\,\ln(1-t)}t\,dt$ converge : en $0$, voir 4(g) ; en $1$, $\ln t\sim t-1$, donc l'intégrande est équivalent à
+$-(1-t)\ln(1-t)\to0$ (faussement impropre). Donc $\int_0^x\to\int_0^1$.
+\end{itemize}
+Par passage à la limite :
+\[\boxed{\zeta(3)=\int_0^1\frac{\ln t\,\ln(1-t)}t\,dt}\approx1{,}2020569 .\]
+
+\begin{essentiel}
+\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
+\item Reste d'une série alternée : majoré par le premier terme. Reste de Riemann : comparaison série-intégrale.
+\item $\int_0^{+\infty}x^ne^{-kx}dx=\frac{n!}{k^{n+1}}$ : intégrations par parties sur un segment, puis limite.
+\item Intervertir $\int$ et $\sum$ : somme finie + reste qui tend vers $0$.
+\item Équation $a(x)y'+b(x)y=c(x)$ avec $a$ qui s'annule : résoudre sur chaque intervalle, puis recoller ; Cauchy ne s'applique
+pas.
+\item Intégration par parties généralisée : sur $[\varepsilon,x]$, puis limite du crochet.
+\end{itemize}
+\end{essentiel}
+
+\end{document}

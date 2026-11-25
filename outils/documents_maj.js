@@ -46,6 +46,13 @@ nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le 
   fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction.tex',
   description: "Corrigés détaillés, rédigés par Le Collé (non officiels), des problèmes d'algèbre de la Banque PT 2018 (page 1) et 2015 (page 5), Mathématiques A : choix de la méthode, pièges, résultats à retenir, liens avec le DL 3. Calculs vérifiés par calcul formel." });
 
+nouveau('ds3-2025-sujet', { titre: "Sujet de l'année dernière — DS 3 (1er décembre 2025)", sousTitre: 'Énoncé · sous-espaces stables, constante d\'Apéry', type: 'devoir',
+  fichier: 'docs/pt/examens/ds3-2025-sujet.pdf', source: 'docs/pt/examens/ds3-2025-sujet.pdf',
+  description: "Le devoir surveillé n° 3 de la classe, l'an dernier (lundi 1er décembre 2025). Exercice 1 : plans et droites stables d'un endomorphisme de R³. Exercice 2 : ζ(3), séries, intégrales généralisées, équation différentielle et séries entières." });
+nouveau('ds3-2025-corrige', { titre: "Sujet de l'année dernière — DS 3 : corrigé Le Collé", sousTitre: 'Corrigé détaillé, rédigé comme une copie de concours · non officiel', type: 'devoir',
+  fichier: 'docs/pt/examens/ds3-2025-corrige.pdf', source: 'docs/pt/sources/ds3-2025-corrige.tex',
+  description: "Corrigé complet du DS 3 du 1er décembre 2025, rédigé par Le Collé (non officiel) : Exercice 1 page 1, Exercice 2 page 6. Choix de la méthode, pièges, résultats à retenir ; calculs vérifiés par calcul formel." });
+
 // titres et sous-titres : numéros de chapitre du nouvel ordre
 const num = Object.fromEntries(CH.map(c => [c.id, c.num]));
 D['livre-red'].titre = 'Réduction';
@@ -79,7 +86,7 @@ CH.forEach(c => {
   ids.forEach(i => vu.add(i));
   groupes.push([`Chapitre ${c.num} — ${c.titre}`, ids]);
 });
-const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
+const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-corrige', 'ds3-2025-sujet', 'ds3-2025-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
 const sel = Object.keys(D).filter(k => k.startsWith('selection-'));
 sel.forEach(i => vu.add(i)); groupes.push(['Sélections de 5 problèmes (générées par td/integrer_selection.py)', CH.map(c => 'selection-' + c.id).filter(k => D[k])]);
 const td = Object.keys(D).filter(k => !vu.has(k));
