@@ -14,7 +14,7 @@ LC.empreintes = {
  "docs/pt/bilans/bilan-metrique.pdf": "88d847a75a",
  "docs/pt/bilans/bilan-red.pdf": "01286d601a",
  "docs/pt/bilans/bilan-series.pdf": "fc100cee8c",
- "docs/pt/examens/ds3-2025-corrige.pdf": "dcb5d863b4",
+ "docs/pt/examens/ds3-2025-corrige.pdf": "bb92a0b182",
  "docs/pt/examens/ds3-2025-sujet.pdf": "3f0b939a6c",
  "docs/pt/examens/eb-al-det-corrige.pdf": "39976ea213",
  "docs/pt/examens/eb-al-det-sujet.pdf": "1fc7b6be08",

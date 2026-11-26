@@ -436,26 +436,9 @@ c'est-à-dire $(a,b,c)=\mu(0,1,1)$ avec $\mu\neq0$. Toutes ces équations défin
 stable},
 \[\mathcal P : y+z=0 .\]
 
-\Q{II.3(c)} \emph{Restriction.} $\mathcal P$ est stable par $f$ (II.3(b)) : l'application $f_{|\mathcal P} : \mathcal P\to\mathcal P$,
-$\vu\mapsto f(\vu)$, est bien définie, et c'est un endomorphisme de $\mathcal P$, avec $\dim\mathcal P=2$.
-
-\emph{Analyse.} Si $\mathcal H=(\vec e_1,\vec e_2)$ est une base de $\mathcal P$ telle que $\Mat_{\mathcal H}(f_{|\mathcal P})=\begin{pmatrix}2&1\\0&2\end{pmatrix}$,
-alors, en lisant les colonnes,
-\[f(\vec e_1)=2\vec e_1\qquad\text{et}\qquad f(\vec e_2)=\vec e_1+2\vec e_2 .\]
-$\vec e_1$ est donc un vecteur propre de $f$ appartenant à $\mathcal P$, et $\vec e_2$ une solution de $f(\vu)=2\vu+\vec e_1$ appartenant à
-$\mathcal P$. On essaie $\vec e_1=\vec a$ et $\vec e_2=\vec b$.
-
-\emph{Synthèse.} Posons $\mathcal H=(\vec a,\vec b)$, avec $\vec a=(1,1,-1)$ et $\vec b=(0,-1,1)$.
-\begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
-\item $\vec a\in\mathcal P$ car $1+(-1)=0$, et $\vec b\in\mathcal P$ car $-1+1=0$.
-\item $\vec a$ et $\vec b$ ne sont pas colinéaires (la première coordonnée de $\vec b$ est nulle, pas celle de $\vec a$, et $\vec b\neq\vec 0$).
-$\mathcal H$ est une famille libre de deux vecteurs de $\mathcal P$, de dimension $2$ : c'est une base de $\mathcal P$.
-\item D'après II.2(a), $f(\vec a)=2\vec a=2\,\vec a+0\,\vec b$.
-\item $\vec b$ est solution de $(E)$ (II.2(b)) : $f(\vec b)=2\vec b+\vec a=1\,\vec a+2\,\vec b$.
-\end{itemize}
-Les coordonnées de $f_{|\mathcal P}(\vec a)$ et de $f_{|\mathcal P}(\vec b)$ dans $\mathcal H$ sont $(2,0)$ et $(1,2)$. Ce sont les colonnes de la
-matrice :
-\[\boxed{\Mat_{\mathcal H}(f_{|\mathcal P})=\begin{pmatrix}2&1\\0&2\end{pmatrix}}\qquad\text{avec}\qquad \mathcal H=\big((1,1,-1),\,(0,-1,1)\big).\]
+\Q{II.3(c)} $\vec a=(1,1,-1)$ et $\vec b=(0,-1,1)$ vérifient $y+z=0$ et ne sont pas colinéaires : $\mathcal H=(\vec a,\vec b)$ est
+une base de $\mathcal P$. Comme $f(\vec a)=2\vec a$ et $f(\vec b)=\vec a+2\vec b$ :
+\[\Mat_{\mathcal H}(f_{|\mathcal P})=\begin{pmatrix}2&1\\0&2\end{pmatrix}.\]
 
 % ---------------------------------------------------------------------
 \Partie{Partie III — Trois plans stables}
