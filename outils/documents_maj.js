@@ -69,6 +69,13 @@ nouveau('ent-ser-corrige', { titre: 'Entraînement — Séries numériques et s�
   fichier: 'docs/pt/examens/ent-series-corrige.pdf', source: 'docs/pt/sources/entrainement-series-corrige.tex',
   description: "Corrigé complet du sujet d'entraînement du 28 novembre : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3. Résultats vérifiés par calcul formel." });
 ['ent-ser-sujet', 'ent-ser-corrige'].forEach(i => { D[i].maj = '2026-11-26'; });
+nouveau('dsb-sujet', { titre: "DS blanc — d'après la Banque PT", sousTitre: 'Énoncé · 4 h · réduction, séries numériques, équations différentielles, séries entières', type: 'devoir',
+  fichier: 'docs/pt/examens/ds-blanc-sujet.pdf', source: 'docs/pt/sources/ds-blanc-banque-pt-sujet.tex',
+  description: "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : réduction de matrices 2×2 et carte de diagonalisabilité (2026, Maths A, partie A) ; série alternée de logarithmes (2026, Maths C, partie I, sans les intégrales) ; reste de la série exponentielle par une équation différentielle et irrationalité de e (2014, Maths C, partie I) ; développement en série entière de la tangente (2022, Maths C, partie II)." });
+nouveau('dsb-corrige', { titre: "DS blanc — d'après la Banque PT : corrigé Le Collé", sousTitre: 'Corrigé rédigé comme une copie · non officiel', type: 'devoir',
+  fichier: 'docs/pt/examens/ds-blanc-corrige.pdf', source: 'docs/pt/sources/ds-blanc-banque-pt-corrige.tex',
+  description: "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3, exercice 4 page 4. Résultats vérifiés par calcul formel." });
+['dsb-sujet', 'dsb-corrige'].forEach(i => { D[i].maj = '2026-11-26'; });
 nouveau('ds3-2025-sujet', { titre: "Sujet de l'année dernière — DS 3 (1er décembre 2025)", sousTitre: 'Énoncé · sous-espaces stables, constante d\'Apéry', type: 'devoir',
   fichier: 'docs/pt/examens/ds3-2025-sujet.pdf', source: 'docs/pt/examens/ds3-2025-sujet.pdf',
   description: "Le devoir surveillé n° 3 de la classe, l'an dernier (lundi 1er décembre 2025). Exercice 1 : plans et droites stables d'un endomorphisme de R³. Exercice 2 : ζ(3), séries, intégrales généralisées, équation différentielle et séries entières." });
@@ -110,7 +117,7 @@ CH.forEach(c => {
   ids.forEach(i => vu.add(i));
   groupes.push([`Chapitre ${c.num} — ${c.titre}`, ids]);
 });
-const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-corrige', 'ds3-2025-sujet', 'ds3-2025-corrige', 'ent-ser-sujet', 'ent-ser-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
+const autres = ['revision', 'dl3', 'eb-al-det-sujet', 'eb-al-det-corrige', 'ent-red-corrige', 'ds3-2025-sujet', 'ds3-2025-corrige', 'ent-ser-sujet', 'ent-ser-corrige', 'dsb-sujet', 'dsb-corrige', 'archive']; autres.forEach(i => vu.add(i)); groupes.push(['Autres documents', autres]);
 const sel = Object.keys(D).filter(k => k.startsWith('selection-'));
 sel.forEach(i => vu.add(i)); groupes.push(['Sélections de 5 problèmes (générées par td/integrer_selection.py)', CH.map(c => 'selection-' + c.id).filter(k => D[k])]);
 const td = Object.keys(D).filter(k => !vu.has(k));

@@ -15,23 +15,27 @@ window.LC = window.LC || {};
 
 LC.entrainement = [
   {
-    id: "ent-series-2026-11-28", type: "devoir", typeTexte: "Séance d'entraînement", theme: "Séries numériques · séries entières",
-    titre: "Entraînement – Séries numériques et séries entières",
-    seance: "Samedi 28 novembre 2026", objectif: "Préparer le DS du lundi 30 novembre (réduction, séries numériques, équations différentielles, un peu de séries entières), en insistant sur les séries.",
-    chapitres: ["series", "se", "ed"], duree: 240, niveau: 3,
-    origine: "Exercice 2 du DS 3 de l'année dernière, puis un sujet d'entraînement Le Collé (non officiel)",
-    description: "Deux temps. D'abord l'exercice 2 du DS 3 de l'année dernière : la constante d'Apéry $\\zeta(3)$ (séries numériques, comparaison série-intégrale, série entière $\\sum\\frac{x^n}{n^3}$ et équation différentielle). Ensuite un sujet d'entraînement de 2 h rédigé par Le Collé, sur les exercices classiques : nature de séries numériques et développement asymptotique, rayons de convergence, somme d'une série entière et continuité au bord, développement en série entière, équation $xy''+2y'+xy=0$ résolue par les séries entières. Chercher sans le cours, puis lire les corrigés.",
+    id: "ent-series-2026-11-28", type: "devoir", typeTexte: "DS blanc et séance d'entraînement", theme: "Séries numériques · séries entières · réduction",
+    titre: "Préparation au DS du 30 novembre – DS blanc d'après la Banque PT",
+    seance: "Samedi 28 novembre 2026", objectif: "Se préparer au DS du lundi 30 novembre (réduction, séries numériques, équations différentielles, un peu de séries entières) sur des questions de concours, dans la forme du DS 3 de l'an dernier.",
+    chapitres: ["red", "series", "se", "ed"], duree: 240, niveau: 4,
+    origine: "Exercice 2 du DS 3 de l'année dernière ; DS blanc composé d'extraits reformulés de la Banque PT (2026 A et C, 2014 C, 2022 C), corrigé Le Collé (non officiel)",
+    description: "En séance : l'exercice 2 du DS 3 de l'année dernière, sur la constante d'Apéry $\\zeta(3)$. Puis un DS blanc de 4 h, construit comme le DS 3 à partir de vrais sujets de la Banque PT et limité au programme du DS (sans intégrales généralisées). Exercice 1 : réduction de matrices $2\\times2$, trigonalisation et carte de diagonalisabilité de $M(a,b)$ (2026, Maths A). Exercice 2 : la série $\\sum\\ln\\big(1+\\frac{(-1)^n}n\\big)$, convergence, convergence absolue et somme (2026, Maths C). Exercice 3 : reste de la série exponentielle par une équation différentielle, suites adjacentes, irrationalité de $e$, Cesàro (2014, Maths C). Exercice 4 : développement en série entière de la tangente par le produit de Cauchy et $f'=1+f^2$ (2022, Maths C). Chercher en temps limité, sans le cours, puis lire le corrigé.",
     liens: [
       { label: "DS 3 — exercice 2", doc: "ds3-2025-sujet", page: 2 },
       { label: "Corrigé de l'exercice 2", doc: "ds3-2025-corrige", page: 5 },
-      { label: "Sujet séries", doc: "ent-ser-sujet", page: 1 },
-      { label: "Corrigé", doc: "ent-ser-corrige", page: 1 }
+      { label: "DS blanc", doc: "dsb-sujet", page: 1 },
+      { label: "Corrigé du DS blanc", doc: "dsb-corrige", page: 1 }
     ],
     ressources: [
+      { label: "Sujet officiel : Banque PT 2026, Maths A", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026", detail: "partie A" },
+      { label: "Sujet officiel : Banque PT 2026, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2026", detail: "préambule et partie I" },
+      { label: "Sujet officiel : Banque PT 2014, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2014", detail: "partie I" },
+      { label: "Sujet officiel : Banque PT 2022, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2022", detail: "partie II" },
+      { label: "Exercices supplémentaires sur les séries (sujet Le Collé)", doc: "ent-ser-sujet", page: 1, detail: "2 h, corrigé dans le document suivant" },
+      { label: "Corrigé des exercices supplémentaires", doc: "ent-ser-corrige", page: 1 },
       { label: "Fiche — Séries numériques", doc: "fiche-series", page: 1, detail: "nature d'une série : l'arbre de décision" },
-      { label: "Fiche — Séries entières", doc: "fiche-se", page: 1, detail: "rayon, sommes, DSE usuels" },
-      { label: "TD Séries entières — exercices classiques", doc: "td-se", page: 1, detail: "parties I et II, corrigés dans le livret de corrections" },
-      { label: "Pour aller plus loin : Banque PT 2022, Maths C, partie II", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2022", detail: "DSE de la tangente par produit de Cauchy et $f'=1+f^2$ (sujet officiel)" }
+      { label: "Fiche — Séries entières", doc: "fiche-se", page: 1, detail: "rayon, sommes, DSE usuels" }
     ]
   },
   {

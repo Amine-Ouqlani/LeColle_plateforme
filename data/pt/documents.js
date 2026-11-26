@@ -563,6 +563,28 @@ LC.documents = {
     "maj": "2026-11-26",
     "description": "Corrigé complet du sujet d'entraînement du 28 novembre : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3. Résultats vérifiés par calcul formel."
   },
+  "dsb-sujet": {
+    "titre": "DS blanc — d'après la Banque PT",
+    "sousTitre": "Énoncé · 4 h · réduction, séries numériques, équations différentielles, séries entières",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ds-blanc-sujet.pdf",
+    "source": "docs/pt/sources/ds-blanc-banque-pt-sujet.tex",
+    "pages": 3,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : réduction de matrices 2×2 et carte de diagonalisabilité (2026, Maths A, partie A) ; série alternée de logarithmes (2026, Maths C, partie I, sans les intégrales) ; reste de la série exponentielle par une équation différentielle et irrationalité de e (2014, Maths C, partie I) ; développement en série entière de la tangente (2022, Maths C, partie II)."
+  },
+  "dsb-corrige": {
+    "titre": "DS blanc — d'après la Banque PT : corrigé Le Collé",
+    "sousTitre": "Corrigé rédigé comme une copie · non officiel",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ds-blanc-corrige.pdf",
+    "source": "docs/pt/sources/ds-blanc-banque-pt-corrige.tex",
+    "pages": 4,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3, exercice 4 page 4. Résultats vérifiés par calcul formel."
+  },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",
     "sousTitre": "Archive — déroulé minuté de la première séance",
