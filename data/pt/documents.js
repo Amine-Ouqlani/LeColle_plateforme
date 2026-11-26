@@ -78,9 +78,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-algebre-lineaire.pdf",
     "source": "docs/pt/sources/fiche-algebre-lineaire.tex",
     "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-13",
-    "description": "Rappels de première année (calcul matriciel, dimension, rang, matrices, changement de base), produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, choix de la méthode, pièges et résultats du TD."
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Rappels de première année (calcul matriciel, dimension, rang, matrices, changement de base), produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, pièges ; en fin de fiche, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-al": {
     "titre": "Exercice bilan — Algèbre linéaire",
@@ -134,9 +134,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-determinants.pdf",
     "source": "docs/pt/sources/fiche-determinants.tex",
     "pages": 3,
-    "version": "v2",
-    "maj": "2026-11-07",
-    "description": "Définitions, règles de calcul, propriétés globales, géométrie, choix de la méthode selon la forme du déterminant, techniques d'ordre n, pièges et résultats des TD."
+    "version": "v3",
+    "maj": "2026-11-26",
+    "description": "Définitions, règles de calcul, propriétés globales, géométrie, choix de la méthode selon la forme du déterminant, techniques d'ordre n, pièges ; en fin de fiche, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-determinants": {
     "titre": "Exercice bilan — Déterminants",
@@ -190,9 +190,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-reduction.pdf",
     "source": "docs/pt/sources/fiche-reduction.tex",
     "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-07",
-    "description": "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges et résultats du TD."
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges ; en fin de fiche, arbre de décision, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-red": {
     "titre": "Exercice bilan — Algèbre linéaire et réduction",
@@ -246,9 +246,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-equations-differentielles.pdf",
     "source": "docs/pt/sources/fiche-equations-differentielles.tex",
     "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-13",
-    "description": "Programme de première année : structure et théorème de Cauchy, premier ordre, second ordre à coefficients constants, choix de la méthode, pièges et résultats du TD."
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Programme de première année : structure et théorème de Cauchy, premier ordre, second ordre à coefficients constants, pièges ; en fin de fiche, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-ed": {
     "titre": "Exercice bilan — Équations différentielles",
@@ -302,9 +302,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-courbes-parametrees.pdf",
     "source": "docs/pt/sources/fiche-courbes-parametrees.tex",
     "pages": 3,
-    "version": "v2",
-    "maj": "2026-11-07",
-    "description": "Outils de calcul, tangente et pente, plan d'étude et symétries, points stationnaires et inflexions, branches infinies, points doubles, check-list de tracé et résultats des TD."
+    "version": "v3",
+    "maj": "2026-11-26",
+    "description": "Outils de calcul, tangente et pente, plan d'étude et symétries, points stationnaires et inflexions, branches infinies, points doubles, pièges ; en fin de fiche, synthèse « quelle méthode ? » et check-list de l'étude."
   },
   "bilan-courbes": {
     "titre": "Exercice bilan — Courbes paramétrées planes",
@@ -336,9 +336,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-metrique-enveloppes.pdf",
     "source": "docs/pt/sources/fiche-metrique-enveloppes.tex",
     "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-11",
-    "description": "Longueur et abscisse curviligne, repère de Frenet et courbure, rayon et centre de courbure, développée, enveloppes, choix de la méthode, pièges et résultats du TD."
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Longueur et abscisse curviligne, repère de Frenet et courbure, rayon et centre de courbure, développée, enveloppes, pièges ; en fin de fiche, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-metrique": {
     "titre": "Exercice bilan — Propriétés métriques et enveloppes",
@@ -392,9 +392,9 @@ LC.documents = {
     "fichier": "docs/pt/fiches/fiche-series.pdf",
     "source": "docs/pt/sources/fiche-series.tex",
     "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-17",
-    "description": "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, choix de la méthode, pièges et résultats du TD."
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, pièges ; en fin de fiche, synthèse « quelle méthode ? » et réflexes avant de rendre."
   },
   "bilan-series": {
     "titre": "Exercice bilan — Séries numériques",

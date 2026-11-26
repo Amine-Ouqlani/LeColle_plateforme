@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -77,12 +83,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 6}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Propriétés métriques et enveloppes}\par\smallskip
-{\color{white!85!Bleu}\sffamily longueur, abscisse curviligne, Frenet, courbure, développée, enveloppes, résultats du TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily longueur, abscisse curviligne, Frenet, courbure, développée, enveloppes, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livret sert à apprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et mêmes notations que le livret ;
-\livre{prop.~1.5} renvoie au livret, \livre{TD~14} à l'exercice~14 du TD complet. Courbe plane régulière $f(t)=\vv{OM(t)}$, plan
-orienté, repère orthonormé direct. Les questions de régularité ne sont pas à soulever (programme).}
+{\small Le livret sert à apprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{prop.~1.5} y renvoie. Courbe plane régulière $f(t)=\vv{OM(t)}$, plan orienté, repère orthonormé direct. Les questions de régularité ne sont pas à soulever (programme).}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -91,7 +95,7 @@ orienté, repère orthonormé direct. Les questions de régularité ne sont pas 
 1.3 Rayon, centre, cercle de courbure ; développée \dotfill\pageref{n13}\\
 2.1 Enveloppe d'une famille de droites \dotfill\pageref{n21}\\
 2.2 La développée, enveloppe des normales \dotfill\pageref{n22}\\
-Méthodes, pièges ; résultats du TD \dotfill\pageref{n3}\\
+Quelle méthode ? Synthèse \dotfill\pageref{n3}\\
 \end{tabular}}
 
 \vspace{0.6em}
@@ -165,33 +169,33 @@ Normale en $M(t)$ : $\vv{M(t)P}\cdot f'(t)=0$ ; dériver par rapport à $t$ ; r�
 Ellipse : $ax\sin t-by\cos t=(a^2-b^2)\sin t\cos t$ $\to$ $\big(\frac{a^2-b^2}a\cos^3t,-\frac{a^2-b^2}b\sin^3t\big)$.
 \end{METH}
 % ======================================================================
-\notion{Méthodes, pièges ; résultats du TD}\label{n3}
-{\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
-\hline
-\textbf{Question} & \textbf{Méthode}\\\hline
-longueur & $\int\|f'\|$, signe connu sur un arc\\
-$s$, $\ve T$, $\ve N$, $\gamma$ & $f'=v(\cos\alpha,\sin\alpha)$\\
+\notion{Quelle méthode ? Synthèse}\label{n3}
+
+\sous{Je vois\dots\ je fais\dots}
+{\small\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.58\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Question} & \textsf{\scriptsize Méthode}\\\midrule
+longueur d'un arc & $\int\|f'\|$ ; signe de $\|f'\|$ connu sur l'arc ; symétries\\
+abscisse curviligne & $s(t)=\int_{t_0}^t\|f'\|$\\
+$\ve T$, $\ve N$, $\gamma$ & $f'=v(\cos\alpha,\sin\alpha)$, $v>0$ ; $\gamma=\frac{\alpha'}v$\\
+contrôler $\gamma$ & $\frac{\det(f',f'')}{\|f'\|^3}$ \HP\\
 centre de courbure & $I=M+R\ve N$, $R=\frac1\gamma$\\
 développée & centres de courbure, ou enveloppe des normales\\
-enveloppe & équation + dérivée en $t$\\\hline
+enveloppe de $a(t)x+b(t)y=c(t)$ & système : équation et sa dérivée en $t$\\
+enveloppe de $A(t)+\vect\ve u(t)$ & $\lambda=\frac{\det(A',\ve u)}{\det(\ve u,\ve u')}$\\
+\bottomrule
 \end{tabular}}
+
 \begin{PIEGE}
 $\gamma=\alpha'(t)$ : oublier de diviser par $v=\frac{ds}{dt}$. $\ve N$ tourné de $-\frac\pi2$ : signe de $\gamma$ faux. $I=M+R\ve N$, pas
 $M+\gamma\ve N$. Enveloppe : dériver en $t$, pas en $x$.
 \end{PIEGE}
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD2 & cardioïde : $L=8$.\\
-TD3 & cycloïde : $L=8$, $s=4\big(1-\cos\frac t2\big)$.\\
-TD10 & astroïde : $L=6$.\\
-TD11 & ellipse : $R=\frac{b^2}a$ et $\frac{a^2}b$ aux sommets.\\
-TD14 & spirale $e^t(\cos t,\sin t)$ : $\gamma=\frac{e^{-t}}{\sqrt2}$, développée tournée de $\frac\pi2$.\\
-TD16 & échelle : astroïde.\\
-TD17 & segment glissant : $(t^2,(1-t)^2)$, parabole $\sqrt x+\sqrt y=1$.\\
-TD19 & développée de la cycloïde : cycloïde translatée.\\
-TD22 & développée de l'ellipse : astroïde de Lamé.
-\end{tabular}}
+
+\begin{REFL}
+Vérifier $v>0$ sur l'intervalle (sinon découper). Contrôler une courbure sur un cas simple (cercle : $\frac1R$). Un point
+d'enveloppe trouvé doit vérifier l'équation de la droite.
+\end{REFL}
+
 \end{multicols}
 \end{document}

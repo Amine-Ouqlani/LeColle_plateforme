@@ -97,7 +97,7 @@ LC.chapitres = [
         },
         {
           "num": "1.6",
-          "titre": "Quelle méthode ? Pièges ; résultats du TD",
+          "titre": "Quelle méthode ? Synthèse",
           "page": 2
         }
       ],
@@ -276,17 +276,12 @@ LC.chapitres = [
         },
         {
           "num": "1.5",
-          "titre": "Quelle méthode pour quel déterminant ?",
-          "page": 2
-        },
-        {
-          "num": "1.6",
           "titre": "Techniques d'ordre n",
           "page": 2
         },
         {
-          "num": "1.7",
-          "titre": "Résultats des TD",
+          "num": "1.6",
+          "titre": "Quelle méthode pour quel déterminant ? Synthèse",
           "page": 3
         }
       ]
@@ -469,7 +464,7 @@ LC.chapitres = [
         },
         {
           "num": "1.6",
-          "titre": "Quelle méthode ? Pièges ; résultats du TD",
+          "titre": "Quelle méthode ? Synthèse",
           "page": 2
         }
       ]
@@ -636,12 +631,7 @@ LC.chapitres = [
         },
         {
           "num": "1.4",
-          "titre": "Quelle méthode ? Pièges",
-          "page": 2
-        },
-        {
-          "num": "1.5",
-          "titre": "Résultats du TD",
+          "titre": "Quelle méthode ? Synthèse",
           "page": 2
         }
       ]
@@ -826,7 +816,7 @@ LC.chapitres = [
         },
         {
           "num": "2.7",
-          "titre": "Check-list et résultats des TD",
+          "titre": "Réussir l'étude d'une courbe : synthèse",
           "page": 3
         }
       ]
@@ -1076,7 +1066,7 @@ LC.chapitres = [
         },
         {
           "num": "3",
-          "titre": "Méthodes, pièges ; résultats du TD",
+          "titre": "Quelle méthode ? Synthèse",
           "page": 2
         }
       ],
@@ -1173,7 +1163,7 @@ LC.chapitres = [
         },
         {
           "num": "1.6",
-          "titre": "Quelle méthode ? Pièges ; résultats du TD",
+          "titre": "Quelle méthode ? Synthèse",
           "page": 2
         }
       ]

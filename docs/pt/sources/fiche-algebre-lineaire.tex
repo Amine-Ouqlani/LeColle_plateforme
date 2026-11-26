@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -77,12 +83,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 1}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Algèbre linéaire}\par\smallskip
-{\color{white!85!Bleu}\sffamily rappels, sommes directes, projecteurs, hyperplans, trace, sous-espaces stables, résultats du TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily rappels, sommes directes, projecteurs, hyperplans, trace, sous-espaces stables, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
-mêmes notations que la présentation et le livret ; \livre{th.~1.5} renvoie au livret, \livre{TD~12} à l'exercice~12 du TD complet.
-$\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{th.~1.3} y renvoie. $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -91,7 +95,7 @@ $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 1.3 Hyperplans et systèmes linéaires \dotfill\pageref{n13}\\
 1.4 Trace \dotfill\pageref{n14}\\
 1.5 Sous-espaces stables \dotfill\pageref{n15}\\
-1.6 Quelle méthode ? Pièges ; résultats du TD \dotfill\pageref{n16}\\
+1.6 Quelle méthode ? Synthèse \dotfill\pageref{n16}\\
 \end{tabular}}
 
 \vspace{0.6em}
@@ -151,7 +155,7 @@ $p\geq3$ : intersections deux à deux nulles $\not\Rightarrow$ directe ($\vect(1
 \begin{FORM}[PROJECTEURS, SYMÉTRIES \livre{prop.~1.6}]
 $p\circ p=p$ : projection sur $\Im p$ parallèlement à $\Ker p$, $E=\Im p\oplus\Ker p$, $\Mat=\mathrm{diag}(I_r,0)$.\\
 $s\circ s=\Id$ : $E=\Ker(s-\Id)\oplus\Ker(s+\Id)$, $\Mat=\mathrm{diag}(I_r,-I_{n-r})$ ; $s=2p-\Id$.\\
-Calcul de $p(x)$ sur $F$ parallèlement à $G=\vect(w)$ : $t$ tel que $x-tw\in F$, $p(x)=x-tw$ \livre{TD~10}.
+Calcul de $p(x)$ sur $F$ parallèlement à $G=\vect(w)$ : $t$ tel que $x-tw\in F$, $p(x)=x-tw$.
 \end{FORM}
 % ======================================================================
 \notion{1.3 Hyperplans et systèmes linéaires}\label{n13}
@@ -172,7 +176,7 @@ Système homogène de rang $r$ : solutions de dimension $n-r$ ; avec second memb
 $\tr A=\sum a_{i,i}$ : forme linéaire ; $\Ker\tr$ hyperplan de $\Mn{\K}$.\\
 $\tr(AB)=\tr(BA)$ ; $\tr(P^{-1}AP)=\tr A$ ; $\tr f$ indépendante de la base.\\
 Projecteur : $\tr p=\rg p$. Symétrie : $\tr s=\dim\Ker(s-\Id)-\dim\Ker(s+\Id)$.\\
-$AB-BA=I_n$ impossible \livre{TD~11} (en dimension finie seulement, \livre{TD~21}).
+$AB-BA=I_n$ impossible en dimension finie (prendre la trace).
 \end{FORM}
 \begin{PIEGE}
 $\tr(AB)\neq\tr A\,\tr B$ ; $\tr(ABC)=\tr(CAB)$ mais $\neq\tr(BAC)$ en général.
@@ -189,35 +193,49 @@ $E=F\oplus G$, les deux stables $\iff\begin{pmatrix}A&0\\0&C\end{pmatrix}$ ; $\t
 Droite $\vect(u)$ stable $\iff f(u)=\lambda u$ \livre{prop.~1.16} : point de départ de la réduction (ch.~3).
 \end{PROP}
 % ======================================================================
-\notion{1.6 Quelle méthode ? Pièges ; résultats du TD}\label{n16}
-{\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
-\hline
-\textbf{Question} & \textbf{Méthode}\\\hline
-$\rg u$, $\dim\Ker u$ & base de l'image, théorème du rang\\
-$E=F\oplus G$ ? & intersection nulle + dimensions\\
-projecteur, symétrie ? & $f^2=f$, $f^2=\Id$ ; base adaptée\\
-équations de $F$ & compatibilité de $x=\sum\lambda_iv_i$\\
-trace & linéaire, $\tr(AB)=\tr(BA)$\\
-$F$ stable ? & images d'une base de $F$ ; blocs\\\hline
+\notion{1.6 Quelle méthode ? Synthèse}\label{n16}
+
+\sous{$E=F\oplus G$ ? En dimension finie}
+\begin{center}
+\begin{tikzpicture}[node distance=5mm and 7mm]
+\node[q] (a) {$\dim F+\dim G=n$ ?};
+\node[non,right=of a] (a2) {non :\\pas supplémentaires};
+\node[q,below=of a] (b) {$F\cap G=\{0\}$\\(ou $F+G=E$) ?};
+\node[oui,right=of b,yshift=4mm] (b1) {$E=F\oplus G$};
+\node[non,right=of b,yshift=-5mm] (b2) {non};
+\draw[fl] (a)--node[lab,above]{non}(a2); \draw[fl] (a)--node[lab,left]{oui}(b);
+\draw[fl] (b.east)--node[lab,above,pos=0.4]{oui}(b1.west); \draw[fl] (b.east)--node[lab,below,pos=0.4]{non}(b2.west);
+\end{tikzpicture}
+\end{center}
+
+\sous{Je vois\dots\ je fais\dots}
+{\small\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.58\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Question} & \textsf{\scriptsize Méthode}\\\midrule
+$\rg u$, $\dim\Ker u$ & image d'une base, puis théorème du rang\\
+$\rg A$, $\Ker A$, $\Im A$ & pivot ; $\Im A$ = colonnes des pivots\\
+inverse de $A$ & résoudre $AX=Y$, ou pivot sur $(A\,|\,I_n)$\\
+$E=F\oplus G$ ? & deux conditions parmi trois (schéma)\\
+$f$ projecteur, symétrie ? & $f^2=f$, $f^2=\Id$ ; base adaptée, $\mathrm{diag}(I_r,0)$ ou $\mathrm{diag}(I_r,-I_{n-r})$\\
+calculer $p(x)$ & décomposer $x=x_F+x_G$ ; $p(x)=x_F$\\
+base $\to$ équations & compatibilité de $x=\sum\lambda_iv_i$ : $n-k$ équations\\
+équations $\to$ base & résoudre le système\\
+$\tr$ dans une égalité matricielle & linéarité, $\tr(AB)=\tr(BA)$\\
+$F$ stable ? & images d'une base de $F$ ; matrice triangulaire par blocs\\
+changer de base & $P$ : nouveaux vecteurs en colonnes ; $P^{-1}AP$\\
+\bottomrule
 \end{tabular}}
+
 \begin{PIEGE}
 $E=F\oplus G$ demande aussi la somme ou les dimensions. $\Ker f$ et $\Im f$ ne sont pas supplémentaires en général
-($f^2=0$, \livre{TD~18}). Matrice de passage : colonnes = \emph{nouveaux} vecteurs dans l'\emph{ancienne} base.
+($f^2=0$). Matrice de passage : colonnes = \emph{nouveaux} vecteurs dans l'\emph{ancienne} base.
 \end{PIEGE}
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD4 & $\{\sum x_i=0\}$ : hyperplan, base $(e_i-e_n)_{i<n}$.\\
-TD6 & $\R^3=\{x+y+z=0\}\oplus\vect(1,1,1)$, $m=\frac{x+y+z}3$.\\
-TD10 & projection sur $2x-y+z=0$ parallèlement à $\vect(1,0,1)$ : $t=\frac{2x-y+z}3$.\\
-TD12 & $\tr(AE_{j,i})=a_{i,j}$ : $\tr(AM)=\tr(BM)\ \forall M\iff A=B$.\\
-TD13 & rang de $\begin{pmatrix}a&b&1\\1&ab&1\\1&b&a\end{pmatrix}$ : $1$ si $a=1$ ; $2$ si $b=0$ ou $a=-2$ ; $3$ sinon.\\
-TD14 & $A^2=A$, $\rg A=\tr A=2$ ; $\Im$ : $x-2y+z=0$.\\
-TD17 & $\rg M\leq1\iff M=UV^T$ ; alors $M^2=\tr(M)M$.\\
-TD19 & $M\mapsto AM-MA$ : $\Ker\supset\vect(I,A)$, $\Im\subset\Ker\tr$.\\
-TD20 & $M^2-\tr(M)M+\det(M)I_2=0$ ; nilpotente $\iff\tr=\det=0$.\\
-TD22 & $\tr f=0$ en dim.~2 : $f^2=\lambda\Id$ ; $f=\alpha s$ ou $\begin{pmatrix}0&1\\0&0\end{pmatrix}$.
-\end{tabular}}
+
+\begin{REFL}
+Contrôler $\dim\Ker+\rg=\dim E$. Vérifier qu'une famille annoncée comme base a le bon cardinal. Tester une projection
+sur un vecteur de $F$ (inchangé) et un vecteur de $G$ (nul).
+\end{REFL}
+
 \end{multicols}
 \end{document}

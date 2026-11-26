@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -73,10 +79,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 2}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Déterminants}\par\smallskip
-{\color{white!85!Bleu}\sffamily définitions, règles de calcul, méthodes, pièges et résultats des TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily définitions, règles de calcul, géométrie, techniques d'ordre $n$, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Elle reprend tout le cours du chapitre, les méthodes des exemples et les résultats des TD, avec les mêmes numéros de parties et les mêmes notations que la présentation. Les renvois \livre{§1.5} désignent les sections du livre ; \HP{} signale une notion hors programme utilisée en TD ou en devoir.}
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{th.~1.3} y renvoie. \HP{} signale une notion hors programme utile en devoir.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -84,9 +90,8 @@
 1.2 Définition et règles de calcul \dotfill\pageref{n12}\\
 1.3 Propriétés globales, endomorphismes \dotfill\pageref{n13}\\
 1.4 Géométrie \dotfill\pageref{n14}\\
-1.5 Quelle méthode pour quel déterminant ? \dotfill\pageref{n15}\\
-1.6 Techniques d'ordre $n$ \dotfill\pageref{n16}\\
-1.7 Résultats des TD \dotfill\pageref{n17}\\
+1.5 Techniques d'ordre $n$ \dotfill\pageref{n16}\\
+1.6 Quelle méthode pour quel déterminant ? Synthèse \dotfill\pageref{n15}\\
 \end{tabular}}
 
 \vspace{0.6em}
@@ -144,7 +149,7 @@ Triangulaire : produit de la diagonale \livre{th.~1.6}.
 
 \begin{METH}{Calculer un déterminant \livre{méth.~1.1}}
 \begin{enumerate}
-\item \emph{Regarder d'abord} la structure : tableau du §1.5.
+\item \emph{Regarder d'abord} la structure : tableau du §1.6.
 \item Sinon pivot : transvections pour créer des zéros (pivot $=1$ si possible), en notant échanges et facteurs sortis, jusqu'à
       une forme triangulaire ou une ligne/colonne à un seul coefficient ; développer selon elle.
 \item Avec paramètre : sortir les facteurs dès qu'ils apparaissent ; ne jamais tout développer.
@@ -198,14 +203,6 @@ $f:M\mapsto AM$ sur $\mathcal M_2(\R)$ : base $(E_{11},E_{21},E_{12},E_{22})$ $\
 (en taille $n$ : $(\det A)^n$).
 \end{METH}
 
-\begin{FORM}[SIMILITUDES \HP{} \livre{TD~8}]
-$\C$ comme $\R$-e.v., base $(1,i)$, $a=\alpha+i\beta$ :\\
-$z\mapsto az$ : $\begin{pmatrix}\alpha&-\beta\\\beta&\alpha\end{pmatrix}$, $\det=|a|^2$, $\mathrm{tr}=2\,\mathrm{Re}\,a$ ; symétrie
-$\iff a=\pm1$ ; $|a|=1$ : rotation d'angle $\arg a$.\\
-$z\mapsto a\bar z$ : $\begin{pmatrix}\alpha&\beta\\\beta&-\alpha\end{pmatrix}$, $\det=-|a|^2$ ; réflexion si $|a|=1$.\\
-$\det f>0$ : orientation conservée ; $<0$ : renversée.
-\end{FORM}
-
 \begin{HPBOX}
 \textbf{Comatrice} : $\com(A)=\big((-1)^{i+j}\Delta_{i,j}\big)$. $A\,\com(A)^T=\com(A)^TA=\det(A)I_n$, donc
 $A^{-1}=\frac1{\det A}\com(A)^T$.\\
@@ -224,7 +221,7 @@ Aire triangle $=\frac12|\det(\vv{AB},\vv{AC})|$ ; volume tétraèdre $=\frac16|\
 Droites $A+\vect\ve u$, $C+\vect\ve v$ coplanaires $\iff\det(\vv{AC},\ve u,\ve v)=0$.
 \end{FORM}
 
-\begin{FORM}[DISTANCE DE DEUX DROITES \livre{prop.~1.13, TD~2}]
+\begin{FORM}[DISTANCE DE DEUX DROITES \livre{prop.~1.13}]
 $\mathcal D_1=A+\vect\ve u$, $\mathcal D_2=C+\vect\ve v$ non parallèles :
 \[d(\mathcal D_1,\mathcal D_2)=\frac{|\det(\vv{AC},\ve u,\ve v)|}{\|\ve u\wedge\ve v\|}\quad(=\text{volume}/\text{base}).\]
 Perpendiculaire commune : $H=A+s\ve u$, $K=C+r\ve v$, $\vv{HK}\cdot\ve u=\vv{HK}\cdot\ve v=0$ (système de déterminant
@@ -232,29 +229,8 @@ $-\|\ve u\wedge\ve v\|^2\neq0$). Sécantes $\iff d=0$.
 \end{FORM}
 
 % ======================================================================
-\notion{1.5 Quelle méthode pour quel déterminant ?}\label{n15}
-
-{\small
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{@{}>{\raggedright}p{0.43\linewidth}>{\raggedright\arraybackslash}p{0.5\linewidth}@{}}
-\toprule
-\textsf{\scriptsize Je vois\dots} & \textsf{\scriptsize Je fais\dots}\\\midrule
-colonnes combinaisons de $\leq2$ vecteurs ($i+j$, $\cos(i+j)$) & $\det=0$ ($n\geq3$)\\
-même somme sur chaque ligne & $C_1\leftarrow\sum C_j$, sortir la somme, $L_i-L_1$\\
-$a_{i,j}$ formule ($\max$, $|i-j|$, $a^{|i-j|}$) & $C_k-C_{k-1}$ (ou $-aC_{k-1}$), $k=n\to2$\\
-ligne/colonne à 1 coefficient & développer selon elle\\
-lettres X, Z, N & développer ; permuter lignes \emph{et} colonnes\\
-puissances $1,x,x^2,\dots$ & Vandermonde / polynôme en $x$\\
-tridiagonal & récurrence d'ordre 2\\
-$a$ au-dessus, $b$ au-dessous, constante ajoutée & fonction affine ; $a=b$ par dérivée\\
-symboles $\delta_{i,j}$ & dessiner la matrice d'abord\\
-relation entre matrices & $\det(AB)$, $\det(\lambda A)$, $\det A^T$\\
-endomorphisme géométrique & base adaptée\\
-\bottomrule
-\end{tabular}}
-
 % ======================================================================
-\notion{1.6 Techniques d'ordre $n$}\label{n16}
+\notion{1.5 Techniques d'ordre $n$}\label{n16}
 
 \sous{Somme constante}
 \begin{FORM}
@@ -280,13 +256,9 @@ Permuter lignes et colonnes par la \emph{même} permutation ne change pas $\det$
 Inverser l'ordre de $m$ lignes : $\lfloor m/2\rfloor$ échanges.\\
 Ligne à un seul coefficient : la sortir comme facteur, puis s'en servir de pivot.
 \end{ASTU}
-\begin{FORM}[RÉSULTATS \livre{TD~4, TD~9}]
-X d'ordre $2n$ ($a$ diagonale, $b$ antidiagonale) : $(a^2-b^2)^n$ ; récurrence $D_{2n}=(a^2-b^2)D_{2n-2}$.\\
-Ordre $2n+1$ (centre $a$) : développer selon la ligne centrale, $a(a^2-b^2)^n$.\\
-Z d'ordre $n$ : $(-1)^{\lfloor\frac{n-2}2\rfloor}b_2\cdots b_{n-1}(a_1c_n-a_nc_1)$.\\
-N (les $b_j$ sur la diagonale) : $b_2\cdots b_{n-1}(a_1c_n-a_nc_1)$.\\
-Piège : signe de l'antidiagonale ($b$ en position $(1,2n)$ : $(-1)^{2n+1}=-1$) ; tester sur $n=3$ ou $4$.
-\end{FORM}
+\begin{PIEGE}
+Signe de l'antidiagonale : le coefficient en position $(1,n)$ porte $(-1)^{1+n}$. Tester la formule obtenue sur $n=3$ ou $4$.
+\end{PIEGE}
 
 \sous{Vandermonde}
 \begin{FORM}[\livre{th.~1.16}]
@@ -316,14 +288,12 @@ racines distinctes $r_1,r_2$ : $u_n=\lambda r_1^n+\mu r_2^n$ ;\\
 racine double $r$ : $u_n=(\lambda+\mu n)r^n$ ;\\
 racines $\rho e^{\pm i\theta}$ : $u_n=\rho^n(\lambda\cos n\theta+\mu\sin n\theta)$.
 \end{FORM}
-\begin{FORM}[RÉSULTATS]
-$(5,6,1)$ : $3^{n+1}-2^{n+1}$ \livre{TD~3}. \ $(2,-1,-1)$ : $n+1$.\\
-$(2\cos\theta,1,1)$ : $\frac{\sin(n+1)\theta}{\sin\theta}$ ; $\theta\in\pi\Z$ : $(n+1)(\pm1)^n$ \livre{TD~7} ; nul $\iff\theta=\frac{k\pi}{n+1}$.\\
-Outil : $\sin(n+1)\theta+\sin(n-1)\theta=2\sin n\theta\cos\theta$ ; $\sin3\theta=\sin\theta(4\cos^2\theta-1)$.
+\begin{FORM}[TRIGONOMÉTRIE UTILE]
+$\sin(n+1)\theta+\sin(n-1)\theta=2\sin n\theta\cos\theta$ ;\ $\sin3\theta=\sin\theta(4\cos^2\theta-1)$.
 \end{FORM}
 
 \sous{Constante ajoutée, polynôme de degré 1}
-\begin{METH}{Fonction affine \livre{méth.~1.5, TD~10}}
+\begin{METH}{Fonction affine \livre{méth.~1.5}}
 $D(x)$ = déterminant avec $x$ ajouté (ou retranché) partout : $C_j-C_1$ chassent $x$ sauf de $C_1$ $\Rightarrow D$ \emph{affine}.
 Choisir les $x$ qui rendent la matrice triangulaire.
 \end{METH}
@@ -335,22 +305,37 @@ Diagonale $x$, $1$ au-dessus, $-1$ au-dessous : $\frac{(x+1)^n+(x-1)^n}2$.
 \end{FORM}
 
 % ======================================================================
-\notion{1.7 Résultats des TD de déterminants}\label{n17}
+\notion{1.6 Quelle méthode pour quel déterminant ? Synthèse}\label{n15}
+
 {\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD1 & $C_2-C_1$, $C_3-C_1$ $\Rightarrow\det(\vv{AB},\vv{AC})$ : équivalence avec l'alignement.\\
-TD2 & $d=\frac{|\det(\vv{AB},\vv{CD},\vv{AC})|}{\|\vv{AB}\wedge\vv{CD}\|}$ ; Pythagore pour la minimalité.\\
-TD3 & 6 au-dessus, 1 au-dessous ; $u_4=211$ ; $u_n=3^{n+1}-2^{n+1}$.\\
-TD4 & $(a^2-b^2)^n$.\\
-TD5 & $P$ de degré $3$, coeff.\ $(b-a)(c-a)(c-b)$, racines $a,b,c$ ; récurrence générale.\\
-TD6 & $(a-b)I+bJ$ : base $\iff a\neq b$, $a+(n-1)b\neq0$ ($n\geq2$).\\
-TD7 & $\frac{\sin(n+1)\theta}{\sin\theta}$, par récurrence.\\
-TD8 & $f^{-1}(z)=\frac za$ ; symétrie $\iff a=\pm1$ ; $\mathrm{tr}=2\mathrm{Re}\,a$, $\det=|a|^2$ ; rotation si $|a|=1$.\\
-TD9 & $(-1)^{\lfloor\frac{n-2}2\rfloor}\prod b_k\,(a_1c_n-a_nc_1)$.\\
-TD10 & $\frac{bQ(a)-aQ(b)}{b-a}$ ; $Q(a)-aQ'(a)$ si $a=b$.
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright}p{0.43\linewidth}>{\raggedright\arraybackslash}p{0.5\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Je vois\dots} & \textsf{\scriptsize Je fais\dots}\\\midrule
+colonnes combinaisons de $\leq2$ vecteurs ($i+j$, $\cos(i+j)$) & $\det=0$ ($n\geq3$)\\
+même somme sur chaque ligne & $C_1\leftarrow\sum C_j$, sortir la somme, $L_i-L_1$\\
+$a_{i,j}$ formule ($\max$, $|i-j|$, $a^{|i-j|}$) & $C_k-C_{k-1}$ (ou $-aC_{k-1}$), $k=n\to2$\\
+ligne/colonne à 1 coefficient & développer selon elle\\
+lettres X, Z, N & développer ; permuter lignes \emph{et} colonnes\\
+puissances $1,x,x^2,\dots$ & Vandermonde / polynôme en $x$\\
+tridiagonal & récurrence d'ordre 2\\
+$a$ au-dessus, $b$ au-dessous, constante ajoutée & fonction affine ; $a=b$ par dérivée\\
+symboles $\delta_{i,j}$ & dessiner la matrice d'abord\\
+relation entre matrices & $\det(AB)$, $\det(\lambda A)$, $\det A^T$\\
+endomorphisme géométrique & base adaptée\\
+\bottomrule
 \end{tabular}}
 
-% ======================================================================
+
+\begin{PIEGE}
+$\det(A+B)\neq\det A+\det B$ ; $\det(\lambda A)=\lambda^n\det A$. Oublier un facteur sorti ou un signe d'échange.
+Développer sans signe $(-1)^{i+j}$. Opérations successives faites sur la matrice d'origine.
+\end{PIEGE}
+
+\begin{REFL}
+Tester la formule trouvée sur $n=2$ ou $3$. Avec un paramètre : rendre le résultat \emph{factorisé}. Inversibilité :
+conclure par $\det\neq0$, en listant les valeurs exclues.
+\end{REFL}
+
 \end{multicols}
 \end{document}

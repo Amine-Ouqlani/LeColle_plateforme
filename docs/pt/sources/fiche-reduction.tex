@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -77,13 +83,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 3}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Réduction}\par\smallskip
-{\color{white!85!Bleu}\sffamily éléments propres, polynôme caractéristique, diagonalisation, trigonalisation, pièges et résultats du TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily éléments propres, polynôme caractéristique, diagonalisation, applications, trigonalisation, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
-mêmes notations que la présentation et le livret ; \livre{th.~1.13} renvoie au livret, \livre{TD~8} à l'exercice~8 du TD complet.
-Les outils du chapitre~1 (sommes directes, trace, sous-espaces stables) sont sur la fiche \emph{Algèbre linéaire}.
-$\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{th.~1.3} y renvoie. Les outils du chapitre~1 (sommes directes, trace, sous-espaces stables) sont sur la fiche \emph{Algèbre linéaire}. $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -92,7 +95,7 @@ $\K=\R$ ou $\C$, $f\in\mathcal L(E)$, $\dim E=n$, $A\in\Mn{\K}$.}
 1.3 Diagonalisation \dotfill\pageref{n13}\\
 1.4 Applications \dotfill\pageref{n14}\\
 1.5 Trigonalisation \dotfill\pageref{n15}\\
-1.6 Quelle méthode ? Pièges ; résultats du TD \dotfill\pageref{n16}\\
+1.6 Quelle méthode ? Synthèse \dotfill\pageref{n16}\\
 \end{tabular}}
 
 \vspace{0.6em}
@@ -172,7 +175,7 @@ Projecteurs, symétries : diagonalisables.
 \end{enumerate}
 \end{METH}
 
-\begin{FORM}[EXEMPLES DU COURS]
+\begin{FORM}[EXEMPLES DU COURS, POUR S'ENTRAÎNER À LA MAIN]
 $\begin{pmatrix}5&1&-1\\2&4&-2\\1&-1&3\end{pmatrix}$ : $2,4,6$ ; $E_2=\vect(0,1,1)$, $E_4=\vect(1,0,1)$, $E_6=\vect(1,1,0)$.\\
 $\begin{pmatrix}3&-1&1\\0&2&0\\1&-1&3\end{pmatrix}$ : $(x-2)^2(x-4)$, $\rg(B-2I)=1$ : diagonalisable.\\
 $\begin{pmatrix}2&1\\-1&4\end{pmatrix}$ : $(x-3)^2$, $\dim E_3=1$ : non.
@@ -211,22 +214,46 @@ $\chi_A=\prod(x-\lambda_i)$ (avec multiplicités) :
 
 \begin{ASTU}
 $2\times2$ : $\tr$ et $\det$ donnent les deux valeurs propres.\\
-$\rg A=1$ : $0$ d'ordre $\geq n-1$, et la dernière est $\tr A$ ; diagonalisable $\iff\tr A\neq0$ \livre{TD~22}.\\
+$\rg A=1$ : $0$ d'ordre $\geq n-1$, et la dernière est $\tr A$ ; diagonalisable $\iff\tr A\neq0$.\\
 $A^p=0$ : $\Sp_\C(A)=\{0\}$, $\chi_A=x^n$, $\tr A=0$ ; diagonalisable $\iff A=0$.
 \end{ASTU}
 
 % ======================================================================
-\notion{1.6 Quelle méthode ? Pièges ; résultats du TD}\label{n16}
+\notion{1.6 Quelle méthode ? Synthèse}\label{n16}
 
-{\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
-\hline
-\textbf{Question} & \textbf{Méthode}\\\hline
-$\lambda$ valeur propre ? & $\rg(A-\lambda I)<n$\\
-valeurs propres & $\chi_A$ factorisé ; $\tr$, $\det$\\
-diagonalisable ? & distinctes ; sinon $\dim E_\lambda=m(\lambda)$\\
-$A^k$, suites & $PD^kP^{-1}$ ; base propre\\
-polynômes, fonctions & $f(x)=\lambda x$ directement\\\hline
+\sous{Diagonalisable ? L'arbre de décision}
+\begin{center}
+\begin{tikzpicture}[node distance=5mm and 9mm]
+\node[q] (a) {$\chi_A$ factorisé\\scindé sur $\K$ ?};
+\node[non,right=of a] (a2) {non diagonalisable\\sur $\K$ (essayer $\C$)};
+\node[q,below=of a] (b) {racines toutes\\simples ?};
+\node[oui,right=of b] (b2) {diagonalisable};
+\node[q,below=of b] (c) {$\dim E_\lambda=m(\lambda)$\\pour chaque $\lambda$ multiple ?};
+\node[oui,right=of c,yshift=4.5mm] (c1) {diagonalisable};
+\node[non,right=of c,yshift=-4.5mm] (c2) {non diagonalisable};
+\draw[fl] (a)--node[lab,above]{non}(a2); \draw[fl] (a)--node[lab,left]{oui}(b);
+\draw[fl] (b)--node[lab,above]{oui}(b2); \draw[fl] (b)--node[lab,left]{non}(c);
+\draw[fl] (c.east)--node[lab,above,pos=0.4]{oui}(c1.west); \draw[fl] (c.east)--node[lab,below,pos=0.4]{non}(c2.west);
+\end{tikzpicture}
+\end{center}
+{\small Avec $\dim E_\lambda=n-\rg(A-\lambda I_n)$. Une seule valeur propre $\lambda$ : diagonalisable $\iff A=\lambda I_n$.}
+
+\sous{Je vois\dots\ je fais\dots}
+{\small\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.58\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Question} & \textsf{\scriptsize Méthode}\\\midrule
+$\lambda$ valeur propre ? & $\rg(A-\lambda I_n)<n$, ou $\det(A-\lambda I_n)=0$\\
+valeurs propres & $\chi_A$ \emph{factorisé} ; contrôle par $\tr$ et $\det$\\
+sous-espaces propres & $(A-\lambda I_n)X=0$ ; $\dim=n-\rg$\\
+$2\times2$ & $x^2-\tr(A)\,x+\det A$\\
+rang $1$ & $0$ (ordre $\geq n-1$) et $\tr A$\\
+$A^p=0$ & $\Sp_\C(A)=\{0\}$ ; diagonalisable $\iff A=0$\\
+endomorphisme de polynômes, de fonctions & résoudre $f(x)=\lambda x$ directement (degré, équation différentielle)\\
+$A^k$, suites couplées, récurrence linéaire & $A^k=PD^kP^{-1}$ ; coordonnées dans la base propre\\
+$AM=MA$, $M^2=A$ & $N=P^{-1}MP$ ; les $E_\lambda(A)$ sont stables\\
+non diagonalisable, $\chi$ scindé & trigonaliser ; $\tr=\sum\lambda_i$, $\det=\prod\lambda_i$\\
+\bottomrule
 \end{tabular}}
 
 \begin{PIEGE}
@@ -234,24 +261,10 @@ Vecteur propre \emph{non nul}. Oublier de vérifier $\chi$ scindé sur $\R$. Val
 Vecteurs propres en \emph{colonnes}, dans l'ordre de $D$. $A=PDP^{-1}$, pas $P^{-1}DP$.
 \end{PIEGE}
 
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD2 & $E_2=\vect(1,2)$, $E_{-3}=\vect(1,1)$ : $A=\begin{pmatrix}-8&5\\-10&7\end{pmatrix}$.\\
-TD4 & $(X+1)P'$ : $(X+1)^k$, valeur $k$.\\
-TD5 & $\begin{pmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{pmatrix}$ : $(x+1)(x-2)^2$, diagonalisable.\\
-TD7 & $\begin{pmatrix}1&a&1\\0&1&1\\0&0&2\end{pmatrix}$ diagonalisable $\iff a=0$.\\
-TD9 & anti-diagonale : symétrie, $\dim E_1=\lceil\frac n2\rceil$.\\
-TD10 & $M\mapsto M^T$ : $\mathcal S_n\oplus\mathcal A_n$, $\tr=n$.\\
-TD12 & transition : $A^k\to\frac1{p+q}\begin{pmatrix}q&q\\p&p\end{pmatrix}$.\\
-TD13 & $J_n$ : $\{0,n\}$ ; $\det(aI+bJ)=a^{n-1}(a+nb)$.\\
-TD15 & circulante : $\det=\prod_{\omega^3=1}(a+b\omega+c\omega^2)$.\\
-TD16 & $nXP-(X^2-1)P'$ : $(X-1)^k(X+1)^{n-k}$, valeur $n-2k$.\\
-TD18 & $\Sp(AB)=\Sp(BA)$.\\
-TD19 & $(f-3\Id)(f+2\Id)=0\Rightarrow$ diagonalisable.\\
-TD21 & $T\sim\begin{pmatrix}1&0&0\\0&2&1\\0&0&2\end{pmatrix}$, non diagonalisable.\\
-TD23 & $u_k=1+(-1)^k+2^k$.
-\end{tabular}}
+\begin{REFL}
+Préciser $\K$. Vérifier $AX=\lambda X$ pour chaque vecteur propre trouvé. Contrôler $\sum\lambda_i=\tr A$ (avec multiplicités).
+Écrire $P$ et $D$ dans le même ordre, puis $AP=PD$.
+\end{REFL}
 
 \end{multicols}
 \end{document}

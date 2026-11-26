@@ -22,10 +22,10 @@ nouveau('presentation-al-statique', { titre: 'Présentation — Algèbre linéai
   description: "La même présentation, chaque diapositive dans son état final." });
 nouveau('fiche-al', { titre: 'Fiche de référence — Algèbre linéaire', sousTitre: 'Chapitre 1 · imprimable', type: 'fiche',
   fichier: 'docs/pt/fiches/fiche-algebre-lineaire.pdf', source: 'docs/pt/sources/fiche-algebre-lineaire.tex',
-  description: "Rappels, produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, choix de la méthode, pièges et résultats du TD." });
+  description: "Rappels, produit et somme de sous-espaces, projecteurs et symétries, hyperplans, trace, sous-espaces stables, choix de la méthode, pièges." });
 nouveau('fiche-metrique', { titre: 'Fiche de référence — Propriétés métriques et enveloppes', sousTitre: 'Chapitre 6 · imprimable', type: 'fiche',
   fichier: 'docs/pt/fiches/fiche-metrique-enveloppes.pdf', source: 'docs/pt/sources/fiche-metrique-enveloppes.tex',
-  description: "Longueur et abscisse curviligne, repère de Frenet et courbure, rayon et centre de courbure, développée, enveloppes, choix de la méthode, pièges et résultats du TD." });
+  description: "Longueur et abscisse curviligne, repère de Frenet et courbure, rayon et centre de courbure, développée, enveloppes, choix de la méthode, pièges." });
 
 nouveau('livre-series', { titre: 'Séries numériques', sousTitre: 'Chapitre 7 · livret : cours, méthodes, exercices corrigés', type: 'cours',
   fichier: 'docs/pt/livres/livre-series.pdf', source: 'docs/pt/sources/livre-series.tex',
@@ -38,7 +38,7 @@ nouveau('presentation-series-statique', { titre: 'Présentation — Séries num�
   description: "La même présentation, chaque diapositive dans son état final." });
 nouveau('fiche-series', { titre: 'Fiche de référence — Séries numériques', sousTitre: 'Chapitre 7 · imprimable', type: 'fiche',
   fichier: 'docs/pt/fiches/fiche-series.pdf', source: 'docs/pt/sources/fiche-series.tex',
-  description: "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, choix de la méthode, pièges et résultats du TD." });
+  description: "Outils sur les suites, séries de référence, théorèmes pour les termes positifs, convergence absolue, séries alternées, produit de Cauchy, choix de la méthode, pièges." });
 nouveau('bilan-series', { titre: 'Exercice bilan — Séries numériques', sousTitre: 'Chapitre 7 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
   fichier: 'docs/pt/bilans/bilan-series.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
   description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
@@ -62,7 +62,7 @@ D['presentation-red'].sousTitre = 'Chapitre 3 · Support de deux séances · 6 e
 D['presentation-red'].description = D['presentation-red'].description.replace('9 exercices', '6 exercices');
 D['presentation-red-statique'].titre = 'Présentation — Réduction (sans animations)';
 D['fiche-red'].titre = 'Fiche de référence — Réduction';
-D['fiche-red'].description = "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges et résultats du TD.";
+D['fiche-red'].description = "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges ; synthèse « quelle méthode ? ».";
 D['livret-pt'].sousTitre = "Tous les cours, dans l'ordre des chapitres 1 à 7";
 D['livret-pt'].description = "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py).";
 D['presentations-pt'].sousTitre = 'Toutes les présentations (chapitres 1 à 5 et 7)';

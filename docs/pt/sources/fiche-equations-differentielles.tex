@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -79,12 +85,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 4}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Équations différentielles}\par\smallskip
-{\color{white!85!Bleu}\sffamily structure, théorème de Cauchy, méthodes de résolution, pièges et résultats du TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily structure, théorème de Cauchy, méthodes de résolution, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livre sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Elle reprend tout le cours
-du chapitre avec les mêmes numéros de parties et les mêmes notations que la présentation et le livre. Les renvois \livre{th.~1.3}
-désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet.\ifPT\else{} Programme de première année (PTSI).\fi $I$ est un intervalle non réduit à un point, $\K=\R$ ou $\C$.}
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{th.~1.3} y renvoie. \ifPT\else Programme de première année (PTSI). \fi $I$ est un intervalle non réduit à un point, $\K=\R$ ou $\C$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -93,13 +97,11 @@ désignent le livre ; \livre{TD~13} renvoie à l'exercice~13 du TD complet.\ifPT
 1.2 Premier ordre, recollement \dotfill\pageref{n12}\\
 1.3 Second ordre à coefficients constants \dotfill\pageref{n13}\\
 1.4 Second ordre à coefficients continus \dotfill\pageref{n14}\\
-1.5 Quelle méthode ? Pièges \dotfill\pageref{n15}\\
-1.6 Résultats du TD \dotfill\pageref{n16}\\
+1.5 Quelle méthode ? Synthèse \dotfill\pageref{n15}\\
 \else
 1.2 Premier ordre \dotfill\pageref{n12}\\
 1.3 Second ordre à coefficients constants \dotfill\pageref{n13}\\
-1.4 Quelle méthode ? Pièges \dotfill\pageref{n15}\\
-1.5 Résultats du TD \dotfill\pageref{n16}\\
+1.4 Quelle méthode ? Synthèse \dotfill\pageref{n15}\\
 \fi
 \end{tabular}}
 
@@ -189,8 +191,7 @@ Ex. : $f(x)=1+\int_0^xtf(t)\,dt\iff f'=xf$, $f(0)=1\iff f=e^{x^2/2}$.
 \begin{FORM}[TROIS SITUATIONS]
 $ty'+y=1$ : $1+\frac{K_\pm}t$ ; une seule solution sur $\R$ : $y=1$.\\
 $ty'-y=t^2$ : $t^2+K_\pm t$ ; dérivabilité $\Rightarrow K_+=K_-$ : une infinité (droite affine).\\
-$ty'=1$ : $\ln|t|+K_\pm$ ; aucune solution sur $\R$.\\
-$ty'-2y=t^3$ : $t^3+K_\pm t^2$, $K_+,K_-$ libres \livre{TD~18}.
+$ty'=1$ : $\ln|t|+K_\pm$ ; aucune solution sur $\R$.
 \end{FORM}
 
 \fi
@@ -227,8 +228,7 @@ pseudo-périodique, pulsation $\sqrt{\omega^2-\lambda^2}$, amortie par $e^{-\lam
 \ifPT
 \begin{METH}{Variation de la constante, ordre 2 \livre{méth.~1.5}}
 Second membre d'une autre forme : $\varphi$ solution de $(H)$ \emph{ne s'annulant pas} sur $I$ ($e^{rt}$, ou $\cos$ sur
-$]-\frac\pi2,\frac\pi2[$), $y=\lambda\varphi$ : équation du \emph{premier ordre} en $\lambda'$, puis intégrer.\\
-Ex. : $y''+y=\frac1{\cos t}$ : $y=t\sin t+\cos t\ln(\cos t)+K\sin t+D\cos t$ \livre{TD~13}.
+$]-\frac\pi2,\frac\pi2[$), $y=\lambda\varphi$ : équation du \emph{premier ordre} en $\lambda'$, puis intégrer.
 \end{METH}
 
 % ======================================================================
@@ -278,7 +278,7 @@ Une série entière ne donne en général qu'une partie de $S_H$, et seulement s
 \fi
 % ======================================================================
 \ifPT
-\notion{1.5 Quelle méthode ? Pièges}\label{n15}
+\notion{1.5 Quelle méthode ? Synthèse}\label{n15}
 {\small\renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}@{}}
 \hline
@@ -300,13 +300,18 @@ Diviser par un coefficient qui s'annule sans le dire.\\
 Recollement : vérifier l'équation au point $t_0$ ; ne pas affirmer l'unicité sans preuve.
 \end{PIEGE}
 
+\begin{REFL}
+Préciser l'intervalle de travail. Vérifier $y_p$ dans l'équation. Compter les constantes : une à l'ordre 1, deux à l'ordre 2.
+Appliquer les conditions initiales à la solution générale complète.
+\end{REFL}
+
 \begin{HPBOX}
 Systèmes différentiels $X'=AX$, équations d'ordre $n\geq3$, wronskien comme outil théorique : hors programme PT.
 L'équation d'Euler n'est au programme qu'avec l'indication $t=e^x$.
 \end{HPBOX}
 
 \else
-\notion{1.4 Quelle méthode ? Pièges}\label{n15}
+\notion{1.4 Quelle méthode ? Synthèse}\label{n15}
 {\small\renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}@{}}
 \hline
@@ -326,51 +331,15 @@ Conditions initiales \emph{après} avoir ajouté $y_p$.\\
 Diviser par un coefficient qui s'annule sans le dire.
 \end{PIEGE}
 
+\begin{REFL}
+Préciser l'intervalle de travail. Vérifier $y_p$ dans l'équation. Compter les constantes : une à l'ordre 1, deux à l'ordre 2.
+Appliquer les conditions initiales à la solution générale complète.
+\end{REFL}
+
 \begin{HPBOX}
 Programme de première année. Second ordre à coefficients non constants, recollement, variation de la constante au second
 ordre : cours de deuxième année, ajoutés plus tard.
 \end{HPBOX}
-
-\fi
-% ======================================================================
-\ifPT
-\notion{1.6 Résultats du TD}\label{n16}
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD2 & $y'-2y=e^t\sin2t$ : $y_p=-\frac{e^t}5(\sin2t+2\cos2t)$ ; $y'+y=te^{-t}$ : $\frac{t^2}2e^{-t}$.\\
-TD6 & $\cos t\,y'+\sin t\,y=1$, $y(0)=2$ : $y=\sin t+2\cos t$.\\
-TD8 & $y''+y=\sin t$, $y(0)=y'(0)=0$ : $\frac{\sin t-t\cos t}2$, non bornée.\\
-TD10 & $y''-4y'+4y=(t+1)e^{2t}$ : $Q''=t+1$, $y_p=\left(\frac{t^3}6+\frac{t^2}2\right)e^{2t}$.\\
-TD12 & $(1+t^2)y'+ty=1$ : $y=\frac{\argsh t+C}{\sqrt{1+t^2}}$.\\
-TD14 & $f=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}du\right)$.\\
-TD16 & $(1+t^2)y''+ty'-y=0$ : $At+B\sqrt{1+t^2}$.\\
-TD17 & $|t|y'-y=t^2$ : une seule solution sur $\R$.\\
-TD20 & $t^2y''-3ty'+4y=t^2$ : $t^2\left(\frac{\ln^2t}2+A+B\ln t\right)$.\\
-TD21 & $f'(x)=f(-x)$ : $f=A(\cos+\sin)$.\\
-TD23 & $y''-2ty'-2y=0$, $y(0)=1$, $y'(0)=0$ : $e^{t^2}$.\\
-TD24 & $4ty''+2y'-y=0$ : $\ch\sqrt t$ ($t\geq0$), $\cos\sqrt{-t}$.\\
-TD25 & $t^2y''+4ty'+(2-t^2)y=1$ : unique solution $\frac{\ch t-1}{t^2}$.\\
-TD27 & $ty''+2y'+ty=0$ : sur $\R$, la droite $\frac{\sin t}t$.\\
-TD28 & $y''+y=f$ ($2\pi$-pér.) : solutions périodiques $\iff\int_0^{2\pi}f\cos=\int_0^{2\pi}f\sin=0$.
-\end{tabular}}
-
-\else
-\notion{1.5 Résultats du TD}\label{n16}
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD2 & $y'-2y=e^t\sin2t$ : $y_p=-\frac{e^t}5(\sin2t+2\cos2t)$ ; $y'+y=te^{-t}$ : $\frac{t^2}2e^{-t}$.\\
-TD6 & $\cos t\,y'+\sin t\,y=1$, $y(0)=2$ : $y=\sin t+2\cos t$.\\
-TD8 & $y''+y=\sin t$, $y(0)=y'(0)=0$ : $\frac{\sin t-t\cos t}2$, non bornée.\\
-TD10 & $y''-4y'+4y=(t+1)e^{2t}$ : $Q''=t+1$, $y_p=\left(\frac{t^3}6+\frac{t^2}2\right)e^{2t}$.\\
-TD12 & $(1+t^2)y'+ty=1$ : $y=\frac{\argsh t+C}{\sqrt{1+t^2}}$.\\
-TD13 & $f=e^{x^2/2}\left(1+\int_0^xe^{-u^2/2}du\right)$.\\
-TD14 & $y''+\omega^2y=\cos t$ : tout est borné si $\omega\neq1$ ; $\frac t2\sin t$ si $\omega=1$.\\
-TD15 & $f'(x)=f(-x)$ : $f=A(\cos+\sin)$.\\
-TD16 & $f(t)=-\frac{t^2}2-\frac{7t^3}{12}-\frac{11t^4}{32}+o(t^4)$.\\
-TD17 & $y''+y=f$ ($2\pi$-pér.) : solutions périodiques $\iff\int_0^{2\pi}f\cos=\int_0^{2\pi}f\sin=0$.
-\end{tabular}}
 
 \fi
 \end{multicols}

@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.17,trig format plots=rad}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
 
@@ -56,6 +56,12 @@
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
 \newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
   before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
 \newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
   before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
 
@@ -77,12 +83,10 @@
 \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
 {\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ CHAPITRE 7}}\par\smallskip
 {\color{white}\sffamily\bfseries\LARGE Fiche de référence --- Séries numériques}\par\smallskip
-{\color{white!85!Bleu}\sffamily suites, séries de référence, termes positifs, convergence absolue, séries alternées, produit de Cauchy, résultats du TD}\vspace{0.4em}}}
+{\color{white!85!Bleu}\sffamily suites, séries de référence, termes positifs, convergence absolue, séries alternées, produit de Cauchy, quelle méthode ?}\vspace{0.4em}}}
 
 \vspace{0.6em}
-{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à travailler et réviser. Mêmes numéros de parties et
-mêmes notations que la présentation et le livret ; \livre{th.~1.22} renvoie au livret, \livre{TD~8} à l'exercice~8 du TD complet.
-$S_n=\sum_{k=0}^nu_k$ ; en cas de convergence, $S=\sum_{n=0}^{+\infty}u_n$ et $R_n=S-S_n$.}
+{\small Le livret sert à apprendre, la présentation à comprendre, cette fiche à réviser : tout le cours du chapitre (définitions, théorèmes, formules, méthodes, pièges), avec les mêmes numéros de parties et les mêmes notations que le livret ; \livre{th.~1.3} y renvoie. $S_n=\sum_{k=0}^nu_k$ ; en cas de convergence, $S=\sum_{n=0}^{+\infty}u_n$ et $R_n=S-S_n$.}
 
 \vspace{0.4em}
 {\small\sffamily\noindent\begin{tabular}{@{}p{0.6\linewidth}@{}}
@@ -91,7 +95,7 @@ $S_n=\sum_{k=0}^nu_k$ ; en cas de convergence, $S=\sum_{n=0}^{+\infty}u_n$ et $R
 1.3 Séries à termes positifs \dotfill\pageref{n13}\\
 1.4 Convergence absolue, séries alternées \dotfill\pageref{n14}\\
 1.5 Produit de Cauchy \dotfill\pageref{n15}\\
-1.6 Quelle méthode ? Pièges ; résultats du TD \dotfill\pageref{n16}\\
+1.6 Quelle méthode ? Synthèse \dotfill\pageref{n16}\\
 \end{tabular}}
 
 \vspace{0.6em}
@@ -156,7 +160,7 @@ $\sum f(n)$ et $\int^{+\infty}f$ ont même nature. Encadre aussi $S_n$ et $R_n$.
 
 \begin{FORM}[RIEMANN \livre{th.~1.23}]
 $\sum\frac1{n^\alpha}$ CV $\iff\alpha>1$.\quad $H_n\sim\ln n$ ;\ $H_n=\ln n+\gamma+o(1)$.\\
-$\sum_{k>n}\frac1{k^\alpha}\sim\frac1{(\alpha-1)n^{\alpha-1}}$ \livre{TD~17}.
+$\sum_{k>n}\frac1{k^\alpha}\sim\frac1{(\alpha-1)n^{\alpha-1}}$ ($\alpha>1$, série-intégrale).
 \end{FORM}
 
 \begin{PROP}[D'ALEMBERT \livre{th.~1.25}]
@@ -198,35 +202,54 @@ $\sum(n+1)x^n=\frac1{(1-x)^2}$ ;\ $\sum nx^n=\frac x{(1-x)^2}$ ;\ $e^{a+b}=e^ae^
 \end{PROP}
 
 % ======================================================================
-\notion{1.6 Quelle méthode ? Pièges ; résultats du TD}\label{n16}
+\notion{1.6 Quelle méthode ? Synthèse}\label{n16}
 
-{\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.6\linewidth}@{}}
-\hline
-\textbf{Terme général} & \textbf{Outil}\\\hline
+\sous{Nature de $\sum u_n$ : l'arbre de décision}
+\begin{center}
+\begin{tikzpicture}[node distance=4.5mm and 6mm]
+\node[q] (a) {$u_n\to0$ ?};
+\node[non,right=of a] (a2) {divergence grossière};
+\node[q,below=of a] (b) {signe constant\\(à partir d'un rang) ?};
+\node[oui,right=of b] (b2) {équivalent, $O$, Riemann,\\d'Alembert, série-intégrale};
+\node[q,below=of b] (c) {$\sum|u_n|$ converge ?};
+\node[oui,right=of c] (c2) {converge (absolument)};
+\node[q,below=of c] (d) {alternée, $|u_n|\searrow0$ ?};
+\node[oui,right=of d,yshift=5mm] (d1) {critère spécial : converge};
+\node[q,right=of d,yshift=-7mm] (d2) {DL jusqu'à $O(\frac1{n^\alpha})$, $\alpha>1$};
+\draw[fl] (a)--node[lab,above]{non}(a2); \draw[fl] (a)--node[lab,left]{oui}(b);
+\draw[fl] (b)--node[lab,above]{oui}(b2); \draw[fl] (b)--node[lab,left]{non}(c);
+\draw[fl] (c)--node[lab,above]{oui}(c2); \draw[fl] (c)--node[lab,left]{non}(d);
+\draw[fl] (d.east)--node[lab,above,pos=0.4]{oui}(d1.west); \draw[fl] (d.east)--node[lab,below,pos=0.4]{non}(d2.west);
+\end{tikzpicture}
+\end{center}
+
+\sous{Je vois\dots\ je fais\dots}
+{\small\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.58\linewidth}@{}}
+\toprule
+\textsf{\scriptsize Terme général} & \textsf{\scriptsize Outil}\\\midrule
 $u_n\not\to0$ & divergence grossière\\
-fraction, racines & équivalent, Riemann\\
-$\ln$, $\sin$\dots\ de $\to0$ & DL puis équivalent\\
+fraction rationnelle, racines & équivalent, Riemann\\
+$\ln(1+v_n)$, $\sin v_n$\dots\ avec $v_n\to0$ & DL, puis équivalent\\
 $n!$, $a^n$, $n^n$ & d'Alembert\\
-$f(n)$, $f\searrow$ & série-intégrale\\
-$(-1)^n$ & absolue ; critère ; DL\\
-$a_{n+1}-a_n$ & télescopique\\\hline
+$f(n)$, $f$ positive décroissante & série-intégrale (nature, encadrement du reste)\\
+$\frac1{n^\alpha(\ln n)^\beta}$ & série-intégrale ou comparaison à Riemann\\
+$(-1)^na_n$ & convergence absolue ; sinon critère spécial ; sinon DL\\
+$a_{n+1}-a_n$, fractions à décomposer & télescopage : somme $=\lim a_n-a_0$\\
+$q^n$, $\frac{x^n}{n!}$, $nx^n$ & sommes de référence ; dérivation, produit de Cauchy\\
+approcher $S$ à $\varepsilon$ près & majorer $R_n$ : alternée ($|R_n|\leq a_{n+1}$) ou série-intégrale\\
+\bottomrule
 \end{tabular}}
 
-{\small
-\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}>{\sffamily\scriptsize\bfseries\color{Bleu}}l>{\raggedright\arraybackslash}p{0.84\linewidth}@{}}
-TD5 & $\sum\frac1{n(n+1)(n+2)}=\frac14$ ;\ $\sum_{n\geq2}\ln(1-\frac1{n^2})=-\ln2$.\\
-TD6 & $\sum\frac1{n(n+2)}=\frac34$.\\
-TD12 & $\sum kx^{k-1}=\frac1{(1-x)^2}$ ;\ $\sum(k-(-1)^k)3^{-k}=0$.\\
-TD13 & $\sum\frac1{n(\ln n)^2}$ CV ;\ $\sum_{k\leq n}\frac1{k\ln k}\sim\ln\ln n$.\\
-TD14 & $\sum\frac{(-1)^{n+1}}n=\ln2$ ; $10^3$ termes pour $10^{-3}$.\\
-TD18 & $\ln(1+\frac{(-1)^n}{\sqrt n})$ : DV ;\ $\frac{(-1)^n}{n+(-1)^n}$ : CV.\\
-TD19 & $\sum\frac1{n^\alpha\ln n}$ CV $\iff\alpha>1$.\\
-TD20 & $\sum\frac{(-1)^n}{3n+1}=\frac{\ln2}3+\frac\pi{3\sqrt3}$.\\
-TD23 & $R_n\sim\frac{(-1)^{n+1}}{2n}$ pour $\sum\frac{(-1)^k}k$.\\
-TD25 & $u_{n+1}=\sin u_n$ : $u_n\sim\sqrt{3/n}$.
-\end{tabular}}
+\begin{PIEGE}
+Équivalent ou comparaison sur un terme de signe variable. $u_n\to0$ ne suffit pas ($\sum\frac1n$).
+Critère spécial sans la décroissance. Riemann : la condition est $\alpha>1$, pas $\alpha\geq1$.
+\end{PIEGE}
+
+\begin{REFL}
+Dire quel théorème s'applique et vérifier ses hypothèses (positivité, décroissance). Pour une somme : vérifier sur les
+premiers termes. Pour un équivalent : contrôler le signe de $v_n$.
+\end{REFL}
 
 \end{multicols}
 \end{document}
