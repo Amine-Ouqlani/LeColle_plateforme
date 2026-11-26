@@ -9,22 +9,22 @@ LC.documents = {
   /* ---- Documents complets ---- */
   "livret-pt": {
     "titre": "Livret complet PT",
-    "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 7",
+    "sousTitre": "Tous les cours, dans l'ordre des chapitres 1 à 8",
     "type": "complet",
     "fichier": "docs/pt/livres/livret-complet-PT.pdf",
-    "pages": 138,
+    "pages": 159,
     "version": "v1",
-    "maj": "2026-11-13",
-    "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
+    "maj": "2026-11-26",
+    "description": "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques, séries entières. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py)."
   },
   "presentations-pt": {
     "titre": "Présentations complètes PT",
-    "sousTitre": "Toutes les présentations (chapitres 1 à 5 et 7)",
+    "sousTitre": "Toutes les présentations (chapitres 1 à 5, 7 et 8)",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT.pdf",
-    "pages": 508,
+    "pages": 605,
     "version": "v1",
-    "maj": "2026-11-13",
+    "maj": "2026-11-26",
     "description": "Les présentations de tous les chapitres réunies en un seul PDF, avec un sommaire et des signets. En séance, on utilise la présentation du chapitre."
   },
   "presentations-pt-statique": {
@@ -32,9 +32,9 @@ LC.documents = {
     "sousTitre": "Une page par diapositive, pour réviser ou imprimer",
     "type": "complet",
     "fichier": "docs/pt/presentations/presentations-completes-PT-sans-animations.pdf",
-    "pages": 246,
+    "pages": 289,
     "version": "v1",
-    "maj": "2026-11-13",
+    "maj": "2026-11-26",
     "description": "La même présentation complète, chaque diapositive dans son état final."
   },
   /* ---- Chapitre 1 — Algèbre linéaire ---- */
@@ -192,7 +192,7 @@ LC.documents = {
     "pages": 2,
     "version": "v2",
     "maj": "2026-11-26",
-    "description": "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges ; en fin de fiche, arbre de décision, synthèse « quelle méthode ? » et réflexes avant de rendre."
+    "description": "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges ; synthèse « quelle méthode ? »."
   },
   "bilan-red": {
     "titre": "Exercice bilan — Algèbre linéaire et réduction",
@@ -407,6 +407,62 @@ LC.documents = {
     "maj": "2026-11-17",
     "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
   },
+  /* ---- Chapitre 8 — Séries entières ---- */
+  "livre-se": {
+    "titre": "Séries entières",
+    "sousTitre": "Chapitre 8 · livret : cours, méthodes, exercices corrigés",
+    "type": "cours",
+    "fichier": "docs/pt/livres/livre-series-entieres.pdf",
+    "source": "docs/pt/sources/livre-series-entieres.tex",
+    "pages": 21,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Série de Taylor (formule avec reste intégral, exponentielle, cosinus, sinus, ch, sh), rayon de convergence (lemme d'Abel, comparaison, équivalents, d'Alembert), somme et produit de Cauchy, fonction somme (continuité, dérivation et intégration terme à terme), développements usuels, méthodes de développement (opérations, éléments simples, équation différentielle). Démonstrations, figures et exercices corrigés."
+  },
+  "presentation-se": {
+    "titre": "Présentation — Séries entières",
+    "sousTitre": "Chapitre 8 · Support de trois séances · 6 exercices intégrés",
+    "type": "presentation",
+    "fichier": "docs/pt/presentations/presentation-series-entieres.pdf",
+    "source": "docs/pt/sources/presentation-series-entieres.tex",
+    "pages": 97,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Les diapositives de la séance, avec 6 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)."
+  },
+  "presentation-se-statique": {
+    "titre": "Présentation — Séries entières (sans animations)",
+    "sousTitre": "Une page par diapositive",
+    "type": "presentation",
+    "fichier": "docs/pt/presentations/presentation-series-entieres-sans-animations.pdf",
+    "source": "docs/pt/sources/presentation-series-entieres.tex",
+    "pages": 43,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "La même présentation, chaque diapositive dans son état final."
+  },
+  "fiche-se": {
+    "titre": "Fiche de référence — Séries entières",
+    "sousTitre": "Chapitre 8 · imprimable",
+    "type": "fiche",
+    "fichier": "docs/pt/fiches/fiche-series-entieres.pdf",
+    "source": "docs/pt/sources/fiche-series-entieres.tex",
+    "pages": 2,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Série de Taylor, rayon de convergence et son calcul, fonction somme, développements usuels, méthodes de développement, pièges ; en fin de fiche, arbre de décision pour le rayon, synthèse « quelle méthode ? » et réflexes avant de rendre."
+  },
+  "bilan-se": {
+    "titre": "Exercice bilan — Séries entières",
+    "sousTitre": "Chapitre 8 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    "type": "bilan",
+    "fichier": "docs/pt/bilans/bilan-se.pdf",
+    "source": "docs/pt/sources/exercices-bilan.tex",
+    "pages": 2,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
+  },
   /* ---- Autres documents ---- */
   "revision": {
     "titre": "Livret de révision — devoir de courbes",
@@ -574,6 +630,17 @@ LC.documents = {
     "maj": "2026-11-06",
     "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
   },
+  "selection-se": {
+    "titre": "Sélection — Séries entières",
+    "sousTitre": "5 problèmes après le cours : énoncés, indications, corrections",
+    "type": "selection",
+    "fichier": "docs/pt/selection/Selection_se.pdf",
+    "source": "docs/pt/sources/selection/Selection_se.tex",
+    "pages": 9,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Les cinq problèmes à travailler en séance après le cours, de la mise en application au niveau DS et concours, avec indications et corrections détaillées."
+  },
   /* ---- TD (générés par td/build_td.py) ---- */
   "td-al": {
     "titre": "TD — Algèbre linéaire",
@@ -728,5 +795,27 @@ LC.documents = {
     "version": "v1",
     "maj": "2026-11-07",
     "description": "Les corrections détaillées des 25 exercices du TD, dans le même ordre et avec les mêmes numéros."
+  },
+  "td-se": {
+    "titre": "TD — Séries entières",
+    "sousTitre": "Chapitre 8 · 33 exercices · énoncés",
+    "type": "td",
+    "fichier": "docs/pt/td/TD_se.pdf",
+    "source": "docs/pt/sources/td/TD_se.tex",
+    "pages": 12,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Tous les exercices du livret (fin de chaque partie du cours) et tous les exercices du TD de la classe, en quatre parties de difficulté croissante. Sans les corrections."
+  },
+  "td-se-corrections": {
+    "titre": "TD — Séries entières : corrections",
+    "sousTitre": "Chapitre 8 · corrections détaillées",
+    "type": "td",
+    "fichier": "docs/pt/td/TD_se_corrections.pdf",
+    "source": "docs/pt/sources/td/TD_se_corrections.tex",
+    "pages": 13,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Les corrections détaillées des 33 exercices du TD, dans le même ordre et avec les mêmes numéros."
   }
 };

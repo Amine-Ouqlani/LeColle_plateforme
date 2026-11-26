@@ -1,0 +1,460 @@
+% =====================================================================
+%  TD Séries entières — exercices du TD de la classe (énoncés repris, corrigés Le Collé)
+%  Identifiants set-1 à set-22 : numéro de l'exercice dans le TD de la classe.
+%  Tous les résultats ont été vérifiés par calcul formel (sympy) et numériquement.
+% =====================================================================
+
+\begin{exo}{set-1}{2}{rayons de convergence}
+Déterminer le rayon de convergence des séries entières suivantes :
+\begin{multicols}{3}
+\begin{enumerate}
+\item $\sum x^n$
+\item $\sum nx^n$
+\item $\sum\frac1{n^3}x^n$
+\item $\sum\cos(n)x^n$
+\item $\sum\sin(n)x^n$
+\item $\sum\arctan(n^\alpha)x^n$, $\alpha\in\R$
+\item $\sum n!\,x^n$
+\item $\sum\frac1{n!}x^n$
+\item $\sum\frac{\ch(n)}{\sh^2(n)}x^n$
+\item $\sum\frac{(n!)^2}{(2n)!}x^n$
+\item $\sum n^nx^n$
+\item $\sum\frac{\cos(n\frac\pi2)}nx^n$
+\item $\sum\frac{n+\ln n}{n^2+2^n}x^n$
+\item $\sum\left(\frac{n-1}n\right)^{n^2}x^n$
+\end{enumerate}
+\end{multicols}
+\begin{enumerate}\setcounter{enumi}{14}
+\item $\sum a_nx^n$ avec $a_n=\left(1-\frac2n\right)^n$ si $n$ est pair et $a_n=3^n$ si $n$ est impair.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-1}
+\choix{lire la forme du coefficient : borné, équivalent simple, factorielles (d'Alembert).}
+\q{1, 2, 3.} $\sum n^\alpha x^n$ a pour rayon $1$ (d'Alembert : $\left(\frac{n+1}n\right)^\alpha|x|\to|x|$) : $R=1$ pour les trois.
+\q{4, 5.} $|\cos n|\leq1$ : $R\geq1$. En $x=1$, $\cos n\not\to0$ (sinon $\cos(2n)=2\cos^2n-1\to-1$, contradiction) : divergence, donc
+$R\leq1$. $R=1$. Même raisonnement pour $\sin n$ (si $\sin n\to0$, alors $\sin(n+1)=\sin n\cos1+\cos n\sin1\to0$ force $\cos n\to0$, et
+$\cos^2+\sin^2=1$ est contredit).
+\q{6.} Si $\alpha>0$, $\arctan(n^\alpha)\to\frac\pi2$ ; si $\alpha=0$, il vaut $\frac\pi4$ ; si $\alpha<0$, $\arctan(n^\alpha)\sim n^\alpha$. Dans tous les
+cas $|a_n|$ est équivalent à $Cn^\beta$ : $R=1$.
+\q{7, 11.} D'Alembert : $(n+1)|x|\to+\infty$ et $(n+1)\left(1+\frac1n\right)^n|x|\to+\infty$ pour $x\neq0$ : $R=0$.
+\q{8.} $\frac{|x|}{n+1}\to0$ : $R=+\infty$.
+\q{9.} $\frac{\ch n}{\sh^2n}\sim\frac{e^n/2}{e^{2n}/4}=2e^{-n}$ : même rayon que $\sum(e^{-1}x)^n$, $R=e$.
+\q{10.} $\frac{a_{n+1}}{a_n}=\frac{(n+1)^2}{(2n+2)(2n+1)}\to\frac14$ : $R=4$.
+\q{12.} $a_n=0$ si $n$ est impair et $a_{2p}=\frac{(-1)^p}{2p}$. $|a_n|\leq\frac1n$ donne $R\geq1$. Pour $|x|>1$, $|a_{2p}x^{2p}|=\frac{|x|^{2p}}{2p}\to+\infty$ :
+divergence, $R\leq1$. Donc $R=1$.
+\q{13.} $\frac{n+\ln n}{n^2+2^n}\sim\frac n{2^n}$ : même rayon que $\sum n\left(\frac x2\right)^n$, $R=2$.
+\q{14.} $\left(1-\frac1n\right)^{n^2}=\exp\big(n^2\ln(1-\tfrac1n)\big)=\exp\left(-n-\frac12+o(1)\right)\sim e^{-1/2}e^{-n}$ : $R=e$.
+\q{15.} $\sum a_nx^n$ est la somme de $\sum_p\left(1-\frac1p\right)^{2p}x^{2p}$ (coefficients $\to e^{-2}$, rayon $1$) et de $\sum_p3^{2p+1}x^{2p+1}$ (rayon
+$\frac13$). Les rayons sont différents : $R=\min\left(1,\frac13\right)=\frac13$.
+\end{corrige}
+
+\begin{exo}{set-2}{2}{rayons de convergence}
+Déterminer le rayon de convergence des séries entières :
+\begin{gather*}\text{(1)}\ \sum\frac{\cos n}nz^n\qquad\text{(2)}\ \sum n!\,z^{2n}\qquad\text{(3)}\ \sum\frac{z^{n!}}{n!}\qquad\text{(4)}\ \sum5^nz^{2n+1}\\
+\text{(5)}\ \sum a_nz^n\ \text{avec}\ a_n=\sum_{k=n+1}^{+\infty}\frac1{k^2+1}.\end{gather*}
+\end{exo}
+
+\begin{corrige}{set-2}
+\q{(1)} $\left|\frac{\cos n}n\right|\leq\frac1n$ : $R\geq1$. Parmi deux entiers consécutifs, l'un vérifie $|\cos k|\geq\frac14$ : si $|\cos n|<\frac14$, alors
+$|\sin n|>0{,}96$ et $|\cos(n+1)|\geq|\sin n|\sin1-|\cos n|\cos1>0{,}96\times0{,}84-0{,}25\times0{,}55>\frac14$. Pour $|z|>1$, une infinité de
+termes vérifient $\left|\frac{\cos n}nz^n\right|\geq\frac{|z|^n}{4n}\to+\infty$ : divergence grossière. $R=1$.
+\q{(2)} Pour $z\neq0$, $\frac{(n+1)!|z|^{2n+2}}{n!|z|^{2n}}=(n+1)|z|^2\to+\infty$ : $R=0$.
+\q{(3)} Série lacunaire. Si $|z|\leq1$, $\frac{|z|^{n!}}{n!}\leq\frac1{n!}$ : convergence. Si $|z|>1$, $\frac{|z|^{n!}}{n!}=\exp\big(n!\ln|z|-\ln n!\big)\to+\infty$ :
+divergence. $R=1$.
+\q{(4)} $\frac{5^{n+1}|z|^{2n+3}}{5^n|z|^{2n+1}}=5|z|^2$ : convergence si $|z|<\frac1{\sqrt5}$, divergence si $|z|>\frac1{\sqrt5}$ : $R=\frac1{\sqrt5}$.
+\q{(5)} Comparaison série-intégrale ($t\mapsto\frac1{t^2+1}$ décroissante) : $\int_{n+1}^{+\infty}\frac{dt}{1+t^2}\leq a_n\leq\int_n^{+\infty}\frac{dt}{1+t^2}$, c'est-à-dire
+$\frac\pi2-\arctan(n+1)\leq a_n\leq\frac\pi2-\arctan n$, et les deux bornes sont équivalentes à $\frac1n$. Donc $a_n\sim\frac1n$ : $R=1$.
+\end{corrige}
+
+\begin{exo}{set-3}{3}{rayons de séries associées}
+\begin{enumerate}
+\item Soit $\sum a_nz^n$ de rayon $R>0$. Déterminer le rayon de (a) $\sum a_nz^{2n}$ ; (b) $\sum\frac{a_n}{n!}z^n$.
+\item Soit $u_n=a_n+ib_n$ avec $(a_n,b_n)\in\R^2$. Comparer le rayon de $\sum u_nz^n$ avec ceux de $\sum a_nz^n$ et $\sum b_nz^n$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-3}
+\q{1.(a)} $\sum a_n(z^2)^n$ converge absolument si $|z|^2<R$ et diverge si $|z|^2>R$ : le rayon est $\sqrt R$ (et $+\infty$ si $R=+\infty$).
+\q{1.(b)} Soit $0<r<R$ : $(a_nr^n)$ est bornée par $M$. Pour tout $\rho>0$, $\left|\frac{a_n}{n!}\rho^n\right|\leq M\frac{(\rho/r)^n}{n!}\to0$ : la suite est bornée,
+donc le rayon est $+\infty$.
+\q{2.} On note $R_u,R_a,R_b$ les rayons. $|a_n|\leq|u_n|$ et $|b_n|\leq|u_n|$ : $R_a\geq R_u$ et $R_b\geq R_u$ (comparaison). Et $u_n=a_n+ib_n$ :
+$R_u\geq\min(R_a,R_b)$ (somme). Donc $R_u=\min(R_a,R_b)$.
+\end{corrige}
+
+\begin{exo}{set-4}{2}{étude au bord}
+\begin{enumerate}
+\item Déterminer le rayon de convergence de $\sum_{n\geq2}\frac{x^n}{\ln(n!)}$.
+\item Étudier la nature de la série pour $x=1$ et $x=-1$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-4}
+\q{1.} Au moins la moitié des facteurs de $n!$ sont $\geq\frac n2$, donc $\ln(n!)\geq\frac n2\ln\frac n2$ et $\frac{\ln(n+1)}{\ln(n!)}\to0$. Ainsi
+$\frac{\ln(n!)}{\ln((n+1)!)}=\frac1{1+\frac{\ln(n+1)}{\ln(n!)}}\to1$ : d'Alembert donne $R=1$.
+\q{2.} En $x=1$ : $\ln(n!)\leq n\ln n$, donc $\frac1{\ln(n!)}\geq\frac1{n\ln n}$, et $\sum\frac1{n\ln n}$ diverge (comparaison série-intégrale :
+$\int_2^X\frac{dt}{t\ln t}=\ln\ln X-\ln\ln2\to+\infty$). La série diverge. En $x=-1$ : $\frac1{\ln(n!)}$ est positive, décroissante, de limite nulle : la série
+converge par le critère des séries alternées.
+\end{corrige}
+
+\begin{exo}{set-5}{3}{rayons par équivalents}
+Déterminer le rayon de convergence des séries entières :
+\[\text{(1)}\ \sum\arccos\left(1-\frac1{n^2}\right)z^n\quad\text{(2)}\ \sum\cos\left(\pi\sqrt{n^2+n+1}\right)z^n\quad\text{(3)}\ \sum\left(\sqrt[n]{n+1}-\sqrt[n]n\right)z^n\]
+\[\text{(4)}\ \sum\frac{\ch(n)}nz^n\quad\text{(5)}\ \sum\frac{n^2}{3^n+n}z^n\quad\text{(6)}\ \sum\left(\frac1{1+\sqrt n}\right)^nz^n.\]
+\end{exo}
+
+\begin{corrige}{set-5}
+\choix{un équivalent simple du coefficient, puis la proposition des équivalents.}
+\q{(1)} $\arccos(1-u)\sim\sqrt{2u}$ quand $u\to0^+$ (car $\cos\theta=1-u$ et $1-\cos\theta\sim\frac{\theta^2}2$). Donc $a_n\sim\frac{\sqrt2}n$ : $R=1$.
+\q{(2)} $\sqrt{n^2+n+1}=n\sqrt{1+\frac1n+\frac1{n^2}}=n+\frac12+\frac3{8n}+O\left(\frac1{n^2}\right)$. Donc
+$\cos\left(\pi\sqrt{n^2+n+1}\right)=(-1)^n\cos\left(\frac\pi2+\frac{3\pi}{8n}+O(\tfrac1{n^2})\right)=(-1)^{n+1}\sin\left(\frac{3\pi}{8n}+O(\tfrac1{n^2})\right)$, de module
+équivalent à $\frac{3\pi}{8n}$ : $R=1$.
+\q{(3)} $\sqrt[n]{n+1}-\sqrt[n]n=e^{\frac{\ln n}n}\left(e^{\frac{\ln(n+1)-\ln n}n}-1\right)\sim1\cdot\frac{\ln(1+\frac1n)}n\sim\frac1{n^2}$ : $R=1$.
+\q{(4)} $\frac{\ch n}n\sim\frac{e^n}{2n}$ : même rayon que $\sum\frac{(ez)^n}n$, $R=\frac1e$.
+\q{(5)} $\frac{n^2}{3^n+n}\sim\frac{n^2}{3^n}$ : $R=3$.
+\q{(6)} Pour tout $r>0$, $a_nr^n=\left(\frac r{1+\sqrt n}\right)^n\to0$ (le quotient est $\leq\frac12$ dès que $\sqrt n\geq2r$) : la suite est bornée pour
+tout $r$, donc $R=+\infty$ (définition du rayon).
+\end{corrige}
+
+\begin{exo}{set-6}{2}{sommes : séries géométriques (1)}
+Déterminer le rayon $R$ de chacune des séries entières suivantes et calculer leur somme pour $x\in\,]-R,R[$ :
+\begin{gather*}\text{(1)}\ \sum_{n\geq0}nx^n\qquad\text{(2)}\ \sum_{n\geq0}n^2x^n\qquad\text{(3)}\ \sum_{n\geq1}\frac1nx^n\\
+\text{(4)}\ \sum_{n\geq1}\frac{n^2+n+1}nx^n\qquad\text{(5)}\ \sum_{n\geq0}\frac{n^3+n+1}{n+1}x^n\qquad\text{(6)}\ \sum_{n\geq1}\frac{\ch(n)}nx^n.\end{gather*}
+\end{exo}
+
+\begin{corrige}{set-6}
+Les cinq premières ont pour rayon $1$ (coefficients équivalents à $Cn^\alpha$).
+\q{(1)} En dérivant $\frac1{1-x}=\sum x^n$ : $\sum_{n\geq1}nx^{n-1}=\frac1{(1-x)^2}$, donc $\sum nx^n=\frac x{(1-x)^2}$.
+\q{(2)} $n^2=(n+1)(n+2)-3(n+1)+1$ et $\sum(n+1)(n+2)x^n=\frac2{(1-x)^3}$ : $\sum n^2x^n=\frac2{(1-x)^3}-\frac3{(1-x)^2}+\frac1{1-x}=\frac{x(1+x)}{(1-x)^3}$.
+\q{(3)} En intégrant $\frac1{1-x}$ : $\sum_{n\geq1}\frac{x^n}n=-\ln(1-x)$.
+\q{(4)} $\frac{n^2+n+1}n=(n+1)+\frac1n$ : $\sum_{n\geq1}(n+1)x^n=\frac1{(1-x)^2}-1$, d'où la somme $\frac1{(1-x)^2}-1-\ln(1-x)$.
+\q{(5)} $n^3+n+1=(n+1)(n^2-n+2)-1$, donc $\frac{n^3+n+1}{n+1}=n^2-n+2-\frac1{n+1}$. Pour $x\neq0$, $\sum_{n\geq0}\frac{x^n}{n+1}=-\frac{\ln(1-x)}x$, et
+\[\sum_{n\geq0}\frac{n^3+n+1}{n+1}x^n=\frac{x(1+x)}{(1-x)^3}-\frac x{(1-x)^2}+\frac2{1-x}+\frac{\ln(1-x)}x\qquad(x\neq0),\]
+la somme valant $1$ en $x=0$.
+\q{(6)} $\frac{\ch n}n\sim\frac{e^n}{2n}$ : $R=\frac1e$. Pour $|x|<\frac1e$ : $\sum_{n\geq1}\frac{\ch n}nx^n=\frac12\sum\frac{(ex)^n}n+\frac12\sum\frac{(x/e)^n}n
+=-\frac12\Big(\ln(1-ex)+\ln\left(1-\frac xe\right)\Big)$.
+\end{corrige}
+
+\begin{exo}{set-7}{3}{sommes : séries géométriques (2)}
+Déterminer le rayon $R$ et calculer la somme pour $x\in\,]-R,R[$ :
+\[\text{(1)}\ \sum_{n\geq0}\frac{n^3+n+3}{n+1}x^n\qquad\text{(2)}\ \sum_{n\geq0}\frac{n^2+n+1}{2^n}x^n\qquad\text{(3)}\ \sum_{n\geq1}\frac1{n(n+2)}x^n\qquad
+\text{(4)}\ \sum_{n\geq0}\frac{2n+1}{2n+3}x^n.\]
+\end{exo}
+
+\begin{corrige}{set-7}
+\q{(1)} $R=1$. $n^3+n+3=(n+1)(n^2-n+2)+1$ : pour $x\neq0$,
+$\displaystyle\sum\frac{n^3+n+3}{n+1}x^n=\frac{x(1+x)}{(1-x)^3}-\frac x{(1-x)^2}+\frac2{1-x}-\frac{\ln(1-x)}x$ ; la somme vaut $3$ en $0$.
+\q{(2)} $R=2$. Avec $u=\frac x2\in\,]-1,1[$ : $\sum(n^2+n+1)u^n=\frac{u(1+u)}{(1-u)^3}+\frac u{(1-u)^2}+\frac1{1-u}$.
+\q{(3)} $R=1$. On a $\frac1{n(n+2)}=\frac12\left(\frac1n-\frac1{n+2}\right)$. Pour $x\neq0$ :
+\[\sum_{n\geq1}\frac{x^n}{n+2}=\frac1{x^2}\sum_{k\geq3}\frac{x^k}k=\frac1{x^2}\left(-\ln(1-x)-x-\frac{x^2}2\right).\]
+Donc
+\[\sum_{n\geq1}\frac{x^n}{n(n+2)}=\frac12\left(-\ln(1-x)+\frac{\ln(1-x)+x+\frac{x^2}2}{x^2}\right)\quad(x\neq0),\qquad\text{et }0\text{ en }x=0.\]
+\q{(4)} $R=1$. $\frac{2n+1}{2n+3}=1-\frac2{2n+3}$. On calcule $\sum\frac{x^n}{2n+3}$ :
+\begin{itemize}
+\item pour $x=t^2$, $0<t<1$ : $\frac1{t^3}\sum_{n\geq0}\frac{t^{2n+3}}{2n+3}=\frac{\operatorname{argth}t-t}{t^3}$, avec $\operatorname{argth}t=\frac12\ln\frac{1+t}{1-t}=\sum_{k\geq0}\frac{t^{2k+1}}{2k+1}$ ;
+\item pour $x=-t^2$ : $\sum\frac{(-1)^nt^{2n}}{2n+3}=\frac{t-\arctan t}{t^3}$.
+\end{itemize}
+Somme : $\frac1{1-x}-2\,\frac{\operatorname{argth}\sqrt x-\sqrt x}{x\sqrt x}$ si $0<x<1$, $\frac1{1-x}-2\,\frac{\sqrt{-x}-\arctan\sqrt{-x}}{(-x)^{3/2}}$ si $-1<x<0$,
+et $\frac13$ en $0$.
+\end{corrige}
+
+\begin{exo}{set-8}{2}{sommes : séries exponentielles}
+Déterminer le rayon $R$ et calculer la somme :
+\[\text{(1)}\ \sum\frac{n^2+n+3}{n!}x^n\qquad\text{(2)}\ \sum\frac{n^2+2n-1}{(n+1)!}x^n\qquad\text{(3)}\ \sum\frac n{(2n+1)!}x^n\qquad\text{(4)}\ \sum\frac{\ch(n)}{n!}x^n.\]
+\end{exo}
+
+\begin{corrige}{set-8}
+Toutes ont pour rayon $+\infty$ (d'Alembert, ou comparaison avec $\frac{C^n}{n!}$).
+\q{(1)} $n^2+n+3=n(n-1)+2n+3$ : $\sum\frac{n(n-1)}{n!}x^n=x^2e^x$, $\sum\frac n{n!}x^n=xe^x$. Somme : $(x^2+2x+3)e^x$.
+\q{(2)} On pose $m=n+1$ : $n^2+2n-1=m^2-2$, et la série est $\sum_{m\geq1}\frac{m^2-2}{m!}x^{m-1}$. Pour $x\neq0$ :
+$\frac1x\left(\sum_{m\geq1}\frac{m^2}{m!}x^m-2\sum_{m\geq1}\frac{x^m}{m!}\right)=\frac{(x^2+x)e^x-2(e^x-1)}x=\frac{(x^2+x-2)e^x+2}x$ ; en $0$, la somme vaut $-1$.
+\q{(3)} $n=\frac{(2n+1)-1}2$ : $\frac n{(2n+1)!}=\frac12\cdot\frac1{(2n)!}-\frac12\cdot\frac1{(2n+1)!}$. Pour $x=t^2>0$ : $\frac12\left(\ch t-\frac{\sh t}t\right)$ ; pour
+$x=-t^2<0$ : $\frac12\left(\cos t-\frac{\sin t}t\right)$ ; $0$ en $x=0$.
+\q{(4)} $\ch n=\frac{e^n+e^{-n}}2$ : somme $\frac12\left(e^{ex}+e^{x/e}\right)$.
+\end{corrige}
+
+\begin{exo}{set-9}{3}{sommes : mélange}
+Déterminer le rayon $R$ et calculer la somme des séries entières :
+\begin{gather*}\text{(1)}\ \sum_{n\geq1}\left(n+\frac1n\right)x^{2n}\qquad\text{(2)}\ \sum_{n\geq0}\frac{x^{3n}}{(3n)!}\qquad\text{(3)}\ \sum_{n\geq0}(-1)^{n+1}nx^{2n+1}\\
+\text{(4)}\ \sum_{n\geq1}\frac{(-1)^n}{4n}x^{4n-1}\qquad\text{(5)}\ \sum_{n\geq0}\cos\left(\frac{2n\pi}3\right)x^n.\end{gather*}
+Indication pour (2) : calculer $\sum_{n=0}^{+\infty}\frac{(j^kx)^n}{n!}$ où $j=e^{2i\pi/3}$ et $k\in\{0,1,2\}$.
+\end{exo}
+
+\begin{corrige}{set-9}
+\q{(1)} $R=1$ (en $X=x^2$). $\sum nX^n=\frac X{(1-X)^2}$, $\sum\frac{X^n}n=-\ln(1-X)$ : somme $\frac{x^2}{(1-x^2)^2}-\ln(1-x^2)$.
+\q{(2)} $R=+\infty$. $1+j+j^2=0$, et plus généralement $1+j^n+j^{2n}$ vaut $3$ si $3\mid n$ et $0$ sinon. Donc
+$e^x+e^{jx}+e^{j^2x}=\sum\frac{1+j^n+j^{2n}}{n!}x^n=3\sum\frac{x^{3n}}{(3n)!}$. Avec $e^{jx}+e^{j^2x}=2\Re(e^{jx})=2e^{-x/2}\cos\frac{\sqrt3x}2$ :
+\[\sum_{n=0}^{+\infty}\frac{x^{3n}}{(3n)!}=\frac13\left(e^x+2e^{-x/2}\cos\frac{\sqrt3\,x}2\right).\]
+\q{(3)} $R=1$. $\sum(-1)^{n+1}nx^{2n+1}=-x\sum n(-x^2)^n=-x\cdot\frac{-x^2}{(1+x^2)^2}=\frac{x^3}{(1+x^2)^2}$.
+\q{(4)} $R=1$. Pour $x\neq0$ : $\frac1{4x}\sum_{n\geq1}\frac{(-x^4)^n}n=-\frac{\ln(1+x^4)}{4x}$ ; $0$ en $x=0$.
+\q{(5)} $R=1$ (coefficients bornés, non tendant vers $0$). $\cos\frac{2n\pi}3=\Re(j^n)$ : $\sum\Re\big((jx)^n\big)=\Re\frac1{1-jx}$. Avec
+$1-jx=1+\frac x2-i\frac{\sqrt3}2x$ et $|1-jx|^2=1+x+x^2$ : somme $\frac{1+\frac x2}{1+x+x^2}=\frac{2+x}{2(1+x+x^2)}$.
+\end{corrige}
+
+\begin{exo}{set-10}{2}{avec $\cos(n\theta)$ et $\sin(n\theta)$}
+Soit $\theta\in\R$. Donner le rayon et calculer la somme des séries entières $\displaystyle\sum_{n\geq0}\frac{x^n\cos(n\theta)}{n!}$ et $\displaystyle\sum_{n\geq0}\frac{x^n\sin(n\theta)}{n!}$.
+\end{exo}
+
+\begin{corrige}{set-10}
+$\left|\frac{\cos n\theta}{n!}\right|\leq\frac1{n!}$ : $R=+\infty$ (de même pour $\sin$). Pour $x\in\R$,
+$\sum\frac{(xe^{i\theta})^n}{n!}=e^{xe^{i\theta}}=e^{x\cos\theta}e^{ix\sin\theta}$ (exponentielle complexe). En prenant parties réelle et imaginaire :
+\[\sum_{n=0}^{+\infty}\frac{x^n\cos n\theta}{n!}=e^{x\cos\theta}\cos(x\sin\theta),\qquad\sum_{n=0}^{+\infty}\frac{x^n\sin n\theta}{n!}=e^{x\cos\theta}\sin(x\sin\theta).\]
+\end{corrige}
+
+\begin{exo}{set-11}{2}{série des sommes harmoniques}
+\begin{enumerate}
+\item Déterminer un équivalent de $a_n=\sum_{k=1}^n\frac1k$ lorsque $n\to+\infty$.
+\item Déterminer le rayon de convergence ainsi que la somme de la série entière $\sum_{n\geq1}a_nx^n$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-11}
+\q{1.} Comparaison série-intégrale ($t\mapsto\frac1t$ décroissante) : $\ln(n+1)\leq a_n\leq1+\ln n$, donc $a_n\sim\ln n$.
+\q{2.} $\frac{a_{n+1}}{a_n}=1+\frac1{(n+1)a_n}\to1$ : $R=1$. $a_n=\sum_{k=1}^n\frac1k\cdot1$ est le coefficient du produit de Cauchy de $\sum_{n\geq1}\frac{x^n}n$ et
+$\sum_{n\geq0}x^n$ (rayons $1$). Pour $|x|<1$ : $\sum_{n\geq1}a_nx^n=-\frac{\ln(1-x)}{1-x}$.
+\end{corrige}
+
+\begin{exo}{set-12}{2}{continuité de la somme au bord}
+On considère $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}x^n$ et on note $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon de convergence $R$ et l'ensemble de définition de $f$.
+\item Calculer $f(x)$ pour tout $x\in\,]-R,R[$.
+\item En déduire la nature et la somme des séries numériques $\sum_{n\geq2}\frac1{n(n-1)}$ et $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-12}
+\q{1.} $|a_n|\sim\frac1{n^2}$ : $R=1$. En $x=\pm1$, $\sum\frac1{n(n-1)}$ converge absolument : $f$ est définie sur $[-1,1]$.
+\q{2.} $\frac1{n(n-1)}=\frac1{n-1}-\frac1n$. Pour $|x|<1$ : $\sum_{n\geq2}\frac{(-1)^nx^n}{n-1}=x\sum_{k\geq1}\frac{(-1)^{k+1}x^k}k=x\ln(1+x)$ et
+$\sum_{n\geq2}\frac{(-1)^nx^n}n=-\ln(1+x)+x$. Donc $f(x)=(1+x)\ln(1+x)-x$.
+\q{3.} $f$ est continue sur $[-1,1]$ (proposition~1.28 du livret, admise) :
+$\sum_{n\geq2}\frac1{n(n-1)}=f(-1)=\lim_{x\to-1}\big((1+x)\ln(1+x)-x\big)=1$ (on retrouve le télescopage), et $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}=f(1)=2\ln2-1$.
+\end{corrige}
+
+\begin{exo}{set-13}{3}{une somme par éléments simples}
+On considère $\sum_{n\geq1}\frac{x^{2n+1}}{2n(2n+1)}$ et on note $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon $R$ et l'ensemble de définition de $f$.
+\item Calculer $f(x)$ pour tout $x\in\,]-R,R[$ (on pourra décomposer $\frac1{2n(2n+1)}$ en éléments simples).
+\item Calculer $f(1)$ et $f(-1)$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-13}
+\q{1.} D'Alembert sur les termes présents : $\frac{2n(2n+1)}{(2n+2)(2n+3)}x^2\to x^2$ : $R=1$. En $\pm1$, $\sum\frac1{2n(2n+1)}$ converge : $f$ est définie
+sur $[-1,1]$ (et impaire).
+\q{2.} $\frac1{2n(2n+1)}=\frac1{2n}-\frac1{2n+1}$. Pour $|x|<1$ : $\sum_{n\geq1}\frac{x^{2n+1}}{2n}=\frac x2\sum\frac{(x^2)^n}n=-\frac x2\ln(1-x^2)$ et
+$\sum_{n\geq1}\frac{x^{2n+1}}{2n+1}=\frac12\ln\frac{1+x}{1-x}-x$. Donc
+\[f(x)=-\frac x2\ln(1-x^2)-\frac12\ln\frac{1+x}{1-x}+x=\frac{1-x}2\ln(1-x)-\frac{1+x}2\ln(1+x)+x.\]
+\q{3.} Par continuité en $1$ : $(1-x)\ln(1-x)\to0$, donc $f(1)=-\ln2+1$. $f$ est impaire : $f(-1)=\ln2-1$.
+\end{corrige}
+
+\begin{exo}{set-14}{3}{somme par changement de variable}
+On considère $\sum\frac{x^n}{2n+1}$ et $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon $R$ et l'ensemble de définition de $f$.
+\item Soit $x\in\,]0,R[$. Calculer $f(x)$ à l'aide du changement de variable $x=t^2$.
+\item Soit $x\in\,]-R,0[$. Calculer $f(x)$ à l'aide du changement de variable $x=-t^2$.
+\item Calculer $\sum_{n=0}^{+\infty}\frac{(-1)^n}{2n+1}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-14}
+\q{1.} $R=1$ ; en $1$, $\sum\frac1{2n+1}$ diverge ; en $-1$, la série alternée converge : $f$ est définie sur $[-1,1[$.
+\q{2.} $f(t^2)=\frac1t\sum\frac{t^{2n+1}}{2n+1}=\frac{\operatorname{argth}t}t=\frac1{2t}\ln\frac{1+t}{1-t}$ : $f(x)=\frac1{2\sqrt x}\ln\frac{1+\sqrt x}{1-\sqrt x}$.
+\q{3.} $f(-t^2)=\frac1t\sum\frac{(-1)^nt^{2n+1}}{2n+1}=\frac{\arctan t}t$ : $f(x)=\frac{\arctan\sqrt{-x}}{\sqrt{-x}}$. Et $f(0)=1$.
+\q{4.} Par continuité de $f$ en $-1$ (la série converge en $-1$) : $\sum_{n=0}^{+\infty}\frac{(-1)^n}{2n+1}=f(-1)=\arctan1=\frac\pi4$.
+\end{corrige}
+
+\begin{exo}{set-15}{3}{développements : somme, produit, dérivation, intégration}
+Déterminer un développement en série entière au voisinage de $0$ des fonctions suivantes, et préciser le rayon de la série obtenue.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $f(x)=\ln(2-x)$
+\item $f(x)=\ln\left(\frac{1+x}{2-x}\right)$
+\item $f(x)=\frac1{(1-x)^2}$
+\item $f(x)=\frac1{x^2-3x+2}$
+\item $f(x)=\sh(x)\cos(x)$
+\item $f(x)=\cos(x)\ch(x)$
+\item $f(x)=\frac{\ln(1-x)}{x-1}$
+\item $f(x)=\frac1{x^2+x+1}$
+\item $f(x)=\arcsin x$
+\item $f(x)=\arctan\left(\frac{x\sqrt2}{1-x^2}\right)$
+\item $f(x)=\arctan\frac1{1+x}$
+\item $f(x)=\int_0^x\frac{\sin t}t\,dt$
+\item $f(x)=\int_0^x\cos(t^2)\,dt$
+\end{enumerate}
+\end{multicols}
+Avec le 5, en déduire : $\displaystyle\sum_{k=0}^{2p}(-1)^k\binom{4p+1}{2k+1}=(-1)^p4^p$ et $\displaystyle\sum_{k=0}^{2p+1}(-1)^k\binom{4p+3}{2k+1}=2(-1)^p4^p$.
+\end{exo}
+
+\begin{corrige}{set-15}
+\q{1.} $\ln(2-x)=\ln2+\ln\left(1-\frac x2\right)=\ln2-\sum_{n\geq1}\frac{x^n}{n2^n}$ ; $R=2$.
+\q{2.} $\ln(1+x)-\ln2-\ln\left(1-\frac x2\right)=-\ln2+\sum_{n\geq1}\left(\frac{(-1)^{n+1}}n+\frac1{n2^n}\right)x^n$ ; valable pour $|x|<1$ ; $R=1$.
+\q{3.} Dérivée de $\frac1{1-x}$ : $\sum_{n\geq0}(n+1)x^n$ ; $R=1$.
+\q{4.} $\frac1{(x-1)(x-2)}=\frac1{1-x}-\frac12\cdot\frac1{1-\frac x2}=\sum_{n\geq0}\left(1-\frac1{2^{n+1}}\right)x^n$ ; $R=1$.
+\q{5.} $\sh x\cos x=\frac12\Re\left(e^{(1+i)x}-e^{(-1+i)x}\right)$, avec $1+i=\sqrt2e^{i\pi/4}$ et $-1+i=\sqrt2e^{3i\pi/4}$. Le coefficient de $x^n$ est
+$\frac{2^{n/2}}{2\,n!}\left(\cos\frac{n\pi}4-\cos\frac{3n\pi}4\right)=\frac{2^{n/2}}{n!}\sin\frac{n\pi}2\sin\frac{n\pi}4$ ; $R=+\infty$.
+Seuls les $n$ impairs subsistent. Par ailleurs, le produit de Cauchy de $\sh$ et $\cos$ donne, pour $N=2q+1$, le coefficient
+$\frac1{N!}\sum_{k=0}^q(-1)^k\binom N{2k}=\frac1{N!}\sum_{j=0}^q(-1)^{q-j}\binom N{2j+1}$. Par unicité du DSE :
+pour $N=4p+1$ ($q=2p$), $\sin\frac N2\pi=1$, $\sin\frac{N\pi}4=(-1)^p\frac{\sqrt2}2$ et $2^{N/2}\cdot(-1)^p\frac{\sqrt2}2=(-1)^p4^p$, d'où la première égalité ;
+pour $N=4p+3$ ($q=2p+1$), on obtient $-\sum_j(-1)^j\binom{4p+3}{2j+1}=-2(-1)^p4^p$, d'où la seconde.
+\q{6.} $\cos x\ch x=\frac12\Re\left(e^{(1+i)x}+e^{(-1+i)x}\right)$ : coefficient $\frac{2^{n/2}}{n!}\cos\frac{n\pi}2\cos\frac{n\pi}4$, non nul seulement si $n=4p$, et
+alors égal à $\frac{(-4)^p}{(4p)!}$. Donc $\cos x\ch x=\sum_{p\geq0}\frac{(-4)^p}{(4p)!}x^{4p}$ ; $R=+\infty$.
+\q{7.} $\frac{\ln(1-x)}{x-1}=\left(\sum_{n\geq1}\frac{x^n}n\right)\left(\sum x^n\right)=\sum_{n\geq1}H_nx^n$ avec $H_n=\sum_{k=1}^n\frac1k$ (exercice précédent) ; $R=1$.
+\q{8.} $\frac1{x^2+x+1}=\frac{1-x}{1-x^3}=\sum_{n\geq0}\left(x^{3n}-x^{3n+1}\right)$ ; $R=1$.
+\q{9.} $\arcsin'(x)=(1-x^2)^{-1/2}=\sum_{n\geq0}\binom{2n}n\frac{x^{2n}}{4^n}$ (série du binôme avec $\alpha=-\frac12$ et $-x^2$ :
+$\frac{(-\frac12)(-\frac32)\cdots(-\frac{2n-1}2)}{n!}(-1)^n=\frac{(2n)!}{4^n(n!)^2}$). En intégrant : $\arcsin x=\sum_{n\geq0}\binom{2n}n\frac{x^{2n+1}}{4^n(2n+1)}$ ; $R=1$.
+\q{10.} On dérive : $f'(x)=\frac{\sqrt2(1+x^2)}{1+x^4}$ sur $]-1,1[$, et $f(0)=0$. Pour $|x|<1$, $\frac1{1+x^4}=\sum(-1)^nx^{4n}$ :
+$f'(x)=\sqrt2\sum(-1)^n\left(x^{4n}+x^{4n+2}\right)$, donc $f(x)=\sqrt2\sum_{n\geq0}(-1)^n\left(\frac{x^{4n+1}}{4n+1}+\frac{x^{4n+3}}{4n+3}\right)$ ; $R=1$.
+\q{11.} $f'(x)=-\frac1{(1+x)^2+1}$ et $f(0)=\frac\pi4$. Avec $(1+x)^2+1=(x+1-i)(x+1+i)$ et $1\pm i=\sqrt2e^{\pm i\pi/4}$, on obtient
+$f'(x)=-\sum_{n\geq0}(-1)^n2^{-\frac{n+1}2}\sin\frac{(n+1)\pi}4\,x^n$ pour $|x|<\sqrt2$. En intégrant sur $[0,x]$, pour $-1<x<1$ :
+$f(x)=\frac\pi4+\sum_{n\geq1}\frac{(-1)^n\sin\frac{n\pi}4}{n\,2^{n/2}}x^n$ ; la série a pour rayon $\sqrt2$.
+\piege{$f$ n'est pas définie en $-1$ : l'égalité est démontrée sur $]-1,1[$, intervalle contenant $0$ où $f$ est dérivable.}
+\q{12.} $\frac{\sin t}t=\sum\frac{(-1)^nt^{2n}}{(2n+1)!}$ ($R=+\infty$) ; en intégrant : $\sum_{n\geq0}\frac{(-1)^nx^{2n+1}}{(2n+1)(2n+1)!}$ ; $R=+\infty$.
+\q{13.} $\cos(t^2)=\sum\frac{(-1)^nt^{4n}}{(2n)!}$ : $\sum_{n\geq0}\frac{(-1)^nx^{4n+1}}{(4n+1)(2n)!}$ ; $R=+\infty$.
+\end{corrige}
+
+\begin{exo}{set-16}{3}{développements par une équation différentielle}
+En utilisant la technique de l'équation différentielle, trouver les développements en série entière des fonctions suivantes.
+\begin{enumerate}
+\item $f(x)=\frac{\arcsin x}{\sqrt{1-x^2}}$.
+\item $f(x)=\arcsin^2x$.
+\item $f(x)=\cos(x)\ch(x)$ : vérifier que $f$ est solution de l'équation $y^{(4)}+4y=0$.
+\item $f(x)=\cos(\alpha\arcsin x)$, $\alpha\in\R$ : vérifier que $f$ est solution d'une équation différentielle d'ordre 2.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-16}
+\q{1.} $f'(x)=\frac1{1-x^2}+\frac{x\arcsin x}{(1-x^2)^{3/2}}$, donc $(1-x^2)f'-xf=1$, $f(0)=0$. Avec $f=\sum a_nx^n$, le coefficient de $x^n$ donne
+$(n+1)a_{n+1}-na_{n-1}=0$ pour $n\geq1$ et $a_1=1$. Les $a_{2p}$ sont nuls ($a_0=0$) et $a_{2p+1}=\frac{2p}{2p+1}a_{2p-1}$, d'où
+$a_{2p+1}=\frac{(2\cdot4\cdots2p)^2}{(2p+1)!}=\frac{4^p(p!)^2}{(2p+1)!}$. Synthèse : $\frac{a_{2p+3}}{a_{2p+1}}x^2\to x^2$, $R=1$ ; sur $]-1,1[$ la somme est solution
+du même problème de Cauchy ($1-x^2\neq0$) : $f(x)=\sum_{p\geq0}\frac{4^p(p!)^2}{(2p+1)!}x^{2p+1}$.
+\q{2.} $(\arcsin^2)'=2\frac{\arcsin x}{\sqrt{1-x^2}}$ ; en intégrant le 1 (valeur $0$ en $0$) :
+$\arcsin^2x=\sum_{p\geq0}\frac{2\cdot4^p(p!)^2}{(2p+2)!}x^{2p+2}=x^2+\frac{x^4}3+\frac{8x^6}{45}+\cdots$ ; $R=1$.
+\q{3.} $f'=-\sin x\ch x+\cos x\sh x$, $f''=-2\sin x\sh x$, $f'''=-2(\cos x\sh x+\sin x\ch x)$,
+$f^{(4)}=-4\cos x\ch x$. Donc $f^{(4)}+4f=0$, avec $f(0)=1$, $f'(0)=f''(0)=f'''(0)=0$. La récurrence est $a_{n+4}=\frac{-4a_n}{(n+1)(n+2)(n+3)(n+4)}$ :
+$a_{4p}=\frac{(-4)^p}{(4p)!}$, les autres sont nuls ; $R=+\infty$ ; unicité de Cauchy : $\cos x\ch x=\sum\frac{(-4)^px^{4p}}{(4p)!}$.
+\q{4.} $f'(x)=-\frac{\alpha\sin(\alpha\arcsin x)}{\sqrt{1-x^2}}$, puis $(1-x^2)f''-xf'+\alpha^2f=0$, avec $f(0)=1$, $f'(0)=0$. Coefficient de $x^n$ :
+$(n+2)(n+1)a_{n+2}=(n^2-\alpha^2)a_n$. Donc $a_{2p+1}=0$ et $a_{2p}=\frac{\prod_{k=0}^{p-1}\big((2k)^2-\alpha^2\big)}{(2p)!}$. Si $\alpha$ est un entier pair, la somme
+est un polynôme ; sinon $\frac{a_{2p+2}}{a_{2p}}x^2\to x^2$ et $R=1$. Sur $]-1,1[$, unicité de Cauchy : $\cos(\alpha\arcsin x)=\sum_{p\geq0}a_{2p}x^{2p}$.
+\end{corrige}
+
+\begin{exo}{set-17}{4}{équation différentielle et produit de Cauchy}
+\begin{enumerate}
+\item Déterminer le développement en série entière au voisinage de $0$ de $f:x\mapsto e^{-x^2}\int_0^xe^{t^2}\,dt$ :
+\begin{itemize}
+\item via la technique de l'équation différentielle ;
+\item via un produit de Cauchy.
+\end{itemize}
+\item En déduire que pour tout $n\in\N$, $\displaystyle\sum_{k=0}^n\frac{(-1)^k}{2k+1}\binom nk\binom{2n}n=\frac{4^n}{2n+1}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-17}
+\q{1. Équation différentielle.} $f'(x)=-2xf(x)+1$, $f(0)=0$. Avec $f=\sum a_nx^n$ : $(n+1)a_{n+1}=-2a_{n-1}$ pour $n\geq1$ et $a_1=1$. Les coefficients
+pairs sont nuls et $a_{2p+1}=\frac{-2}{2p+1}a_{2p-1}$, donc $a_{2p+1}=\frac{(-2)^p}{3\cdot5\cdots(2p+1)}=\frac{(-1)^p4^pp!}{(2p+1)!}$. Le rayon est $+\infty$ ;
+unicité de Cauchy sur $\R$ : $f(x)=\sum_{p\geq0}\frac{(-1)^p4^pp!}{(2p+1)!}x^{2p+1}$.
+\q{1. Produit de Cauchy.} $e^{-x^2}=\sum\frac{(-1)^kx^{2k}}{k!}$ et $\int_0^xe^{t^2}dt=\sum\frac{x^{2j+1}}{j!(2j+1)}$ (rayons infinis). Le coefficient de $x^{2n+1}$ du
+produit est $\sum_{k=0}^n\frac{(-1)^k}{k!(n-k)!(2n-2k+1)}$.
+\q{2.} Par unicité du DSE, $\sum_{k=0}^n\frac{(-1)^k}{k!(n-k)!(2(n-k)+1)}=\frac{(-1)^n4^nn!}{(2n+1)!}$. On pose $j=n-k$ et on multiplie par $(-1)^nn!$ :
+$\sum_{j=0}^n\frac{(-1)^j}{2j+1}\binom nj=\frac{4^n(n!)^2}{(2n+1)!}$. En multipliant par $\binom{2n}n=\frac{(2n)!}{(n!)^2}$ : $\frac{4^n(2n)!}{(2n+1)!}=\frac{4^n}{2n+1}$.
+\end{corrige}
+
+\begin{exo}{set-18}{2}{prolongement $\mathcal C^\infty$}
+\begin{enumerate}
+\item Montrer que la fonction $x\mapsto\frac{e^x-1}x$ peut être prolongée en une fonction de classe $\mathcal C^\infty$ sur $\R$.
+\item Déterminer les dérivées successives de ce prolongement en $0$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-18}
+\q{1.} Pour $x\neq0$, $\frac{e^x-1}x=\sum_{n\geq1}\frac{x^{n-1}}{n!}=\sum_{n\geq0}\frac{x^n}{(n+1)!}$, série de rayon $+\infty$ dont la somme vaut $1$ en $0$. Le
+prolongement par $1$ est la somme d'une série entière de rayon infini : il est $\mathcal C^\infty$ sur $\R$.
+\q{2.} $f^{(n)}(0)=n!\,a_n=\frac{n!}{(n+1)!}=\frac1{n+1}$.
+\end{corrige}
+
+\begin{exo}{set-19}{4}{une intégrale égale à une série}
+\begin{enumerate}
+\item Montrer que pour tout $\alpha>0$, $\displaystyle\int_0^1\frac{dx}{1+x^\alpha}=\sum_{n=0}^{+\infty}\frac{(-1)^n}{n\alpha+1}$.
+\item En déduire la somme de la série $\sum_{n\geq0}\frac{(-1)^n}{2n+1}$.
+\item Montrer que pour tout $\alpha<0$, $\displaystyle\int_0^1\frac{x^\alpha\,dx}{1+x^\alpha}=\sum_{n=0}^{+\infty}\frac{(-1)^n}{-n\alpha+1}$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-19}
+\choix{l'intervalle $[0,1]$ touche le bord du disque de convergence de $\frac1{1+u}$ : on ne peut pas intégrer terme à terme directement. On
+travaille avec une somme finie et un reste.}
+\q{1.} Pour $x\in[0,1]$ et $N\in\N$ : $\frac1{1+x^\alpha}=\sum_{k=0}^{N-1}(-x^\alpha)^k+\frac{(-x^\alpha)^N}{1+x^\alpha}$. On intègre sur $[0,1]$ :
+\[\int_0^1\frac{dx}{1+x^\alpha}=\sum_{k=0}^{N-1}\frac{(-1)^k}{k\alpha+1}+(-1)^N\int_0^1\frac{x^{N\alpha}}{1+x^\alpha}dx,\qquad0\leq\int_0^1\frac{x^{N\alpha}}{1+x^\alpha}dx\leq\frac1{N\alpha+1}\to0.\]
+Les sommes partielles tendent vers l'intégrale : la série converge et sa somme est $\int_0^1\frac{dx}{1+x^\alpha}$.
+\q{2.} $\alpha=2$ : $\sum_{n\geq0}\frac{(-1)^n}{2n+1}=\int_0^1\frac{dx}{1+x^2}=\frac\pi4$.
+\q{3.} Pour $\alpha<0$ et $x\in\,]0,1]$, $\frac{x^\alpha}{1+x^\alpha}=\frac1{x^{-\alpha}+1}$ : c'est le 1 avec $\beta=-\alpha>0$. Donc l'intégrale vaut
+$\sum\frac{(-1)^n}{n\beta+1}=\sum\frac{(-1)^n}{-n\alpha+1}$.
+\end{corrige}
+
+\begin{exo}{set-20}{3}{une somme trigonométrique}
+Soit $\theta\in\R$ et $x\in\,]-1,1[$.
+\begin{enumerate}
+\item Montrer que la série $\sum_{n\geq1}\frac{\sin(n\theta)x^n}n$ converge.
+\item Déterminer la somme $\sum_{n=1}^{+\infty}\frac{\sin(n\theta)}nx^n$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-20}
+\q{1.} $\left|\frac{\sin n\theta}nx^n\right|\leq|x|^n$ : convergence absolue (rayon au moins $1$).
+\q{2.} Soit $f(x)$ la somme. Par dérivation terme à terme sur $]-1,1[$ :
+$f'(x)=\sum_{n\geq1}\sin(n\theta)x^{n-1}=\Im\left(\sum_{n\geq1}e^{in\theta}x^{n-1}\right)=\Im\frac{e^{i\theta}}{1-xe^{i\theta}}=\frac{\sin\theta}{1-2x\cos\theta+x^2}$
+(on multiplie par le conjugué $1-xe^{-i\theta}$). Or $x\mapsto\arctan\frac{x\sin\theta}{1-x\cos\theta}$ (défini car $1-x\cos\theta>0$) a la même dérivée
+et s'annule en $0$, comme $f$. Donc $f(x)=\arctan\left(\frac{x\sin\theta}{1-x\cos\theta}\right)$.
+\end{corrige}
+
+\begin{exo}{set-21}{4}{une suite récurrente}
+Soit $(a_n)$ définie par $a_0=a_1=1$ et $a_{n+2}=a_{n+1}+\frac{a_n}{n+2}$ pour $n\geq0$. On considère $\sum_{n\geq0}a_nx^n$.
+\begin{enumerate}
+\item (a) Montrer que pour tout $n$, $1\leq a_n\leq n+2$.\quad (b) En déduire que $(a_n)$ est monotone et déterminer le rayon de convergence.
+\item On pose $f(x)=\sum_{n=0}^{+\infty}a_nx^n$ et $g(x)=\sum_{n\geq0}\frac{a_n}{n+2}x^{n+2}$.
+\begin{enumerate}
+\item Justifier que $f$ et $g$ sont de classe $\mathcal C^\infty$ sur $]-1,1[$.
+\item Trouver une relation entre $f$ et $g$.
+\item Montrer que $g$ est solution d'une équation différentielle linéaire d'ordre 1 que l'on résoudra explicitement.
+\item Donner une expression de $f(x)$.
+\end{enumerate}
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-21}
+\q{1.(a)} Récurrence double. Si $a_n,a_{n+1}\geq1$, alors $a_{n+2}\geq a_{n+1}\geq1$. Si $a_n\leq n+2$ et $a_{n+1}\leq n+3$, alors
+$a_{n+2}\leq n+3+\frac{n+2}{n+2}=n+4$.
+\q{1.(b)} $a_{n+2}-a_{n+1}=\frac{a_n}{n+2}>0$ : la suite est croissante. Comme $1\leq a_n\leq n+2$, comparaison avec $\sum x^n$ et $\sum(n+2)x^n$
+(rayons $1$) : $R=1$.
+\q{2.(a)} Ce sont des sommes de séries entières de rayon $1$ ($g$ : intégration terme à terme), donc $\mathcal C^\infty$ sur $]-1,1[$.
+\q{2.(b)} $g'(x)=\sum a_nx^{n+1}=xf(x)$.
+\q{2.(c)} On multiplie la relation par $x^{n+2}$ et on somme pour $n\geq0$ :
+$f(x)-1-x=x\big(f(x)-1\big)+g(x)$, donc $(1-x)f(x)=1+g(x)$. Avec $g'=xf$ : $g'(x)=\frac x{1-x}\big(1+g(x)\big)$, équation linéaire d'ordre 1.
+$\frac x{1-x}=-1+\frac1{1-x}$ a pour primitive $-x-\ln(1-x)$ : les solutions sont $g(x)=-1+C\frac{e^{-x}}{1-x}$. Avec $g(0)=0$ : $C=1$,
+$g(x)=\frac{e^{-x}}{1-x}-1$.
+\q{2.(d)} $f(x)=\frac{1+g(x)}{1-x}=\frac{e^{-x}}{(1-x)^2}$.
+\end{corrige}
+
+\begin{exo}{set-22}{4}{équation différentielle du second ordre}
+On considère l'équation $16(x^2-x)y''+(16x-8)y'-y=0$ $(E)$. On suppose que la série entière $\sum a_nx^n$ est solution de $(E)$ sur $]0,R[$, où
+$R>0$ est son rayon de convergence.
+\begin{enumerate}
+\item Montrer que pour tout $n\geq1$, $a_n=\frac{(4n-3)(4n-5)}{8n(2n-1)}a_{n-1}$.
+\item Déterminer le rayon de convergence de la série entière $\sum a_nx^n$.
+\item On suppose que $a_0=1$. Déterminer $a_n$ en fonction de $n$.
+\item En utilisant la formule de Stirling, déterminer un équivalent de $a_n$ lorsque $n\to+\infty$.
+\end{enumerate}
+\end{exo}
+
+\begin{corrige}{set-22}
+\q{1.} On injecte : $16x^2y''=\sum16n(n-1)a_nx^n$, $-16xy''=-\sum16(n+1)na_{n+1}x^n$, $16xy'=\sum16na_nx^n$, $-8y'=-\sum8(n+1)a_{n+1}x^n$.
+Le coefficient de $x^n$ est $(16n^2-1)a_n-8(n+1)(2n+1)a_{n+1}$ ; par unicité du DSE (sur $]0,R[$ la somme est nulle, donc tous ses
+coefficients aussi), $a_{n+1}=\frac{(4n-1)(4n+1)}{8(n+1)(2n+1)}a_n$, ce qui est la relation demandée au rang $n+1$.
+\q{2.} Si $a_0\neq0$, aucun $a_n$ n'est nul et $\frac{a_n}{a_{n-1}}\to\frac{16}{16}=1$ : $R=1$ (si $a_0=0$, la solution est nulle).
+\q{3.} Le produit des $(4k-3)(4k-5)$ pour $k=1..n$ vaut $-1\times1\times3\times\cdots\times(4n-3)=-\frac{(4n-2)!}{2^{2n-1}(2n-1)!}$, et celui des
+$8k(2k-1)$ vaut $8^nn!\cdot\frac{(2n)!}{2^nn!}=4^n(2n)!$. Donc $a_n=-\frac{2\,(4n-2)!}{16^n(2n-1)!\,(2n)!}=-\frac1{16^n(4n-1)}\binom{4n}{2n}$
+(contrôle : $a_1=-\frac18$).
+\q{4.} Stirling : $\binom{4n}{2n}\sim\frac{16^n}{\sqrt{2\pi n}}$. Donc $a_n\sim-\frac1{4n\sqrt{2\pi n}}=-\frac1{4\sqrt{2\pi}\,n^{3/2}}$.
+\end{corrige}

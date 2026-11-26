@@ -42,6 +42,22 @@ nouveau('fiche-series', { titre: 'Fiche de référence — Séries numériques',
 nouveau('bilan-series', { titre: 'Exercice bilan — Séries numériques', sousTitre: 'Chapitre 7 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
   fichier: 'docs/pt/bilans/bilan-series.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
   description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
+nouveau('livre-se', { titre: 'Séries entières', sousTitre: 'Chapitre 8 · livret : cours, méthodes, exercices corrigés', type: 'cours',
+  fichier: 'docs/pt/livres/livre-series-entieres.pdf', source: 'docs/pt/sources/livre-series-entieres.tex',
+  description: "Série de Taylor (formule avec reste intégral, exponentielle, cosinus, sinus, ch, sh), rayon de convergence (lemme d'Abel, comparaison, équivalents, d'Alembert), somme et produit de Cauchy, fonction somme (continuité, dérivation et intégration terme à terme), développements usuels, méthodes de développement (opérations, éléments simples, équation différentielle). Démonstrations, figures et exercices corrigés." });
+nouveau('presentation-se', { titre: 'Présentation — Séries entières', sousTitre: 'Chapitre 8 · Support de trois séances · 6 exercices intégrés', type: 'presentation',
+  fichier: 'docs/pt/presentations/presentation-series-entieres.pdf', source: 'docs/pt/sources/presentation-series-entieres.tex',
+  description: "Les diapositives de la séance, avec 6 exercices à chercher en direct : énoncé seul, puis correction sur la diapositive suivante (raisonnement, méthode, étapes)." });
+nouveau('presentation-se-statique', { titre: 'Présentation — Séries entières (sans animations)', sousTitre: 'Une page par diapositive', type: 'presentation',
+  fichier: 'docs/pt/presentations/presentation-series-entieres-sans-animations.pdf', source: 'docs/pt/sources/presentation-series-entieres.tex',
+  description: "La même présentation, chaque diapositive dans son état final." });
+nouveau('fiche-se', { titre: 'Fiche de référence — Séries entières', sousTitre: 'Chapitre 8 · imprimable', type: 'fiche',
+  fichier: 'docs/pt/fiches/fiche-series-entieres.pdf', source: 'docs/pt/sources/fiche-series-entieres.tex',
+  description: "Série de Taylor, rayon de convergence et son calcul, fonction somme, développements usuels, méthodes de développement, pièges ; en fin de fiche, arbre de décision pour le rayon, synthèse « quelle méthode ? » et réflexes avant de rendre." });
+nouveau('bilan-se', { titre: 'Exercice bilan — Séries entières', sousTitre: 'Chapitre 8 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
+  fichier: 'docs/pt/bilans/bilan-se.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
+  description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
+['livre-se', 'presentation-se', 'presentation-se-statique', 'fiche-se', 'bilan-se'].forEach(i => { D[i].maj = '2026-11-26'; });
 nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le Collé', sousTitre: 'Banque PT 2018 et 2015, Mathématiques A, problèmes d\'algèbre · corrigé non officiel', type: 'devoir',
   fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction.tex',
   description: "Corrigés détaillés, rédigés par Le Collé (non officiels), des problèmes d'algèbre de la Banque PT 2018 (page 1) et 2015 (page 5), Mathématiques A : choix de la méthode, pièges, résultats à retenir, liens avec le DL 3. Calculs vérifiés par calcul formel." });
@@ -63,9 +79,10 @@ D['presentation-red'].description = D['presentation-red'].description.replace('9
 D['presentation-red-statique'].titre = 'Présentation — Réduction (sans animations)';
 D['fiche-red'].titre = 'Fiche de référence — Réduction';
 D['fiche-red'].description = "Éléments propres, polynôme caractéristique, critères de diagonalisation, applications, trigonalisation, pièges ; synthèse « quelle méthode ? ».";
-D['livret-pt'].sousTitre = "Tous les cours, dans l'ordre des chapitres 1 à 7";
-D['livret-pt'].description = "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py).";
-D['presentations-pt'].sousTitre = 'Toutes les présentations (chapitres 1 à 5 et 7)';
+D['livret-pt'].sousTitre = "Tous les cours, dans l'ordre des chapitres 1 à 8";
+D['livret-pt'].description = "Les livrets de tous les chapitres réunis en un seul PDF, avec un sommaire et des signets : algèbre linéaire, déterminants, réduction, équations différentielles, courbes paramétrées, propriétés métriques, séries numériques, séries entières. Assemblé automatiquement à partir des livrets individuels (outils/livrets/construire.py).";
+D['presentations-pt'].sousTitre = 'Toutes les présentations (chapitres 1 à 5, 7 et 8)';
+['livret-pt', 'presentations-pt', 'presentations-pt-statique'].forEach(i => { D[i].maj = '2026-11-26'; });
 D['volume2'].sousTitre = D['volume2'].sousTitre.replace(/Chapitre \d/, 'Chapitre ' + num.metrique);
 const doc2chap = {};
 CH.forEach(c => {

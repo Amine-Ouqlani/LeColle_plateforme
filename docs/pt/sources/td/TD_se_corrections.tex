@@ -1,0 +1,665 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Séries entières (corrections)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Séries entières · corrections}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 8}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Séries entières}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Corrections}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Corrections détaillées des 33 exercices du TD, dans le même ordre et avec les mêmes numéros.
+Chaque correction commence par le choix de la méthode, puis détaille les calculs ; les encadrés « À retenir » résument ce qui
+resservira. Les renvois « méthode~1.3 du livret » désignent le cours.
+\textbf{Chercher d'abord l'exercice} avant d'ouvrir sa correction.}
+
+\partie{I}{Applications directes du cours}{}
+\correction{1}{Encadrer un rayon}{se-encadre}{énoncé : TD, p.~2}
+La série converge en $\sqrt2\,i$, donc $R\geq|\sqrt2\,i|=\sqrt2$ ; elle diverge en $1+i$, donc $R\leq|1+i|=\sqrt2$. Ainsi $R=\sqrt2$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{2}{Rayon et comportement au bord}{se-bord}{énoncé : TD, p.~2}
+D'Alembert : $\sqrt{\frac n{n+1}}\,|x|\to|x|$, donc $R=1$. En $x=1$ : $\sum\frac1{\sqrt n}$ diverge (Riemann, $\frac12\leq1$). En $x=-1$ :
+$\sum\frac{(-1)^n}{\sqrt n}$ converge (critère des séries alternées : $\frac1{\sqrt n}$ décroît vers $0$), sans converger absolument ; on
+retrouve $R=1$ par la proposition~1.15 du livret.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{3}{Rayons de convergence (quinze séries)}{set-1}{énoncé : TD, p.~2}
+\choix{lire la forme du coefficient : borné, équivalent simple, factorielles (d'Alembert).}
+\q{1, 2, 3.} $\sum n^\alpha x^n$ a pour rayon $1$ (d'Alembert : $\left(\frac{n+1}n\right)^\alpha|x|\to|x|$) : $R=1$ pour les trois.
+\q{4, 5.} $|\cos n|\leq1$ : $R\geq1$. En $x=1$, $\cos n\not\to0$ (sinon $\cos(2n)=2\cos^2n-1\to-1$, contradiction) : divergence, donc
+$R\leq1$. $R=1$. Même raisonnement pour $\sin n$ (si $\sin n\to0$, alors $\sin(n+1)=\sin n\cos1+\cos n\sin1\to0$ force $\cos n\to0$, et
+$\cos^2+\sin^2=1$ est contredit).
+\q{6.} Si $\alpha>0$, $\arctan(n^\alpha)\to\frac\pi2$ ; si $\alpha=0$, il vaut $\frac\pi4$ ; si $\alpha<0$, $\arctan(n^\alpha)\sim n^\alpha$. Dans tous les
+cas $|a_n|$ est équivalent à $Cn^\beta$ : $R=1$.
+\q{7, 11.} D'Alembert : $(n+1)|x|\to+\infty$ et $(n+1)\left(1+\frac1n\right)^n|x|\to+\infty$ pour $x\neq0$ : $R=0$.
+\q{8.} $\frac{|x|}{n+1}\to0$ : $R=+\infty$.
+\q{9.} $\frac{\ch n}{\sh^2n}\sim\frac{e^n/2}{e^{2n}/4}=2e^{-n}$ : même rayon que $\sum(e^{-1}x)^n$, $R=e$.
+\q{10.} $\frac{a_{n+1}}{a_n}=\frac{(n+1)^2}{(2n+2)(2n+1)}\to\frac14$ : $R=4$.
+\q{12.} $a_n=0$ si $n$ est impair et $a_{2p}=\frac{(-1)^p}{2p}$. $|a_n|\leq\frac1n$ donne $R\geq1$. Pour $|x|>1$, $|a_{2p}x^{2p}|=\frac{|x|^{2p}}{2p}\to+\infty$ :
+divergence, $R\leq1$. Donc $R=1$.
+\q{13.} $\frac{n+\ln n}{n^2+2^n}\sim\frac n{2^n}$ : même rayon que $\sum n\left(\frac x2\right)^n$, $R=2$.
+\q{14.} $\left(1-\frac1n\right)^{n^2}=\exp\big(n^2\ln(1-\tfrac1n)\big)=\exp\left(-n-\frac12+o(1)\right)\sim e^{-1/2}e^{-n}$ : $R=e$.
+\q{15.} $\sum a_nx^n$ est la somme de $\sum_p\left(1-\frac1p\right)^{2p}x^{2p}$ (coefficients $\to e^{-2}$, rayon $1$) et de $\sum_p3^{2p+1}x^{2p+1}$ (rayon
+$\frac13$). Les rayons sont différents : $R=\min\left(1,\frac13\right)=\frac13$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{4}{Rayons de convergence : cas particuliers}{set-2}{énoncé : TD, p.~3}
+\q{(1)} $\left|\frac{\cos n}n\right|\leq\frac1n$ : $R\geq1$. Parmi deux entiers consécutifs, l'un vérifie $|\cos k|\geq\frac14$ : si $|\cos n|<\frac14$, alors
+$|\sin n|>0{,}96$ et $|\cos(n+1)|\geq|\sin n|\sin1-|\cos n|\cos1>0{,}96\times0{,}84-0{,}25\times0{,}55>\frac14$. Pour $|z|>1$, une infinité de
+termes vérifient $\left|\frac{\cos n}nz^n\right|\geq\frac{|z|^n}{4n}\to+\infty$ : divergence grossière. $R=1$.
+\q{(2)} Pour $z\neq0$, $\frac{(n+1)!|z|^{2n+2}}{n!|z|^{2n}}=(n+1)|z|^2\to+\infty$ : $R=0$.
+\q{(3)} Série lacunaire. Si $|z|\leq1$, $\frac{|z|^{n!}}{n!}\leq\frac1{n!}$ : convergence. Si $|z|>1$, $\frac{|z|^{n!}}{n!}=\exp\big(n!\ln|z|-\ln n!\big)\to+\infty$ :
+divergence. $R=1$.
+\q{(4)} $\frac{5^{n+1}|z|^{2n+3}}{5^n|z|^{2n+1}}=5|z|^2$ : convergence si $|z|<\frac1{\sqrt5}$, divergence si $|z|>\frac1{\sqrt5}$ : $R=\frac1{\sqrt5}$.
+\q{(5)} Comparaison série-intégrale ($t\mapsto\frac1{t^2+1}$ décroissante) : $\int_{n+1}^{+\infty}\frac{dt}{1+t^2}\leq a_n\leq\int_n^{+\infty}\frac{dt}{1+t^2}$, c'est-à-dire
+$\frac\pi2-\arctan(n+1)\leq a_n\leq\frac\pi2-\arctan n$, et les deux bornes sont équivalentes à $\frac1n$. Donc $a_n\sim\frac1n$ : $R=1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{5}{Étude au bord}{set-4}{énoncé : TD, p.~3}
+\q{1.} Au moins la moitié des facteurs de $n!$ sont $\geq\frac n2$, donc $\ln(n!)\geq\frac n2\ln\frac n2$ et $\frac{\ln(n+1)}{\ln(n!)}\to0$. Ainsi
+$\frac{\ln(n!)}{\ln((n+1)!)}=\frac1{1+\frac{\ln(n+1)}{\ln(n!)}}\to1$ : d'Alembert donne $R=1$.
+\q{2.} En $x=1$ : $\ln(n!)\leq n\ln n$, donc $\frac1{\ln(n!)}\geq\frac1{n\ln n}$, et $\sum\frac1{n\ln n}$ diverge (comparaison série-intégrale :
+$\int_2^X\frac{dt}{t\ln t}=\ln\ln X-\ln\ln2\to+\infty$). La série diverge. En $x=-1$ : $\frac1{\ln(n!)}$ est positive, décroissante, de limite nulle : la série
+converge par le critère des séries alternées.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{6}{Sommes de la famille exponentielle}{se-fexp}{énoncé : TD, p.~3}
+\q{(a)} Si $x=t^2>0$ ($t=\sqrt x$) : $\sum_{n=0}^{+\infty}\frac{(-1)^nt^{2n}}{(2n+1)!}=\frac1t\sum_{n=0}^{+\infty}\frac{(-1)^nt^{2n+1}}{(2n+1)!}=\frac{\sin t}t=\frac{\sin\sqrt x}{\sqrt x}$.
+Si $x=-t^2<0$ : $(-1)^nx^n=t^{2n}$ et la somme vaut $\frac{\sh t}t=\frac{\sh\sqrt{-x}}{\sqrt{-x}}$. Si $x=0$ : la somme vaut $1$.
+\q{(b)} $\frac{n+1}{n!}=\frac n{n!}+\frac1{n!}$ et $\sum_{n\geq1}\frac{x^n}{(n-1)!}=x\sum_{k\geq0}\frac{x^k}{k!}=xe^x$. Donc la somme vaut $(x+1)e^x$.
+\q{(c)} $\frac{e^x+e^{-x}}2=\ch x$ garde les termes d'indice pair, $\cos x$ les garde avec le signe $(-1)^p$ ; dans $\frac{\ch x+\cos x}2$,
+les termes $\frac{x^{2p}}{(2p)!}$ ont pour coefficient $\frac{1+(-1)^p}2$, qui vaut $1$ si $p$ est pair et $0$ sinon. Donc
+$\sum_{n=0}^{+\infty}\frac{x^{4n}}{(4n)!}=\frac{\ch x+\cos x}2$.
+\gain{pour isoler une classe d'indices modulo $2$ ou $4$, on combine $f(x)$ et $f(-x)$, ou $e^x,e^{-x},e^{ix},e^{-ix}$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{7}{Prolongement $\mathcal C^\infty$}{set-18}{énoncé : TD, p.~3}
+\q{1.} Pour $x\neq0$, $\frac{e^x-1}x=\sum_{n\geq1}\frac{x^{n-1}}{n!}=\sum_{n\geq0}\frac{x^n}{(n+1)!}$, série de rayon $+\infty$ dont la somme vaut $1$ en $0$. Le
+prolongement par $1$ est la somme d'une série entière de rayon infini : il est $\mathcal C^\infty$ sur $\R$.
+\q{2.} $f^{(n)}(0)=n!\,a_n=\frac{n!}{(n+1)!}=\frac1{n+1}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{8}{Coefficients et dérivées en $0$}{se-coef}{énoncé : TD, p.~4}
+$a_p=\frac{f^{(p)}(0)}{p!}$ : $f''(0)=2a_2$, $f^{(5)}(0)=120\,a_5$. Pour $f(x)=\frac1{1-x^2}=\sum_{n=0}^{+\infty}x^{2n}$ : $a_{10}=1$ et $a_{11}=0$,
+donc $f^{(10)}(0)=10!=3\,628\,800$ et $f^{(11)}(0)=0$ (fonction paire).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{II}{Exercices classiques et méthodes incontournables}{}
+\correction{9}{Rayons de convergence}{se-rayons}{énoncé : TD, p.~5}
+\q{(a)} $e^{-1}\leq e^{\cos n}\leq e$ : par comparaison avec $\sum e^{-1}z^n$ et $\sum ez^n$ (rayon $1$), $1\leq R\leq1$. Donc $R=1$.
+\q{(b)} $\left|\frac{e^{in}}{1+in}\right|=\frac1{\sqrt{1+n^2}}\sim\frac1n$ : même rayon que $\sum\frac{z^n}n$, $R=1$.
+\q{(c)} $\left|\frac{(-1)^n}{n(n-1)}\right|\sim\frac1{n^2}$ : même rayon que $\sum\frac{z^n}{n^2}$, c'est-à-dire $1$ (proposition~1.21 du livret).
+\q{(d)} $\frac{a_{n+1}}{a_n}=\frac{(2n+2)(2n+1)}{(n+1)^2}=\frac{2(2n+1)}{n+1}\to4$ : $R=\frac14$.
+\q{(e)} Série lacunaire : pour $z\neq0$, $\frac{|2^{n+1}z^{3n+3}|}{|2^nz^{3n}|}=2|z|^3$. Convergence absolue si $2|z|^3<1$, divergence si
+$2|z|^3>1$ : $R=2^{-1/3}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{10}{Rayons par équivalents}{set-5}{énoncé : TD, p.~5}
+\choix{un équivalent simple du coefficient, puis la proposition des équivalents.}
+\q{(1)} $\arccos(1-u)\sim\sqrt{2u}$ quand $u\to0^+$ (car $\cos\theta=1-u$ et $1-\cos\theta\sim\frac{\theta^2}2$). Donc $a_n\sim\frac{\sqrt2}n$ : $R=1$.
+\q{(2)} $\sqrt{n^2+n+1}=n\sqrt{1+\frac1n+\frac1{n^2}}=n+\frac12+\frac3{8n}+O\left(\frac1{n^2}\right)$. Donc
+$\cos\left(\pi\sqrt{n^2+n+1}\right)=(-1)^n\cos\left(\frac\pi2+\frac{3\pi}{8n}+O(\tfrac1{n^2})\right)=(-1)^{n+1}\sin\left(\frac{3\pi}{8n}+O(\tfrac1{n^2})\right)$, de module
+équivalent à $\frac{3\pi}{8n}$ : $R=1$.
+\q{(3)} $\sqrt[n]{n+1}-\sqrt[n]n=e^{\frac{\ln n}n}\left(e^{\frac{\ln(n+1)-\ln n}n}-1\right)\sim1\cdot\frac{\ln(1+\frac1n)}n\sim\frac1{n^2}$ : $R=1$.
+\q{(4)} $\frac{\ch n}n\sim\frac{e^n}{2n}$ : même rayon que $\sum\frac{(ez)^n}n$, $R=\frac1e$.
+\q{(5)} $\frac{n^2}{3^n+n}\sim\frac{n^2}{3^n}$ : $R=3$.
+\q{(6)} Pour tout $r>0$, $a_nr^n=\left(\frac r{1+\sqrt n}\right)^n\to0$ (le quotient est $\leq\frac12$ dès que $\sqrt n\geq2r$) : la suite est bornée pour
+tout $r$, donc $R=+\infty$ (définition du rayon).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{11}{Sommes : séries géométriques (1)}{set-6}{énoncé : TD, p.~5}
+Les cinq premières ont pour rayon $1$ (coefficients équivalents à $Cn^\alpha$).
+\q{(1)} En dérivant $\frac1{1-x}=\sum x^n$ : $\sum_{n\geq1}nx^{n-1}=\frac1{(1-x)^2}$, donc $\sum nx^n=\frac x{(1-x)^2}$.
+\q{(2)} $n^2=(n+1)(n+2)-3(n+1)+1$ et $\sum(n+1)(n+2)x^n=\frac2{(1-x)^3}$ : $\sum n^2x^n=\frac2{(1-x)^3}-\frac3{(1-x)^2}+\frac1{1-x}=\frac{x(1+x)}{(1-x)^3}$.
+\q{(3)} En intégrant $\frac1{1-x}$ : $\sum_{n\geq1}\frac{x^n}n=-\ln(1-x)$.
+\q{(4)} $\frac{n^2+n+1}n=(n+1)+\frac1n$ : $\sum_{n\geq1}(n+1)x^n=\frac1{(1-x)^2}-1$, d'où la somme $\frac1{(1-x)^2}-1-\ln(1-x)$.
+\q{(5)} $n^3+n+1=(n+1)(n^2-n+2)-1$, donc $\frac{n^3+n+1}{n+1}=n^2-n+2-\frac1{n+1}$. Pour $x\neq0$, $\sum_{n\geq0}\frac{x^n}{n+1}=-\frac{\ln(1-x)}x$, et
+\[\sum_{n\geq0}\frac{n^3+n+1}{n+1}x^n=\frac{x(1+x)}{(1-x)^3}-\frac x{(1-x)^2}+\frac2{1-x}+\frac{\ln(1-x)}x\qquad(x\neq0),\]
+la somme valant $1$ en $x=0$.
+\q{(6)} $\frac{\ch n}n\sim\frac{e^n}{2n}$ : $R=\frac1e$. Pour $|x|<\frac1e$ : $\sum_{n\geq1}\frac{\ch n}nx^n=\frac12\sum\frac{(ex)^n}n+\frac12\sum\frac{(x/e)^n}n
+=-\frac12\Big(\ln(1-ex)+\ln\left(1-\frac xe\right)\Big)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{12}{Sommes : séries exponentielles}{set-8}{énoncé : TD, p.~6}
+Toutes ont pour rayon $+\infty$ (d'Alembert, ou comparaison avec $\frac{C^n}{n!}$).
+\q{(1)} $n^2+n+3=n(n-1)+2n+3$ : $\sum\frac{n(n-1)}{n!}x^n=x^2e^x$, $\sum\frac n{n!}x^n=xe^x$. Somme : $(x^2+2x+3)e^x$.
+\q{(2)} On pose $m=n+1$ : $n^2+2n-1=m^2-2$, et la série est $\sum_{m\geq1}\frac{m^2-2}{m!}x^{m-1}$. Pour $x\neq0$ :
+$\frac1x\left(\sum_{m\geq1}\frac{m^2}{m!}x^m-2\sum_{m\geq1}\frac{x^m}{m!}\right)=\frac{(x^2+x)e^x-2(e^x-1)}x=\frac{(x^2+x-2)e^x+2}x$ ; en $0$, la somme vaut $-1$.
+\q{(3)} $n=\frac{(2n+1)-1}2$ : $\frac n{(2n+1)!}=\frac12\cdot\frac1{(2n)!}-\frac12\cdot\frac1{(2n+1)!}$. Pour $x=t^2>0$ : $\frac12\left(\ch t-\frac{\sh t}t\right)$ ; pour
+$x=-t^2<0$ : $\frac12\left(\cos t-\frac{\sin t}t\right)$ ; $0$ en $x=0$.
+\q{(4)} $\ch n=\frac{e^n+e^{-n}}2$ : somme $\frac12\left(e^{ex}+e^{x/e}\right)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{13}{Calculs de sommes}{se-sommes}{énoncé : TD, p.~6}
+\q{(a)} $R=1$ (d'Alembert). En dérivant $\frac1{1+x}=\sum(-1)^nx^n$ : $-\frac1{(1+x)^2}=\sum_{n\geq1}(-1)^nnx^{n-1}=-\sum_{n\geq0}(-1)^n(n+1)x^n$.
+Donc $\sum_{n=0}^{+\infty}(n+1)(-1)^nx^n=\frac1{(1+x)^2}$.
+\q{(b)} $R=1$. $\frac1{n(n+1)}=\frac1n-\frac1{n+1}$. Pour $0<|x|<1$ : $\sum_{n\geq1}\frac{x^n}n=-\ln(1-x)$ et
+$\sum_{n\geq1}\frac{x^n}{n+1}=\frac1x\sum_{k\geq2}\frac{x^k}k=\frac{-\ln(1-x)-x}x$. Donc
+\[S(x)=-\ln(1-x)+\frac{\ln(1-x)+x}x=1+\frac{(1-x)\ln(1-x)}x,\qquad S(0)=0.\]
+\q{(c)} $R=1$. Sa dérivée est $\sum x^{2n}=\frac1{1-x^2}=\frac12\left(\frac1{1-x}+\frac1{1+x}\right)$ ; en intégrant (valeur $0$ en $0$) :
+$\sum_{n=0}^{+\infty}\frac{x^{2n+1}}{2n+1}=\frac12\ln\frac{1+x}{1-x}$.
+\q{Application.} Avec $x=\frac12$ dans (b) : $\sum_{n=1}^{+\infty}\frac1{n(n+1)2^n}=1+\frac{\frac12\ln\frac12}{\frac12}=1-\ln2\approx0{,}307$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{14}{Série des sommes harmoniques}{set-11}{énoncé : TD, p.~6}
+\q{1.} Comparaison série-intégrale ($t\mapsto\frac1t$ décroissante) : $\ln(n+1)\leq a_n\leq1+\ln n$, donc $a_n\sim\ln n$.
+\q{2.} $\frac{a_{n+1}}{a_n}=1+\frac1{(n+1)a_n}\to1$ : $R=1$. $a_n=\sum_{k=1}^n\frac1k\cdot1$ est le coefficient du produit de Cauchy de $\sum_{n\geq1}\frac{x^n}n$ et
+$\sum_{n\geq0}x^n$ (rayons $1$). Pour $|x|<1$ : $\sum_{n\geq1}a_nx^n=-\frac{\ln(1-x)}{1-x}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{15}{Continuité de la somme au bord}{set-12}{énoncé : TD, p.~6}
+\q{1.} $|a_n|\sim\frac1{n^2}$ : $R=1$. En $x=\pm1$, $\sum\frac1{n(n-1)}$ converge absolument : $f$ est définie sur $[-1,1]$.
+\q{2.} $\frac1{n(n-1)}=\frac1{n-1}-\frac1n$. Pour $|x|<1$ : $\sum_{n\geq2}\frac{(-1)^nx^n}{n-1}=x\sum_{k\geq1}\frac{(-1)^{k+1}x^k}k=x\ln(1+x)$ et
+$\sum_{n\geq2}\frac{(-1)^nx^n}n=-\ln(1+x)+x$. Donc $f(x)=(1+x)\ln(1+x)-x$.
+\q{3.} $f$ est continue sur $[-1,1]$ (proposition~1.28 du livret, admise) :
+$\sum_{n\geq2}\frac1{n(n-1)}=f(-1)=\lim_{x\to-1}\big((1+x)\ln(1+x)-x\big)=1$ (on retrouve le télescopage), et $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}=f(1)=2\ln2-1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{16}{Somme par changement de variable}{set-14}{énoncé : TD, p.~7}
+\q{1.} $R=1$ ; en $1$, $\sum\frac1{2n+1}$ diverge ; en $-1$, la série alternée converge : $f$ est définie sur $[-1,1[$.
+\q{2.} $f(t^2)=\frac1t\sum\frac{t^{2n+1}}{2n+1}=\frac{\operatorname{argth}t}t=\frac1{2t}\ln\frac{1+t}{1-t}$ : $f(x)=\frac1{2\sqrt x}\ln\frac{1+\sqrt x}{1-\sqrt x}$.
+\q{3.} $f(-t^2)=\frac1t\sum\frac{(-1)^nt^{2n+1}}{2n+1}=\frac{\arctan t}t$ : $f(x)=\frac{\arctan\sqrt{-x}}{\sqrt{-x}}$. Et $f(0)=1$.
+\q{4.} Par continuité de $f$ en $-1$ (la série converge en $-1$) : $\sum_{n=0}^{+\infty}\frac{(-1)^n}{2n+1}=f(-1)=\arctan1=\frac\pi4$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{17}{Développements en série entière}{se-dse}{énoncé : TD, p.~7}
+\q{(a)} $\frac1{(1-x)(1-2x)}=\frac2{1-2x}-\frac1{1-x}=\sum_{n=0}^{+\infty}\left(2^{n+1}-1\right)x^n$, pour $|x|<\frac12$ ; le rayon est $\frac12$
+(coefficient $\sim2^{n+1}$).
+\q{(b)} $1+x-2x^2=(1-x)(1+2x)$, positif près de $0$ : $\ln(1+x-2x^2)=\ln(1-x)+\ln(1+2x)=\sum_{n=1}^{+\infty}\frac{(-1)^{n+1}2^n-1}nx^n$,
+valable pour $|x|<1$ et $|2x|<1$ ; le rayon est $\frac12$.
+\q{(c)} Produit de Cauchy de $\sum\frac{x^n}{n!}$ ($R=+\infty$) et $\sum x^n$ ($R=1$) : pour $|x|<1$,
+$\frac{e^x}{1-x}=\sum_{n=0}^{+\infty}\left(\sum_{k=0}^n\frac1{k!}\right)x^n=1+2x+\frac52x^2+\frac83x^3+\cdots$. Les coefficients tendent vers
+$e\neq0$ : le rayon vaut exactement $1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{18}{Unicité et parité}{se-unicite}{énoncé : TD, p.~7}
+\q{1.} La fonction est paire : ses coefficients impairs sont nuls (proposition~1.36 du livret). En effet
+$\frac1{1+x^2}=\sum_{n=0}^{+\infty}(-1)^nx^{2n}$ pour $|x|<1$.
+\q{2.} $\sh x=\sum_{n=0}^{+\infty}\frac{x^{2n+1}}{(2n+1)!}$ (rayon $+\infty$) ; en dérivant terme à terme,
+$\ch x=\sh'(x)=\sum_{n=0}^{+\infty}\frac{(2n+1)x^{2n}}{(2n+1)!}=\sum_{n=0}^{+\infty}\frac{x^{2n}}{(2n)!}$.
+\q{3.} Pour $x\neq0$, $\frac{\sin x}x=\sum_{n=0}^{+\infty}\frac{(-1)^nx^{2n}}{(2n+1)!}$, et cette somme vaut $1$ en $0$. La fonction prolongée
+est donc la somme d'une série entière de rayon $+\infty$ : elle est $\mathcal C^\infty$ sur $\R$ (corollaire~1.30 du livret).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{III}{Exercices de synthèse et approfondissement}{}
+\correction{19}{Rayons de séries associées}{set-3}{énoncé : TD, p.~8}
+\q{1.(a)} $\sum a_n(z^2)^n$ converge absolument si $|z|^2<R$ et diverge si $|z|^2>R$ : le rayon est $\sqrt R$ (et $+\infty$ si $R=+\infty$).
+\q{1.(b)} Soit $0<r<R$ : $(a_nr^n)$ est bornée par $M$. Pour tout $\rho>0$, $\left|\frac{a_n}{n!}\rho^n\right|\leq M\frac{(\rho/r)^n}{n!}\to0$ : la suite est bornée,
+donc le rayon est $+\infty$.
+\q{2.} On note $R_u,R_a,R_b$ les rayons. $|a_n|\leq|u_n|$ et $|b_n|\leq|u_n|$ : $R_a\geq R_u$ et $R_b\geq R_u$ (comparaison). Et $u_n=a_n+ib_n$ :
+$R_u\geq\min(R_a,R_b)$ (somme). Donc $R_u=\min(R_a,R_b)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{20}{Sommes : séries géométriques (2)}{set-7}{énoncé : TD, p.~8}
+\q{(1)} $R=1$. $n^3+n+3=(n+1)(n^2-n+2)+1$ : pour $x\neq0$,
+$\displaystyle\sum\frac{n^3+n+3}{n+1}x^n=\frac{x(1+x)}{(1-x)^3}-\frac x{(1-x)^2}+\frac2{1-x}-\frac{\ln(1-x)}x$ ; la somme vaut $3$ en $0$.
+\q{(2)} $R=2$. Avec $u=\frac x2\in\,]-1,1[$ : $\sum(n^2+n+1)u^n=\frac{u(1+u)}{(1-u)^3}+\frac u{(1-u)^2}+\frac1{1-u}$.
+\q{(3)} $R=1$. On a $\frac1{n(n+2)}=\frac12\left(\frac1n-\frac1{n+2}\right)$. Pour $x\neq0$ :
+\[\sum_{n\geq1}\frac{x^n}{n+2}=\frac1{x^2}\sum_{k\geq3}\frac{x^k}k=\frac1{x^2}\left(-\ln(1-x)-x-\frac{x^2}2\right).\]
+Donc
+\[\sum_{n\geq1}\frac{x^n}{n(n+2)}=\frac12\left(-\ln(1-x)+\frac{\ln(1-x)+x+\frac{x^2}2}{x^2}\right)\quad(x\neq0),\qquad\text{et }0\text{ en }x=0.\]
+\q{(4)} $R=1$. $\frac{2n+1}{2n+3}=1-\frac2{2n+3}$. On calcule $\sum\frac{x^n}{2n+3}$ :
+\begin{itemize}
+\item pour $x=t^2$, $0<t<1$ : $\frac1{t^3}\sum_{n\geq0}\frac{t^{2n+3}}{2n+3}=\frac{\operatorname{argth}t-t}{t^3}$, avec $\operatorname{argth}t=\frac12\ln\frac{1+t}{1-t}=\sum_{k\geq0}\frac{t^{2k+1}}{2k+1}$ ;
+\item pour $x=-t^2$ : $\sum\frac{(-1)^nt^{2n}}{2n+3}=\frac{t-\arctan t}{t^3}$.
+\end{itemize}
+Somme : $\frac1{1-x}-2\,\frac{\operatorname{argth}\sqrt x-\sqrt x}{x\sqrt x}$ si $0<x<1$, $\frac1{1-x}-2\,\frac{\sqrt{-x}-\arctan\sqrt{-x}}{(-x)^{3/2}}$ si $-1<x<0$,
+et $\frac13$ en $0$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{21}{Sommes : mélange}{set-9}{énoncé : TD, p.~8}
+\q{(1)} $R=1$ (en $X=x^2$). $\sum nX^n=\frac X{(1-X)^2}$, $\sum\frac{X^n}n=-\ln(1-X)$ : somme $\frac{x^2}{(1-x^2)^2}-\ln(1-x^2)$.
+\q{(2)} $R=+\infty$. $1+j+j^2=0$, et plus généralement $1+j^n+j^{2n}$ vaut $3$ si $3\mid n$ et $0$ sinon. Donc
+$e^x+e^{jx}+e^{j^2x}=\sum\frac{1+j^n+j^{2n}}{n!}x^n=3\sum\frac{x^{3n}}{(3n)!}$. Avec $e^{jx}+e^{j^2x}=2\Re(e^{jx})=2e^{-x/2}\cos\frac{\sqrt3x}2$ :
+\[\sum_{n=0}^{+\infty}\frac{x^{3n}}{(3n)!}=\frac13\left(e^x+2e^{-x/2}\cos\frac{\sqrt3\,x}2\right).\]
+\q{(3)} $R=1$. $\sum(-1)^{n+1}nx^{2n+1}=-x\sum n(-x^2)^n=-x\cdot\frac{-x^2}{(1+x^2)^2}=\frac{x^3}{(1+x^2)^2}$.
+\q{(4)} $R=1$. Pour $x\neq0$ : $\frac1{4x}\sum_{n\geq1}\frac{(-x^4)^n}n=-\frac{\ln(1+x^4)}{4x}$ ; $0$ en $x=0$.
+\q{(5)} $R=1$ (coefficients bornés, non tendant vers $0$). $\cos\frac{2n\pi}3=\Re(j^n)$ : $\sum\Re\big((jx)^n\big)=\Re\frac1{1-jx}$. Avec
+$1-jx=1+\frac x2-i\frac{\sqrt3}2x$ et $|1-jx|^2=1+x+x^2$ : somme $\frac{1+\frac x2}{1+x+x^2}=\frac{2+x}{2(1+x+x^2)}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{22}{Sommes avec $\cos(n\theta)$ et $\sin(n\theta)$}{set-10}{énoncé : TD, p.~9}
+$\left|\frac{\cos n\theta}{n!}\right|\leq\frac1{n!}$ : $R=+\infty$ (de même pour $\sin$). Pour $x\in\R$,
+$\sum\frac{(xe^{i\theta})^n}{n!}=e^{xe^{i\theta}}=e^{x\cos\theta}e^{ix\sin\theta}$ (exponentielle complexe). En prenant parties réelle et imaginaire :
+\[\sum_{n=0}^{+\infty}\frac{x^n\cos n\theta}{n!}=e^{x\cos\theta}\cos(x\sin\theta),\qquad\sum_{n=0}^{+\infty}\frac{x^n\sin n\theta}{n!}=e^{x\cos\theta}\sin(x\sin\theta).\]
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{23}{Une somme par éléments simples}{set-13}{énoncé : TD, p.~9}
+\q{1.} D'Alembert sur les termes présents : $\frac{2n(2n+1)}{(2n+2)(2n+3)}x^2\to x^2$ : $R=1$. En $\pm1$, $\sum\frac1{2n(2n+1)}$ converge : $f$ est définie
+sur $[-1,1]$ (et impaire).
+\q{2.} $\frac1{2n(2n+1)}=\frac1{2n}-\frac1{2n+1}$. Pour $|x|<1$ : $\sum_{n\geq1}\frac{x^{2n+1}}{2n}=\frac x2\sum\frac{(x^2)^n}n=-\frac x2\ln(1-x^2)$ et
+$\sum_{n\geq1}\frac{x^{2n+1}}{2n+1}=\frac12\ln\frac{1+x}{1-x}-x$. Donc
+\[f(x)=-\frac x2\ln(1-x^2)-\frac12\ln\frac{1+x}{1-x}+x=\frac{1-x}2\ln(1-x)-\frac{1+x}2\ln(1+x)+x.\]
+\q{3.} Par continuité en $1$ : $(1-x)\ln(1-x)\to0$, donc $f(1)=-\ln2+1$. $f$ est impaire : $f(-1)=\ln2-1$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{24}{Développements : somme, produit, dérivation, intégration}{set-15}{énoncé : TD, p.~9}
+\q{1.} $\ln(2-x)=\ln2+\ln\left(1-\frac x2\right)=\ln2-\sum_{n\geq1}\frac{x^n}{n2^n}$ ; $R=2$.
+\q{2.} $\ln(1+x)-\ln2-\ln\left(1-\frac x2\right)=-\ln2+\sum_{n\geq1}\left(\frac{(-1)^{n+1}}n+\frac1{n2^n}\right)x^n$ ; valable pour $|x|<1$ ; $R=1$.
+\q{3.} Dérivée de $\frac1{1-x}$ : $\sum_{n\geq0}(n+1)x^n$ ; $R=1$.
+\q{4.} $\frac1{(x-1)(x-2)}=\frac1{1-x}-\frac12\cdot\frac1{1-\frac x2}=\sum_{n\geq0}\left(1-\frac1{2^{n+1}}\right)x^n$ ; $R=1$.
+\q{5.} $\sh x\cos x=\frac12\Re\left(e^{(1+i)x}-e^{(-1+i)x}\right)$, avec $1+i=\sqrt2e^{i\pi/4}$ et $-1+i=\sqrt2e^{3i\pi/4}$. Le coefficient de $x^n$ est
+$\frac{2^{n/2}}{2\,n!}\left(\cos\frac{n\pi}4-\cos\frac{3n\pi}4\right)=\frac{2^{n/2}}{n!}\sin\frac{n\pi}2\sin\frac{n\pi}4$ ; $R=+\infty$.
+Seuls les $n$ impairs subsistent. Par ailleurs, le produit de Cauchy de $\sh$ et $\cos$ donne, pour $N=2q+1$, le coefficient
+$\frac1{N!}\sum_{k=0}^q(-1)^k\binom N{2k}=\frac1{N!}\sum_{j=0}^q(-1)^{q-j}\binom N{2j+1}$. Par unicité du DSE :
+pour $N=4p+1$ ($q=2p$), $\sin\frac N2\pi=1$, $\sin\frac{N\pi}4=(-1)^p\frac{\sqrt2}2$ et $2^{N/2}\cdot(-1)^p\frac{\sqrt2}2=(-1)^p4^p$, d'où la première égalité ;
+pour $N=4p+3$ ($q=2p+1$), on obtient $-\sum_j(-1)^j\binom{4p+3}{2j+1}=-2(-1)^p4^p$, d'où la seconde.
+\q{6.} $\cos x\ch x=\frac12\Re\left(e^{(1+i)x}+e^{(-1+i)x}\right)$ : coefficient $\frac{2^{n/2}}{n!}\cos\frac{n\pi}2\cos\frac{n\pi}4$, non nul seulement si $n=4p$, et
+alors égal à $\frac{(-4)^p}{(4p)!}$. Donc $\cos x\ch x=\sum_{p\geq0}\frac{(-4)^p}{(4p)!}x^{4p}$ ; $R=+\infty$.
+\q{7.} $\frac{\ln(1-x)}{x-1}=\left(\sum_{n\geq1}\frac{x^n}n\right)\left(\sum x^n\right)=\sum_{n\geq1}H_nx^n$ avec $H_n=\sum_{k=1}^n\frac1k$ (exercice précédent) ; $R=1$.
+\q{8.} $\frac1{x^2+x+1}=\frac{1-x}{1-x^3}=\sum_{n\geq0}\left(x^{3n}-x^{3n+1}\right)$ ; $R=1$.
+\q{9.} $\arcsin'(x)=(1-x^2)^{-1/2}=\sum_{n\geq0}\binom{2n}n\frac{x^{2n}}{4^n}$ (série du binôme avec $\alpha=-\frac12$ et $-x^2$ :
+$\frac{(-\frac12)(-\frac32)\cdots(-\frac{2n-1}2)}{n!}(-1)^n=\frac{(2n)!}{4^n(n!)^2}$). En intégrant : $\arcsin x=\sum_{n\geq0}\binom{2n}n\frac{x^{2n+1}}{4^n(2n+1)}$ ; $R=1$.
+\q{10.} On dérive : $f'(x)=\frac{\sqrt2(1+x^2)}{1+x^4}$ sur $]-1,1[$, et $f(0)=0$. Pour $|x|<1$, $\frac1{1+x^4}=\sum(-1)^nx^{4n}$ :
+$f'(x)=\sqrt2\sum(-1)^n\left(x^{4n}+x^{4n+2}\right)$, donc $f(x)=\sqrt2\sum_{n\geq0}(-1)^n\left(\frac{x^{4n+1}}{4n+1}+\frac{x^{4n+3}}{4n+3}\right)$ ; $R=1$.
+\q{11.} $f'(x)=-\frac1{(1+x)^2+1}$ et $f(0)=\frac\pi4$. Avec $(1+x)^2+1=(x+1-i)(x+1+i)$ et $1\pm i=\sqrt2e^{\pm i\pi/4}$, on obtient
+$f'(x)=-\sum_{n\geq0}(-1)^n2^{-\frac{n+1}2}\sin\frac{(n+1)\pi}4\,x^n$ pour $|x|<\sqrt2$. En intégrant sur $[0,x]$, pour $-1<x<1$ :
+$f(x)=\frac\pi4+\sum_{n\geq1}\frac{(-1)^n\sin\frac{n\pi}4}{n\,2^{n/2}}x^n$ ; la série a pour rayon $\sqrt2$.
+\piege{$f$ n'est pas définie en $-1$ : l'égalité est démontrée sur $]-1,1[$, intervalle contenant $0$ où $f$ est dérivable.}
+\q{12.} $\frac{\sin t}t=\sum\frac{(-1)^nt^{2n}}{(2n+1)!}$ ($R=+\infty$) ; en intégrant : $\sum_{n\geq0}\frac{(-1)^nx^{2n+1}}{(2n+1)(2n+1)!}$ ; $R=+\infty$.
+\q{13.} $\cos(t^2)=\sum\frac{(-1)^nt^{4n}}{(2n)!}$ : $\sum_{n\geq0}\frac{(-1)^nx^{4n+1}}{(4n+1)(2n)!}$ ; $R=+\infty$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{25}{Développements par une équation différentielle}{set-16}{énoncé : TD, p.~10}
+\q{1.} $f'(x)=\frac1{1-x^2}+\frac{x\arcsin x}{(1-x^2)^{3/2}}$, donc $(1-x^2)f'-xf=1$, $f(0)=0$. Avec $f=\sum a_nx^n$, le coefficient de $x^n$ donne
+$(n+1)a_{n+1}-na_{n-1}=0$ pour $n\geq1$ et $a_1=1$. Les $a_{2p}$ sont nuls ($a_0=0$) et $a_{2p+1}=\frac{2p}{2p+1}a_{2p-1}$, d'où
+$a_{2p+1}=\frac{(2\cdot4\cdots2p)^2}{(2p+1)!}=\frac{4^p(p!)^2}{(2p+1)!}$. Synthèse : $\frac{a_{2p+3}}{a_{2p+1}}x^2\to x^2$, $R=1$ ; sur $]-1,1[$ la somme est solution
+du même problème de Cauchy ($1-x^2\neq0$) : $f(x)=\sum_{p\geq0}\frac{4^p(p!)^2}{(2p+1)!}x^{2p+1}$.
+\q{2.} $(\arcsin^2)'=2\frac{\arcsin x}{\sqrt{1-x^2}}$ ; en intégrant le 1 (valeur $0$ en $0$) :
+$\arcsin^2x=\sum_{p\geq0}\frac{2\cdot4^p(p!)^2}{(2p+2)!}x^{2p+2}=x^2+\frac{x^4}3+\frac{8x^6}{45}+\cdots$ ; $R=1$.
+\q{3.} $f'=-\sin x\ch x+\cos x\sh x$, $f''=-2\sin x\sh x$, $f'''=-2(\cos x\sh x+\sin x\ch x)$,
+$f^{(4)}=-4\cos x\ch x$. Donc $f^{(4)}+4f=0$, avec $f(0)=1$, $f'(0)=f''(0)=f'''(0)=0$. La récurrence est $a_{n+4}=\frac{-4a_n}{(n+1)(n+2)(n+3)(n+4)}$ :
+$a_{4p}=\frac{(-4)^p}{(4p)!}$, les autres sont nuls ; $R=+\infty$ ; unicité de Cauchy : $\cos x\ch x=\sum\frac{(-4)^px^{4p}}{(4p)!}$.
+\q{4.} $f'(x)=-\frac{\alpha\sin(\alpha\arcsin x)}{\sqrt{1-x^2}}$, puis $(1-x^2)f''-xf'+\alpha^2f=0$, avec $f(0)=1$, $f'(0)=0$. Coefficient de $x^n$ :
+$(n+2)(n+1)a_{n+2}=(n^2-\alpha^2)a_n$. Donc $a_{2p+1}=0$ et $a_{2p}=\frac{\prod_{k=0}^{p-1}\big((2k)^2-\alpha^2\big)}{(2p)!}$. Si $\alpha$ est un entier pair, la somme
+est un polynôme ; sinon $\frac{a_{2p+2}}{a_{2p}}x^2\to x^2$ et $R=1$. Sur $]-1,1[$, unicité de Cauchy : $\cos(\alpha\arcsin x)=\sum_{p\geq0}a_{2p}x^{2p}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{26}{Un produit de Cauchy}{se-cauchy}{énoncé : TD, p.~10}
+D'Alembert : $\left|\frac{a_{n+1}x^{n+1}}{a_nx^n}\right|\to|x|$, donc $\sum a_nx^n$ a pour rayon $1$ : $f$ est définie sur $]-1,1[$. Le produit
+de Cauchy de $\sum a_nx^n$ et $\sum x^n$ (rayons $1$) a pour coefficient $c_n=\sum_{k=0}^na_k\cdot1=S_n$ : son rayon est au moins $1$,
+donc $g$ est définie sur $]-1,1[$, et $g(x)=f(x)\cdot\frac1{1-x}$ (théorème~1.23 du livret).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{27}{Solutions développables d'une équation différentielle}{se-ed}{énoncé : TD, p.~10}
+\choix{analyse : on injecte $y=\sum a_nx^n$, on réindexe pour avoir $x^n$ partout, puis on identifie.}
+$xy''=\sum_{n\geq2}n(n-1)a_nx^{n-1}$ et $y'=\sum_{n\geq1}na_nx^{n-1}$, donc $xy''+y'=\sum_{n\geq1}n^2a_nx^{n-1}=\sum_{n\geq0}(n+1)^2a_{n+1}x^n$.
+L'équation s'écrit $\sum_{n\geq0}\big((n+1)^2a_{n+1}-a_n\big)x^n=0$ ; par unicité du DSE, $a_{n+1}=\frac{a_n}{(n+1)^2}$, donc $a_n=\frac{a_0}{(n!)^2}$.
+
+Synthèse : $\sum\frac{x^n}{(n!)^2}$ a pour rayon $+\infty$ (d'Alembert : $\frac{|x|}{(n+1)^2}\to0$), et sa somme vérifie l'équation sur $\R$.
+Les solutions DSE sont les $y=a_0\sum_{n=0}^{+\infty}\frac{x^n}{(n!)^2}$, $a_0\in\R$ ; celle qui vaut $1$ en $0$ correspond à $a_0=1$.
+\piege{l'équation a pour coefficient $x$ devant $y''$, qui s'annule en $0$ : le théorème de Cauchy ne s'applique pas sur un
+intervalle contenant $0$. Il n'y a qu'une droite de solutions DSE, alors que l'espace des solutions sur $]0,+\infty[$ est de dimension $2$.}
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{28}{Une fonction $\mathcal C^\infty$ non développable}{se-plat}{énoncé : TD, p.~10}
+\q{1.} Pour $n=0$, $P_0=1$. Si $f^{(n)}(x)=\frac{P_n(x)}{x^{3n}}e^{-1/x^2}$, on dérive (avec $\left(e^{-1/x^2}\right)'=\frac2{x^3}e^{-1/x^2}$) :
+\begin{align*}f^{(n+1)}(x)&=\left(\frac{P_n'(x)x^{3n}-3nx^{3n-1}P_n(x)}{x^{6n}}+\frac{2P_n(x)}{x^{3n+3}}\right)e^{-1/x^2}\\
+&=\frac{x^3P_n'(x)-3nx^2P_n(x)+2P_n(x)}{x^{3n+3}}e^{-1/x^2},\end{align*}
+et $P_{n+1}=X^3P_n'-3nX^2P_n+2P_n$ est un polynôme.
+\q{2.} Pour tout $k\in\N$, $\frac1{x^k}e^{-1/x^2}\to0$ quand $x\to0$ (on pose $X=\frac1{x^2}$ : $X^{k/2}e^{-X}\to0$, croissances comparées).
+Donc $f^{(n)}(x)\to0$ en $0$. Par récurrence, $f^{(n)}$ est continue en $0$ avec $f^{(n)}(0)=0$, et dérivable en $0$ :
+$\frac{f^{(n)}(x)-0}{x}=\frac{P_n(x)}{x^{3n+1}}e^{-1/x^2}\to0$. Ainsi $f$ est $\mathcal C^\infty$ et toutes ses dérivées en $0$ sont nulles.
+\q{3.} La série de Taylor est $\sum0\cdot x^n$, de somme nulle. Or $f(x)>0$ pour $x\neq0$ : $f$ n'est égale à sa série de Taylor sur
+aucun intervalle $]-r,r[$, donc $f$ n'est pas DSE (théorème~1.35 du livret).
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\partie{IV}{Exercices difficiles et type concours}{}
+\correction{29}{Équation différentielle et produit de Cauchy}{set-17}{énoncé : TD, p.~11}
+\q{1. Équation différentielle.} $f'(x)=-2xf(x)+1$, $f(0)=0$. Avec $f=\sum a_nx^n$ : $(n+1)a_{n+1}=-2a_{n-1}$ pour $n\geq1$ et $a_1=1$. Les coefficients
+pairs sont nuls et $a_{2p+1}=\frac{-2}{2p+1}a_{2p-1}$, donc $a_{2p+1}=\frac{(-2)^p}{3\cdot5\cdots(2p+1)}=\frac{(-1)^p4^pp!}{(2p+1)!}$. Le rayon est $+\infty$ ;
+unicité de Cauchy sur $\R$ : $f(x)=\sum_{p\geq0}\frac{(-1)^p4^pp!}{(2p+1)!}x^{2p+1}$.
+\q{1. Produit de Cauchy.} $e^{-x^2}=\sum\frac{(-1)^kx^{2k}}{k!}$ et $\int_0^xe^{t^2}dt=\sum\frac{x^{2j+1}}{j!(2j+1)}$ (rayons infinis). Le coefficient de $x^{2n+1}$ du
+produit est $\sum_{k=0}^n\frac{(-1)^k}{k!(n-k)!(2n-2k+1)}$.
+\q{2.} Par unicité du DSE, $\sum_{k=0}^n\frac{(-1)^k}{k!(n-k)!(2(n-k)+1)}=\frac{(-1)^n4^nn!}{(2n+1)!}$. On pose $j=n-k$ et on multiplie par $(-1)^nn!$ :
+$\sum_{j=0}^n\frac{(-1)^j}{2j+1}\binom nj=\frac{4^n(n!)^2}{(2n+1)!}$. En multipliant par $\binom{2n}n=\frac{(2n)!}{(n!)^2}$ : $\frac{4^n(2n)!}{(2n+1)!}=\frac{4^n}{2n+1}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{30}{Une intégrale égale à une série}{set-19}{énoncé : TD, p.~11}
+\choix{l'intervalle $[0,1]$ touche le bord du disque de convergence de $\frac1{1+u}$ : on ne peut pas intégrer terme à terme directement. On
+travaille avec une somme finie et un reste.}
+\q{1.} Pour $x\in[0,1]$ et $N\in\N$ : $\frac1{1+x^\alpha}=\sum_{k=0}^{N-1}(-x^\alpha)^k+\frac{(-x^\alpha)^N}{1+x^\alpha}$. On intègre sur $[0,1]$ :
+\[\int_0^1\frac{dx}{1+x^\alpha}=\sum_{k=0}^{N-1}\frac{(-1)^k}{k\alpha+1}+(-1)^N\int_0^1\frac{x^{N\alpha}}{1+x^\alpha}dx,\qquad0\leq\int_0^1\frac{x^{N\alpha}}{1+x^\alpha}dx\leq\frac1{N\alpha+1}\to0.\]
+Les sommes partielles tendent vers l'intégrale : la série converge et sa somme est $\int_0^1\frac{dx}{1+x^\alpha}$.
+\q{2.} $\alpha=2$ : $\sum_{n\geq0}\frac{(-1)^n}{2n+1}=\int_0^1\frac{dx}{1+x^2}=\frac\pi4$.
+\q{3.} Pour $\alpha<0$ et $x\in\,]0,1]$, $\frac{x^\alpha}{1+x^\alpha}=\frac1{x^{-\alpha}+1}$ : c'est le 1 avec $\beta=-\alpha>0$. Donc l'intégrale vaut
+$\sum\frac{(-1)^n}{n\beta+1}=\sum\frac{(-1)^n}{-n\alpha+1}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{31}{Une somme trigonométrique}{set-20}{énoncé : TD, p.~11}
+\q{1.} $\left|\frac{\sin n\theta}nx^n\right|\leq|x|^n$ : convergence absolue (rayon au moins $1$).
+\q{2.} Soit $f(x)$ la somme. Par dérivation terme à terme sur $]-1,1[$ :
+$f'(x)=\sum_{n\geq1}\sin(n\theta)x^{n-1}=\Im\left(\sum_{n\geq1}e^{in\theta}x^{n-1}\right)=\Im\frac{e^{i\theta}}{1-xe^{i\theta}}=\frac{\sin\theta}{1-2x\cos\theta+x^2}$
+(on multiplie par le conjugué $1-xe^{-i\theta}$). Or $x\mapsto\arctan\frac{x\sin\theta}{1-x\cos\theta}$ (défini car $1-x\cos\theta>0$) a la même dérivée
+et s'annule en $0$, comme $f$. Donc $f(x)=\arctan\left(\frac{x\sin\theta}{1-x\cos\theta}\right)$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{32}{Une suite récurrente et sa série entière}{set-21}{énoncé : TD, p.~12}
+\q{1.(a)} Récurrence double. Si $a_n,a_{n+1}\geq1$, alors $a_{n+2}\geq a_{n+1}\geq1$. Si $a_n\leq n+2$ et $a_{n+1}\leq n+3$, alors
+$a_{n+2}\leq n+3+\frac{n+2}{n+2}=n+4$.
+\q{1.(b)} $a_{n+2}-a_{n+1}=\frac{a_n}{n+2}>0$ : la suite est croissante. Comme $1\leq a_n\leq n+2$, comparaison avec $\sum x^n$ et $\sum(n+2)x^n$
+(rayons $1$) : $R=1$.
+\q{2.(a)} Ce sont des sommes de séries entières de rayon $1$ ($g$ : intégration terme à terme), donc $\mathcal C^\infty$ sur $]-1,1[$.
+\q{2.(b)} $g'(x)=\sum a_nx^{n+1}=xf(x)$.
+\q{2.(c)} On multiplie la relation par $x^{n+2}$ et on somme pour $n\geq0$ :
+$f(x)-1-x=x\big(f(x)-1\big)+g(x)$, donc $(1-x)f(x)=1+g(x)$. Avec $g'=xf$ : $g'(x)=\frac x{1-x}\big(1+g(x)\big)$, équation linéaire d'ordre 1.
+$\frac x{1-x}=-1+\frac1{1-x}$ a pour primitive $-x-\ln(1-x)$ : les solutions sont $g(x)=-1+C\frac{e^{-x}}{1-x}$. Avec $g(0)=0$ : $C=1$,
+$g(x)=\frac{e^{-x}}{1-x}-1$.
+\q{2.(d)} $f(x)=\frac{1+g(x)}{1-x}=\frac{e^{-x}}{(1-x)^2}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\correction{33}{Équation différentielle du second ordre}{set-22}{énoncé : TD, p.~12}
+\q{1.} On injecte : $16x^2y''=\sum16n(n-1)a_nx^n$, $-16xy''=-\sum16(n+1)na_{n+1}x^n$, $16xy'=\sum16na_nx^n$, $-8y'=-\sum8(n+1)a_{n+1}x^n$.
+Le coefficient de $x^n$ est $(16n^2-1)a_n-8(n+1)(2n+1)a_{n+1}$ ; par unicité du DSE (sur $]0,R[$ la somme est nulle, donc tous ses
+coefficients aussi), $a_{n+1}=\frac{(4n-1)(4n+1)}{8(n+1)(2n+1)}a_n$, ce qui est la relation demandée au rang $n+1$.
+\q{2.} Si $a_0\neq0$, aucun $a_n$ n'est nul et $\frac{a_n}{a_{n-1}}\to\frac{16}{16}=1$ : $R=1$ (si $a_0=0$, la solution est nulle).
+\q{3.} Le produit des $(4k-3)(4k-5)$ pour $k=1..n$ vaut $-1\times1\times3\times\cdots\times(4n-3)=-\frac{(4n-2)!}{2^{2n-1}(2n-1)!}$, et celui des
+$8k(2k-1)$ vaut $8^nn!\cdot\frac{(2n)!}{2^nn!}=4^n(2n)!$. Donc $a_n=-\frac{2\,(4n-2)!}{16^n(2n-1)!\,(2n)!}=-\frac1{16^n(4n-1)}\binom{4n}{2n}$
+(contrôle : $a_1=-\frac18$).
+\q{4.} Stirling : $\binom{4n}{2n}\sim\frac{16^n}{\sqrt{2\pi n}}$. Donc $a_n\sim-\frac1{4n\sqrt{2\pi n}}=-\frac1{4\sqrt{2\pi}\,n^{3/2}}$.
+\par\hfill\textcolor{BleuClair}{$\square$}\par
+\end{document}

@@ -1,0 +1,633 @@
+\documentclass[a4paper,11pt]{article}
+
+% ============================================================
+%  Le Collé — Séance 1 : Déterminants, courbes paramétrées
+%  © 2026 Ahmed Amine Ouqlani
+% ============================================================
+
+% ---------- Polices ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}          % texte et mathématiques : Palatino
+\usepackage[scaled=0.88]{helvet}   % titres et repères : linéale
+\linespread{1.07}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,stmaryrd}
+\usepackage{microtype}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.4cm,right=2.4cm,
+            headheight=14pt,headsep=0.8cm,footskip=1.1cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.15em minus 0.1em}
+\raggedbottom
+\emergencystretch=1.5em
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000 \brokenpenalty=10000
+
+% ---------- Couleurs : un bleu de nuit, un ocre, des gris ----------
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}
+\definecolor{Bleu}{HTML}{1F3A5F}
+\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}
+\definecolor{Fond}{HTML}{F2F4F7}
+\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}
+\definecolor{Gris}{HTML}{5E6672}
+\definecolor{Filet}{HTML}{C5CCD6}
+
+% ---------- Packages ----------
+\usepackage{enumitem}
+\setlist{itemsep=0.25em,topsep=0.35em,parsep=0pt}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\small\textbullet},leftmargin=1.4em}
+\setlist[enumerate]{leftmargin=1.8em,label=\textsf{\small\color{Bleu}\arabic*.}}
+\usepackage{booktabs,array,multicol}
+\usepackage{needspace,float}
+\usepackage[font=small,labelfont={sf,color=Bleu},labelsep=period,skip=6pt]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tkz-tab}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,titletoc}
+\usepackage{fancyhdr,lastpage,etoolbox}
+\usepackage[colorlinks=true,linkcolor=Bleu,urlcolor=Bleu,citecolor=Bleu,
+            pdftitle={Le Collé — TD Séries entières (énoncés)},pdfauthor={Ahmed Amine Ouqlani}]{hyperref}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ---------- Titres ----------
+% Chapitres (sections) : grand numéro, titre en linéale, filet ocre
+\titleformat{\section}[display]
+  {\normalfont\sffamily\color{Ink}}
+  {{\small\color{Gris}\textls[200]{\MakeUppercase{Chapitre}}}\\[-0.2em]%
+   {\fontsize{64}{64}\selectfont\color{BleuClair}\thesection}}
+  {0.4em}
+  {\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{\section}{0pt}{0pt}{1.6em}
+\titleformat{name=\section,numberless}[display]
+  {\normalfont\sffamily\color{Ink}}{}{0pt}{\fontsize{25}{30}\selectfont\bfseries}
+  [\vspace{0.5em}{\color{Ocre}\rule{3.2cm}{1.4pt}}]
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{1.6em}
+
+\titleformat{\subsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\Large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{1.8em}{0.5em}
+\titleformat{\subsubsection}
+  {\needspace{5\baselineskip}\normalfont\sffamily\large\bfseries\color{Ink}}
+  {\color{Bleu}\thesubsubsection}{0.7em}{}
+\titlespacing*{\subsubsection}{0pt}{1.6em}{0.4em}
+\titleformat{\paragraph}[runin]{\normalfont\sffamily\bfseries\color{Ink}}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{0.9em}{0.6em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% ---------- Table des matières ----------
+\titlecontents{section}[0pt]{\addvspace{0.7em}\sffamily\bfseries\color{Ink}}
+  {\makebox[2.2em][l]{\color{Bleu}\thecontentslabel}}{}{\hfill\contentspage}[\addvspace{0.2em}]
+\titlecontents{subsection}[2.2em]{\small\linespread{1}\selectfont}
+  {\makebox[2.6em][l]{\color{Gris}\thecontentslabel}}{}{\titlerule*[0.7pc]{.}\contentspage}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad#1}{}}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}
+\fancyfoot[L]{\scriptsize\sffamily\hyperlink{toc}{\color{Filet}sommaire}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{Filet}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Énoncés ----------
+\newtheoremstyle{enonce}{0pt}{0pt}{}{}{\sffamily\bfseries\color{Bleu}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{exemple}{0.9em}{0.9em}{}{}{\sffamily\bfseries\color{BleuMoyen}}{.}{0.5em}
+  {\thmname{#1}\thmnumber{~#2}\thmnote{\ \normalfont\sffamily\color{Ink}(#3)}}
+\newtheoremstyle{remarque}{0.7em}{0.7em}{}{}{\sffamily\itshape}{.}{0.5em}{\thmname{#1}\thmnote{\ (#3)}}
+\theoremstyle{enonce}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theoreme}[definition]{Théorème}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollaire}[definition]{Corollaire}
+\theoremstyle{exemple}
+\newtheorem{exemple}[definition]{Exemple}
+\theoremstyle{remarque}
+\newtheorem*{remarque}{Remarque}
+
+\tcbset{
+  defi/.style={enhanced,breakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+     borderline west={1.2pt}{0pt}{Bleu},left=11pt,right=4pt,top=3pt,bottom=3pt,
+     before skip=1.1em,after skip=1.1em},
+  thm/.style={enhanced,breakable,colback=Fond,colframe=Fond,boxrule=0pt,arc=0pt,
+     borderline west={2.4pt}{0pt}{Bleu},left=11pt,right=8pt,top=6pt,bottom=6pt,
+     before skip=1.2em,after skip=1.2em}}
+\tcolorboxenvironment{definition}{defi}
+\tcolorboxenvironment{theoreme}{thm}
+\tcolorboxenvironment{proposition}{thm}
+\tcolorboxenvironment{corollaire}{thm}
+
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\qedsymbol}{\textcolor{BleuClair}{$\blacksquare$}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont
+  \topsep0.5em\relax\trivlist\item[\hskip\labelsep\sffamily\itshape\color{Gris}#1.]\ignorespaces}
+  {\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+% ---------- Méthode : filets haut et bas, titre en bandeau ----------
+\makeatletter\newcommand{\methlabelfix}{\protected@edef\@currentlabel{\thetcbcounter}}\makeatother
+\newtcolorbox[auto counter,number within=section]{methode}[2][]{%
+  enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+  borderline north={0.9pt}{0pt}{Bleu},borderline south={0.9pt}{0pt}{Bleu},
+  left=4pt,right=4pt,top=8pt,bottom=8pt,before skip=1.4em,after skip=1.4em,
+  before upper={\methlabelfix\phantomsection\addcontentsline{met}{metentry}{\protect\makebox[2.6em][l]{\thetcbcounter}#2}%
+     {\sffamily\bfseries\small\color{white}\colorbox{Bleu}{\strut\ MÉTHODE~\thetcbcounter\ }}%
+     \ \ {\sffamily\bfseries\color{Bleu}#2}\par\smallskip},#1}
+
+% ---------- Repères pédagogiques : un filet de couleur, un mot-clé ----------
+\newcommand{\definirbloc}[3]{% nom, couleur, libellé
+  \newtcolorbox{#1}[1][]{enhanced,breakable,blanker,
+    borderline west={1.4pt}{0pt}{#2},left=10pt,right=2pt,top=1pt,bottom=1pt,
+    before skip=1em,after skip=1em,
+    before upper={{\sffamily\bfseries\footnotesize\color{#2}\textls[120]{\MakeUppercase{#3}}}\quad},##1}}
+\definirbloc{reflexe}{Bleu}{Réflexe}
+\definirbloc{astuce}{Ocre}{Astuce}
+\definirbloc{attention}{Brique}{Attention}
+\definirbloc{enpratique}{BleuMoyen}{En pratique}
+\definirbloc{plusloin}{Gris}{Pour aller plus loin}
+\definirbloc{strategie}{Bleu}{Stratégie}
+\definirbloc{lecture}{BleuMoyen}{Lire le schéma}
+% compatibilité avec les parties reprises
+\newenvironment{garde}{\begin{attention}}{\end{attention}}
+\newenvironment{complementHP}{\begin{plusloin}}{\end{plusloin}}
+\newenvironment{interpretation}{\begin{enpratique}}{\end{enpratique}}
+
+% ---------- Exercices, corrigés ----------
+\newcounter{exo}[section]
+\renewcommand{\theexo}{\thesection.\arabic{exo}}
+\newcommand{\niveau}[1]{{\color{Ocre}\footnotesize
+  \ifcase#1\or$\bullet\circ\circ\circ\circ$\or$\bullet\bullet\circ\circ\circ$\or$\bullet\bullet\bullet\circ\circ$%
+  \or$\bullet\bullet\bullet\bullet\circ$\or$\bullet\bullet\bullet\bullet\bullet$\fi}}
+\newcommand{\serie}[1]{\par\needspace{8\baselineskip}\vspace{1.5em}%
+  \noindent{\sffamily\bfseries\color{Bleu}#1}\par\nobreak\vspace{-0.4em}%
+  \noindent{\color{Filet}\rule{\linewidth}{0.4pt}}\par\nobreak\vspace{0.1em}}
+\newenvironment{exo}[3]{%
+  \par\needspace{5\baselineskip}\vspace{0.75em}\refstepcounter{exo}\label{e:#1}%
+  \def\exolab{#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\theexo}\quad\niveau{#2}%
+  \hfill{\footnotesize\sffamily\color{Gris}#3}\par\nobreak\vspace{0.15em}}%
+  {\par\nopagebreak\noindent\hfill{\scriptsize\sffamily\hyperref[c:\exolab]{\color{Gris}corrigé p.~\pageref{c:\exolab}}}\par}
+\newenvironment{corrige}[1]{%
+  \par\needspace{6\baselineskip}\vspace{1em}\phantomsection\label{c:#1}%
+  \noindent{\sffamily\bfseries\color{Bleu}Exercice~\ref{e:#1}}\quad
+  {\scriptsize\sffamily\hyperref[e:#1]{\color{Gris}énoncé p.~\pageref{e:#1}}}\par\nobreak\vspace{0.2em}}%
+  {\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\etape}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1.}\ }
+\newenvironment{solution}{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Solution.}\ }{\hfill\textcolor{BleuClair}{$\square$}\par}
+\newcommand{\chercher}{\par\smallskip\noindent{\color{Filet}\rule[0.5ex]{1.2cm}{0.4pt}}\
+  {\footnotesize\sffamily\itshape\color{Gris}laisser chercher l'étudiant avant de poursuivre}\par\smallskip}
+
+% ---------- Guide de séance ----------
+
+\newcommand{\marge}[1]{\leavevmode\marginpar{\raggedleft\scriptsize\sffamily\color{Gris}\textls[100]{\MakeUppercase{#1}}}\ignorespaces}
+\newcommand{\Etape}[4]{%
+  \subsection[Étape #1 --- #3 {\color{Gris}(#2)}]{#3}\label{etape:#1}%
+  \noindent{\small\sffamily\color{Gris}{\color{Ocre}\bfseries Étape #1}\quad·\quad #2\quad·\quad #4}\par\medskip}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\small\color{BleuMoyen}Question.}\ \textit{#1}\par\smallskip}
+\newcommand{\rappel}[1]{\par\smallskip\noindent\phantomsection\addcontentsline{rap}{rapentry}{#1}%
+  {\sffamily\bfseries\scriptsize\colorbox{Fond}{\color{Gris}\strut RAPPEL}}\ {\sffamily\small\color{Gris}#1.}\ }
+\newcommand{\pourquoi}{\par\noindent{\sffamily\bfseries\small\color{Ocre}Pourquoi ?}\ }
+
+% Ouverture de chapitre : \ouverture{objectifs}{prérequis}{durée}
+\newcommand{\ouverture}[3]{%
+  \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+     before skip=1.2em,after skip=1.6em]
+  \begin{minipage}[t]{0.56\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}OBJECTIFS}\par\vspace{0.3em}\small #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\linewidth}
+  {\sffamily\bfseries\small\color{Bleu}PRÉREQUIS}\par\vspace{0.3em}\small #2
+  \ifx\relax#3\relax\else\par\vspace{0.6em}{\sffamily\bfseries\small\color{Bleu}DURÉE}\par\vspace{0.2em}\small #3\fi
+  \end{minipage}
+  \end{tcolorbox}}
+% Fin de chapitre
+\newenvironment{essentiel}{\par\needspace{12\baselineskip}\vspace{1.5em}%
+  \begin{tcolorbox}[enhanced,unbreakable,colback=white,colframe=white,boxrule=0pt,arc=0pt,
+   borderline north={1.4pt}{0pt}{Ocre},left=2pt,right=2pt,top=8pt,bottom=4pt]
+  {\sffamily\bfseries\color{Ocre}L'ESSENTIEL DU CHAPITRE}\par\medskip}{\end{tcolorbox}}
+
+% ---------- Notations ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\newcommand{\LE}{\mathcal{L}(E)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ch}{\operatorname{ch}}
+\renewcommand{\th}{\operatorname{th}}
+\DeclareMathOperator{\argsh}{argsh}
+\newcommand{\vv}[1]{\overrightarrow{#1}}
+\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\ient}[2]{\llbracket #1,#2\rrbracket}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\dis}{\displaystyle}
+
+% ---------- Figures ----------
+\pgfplotsset{trig format plots=rad}
+\pgfplotsset{courbe/.style={axis lines=middle,axis equal image,
+  axis line style={Gris,-{Stealth[length=5pt]}},
+  xlabel={$x$},ylabel={$y$},ticklabel style={font=\scriptsize\sffamily,color=Gris},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small},
+  samples=300,smooth,width=0.6\linewidth}}
+\tikzset{arcetude/.style={Bleu,line width=1.25pt},
+         reste/.style={BleuClair,line width=1pt},
+         tgte/.style={Ocre,line width=0.9pt},
+         asy/.style={Gris,dashed,line width=0.6pt},
+         pt/.style={circle,fill=Ink,inner sep=1.2pt}}
+
+% ---------- Navigation ----------
+\makeatletter
+\newcommand*\l@rapentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand*\l@metentry{\@dottedtocline{1}{0em}{0em}}
+\newcommand{\listemethodes}{\@starttoc{met}}
+\newcommand{\listerappels}{\@starttoc{rap}}
+\makeatother
+% onglets de chapitre sur le bord droit
+\usepackage{eso-pic}
+\newif\ifonglets \ongletsfalse
+\newcommand{\dessineronglet}{%
+  \edef\ongcol{\ifnum\value{section}=3 Ocre\else Bleu\fi}%
+  \edef\ongnum{\the\value{section}}%
+  \pgfmathsetmacro{\ongy}{3.2+2.3*(\ongnum-1)}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[\ongcol] ([xshift=-0.75cm,yshift=-\ongy cm]current page.north east)
+     rectangle ([yshift=-\ongy cm-1.9cm]current page.north east);
+  \node[text=white,font=\sffamily\bfseries\large] at ([xshift=-0.37cm,yshift=-\ongy cm-0.95cm]current page.north east)
+     {\ongnum};
+  \end{tikzpicture}}
+\AddToShipoutPictureBG{\ifonglets\ifnum\value{section}>0 \dessineronglet\fi\fi}
+% blocs de navigation et d'enseignement
+\definirbloc{commencer}{Gris}{Si vous commencez ici}
+\definirbloc{horsprogramme}{Brique}{Hors programme}
+\newcommand{\HP}{\,{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\source}[1]{{\footnotesize\sffamily\color{Gris}\,(#1)}}
+\newcommand{\coupdepouce}[1]{\par\vspace{-0.2em}\noindent{\footnotesize\sffamily\color{Gris}%
+  \textbf{Coup de pouce} (à donner si l'étudiant bloque) : #1}\par}
+\newcommand{\pointarret}[1]{\par\vspace{1em}\noindent{\color{Filet}\rule[0.5ex]{\linewidth}{0.4pt}}\par\nobreak
+  \noindent{\footnotesize\sffamily\color{Ocre}\bfseries POINT D'ARRÊT POSSIBLE}\quad{\footnotesize\sffamily\color{Gris}#1}\par\vspace{0.6em}}
+\newcommand{\demarche}[1]{\noindent{\sffamily\bfseries\small\color{BleuMoyen}Démarche.}\ \textit{#1}\par\smallskip}
+
+% ---------- Corrigés : idées, astuces, pièges, à retenir ----------
+\newcommand{\choix}[1]{\par\noindent{\sffamily\bfseries\small\color{BleuMoyen}Choix de la méthode.}\ #1\par\smallskip}
+\newcommand{\gain}[1]{\par\noindent{\sffamily\bfseries\small\color{Ocre}Astuce.}\ #1\par}
+\newcommand{\piege}[1]{\par\noindent{\sffamily\bfseries\small\color{Brique}Piège.}\ #1\par}
+\newtcolorbox{retenirbox}{enhanced,breakable,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,
+  borderline west={2pt}{0pt}{Ocre},left=8pt,right=6pt,top=4pt,bottom=4pt,before skip=0.7em,after skip=0.5em}
+\newcommand{\retenir}[1]{\begin{retenirbox}{\sffamily\bfseries\footnotesize\color{Ocre}À RETENIR}\quad #1\end{retenirbox}}
+\newcommand{\TD}[1]{{\color{Ocre}\bfseries TD\,#1}\ ·\ }
+\newcommand{\q}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{Bleu}#1}\ }
+\providecommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+
+\providecommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\providecommand{\tr}{\operatorname{tr}}\providecommand{\Sp}{\operatorname{Sp}}
+
+% ================================================================ TD : mise en page propre au livret d'exercices
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{Gris}TD · Séries entières · énoncés}
+\fancyhead[R]{\footnotesize\sffamily\scshape\color{Gris}Le Collé}
+\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\color{Ink}\thepage\,/\,\pageref{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\newcommand{\partie}[3]{% numéro, titre, description
+  \par\needspace{10\baselineskip}\vspace{1.4em}\phantomsection\label{partie:#1}\pdfbookmark[0]{Partie #1}{partie.#1}%
+  {\sffamily\small\color{Gris}\textls[200]{PARTIE #1}}\par\nobreak\vspace{0.1em}
+  {\sffamily\bfseries\LARGE\color{Ink}#2}\par\nobreak\vspace{0.3em}
+  {\color{Ocre}\rule{2.6cm}{1.2pt}}\par\nobreak\vspace{0.2em}
+  {\small\color{Gris}#3}\par\nobreak\vspace{0.6em}}
+\newcommand{\exercice}[7]{% numéro, difficulté, titre, origine, notions, identifiant, page du corrigé
+  \par\needspace{8\baselineskip}\vspace{1.1em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#6}\pdfbookmark[1]{Exercice #1}{e.#6}%
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad\niveau{#2}\hfill{\footnotesize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.1em}\noindent{\sffamily\bfseries\color{Ink}#3}\par\nobreak
+  \vspace{0.1em}\noindent{\footnotesize\sffamily\color{Gris}Notions : #5.\hfill\mbox{corrigé p.~#7}\par}\nobreak
+  \vspace{0.35em}}
+\newcommand{\renvoi}[1]{\par\nopagebreak\vspace{0.2em}\noindent\hfill{\scriptsize\sffamily\color{Gris}#1}\par}
+\newcommand{\place}{\par\vspace{1.6cm plus 0.6cm minus 0.6cm}}
+\newcommand{\correction}[4]{% numéro, titre, identifiant, renvoi
+  \par\needspace{7\baselineskip}\vspace{1.3em}\phantomsection
+  \def\@currentlabel{#1}\label{e:#3}\pdfbookmark[1]{Exercice #1}{c.#3}%
+  {\color{Filet}\hrule height 0.4pt}\vspace{0.5em}
+  \noindent{\sffamily\bfseries\large\color{Bleu}Exercice~#1}\quad{\sffamily\bfseries\color{Ink}#2}\hfill{\scriptsize\sffamily\color{Gris}#4}\par\nobreak
+  \vspace{0.4em}}
+\newcommand{\sommaireligne}[3]{\noindent\hbox to 2.2em{\hfill\sffamily\color{Bleu}#1.}\enspace\begin{minipage}[t]{0.8\linewidth}\raggedright#2\end{minipage}\hfill\pageref{e:#3}\par}
+\makeatother
+\setlength{\parskip}{0.5em plus 0.15em minus 0.1em}
+
+\begin{document}
+\thispagestyle{plain}
+{\sffamily\small\color{Gris}\textls[150]{LE COLLÉ · MATHÉMATIQUES PT · CHAPITRE 8}}\par\vspace{0.2em}
+{\sffamily\bfseries\fontsize{26}{30}\selectfont\color{Ink}TD --- Séries entières}\par\vspace{0.3em}
+{\sffamily\Large\color{BleuMoyen}Énoncés}\par\vspace{0.4em}
+{\color{Ocre}\rule{3.2cm}{1.4pt}}\par\vspace{0.8em}
+{\small Ce livret rassemble 33 exercices, classés en quatre parties, du plus direct au plus exigeant.
+Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours) et \textbf{tous les exercices du TD de la
+classe}, avec leurs énoncés d'origine et des corrigés rédigés par Le Collé. L'origine de chaque exercice est indiquée en haut à droite :
+\emph{« Livret, exercice~1.5 »} ou \emph{« TD de la classe, exercice~7 »}. La difficulté va de \niveau{1} à \niveau{5}.
+Les corrections sont dans un livret séparé, \texttt{TD\_se\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}
+
+\vspace{0.6em}{\sffamily\bfseries\color{Bleu}Sommaire}\par\vspace{0.2em}{\small\setlength{\parskip}{1.5pt}\setlength{\columnsep}{1.2cm}\begin{multicols}{2}\raggedcolumns
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}I. Applications directes du cours\end{minipage}\hfill\pageref{partie:I}\par\vspace{0.15em}
+\sommaireligne{1}{Encadrer un rayon}{se-encadre}
+\sommaireligne{2}{Rayon et comportement au bord}{se-bord}
+\sommaireligne{3}{Rayons de convergence (quinze séries)}{set-1}
+\sommaireligne{4}{Rayons de convergence : cas particuliers}{set-2}
+\sommaireligne{5}{Étude au bord}{set-4}
+\sommaireligne{6}{Sommes de la famille exponentielle}{se-fexp}
+\sommaireligne{7}{Prolongement $\mathcal C^\infty$}{set-18}
+\sommaireligne{8}{Coefficients et dérivées en $0$}{se-coef}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}II. Exercices classiques et méthodes incontournables\end{minipage}\hfill\pageref{partie:II}\par\vspace{0.15em}
+\sommaireligne{9}{Rayons de convergence}{se-rayons}
+\sommaireligne{10}{Rayons par équivalents}{set-5}
+\sommaireligne{11}{Sommes : séries géométriques (1)}{set-6}
+\sommaireligne{12}{Sommes : séries exponentielles}{set-8}
+\sommaireligne{13}{Calculs de sommes}{se-sommes}
+\sommaireligne{14}{Série des sommes harmoniques}{set-11}
+\sommaireligne{15}{Continuité de la somme au bord}{set-12}
+\sommaireligne{16}{Somme par changement de variable}{set-14}
+\sommaireligne{17}{Développements en série entière}{se-dse}
+\sommaireligne{18}{Unicité et parité}{se-unicite}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}III. Exercices de synthèse et approfondissement\end{minipage}\hfill\pageref{partie:III}\par\vspace{0.15em}
+\sommaireligne{19}{Rayons de séries associées}{set-3}
+\sommaireligne{20}{Sommes : séries géométriques (2)}{set-7}
+\sommaireligne{21}{Sommes : mélange}{set-9}
+\sommaireligne{22}{Sommes avec $\cos(n\theta)$ et $\sin(n\theta)$}{set-10}
+\sommaireligne{23}{Une somme par éléments simples}{set-13}
+\sommaireligne{24}{Développements : somme, produit, dérivation, intégration}{set-15}
+\sommaireligne{25}{Développements par une équation différentielle}{set-16}
+\sommaireligne{26}{Un produit de Cauchy}{se-cauchy}
+\sommaireligne{27}{Solutions développables d'une équation différentielle}{se-ed}
+\sommaireligne{28}{Une fonction $\mathcal C^\infty$ non développable}{se-plat}
+\vspace{0.5em}\noindent\begin{minipage}[t]{0.86\linewidth}\raggedright\leavevmode\sffamily\bfseries\color{Ink}IV. Exercices difficiles et type concours\end{minipage}\hfill\pageref{partie:IV}\par\vspace{0.15em}
+\sommaireligne{29}{Équation différentielle et produit de Cauchy}{set-17}
+\sommaireligne{30}{Une intégrale égale à une série}{set-19}
+\sommaireligne{31}{Une somme trigonométrique}{set-20}
+\sommaireligne{32}{Une suite récurrente et sa série entière}{set-21}
+\sommaireligne{33}{Équation différentielle du second ordre}{set-22}
+\end{multicols}}
+\clearpage
+\partie{I}{Applications directes du cours}{Encadrer un rayon, rayons de référence, comportement au bord, sommes de la famille exponentielle, coefficients et dérivées.}
+\exercice{1}{1}{Encadrer un rayon}{Livret, exercice 1.3}{rayon de convergence, module}{se-encadre}{1}
+Une série entière $\sum a_nz^n$ converge pour $z=\sqrt2\,i$ et diverge pour $z=1+i$. Quel est son rayon de convergence ?
+\place
+\exercice{2}{2}{Rayon et comportement au bord}{Livret, exercice 1.4}{d'Alembert, Riemann, séries alternées}{se-bord}{1}
+Déterminer le rayon de convergence de $\sum\frac{x^n}{\sqrt n}$ ($n\geq1$) et la nature de la série pour $x=1$ et $x=-1$.
+\place
+\exercice{3}{2}{Rayons de convergence (quinze séries)}{TD de la classe, exercice 1}{d'Alembert, équivalents, comparaison}{set-1}{1}
+Déterminer le rayon de convergence des séries entières suivantes :
+\begin{multicols}{3}
+\begin{enumerate}
+\item $\sum x^n$
+\item $\sum nx^n$
+\item $\sum\frac1{n^3}x^n$
+\item $\sum\cos(n)x^n$
+\item $\sum\sin(n)x^n$
+\item $\sum\arctan(n^\alpha)x^n$, $\alpha\in\R$
+\item $\sum n!\,x^n$
+\item $\sum\frac1{n!}x^n$
+\item $\sum\frac{\ch(n)}{\sh^2(n)}x^n$
+\item $\sum\frac{(n!)^2}{(2n)!}x^n$
+\item $\sum n^nx^n$
+\item $\sum\frac{\cos(n\frac\pi2)}nx^n$
+\item $\sum\frac{n+\ln n}{n^2+2^n}x^n$
+\item $\sum\left(\frac{n-1}n\right)^{n^2}x^n$
+\end{enumerate}
+\end{multicols}
+\begin{enumerate}\setcounter{enumi}{14}
+\item $\sum a_nx^n$ avec $a_n=\left(1-\frac2n\right)^n$ si $n$ est pair et $a_n=3^n$ si $n$ est impair.
+\end{enumerate}
+\place
+\exercice{4}{2}{Rayons de convergence : cas particuliers}{TD de la classe, exercice 2}{série lacunaire, comparaison série-intégrale}{set-2}{2}
+Déterminer le rayon de convergence des séries entières :
+\begin{gather*}\text{(1)}\ \sum\frac{\cos n}nz^n\qquad\text{(2)}\ \sum n!\,z^{2n}\qquad\text{(3)}\ \sum\frac{z^{n!}}{n!}\qquad\text{(4)}\ \sum5^nz^{2n+1}\\
+\text{(5)}\ \sum a_nz^n\ \text{avec}\ a_n=\sum_{k=n+1}^{+\infty}\frac1{k^2+1}.\end{gather*}
+\place
+\exercice{5}{2}{Étude au bord}{TD de la classe, exercice 4}{d'Alembert, série-intégrale, séries alternées}{set-4}{2}
+\begin{enumerate}
+\item Déterminer le rayon de convergence de $\sum_{n\geq2}\frac{x^n}{\ln(n!)}$.
+\item Étudier la nature de la série pour $x=1$ et $x=-1$.
+\end{enumerate}
+\place
+\exercice{6}{2}{Sommes de la famille exponentielle}{Livret, exercice 1.1}{série exponentielle, changement d'indice, ch, cos}{se-fexp}{3}
+Calculer, pour $x\in\R$ :
+\[\text{(a)}\ \sum_{n=0}^{+\infty}\frac{(-1)^nx^n}{(2n+1)!}\qquad\text{(b)}\ \sum_{n=0}^{+\infty}\frac{n+1}{n!}x^n\qquad\text{(c)}\ \sum_{n=0}^{+\infty}\frac{x^{4n}}{(4n)!}.\]
+\place
+\exercice{7}{2}{Prolongement $\mathcal C^\infty$}{TD de la classe, exercice 18}{série exponentielle, classe $\mathcal C^\infty$}{set-18}{3}
+\begin{enumerate}
+\item Montrer que la fonction $x\mapsto\frac{e^x-1}x$ peut être prolongée en une fonction de classe $\mathcal C^\infty$ sur $\R$.
+\item Déterminer les dérivées successives de ce prolongement en $0$.
+\end{enumerate}
+\place
+\exercice{8}{2}{Coefficients et dérivées en $0$}{Livret, exercice 1.8}{$a_p=f^{(p)}(0)/p!$, parité}{se-coef}{3}
+Soit $f(x)=\sum_{n=0}^{+\infty}a_nx^n$ de rayon $R>0$. Exprimer $f''(0)$, $f^{(5)}(0)$ à l'aide des $a_n$. Si $f(x)=\frac1{1-x^2}$ sur $]-1,1[$,
+que valent $f^{(10)}(0)$ et $f^{(11)}(0)$ ?
+\place
+\clearpage
+\partie{II}{Exercices classiques et méthodes incontournables}{Rayons par équivalents, sommes par dérivation et intégration, séries exponentielles, continuité au bord, DSE usuels.}
+\exercice{9}{2}{Rayons de convergence}{Livret, exercice 1.5}{comparaison, équivalents, d'Alembert, série lacunaire}{se-rayons}{3}
+Déterminer le rayon de convergence des séries entières :
+\begin{gather*}\text{(a)}\ \sum e^{\cos n}z^n\qquad\text{(b)}\ \sum\frac{e^{in}}{1+in}z^n\qquad\text{(c)}\ \sum_{n\geq2}\frac{(-1)^n}{n(n-1)}z^n\\
+\text{(d)}\ \sum\frac{(2n)!}{(n!)^2}z^n\qquad\text{(e)}\ \sum2^nz^{3n}.\end{gather*}
+\place
+\exercice{10}{3}{Rayons par équivalents}{TD de la classe, exercice 5}{développement limité, équivalents, définition du rayon}{set-5}{4}
+Déterminer le rayon de convergence des séries entières :
+\[\text{(1)}\ \sum\arccos\left(1-\frac1{n^2}\right)z^n\quad\text{(2)}\ \sum\cos\left(\pi\sqrt{n^2+n+1}\right)z^n\quad\text{(3)}\ \sum\left(\sqrt[n]{n+1}-\sqrt[n]n\right)z^n\]
+\[\text{(4)}\ \sum\frac{\ch(n)}nz^n\quad\text{(5)}\ \sum\frac{n^2}{3^n+n}z^n\quad\text{(6)}\ \sum\left(\frac1{1+\sqrt n}\right)^nz^n.\]
+\place
+\exercice{11}{2}{Sommes : séries géométriques (1)}{TD de la classe, exercice 6}{dérivation terme à terme, intégration terme à terme}{set-6}{4}
+Déterminer le rayon $R$ de chacune des séries entières suivantes et calculer leur somme pour $x\in\,]-R,R[$ :
+\begin{gather*}\text{(1)}\ \sum_{n\geq0}nx^n\qquad\text{(2)}\ \sum_{n\geq0}n^2x^n\qquad\text{(3)}\ \sum_{n\geq1}\frac1nx^n\\
+\text{(4)}\ \sum_{n\geq1}\frac{n^2+n+1}nx^n\qquad\text{(5)}\ \sum_{n\geq0}\frac{n^3+n+1}{n+1}x^n\qquad\text{(6)}\ \sum_{n\geq1}\frac{\ch(n)}nx^n.\end{gather*}
+\place
+\exercice{12}{2}{Sommes : séries exponentielles}{TD de la classe, exercice 8}{série exponentielle, base $n(n-1)$, $n$, $1$}{set-8}{5}
+Déterminer le rayon $R$ et calculer la somme :
+\[\text{(1)}\ \sum\frac{n^2+n+3}{n!}x^n\qquad\text{(2)}\ \sum\frac{n^2+2n-1}{(n+1)!}x^n\qquad\text{(3)}\ \sum\frac n{(2n+1)!}x^n\qquad\text{(4)}\ \sum\frac{\ch(n)}{n!}x^n.\]
+\place
+\exercice{13}{2}{Calculs de sommes}{Livret, exercice 1.7}{dérivation terme à terme, intégration terme à terme, éléments simples}{se-sommes}{5}
+Déterminer le rayon et la somme de :
+\[\text{(a)}\ \sum_{n\geq0}(n+1)(-1)^nx^n\qquad\text{(b)}\ \sum_{n\geq1}\frac{x^n}{n(n+1)}\qquad\text{(c)}\ \sum_{n\geq0}\frac{x^{2n+1}}{2n+1}.\]
+En déduire $\sum_{n=1}^{+\infty}\frac1{n(n+1)2^n}$.
+\place
+\exercice{14}{2}{Série des sommes harmoniques}{TD de la classe, exercice 11}{produit de Cauchy, comparaison série-intégrale}{set-11}{5}
+\begin{enumerate}
+\item Déterminer un équivalent de $a_n=\sum_{k=1}^n\frac1k$ lorsque $n\to+\infty$.
+\item Déterminer le rayon de convergence ainsi que la somme de la série entière $\sum_{n\geq1}a_nx^n$.
+\end{enumerate}
+\place
+\exercice{15}{2}{Continuité de la somme au bord}{TD de la classe, exercice 12}{éléments simples, continuité au bord, logarithme}{set-12}{6}
+On considère $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}x^n$ et on note $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon de convergence $R$ et l'ensemble de définition de $f$.
+\item Calculer $f(x)$ pour tout $x\in\,]-R,R[$.
+\item En déduire la nature et la somme des séries numériques $\sum_{n\geq2}\frac1{n(n-1)}$ et $\sum_{n\geq2}\frac{(-1)^n}{n(n-1)}$.
+\end{enumerate}
+\place
+\exercice{16}{3}{Somme par changement de variable}{TD de la classe, exercice 14}{changement de variable $x=\pm t^2$, arctan, argth}{set-14}{6}
+On considère $\sum\frac{x^n}{2n+1}$ et $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon $R$ et l'ensemble de définition de $f$.
+\item Soit $x\in\,]0,R[$. Calculer $f(x)$ à l'aide du changement de variable $x=t^2$.
+\item Soit $x\in\,]-R,0[$. Calculer $f(x)$ à l'aide du changement de variable $x=-t^2$.
+\item Calculer $\sum_{n=0}^{+\infty}\frac{(-1)^n}{2n+1}$.
+\end{enumerate}
+\place
+\exercice{17}{2}{Développements en série entière}{Livret, exercice 1.10}{éléments simples, logarithme, produit de Cauchy}{se-dse}{6}
+Développer en série entière au voisinage de $0$, en précisant le rayon :
+\[\text{(a)}\ \frac1{(1-x)(1-2x)}\qquad\text{(b)}\ \ln(1+x-2x^2)\qquad\text{(c)}\ \frac{e^x}{1-x}.\]
+En (c), donner la forme générale du coefficient et les quatre premiers termes.
+\place
+\exercice{18}{2}{Unicité et parité}{Livret, exercice 1.9}{unicité du DSE, parité, prolongement $\mathcal C^\infty$}{se-unicite}{6}
+\begin{enumerate}
+\item Sans calcul, que valent les coefficients d'indice impair du DSE de $x\mapsto\frac1{1+x^2}$ ? Le vérifier sur le développement.
+\item Retrouver le DSE de $\ch$ à partir de celui de $\sh$, par dérivation.
+\item Montrer que la fonction $x\mapsto\frac{\sin x}x$, prolongée par $1$ en $0$, est de classe $\mathcal C^\infty$ sur $\R$.
+\end{enumerate}
+\place
+\clearpage
+\partie{III}{Exercices de synthèse et approfondissement}{Séries associées, sommes plus délicates, racines de l'unité, développements par opérations et par équation différentielle.}
+\exercice{19}{3}{Rayons de séries associées}{TD de la classe, exercice 3}{définition du rayon, parties réelle et imaginaire}{set-3}{7}
+\begin{enumerate}
+\item Soit $\sum a_nz^n$ de rayon $R>0$. Déterminer le rayon de (a) $\sum a_nz^{2n}$ ; (b) $\sum\frac{a_n}{n!}z^n$.
+\item Soit $u_n=a_n+ib_n$ avec $(a_n,b_n)\in\R^2$. Comparer le rayon de $\sum u_nz^n$ avec ceux de $\sum a_nz^n$ et $\sum b_nz^n$.
+\end{enumerate}
+\place
+\exercice{20}{3}{Sommes : séries géométriques (2)}{TD de la classe, exercice 7}{éléments simples, changement de variable $x=\pm t^2$}{set-7}{7}
+Déterminer le rayon $R$ et calculer la somme pour $x\in\,]-R,R[$ :
+\[\text{(1)}\ \sum_{n\geq0}\frac{n^3+n+3}{n+1}x^n\qquad\text{(2)}\ \sum_{n\geq0}\frac{n^2+n+1}{2^n}x^n\qquad\text{(3)}\ \sum_{n\geq1}\frac1{n(n+2)}x^n\qquad
+\text{(4)}\ \sum_{n\geq0}\frac{2n+1}{2n+3}x^n.\]
+\place
+\exercice{21}{3}{Sommes : mélange}{TD de la classe, exercice 9}{racines de l'unité, substitution, parties réelles}{set-9}{8}
+Déterminer le rayon $R$ et calculer la somme des séries entières :
+\begin{gather*}\text{(1)}\ \sum_{n\geq1}\left(n+\frac1n\right)x^{2n}\qquad\text{(2)}\ \sum_{n\geq0}\frac{x^{3n}}{(3n)!}\qquad\text{(3)}\ \sum_{n\geq0}(-1)^{n+1}nx^{2n+1}\\
+\text{(4)}\ \sum_{n\geq1}\frac{(-1)^n}{4n}x^{4n-1}\qquad\text{(5)}\ \sum_{n\geq0}\cos\left(\frac{2n\pi}3\right)x^n.\end{gather*}
+Indication pour (2) : calculer $\sum_{n=0}^{+\infty}\frac{(j^kx)^n}{n!}$ où $j=e^{2i\pi/3}$ et $k\in\{0,1,2\}$.
+\place
+\exercice{22}{2}{Sommes avec $\cos(n\theta)$ et $\sin(n\theta)$}{TD de la classe, exercice 10}{exponentielle complexe, parties réelle et imaginaire}{set-10}{8}
+Soit $\theta\in\R$. Donner le rayon et calculer la somme des séries entières $\displaystyle\sum_{n\geq0}\frac{x^n\cos(n\theta)}{n!}$ et $\displaystyle\sum_{n\geq0}\frac{x^n\sin(n\theta)}{n!}$.
+\place
+\exercice{23}{3}{Une somme par éléments simples}{TD de la classe, exercice 13}{éléments simples, argth, continuité au bord}{set-13}{8}
+On considère $\sum_{n\geq1}\frac{x^{2n+1}}{2n(2n+1)}$ et on note $f$ sa fonction somme.
+\begin{enumerate}
+\item Déterminer le rayon $R$ et l'ensemble de définition de $f$.
+\item Calculer $f(x)$ pour tout $x\in\,]-R,R[$ (on pourra décomposer $\frac1{2n(2n+1)}$ en éléments simples).
+\item Calculer $f(1)$ et $f(-1)$.
+\end{enumerate}
+\place
+\exercice{24}{3}{Développements : somme, produit, dérivation, intégration}{TD de la classe, exercice 15}{DSE usuels, éléments simples, intégration terme à terme}{set-15}{9}
+Déterminer un développement en série entière au voisinage de $0$ des fonctions suivantes, et préciser le rayon de la série obtenue.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $f(x)=\ln(2-x)$
+\item $f(x)=\ln\left(\frac{1+x}{2-x}\right)$
+\item $f(x)=\frac1{(1-x)^2}$
+\item $f(x)=\frac1{x^2-3x+2}$
+\item $f(x)=\sh(x)\cos(x)$
+\item $f(x)=\cos(x)\ch(x)$
+\item $f(x)=\frac{\ln(1-x)}{x-1}$
+\item $f(x)=\frac1{x^2+x+1}$
+\item $f(x)=\arcsin x$
+\item $f(x)=\arctan\left(\frac{x\sqrt2}{1-x^2}\right)$
+\item $f(x)=\arctan\frac1{1+x}$
+\item $f(x)=\int_0^x\frac{\sin t}t\,dt$
+\item $f(x)=\int_0^x\cos(t^2)\,dt$
+\end{enumerate}
+\end{multicols}
+Avec le 5, en déduire : $\displaystyle\sum_{k=0}^{2p}(-1)^k\binom{4p+1}{2k+1}=(-1)^p4^p$ et $\displaystyle\sum_{k=0}^{2p+1}(-1)^k\binom{4p+3}{2k+1}=2(-1)^p4^p$.
+\place
+\exercice{25}{3}{Développements par une équation différentielle}{TD de la classe, exercice 16}{équation différentielle, récurrence, unicité de Cauchy}{set-16}{10}
+En utilisant la technique de l'équation différentielle, trouver les développements en série entière des fonctions suivantes.
+\begin{enumerate}
+\item $f(x)=\frac{\arcsin x}{\sqrt{1-x^2}}$.
+\item $f(x)=\arcsin^2x$.
+\item $f(x)=\cos(x)\ch(x)$ : vérifier que $f$ est solution de l'équation $y^{(4)}+4y=0$.
+\item $f(x)=\cos(\alpha\arcsin x)$, $\alpha\in\R$ : vérifier que $f$ est solution d'une équation différentielle d'ordre 2.
+\end{enumerate}
+\place
+\exercice{26}{3}{Un produit de Cauchy}{Livret, exercice 1.6}{produit de Cauchy, sommes partielles}{se-cauchy}{10}
+Soit $(a_n)$ une suite de réels non nuls telle que $\frac{a_{n+1}}{a_n}\to1$, et $S_n=\sum_{k=0}^na_k$. Justifier que
+$f(x)=\sum_{n=0}^{+\infty}a_nx^n$ et $g(x)=\sum_{n=0}^{+\infty}S_nx^n$ sont définies sur $]-1,1[$, et montrer que $g(x)=\frac{f(x)}{1-x}$.
+\place
+\exercice{27}{3}{Solutions développables d'une équation différentielle}{Livret, exercice 1.11}{équation différentielle, récurrence, unicité du DSE}{se-ed}{10}
+Déterminer les solutions DSE de l'équation $xy''+y'-y=0$, puis celle qui vérifie $y(0)=1$. Préciser le rayon.
+\place
+\exercice{28}{3}{Une fonction $\mathcal C^\infty$ non développable}{Livret, exercice 1.2}{série de Taylor, classe $\mathcal C^\infty$, croissances comparées}{se-plat}{11}
+Soit $f(x)=e^{-1/x^2}$ pour $x\neq0$ et $f(0)=0$.
+\begin{enumerate}
+\item Montrer par récurrence que, pour tout $n$, il existe un polynôme $P_n$ tel que $f^{(n)}(x)=\frac{P_n(x)}{x^{3n}}e^{-1/x^2}$ pour $x\neq0$.
+\item En déduire que $f$ est de classe $\mathcal C^\infty$ sur $\R$ et que $f^{(n)}(0)=0$ pour tout $n$.
+\item Que vaut la série de Taylor de $f$ ? Est-elle égale à $f$ au voisinage de $0$ ?
+\end{enumerate}
+\place
+\clearpage
+\partie{IV}{Exercices difficiles et type concours}{Produit de Cauchy et identités binomiales, intégrale égale à une série, suite récurrente, équation du second ordre.}
+\exercice{29}{4}{Équation différentielle et produit de Cauchy}{TD de la classe, exercice 17}{équation différentielle, produit de Cauchy, identités binomiales}{set-17}{11}
+\begin{enumerate}
+\item Déterminer le développement en série entière au voisinage de $0$ de $f:x\mapsto e^{-x^2}\int_0^xe^{t^2}\,dt$ :
+\begin{itemize}
+\item via la technique de l'équation différentielle ;
+\item via un produit de Cauchy.
+\end{itemize}
+\item En déduire que pour tout $n\in\N$, $\displaystyle\sum_{k=0}^n\frac{(-1)^k}{2k+1}\binom nk\binom{2n}n=\frac{4^n}{2n+1}$.
+\end{enumerate}
+\place
+\exercice{30}{4}{Une intégrale égale à une série}{TD de la classe, exercice 19}{somme géométrique finie, majoration du reste, intégrale}{set-19}{11}
+\begin{enumerate}
+\item Montrer que pour tout $\alpha>0$, $\displaystyle\int_0^1\frac{dx}{1+x^\alpha}=\sum_{n=0}^{+\infty}\frac{(-1)^n}{n\alpha+1}$.
+\item En déduire la somme de la série $\sum_{n\geq0}\frac{(-1)^n}{2n+1}$.
+\item Montrer que pour tout $\alpha<0$, $\displaystyle\int_0^1\frac{x^\alpha\,dx}{1+x^\alpha}=\sum_{n=0}^{+\infty}\frac{(-1)^n}{-n\alpha+1}$.
+\end{enumerate}
+\place
+\exercice{31}{3}{Une somme trigonométrique}{TD de la classe, exercice 20}{dérivation terme à terme, exponentielle complexe, arctan}{set-20}{12}
+Soit $\theta\in\R$ et $x\in\,]-1,1[$.
+\begin{enumerate}
+\item Montrer que la série $\sum_{n\geq1}\frac{\sin(n\theta)x^n}n$ converge.
+\item Déterminer la somme $\sum_{n=1}^{+\infty}\frac{\sin(n\theta)}nx^n$.
+\end{enumerate}
+\place
+\exercice{32}{4}{Une suite récurrente et sa série entière}{TD de la classe, exercice 21}{récurrence, équation différentielle d'ordre 1, rayon}{set-21}{12}
+Soit $(a_n)$ définie par $a_0=a_1=1$ et $a_{n+2}=a_{n+1}+\frac{a_n}{n+2}$ pour $n\geq0$. On considère $\sum_{n\geq0}a_nx^n$.
+\begin{enumerate}
+\item (a) Montrer que pour tout $n$, $1\leq a_n\leq n+2$.\quad (b) En déduire que $(a_n)$ est monotone et déterminer le rayon de convergence.
+\item On pose $f(x)=\sum_{n=0}^{+\infty}a_nx^n$ et $g(x)=\sum_{n\geq0}\frac{a_n}{n+2}x^{n+2}$.
+\begin{enumerate}
+\item Justifier que $f$ et $g$ sont de classe $\mathcal C^\infty$ sur $]-1,1[$.
+\item Trouver une relation entre $f$ et $g$.
+\item Montrer que $g$ est solution d'une équation différentielle linéaire d'ordre 1 que l'on résoudra explicitement.
+\item Donner une expression de $f(x)$.
+\end{enumerate}
+\end{enumerate}
+\place
+\exercice{33}{4}{Équation différentielle du second ordre}{TD de la classe, exercice 22}{récurrence, formule de Stirling, rayon}{set-22}{12}
+On considère l'équation $16(x^2-x)y''+(16x-8)y'-y=0$ $(E)$. On suppose que la série entière $\sum a_nx^n$ est solution de $(E)$ sur $]0,R[$, où
+$R>0$ est son rayon de convergence.
+\begin{enumerate}
+\item Montrer que pour tout $n\geq1$, $a_n=\frac{(4n-3)(4n-5)}{8n(2n-1)}a_{n-1}$.
+\item Déterminer le rayon de convergence de la série entière $\sum a_nx^n$.
+\item On suppose que $a_0=1$. Déterminer $a_n$ en fonction de $n$.
+\item En utilisant la formule de Stirling, déterminer un équivalent de $a_n$ lorsque $n\to+\infty$.
+\end{enumerate}
+\place
+\end{document}

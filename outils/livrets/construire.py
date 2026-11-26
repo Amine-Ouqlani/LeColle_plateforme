@@ -40,6 +40,8 @@ CHAPITRES = [
          livret='volume2-metrique-enveloppes', presentation=None, fiche='fiche-metrique-enveloppes'),
     dict(num=7, id='series', titre='Séries numériques',
          livret='livre-series', presentation='presentation-series', fiche='fiche-series'),
+    dict(num=8, id='se', titre='Séries entières',
+         livret='livre-series-entieres', presentation='presentation-series-entieres', fiche='fiche-series-entieres'),
 ]
 LIVRET_PT = 'docs/pt/livres/livret-complet-PT.pdf'
 PRES_PT = 'docs/pt/presentations/presentations-completes-PT.pdf'

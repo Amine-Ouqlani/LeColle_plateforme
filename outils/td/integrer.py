@@ -28,7 +28,9 @@ for cid, ch in CHAPITRES.items():
     n = len(TD[cid])
     for suffixe, cle, titre, sous, desc in [
         ('', f'td-{cid}', f"TD — {ch['titre']}", f"Chapitre {ch['num']} · {n} exercices · énoncés",
-         ("Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
+         ("Tous les exercices du livret (fin de chaque partie du cours) et tous les exercices du TD de la classe, en quatre parties de difficulté croissante. Sans les corrections."
+          if cid == 'se' else
+          "Tous les exercices du livret (fin de chaque partie du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections."
           if ch.get('nouveau') else
           f"Tous les exercices du livret pour ce chapitre (TD de la classe, exercices d'entraînement, exemples du cours), complétés par des exercices complémentaires, en quatre parties de difficulté croissante. Sans les corrections.")),
         ('_corrections', f'td-{cid}-corrections', f"TD — {ch['titre']} : corrections", f"Chapitre {ch['num']} · corrections détaillées",
@@ -80,9 +82,10 @@ for cid, ch in CHAPITRES.items():
             e.update(notions=o['notions'], prerequis=o.get('prerequis', []), objectifs=o['objectifs'], indication=o['indication'])
         else:
             t, n, ob, ind = META[i]
-            org = 'exemple' if i.startswith('ex-') else ('cours' if x['origine'].startswith('Livret,') else 'complementaire')
+            org = 'exemple' if i.startswith('ex-') else ('td' if i.startswith('set-') else ('cours' if x['origine'].startswith('Livret,') else 'complementaire'))
             e = dict(id=i, chapitre=cid, num=x['num'], partie=x['partie'], titre=t, origine=org, provenance=x['origine'],
                      difficulte=x['diff'], niveau=NIV[x['partie']], notions=n, prerequis=[], objectifs=ob, indication=ind)
+            if i.startswith('set-'): e['td'] = int(i[4:])
         e['enonce'] = dict(doc=f'td-{cid}', page=x['page'])
         e['corrige'] = dict(doc=f'td-{cid}-corrections', page=x['pageCorrige'])
         lignes.append('  ' + json.dumps(e, ensure_ascii=False) + ',')

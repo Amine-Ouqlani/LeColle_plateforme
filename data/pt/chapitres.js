@@ -1255,5 +1255,211 @@ LC.chapitres = [
         "r": "Les deux séries sont absolument convergentes."
       }
     ]
+  },
+  {
+    "id": "se",
+    "num": 8,
+    "bilan": {
+      "doc": "bilan-se",
+      "corrige": 2,
+      "duree": 15
+    },
+    "titre": "Séries entières",
+    "accroche": "Écrire une fonction comme un « polynôme de degré infini » $\\sum a_nx^n$ : série de Taylor, rayon de convergence, fonction somme, développements usuels, et comment développer une fonction.",
+    "statut": "complet",
+    "td": {
+      "doc": "td-se",
+      "corrections": "td-se-corrections"
+    },
+    "prerequis": [
+      "Séries numériques (chapitre 7) : comparaison, équivalents, règle de d'Alembert, convergence absolue, séries alternées, produit de Cauchy.",
+      "Formules de Taylor (première année), développements limités usuels.",
+      "Équations différentielles linéaires et théorème de Cauchy (chapitre 4), pour le §1.6."
+    ],
+    "cours": {
+      "doc": "livre-se",
+      "debut": 4,
+      "fin": 18,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Série de Taylor d'une fonction",
+          "page": 4
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries entières, rayon de convergence",
+          "page": 7
+        },
+        {
+          "num": "1.3",
+          "titre": "Calcul du rayon de convergence",
+          "page": 9
+        },
+        {
+          "num": "1.4",
+          "titre": "Fonction somme d'une série entière réelle",
+          "page": 11
+        },
+        {
+          "num": "1.5",
+          "titre": "Fonctions développables en série entière",
+          "page": 13
+        },
+        {
+          "num": "1.6",
+          "titre": "Développer une fonction en série entière",
+          "page": 16
+        },
+        {
+          "num": "1.7",
+          "titre": "Quelle méthode ? Synthèse",
+          "page": 17
+        }
+      ],
+      "corriges": {
+        "debut": 19,
+        "fin": 21
+      }
+    },
+    "fiche": {
+      "doc": "fiche-se",
+      "debut": 1,
+      "fin": 2,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Série de Taylor d'une fonction",
+          "page": 1
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries entières, rayon de convergence",
+          "page": 1
+        },
+        {
+          "num": "1.3",
+          "titre": "Calcul du rayon de convergence",
+          "page": 1
+        },
+        {
+          "num": "1.4",
+          "titre": "Fonction somme d'une série entière réelle",
+          "page": 1
+        },
+        {
+          "num": "1.5",
+          "titre": "Fonctions développables en série entière",
+          "page": 2
+        },
+        {
+          "num": "1.6",
+          "titre": "Développer une fonction en série entière",
+          "page": 2
+        },
+        {
+          "num": "1.7",
+          "titre": "Quelle méthode ? Synthèse",
+          "page": 2
+        }
+      ]
+    },
+    "presentation": {
+      "doc": "presentation-se",
+      "debut": 1,
+      "fin": 97,
+      "statique": {
+        "doc": "presentation-se-statique",
+        "debut": 1,
+        "fin": 43
+      },
+      "exercices": 6,
+      "sections": [
+        {
+          "num": "1.1",
+          "titre": "Série de Taylor d'une fonction",
+          "page": 7,
+          "pageStatique": 4
+        },
+        {
+          "num": "1.2",
+          "titre": "Séries entières, rayon de convergence",
+          "page": 26,
+          "pageStatique": 12
+        },
+        {
+          "num": "1.3",
+          "titre": "Calcul du rayon de convergence",
+          "page": 36,
+          "pageStatique": 16
+        },
+        {
+          "num": "1.4",
+          "titre": "Fonction somme d'une série entière réelle",
+          "page": 55,
+          "pageStatique": 24
+        },
+        {
+          "num": "1.5",
+          "titre": "Fonctions développables en série entière",
+          "page": 70,
+          "pageStatique": 30
+        },
+        {
+          "num": "1.6",
+          "titre": "Développer une fonction en série entière",
+          "page": 76,
+          "pageStatique": 33
+        },
+        {
+          "num": "1.7",
+          "titre": "Synthèse",
+          "page": 94,
+          "pageStatique": 40
+        }
+      ]
+    },
+    "erreurs": [
+      "Conclure sur la convergence au bord ($|z|=R$) à partir du rayon : en $\\pm R$, tout peut arriver.",
+      "Appliquer la règle de d'Alembert aux coefficients $a_n$ d'une série lacunaire ($\\sum x^{2n}$…), où une infinité de coefficients sont nuls.",
+      "Confondre $R$ et $\\frac1R$ : si $\\frac{|a_{n+1}|}{|a_n|}\\to L$, le rayon est $\\frac1L$.",
+      "Écrire un développement sans son intervalle de validité ($\\frac1{1+x^2}=\\sum(-1)^nx^{2n}$ seulement pour $|x|<1$).",
+      "Oublier la constante $f(0)$ en intégrant terme à terme, ou se tromper d'indice de départ en dérivant.",
+      "Croire qu'une fonction de classe $\\mathcal C^\\infty$ est toujours égale à sa série de Taylor ($e^{-1/x^2}$)."
+    ],
+    "flash": [
+      {
+        "q": "Que se passe-t-il pour $|z|<R$, $|z|>R$, $|z|=R$ ?",
+        "r": "Convergence absolue ; divergence grossière ; on ne peut rien dire en général."
+      },
+      {
+        "q": "Comment obtenir le rayon par d'Alembert ?",
+        "r": "Sur la série numérique $\\sum|a_nz^n|$ : si $\\frac{|a_{n+1}|}{|a_n|}\\to L$, alors $R=\\frac1L$."
+      },
+      {
+        "q": "$\\sum a_nx^n$ et $\\sum na_nx^n$ ont-elles le même rayon ?",
+        "r": "Oui (et de même pour $\\sum n^\\alpha a_nx^n$)."
+      },
+      {
+        "q": "Que vaut $a_p$ en fonction de la somme $f$ ?",
+        "r": "$a_p=\\frac{f^{(p)}(0)}{p!}$ : le développement est la série de Taylor, il est unique."
+      },
+      {
+        "q": "DSE de $\\ln(1+x)$ et rayon ?",
+        "r": "$\\sum_{n\\geq1}\\frac{(-1)^{n+1}}nx^n$, rayon $1$."
+      },
+      {
+        "q": "DSE de $(1+x)^\\alpha$ ?",
+        "r": "$1+\\sum_{n\\geq1}\\frac{\\alpha(\\alpha-1)\\cdots(\\alpha-n+1)}{n!}x^n$, pour $|x|<1$."
+      },
+      {
+        "q": "DSE de $\\arctan x$ ?",
+        "r": "$\\sum_{n\\geq0}\\frac{(-1)^n}{2n+1}x^{2n+1}$, pour $|x|<1$ (on intègre $\\frac1{1+t^2}$)."
+      },
+      {
+        "q": "Calculer $\\sum_{n\\geq1}nx^n$ ?",
+        "r": "Dériver $\\frac1{1-x}$ : $\\frac x{(1-x)^2}$ pour $|x|<1$."
+      }
+    ]
   }
 ];

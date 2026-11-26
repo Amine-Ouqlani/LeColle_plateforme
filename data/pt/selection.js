@@ -1094,5 +1094,160 @@ LC.selection = {
     "pageCorrige": 9
    }
   ]
+ },
+ "se": {
+  "doc": "selection-se",
+  "problemes": [
+   {
+    "id": "se-rayons",
+    "num": 1,
+    "etape": "Mise en application",
+    "titre": "Rayons de convergence",
+    "difficulte": 2,
+    "duree": 25,
+    "origine": "Livret, exercice 1.5 · TD complet, exercice 9",
+    "notions": [
+     "comparaison",
+     "équivalents",
+     "d'Alembert",
+     "série lacunaire"
+    ],
+    "objectifs": "Choisir, d'après la forme du coefficient, l'outil qui donne le rayon : encadrement, équivalent ou règle de d'Alembert.",
+    "prerequis": [
+     "Définition et caractérisation du rayon",
+     "Règle de d'Alembert pour les séries numériques",
+     "Rayon de $\\sum n^\\alpha z^n$"
+    ],
+    "indications": [
+     "(a) Encadrer $e^{\\cos n}$ entre deux constantes.",
+     "(b) Calculer le module $\\left|\\frac{e^{in}}{1+in}\\right|$.",
+     "(c) Un équivalent du coefficient, puis la proposition des équivalents.",
+     "(d) Règle de d'Alembert : $\\frac{a_{n+1}}{a_n}$ se simplifie.",
+     "(e) Quotient de deux termes présents : $\\frac{|2^{n+1}z^{3n+3}|}{|2^nz^{3n}|}$."
+    ],
+    "page": 2,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "set-12",
+    "num": 2,
+    "etape": "Méthodes classiques",
+    "titre": "Continuité de la somme au bord",
+    "difficulte": 2,
+    "duree": 30,
+    "origine": "TD de la classe, exercice 12 · TD complet, exercice 15",
+    "notions": [
+     "éléments simples",
+     "logarithme",
+     "continuité au bord",
+     "série télescopique"
+    ],
+    "objectifs": "Calculer une fonction somme sur l'intervalle ouvert, puis en déduire des sommes numériques par passage à la limite au bord.",
+    "prerequis": [
+     "DSE de $\\ln(1+x)$",
+     "Continuité de la somme au bord (admise)",
+     "Décomposition en éléments simples"
+    ],
+    "indications": [
+     "1. $|a_n|\\sim\\frac1{n^2}$ ; étudier la convergence absolue en $\\pm1$.",
+     "2. $\\frac1{n(n-1)}=\\frac1{n-1}-\\frac1n$ ; reconnaître deux fois $\\ln(1+x)$.",
+     "3. Les deux séries numériques sont $f(-1)$ et $f(1)$."
+    ],
+    "page": 3,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "set-16",
+    "num": 3,
+    "etape": "Approfondissement",
+    "titre": "Développements par une équation différentielle",
+    "difficulte": 3,
+    "duree": 40,
+    "origine": "TD de la classe, exercice 16 · TD complet, exercice 25",
+    "notions": [
+     "équation différentielle",
+     "relation de récurrence",
+     "unicité du DSE",
+     "unicité de Cauchy"
+    ],
+    "objectifs": "Mettre en œuvre complètement la méthode analyse-synthèse : équation vérifiée par $f$, récurrence, rayon, conclusion par Cauchy.",
+    "prerequis": [
+     "Dérivation terme à terme",
+     "Théorème de Cauchy linéaire",
+     "Dérivées de $\\arcsin$"
+    ],
+    "indications": [
+     "1. Montrer que $(1-x^2)f'-xf=1$, puis identifier le coefficient de $x^n$.",
+     "2. $\\arcsin^2$ a pour dérivée $2\\frac{\\arcsin x}{\\sqrt{1-x^2}}$ : intégrer le 1.",
+     "3. Dériver quatre fois $\\cos x\\ch x$ ; récurrence de pas $4$.",
+     "4. Montrer $(1-x^2)f''-xf'+\\alpha^2f=0$ ; récurrence de pas $2$."
+    ],
+    "page": 4,
+    "pageIndication": 7,
+    "pageCorrige": 8
+   },
+   {
+    "id": "set-21",
+    "num": 4,
+    "etape": "Problème de synthèse",
+    "titre": "Une suite récurrente et sa série entière",
+    "difficulte": 4,
+    "duree": 45,
+    "origine": "TD de la classe, exercice 21 · TD complet, exercice 32",
+    "notions": [
+     "récurrence double",
+     "rayon par comparaison",
+     "équation différentielle du premier ordre",
+     "intégration terme à terme"
+    ],
+    "objectifs": "Transformer une récurrence sur les coefficients en une équation fonctionnelle, puis différentielle, et obtenir la somme.",
+    "prerequis": [
+     "Comparaison des rayons",
+     "Résolution du premier ordre",
+     "Intégration terme à terme"
+    ],
+    "indications": [
+     "1.(a) Récurrence double, en supposant les deux encadrements aux rangs $n$ et $n+1$.",
+     "2.(b) Dériver $g$ terme à terme.",
+     "2.(c) Multiplier la relation par $x^{n+2}$ et sommer : $(1-x)f=1+g$.",
+     "2.(d) $\\frac x{1-x}=-1+\\frac1{1-x}$ ; utiliser $g(0)=0$."
+    ],
+    "page": 5,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   },
+   {
+    "id": "set-22",
+    "num": 5,
+    "etape": "Niveau DS / concours",
+    "titre": "Équation différentielle du second ordre",
+    "difficulte": 4,
+    "duree": 45,
+    "origine": "TD de la classe, exercice 22 · TD complet, exercice 33",
+    "notions": [
+     "série entière solution",
+     "récurrence",
+     "rayon",
+     "formule de Stirling"
+    ],
+    "objectifs": "Chercher une solution développable d'une équation dont le coefficient dominant s'annule, puis étudier ses coefficients : le type de raisonnement des épreuves écrites.",
+    "prerequis": [
+     "Unicité du DSE",
+     "Règle de d'Alembert",
+     "Formule de Stirling"
+    ],
+    "indications": [
+     "1. Écrire chaque terme avec $x^n$ ; regrouper $16n^2-1$.",
+     "2. Le quotient $\\frac{a_n}{a_{n-1}}$ tend vers $1$.",
+     "3. Les facteurs $(4k-3)(4k-5)$ parcourent les entiers impairs ; faire apparaître $\\binom{4n}{2n}$.",
+     "4. $\\binom{4n}{2n}\\sim\\frac{16^n}{\\sqrt{2\\pi n}}$."
+    ],
+    "page": 6,
+    "pageIndication": 7,
+    "pageCorrige": 9
+   }
+  ]
  }
 };

@@ -18,7 +18,7 @@ LC.entrainement = [
     id: "ds3-2025", type: "devoir", typeTexte: "Sujet de l'année dernière", theme: "Sous-espaces stables · constante d'Apéry",
     titre: "Sujet de l'année dernière — DS 3 (lundi 1er décembre 2025)",
     objectif: "Se mettre en conditions de DS : 4 heures, sans document ni calculatrice, puis se corriger avec le corrigé.",
-    chapitres: ["red", "series", "ed"], duree: 240, niveau: 4,
+    chapitres: ["red", "series", "se", "ed"], duree: 240, niveau: 4,
     origine: "DS 3 de la classe, l'an dernier ; corrigé Le Collé (non officiel)",
     description: "Exercice 1 : recherche des plans et droites stables d'un endomorphisme de $\\mathbb R^3$ — les plans stables correspondent aux vecteurs propres de $A^T$ ; trigonalisation, symétrie et projection, un, trois ou une infinité de plans stables. Exercice 2 : la constante d'Apéry $\\zeta(3)$ — séries alternées et comparaison série-intégrale, $\\int_0^{+\\infty}\\frac{x^2}{e^x-1}dx=2\\zeta(3)$, équation différentielle et série entière $\\sum\\frac{x^n}{n^3}$. Le corrigé est rédigé comme une copie de concours.",
     liens: [

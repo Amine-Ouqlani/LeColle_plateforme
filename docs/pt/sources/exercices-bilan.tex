@@ -108,6 +108,8 @@ qui est acquis et ce qu'il faut revoir. Justifier chaque réponse en citant la p
 4 & Équations différentielles linéaires & 15 min\\
 5 & Courbes paramétrées planes & 15 min\\
 6 & Propriétés métriques et enveloppes & 13 min\\
+7 & Séries numériques & 15 min\\
+8 & Séries entières & 15 min\\
 \bottomrule
 \end{tabular}}
 
@@ -775,6 +777,65 @@ $\sum_{k=2}^n\frac1{k^2-1}=\frac12\left(1+\frac12-\frac1n-\frac1{n+1}\right)\to\
 1.e & Cas douteux de d'Alembert. & « Vrai » : la règle est mal sue.\\
 2 & Choix de l'outil : équivalent, d'Alembert, critère des séries alternées. & Mauvais outil (d'Alembert sur une fraction) ou équivalent pour un signe variable.\\
 3 & Décomposition en éléments simples, télescopage. & Somme fausse : simplification de deux en deux mal suivie.\\
+\bottomrule
+\end{tabularx}
+\end{GRILLE}
+\fi
+\fi
+\ifnum\numexpr\CHAP*(\CHAP-8)\relax=0
+% ======================================================================
+%  CHAPITRE 8 — SÉRIES ENTIÈRES
+% ======================================================================
+\bilan{8}{Séries entières}{15 min}
+
+\begin{enumerate}
+\item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
+  \begin{enumerate}
+  \item Une série entière de rayon $R>0$ converge en $z=R$.
+  \item $\sum a_nx^n$ et $\sum na_nx^n$ ont le même rayon de convergence.
+  \item Une fonction de classe $\mathcal C^\infty$ sur $]-1,1[$ est développable en série entière au voisinage de $0$.
+  \item La série entière $\sum\frac{x^{2n}}{4^n}$ a pour rayon de convergence $4$.
+  \end{enumerate}
+\item Déterminer le rayon de convergence de :
+  \[\text{(a)}\ \sum\frac{n^2}{3^n}z^n\qquad\text{(b)}\ \sum\frac{n!}{n^n}z^n\qquad\text{(c)}\ \sum\sin\left(\frac1n\right)z^n\ (n\geq1).\]
+\item Développer en série entière, en précisant le rayon : (a) $\dfrac1{2+x}$\qquad (b) $\ln(1+x^2)$.
+\item Pour $x\in\,]-1,1[$, calculer $\sum_{n\geq1}nx^n$. En déduire $\sum_{n=1}^{+\infty}\frac n{2^n}$.
+\end{enumerate}
+
+\ifprof
+\corrige
+\q{1.a)} \emph{Faux.} $\sum x^n$ a pour rayon $1$ et diverge en $x=1$ ; au bord, tout peut arriver \prop{th.~1.12}.
+
+\q{1.b)} \emph{Vrai} \prop{prop.~1.21}.
+
+\q{1.c)} \emph{Faux.} $x\mapsto e^{-1/x^2}$ (prolongée par $0$) est $\mathcal C^\infty$, de série de Taylor nulle : elle n'est pas DSE
+\prop{exercice~1.2, th.~1.35}.
+
+\q{1.d)} \emph{Faux.} $\sum\left(\frac{x^2}4\right)^n$ converge si et seulement si $\frac{x^2}4<1$ : $R=2$. Série lacunaire : on raisonne sur $x^2$.
+
+\q{2.a)} D'Alembert : $\frac{(n+1)^2}{3n^2}|z|\to\frac{|z|}3$ : $R=3$.
+
+\q{2.b)} $\frac{a_{n+1}}{a_n}=\frac{(n+1)!\,n^n}{(n+1)^{n+1}n!}=\left(\frac n{n+1}\right)^n\to\frac1e$ : $R=e$.
+
+\q{2.c)} $\sin\frac1n\sim\frac1n$ : même rayon que $\sum\frac{z^n}n$, $R=1$ \prop{prop.~1.18}.
+
+\q{3.a)} $\frac1{2+x}=\frac12\cdot\frac1{1+\frac x2}=\sum_{n\geq0}\frac{(-1)^n}{2^{n+1}}x^n$ pour $|x|<2$ : $R=2$.
+
+\q{3.b)} $\ln(1+u)=\sum_{n\geq1}\frac{(-1)^{n+1}}nu^n$ avec $u=x^2$ : $\ln(1+x^2)=\sum_{n\geq1}\frac{(-1)^{n+1}}nx^{2n}$ pour $|x|<1$ ; $R=1$.
+
+\q{4.} En dérivant $\frac1{1-x}=\sum x^n$ sur $]-1,1[$ : $\sum_{n\geq1}nx^{n-1}=\frac1{(1-x)^2}$, donc $\sum nx^n=\frac x{(1-x)^2}$
+\prop{th.~1.29}. Avec $x=\frac12$ : $\sum\frac n{2^n}=\frac{1/2}{1/4}=2$.
+
+\begin{GRILLE}
+\begin{tabularx}{\linewidth}{QNN}
+\entete
+1.a & Le rayon ne dit rien au bord. & « Vrai » : confusion entre intervalle ouvert et fermé de convergence.\\
+1.b & Rayon de $\sum na_nx^n$. & Pas de justification : lien avec la dérivation terme à terme non fait.\\
+1.c & DSE et série de Taylor. & « Vrai » : la condition nécessaire ($\mathcal C^\infty$) est prise pour suffisante.\\
+1.d & Série lacunaire. & « $4$ » : d'Alembert appliqué aux coefficients sans tenir compte de $x^{2n}$.\\
+2 & Choix de l'outil : d'Alembert, équivalents. & Rayon inversé ($\frac13$ au lieu de $3$) : la règle $R=\frac1L$ est mal sue.\\
+3 & DSE usuels, substitution. & Intervalle de validité oublié ; mauvais facteur $\frac12$.\\
+4 & Dérivation terme à terme, somme numérique. & Décalage d'indice faux ; oubli du facteur $x$.\\
 \bottomrule
 \end{tabularx}
 \end{GRILLE}

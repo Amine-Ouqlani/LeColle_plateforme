@@ -18,11 +18,11 @@ os.makedirs(BUILD, exist_ok=True)
 S = os.path.normpath(os.path.join(ICI, '..', '..', 'docs', 'pt', 'sources'))
 BL = os.path.normpath(os.path.join(ICI, '..', 'livrets', 'build'))   # .aux produits par outils/livrets/construire.py
 LIVRETS = {'determinants': 'livre-determinants', 'courbes': 'livre-courbes', 'metrique': 'volume2-metrique-enveloppes',
-           'ed': 'livre-equations-differentielles', 'red': 'livre-reduction', 'al': 'livre-algebre-lineaire', 'series': 'livre-series'}
+           'ed': 'livre-equations-differentielles', 'red': 'livre-reduction', 'al': 'livre-algebre-lineaire', 'series': 'livre-series', 'se': 'livre-series-entieres'}
 SOURCES = [f'{S}/{f}.tex' for f in LIVRETS.values()] + \
-          [f'{ICI}/nouveaux_{c}.tex' for c in ('det', 'courbes', 'metrique', 'ed', 'red', 'al', 'series')]
+          [f'{ICI}/nouveaux_{c}.tex' for c in ('det', 'courbes', 'metrique', 'ed', 'red', 'al', 'series', 'se')]
 # exercices des livrets écrits après la séance 1 : identifiant du livre -> source
-COURS_SRC = {'ed': f'{S}/livre-equations-differentielles.tex', 'red': f'{S}/livre-reduction.tex', 'al': f'{S}/livre-algebre-lineaire.tex', 'series': f'{S}/livre-series.tex'}
+COURS_SRC = {'ed': f'{S}/livre-equations-differentielles.tex', 'red': f'{S}/livre-reduction.tex', 'al': f'{S}/livre-algebre-lineaire.tex', 'series': f'{S}/livre-series.tex', 'se': f'{S}/livre-series-entieres.tex'}
 
 # ------------------------------------------------------------------ lecture des sources
 def groupe(s, i):
@@ -65,8 +65,8 @@ def aux(path):
     return d
 AUX = {'livre6': {**aux(f'{BL}/livre-determinants.aux'), **aux(f'{BL}/livre-courbes.aux')},
        'livre7': aux(f'{BL}/volume2-metrique-enveloppes.aux'),
-       'ed': aux(f'{BL}/livre-equations-differentielles.aux'), 'red': aux(f'{BL}/livre-reduction.aux'), 'al': aux(f'{BL}/livre-algebre-lineaire.aux'), 'series': aux(f'{BL}/livre-series.aux')}
-NOM_LIVRE = {'livre6': 'du livret', 'livre7': 'du livret', 'ed': 'du livret', 'red': 'du livret', 'al': 'du livret', 'series': 'du livret'}
+       'ed': aux(f'{BL}/livre-equations-differentielles.aux'), 'red': aux(f'{BL}/livre-reduction.aux'), 'al': aux(f'{BL}/livre-algebre-lineaire.aux'), 'series': aux(f'{BL}/livre-series.aux'), 'se': aux(f'{BL}/livre-series-entieres.aux')}
+NOM_LIVRE = {'livre6': 'du livret', 'livre7': 'du livret', 'ed': 'du livret', 'red': 'du livret', 'al': 'du livret', 'series': 'du livret', 'se': 'du livret'}
 
 ANCIENS = {e['id']: e for e in json.load(open(os.path.join(ICI, 'exercices_old.json'), encoding='utf8'))}
 
@@ -94,6 +94,7 @@ def tex(s):
 
 def origine(id_, livre):
     if id_ in EXEMPLES: return EXEMPLES[id_]
+    if id_.startswith('set-'): return f"TD de la classe, exercice {id_[4:]}"
     if livre in COURS_SRC and EXOS[id_]['src'] == COURS_SRC[livre]:
         return f"Livret, exercice {AUX[livre]['e:' + id_][0]}"
     if id_ in ANCIENS:
@@ -171,7 +172,13 @@ def generer(cid, pages_cor=None, pages_enon=None):
 
     # ---------------- énoncés
     corps = []
-    if ch.get('nouveau'):
+    if cid == 'se':
+        legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
+Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours) et \textbf{tous les exercices du TD de la
+classe}, avec leurs énoncés d'origine et des corrigés rédigés par Le Collé. L'origine de chaque exercice est indiquée en haut à droite :
+\emph{« Livret, exercice~1.5 »} ou \emph{« TD de la classe, exercice~7 »}. La difficulté va de \niveau{1} à \niveau{5}.
+Les corrections sont dans un livret séparé, \texttt{''' + nom.replace('_', r'\_') + r'''\_corrections.pdf} ; la page de chaque correction est indiquée en tête de l'énoncé.}''')
+    elif ch.get('nouveau'):
         legende = (r'{\small Ce livret rassemble ' + str(total) + r''' exercices, classés en quatre parties, du plus direct au plus exigeant.
 Il reprend \textbf{tous les exercices du livret} (proposés à la fin de chaque partie du cours), complétés par des
 \textbf{exercices complémentaires}, absents du livret. L'origine de chaque exercice est indiquée en haut à droite :
