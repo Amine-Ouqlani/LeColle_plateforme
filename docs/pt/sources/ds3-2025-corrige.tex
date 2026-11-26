@@ -344,9 +344,7 @@ stables d'un endomorphisme de $\R^3$ (réduction, transposée, trigonalisation, 
 la constante d'Apéry $\zeta(3)$ (séries numériques, comparaison série-intégrale, intégrales généralisées, équation différentielle
 et séries entières).
 
-\textbf{\sffamily\color{Bleu}Ce document.} Corrigé rédigé par Le Collé, non officiel, avec le niveau de rédaction attendu
-au concours : chaque argument du cours est cité au moment où il sert. Les encadrés « Choix de la méthode », « Piège » et
-« À retenir » ne font pas partie de la copie ; ils expliquent la démarche. Tous les calculs ont été vérifiés par calcul formel.
+\textbf{\sffamily\color{Bleu}Ce document.} Corrigé rédigé par Le Collé (non officiel).
 \end{tcolorbox}
 
 On note $\mathcal B$ la base canonique de $\R^3$, $E_\lambda(u)=\Ker(u-\lambda\Id)$ et, pour un vecteur $\vu$, $U$ sa colonne de
@@ -363,8 +361,6 @@ $(a,b,c)\neq(0,0,0)$, donc $N\neq0$.
 \Q{I.1} Pour tout $x\in\R$, $xI_3-A^T=(xI_3-A)^T$ et une matrice a même déterminant que sa transposée :
 \[\chi_{A^T}(x)=\det\big((xI_3-A)^T\big)=\det(xI_3-A)=\chi_A(x).\]
 $A$ et $A^T$ ont le même polynôme caractéristique. Les valeurs propres étant les racines de $\chi$, \textbf{$\Sp(A)=\Sp(A^T)$}.
-\piege{ce raisonnement donne les mêmes valeurs propres, pas les mêmes sous-espaces propres. La suite montre justement que les
-vecteurs propres de $A^T$ décrivent les \emph{plans} stables, et non les droites.}
 
 \Q{I.2} $\vu=(x,y,z)$ appartient à $\mathcal P$ si et seulement si $ax+by+cz=0$, c'est-à-dire
 \[\vu\in\mathcal P\iff U^TN=0 .\]
@@ -372,8 +368,7 @@ vecteurs propres de $A^T$ décrivent les \emph{plans} stables, et non les droite
 \Q{I.3} Soit $\vu\in\mathcal P$. Par stabilité, $\varphi(\vu)\in\mathcal P$ ; sa colonne est $AU$. D'après I.2 :
 \[(AU)^TN=0,\quad\text{soit}\quad U^T(A^TN)=0 .\]
 
-\Q{I.4} \choix{on décompose $A^TN$ selon $\R^3=\mathcal P\oplus\vect(N)$, puis on teste I.3 sur la composante dans $\mathcal P$.}
-\emph{La somme est directe.} $N\notin\mathcal P$ car $N^TN=a^2+b^2+c^2>0$ ; donc $\mathcal P\cap\vect(N)=\{0\}$, et
+\Q{I.4} \emph{La somme est directe.} $N\notin\mathcal P$ car $N^TN=a^2+b^2+c^2>0$ ; donc $\mathcal P\cap\vect(N)=\{0\}$, et
 $\dim\mathcal P+\dim\vect(N)=3$. Ainsi $\R^3=\mathcal P\oplus\vect(N)$.
 
 \emph{Décomposition.} Il existe donc $\vec p\in\mathcal P$, de colonne $P_0$, et $\lambda\in\R$ tels que $A^TN=P_0+\lambda N$.
@@ -381,8 +376,6 @@ $\dim\mathcal P+\dim\vect(N)=3$. Ainsi $\R^3=\mathcal P\oplus\vect(N)$.
 \emph{Conclusion.} On applique I.3 à $\vu=\vec p\in\mathcal P$, et I.2 donne $P_0^TN=0$ :
 \[0=P_0^T(A^TN)=P_0^TP_0+\lambda\,P_0^TN=\|P_0\|^2 .\]
 Donc $P_0=0$ et $A^TN=\lambda N$ avec $N\neq0$ : \textbf{$N$ est un vecteur propre de $A^T$}.
-\retenir{le vecteur normal d'un plan stable par $\varphi$ est un vecteur propre de $A^T$. Autre rédaction possible : I.3 dit que
-$A^TN$ est orthogonal à $\mathcal P$, et $\mathcal P^\perp=\vect(N)$ ; donc $A^TN$ est colinéaire à $N$.}
 
 \Q{I.5} \emph{Une valeur propre réelle.} $\chi_{A^T}$ est un polynôme réel de degré $3$ (impair). Ses limites en $-\infty$ et
 $+\infty$ sont $-\infty$ et $+\infty$ ; continu, il s'annule (théorème des valeurs intermédiaires). Soit $\lambda$ une racine réelle et
@@ -391,14 +384,9 @@ $N=\col abc\neq0$ tel que $A^TN=\lambda N$.
 \emph{Le plan associé est stable.} Soit $\mathcal P : ax+by+cz=0$, un plan car $N\neq0$. Pour $\vu\in\mathcal P$ :
 \[(AU)^TN=U^T(A^TN)=\lambda\,U^TN=0,\]
 donc $\varphi(\vu)\in\mathcal P$ par I.2. \textbf{$\varphi$ possède au moins un plan stable.}
-\retenir{avec I.4 : les plans stables par $\varphi$ sont exactement les plans $N^TU=0$ où $N$ est un vecteur propre de $A^T$.
-Deux vecteurs propres colinéaires donnent le même plan : compter les plans stables, c'est compter les \emph{droites} de vecteurs
-propres de $A^T$.}
 
 \Q{I.6} D'après I.1 et I.5, $\lambda\in\Sp(A^T)=\Sp(A)$. Soit $\vec v\neq\vec 0$ tel que $\varphi(\vec v)=\lambda\vec v$, et
 $D=\vect(\vec v)$. Pour $\vu=\mu\vec v\in D$, $\varphi(\vu)=\mu\lambda\vec v\in D$ : \textbf{la droite $D$ est stable par $\varphi$}.
-\retenir{une droite $\vect(\vec v)$ est stable si et seulement si $\vec v$ est un vecteur propre. Droites stables : vecteurs propres de
-$A$ ; plans stables : vecteurs propres de $A^T$.}
 
 % ---------------------------------------------------------------------
 \Partie{Partie II — Un plan stable unique}
@@ -417,7 +405,6 @@ coefficients diagonaux dans $\Sp(f)=\{2\}$ : c'est $2I_3$. Alors $M=P(2I_3)P^{-1
 diagonalisable.}
 
 $\chi_f=(x-2)^3$ est scindé sur $\R$ : \textbf{$f$ est trigonalisable} (théorème du cours).
-\gain{autre preuve : $M-2I_3\neq0$, donc $\dim E_2(f)\leq2<3=m(2)$.}
 
 \Q{II.2(a)} $M\col11{-1}=\col22{-2}=2\col11{-1}$ et $\vec a\neq\vec 0$ : \textbf{$\vec a$ est un vecteur propre de $f$, associé à $2$}.
 
@@ -427,21 +414,18 @@ $\chi_f=(x-2)^3$ est scindé sur $\R$ : \textbf{$f$ est trigonalisable} (théor�
 Les solutions sont les vecteurs $(1+t,\ t,\ -t)$, $t\in\R$ (une droite affine dirigée par $\vec a$). Dans le plan $x=0$ : $t=-1$,
 \[\vec b=(0,-1,1).\]
 
-\Q{II.2(c)} \choix{on lit $T$ colonne par colonne : $f(\vec a)=2\vec a$, $f(\vec b)=\vec a+2\vec b$, $f(\vec c)=\vec b+2\vec c$. Les deux
-premières égalités sont acquises ; il reste à résoudre $(M-2I_3)C=B$.}
+\Q{II.2(c)} $\Mat_{\mathcal C}(f)=T$ équivaut à $f(\vec a)=2\vec a$, $f(\vec b)=\vec a+2\vec b$ et $f(\vec c)=\vec b+2\vec c$. Les deux premières
+égalités sont vraies par (a) et (b) ; il reste à résoudre $(M-2I_3)C=B$.
 $(M-2I_3)C=\col0{-1}1$ s'écrit $x+y+2z=0$ et $x-y=-1$, soit $x=y-1$ et $z=\frac12-y$. Avec $y=\frac12$ :
 \[\vec c=\Big(-\tfrac12,\ \tfrac12,\ 0\Big).\]
 \emph{C'est une base} :
 $\begin{vmatrix}1&0&-\frac12\\1&-1&\frac12\\-1&1&0\end{vmatrix}
 =1\cdot\big(0-\tfrac12\big)-0+\big(-\tfrac12\big)(1-1)=-\tfrac12\neq0 .$
 Dans $\mathcal C=(\vec a,\vec b,\vec c)$, les trois égalités ci-dessus donnent exactement $\Mat_{\mathcal C}(f)=T$.
-\piege{prendre $\vec c$ au hasard hors de $\vect(\vec a,\vec b)$ donne une base, mais pas la matrice $T$ : avec $\vec c=(0,0,\frac12)$,
-on obtient un coefficient $1$ en position $(1,3)$.}
 
 \Q{II.2(d)} Formule de changement de base, avec $P=P_{\mathcal B\to\mathcal C}$ :
 \[P=\begin{pmatrix}1&0&-\frac12\\1&-1&\frac12\\-1&1&0\end{pmatrix},\qquad M=PTP^{-1},\qquad
 P^{-1}=\begin{pmatrix}1&1&1\\1&1&2\\0&2&2\end{pmatrix}.\]
-(Contrôle : $PP^{-1}=I_3$.)
 
 \Q{II.3(a)} $\chi_{M^T}=\chi_M=(x-2)^3$ (I.1), donc $\Sp(M^T)=\{2\}$. Avec $M^T-2I_3=\begin{pmatrix}1&1&-1\\1&-1&1\\2&0&0\end{pmatrix}$ :
 la troisième ligne donne $x=0$, puis $y-z=0$. Donc
@@ -455,8 +439,6 @@ stable},
 \Q{II.3(c)} $\vec a=(1,1,-1)$ et $\vec b=(0,-1,1)$ vérifient $y+z=0$ et ne sont pas colinéaires : $\mathcal H=(\vec a,\vec b)$ est
 une base de $\mathcal P$. Comme $f(\vec a)=2\vec a$ et $f(\vec b)=\vec a+2\vec b$ :
 \[\Mat_{\mathcal H}(f_{|\mathcal P})=\begin{pmatrix}2&1\\0&2\end{pmatrix}.\]
-\retenir{dans une base trigonalisante $(\vec e_1,\vec e_2,\vec e_3)$, les sous-espaces $\vect(\vec e_1)$ et $\vect(\vec e_1,\vec e_2)$ sont
-toujours stables. Ici, c'est le seul plan stable.}
 
 % ---------------------------------------------------------------------
 \Partie{Partie III — Trois plans stables}
@@ -469,17 +451,14 @@ $g$ a trois valeurs propres distinctes $-2,-1,1$, entières et dans $\ient{-2}{2
 (trois valeurs propres distinctes). Sous-espaces propres, chacun de dimension $1$ :
 \begin{gather*}E_{-2}=\vect(\vec u_{-2}),\qquad E_{-1}=\vect(\vec u_{-1}),\qquad E_1=\vect(\vec u_1),\\
 \vec u_{-2}=(1,-1,0),\qquad \vec u_{-1}=(1,0,2),\qquad \vec u_1=(1,0,1).\end{gather*}
-(Contrôles : $K\vec u_{-2}=(-2,2,0)$, $K\vec u_{-1}=(-1,0,-2)$, $K\vec u_1=(1,0,1)$.)
 
-\Q{III.2(a)} \choix{dans la base propre $\mathcal U=(\vec u_{-2},\vec u_{-1},\vec u_1)$, on cherche une matrice diagonale de
-coefficients $\pm1$ (symétrie) moins une matrice diagonale de coefficients $0$ ou $1$ (projection).}
+\Q{III.2(a)} Soit $\mathcal U=(\vec u_{-2},\vec u_{-1},\vec u_1)$, base de vecteurs propres : $\Mat_{\mathcal U}(g)=\operatorname{diag}(-2,-1,1)$, et
 \[\operatorname{diag}(-2,-1,1)=\operatorname{diag}(-1,-1,1)-\operatorname{diag}(1,0,0).\]
 Soit $s$ et $p$ les endomorphismes de matrices $\operatorname{diag}(-1,-1,1)$ et $\operatorname{diag}(1,0,0)$ dans $\mathcal U$. Alors
 $s^2=\Id$ ($s$ est une symétrie), $p^2=p$ ($p$ est une projection) et $g=s-p$, car les trois endomorphismes coïncident sur la base
 $\mathcal U$. Dans $\mathcal B$, avec $Q=(\vec u_{-2}\,|\,\vec u_{-1}\,|\,\vec u_1)$ :
 \[S=\begin{pmatrix}3&4&-2\\0&-1&0\\4&4&-3\end{pmatrix},\qquad \Pi=\begin{pmatrix}0&-1&0\\0&1&0\\0&0&0\end{pmatrix},\qquad
 S-\Pi=K .\]
-(Contrôles : $S^2=I_3$ et $\Pi^2=\Pi$.)
 
 \Q{III.2(b)} \emph{$s$} est la symétrie par rapport à $\Ker(s-\Id)=E_1=\vect\big((1,0,1)\big)$, parallèlement à
 $\Ker(s+\Id)=E_{-2}\oplus E_{-1}=\vect\big((1,-1,0),(1,0,2)\big)$, plan d'équation $-2x-2y+z=0$.
@@ -502,8 +481,6 @@ Les trois plans stables sont donc
 \item $\vec u_{-2}$ et $\vec u_{-1}$ vérifient $-2x-2y+z=0$ : $\mathcal P_3=E_{-2}\oplus E_{-1}$.
 \end{itemize}
 \textbf{Les plans stables sont les sommes de deux des trois droites stables} $E_{-2}$, $E_{-1}$, $E_1$.
-\retenir{pour un endomorphisme à trois valeurs propres simples, les plans stables sont les $\binom32=3$ sommes de deux droites
-propres. On retrouve aussi que $\Ker p$ et $\Ker(s+\Id)$ sont stables.}
 
 % ---------------------------------------------------------------------
 \Partie{Partie IV — Combien de plans stables ?}
@@ -518,18 +495,6 @@ $1$, donc $\dim E_2(L)=2<3$. \textbf{$L$ n'est pas diagonalisable} (sinon on aur
 \[\mathcal P_{\beta,\gamma} : \beta y+\gamma z=0,\qquad (\beta,\gamma)\neq(0,0).\]
 Deux couples non proportionnels donnent deux plans distincts : \textbf{$h$ possède une infinité de plans stables}, exactement les
 plans contenant $\vect(\vec e_1)$.
-\gain{vérification directe : $h(\vu)=2\vu+(y+z)\vec e_1$. Un plan contenant $\vec e_1$ est donc stable.}
-
-\begin{essentiel}
-\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
-\item Droites stables : $\vect(\vec v)$ avec $\vec v$ vecteur propre de $A$. Plans stables : $N^TU=0$ avec $N$ vecteur propre de $A^T$.
-\item Nombre de plans stables = nombre de droites dans les sous-espaces propres de $A^T$ : $1$ (partie II), $3$ (partie III),
-une infinité (partie IV, sous-espace propre de dimension $2$).
-\item Trigonaliser : poser $f(\vec a)=2\vec a$, $f(\vec b)=\vec a+2\vec b$, $f(\vec c)=\vec b+2\vec c$ et résoudre des systèmes
-$(M-2I)X=Y$.
-\item Diagonalisable avec une seule valeur propre $\lambda$ $\iff$ égale à $\lambda I_n$.
-\end{itemize}
-\end{essentiel}
 
 % =====================================================================
 \section*{Exercice 2 — $\zeta(3)$ ou constante d'Apéry}\addcontentsline{toc}{section}{Exercice 2}
@@ -559,8 +524,7 @@ La minoration vient de ce que les termes du reste sont positifs.
 \Q{2(b)} D'après le critère des séries alternées (1(a)), le reste est majoré en valeur absolue par son premier terme :
 \[\Big|\eta(3)-\sum_{k=1}^{N}\frac{(-1)^{k-1}}{k^3}\Big|\leq\frac1{(N+1)^3}\leq\frac1{N^3}.\]
 
-\Q{2(c)} \choix{le reste alterné est en $\frac1{N^3}$, beaucoup plus petit que $\frac1{2N^2}$. On calcule donc $\eta(3)$ et on utilise
-$\zeta(3)=\frac43\eta(3)$.}
+\Q{2(c)} On approche $\eta(3)$, dont le reste est plus petit, et on utilise $\zeta(3)=\frac43\eta(3)$.
 Avec $\eta_N=\sum_{k=1}^N\frac{(-1)^{k-1}}{k^3}$, l'erreur sur $\frac43\eta_N$ vaut au plus $\frac4{3N^3}$.
 \[\frac4{3N^3}\leq10^{-6}\iff N^3\geq\tfrac43\cdot10^6\iff N\geq110{,}06\ldots,\quad\text{donc } N=111 .\]
 En sommant directement $\zeta(3)$, il faudrait $\frac1{2N^2}\leq10^{-6}$, soit $N=708$ termes.
@@ -580,8 +544,6 @@ print(zeta3())   # 1.20205738...  (N = 111)
 \end{verbatim}
 \end{minipage}
 \end{center}
-\gain{pour aller plus loin : la comparaison série-intégrale donne aussi $\zeta(3)-\zeta_N\geq\frac1{2(N+1)^2}$. Le milieu de
-l'encadrement obtenu approche $\zeta(3)$ à $\frac{2N+1}{4N^2(N+1)^2}$ près : $N=79$ suffit.}
 
 \Partie{3. Expression de $\zeta(3)$ avec une intégrale généralisée}
 
@@ -615,12 +577,10 @@ Quand $A\to+\infty$, $A^2e^{-kA}\to0$ et $Ae^{-kA}\to0$ (croissances comparées)
 Toutes ces intégrales convergent (3(a), 3(c), 3(e)) ; par linéarité,
 \[I=\sum_{k=1}^N\frac2{k^3}+\int_0^{+\infty}\delta(x)e^{-Nx}dx .\]
 Quand $N\to+\infty$, par 3(e) : \[\boxed{I=2\zeta(3)}\approx2{,}404 .\]
-\piege{intervertir directement $\int$ et $\sum_{k=1}^{+\infty}$ n'est pas justifié avec le programme de PT : on travaille avec une
-somme \emph{finie} et un reste qu'on contrôle.}
 
 \Partie{4. Équation différentielle et série entière}
 
-Rappel : pour $|x|<1$, $-\ln(1-x)=\sum_{n\geq1}\frac{x^n}n$. Donc $\varphi(x)=\sum_{n\geq1}\frac{x^{n-1}}n$ sur $]-1,1[$, la valeur en
+\textbf{Préliminaire.} Pour $|x|<1$, $-\ln(1-x)=\sum_{n\geq1}\frac{x^n}n$. Donc $\varphi(x)=\sum_{n\geq1}\frac{x^{n-1}}n$ sur $]-1,1[$, la valeur en
 $0$ étant bien $1$ : \textbf{$\varphi$ est développable en série entière, donc $\mathcal C^\infty$ sur $]-1,1[$}.
 
 \Q{4(a)} On note $a_n=\frac1{n^3}$.
@@ -687,7 +647,6 @@ $\frac1u$ :
 Quand $\varepsilon\to0^+$ : $G(\varepsilon)\sim-\varepsilon$, donc $G(\varepsilon)\ln\varepsilon\to0$ ; et $\frac{\ln u\ln(1-u)}u\sim-\ln u$, intégrable en
 $0$. D'où
 \[\boxed{S(x)=\int_0^x\frac{\ln t\,\ln(1-t)}t\,dt-\ln x\int_0^x\frac{\ln(1-t)}t\,dt .}\]
-\piege{faire l'intégration par parties directement sur $]0,x]$ sans vérifier la limite du crochet en $0$.}
 
 \Q{4(h)} On fait tendre $x$ vers $1^-$ dans 4(g).
 \begin{itemize}[leftmargin=1.2em,itemsep=2pt,topsep=2pt]
@@ -699,16 +658,5 @@ $-(1-t)\ln(1-t)\to0$ (faussement impropre). Donc $\int_0^x\to\int_0^1$.
 \end{itemize}
 Par passage à la limite :
 \[\boxed{\zeta(3)=\int_0^1\frac{\ln t\,\ln(1-t)}t\,dt}\approx1{,}2020569 .\]
-
-\begin{essentiel}
-\begin{itemize}[leftmargin=1.1em,itemsep=3pt]
-\item Reste d'une série alternée : majoré par le premier terme. Reste de Riemann : comparaison série-intégrale.
-\item $\int_0^{+\infty}x^ne^{-kx}dx=\frac{n!}{k^{n+1}}$ : intégrations par parties sur un segment, puis limite.
-\item Intervertir $\int$ et $\sum$ : somme finie + reste qui tend vers $0$.
-\item Équation $a(x)y'+b(x)y=c(x)$ avec $a$ qui s'annule : résoudre sur chaque intervalle, puis recoller ; Cauchy ne s'applique
-pas.
-\item Intégration par parties généralisée : sur $[\varepsilon,x]$, puis limite du crochet.
-\end{itemize}
-\end{essentiel}
 
 \end{document}

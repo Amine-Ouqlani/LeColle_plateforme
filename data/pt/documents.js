@@ -476,14 +476,14 @@ LC.documents = {
   },
   "ds3-2025-corrige": {
     "titre": "Sujet de l'année dernière — DS 3 : corrigé Le Collé",
-    "sousTitre": "Corrigé détaillé, rédigé comme une copie de concours · non officiel",
+    "sousTitre": "Corrigé rédigé comme une copie de concours · non officiel",
     "type": "devoir",
     "fichier": "docs/pt/examens/ds3-2025-corrige.pdf",
     "source": "docs/pt/sources/ds3-2025-corrige.tex",
-    "pages": 11,
-    "version": "v1",
-    "maj": "2026-11-25",
-    "description": "Corrigé complet du DS 3 du 1er décembre 2025, rédigé par Le Collé (non officiel) : Exercice 1 page 1, Exercice 2 page 6. Choix de la méthode, pièges, résultats à retenir ; calculs vérifiés par calcul formel."
+    "pages": 9,
+    "version": "v2",
+    "maj": "2026-11-26",
+    "description": "Corrigé complet du DS 3 du 1er décembre 2025, rédigé par Le Collé (non officiel) : Exercice 1 page 1, Exercice 2 page 5. Rédaction de copie, sans commentaires de méthode."
   },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",
