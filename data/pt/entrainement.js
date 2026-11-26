@@ -15,6 +15,26 @@ window.LC = window.LC || {};
 
 LC.entrainement = [
   {
+    id: "ent-series-2026-11-28", type: "devoir", typeTexte: "Séance d'entraînement", theme: "Séries numériques · séries entières",
+    titre: "Entraînement – Séries numériques et séries entières",
+    seance: "Samedi 28 novembre 2026", objectif: "Préparer le DS du lundi 30 novembre (réduction, séries numériques, équations différentielles, un peu de séries entières), en insistant sur les séries.",
+    chapitres: ["series", "se", "ed"], duree: 240, niveau: 3,
+    origine: "Exercice 2 du DS 3 de l'année dernière, puis un sujet d'entraînement Le Collé (non officiel)",
+    description: "Deux temps. D'abord l'exercice 2 du DS 3 de l'année dernière : la constante d'Apéry $\\zeta(3)$ (séries numériques, comparaison série-intégrale, série entière $\\sum\\frac{x^n}{n^3}$ et équation différentielle). Ensuite un sujet d'entraînement de 2 h rédigé par Le Collé, sur les exercices classiques : nature de séries numériques et développement asymptotique, rayons de convergence, somme d'une série entière et continuité au bord, développement en série entière, équation $xy''+2y'+xy=0$ résolue par les séries entières. Chercher sans le cours, puis lire les corrigés.",
+    liens: [
+      { label: "DS 3 — exercice 2", doc: "ds3-2025-sujet", page: 2 },
+      { label: "Corrigé de l'exercice 2", doc: "ds3-2025-corrige", page: 5 },
+      { label: "Sujet séries", doc: "ent-ser-sujet", page: 1 },
+      { label: "Corrigé", doc: "ent-ser-corrige", page: 1 }
+    ],
+    ressources: [
+      { label: "Fiche — Séries numériques", doc: "fiche-series", page: 1, detail: "nature d'une série : l'arbre de décision" },
+      { label: "Fiche — Séries entières", doc: "fiche-se", page: 1, detail: "rayon, sommes, DSE usuels" },
+      { label: "TD Séries entières — exercices classiques", doc: "td-se", page: 1, detail: "parties I et II, corrigés dans le livret de corrections" },
+      { label: "Pour aller plus loin : Banque PT 2022, Maths C, partie II", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2022", detail: "DSE de la tangente par produit de Cauchy et $f'=1+f^2$ (sujet officiel)" }
+    ]
+  },
+  {
     id: "ds3-2025", type: "devoir", typeTexte: "Sujet de l'année dernière", theme: "Sous-espaces stables · constante d'Apéry",
     titre: "Sujet de l'année dernière — DS 3 (lundi 1er décembre 2025)",
     objectif: "Se mettre en conditions de DS : 4 heures, sans document ni calculatrice, puis se corriger avec le corrigé.",

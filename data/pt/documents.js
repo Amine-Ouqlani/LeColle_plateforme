@@ -541,6 +541,28 @@ LC.documents = {
     "maj": "2026-11-26",
     "description": "Corrigé complet du DS 3 du 1er décembre 2025, rédigé par Le Collé (non officiel) : Exercice 1 page 1, Exercice 2 page 5. Rédaction de copie, sans commentaires de méthode."
   },
+  "ent-ser-sujet": {
+    "titre": "Entraînement — Séries numériques et séries entières",
+    "sousTitre": "Sujet Le Collé · séance du samedi 28 novembre 2026 · 2 h",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ent-series-sujet.pdf",
+    "source": "docs/pt/sources/entrainement-series-sujet.tex",
+    "pages": 2,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Sujet d'entraînement rédigé par Le Collé (pas une annale), dans l'esprit d'un DS : nature de séries numériques, développement asymptotique, télescopage ; rayons de convergence, somme d'une série entière et continuité au bord, développement de ln(1+x+x²) ; équation xy''+2y'+xy=0 résolue par les séries entières."
+  },
+  "ent-ser-corrige": {
+    "titre": "Entraînement — Séries numériques et séries entières : corrigé",
+    "sousTitre": "Corrigé Le Collé, rédigé comme une copie",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/ent-series-corrige.pdf",
+    "source": "docs/pt/sources/entrainement-series-corrige.tex",
+    "pages": 3,
+    "version": "v1",
+    "maj": "2026-11-26",
+    "description": "Corrigé complet du sujet d'entraînement du 28 novembre : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3. Résultats vérifiés par calcul formel."
+  },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",
     "sousTitre": "Archive — déroulé minuté de la première séance",

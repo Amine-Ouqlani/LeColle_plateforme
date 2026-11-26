@@ -20,6 +20,8 @@ LC.empreintes = {
  "docs/pt/examens/eb-al-det-corrige.pdf": "39976ea213",
  "docs/pt/examens/eb-al-det-sujet.pdf": "1fc7b6be08",
  "docs/pt/examens/ent-red-corrige.pdf": "28693dd619",
+ "docs/pt/examens/ent-series-corrige.pdf": "14f2cdf25f",
+ "docs/pt/examens/ent-series-sujet.pdf": "8c64d548d3",
  "docs/pt/fiches/dl3-bases-familles-cycliques.pdf": "1a281e00cd",
  "docs/pt/fiches/fiche-algebre-lineaire.pdf": "7169753f5e",
  "docs/pt/fiches/fiche-courbes-parametrees.pdf": "2dfc64bed6",
