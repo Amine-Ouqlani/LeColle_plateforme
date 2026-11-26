@@ -26,7 +26,7 @@ LC.entrainement = [
       { label: "Corrigé", doc: "ds3-2025-corrige", page: 1 }
     ],
     ressources: [
-      { label: "Corrigé de l'exercice 2", doc: "ds3-2025-corrige", page: 5, detail: "ζ(3), séries, intégrales, séries entières" },
+      { label: "Corrigé de l'exercice 2", doc: "ds3-2025-corrige", page: 6, detail: "ζ(3), séries, intégrales, séries entières" },
       { label: "Livret de réduction", doc: "livre-red", page: 1, detail: "sous-espaces stables, trigonalisation" },
       { label: "Fiche de référence — Séries numériques", doc: "fiche-series", page: 1, detail: "séries alternées, comparaison série-intégrale" }
     ]
