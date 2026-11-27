@@ -338,7 +338,7 @@
 \small Sujet composé d'extraits de sujets officiels de la Banque PT (filière PT), choisis pour couvrir le programme du DS :
 réduction, séries numériques, équations différentielles et séries entières. Les énoncés sont reformulés et légèrement adaptés
 (aucune question ne porte sur les intégrales généralisées) ; la source de chaque exercice est indiquée. Les quatre exercices
-sont indépendants. Calculatrice interdite. La qualité de la rédaction et la précision des justifications seront prises en compte.
+sont indépendants. Le sujet est volontairement long : traiter à fond les questions abordées vaut mieux que tout survoler. Calculatrice interdite. La qualité de la rédaction et la précision des justifications seront prises en compte.
 \end{tcolorbox}
 
 \Partie{Exercice 1 — L'équation matricielle $M^2-2M=A$}
@@ -371,10 +371,17 @@ associé à $\lambda$, puis en déduire que $X$ est un vecteur propre de $M$.
 \item Déterminer toutes les matrices diagonales $\Delta$ vérifiant $\Delta^2-2\Delta=D$.
 \item En déduire toutes les matrices $M$ solutions de $(\mathcal E)$, en les exprimant à l'aide de $P$ et de matrices diagonales à préciser.
 \end{enumerate}
+\item \emph{Application à un système différentiel.} On cherche les fonctions dérivables $X:\R\to\mathcal M_{3,1}(\R)$ telles que $X'=AX$.
+\begin{enumerate}[label=(\alph*)]
+\item On pose $Y=P^{-1}X$. Montrer que $X'=AX$ si et seulement si $Y'=DY$.
+\item En déduire toutes les solutions du système $X'=AX$.
+\item Déterminer la solution vérifiant $X(0)=\begin{pmatrix}1&0&0\end{pmatrix}^T$.
+\item Déterminer les solutions bornées sur $[0,+\infty[$.
+\end{enumerate}
 \end{enumerate}
 
 \Partie{Exercice 2 — Séries numériques}
-\Source{Questions 1 à 5 : d'après Banque PT 2026, Mathématiques C, préambule et partie I (questions sur les intégrales généralisées retirées). Questions 6 à 8 : ajoutées par Le Collé, dans l'esprit de l'exercice 2 du DS 3 de l'an dernier.}
+\Source{Questions 1 à 5 : d'après Banque PT 2026, Mathématiques C, préambule et partie I (questions sur les intégrales généralisées retirées). Questions 6 à 10 : ajoutées par Le Collé, dans l'esprit de l'exercice 2 du DS 3 de l'an dernier.}
 
 Pour tout entier $n\geq2$, on pose $u_n=\ln\left(1+\dfrac{(-1)^n}n\right)$.
 \begin{enumerate}
@@ -393,6 +400,14 @@ Pour tout entier $n\geq2$, on pose $u_n=\ln\left(1+\dfrac{(-1)^n}n\right)$.
 \item Montrer que, pour tous entiers $N>n\geq1$ : $\displaystyle\int_{n+1}^{N+1}\frac{dt}{t^\alpha}\leq\sum_{k=n+1}^N\frac1{k^\alpha}\leq\int_n^N\frac{dt}{t^\alpha}$.
 \item En déduire un encadrement de $r_n(\alpha)$, puis un équivalent de $r_n(\alpha)$ quand $n\to+\infty$.
 \item Pour quelles valeurs de $\alpha$ la série $\sum_{n\geq1}r_n(\alpha)$ converge-t-elle ?
+\item Par une comparaison série-intégrale, montrer que la série $\sum_{n\geq2}\dfrac1{n\ln n}$ diverge, puis donner un équivalent de
+$\displaystyle\sum_{k=2}^N\frac1{k\ln k}$ quand $N\to+\infty$.
+\item Déterminer la nature des séries de termes généraux suivants :
+\begin{enumerate}[label=(\alph*)]
+\item $\sin\left(\dfrac1{n^2}\right)$ ;\qquad (b)\ $\dfrac{n^2}{2^n}$ ;\qquad (c)\ $\dfrac{\ln n}{n^2}$ ;\qquad (d)\ $\left(1+\dfrac1n\right)^{-n^2}$ ;
+\setcounter{enumii}{4}
+\item $\dfrac{(-1)^n}{\sqrt n+(-1)^n}$\ ($n\geq2$). On comparera avec la série $\sum\frac{(-1)^n}{\sqrt n}$ : que retenir sur l'usage des équivalents ?
+\end{enumerate}
 \end{enumerate}
 
 \Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
@@ -417,6 +432,12 @@ On cherche $C$ et $S$ sous la forme de séries entières : pour $x\in\,]-R,R[$, 
 \item Préciser son rayon de convergence et exprimer sa somme $D(x)$ en fonction de $x$.
 \item Montrer que $\displaystyle\int_0^{1/\sqrt2}\frac{dx}{1+x^4}$ est la somme d'une série numérique, que l'on explicitera.
 \item Que vaut $\displaystyle\frac1{\sqrt2}\sum_{n=0}^{+\infty}\frac{(-1)^n}{4^n(4n+1)}$ ? (On ne demande pas de calculer l'intégrale.)
+\end{enumerate}
+\item \emph{Sans les séries entières.} Dans cette question, $C$ et $S$ sont deux fonctions dérivables sur $\R$ vérifiant le système et les conditions initiales.
+\begin{enumerate}[label=(\alph*)]
+\item Montrer que $C^2+S^2=1$ sur $\R$.
+\item On pose $Z=C+iS$. Montrer que $Z'(x)=2ix\,Z(x)$, puis que $x\mapsto Z(x)e^{-ix^2}$ est constante. Retrouver ainsi $C$ et $S$.
+\item Montrer que $C$ est solution sur $\R$ de l'équation différentielle $xy''-y'+4x^3y=0$.
 \end{enumerate}
 \end{enumerate}
 

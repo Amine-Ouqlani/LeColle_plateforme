@@ -379,6 +379,19 @@ exactement les quatre matrices
 \[M=P\begin{pmatrix}1&0&0\\0&\delta_2&0\\0&0&\delta_3\end{pmatrix}P^{-1},\qquad\delta_2\in\{0,2\},\ \delta_3\in\{-1,3\},\qquad P^{-1}=\begin{pmatrix}-1&1&0\\-1&2&-1\\1&-1&1\end{pmatrix}.\]
 Par exemple $(\delta_2,\delta_3)=(2,3)$ donne $M=\begin{pmatrix}2&0&1\\1&1&1\\2&-2&3\end{pmatrix}$, et l'on vérifie $M^2-2M=A$.
 
+\Q{5.(a)} $P$ est constante, donc $Y=P^{-1}X$ est dérivable et $Y'=P^{-1}X'$. Ainsi $X'=AX\iff P^{-1}X'=P^{-1}APP^{-1}X\iff Y'=DY$.
+
+\Q{5.(b)} En notant $Y=(y_1,y_2,y_3)^T$, le système $Y'=DY$ s'écrit $y_1'=-y_1$, $y_2'=0$, $y_3'=3y_3$ : ce sont trois équations scalaires
+indépendantes, de solutions $y_1(t)=\alpha e^{-t}$, $y_2(t)=\beta$, $y_3(t)=\gamma e^{3t}$, avec $(\alpha,\beta,\gamma)\in\R^3$. Comme $X=PY$, les solutions de
+$X'=AX$ sont les fonctions
+\[X(t)=\alpha e^{-t}\begin{pmatrix}-1\\0\\1\end{pmatrix}+\beta\begin{pmatrix}1\\1\\0\end{pmatrix}+\gamma e^{3t}\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad(\alpha,\beta,\gamma)\in\R^3.\]
+
+\Q{5.(c)} $X(0)=(1,0,0)^T\iff Y(0)=P^{-1}(1,0,0)^T=(-1,-1,1)^T$ (première colonne de $P^{-1}$), soit $\alpha=-1$, $\beta=-1$, $\gamma=1$ :
+\[X(t)=\begin{pmatrix}e^{3t}+e^{-t}-1\\e^{3t}-1\\e^{3t}-e^{-t}\end{pmatrix}.\]
+
+\Q{5.(d)} $X=PY$ et $Y=P^{-1}X$ : $X$ est bornée sur $[0,+\infty[$ si et seulement si $Y$ l'est. Or $y_1$ et $y_2$ sont toujours bornées sur $[0,+\infty[$,
+et $y_3=\gamma e^{3t}$ l'est si et seulement si $\gamma=0$. Les solutions bornées sont les $X(t)=\alpha e^{-t}(-1,0,1)^T+\beta(1,1,0)^T$, $(\alpha,\beta)\in\R^2$.
+
 \Partie{Exercice 2 — Séries numériques}
 
 \Q{1.} $\ln(1+h)=h-\dfrac{h^2}2+o(h^2)$ quand $h\to0$ (et même $h-\frac{h^2}2+O(h^3)$).
@@ -418,6 +431,31 @@ Les deux bornes sont équivalentes car $(n+1)^{\alpha-1}\sim n^{\alpha-1}$ ; par
 \Q{8.} $r_n(\alpha)>0$ et $r_n(\alpha)\sim\frac1{\alpha-1}\cdot\frac1{n^{\alpha-1}}$. Par comparaison avec une série de Riemann, $\sum r_n(\alpha)$ converge si et seulement si
 $\alpha-1>1$, c'est-à-dire \textbf{$\alpha>2$}.
 
+\Q{9.} $f:t\mapsto\frac1{t\ln t}$ est positive et décroissante sur $[2,+\infty[$ ($t\mapsto t\ln t$ y est croissante et positive), de primitive $\ln(\ln t)$.
+Comme en 6, pour $k\geq3$ : $\int_k^{k+1}f\leq f(k)\leq\int_{k-1}^kf$ (l'inégalité de gauche vaut aussi pour $k=2$). En notant $T_N=\sum_{k=2}^N\frac1{k\ln k}$ :
+\[\ln\ln(N+1)-\ln\ln2\leq T_N\leq\frac1{2\ln2}+\ln\ln N-\ln\ln2.\]
+La minoration tend vers $+\infty$ : \textbf{la série diverge}. De plus $\ln(N+1)=\ln N+\ln\left(1+\frac1N\right)\sim\ln N$, donc $\ln\ln(N+1)=\ln\ln N+o(1)$ ;
+en divisant l'encadrement par $\ln\ln N\to+\infty$, les deux bornes tendent vers $1$ : \textbf{$T_N\sim\ln\ln N$}.
+
+\Q{10.(a)} $\frac1{n^2}\to0$ et $\sin h\sim h$ en $0$ : $\sin\frac1{n^2}\sim\frac1{n^2}>0$. Par comparaison à une série de Riemann ($2>1$), \textbf{convergente}.
+
+\Q{10.(b)} Le terme est strictement positif et $\dfrac{(n+1)^2/2^{n+1}}{n^2/2^n}=\dfrac12\left(1+\dfrac1n\right)^2\to\dfrac12<1$ : \textbf{convergente} (règle de d'Alembert).
+
+\Q{10.(c)} $n^{3/2}\cdot\frac{\ln n}{n^2}=\frac{\ln n}{\sqrt n}\to0$ (croissances comparées), donc $\frac{\ln n}{n^2}=o\left(\frac1{n^{3/2}}\right)$, terme positif : \textbf{convergente}
+(Riemann, $\frac32>1$).
+
+\Q{10.(d)} $\ln\left(1+\frac1n\right)^{-n^2}=-n^2\left(\frac1n-\frac1{2n^2}+O\left(\frac1{n^3}\right)\right)=-n+\frac12+O\left(\frac1n\right)$, donc
+$\left(1+\frac1n\right)^{-n^2}=e^{1/2}e^{-n}e^{O(1/n)}\sim\sqrt e\,e^{-n}$. Terme positif équivalent au terme d'une série géométrique de raison
+$\frac1e<1$ : \textbf{convergente}.
+
+\Q{10.(e)} Avec $\frac1{1+h}=1-h+O(h^2)$ et $h=\frac{(-1)^n}{\sqrt n}\to0$ :
+\[v_n=\frac{(-1)^n}{\sqrt n}\cdot\frac1{1+\frac{(-1)^n}{\sqrt n}}=\frac{(-1)^n}{\sqrt n}-\frac1n+O\left(\frac1{n^{3/2}}\right).\]
+$\sum\frac{(-1)^n}{\sqrt n}$ converge (critère des séries alternées) et $\sum O\left(\frac1{n^{3/2}}\right)$ converge absolument. Si $\sum v_n$ convergeait,
+$\sum\frac1n$ serait combinaison linéaire de séries convergentes (question 3), ce qui est faux : \textbf{$\sum v_n$ diverge}.
+
+Pourtant $v_n\sim\frac{(-1)^n}{\sqrt n}$, terme d'une série convergente : le critère des équivalents n'est valable que pour des termes \textbf{de signe
+constant}. Pour une série alternée, on fait un développement asymptotique jusqu'à un reste absolument convergent.
+
 \Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
 
 \Q{1.(a)} Sur $]-R,R[$, on dérive terme à terme : $C'(x)=\sum_{n\geq0}(n+1)a_{n+1}x^n$ et $-2xS(x)=\sum_{n\geq1}-2b_{n-1}x^n$. Par unicité du développement en
@@ -448,6 +486,16 @@ $x\in\,]-1,1[$, $D(x)=\dfrac1{1+x^4}$.
 
 \Q{2.(c)} Comme $\left(\frac1{\sqrt2}\right)^{4n+1}=\frac1{\sqrt2}\cdot\frac1{4^n}$, la question précédente donne
 \[\frac1{\sqrt2}\sum_{n=0}^{+\infty}\frac{(-1)^n}{4^n(4n+1)}=\int_0^{1/\sqrt2}\frac{dx}{1+x^4}\ (\approx0{,}676).\]
+
+\Q{3.(a)} $(C^2+S^2)'=2CC'+2SS'=2C(-2xS)+2S(2xC)=0$ sur l'intervalle $\R$ : $C^2+S^2$ est constante, égale à $C(0)^2+S(0)^2=1$.
+
+\Q{3.(b)} $Z'=C'+iS'=-2xS+2ixC=2ix(C+iS)=2ixZ$. Puis
+$\big(Z(x)e^{-ix^2}\big)'=\big(Z'(x)-2ixZ(x)\big)e^{-ix^2}=0$ sur $\R$ : $Z(x)e^{-ix^2}=Z(0)=C(0)+iS(0)=1$. Donc $Z(x)=e^{ix^2}$, et en prenant parties
+réelle et imaginaire : $C(x)=\cos(x^2)$, $S(x)=\sin(x^2)$ pour tout réel $x$. On retrouve le résultat de 1(f), sans hypothèse de parité ni de
+développement en série entière.
+
+\Q{3.(c)} $C'=-2xS$ est dérivable, et $C''=-2S-2xS'=-2S-4x^2C$. Donc $xC''=-2xS-4x^3C=C'-4x^3C$, c'est-à-dire
+$xC''-C'+4x^3C=0$ sur $\R$.
 
 \Partie{Exercice 4 — Développement en série entière de la tangente}
 

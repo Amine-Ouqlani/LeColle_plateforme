@@ -71,10 +71,10 @@ nouveau('ent-ser-corrige', { titre: 'Entraînement — Séries numériques et s�
 ['ent-ser-sujet', 'ent-ser-corrige'].forEach(i => { D[i].maj = '2026-11-26'; });
 nouveau('dsb-sujet', { titre: "DS blanc — d'après la Banque PT", sousTitre: 'Énoncé · 4 h · réduction, séries numériques, équations différentielles, séries entières', type: 'devoir',
   fichier: 'docs/pt/examens/ds-blanc-sujet.pdf', source: 'docs/pt/sources/ds-blanc-banque-pt-sujet.tex',
-  description: "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : l'équation matricielle M²−2M=A par diagonalisation et commutation (2024, Maths B, exercice 3) ; série alternée de logarithmes (2026, Maths C, partie I) et reste d'une série de Riemann par comparaison série-intégrale ; système différentiel C'=−2xS, S'=2xC résolu par les séries entières, cos(x²) et sin(x²) (2025, Maths C, partie II) ; développement en série entière de la tangente (2022, Maths C, partie II)." });
+  description: "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : l'équation matricielle M²−2M=A par diagonalisation et commutation, puis le système X'=AX (2024, Maths B, exercice 3, complété) ; série alternée de logarithmes (2026, Maths C, partie I), reste de Riemann, série de Bertrand et nature de séries classiques, dont le piège des équivalents pour une série alternée ; système différentiel C'=−2xS, S'=2xC résolu par les séries entières puis directement, via C²+S²=1 et Z=C+iS (2025, Maths C, partie II, complété) ; développement en série entière de la tangente (2022, Maths C, partie II)." });
 nouveau('dsb-corrige', { titre: "DS blanc — d'après la Banque PT : corrigé Le Collé", sousTitre: 'Corrigé rédigé comme une copie · non officiel', type: 'devoir',
   fichier: 'docs/pt/examens/ds-blanc-corrige.pdf', source: 'docs/pt/sources/ds-blanc-banque-pt-corrige.tex',
-  description: "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 3, exercice 4 page 4. Résultats vérifiés par calcul formel." });
+  description: "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 4, exercice 4 page 5. Résultats vérifiés par calcul formel." });
 ['dsb-sujet', 'dsb-corrige'].forEach(i => { D[i].maj = '2026-11-26'; });
 nouveau('ds3-2025-sujet', { titre: "Sujet de l'année dernière — DS 3 (1er décembre 2025)", sousTitre: 'Énoncé · sous-espaces stables, constante d\'Apéry', type: 'devoir',
   fichier: 'docs/pt/examens/ds3-2025-sujet.pdf', source: 'docs/pt/examens/ds3-2025-sujet.pdf',
