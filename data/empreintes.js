@@ -13,7 +13,7 @@ LC.empreintes = {
  "docs/pt/bilans/bilan-ed.pdf": "92459f2aa2",
  "docs/pt/bilans/bilan-metrique.pdf": "88d847a75a",
  "docs/pt/bilans/bilan-red.pdf": "01286d601a",
- "docs/pt/bilans/bilan-se.pdf": "1c9cd95009",
+ "docs/pt/bilans/bilan-se.pdf": "d5d69bd243",
  "docs/pt/bilans/bilan-series.pdf": "fc100cee8c",
  "docs/pt/examens/ds-blanc-corrige.pdf": "b737e1ec1f",
  "docs/pt/examens/ds-blanc-sujet.pdf": "94c7653324",

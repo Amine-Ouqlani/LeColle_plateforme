@@ -54,10 +54,11 @@ nouveau('presentation-se-statique', { titre: 'Présentation — Séries entière
 nouveau('fiche-se', { titre: 'Fiche de référence — Séries entières', sousTitre: 'Chapitre 8 · imprimable', type: 'fiche',
   fichier: 'docs/pt/fiches/fiche-series-entieres.pdf', source: 'docs/pt/sources/fiche-series-entieres.tex',
   description: "Série de Taylor, rayon de convergence et son calcul, fonction somme, développements usuels, méthodes de développement, pièges ; en fin de fiche, arbre de décision pour le rayon, synthèse « quelle méthode ? » et réflexes avant de rendre." });
-nouveau('bilan-se', { titre: 'Exercice bilan — Séries entières', sousTitre: 'Chapitre 8 · 15 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
+nouveau('bilan-se', { titre: 'Exercice bilan — Séries entières', sousTitre: 'Chapitre 8 · 25 min · énoncé, corrigé détaillé, notions évaluées', type: 'bilan',
   fichier: 'docs/pt/bilans/bilan-se.pdf', source: 'docs/pt/sources/exercices-bilan.tex',
   description: "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur." });
-['livre-se', 'presentation-se', 'presentation-se-statique', 'fiche-se', 'bilan-se'].forEach(i => { D[i].maj = '2026-11-26'; });
+['livre-se', 'presentation-se', 'presentation-se-statique', 'fiche-se'].forEach(i => { D[i].maj = '2026-11-26'; });
+D['bilan-se'].maj = '2026-11-27';
 nouveau('ent-red-corrige', { titre: 'Entraînement — Réduction : corrigé Le Collé', sousTitre: 'Banque PT 2018 et 2015, Mathématiques A, problèmes d\'algèbre · corrigé non officiel', type: 'devoir',
   fichier: 'docs/pt/examens/ent-red-corrige.pdf', source: 'docs/pt/sources/entrainement-reduction.tex',
   description: "Corrigés détaillés, rédigés par Le Collé (non officiels), des problèmes d'algèbre de la Banque PT 2018 (page 1) et 2015 (page 5), Mathématiques A : choix de la méthode, pièges, résultats à retenir, liens avec le DL 3. Calculs vérifiés par calcul formel." });

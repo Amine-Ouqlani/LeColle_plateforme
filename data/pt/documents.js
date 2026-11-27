@@ -454,13 +454,13 @@ LC.documents = {
   },
   "bilan-se": {
     "titre": "Exercice bilan — Séries entières",
-    "sousTitre": "Chapitre 8 · 15 min · énoncé, corrigé détaillé, notions évaluées",
+    "sousTitre": "Chapitre 8 · 25 min · énoncé, corrigé détaillé, notions évaluées",
     "type": "bilan",
     "fichier": "docs/pt/bilans/bilan-se.pdf",
     "source": "docs/pt/sources/exercices-bilan.tex",
-    "pages": 2,
-    "version": "v1",
-    "maj": "2026-11-26",
+    "pages": 3,
+    "version": "v2",
+    "maj": "2026-11-27",
     "description": "Un exercice court qui reprend les notions essentielles du chapitre, à faire en début de séance sans document pour vérifier ce qui est acquis. Page 1 : l'énoncé ; ensuite : le corrigé et, pour chaque question, les notions testées et la lacune que révèle une erreur."
   },
   /* ---- Autres documents ---- */

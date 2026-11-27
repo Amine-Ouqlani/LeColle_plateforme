@@ -1262,7 +1262,7 @@ LC.chapitres = [
     "bilan": {
       "doc": "bilan-se",
       "corrige": 2,
-      "duree": 15
+      "duree": 25
     },
     "titre": "Séries entières",
     "accroche": "Écrire une fonction comme un « polynôme de degré infini » $\\sum a_nx^n$ : série de Taylor, rayon de convergence, fonction somme, développements usuels, et comment développer une fonction.",
