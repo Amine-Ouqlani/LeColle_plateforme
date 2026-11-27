@@ -871,8 +871,62 @@ Si deux séries ont la même somme, leurs coefficients sont tous égaux à $\fra
 \end{proof}
 
 \begin{remarque}
-La réciproque est fausse : une fonction $\mathcal C^\infty$ n'est pas forcément DSE (exercice~\ref{e:se-plat}). Mais si $f$ est DSE,
-ses développements limités en $0$ s'obtiennent en tronquant le DSE.
+Si $f$ est DSE, ses développements limités en $0$ s'obtiennent en tronquant le DSE.
+\end{remarque}
+
+\subsubsection*{Quand une fonction est-elle égale à sa série de Taylor ?}
+
+Le théorème~\ref{t:dseTaylor} ne va que dans un sens : \emph{si} $f$ est DSE, son DSE est sa série de Taylor. La réciproque est
+fausse. Pour $f$ de classe $\mathcal C^\infty$, la série de Taylor existe toujours, mais deux choses peuvent mal tourner :
+\begin{enumerate}
+\item son rayon est nul (il existe de telles fonctions, admis) ;
+\item elle converge, mais sa somme n'est pas $f$ : c'est le cas de $e^{-1/x^2}$, dont la série de Taylor est nulle
+      (exercice~\ref{e:se-plat}).
+\end{enumerate}
+Ce qui décide, c'est le reste de la formule de Taylor.
+
+\begin{theoreme}[caractérisation par le reste]\label{t:caracDSE}
+Soit $a>0$ et $f$ de classe $\mathcal C^\infty$ sur $]-a,a[$. Alors $f$ est DSE sur $]-a,a[$ si et seulement si, pour tout
+$x\in\,]-a,a[$,
+\[R_n(x)=f(x)-\sum_{k=0}^n\frac{f^{(k)}(0)}{k!}x^k=\int_0^x\frac{(x-t)^n}{n!}f^{(n+1)}(t)\,dt\xrightarrow[n\to+\infty]{}0.\]
+Le développement est alors la série de Taylor.
+\end{theoreme}
+
+\begin{proof}
+Par la formule de Taylor (théorème~\ref{t:taylor}), $R_n(x)$ est l'écart entre $f(x)$ et la somme partielle de rang $n$ de la
+série de Taylor. Donc $R_n(x)\to0$ pour tout $x\in\,]-a,a[$ si et seulement si la série de Taylor converge vers $f(x)$ sur
+$]-a,a[$ ; son rayon est alors au moins $a$, et $f$ est DSE. Réciproquement, si $f$ est DSE sur $]-a,a[$, son développement
+est sa série de Taylor (théorème~\ref{t:dseTaylor}), qui converge donc vers $f(x)$ : $R_n(x)\to0$.
+\end{proof}
+
+\begin{corollaire}[dérivées uniformément bornées]\label{c:bornees}
+Soit $f$ de classe $\mathcal C^\infty$ sur $]-a,a[$. S'il existe $M$ tel que $|f^{(n)}(t)|\leq M$ pour tout $n\in\N$ et tout
+$t\in\,]-a,a[$, alors $f$ est DSE sur $]-a,a[$.
+\end{corollaire}
+
+\begin{proof}
+Par l'inégalité de Taylor-Lagrange (corollaire~\ref{c:tl}), $|R_n(x)|\leq M\frac{|x|^{n+1}}{(n+1)!}$, qui tend vers $0$ par
+croissances comparées. On conclut par le théorème~\ref{t:caracDSE}.
+\end{proof}
+
+\begin{exemple}
+$|\sin^{(n)}|\leq1$ et $|\cos^{(n)}|\leq1$ sur $\R$ : $\sin$ et $\cos$ sont DSE sur $\R$ (avec $M=1$). Sur $]-a,a[$,
+$|\exp^{(n)}|\leq e^a$ : $\exp$ est DSE sur $]-a,a[$ pour tout $a$, donc sur $\R$. On retrouve les théorèmes~\ref{t:exp}
+et~\ref{t:trigo}.
+\end{exemple}
+
+{\centering\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{4.6cm}p{4.2cm}p{4.6cm}@{}}
+\toprule
+\textbf{$f$ est DSE} & \textbf{$f$ est $\mathcal C^\infty$, Taylor de rayon nul} & \textbf{$f$ est $\mathcal C^\infty$, Taylor converge vers $g\neq f$}\\\midrule
+DSE $=$ série de Taylor, $R_n(x)\to0$. Ex.~: $e^x$, $\frac1{1-x}$, $\ln(1+x)$. & Existe (admis). & $R_n(x)\not\to0$. Ex.~: $e^{-1/x^2}$, Taylor nulle.\\
+\bottomrule
+\end{tabular}\par}
+
+\begin{remarque}
+En pratique, on étudie rarement le reste : on développe par opérations sur les DSE usuels, par dérivation ou intégration, ou par
+une équation différentielle (§\ref{ss:methodes}). Le reste sert surtout à établir les DSE de base ($\exp$, $\cos$, $\sin$), ou
+lorsqu'on dispose d'une majoration des dérivées.
 \end{remarque}
 
 \begin{proposition}[parité]\label{p:parite}
@@ -1085,7 +1139,7 @@ $f^{(p)}(0)$ & $p!\,a_p$ (corollaire~\ref{c:cinfini})\\\hline
 
 \begin{essentiel}
 \begin{itemize}[leftmargin=1.1em,itemsep=2pt]
-\item Taylor avec reste intégral : $f(x)$ est la somme de sa série de Taylor si et seulement si le reste tend vers $0$.
+\item Taylor avec reste intégral : $f(x)$ est la somme de sa série de Taylor si et seulement si le reste tend vers $0$ ; si les dérivées sont uniformément bornées, $f$ est DSE. $\mathcal C^\infty$ ne suffit pas.
 \item Rayon $R$ : convergence absolue pour $|z|<R$, divergence grossière pour $|z|>R$, rien de général pour $|z|=R$.
 \item Calcul du rayon : d'Alembert sur $\sum|a_nz^n|$, équivalents, comparaison ; $\sum a_nz^n$ et $\sum na_nz^n$ ont le même rayon.
 \item Sur $]-R,R[$, la somme est $\mathcal C^\infty$, se dérive et s'intègre terme à terme, et $a_n=\frac{f^{(n)}(0)}{n!}$.

@@ -1262,7 +1262,7 @@ LC.chapitres = [
     "bilan": {
       "doc": "bilan-se",
       "corrige": 2,
-      "duree": 15
+      "duree": 25
     },
     "titre": "Séries entières",
     "accroche": "Écrire une fonction comme un « polynôme de degré infini » $\\sum a_nx^n$ : série de Taylor, rayon de convergence, fonction somme, développements usuels, et comment développer une fonction.",
@@ -1279,7 +1279,7 @@ LC.chapitres = [
     "cours": {
       "doc": "livre-se",
       "debut": 4,
-      "fin": 18,
+      "fin": 19,
       "sections": [
         {
           "num": "1.1",
@@ -1309,17 +1309,17 @@ LC.chapitres = [
         {
           "num": "1.6",
           "titre": "Développer une fonction en série entière",
-          "page": 16
+          "page": 17
         },
         {
           "num": "1.7",
           "titre": "Quelle méthode ? Synthèse",
-          "page": 17
+          "page": 18
         }
       ],
       "corriges": {
-        "debut": 19,
-        "fin": 21
+        "debut": 20,
+        "fin": 22
       }
     },
     "fiche": {
@@ -1367,11 +1367,11 @@ LC.chapitres = [
     "presentation": {
       "doc": "presentation-se",
       "debut": 1,
-      "fin": 97,
+      "fin": 100,
       "statique": {
         "doc": "presentation-se-statique",
         "debut": 1,
-        "fin": 43
+        "fin": 44
       },
       "exercices": 6,
       "sections": [
@@ -1408,14 +1408,14 @@ LC.chapitres = [
         {
           "num": "1.6",
           "titre": "Développer une fonction en série entière",
-          "page": 76,
-          "pageStatique": 33
+          "page": 79,
+          "pageStatique": 34
         },
         {
           "num": "1.7",
           "titre": "Synthèse",
-          "page": 94,
-          "pageStatique": 40
+          "page": 97,
+          "pageStatique": 41
         }
       ]
     },
@@ -1428,6 +1428,10 @@ LC.chapitres = [
       "Croire qu'une fonction de classe $\\mathcal C^\\infty$ est toujours égale à sa série de Taylor ($e^{-1/x^2}$)."
     ],
     "flash": [
+      {
+        "q": "Quand une fonction $\\mathcal C^\\infty$ est-elle égale à sa série de Taylor ?",
+        "r": "Si et seulement si le reste $R_n(x)\\to0$. Il suffit que les dérivées soient uniformément bornées : $|f^{(n)}|\\leq M$ pour tout $n$ (Taylor-Lagrange)."
+      },
       {
         "q": "Que se passe-t-il pour $|z|<R$, $|z|>R$, $|z|=R$ ?",
         "r": "Convergence absolue ; divergence grossière ; on ne peut rien dire en général."

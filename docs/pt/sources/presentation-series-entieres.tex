@@ -614,13 +614,35 @@ $f$ DSE $\Rightarrow$ $f$ est $\mathcal C^\infty$ et $f(x)=\sum\frac{f^{(n)}(0)}
 \pause
 \begin{columns}[T]
 \column{0.48\textwidth}
-\begin{PROP}[Parité \livre{prop.~1.36}]
+\begin{PROP}[Parité \livre{prop.~1.39}]
 Paire : puissances paires ;\ impaire : impaires.
 \end{PROP}
 \column{0.48\textwidth}
 \begin{PIEGE}
 Réciproque fausse : $e^{-1/x^2}$ est $\mathcal C^\infty$, pas DSE.
 \end{PIEGE}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Quand $f$ est-elle égale à sa série de Taylor ?}
+\begin{PROP}[Caractérisation \livre{th.~1.36}]
+$f$ de classe $\mathcal C^\infty$ sur $]-a,a[$ : \quad $f$ DSE sur $]-a,a[$ $\iff$ $\forall x\in\,]-a,a[$, $R_n(x)=\displaystyle\int_0^x\frac{(x-t)^n}{n!}f^{(n+1)}(t)\,dt\to0$.
+\end{PROP}
+\pause
+\begin{PROP}[Dérivées uniformément bornées \livre{cor.~1.37}]
+$|f^{(n)}(t)|\leq M$ pour tout $n$ et tout $t\in\,]-a,a[$ $\Rightarrow$ $|R_n(x)|\leq M\frac{|x|^{n+1}}{(n+1)!}\to0$ : $f$ est DSE.
+\quad Ex. : $\sin$, $\cos$ ($M=1$), $\exp$ ($M=e^a$).
+\end{PROP}
+\pause
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{PIEGE}
+$\mathcal C^\infty$ : la série de Taylor existe, mais peut avoir un rayon nul, ou converger vers $g\neq f$ ($e^{-1/x^2}$).
+\end{PIEGE}
+\column{0.48\textwidth}
+\begin{ASTU}[En pratique]
+On étudie rarement le reste : opérations sur les DSE usuels, dérivation, intégration, équation différentielle.
+\end{ASTU}
 \end{columns}
 \end{frame}
 
@@ -635,7 +657,7 @@ $\cos x=\sum\frac{(-1)^nx^{2n}}{(2n)!}$\\
 $\sin x=\sum\frac{(-1)^nx^{2n+1}}{(2n+1)!}$
 \end{FORM}
 \column{0.48\textwidth}
-\begin{FORM}[$R=1$ \livre{th.~1.37, 1.38}]
+\begin{FORM}[$R=1$ \livre{th.~1.40, 1.41}]
 $\frac1{1-x}=\sum x^n$,\ $\frac1{1+x}=\sum(-1)^nx^n$\\
 $\ln(1+x)=\sum_{n\geq1}\frac{(-1)^{n+1}}nx^n$\\
 $\arctan x=\sum\frac{(-1)^n}{2n+1}x^{2n+1}$\\
@@ -645,7 +667,7 @@ $(1+x)^\alpha=1+\sum_{n\geq1}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n$
 \pause
 \begin{EX}[D'où viennent-ils ?]
 $\ln(1+x)$ : intégrer $\frac1{1+t}$.\quad $\arctan$ : intégrer $\frac1{1+t^2}=\sum(-1)^nt^{2n}$.\quad $(1+x)^\alpha$ : équation $(1+x)y'=\alpha y$.\quad
-$\C$ : $e^z=\sum\frac{z^n}{n!}$ \livre{th.~1.40}.
+$\C$ : $e^z=\sum\frac{z^n}{n!}$ \livre{th.~1.43}.
 \end{EX}
 \end{frame}
 

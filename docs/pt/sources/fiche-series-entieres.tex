@@ -204,7 +204,12 @@ $\sum_{n\geq1}nx^n=\frac x{(1-x)^2}$ ;\ $\sum(n+1)x^n=\frac1{(1-x)^2}$ ;\ $\sum 
 
 \begin{PROP}[DSE = SÉRIE DE TAYLOR \livre{th.~1.35}]
 $f$ DSE sur $]-r,r[$ $\Rightarrow$ $f$ est $\mathcal C^\infty$ et $f(x)=\sum\frac{f^{(n)}(0)}{n!}x^n$ : DSE \emph{unique}.
-Paire : puissances paires ; impaire : impaires \livre{prop.~1.36}.
+Paire : puissances paires ; impaire : impaires \livre{prop.~1.39}.
+\end{PROP}
+
+\begin{PROP}[QUAND $f$ = SA SÉRIE DE TAYLOR \livre{th.~1.36, cor.~1.37}]
+$f$ $\mathcal C^\infty$ sur $]-a,a[$ : $f$ DSE $\iff R_n(x)\to0$ pour tout $x$. Si $|f^{(n)}|\leq M$ pour tout $n$ sur $]-a,a[$ : DSE
+(Taylor-Lagrange). $\mathcal C^\infty$ seul ne suffit pas.
 \end{PROP}
 
 \begin{FORM}[DSE USUELS \livre{tab.~1.1}]
@@ -213,7 +218,7 @@ $R=1$ : $\frac1{1-x}=\sum x^n$,\ $\frac1{1+x}=\sum(-1)^nx^n$,\\
 $\ln(1+x)=\sum_{n\geq1}\frac{(-1)^{n+1}}nx^n$,\ $\ln(1-x)=-\sum_{n\geq1}\frac{x^n}n$,\\
 $\arctan x=\sum\frac{(-1)^n}{2n+1}x^{2n+1}$,\\
 $(1+x)^\alpha=1+\sum_{n\geq1}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n$.\\[2pt]
-$\C$ : $e^z=\sum\frac{z^n}{n!}$, $e^{z+z'}=e^ze^{z'}$ \livre{th.~1.40}.
+$\C$ : $e^z=\sum\frac{z^n}{n!}$, $e^{z+z'}=e^ze^{z'}$ \livre{th.~1.43}.
 \end{FORM}
 
 % ======================================================================

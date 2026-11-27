@@ -109,7 +109,7 @@ qui est acquis et ce qu'il faut revoir. Justifier chaque réponse en citant la p
 5 & Courbes paramétrées planes & 15 min\\
 6 & Propriétés métriques et enveloppes & 13 min\\
 7 & Séries numériques & 15 min\\
-8 & Séries entières & 15 min\\
+8 & Séries entières & 25 min\\
 \bottomrule
 \end{tabular}}
 
@@ -786,59 +786,140 @@ $\sum_{k=2}^n\frac1{k^2-1}=\frac12\left(1+\frac12-\frac1n-\frac1{n+1}\right)\to\
 % ======================================================================
 %  CHAPITRE 8 — SÉRIES ENTIÈRES
 % ======================================================================
-\bilan{8}{Séries entières}{15 min}
+\bilan{8}{Séries entières}{25 min}
 
+\partie{Partie A --- Cours}
 \begin{enumerate}
 \item \emph{Vrai ou faux ?} Justifier par une preuve courte ou un contre-exemple.
   \begin{enumerate}
   \item Une série entière de rayon $R>0$ converge en $z=R$.
+  \item Si la série numérique $\sum a_n3^n$ converge, alors le rayon de $\sum a_nz^n$ est strictement supérieur à $3$.
+  \item Si $\sum a_nz^n$ converge en $z=2i$, alors elle converge absolument en $z=-1{,}5$.
   \item $\sum a_nx^n$ et $\sum na_nx^n$ ont le même rayon de convergence.
   \item Une fonction de classe $\mathcal C^\infty$ sur $]-1,1[$ est développable en série entière au voisinage de $0$.
-  \item La série entière $\sum\frac{x^{2n}}{4^n}$ a pour rayon de convergence $4$.
+  \item Si $f$ est DSE sur $]-r,r[$ et paire, alors $f^{(7)}(0)=0$.
   \end{enumerate}
+\end{enumerate}
+
+\partie{Partie B --- Rayon de convergence}
+\begin{enumerate}[resume]
 \item Déterminer le rayon de convergence de :
-  \[\text{(a)}\ \sum\frac{n^2}{3^n}z^n\qquad\text{(b)}\ \sum\frac{n!}{n^n}z^n\qquad\text{(c)}\ \sum\sin\left(\frac1n\right)z^n\ (n\geq1).\]
-\item Développer en série entière, en précisant le rayon : (a) $\dfrac1{2+x}$\qquad (b) $\ln(1+x^2)$.
+  \[\text{(a)}\ \sum\frac{n^2}{3^n}z^n\qquad\text{(b)}\ \sum\frac{n!}{n^n}z^n\qquad\text{(c)}\ \sum_{n\geq1}\sin\left(\frac1n\right)z^n\qquad\text{(d)}\ \sum\frac{x^{2n}}{4^n}.\]
+\end{enumerate}
+
+\partie{Partie C --- Série de Taylor et développements}
+\begin{enumerate}[resume]
+\item À l'aide de l'inégalité de Taylor-Lagrange, montrer que pour tout $x\in\R$, $\cos x=\displaystyle\sum_{n=0}^{+\infty}\frac{(-1)^n}{(2n)!}x^{2n}$.
+\item Développer en série entière, en précisant le rayon :
+  \[\text{(a)}\ \frac1{2+x}\qquad\text{(b)}\ \ln(1+x^2)\qquad\text{(c)}\ \sqrt{1+x}\ \text{(jusqu'au terme en $x^3$)}\qquad\text{(d)}\ \frac{e^x}{1-x}\ \text{(coefficient de $x^n$)}.\]
+  \begin{enumerate}[start=5]
+  \item Pour $f(x)=\ln(1+x^2)$, en déduire $f^{(10)}(0)$ et $f^{(11)}(0)$.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{Partie D --- Fonction somme}
+\begin{enumerate}[resume]
 \item Pour $x\in\,]-1,1[$, calculer $\sum_{n\geq1}nx^n$. En déduire $\sum_{n=1}^{+\infty}\frac n{2^n}$.
+\item On cherche $y=\sum a_nx^n$, de rayon $R>0$, solution de $y'=2xy$ avec $y(0)=1$. Établir une relation entre $a_{n+1}$ et
+      $a_{n-1}$, calculer les $a_n$, reconnaître $y$ et donner le rayon.
 \end{enumerate}
 
 \ifprof
 \corrige
-\q{1.a)} \emph{Faux.} $\sum x^n$ a pour rayon $1$ et diverge en $x=1$ ; au bord, tout peut arriver \prop{th.~1.12}.
+\q{1.a)} \emph{Faux.} $\sum x^n$ a pour rayon $1$ et diverge en $x=1$ (terme général $1\not\to0$) ; au bord, tout peut arriver \prop{th.~1.12}.
 
-\q{1.b)} \emph{Vrai} \prop{prop.~1.21}.
+\q{1.b)} \emph{Faux.} La convergence en $3$ donne seulement $R\geq3$ \prop{prop.~1.15}. Contre-exemple : $a_n=\frac1{n^23^n}$ ($n\geq1$) ;
+$\sum a_n3^n=\sum\frac1{n^2}$ converge, et $R=3$ (d'Alembert).
 
-\q{1.c)} \emph{Faux.} $x\mapsto e^{-1/x^2}$ (prolongée par $0$) est $\mathcal C^\infty$, de série de Taylor nulle : elle n'est pas DSE
-\prop{exercice~1.2, th.~1.35}.
+\q{1.c)} \emph{Vrai.} La convergence en $2i$ donne $R\geq|2i|=2$ ; comme $|-1{,}5|<2\leq R$, la série converge absolument en $-1{,}5$
+\prop{prop.~1.10, th.~1.12}.
 
-\q{1.d)} \emph{Faux.} $\sum\left(\frac{x^2}4\right)^n$ converge si et seulement si $\frac{x^2}4<1$ : $R=2$. Série lacunaire : on raisonne sur $x^2$.
+\q{1.d)} \emph{Vrai} \prop{prop.~1.21} : c'est ce qui permet de dériver terme à terme sans perdre de rayon.
+
+\q{1.e)} \emph{Faux.} $f(x)=e^{-1/x^2}$ (prolongée par $f(0)=0$) est $\mathcal C^\infty$, toutes ses dérivées en $0$ sont nulles : sa série de
+Taylor est nulle, alors que $f(x)>0$ pour $x\neq0$. Si $f$ était DSE, son DSE serait sa série de Taylor, donc $f=0$ près de $0$ :
+absurde \prop{th.~1.35, 1.36, exercice~1.2}.
+
+\q{1.f)} \emph{Vrai.} $f$ paire : son DSE ne contient que des puissances paires, donc $a_7=0$ \prop{prop.~1.39} ; or
+$a_7=\frac{f^{(7)}(0)}{7!}$ \prop{cor.~1.30}, donc $f^{(7)}(0)=0$.
 
 \q{2.a)} D'Alembert : $\frac{(n+1)^2}{3n^2}|z|\to\frac{|z|}3$ : $R=3$.
 
-\q{2.b)} $\frac{a_{n+1}}{a_n}=\frac{(n+1)!\,n^n}{(n+1)^{n+1}n!}=\left(\frac n{n+1}\right)^n\to\frac1e$ : $R=e$.
+\q{2.b)} $\frac{a_{n+1}}{a_n}=\frac{(n+1)!\,n^n}{(n+1)^{n+1}n!}=\left(\frac n{n+1}\right)^n=e^{-n\ln(1+1/n)}\to\frac1e$ : $R=e$.
 
 \q{2.c)} $\sin\frac1n\sim\frac1n$ : même rayon que $\sum\frac{z^n}n$, $R=1$ \prop{prop.~1.18}.
 
-\q{3.a)} $\frac1{2+x}=\frac12\cdot\frac1{1+\frac x2}=\sum_{n\geq0}\frac{(-1)^n}{2^{n+1}}x^n$ pour $|x|<2$ : $R=2$.
+\q{2.d)} Série lacunaire : $\sum\left(\frac{x^2}4\right)^n$ converge si et seulement si $\frac{x^2}4<1$, soit $|x|<2$ : $R=2$ (et non $4$).
 
-\q{3.b)} $\ln(1+u)=\sum_{n\geq1}\frac{(-1)^{n+1}}nu^n$ avec $u=x^2$ : $\ln(1+x^2)=\sum_{n\geq1}\frac{(-1)^{n+1}}nx^{2n}$ pour $|x|<1$ ; $R=1$.
+\q{3.} $\cos$ est $\mathcal C^\infty$ sur $\R$, avec $\cos^{(k)}(t)=\cos\left(t+k\frac\pi2\right)$, donc $|\cos^{(k)}|\leq1$ pour tout $k$. Par
+Taylor-Lagrange \prop{cor.~1.2} : $\left|\cos x-\sum_{k=0}^n\frac{\cos^{(k)}(0)}{k!}x^k\right|\leq\frac{|x|^{n+1}}{(n+1)!}\to0$ (croissances
+comparées). Donc $\cos x=\sum_{k\geq0}\frac{\cos^{(k)}(0)}{k!}x^k$ pour tout $x$ \prop{cor.~1.37}. Enfin $\cos^{(k)}(0)=\cos\frac{k\pi}2$ vaut $0$
+si $k$ est impair et $(-1)^n$ si $k=2n$ : on obtient la formule, avec $R=+\infty$.
 
-\q{4.} En dérivant $\frac1{1-x}=\sum x^n$ sur $]-1,1[$ : $\sum_{n\geq1}nx^{n-1}=\frac1{(1-x)^2}$, donc $\sum nx^n=\frac x{(1-x)^2}$
-\prop{th.~1.29}. Avec $x=\frac12$ : $\sum\frac n{2^n}=\frac{1/2}{1/4}=2$.
+\q{4.a)} $\frac1{2+x}=\frac12\cdot\frac1{1+\frac x2}=\sum_{n\geq0}\frac{(-1)^n}{2^{n+1}}x^n$ pour $\left|\frac x2\right|<1$ : $R=2$.
+
+\q{4.b)} $\ln(1+u)=\sum_{n\geq1}\frac{(-1)^{n+1}}nu^n$ pour $|u|<1$, avec $u=x^2$ : $\ln(1+x^2)=\sum_{n\geq1}\frac{(-1)^{n+1}}nx^{2n}$ pour $|x|<1$ ;
+$R=1$.
+
+\q{4.c)} Binôme avec $\alpha=\frac12$ \prop{th.~1.41} : $\sqrt{1+x}=1+\frac12x+\frac{\frac12\left(-\frac12\right)}{2!}x^2+\frac{\frac12\left(-\frac12\right)\left(-\frac32\right)}{3!}x^3+\cdots
+=1+\frac x2-\frac{x^2}8+\frac{x^3}{16}+\cdots$ ; $R=1$ ($\alpha\notin\mathbb N$).
+
+\q{4.d)} Produit de Cauchy de $\sum\frac{x^n}{n!}$ ($R=+\infty$) et $\sum x^n$ ($R=1$) \prop{th.~1.23} : pour $|x|<1$,
+$\frac{e^x}{1-x}=\sum_{n\geq0}c_nx^n$ avec $c_n=\sum_{k=0}^n\frac1{k!}$. Rayon : $R\geq1$, et $c_n\to e\neq0$ donc la série diverge en $x=1$ :
+$R=1$.
+
+\q{4.e)} Par unicité, $\frac{f^{(p)}(0)}{p!}$ est le coefficient de $x^p$ dans 4.b. Pour $x^{10}$ : $n=5$, coefficient $\frac{(-1)^6}5=\frac15$,
+donc $f^{(10)}(0)=\frac{10!}5=725\,760$. Il n'y a pas de terme en $x^{11}$ : $f^{(11)}(0)=0$.
+
+\q{5.} En dérivant $\frac1{1-x}=\sum x^n$ sur $]-1,1[$ \prop{th.~1.29} : $\sum_{n\geq1}nx^{n-1}=\frac1{(1-x)^2}$, donc $\sum_{n\geq1}nx^n=\frac x{(1-x)^2}$.
+Avec $x=\frac12$ : $\sum\frac n{2^n}=\frac{1/2}{1/4}=2$.
+
+\q{6.} \emph{Analyse.} Sur $]-R,R[$ : $y'=\sum_{n\geq0}(n+1)a_{n+1}x^n$ et $2xy=\sum_{n\geq0}2a_nx^{n+1}=\sum_{n\geq1}2a_{n-1}x^n$. Par unicité du DSE
+\prop{th.~1.35} : $a_1=0$ (terme constant) et $(n+1)a_{n+1}=2a_{n-1}$ pour $n\geq1$. Donc tous les $a_{2p+1}$ sont nuls, et
+$a_{2p}=\frac{2}{2p}a_{2p-2}=\frac{a_{2p-2}}p$, d'où $a_{2p}=\frac{a_0}{p!}=\frac1{p!}$.
+\emph{Synthèse.} $\sum\frac{x^{2p}}{p!}=e^{x^2}$, de rayon $+\infty$, et $y=e^{x^2}$ vérifie bien $y'=2xy$, $y(0)=1$ \prop{méth.~1.7}.
 
 \begin{GRILLE}
 \begin{tabularx}{\linewidth}{QNN}
 \entete
-1.a & Le rayon ne dit rien au bord. & « Vrai » : confusion entre intervalle ouvert et fermé de convergence.\\
-1.b & Rayon de $\sum na_nx^n$. & Pas de justification : lien avec la dérivation terme à terme non fait.\\
-1.c & DSE et série de Taylor. & « Vrai » : la condition nécessaire ($\mathcal C^\infty$) est prise pour suffisante.\\
-1.d & Série lacunaire. & « $4$ » : d'Alembert appliqué aux coefficients sans tenir compte de $x^{2n}$.\\
-2 & Choix de l'outil : d'Alembert, équivalents. & Rayon inversé ($\frac13$ au lieu de $3$) : la règle $R=\frac1L$ est mal sue.\\
-3 & DSE usuels, substitution. & Intervalle de validité oublié ; mauvais facteur $\frac12$.\\
-4 & Dérivation terme à terme, somme numérique. & Décalage d'indice faux ; oubli du facteur $x$.\\
+1.a & Le rayon ne dit rien au bord \prop{§1.2}. & « Vrai » : confusion entre $]-R,R[$ et $[-R,R]$.\\
+1.b & Encadrer un rayon : convergence en $z_0\Rightarrow R\geq|z_0|$ \prop{prop.~1.15}. &
+  « Vrai » : inégalité stricte au lieu de large ; ne sait pas ce qu'un point de convergence apprend sur $R$.\\
+1.c & Lemme d'Abel, convergence absolue dans le disque ouvert. & « Faux » ou pas d'argument : le sens du rayon (module, disque) est flou ; confusion $2i$/$2$.\\
+1.d & Rayon de $\sum na_nx^n$. & Pas de justification : lien avec la dérivation terme à terme non fait.\\
+1.e & DSE et série de Taylor : $\mathcal C^\infty$ ne suffit pas \prop{th.~1.36}. &
+  « Vrai » : la condition nécessaire est prise pour suffisante. Contre-exemple absent : reprendre l'exercice~1.2.\\
+1.f & Parité, $a_p=\frac{f^{(p)}(0)}{p!}$. & « Faux » ou pas de lien coefficient/dérivée : corollaire~1.30 non su.\\\midrule
+2.a--c & Choix de l'outil : d'Alembert, équivalents. & Rayon inversé ($\frac13$ au lieu de $3$) : la règle $R=\frac1L$ est mal sue.
+  (b) bloqué sur $\left(\frac n{n+1}\right)^n$ : limites usuelles (passage à l'exponentielle).\\
+2.d & Série lacunaire. & « $4$ » : d'Alembert appliqué aux coefficients sans tenir compte de $x^{2n}$.\\\midrule
+3 & Taylor-Lagrange, dérivées bornées $\Rightarrow$ DSE \prop{cor.~1.2, 1.37}. &
+  Formule écrite sans étudier le reste : ne sait pas \emph{pourquoi} une fonction est DSE. $\cos^{(k)}(0)$ faux : dérivées successives.\\
+4.a & Mise sous la forme $\frac1{1-u}$. & Facteur $\frac12$ oublié ; rayon $1$ au lieu de $2$.\\
+4.b & Substitution $u=x^2$. & Intervalle de validité oublié ; $x^n$ au lieu de $x^{2n}$.\\
+4.c & Série du binôme. & Coefficients faux : formule $\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$ non sue.\\
+4.d & Produit de Cauchy, rayon du produit. & $c_n=\frac1{n!}$ (produit terme à terme) ; rayon $+\infty$ : règle $R\geq\min(R_a,R_b)$ mal comprise.\\
+4.e & Unicité du DSE, lecture des dérivées. & $f^{(10)}(0)=\frac15$ : oubli du $p!$. Calcul de dérivées à la main : lien non fait.\\\midrule
+5 & Dérivation terme à terme, somme numérique. & Décalage d'indice faux ; oubli du facteur $x$.\\
+6 & Solutions DSE d'une équation différentielle : réindexation, identification, synthèse \prop{méth.~1.7}. &
+  Bloque à la réindexation ; oublie $a_1=0$ ; ne reconnaît pas $e^{x^2}$ ; pas de synthèse (rayon non vérifié).\\
 \bottomrule
 \end{tabularx}
 \end{GRILLE}
+
+\partie{Lecture du diagnostic : quoi reprendre}
+{\small
+\begin{tabularx}{\linewidth}{@{}>{\leavevmode\sffamily\bfseries\footnotesize\color{Bleu}}p{2.2cm}X@{}}
+\toprule
+Partie A & Erreurs sur les V/F alors que B--D sont réussies : les théorèmes sont appliqués comme des recettes, sans leurs hypothèses.
+  Relire les énoncés du §1.2 (lemme d'Abel, th.~1.12, prop.~1.15) et du §1.5 (th.~1.35 à 1.39).\\
+Partie B & Rayon : §1.3 et la méthode~1.3. Une erreur isolée en (d) seulement : séries lacunaires (exercice~1.5\,(e)).\\
+Question 3 & Série de Taylor et reste : §1.1 et « Quand une fonction est-elle égale à sa série de Taylor ? » (§1.5).\\
+Question 4 & DSE usuels (tableau~1.1) et méthode~1.5 ; 4.e : corollaire~1.30, exercice~1.8.\\
+Partie D & Fonction somme : th.~1.29, méthode~1.4 ; équation différentielle : méthode~1.7, exercice~1.11.\\
+Temps & Plus de 30 min au total : les DSE usuels ne sont pas automatiques ; faire refaire les questions 2 et 4 la séance suivante.\\
+\bottomrule
+\end{tabularx}}
 \fi
 \fi
 \end{document}
