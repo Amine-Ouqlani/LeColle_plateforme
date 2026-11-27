@@ -456,7 +456,49 @@ $\sum\frac1n$ serait combinaison linéaire de séries convergentes (question 3),
 Pourtant $v_n\sim\frac{(-1)^n}{\sqrt n}$, terme d'une série convergente : le critère des équivalents n'est valable que pour des termes \textbf{de signe
 constant}. Pour une série alternée, on fait un développement asymptotique jusqu'à un reste absolument convergent.
 
-\Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
+\Partie{Exercice 3 — Sommes de séries entières}
+
+\Q{1.(a)} Pour $x\neq0$, $\left|\dfrac{a_{n+1}x^{n+1}}{a_nx^n}\right|=\dfrac{(n+1)^2+(n+1)+1}{(n^2+n+1)(n+1)}|x|\sim\dfrac{|x|}n\to0<1$ : la série converge
+absolument pour tout réel $x$ (règle de d'Alembert). \textbf{Le rayon est $+\infty$}.
+
+\Q{1.(b)} $n(n-1)+bn+c=n^2+(b-1)n+c$ : par identification, \textbf{$b=2$ et $c=1$}.
+
+\Q{1.(c)} Pour tout réel $x$, les trois séries ci-dessous convergent (rayon $+\infty$), et, en supprimant les termes nuls :
+\[\sum_{n\geq0}\frac{n(n-1)}{n!}x^n=\sum_{n\geq2}\frac{x^n}{(n-2)!}=x^2e^x,\qquad\sum_{n\geq0}\frac{2n}{n!}x^n=2\sum_{n\geq1}\frac{x^n}{(n-1)!}=2xe^x,\qquad\sum_{n\geq0}\frac{x^n}{n!}=e^x.\]
+Par linéarité :
+\[\sum_{n=0}^{+\infty}\frac{n^2+n+1}{n!}x^n=(x^2+2x+1)e^x=(x+1)^2e^x.\]
+Avec $x=1$ : $\displaystyle\sum_{n=0}^{+\infty}\frac{n^2+n+1}{n!}=4e$.
+
+\Q{2.(a)} Pour $x\neq0$, $\left|\dfrac{x^{n+1}/((n+1)(n+2))}{x^n/(n(n+1))}\right|=\dfrac n{n+2}|x|\to|x|$ : par d'Alembert, \textbf{$R=1$}.
+
+\Q{2.(b)} $\dfrac1{n(n+1)}=\dfrac1n-\dfrac1{n+1}$. Pour $x\in\,]-1,1[$, les séries $\sum_{n\geq1}\frac{x^n}n$ et $\sum_{n\geq1}\frac{x^n}{n+1}$ convergent (rayon $1$), donc
+$S(x)=\sum_{n\geq1}\frac{x^n}n-\sum_{n\geq1}\frac{x^n}{n+1}$. D'une part $\sum_{n\geq1}\frac{x^n}n=-\ln(1-x)$. D'autre part, pour $x\neq0$,
+\[\sum_{n\geq1}\frac{x^n}{n+1}=\frac1x\sum_{n\geq1}\frac{x^{n+1}}{n+1}=\frac1x\sum_{m\geq2}\frac{x^m}m=\frac1x\big(-\ln(1-x)-x\big).\]
+Donc, pour $x\in\,]-1,1[\setminus\{0\}$ :
+\[S(x)=-\ln(1-x)+\frac{\ln(1-x)}x+1=1+\frac{(1-x)\ln(1-x)}x.\]
+
+\Q{2.(c)} $\ln(1-x)\sim-x$ en $0$, donc $\frac{(1-x)\ln(1-x)}x\to-1$ et $S(x)\to0$. C'est cohérent : $S$ est continue en $0$ (somme d'une série
+entière sur $]-1,1[$) et $S(0)=0$.
+
+\Q{3.(a)} Pour $x\neq0$, $\left|\dfrac{x^{n+1}/(2n+3)}{x^n/(2n+1)}\right|=\dfrac{2n+1}{2n+3}|x|\to|x|$ : par d'Alembert, \textbf{le rayon est $1$}.
+
+\Q{3.(b)} Pour $t\in\,]-1,1[$, $\sum_{n\geq0}t^{2n}=\frac1{1-t^2}$ et $\sum_{n\geq0}(-1)^nt^{2n}=\frac1{1+t^2}$ (séries géométriques de raisons $t^2$ et $-t^2$).
+Les séries $\sum\frac{t^{2n+1}}{2n+1}$ et $\sum(-1)^n\frac{t^{2n+1}}{2n+1}$ ont pour rayon $1$ ; leurs sommes $u$ et $v$ s'annulent en $0$ et, par dérivation terme à terme
+sur $]-1,1[$, $u'(t)=\frac1{1-t^2}$ et $v'(t)=\frac1{1+t^2}$. Comme $\frac1{1-t^2}=\frac12\left(\frac1{1-t}+\frac1{1+t}\right)$ :
+\[u(t)=\sum_{n=0}^{+\infty}\frac{t^{2n+1}}{2n+1}=\frac12\ln\left(\frac{1+t}{1-t}\right),\qquad v(t)=\sum_{n=0}^{+\infty}(-1)^n\frac{t^{2n+1}}{2n+1}=\arctan t.\]
+
+\Q{3.(c)} Si $x\in\,]0,1[$, on pose $t=\sqrt x\in\,]0,1[$ : $g(x)=\sum\frac{t^{2n}}{2n+1}=\frac1tu(t)$, donc
+\[g(x)=\frac1{2\sqrt x}\ln\left(\frac{1+\sqrt x}{1-\sqrt x}\right).\]
+Si $x\in\,]-1,0[$, on pose $t=\sqrt{-x}\in\,]0,1[$ : $x^n=(-1)^nt^{2n}$, donc $g(x)=\frac1t\sum(-1)^n\frac{t^{2n+1}}{2n+1}=\frac1tv(t)$ :
+\[g(x)=\frac{\arctan\sqrt{-x}}{\sqrt{-x}}.\]
+Enfin $g(0)=1$.
+
+\Q{4.} $\dfrac1{(1-x)(2-x)}=\dfrac1{1-x}-\dfrac1{2-x}$ (en effet $(2-x)-(1-x)=1$). Pour $|x|<1$, $\dfrac1{1-x}=\sum_{n\geq0}x^n$, et pour $|x|<2$,
+$\dfrac1{2-x}=\dfrac12\cdot\dfrac1{1-\frac x2}=\sum_{n\geq0}\dfrac{x^n}{2^{n+1}}$. Pour $|x|<1$ :
+\[f(x)=\sum_{n=0}^{+\infty}\left(1-\frac1{2^{n+1}}\right)x^n.\]
+Le rayon est au moins $1$ ; les coefficients tendent vers $1\neq0$, donc la série diverge grossièrement en $x=1$ : \textbf{le rayon est $1$}.
+
+\Partie{Exercice 4 — Un système différentiel résolu par les séries entières}
 
 \Q{1.(a)} Sur $]-R,R[$, on dérive terme à terme : $C'(x)=\sum_{n\geq0}(n+1)a_{n+1}x^n$ et $-2xS(x)=\sum_{n\geq1}-2b_{n-1}x^n$. Par unicité du développement en
 série entière : $a_1=0$ (terme constant) et $(n+1)a_{n+1}=-2b_{n-1}$ pour $n\geq1$. De même, $S'=2xC$ donne $b_1=0$ et $(n+1)b_{n+1}=2a_{n-1}$
@@ -497,7 +539,7 @@ développement en série entière.
 \Q{3.(c)} $C'=-2xS$ est dérivable, et $C''=-2S-2xS'=-2S-4x^2C$. Donc $xC''=-2xS-4x^3C=C'-4x^3C$, c'est-à-dire
 $xC''-C'+4x^3C=0$ sur $\R$.
 
-\Partie{Exercice 4 — Développement en série entière de la tangente}
+\Partie{Exercice 5 — Développement en série entière de la tangente}
 
 \Q{1.(a)} Le produit de Cauchy des deux séries est $\sum c_nx^n$ avec $c_n=\sum_{k=0}^na_kb_{n-k}$. Son rayon est au moins égal au minimum des
 deux rayons ; ici les deux séries convergent sur $]-R,R[$, donc le produit converge (absolument) sur $]-R,R[$, et pour $x\in\,]-R,R[$,

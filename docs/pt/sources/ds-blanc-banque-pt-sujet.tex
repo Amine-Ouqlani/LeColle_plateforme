@@ -337,7 +337,7 @@
 \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=10pt,right=10pt,top=8pt,bottom=8pt]
 \small Sujet composé d'extraits de sujets officiels de la Banque PT (filière PT), choisis pour couvrir le programme du DS :
 réduction, séries numériques, équations différentielles et séries entières. Les énoncés sont reformulés et légèrement adaptés
-(aucune question ne porte sur les intégrales généralisées) ; la source de chaque exercice est indiquée. Les quatre exercices
+(aucune question ne porte sur les intégrales généralisées) ; la source de chaque exercice est indiquée. Les cinq exercices
 sont indépendants. Le sujet est volontairement long : traiter à fond les questions abordées vaut mieux que tout survoler. Calculatrice interdite. La qualité de la rédaction et la précision des justifications seront prises en compte.
 \end{tcolorbox}
 
@@ -410,7 +410,32 @@ $\displaystyle\sum_{k=2}^N\frac1{k\ln k}$ quand $N\to+\infty$.
 \end{enumerate}
 \end{enumerate}
 
-\Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
+\Partie{Exercice 3 — Sommes de séries entières}
+\Source{Exercice classique, ajouté par Le Collé : les quatre questions sont indépendantes.}
+
+\begin{enumerate}
+\item Pour $n\in\N$, on pose $a_n=\dfrac{n^2+n+1}{n!}$.
+\begin{enumerate}[label=(\alph*)]
+\item Déterminer le rayon de convergence de la série entière $\sum a_nx^n$.
+\item Déterminer deux réels $b$ et $c$ tels que, pour tout $n\in\N$, $n^2+n+1=n(n-1)+bn+c$.
+\item En déduire, pour tout réel $x$, la valeur de $\displaystyle\sum_{n=0}^{+\infty}a_nx^n$, puis celle de $\displaystyle\sum_{n=0}^{+\infty}\frac{n^2+n+1}{n!}$.
+\end{enumerate}
+\item On considère la série entière $\displaystyle\sum_{n\geq1}\frac{x^n}{n(n+1)}$, de somme $S$.
+\begin{enumerate}[label=(\alph*)]
+\item Déterminer son rayon de convergence $R$.
+\item Décomposer $\dfrac1{n(n+1)}$ en éléments simples, puis calculer $S(x)$ pour $x\in\,]-R,R[$, $x\neq0$.
+\item Vérifier la cohérence du résultat en étudiant la limite de $S(x)$ quand $x\to0$.
+\end{enumerate}
+\item On considère la série entière $\displaystyle\sum_{n\geq0}\frac{x^n}{2n+1}$, de somme $g$.
+\begin{enumerate}[label=(\alph*)]
+\item Déterminer son rayon de convergence.
+\item Pour $t\in\,]-1,1[$, calculer $\displaystyle\sum_{n=0}^{+\infty}\frac{t^{2n+1}}{2n+1}$ et $\displaystyle\sum_{n=0}^{+\infty}(-1)^n\frac{t^{2n+1}}{2n+1}$ (on pourra dériver).
+\item En déduire une expression de $g(x)$ pour $x\in\,]0,1[$ (on posera $x=t^2$), puis pour $x\in\,]-1,0[$ (on posera $x=-t^2$).
+\end{enumerate}
+\item Développer en série entière la fonction $f:x\mapsto\dfrac1{(1-x)(2-x)}$ au voisinage de $0$, en précisant le rayon de convergence.
+\end{enumerate}
+
+\Partie{Exercice 4 — Un système différentiel résolu par les séries entières}
 \Source{D'après Banque PT 2025, Mathématiques C, partie II.}
 
 On considère deux fonctions $C$ et $S$, à valeurs réelles, \emph{paires}, définies sur un intervalle $]-R,R[$ ($R>0$ ou $R=+\infty$), solutions du
@@ -441,7 +466,7 @@ On cherche $C$ et $S$ sous la forme de séries entières : pour $x\in\,]-R,R[$, 
 \end{enumerate}
 \end{enumerate}
 
-\Partie{Exercice 4 — Développement en série entière de la tangente}
+\Partie{Exercice 5 — Développement en série entière de la tangente}
 \Source{D'après Banque PT 2022, Mathématiques C, partie II.}
 
 Soit $R$ un réel strictement positif.
