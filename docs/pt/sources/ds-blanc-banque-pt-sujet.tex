@@ -327,7 +327,7 @@
 \end{tikzpicture}
 \vspace*{2.9cm}}
 \newcommand{\Source}[1]{\par\vspace{-0.3em}\noindent{\footnotesize\sffamily\color{Gris}#1}\par\smallskip}
-\usetikzlibrary{patterns}
+\usetikzlibrary{patterns}\usepgfplotslibrary{fillbetween}
 \fancyhead[L]{\footnotesize\sffamily\color{Gris}DS blanc · d'après la Banque PT · énoncé}
 \providecommand{\ch}{\operatorname{ch}}
 \begin{document}
@@ -337,38 +337,44 @@
 \begin{tcolorbox}[enhanced,colback=Fond,colframe=Fond,arc=0pt,boxrule=0pt,left=10pt,right=10pt,top=8pt,bottom=8pt]
 \small Sujet composé d'extraits de sujets officiels de la Banque PT (filière PT), choisis pour couvrir le programme du DS :
 réduction, séries numériques, équations différentielles et séries entières. Les énoncés sont reformulés et légèrement adaptés
-(les questions sur les intégrales généralisées ont été retirées) ; la source de chaque exercice est indiquée. Les quatre exercices
+(aucune question ne porte sur les intégrales généralisées) ; la source de chaque exercice est indiquée. Les quatre exercices
 sont indépendants. Calculatrice interdite. La qualité de la rédaction et la précision des justifications seront prises en compte.
 \end{tcolorbox}
 
-\Partie{Exercice 1 — Réduction de quelques matrices}
-\Source{D'après Banque PT 2026, Mathématiques A, partie A.}
+\Partie{Exercice 1 — L'équation matricielle $M^2-2M=A$}
+\Source{D'après Banque PT 2024, Mathématiques B, exercice 3, partie A.}
 
-On considère les matrices
-\[M_1=\begin{pmatrix}2&6\\1&1\end{pmatrix},\qquad M_2=\begin{pmatrix}3&-2\\1&1\end{pmatrix},\qquad M_3=\begin{pmatrix}5&-4\\1&1\end{pmatrix}.\]
+On considère la matrice $A=\begin{pmatrix}2&-2&3\\3&-3&3\\4&-4&3\end{pmatrix}$. On cherche toutes les matrices $M\in\mathcal M_3(\R)$ telles que
+\[M^2-2M=A.\qquad(\mathcal E)\]
 \begin{enumerate}
-\item Rappeler la caractérisation des matrices trigonalisables à l'aide du polynôme caractéristique.
-\item $M_1$ est-elle diagonalisable dans $\mathcal M_2(\C)$ ? dans $\mathcal M_2(\R)$ ? Déterminer, si possible, une matrice inversible $P_1$ et une
-matrice diagonale $D_1$ telles que $M_1=P_1D_1P_1^{-1}$ (le calcul de $P_1^{-1}$ n'est pas demandé).
-\item Mêmes questions pour $M_2$.
-\item (a) $M_3$ est-elle diagonalisable dans $\mathcal M_2(\R)$ ? Est-elle trigonalisable dans $\mathcal M_2(\R)$ ?\\
-(b) On note $f_3$ l'endomorphisme de $\R^2$ canoniquement associé à $M_3$. Déterminer une base de $\R^2$ dans laquelle la matrice de
-$f_3$ est $T_3=\begin{pmatrix}3&1\\0&3\end{pmatrix}$.
+\item Résoudre dans $\R$ les trois équations d'inconnue $x$ : $x^2-2x=0$ ;\quad $x^2-2x=-1$ ;\quad $x^2-2x=3$.
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Déterminer les valeurs propres de $A$.
+\item La matrice $A$ est-elle diagonalisable ?
+\item Déterminer une matrice inversible $P$ et une matrice diagonale $D$, dont les coefficients diagonaux sont rangés par ordre croissant,
+telles que $A=PDP^{-1}$.
 \end{enumerate}
-On s'intéresse désormais aux matrices $M(a,b)=\begin{pmatrix}a&b\\1&1\end{pmatrix}$, où $(a,b)\in\R^2$.
-\begin{enumerate}\setcounter{enumi}{4}
-\item À quelle condition nécessaire et suffisante la matrice $M(a,b)$ est-elle inversible ?
-\item Calculer le discriminant $\Delta(a,b)$ du polynôme caractéristique de $M(a,b)$.
-\item (a) Justifier que si $\Delta(a,b)=0$, alors $M(a,b)$ n'est pas diagonalisable dans $\mathcal M_2(\C)$.\\
-(b) Lorsque $\Delta(a,b)\neq0$, $M(a,b)$ est-elle diagonalisable ? On précisera si c'est dans $\mathcal M_2(\R)$ et/ou dans $\mathcal M_2(\C)$.
-\item Représenter dans un repère du plan, avec les coordonnées $(a,b)$ : l'ensemble des points tels que $M(a,b)$ n'est pas inversible ;
-celui des points tels que $M(a,b)$ est diagonalisable dans $\mathcal M_2(\R)$ ; celui des points tels que $M(a,b)$ est diagonalisable dans
-$\mathcal M_2(\C)$ mais pas dans $\mathcal M_2(\R)$ ; celui des points tels que $M(a,b)$ n'est pas diagonalisable dans $\mathcal M_2(\C)$ ; enfin les trois
-points correspondant à $M_1$, $M_2$, $M_3$.
+\item Soit $M\in\mathcal M_3(\R)$. On pose $\Delta=P^{-1}MP$, où $P$ est la matrice de la question 2(c).
+\begin{enumerate}[label=(\alph*)]
+\item Démontrer que $M^2-2M=A$ si et seulement si $\Delta^2-2\Delta=D$.
+\end{enumerate}
+On suppose désormais que $M$ est solution de $(\mathcal E)$.
+\begin{enumerate}[label=(\alph*)]\setcounter{enumii}{1}
+\item Démontrer que $MA=AM$.
+\item Soit $X$ un vecteur propre de $A$ associé à la valeur propre $\lambda$. Démontrer que $Y=MX$ appartient au sous-espace propre de $A$
+associé à $\lambda$, puis en déduire que $X$ est un vecteur propre de $M$.
+\item En déduire que la matrice $\Delta$ est diagonale.
+\end{enumerate}
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Déterminer toutes les matrices diagonales $\Delta$ vérifiant $\Delta^2-2\Delta=D$.
+\item En déduire toutes les matrices $M$ solutions de $(\mathcal E)$, en les exprimant à l'aide de $P$ et de matrices diagonales à préciser.
+\end{enumerate}
 \end{enumerate}
 
-\Partie{Exercice 2 — Une série alternée de logarithmes}
-\Source{D'après Banque PT 2026, Mathématiques C, préambule et partie I (questions sur les intégrales retirées).}
+\Partie{Exercice 2 — Séries numériques}
+\Source{Questions 1 à 5 : d'après Banque PT 2026, Mathématiques C, préambule et partie I (questions sur les intégrales généralisées retirées). Questions 6 à 8 : ajoutées par Le Collé, dans l'esprit de l'exercice 2 du DS 3 de l'an dernier.}
 
 Pour tout entier $n\geq2$, on pose $u_n=\ln\left(1+\dfrac{(-1)^n}n\right)$.
 \begin{enumerate}
@@ -383,38 +389,35 @@ Pour tout entier $n\geq2$, on pose $u_n=\ln\left(1+\dfrac{(-1)^n}n\right)$.
 \item En déduire, pour tout entier $N\geq2$, la valeur de $S_{2N-1}$.
 \item Calculer $\displaystyle\sum_{n=2}^{+\infty}u_n$.
 \end{enumerate}
+\item[] \emph{Reste d'une série de Riemann.} Pour $\alpha>1$ et $n\geq1$, on note $r_n(\alpha)=\displaystyle\sum_{k=n+1}^{+\infty}\frac1{k^\alpha}$.
+\item Montrer que, pour tous entiers $N>n\geq1$ : $\displaystyle\int_{n+1}^{N+1}\frac{dt}{t^\alpha}\leq\sum_{k=n+1}^N\frac1{k^\alpha}\leq\int_n^N\frac{dt}{t^\alpha}$.
+\item En déduire un encadrement de $r_n(\alpha)$, puis un équivalent de $r_n(\alpha)$ quand $n\to+\infty$.
+\item Pour quelles valeurs de $\alpha$ la série $\sum_{n\geq1}r_n(\alpha)$ converge-t-elle ?
 \end{enumerate}
 
-\Partie{Exercice 3 — Reste de la série exponentielle, irrationalité de $e$}
-\Source{D'après Banque PT 2014, Mathématiques C, partie I.}
+\Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
+\Source{D'après Banque PT 2025, Mathématiques C, partie II.}
 
-Pour $t\in\R$ et $n\in\N$, on pose $R_n(t)=e^t-\displaystyle\sum_{k=0}^n\frac{t^k}{k!}$.
+On considère deux fonctions $C$ et $S$, à valeurs réelles, \emph{paires}, définies sur un intervalle $]-R,R[$ ($R>0$ ou $R=+\infty$), solutions du
+système différentiel
+\[C'(x)=-2x\,S(x),\qquad S'(x)=2x\,C(x),\qquad C(0)=1,\quad S(0)=0.\]
+On cherche $C$ et $S$ sous la forme de séries entières : pour $x\in\,]-R,R[$, $C(x)=\sum_{n=0}^{+\infty}a_nx^n$ et $S(x)=\sum_{n=0}^{+\infty}b_nx^n$.
 \begin{enumerate}
 \item
 \begin{enumerate}[label=(\alph*)]
-\item Montrer que $R_n$ est solution sur $\R$ de l'équation différentielle $(E)$ : $y'-y=\dfrac{t^n}{n!}$.
-\item Donner la solution générale de l'équation homogène $(E_0)$ associée à $(E)$.
-\item Résoudre $(E)$ en exprimant les solutions à l'aide d'une intégrale, sans chercher à la calculer.
-\item En déduire une expression de $R_n(t)$ à l'aide d'une intégrale, pour tout réel $t$ et tout entier $n$.
-\item Montrer que, pour tout réel $t\geq0$, $0\leq R_n(t)\leq\dfrac{e^t\,t^{n+1}}{(n+1)!}$, et que pour tout réel $t<0$, $|R_n(t)|\leq\dfrac{|t|^{n+1}}{(n+1)!}$.
-\item À l'aide de ce qui précède, retrouver le développement en série entière de la fonction exponentielle en $0$, en précisant son
-rayon de convergence.
+\item Montrer que $a_1=b_1=0$ et que, pour tout entier $n\geq1$ : $(n+1)a_{n+1}=-2b_{n-1}$ et $(n+1)b_{n+1}=2a_{n-1}$.
+\item En déduire que, pour tout entier $n\geq4$ : $a_n=-\dfrac4{n(n-2)}\,a_{n-4}$.
+\item Les fonctions $C$ et $S$ étant paires, que peut-on dire des coefficients de leurs développements ?
+\item Montrer que $a_n=0$ pour tout entier $n$ qui n'est pas multiple de $4$ (on pourra écrire $n=4p+r$ avec $r\in\{0,1,2,3\}$).
+\item Montrer que, pour tout $p\in\N$, $a_{4p}=\dfrac{(-1)^p}{(2p)!}$.
+\item Déterminer le rayon de convergence de $\sum a_nx^n$. Donner une expression simple de $C(x)$, puis de $S(x)$.
 \end{enumerate}
-\item On considère les suites définies pour $n\geq1$ par $u_n=\displaystyle\sum_{k=0}^n\frac1{k!}$ et $v_n=u_n+\dfrac1{n\,n!}$.
+\item On considère la série entière $\sum_{n\geq0}(-1)^nx^{4n}$.
 \begin{enumerate}[label=(\alph*)]
-\item Montrer que $(u_n)$ et $(v_n)$ sont strictement monotones, et donner leur sens de variation.
-\item Montrer que $(u_n)$ et $(v_n)$ sont adjacentes, de limite $e$.
-\item En déduire que, pour tout entier $q\geq1$, $u_q<e<v_q$.
-\item On suppose qu'il existe deux entiers naturels non nuls $p$ et $q$ tels que $e=\frac pq$. En multipliant la double inégalité précédente
-par $q!$, montrer que c'est impossible. Conclure.
-\item On pose $w_n=\dfrac1n\displaystyle\sum_{k=1}^nu_k$ pour $n\geq1$. Soit $\varepsilon>0$.
-\begin{enumerate}[label=(\roman*)]
-\item Montrer qu'il existe un rang $n_0$ tel que, pour tout $n\geq n_0$, $|u_n-e|\leq\frac\varepsilon2$.
-\item Montrer qu'il existe un rang $n_1$ tel que, pour tout $n\geq n_1$, $|w_n-e|\leq\varepsilon$.
-\item Quelle est la limite de la suite $(w_n)$ ?
+\item Préciser son rayon de convergence et exprimer sa somme $D(x)$ en fonction de $x$.
+\item Montrer que $\displaystyle\int_0^{1/\sqrt2}\frac{dx}{1+x^4}$ est la somme d'une série numérique, que l'on explicitera.
+\item Que vaut $\displaystyle\frac1{\sqrt2}\sum_{n=0}^{+\infty}\frac{(-1)^n}{4^n(4n+1)}$ ? (On ne demande pas de calculer l'intégrale.)
 \end{enumerate}
-\end{enumerate}
-\item On considère la suite $(e_n)_{n\geq2}$ définie par $e_n=\left(1-\dfrac1n\right)^{-n}$. Quelle est sa limite ?
 \end{enumerate}
 
 \Partie{Exercice 4 — Développement en série entière de la tangente}

@@ -339,67 +339,47 @@
 calcul formel.
 \end{tcolorbox}
 
-\Partie{Exercice 1 — Réduction de quelques matrices}
+\Partie{Exercice 1 — L'équation matricielle $M^2-2M=A$}
 
-\Q{1.} Une matrice de $\mathcal M_n(\K)$ est trigonalisable dans $\mathcal M_n(\K)$ si et seulement si son polynôme caractéristique est scindé
-sur $\K$. En particulier, toute matrice est trigonalisable dans $\mathcal M_n(\C)$.
+\Q{1.} $x^2-2x=0\iff x(x-2)=0$ : solutions $0$ et $2$. $x^2-2x=-1\iff(x-1)^2=0$ : solution $1$. $x^2-2x=3\iff(x-3)(x+1)=0$ :
+solutions $-1$ et $3$.
 
-\Q{2.} $\chi_{M_1}(x)=x^2-\tr(M_1)x+\det M_1=x^2-3x-4=(x-4)(x+1)$. $M_1$ est d'ordre $2$ et a deux valeurs propres réelles distinctes : elle est
-\textbf{diagonalisable dans $\mathcal M_2(\R)$}, donc dans $\mathcal M_2(\C)$.
-$M_1-4I_2=\begin{pmatrix}-2&6\\1&-3\end{pmatrix}$ : $E_4=\vect\big((3,1)\big)$ ; $M_1+I_2=\begin{pmatrix}3&6\\1&2\end{pmatrix}$ : $E_{-1}=\vect\big((-2,1)\big)$. Donc
-\[P_1=\begin{pmatrix}3&-2\\1&1\end{pmatrix},\qquad D_1=\begin{pmatrix}4&0\\0&-1\end{pmatrix},\qquad M_1=P_1D_1P_1^{-1}.\]
+\Q{2.(a)} Dans $\chi_A(x)=\det(xI_3-A)=\begin{vmatrix}x-2&2&-3\\-3&x+3&-3\\-4&4&x-3\end{vmatrix}$, on remplace $C_1$ par $C_1+C_2$ : la première
+colonne devient $(x,x,0)$, et on factorise $x$. Puis $L_2\leftarrow L_2-L_1$ :
+\[\chi_A(x)=x\begin{vmatrix}1&2&-3\\1&x+3&-3\\0&4&x-3\end{vmatrix}=x\begin{vmatrix}1&2&-3\\0&x+1&0\\0&4&x-3\end{vmatrix}=x(x+1)(x-3).\]
+\textbf{$\Sp(A)=\{-1,0,3\}$}.
 
-\Q{3.} $\chi_{M_2}(x)=x^2-4x+5$, de discriminant $-4<0$ : les racines sont $2+i$ et $2-i$. $M_2$ n'a pas de valeur propre réelle : elle
-\textbf{n'est pas diagonalisable dans $\mathcal M_2(\R)$}. Dans $\C$, elle a deux valeurs propres distinctes : elle est \textbf{diagonalisable dans
-$\mathcal M_2(\C)$}. $M_2-(2+i)I_2=\begin{pmatrix}1-i&-2\\1&-1-i\end{pmatrix}$ : la deuxième ligne donne $x=(1+i)y$, d'où $E_{2+i}=\vect\big((1+i,1)\big)$ ;
-la matrice étant réelle, $E_{2-i}=\vect\big((1-i,1)\big)$ (vecteur conjugué). Donc
-\[P_2=\begin{pmatrix}1+i&1-i\\1&1\end{pmatrix},\qquad D_2=\begin{pmatrix}2+i&0\\0&2-i\end{pmatrix},\qquad M_2=P_2D_2P_2^{-1}.\]
+\Q{2.(b)} $A\in\mathcal M_3(\R)$ a trois valeurs propres distinctes : \textbf{$A$ est diagonalisable}, et chaque sous-espace propre est une droite.
 
-\Q{4.(a)} $\chi_{M_3}(x)=x^2-6x+9=(x-3)^2$ : $\Sp(M_3)=\{3\}$. Si $M_3$ était diagonalisable, elle serait semblable à $3I_2$, donc égale à
-$3I_2$ : faux. \textbf{$M_3$ n'est pas diagonalisable}. $\chi_{M_3}$ est scindé sur $\R$ : \textbf{$M_3$ est trigonalisable dans $\mathcal M_2(\R)$}.
+\Q{2.(c)} On résout $(A-\lambda I_3)X=0$ :
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item $\lambda=-1$ : $3x-2y+3z=0$, $3x-2y+3z=0$, $4x-4y+4z=0$ donnent $y=0$, $z=-x$ : $E_{-1}=\vect\big((-1,0,1)\big)$ ;
+\item $\lambda=0$ : $A(1,1,0)^T=0$ : $E_0=\vect\big((1,1,0)\big)$ ;
+\item $\lambda=3$ : $A(1,1,1)^T=(3,3,3)^T$ : $E_3=\vect\big((1,1,1)\big)$.
+\end{itemize}
+\[P=\begin{pmatrix}-1&1&1\\0&1&1\\1&0&1\end{pmatrix},\qquad D=\begin{pmatrix}-1&0&0\\0&0&0\\0&0&3\end{pmatrix},\qquad A=PDP^{-1}\qquad(\det P=-1\neq0).\]
 
-\Q{4.(b)} On cherche $(e_1,e_2)$ avec $f_3(e_1)=3e_1$ et $f_3(e_2)=e_1+3e_2$. $M_3-3I_2=\begin{pmatrix}2&-4\\1&-2\end{pmatrix}$ : on prend $e_1=(2,1)$.
-Puis $(M_3-3I_2)X=\begin{pmatrix}2\\1\end{pmatrix}$ s'écrit $x-2y=1$ : on prend $e_2=(1,0)$. $\det\begin{pmatrix}2&1\\1&0\end{pmatrix}=-1\neq0$ : $(e_1,e_2)$ est une base de
-$\R^2$, et par construction la matrice de $f_3$ dans cette base est $T_3$.
+\Q{3.(a)} $\Delta^2-2\Delta=P^{-1}MPP^{-1}MP-2P^{-1}MP=P^{-1}(M^2-2M)P$. Comme $P$ est inversible,
+$M^2-2M=A\iff P^{-1}(M^2-2M)P=P^{-1}AP\iff\Delta^2-2\Delta=D$.
 
-\Q{5.} $\det M(a,b)=a-b$ : \textbf{$M(a,b)$ est inversible si et seulement si $a\neq b$}.
+\Q{3.(b)} $MA=M(M^2-2M)=M^3-2M^2=(M^2-2M)M=AM$.
 
-\Q{6.} $\chi(x)=x^2-(a+1)x+(a-b)$, donc $\Delta(a,b)=(a+1)^2-4(a-b)=(a-1)^2+4b$.
+\Q{3.(c)} $AY=AMX=MAX=M(\lambda X)=\lambda MX=\lambda Y$ : $Y\in E_\lambda(A)$. Or $E_\lambda(A)$ est la droite $\vect(X)$ (question 2(b)) : il existe $\mu$ tel
+que $MX=\mu X$, avec $X\neq0$. Donc $X$ est un vecteur propre de $M$.
 
-\Q{7.(a)} Si $\Delta(a,b)=0$, $\chi$ a une racine double $\lambda$ et $\Sp_\C(M(a,b))=\{\lambda\}$. Si $M(a,b)$ était diagonalisable dans $\mathcal M_2(\C)$,
-on aurait $M(a,b)=P(\lambda I_2)P^{-1}=\lambda I_2$ ; or le coefficient $(2,1)$ de $M(a,b)$ vaut $1\neq0$. Donc $M(a,b)$ n'est pas diagonalisable dans
-$\mathcal M_2(\C)$.
+\Q{3.(d)} Les colonnes $X_1,X_2,X_3$ de $P$ sont des vecteurs propres de $A$, donc de $M$ : $MX_j=\mu_jX_j$, c'est-à-dire $MP=P\,\mathrm{diag}(\mu_1,\mu_2,\mu_3)$.
+Ainsi $\Delta=P^{-1}MP=\mathrm{diag}(\mu_1,\mu_2,\mu_3)$ est diagonale.
 
-\Q{7.(b)} Si $\Delta(a,b)>0$, $\chi$ a deux racines réelles distinctes : $M(a,b)$ est diagonalisable dans $\mathcal M_2(\R)$ (et dans $\mathcal M_2(\C)$).
-Si $\Delta(a,b)<0$, $\chi$ a deux racines complexes conjuguées distinctes, non réelles : $M(a,b)$ est diagonalisable dans $\mathcal M_2(\C)$, mais
-pas dans $\mathcal M_2(\R)$ (aucune valeur propre réelle).
+\Q{4.(a)} Pour $\Delta=\mathrm{diag}(\delta_1,\delta_2,\delta_3)$, $\Delta^2-2\Delta=D$ équivaut à $\delta_1^2-2\delta_1=-1$, $\delta_2^2-2\delta_2=0$, $\delta_3^2-2\delta_3=3$.
+D'après la question 1 : $\delta_1=1$, $\delta_2\in\{0,2\}$, $\delta_3\in\{-1,3\}$. Il y a \textbf{quatre} matrices $\Delta=\mathrm{diag}(1,\delta_2,\delta_3)$.
 
-\Q{8.} $\Delta(a,b)=0\iff b=-\frac{(a-1)^2}4$ : c'est une parabole $\mathcal P$. Au-dessus ($\Delta>0$) : diagonalisable dans $\mathcal M_2(\R)$ ; en dessous
-($\Delta<0$) : diagonalisable dans $\mathcal M_2(\C)$ seulement ; sur $\mathcal P$ : non diagonalisable. Les matrices non inversibles correspondent à la
-droite $b=a$. Enfin $\Delta(2,6)=25>0$, $\Delta(3,-2)=-4<0$ et $\Delta(5,-4)=0$ : $M_1$ est au-dessus de $\mathcal P$, $M_2$ en dessous, $M_3$ sur $\mathcal P$.
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[width=0.62\linewidth,height=6.2cm,axis lines=middle,xmin=-4,xmax=7,ymin=-7,ymax=7,xlabel={$a$},ylabel={$b$},
-  ticklabel style={font=\scriptsize\sffamily,color=Gris},samples=100,
-  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small},
-  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small}]
-\addplot[name path=P,Bleu,line width=1.2pt,domain=-4:7] {-(x-1)^2/4};
-\path[name path=B] (axis cs:-4,-7) -- (axis cs:7,-7);
-\addplot[Brique!12] fill between[of=P and B];
-\addplot[Ocre,line width=1pt,domain=-4:7] {x};
-\addplot[only marks,mark=*,mark size=2pt,Ink] coordinates {(2,6)(3,-2)(5,-4)};
-\node[font=\scriptsize,anchor=west] at (axis cs:2.2,6) {$M_1$};
-\node[font=\scriptsize,anchor=west] at (axis cs:3.2,-2) {$M_2$};
-\node[font=\scriptsize,anchor=west] at (axis cs:5.2,-4) {$M_3$};
-\node[font=\scriptsize\sffamily,Ocre,anchor=west] at (axis cs:5.3,6.1) {$b=a$};
-\node[font=\scriptsize\sffamily,Bleu] at (axis cs:-1.5,2.5) {diag. dans $\mathcal M_2(\R)$};
-\node[font=\scriptsize\sffamily,Brique] at (axis cs:-0.5,-5.5) {diag. dans $\mathcal M_2(\C)$ seulement};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-{\small Parabole $\mathcal P$ (en bleu) : non diagonalisable dans $\mathcal M_2(\C)$ ; droite $b=a$ (en ocre) : non inversible.}
+\Q{4.(b)} Si $M$ est solution, $\Delta=P^{-1}MP$ est diagonale (3(d)) et vérifie $\Delta^2-2\Delta=D$ (3(a)) : c'est l'une des quatre matrices
+précédentes. Réciproquement, si $\Delta$ est l'une d'elles, $M=P\Delta P^{-1}$ est solution par 3(a). Les solutions de $(\mathcal E)$ sont donc
+exactement les quatre matrices
+\[M=P\begin{pmatrix}1&0&0\\0&\delta_2&0\\0&0&\delta_3\end{pmatrix}P^{-1},\qquad\delta_2\in\{0,2\},\ \delta_3\in\{-1,3\},\qquad P^{-1}=\begin{pmatrix}-1&1&0\\-1&2&-1\\1&-1&1\end{pmatrix}.\]
+Par exemple $(\delta_2,\delta_3)=(2,3)$ donne $M=\begin{pmatrix}2&0&1\\1&1&1\\2&-2&3\end{pmatrix}$, et l'on vérifie $M^2-2M=A$.
 
-\Partie{Exercice 2 — Une série alternée de logarithmes}
+\Partie{Exercice 2 — Séries numériques}
 
 \Q{1.} $\ln(1+h)=h-\dfrac{h^2}2+o(h^2)$ quand $h\to0$ (et même $h-\frac{h^2}2+O(h^3)$).
 
@@ -425,47 +405,49 @@ de $S_{2N}$ par paires $(2,3),(4,5),\dots,(2N-2,2N-1)$, et il reste le dernier t
 \Q{5.(d)} $S_{2N}\to\ln1=0$ et $S_{2N-1}=0$ : les deux suites extraites de $(S_N)$ tendent vers $0$, donc $S_N\to0$.
 \[\sum_{n=2}^{+\infty}\ln\left(1+\frac{(-1)^n}n\right)=0.\]
 
-\Partie{Exercice 3 — Reste de la série exponentielle, irrationalité de $e$}
+\Q{6.} La fonction $t\mapsto\frac1{t^\alpha}$ est décroissante sur $[1,+\infty[$. Soit $k\geq2$. Pour $t\in[k-1,k]$, $\frac1{k^\alpha}\leq\frac1{t^\alpha}$ ; pour $t\in[k,k+1]$,
+$\frac1{t^\alpha}\leq\frac1{k^\alpha}$. En intégrant sur ces segments de longueur $1$ : $\int_k^{k+1}\frac{dt}{t^\alpha}\leq\frac1{k^\alpha}\leq\int_{k-1}^k\frac{dt}{t^\alpha}$. On somme pour $k$ de
+$n+1$ à $N$ (relation de Chasles) :
+\[\int_{n+1}^{N+1}\frac{dt}{t^\alpha}\leq\sum_{k=n+1}^N\frac1{k^\alpha}\leq\int_n^N\frac{dt}{t^\alpha}.\]
 
-\Q{1.(a)} $R_n$ est dérivable et $R_n'(t)=e^t-\sum_{k=1}^n\frac{t^{k-1}}{(k-1)!}=e^t-\sum_{k=0}^{n-1}\frac{t^k}{k!}=R_n(t)+\frac{t^n}{n!}$. Donc $R_n'-R_n=\frac{t^n}{n!}$ :
-$R_n$ est solution de $(E)$.
+\Q{7.} $\int_a^b\frac{dt}{t^\alpha}=\frac1{\alpha-1}\left(\frac1{a^{\alpha-1}}-\frac1{b^{\alpha-1}}\right)$. Comme $\alpha>1$, on fait tendre $N$ vers $+\infty$ dans l'encadrement
+($\frac1{N^{\alpha-1}}\to0$), la série de Riemann étant convergente :
+\[\frac1{(\alpha-1)(n+1)^{\alpha-1}}\leq r_n(\alpha)\leq\frac1{(\alpha-1)n^{\alpha-1}}.\]
+Les deux bornes sont équivalentes car $(n+1)^{\alpha-1}\sim n^{\alpha-1}$ ; par encadrement, $r_n(\alpha)\sim\dfrac1{(\alpha-1)n^{\alpha-1}}$.
 
-\Q{1.(b)} $(E_0)$ : $y'=y$. Ses solutions sur $\R$ sont $t\mapsto Ce^t$, $C\in\R$.
+\Q{8.} $r_n(\alpha)>0$ et $r_n(\alpha)\sim\frac1{\alpha-1}\cdot\frac1{n^{\alpha-1}}$. Par comparaison avec une série de Riemann, $\sum r_n(\alpha)$ converge si et seulement si
+$\alpha-1>1$, c'est-à-dire \textbf{$\alpha>2$}.
 
-\Q{1.(c)} Variation de la constante : $y=C(t)e^t$ est solution si et seulement si $C'(t)e^t=\frac{t^n}{n!}$, soit $C(t)=K+\int_0^te^{-s}\frac{s^n}{n!}\,ds$.
-Les solutions de $(E)$ sont $t\mapsto e^t\left(K+\displaystyle\int_0^te^{-s}\frac{s^n}{n!}\,ds\right)$, $K\in\R$.
+\Partie{Exercice 3 — Un système différentiel résolu par les séries entières}
 
-\Q{1.(d)} $R_n(0)=1-1=0$ impose $K=0$ : pour tout $t\in\R$, $\displaystyle R_n(t)=\int_0^te^{t-s}\frac{s^n}{n!}\,ds$.
+\Q{1.(a)} Sur $]-R,R[$, on dérive terme à terme : $C'(x)=\sum_{n\geq0}(n+1)a_{n+1}x^n$ et $-2xS(x)=\sum_{n\geq1}-2b_{n-1}x^n$. Par unicité du développement en
+série entière : $a_1=0$ (terme constant) et $(n+1)a_{n+1}=-2b_{n-1}$ pour $n\geq1$. De même, $S'=2xC$ donne $b_1=0$ et $(n+1)b_{n+1}=2a_{n-1}$
+pour $n\geq1$.
 
-\Q{1.(e)} Si $t\geq0$ : pour $s\in[0,t]$, $0\leq e^{t-s}\frac{s^n}{n!}\leq e^t\frac{s^n}{n!}$, donc $0\leq R_n(t)\leq e^t\int_0^t\frac{s^n}{n!}\,ds=\frac{e^t\,t^{n+1}}{(n+1)!}$.
-Si $t<0$ : pour $s\in[t,0]$, $t-s\leq0$, donc $\left|e^{t-s}\frac{s^n}{n!}\right|\leq\frac{|s|^n}{n!}$, et $|R_n(t)|\leq\int_t^0\frac{|s|^n}{n!}\,ds=\frac{|t|^{n+1}}{(n+1)!}$.
+\Q{1.(b)} Pour $n\geq4$ : $na_n=-2b_{n-2}$ (relation au rang $n-1$) et $(n-2)b_{n-2}=2a_{n-4}$ (relation au rang $n-3\geq1$). Donc
+$a_n=-\frac2nb_{n-2}=-\frac2n\cdot\frac2{n-2}a_{n-4}=-\dfrac4{n(n-2)}a_{n-4}$.
 
-\Q{1.(f)} Pour $t$ fixé, $\frac{|t|^{n+1}}{(n+1)!}\to0$ (croissances comparées), donc $R_n(t)\to0$ : la série $\sum\frac{t^n}{n!}$ converge et
-$e^t=\sum_{n=0}^{+\infty}\frac{t^n}{n!}$ pour tout $t\in\R$. La série entière converge en tout point : son \textbf{rayon de convergence est $+\infty$}.
+\Q{1.(c)} $C$ et $S$ sont paires : leurs développements ne contiennent que des puissances paires, $a_{2p+1}=b_{2p+1}=0$ pour tout $p$.
 
-\Q{2.(a)} $u_{n+1}-u_n=\frac1{(n+1)!}>0$ : $(u_n)$ est strictement croissante. Et
-\begin{align*}v_{n+1}-v_n&=\frac1{(n+1)!}+\frac1{(n+1)(n+1)!}-\frac1{n\,n!}\\&=\frac{n(n+1)+n-(n+1)^2}{n(n+1)(n+1)!}=-\frac1{n(n+1)(n+1)!}<0 :\end{align*}
-$(v_n)$ est strictement décroissante.
+\Q{1.(d)} Tout entier s'écrit $n=4p+r$ avec $r\in\{0,1,2,3\}$ (division euclidienne par $4$). Si $r=1$ ou $r=3$, $n$ est impair et $a_n=0$ (1(c)).
+Si $r=2$ : $a_2=-b_0=-S(0)=0$ (relation 1(a) avec $n=1$), et par 1(b), $a_{4p+2}$ est un multiple de $a_{4p-2}$, \dots, de $a_2=0$ : $a_{4p+2}=0$.
 
-\Q{2.(b)} $v_n-u_n=\frac1{n\,n!}\to0$ : les suites sont adjacentes. Par 1.(f) avec $t=1$, $u_n\to e$ : leur limite commune est $e$.
+\Q{1.(e)} Par récurrence : $a_0=C(0)=1$ ; si $a_{4p}=\frac{(-1)^p}{(2p)!}$, alors par 1(b)
+$a_{4p+4}=-\frac4{(4p+4)(4p+2)}a_{4p}=-\frac1{(2p+2)(2p+1)}\cdot\frac{(-1)^p}{(2p)!}=\frac{(-1)^{p+1}}{(2p+2)!}$.
 
-\Q{2.(c)} Soit $q\geq1$. $(u_n)$ est strictement croissante de limite $e$ : $u_q<u_{q+1}\leq e$. $(v_n)$ est strictement décroissante de limite $e$ :
-$e\leq v_{q+1}<v_q$. Donc $u_q<e<v_q$.
+\Q{1.(f)} Pour $x\neq0$, d'Alembert sur les termes présents : $\frac{|x|^{4p+4}/(2p+2)!}{|x|^{4p}/(2p)!}=\frac{x^4}{(2p+1)(2p+2)}\to0$ : le \textbf{rayon est
+$+\infty$}. Pour tout réel $x$ : $C(x)=\sum_{p\geq0}\frac{(-1)^p(x^2)^{2p}}{(2p)!}=\cos(x^2)$. Pour $S$ : $b_{n+1}=\frac2{n+1}a_{n-1}$, donc $b_{4p+2}=\frac{2a_{4p}}{4p+2}=\frac{(-1)^p}{(2p+1)!}$,
+les autres $b_n$ étant nuls ($b_0=S(0)=0$, $b_{4p}=\frac2{4p}a_{4p-2}=0$, et les indices impairs). Ainsi $S(x)=\sum_{p\geq0}\frac{(-1)^p(x^2)^{2p+1}}{(2p+1)!}=\sin(x^2)$.
+(On vérifie directement : $(\cos x^2)'=-2x\sin x^2$ et $(\sin x^2)'=2x\cos x^2$.)
 
-\Q{2.(d)} Supposons $e=\frac pq$. En multipliant par $q!>0$ : $q!\,u_q<p\,(q-1)!<q!\,u_q+\frac1q$. Or $N=q!\,u_q=\sum_{k=0}^q\frac{q!}{k!}$ est un entier, de
-même que $p\,(q-1)!$. On aurait un entier strictement compris entre $N$ et $N+\frac1q\leq N+1$ : c'est impossible. Donc \textbf{$e$ est irrationnel}.
+\Q{2.(a)} $\sum(-1)^nx^{4n}=\sum(-x^4)^n$ est géométrique : elle converge si et seulement si $x^4<1$, donc le \textbf{rayon est $1$}, et pour
+$x\in\,]-1,1[$, $D(x)=\dfrac1{1+x^4}$.
 
-\Q{2.(e)(i)} C'est la définition de $u_n\to e$, appliquée avec $\frac\varepsilon2>0$.
+\Q{2.(b)} $\left[0,\frac1{\sqrt2}\right]\subset\,]-1,1[$ : on peut intégrer terme à terme la série entière sur ce segment :
+\[\int_0^{1/\sqrt2}\frac{dx}{1+x^4}=\sum_{n=0}^{+\infty}(-1)^n\int_0^{1/\sqrt2}x^{4n}\,dx=\sum_{n=0}^{+\infty}\frac{(-1)^n}{4n+1}\left(\frac1{\sqrt2}\right)^{4n+1}.\]
 
-\Q{2.(e)(ii)} Pour $n\geq n_0$ :
-\[|w_n-e|=\left|\frac1n\sum_{k=1}^n(u_k-e)\right|\leq\frac1n\sum_{k=1}^{n_0-1}|u_k-e|+\frac1n\sum_{k=n_0}^n|u_k-e|\leq\frac Cn+\frac{n-n_0+1}n\cdot\frac\varepsilon2,\]
-où $C=\sum_{k=1}^{n_0-1}|u_k-e|$ ne dépend pas de $n$. Comme $\frac Cn\to0$, il existe $n_1\geq n_0$ tel que $\frac Cn\leq\frac\varepsilon2$ pour $n\geq n_1$ ; alors
-$|w_n-e|\leq\frac\varepsilon2+\frac\varepsilon2=\varepsilon$.
-
-\Q{2.(e)(iii)} Ainsi $w_n\to e$ (lemme de Cesàro).
-
-\Q{3.} $e_n=\exp\left(-n\ln\left(1-\frac1n\right)\right)$ et $-n\ln\left(1-\frac1n\right)=n\left(\frac1n+\frac1{2n^2}+o\left(\frac1{n^2}\right)\right)=1+\frac1{2n}+o\left(\frac1n\right)\to1$.
-Par continuité de $\exp$, \textbf{$e_n\to e$}.
+\Q{2.(c)} Comme $\left(\frac1{\sqrt2}\right)^{4n+1}=\frac1{\sqrt2}\cdot\frac1{4^n}$, la question précédente donne
+\[\frac1{\sqrt2}\sum_{n=0}^{+\infty}\frac{(-1)^n}{4^n(4n+1)}=\int_0^{1/\sqrt2}\frac{dx}{1+x^4}\ (\approx0{,}676).\]
 
 \Partie{Exercice 4 — Développement en série entière de la tangente}
 

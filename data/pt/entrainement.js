@@ -19,8 +19,8 @@ LC.entrainement = [
     titre: "Préparation au DS du 30 novembre – DS blanc d'après la Banque PT",
     seance: "Samedi 28 novembre 2026", objectif: "Se préparer au DS du lundi 30 novembre (réduction, séries numériques, équations différentielles, un peu de séries entières) sur des questions de concours, dans la forme du DS 3 de l'an dernier.",
     chapitres: ["red", "series", "se", "ed"], duree: 240, niveau: 4,
-    origine: "Exercice 2 du DS 3 de l'année dernière ; DS blanc composé d'extraits reformulés de la Banque PT (2026 A et C, 2014 C, 2022 C), corrigé Le Collé (non officiel)",
-    description: "En séance : l'exercice 2 du DS 3 de l'année dernière, sur la constante d'Apéry $\\zeta(3)$. Puis un DS blanc de 4 h, construit comme le DS 3 à partir de vrais sujets de la Banque PT et limité au programme du DS (sans intégrales généralisées). Exercice 1 : réduction de matrices $2\\times2$, trigonalisation et carte de diagonalisabilité de $M(a,b)$ (2026, Maths A). Exercice 2 : la série $\\sum\\ln\\big(1+\\frac{(-1)^n}n\\big)$, convergence, convergence absolue et somme (2026, Maths C). Exercice 3 : reste de la série exponentielle par une équation différentielle, suites adjacentes, irrationalité de $e$, Cesàro (2014, Maths C). Exercice 4 : développement en série entière de la tangente par le produit de Cauchy et $f'=1+f^2$ (2022, Maths C). Chercher en temps limité, sans le cours, puis lire le corrigé.",
+    origine: "Exercice 2 du DS 3 de l'année dernière ; DS blanc composé d'extraits reformulés de la Banque PT (2024 B, 2026 C, 2025 C, 2022 C), corrigé Le Collé (non officiel)",
+    description: "En séance : l'exercice 2 du DS 3 de l'année dernière, sur la constante d'Apéry $\\zeta(3)$. Puis un DS blanc de 4 h, construit comme le DS 3 à partir de vrais sujets de la Banque PT et limité au programme du DS (sans intégrales généralisées). Exercice 1 : l'équation $M^2-2M=A$ dans $\\mathcal M_3(\\mathbb R)$, par diagonalisation et commutation (2024, Maths B). Exercice 2 : la série $\\sum\\ln\\big(1+\\frac{(-1)^n}n\\big)$ (2026, Maths C), puis le reste d'une série de Riemann par comparaison série-intégrale. Exercice 3 : le système $C'=-2xS$, $S'=2xC$ résolu par les séries entières, qui donne $\\cos(x^2)$ et $\\sin(x^2)$ (2025, Maths C). Exercice 4 : développement en série entière de la tangente par le produit de Cauchy et $f'=1+f^2$ (2022, Maths C). Chercher en temps limité, sans le cours, puis lire le corrigé.",
     liens: [
       { label: "DS 3 — exercice 2", doc: "ds3-2025-sujet", page: 2 },
       { label: "Corrigé de l'exercice 2", doc: "ds3-2025-corrige", page: 5 },
@@ -28,9 +28,9 @@ LC.entrainement = [
       { label: "Corrigé du DS blanc", doc: "dsb-corrige", page: 1 }
     ],
     ressources: [
-      { label: "Sujet officiel : Banque PT 2026, Maths A", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-a_pt_2026", detail: "partie A" },
+      { label: "Sujet officiel : Banque PT 2024, Maths B", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-b_pt_2024", detail: "exercice 3, partie A" },
       { label: "Sujet officiel : Banque PT 2026, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2026", detail: "préambule et partie I" },
-      { label: "Sujet officiel : Banque PT 2014, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2014", detail: "partie I" },
+      { label: "Sujet officiel : Banque PT 2025, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2025", detail: "partie II" },
       { label: "Sujet officiel : Banque PT 2022, Maths C", url: "https://wikiprepa.fr/concours/ecrit/banque-pt_maths-c_pt_2022", detail: "partie II" },
       { label: "Exercices supplémentaires sur les séries (sujet Le Collé)", doc: "ent-ser-sujet", page: 1, detail: "2 h, corrigé dans le document suivant" },
       { label: "Corrigé des exercices supplémentaires", doc: "ent-ser-corrige", page: 1 },
