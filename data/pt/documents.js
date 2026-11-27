@@ -570,9 +570,9 @@ LC.documents = {
     "fichier": "docs/pt/examens/ds-blanc-sujet.pdf",
     "source": "docs/pt/sources/ds-blanc-banque-pt-sujet.tex",
     "pages": 4,
-    "version": "v4",
+    "version": "v5",
     "maj": "2026-11-26",
-    "description": "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : l'équation matricielle M²−2M=A par diagonalisation et commutation, puis le système X'=AX (2024, Maths B, exercice 3, complété) ; série alternée de logarithmes (2026, Maths C, partie I), reste de Riemann, série de Bertrand et nature de séries classiques, dont le piège des équivalents pour une série alternée ; exercice classique de sommes de séries entières (Le Collé) : décomposition du coefficient, éléments simples, cas x>0 et x<0, développement d'une fraction rationnelle ; système différentiel C'=−2xS, S'=2xC résolu par les séries entières puis directement, via C²+S²=1 et Z=C+iS (2025, Maths C, partie II, complété) ; développement en série entière de la tangente (2022, Maths C, partie II)."
+    "description": "Sujet composé d'extraits reformulés de la Banque PT, sur le modèle du DS 3 de l'an dernier : l'équation matricielle M²−2M=A par diagonalisation et commutation, puis le système X'=AX (2024, Maths B, exercice 3, complété) ; série alternée de logarithmes (2026, Maths C, partie I), reste de Riemann, série de Bertrand et nature de séries classiques, dont le piège des équivalents pour une série alternée ; exercice classique sur la constante d'Euler (Le Collé) : H_n = ln n + γ + o(1) par télescopage, séries Σ1/H_n et Σ(−1)ⁿ/H_n, somme de la série harmonique alternée (ln 2) ; système différentiel C'=−2xS, S'=2xC résolu par les séries entières puis directement, via C²+S²=1 et Z=C+iS (2025, Maths C, partie II, complété) ; développement en série entière de la tangente (2022, Maths C, partie II)."
   },
   "dsb-corrige": {
     "titre": "DS blanc — d'après la Banque PT : corrigé Le Collé",
@@ -581,9 +581,9 @@ LC.documents = {
     "fichier": "docs/pt/examens/ds-blanc-corrige.pdf",
     "source": "docs/pt/sources/ds-blanc-banque-pt-corrige.tex",
     "pages": 7,
-    "version": "v4",
+    "version": "v5",
     "maj": "2026-11-26",
-    "description": "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 4, exercice 4 page 5, exercice 5 page 7. Résultats vérifiés par calcul formel."
+    "description": "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 4, exercice 4 page 5, exercice 5 page 6. Résultats vérifiés par calcul formel."
   },
   "archive": {
     "titre": "Livre de la séance 1 (première version)",

@@ -410,29 +410,32 @@ $\displaystyle\sum_{k=2}^N\frac1{k\ln k}$ quand $N\to+\infty$.
 \end{enumerate}
 \end{enumerate}
 
-\Partie{Exercice 3 — Sommes de séries entières}
-\Source{Exercice classique, ajouté par Le Collé : les quatre questions sont indépendantes.}
+\Partie{Exercice 3 — La constante d'Euler et la série harmonique alternée}
+\Source{Exercice classique, ajouté par Le Collé.}
 
+Pour tout entier $n\geq1$, on pose $H_n=\displaystyle\sum_{k=1}^n\frac1k$ et $u_n=H_n-\ln n$.
 \begin{enumerate}
-\item Pour $n\in\N$, on pose $a_n=\dfrac{n^2+n+1}{n!}$.
+\item Pour $n\geq2$, on pose $w_n=u_n-u_{n-1}$.
 \begin{enumerate}[label=(\alph*)]
-\item Déterminer le rayon de convergence de la série entière $\sum a_nx^n$.
-\item Déterminer deux réels $b$ et $c$ tels que, pour tout $n\in\N$, $n^2+n+1=n(n-1)+bn+c$.
-\item En déduire, pour tout réel $x$, la valeur de $\displaystyle\sum_{n=0}^{+\infty}a_nx^n$, puis celle de $\displaystyle\sum_{n=0}^{+\infty}\frac{n^2+n+1}{n!}$.
+\item Montrer que $w_n=\dfrac1n+\ln\left(1-\dfrac1n\right)$, puis déterminer un équivalent simple de $w_n$ quand $n\to+\infty$.
+\item En déduire que la suite $(u_n)_{n\geq1}$ converge. On note $\gamma$ sa limite (constante d'Euler).
 \end{enumerate}
-\item On considère la série entière $\displaystyle\sum_{n\geq1}\frac{x^n}{n(n+1)}$, de somme $S$.
+\item
 \begin{enumerate}[label=(\alph*)]
-\item Déterminer son rayon de convergence $R$.
-\item Décomposer $\dfrac1{n(n+1)}$ en éléments simples, puis calculer $S(x)$ pour $x\in\,]-R,R[$, $x\neq0$.
-\item Vérifier la cohérence du résultat en étudiant la limite de $S(x)$ quand $x\to0$.
+\item Montrer que la suite $(u_n)$ est décroissante.
+\item Montrer que, pour tout $n\geq1$, $H_n\geq\ln(n+1)$. En déduire que $0\leq\gamma\leq1$.
 \end{enumerate}
-\item On considère la série entière $\displaystyle\sum_{n\geq0}\frac{x^n}{2n+1}$, de somme $g$.
+\item
 \begin{enumerate}[label=(\alph*)]
-\item Déterminer son rayon de convergence.
-\item Pour $t\in\,]-1,1[$, calculer $\displaystyle\sum_{n=0}^{+\infty}\frac{t^{2n+1}}{2n+1}$ et $\displaystyle\sum_{n=0}^{+\infty}(-1)^n\frac{t^{2n+1}}{2n+1}$ (on pourra dériver).
-\item En déduire une expression de $g(x)$ pour $x\in\,]0,1[$ (on posera $x=t^2$), puis pour $x\in\,]-1,0[$ (on posera $x=-t^2$).
+\item Justifier que $H_n=\ln n+\gamma+o(1)$, et en déduire un équivalent de $H_n$.
+\item Déterminer la nature des séries $\displaystyle\sum_{n\geq1}\frac1{H_n}$ et $\displaystyle\sum_{n\geq1}\frac{(-1)^n}{H_n}$. La seconde est-elle absolument convergente ?
 \end{enumerate}
-\item Développer en série entière la fonction $f:x\mapsto\dfrac1{(1-x)(2-x)}$ au voisinage de $0$, en précisant le rayon de convergence.
+\item On pose, pour $N\geq1$, $T_N=\displaystyle\sum_{k=1}^N\frac{(-1)^{k+1}}k$.
+\begin{enumerate}[label=(\alph*)]
+\item Montrer que, pour tout $n\geq1$, $T_{2n}=H_{2n}-H_n$.
+\item En déduire que la série $\sum_{k\geq1}\frac{(-1)^{k+1}}k$ converge et que sa somme vaut $\ln2$.
+\end{enumerate}
+\item Montrer que la série $\displaystyle\sum_{n\geq1}\frac1{n(2n-1)}$ converge et calculer sa somme.
 \end{enumerate}
 
 \Partie{Exercice 4 — Un système différentiel résolu par les séries entières}
