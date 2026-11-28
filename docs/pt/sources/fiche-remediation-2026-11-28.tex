@@ -1,0 +1,550 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb,mathrsfs,stmaryrd}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=1.4cm,right=1.4cm,headheight=12pt,headsep=0.4cm,footskip=0.7cm]{geometry}
+\usepackage{xcolor}
+\definecolor{Ink}{HTML}{1C2533}\definecolor{Bleu}{HTML}{1F3A5F}\definecolor{BleuMoyen}{HTML}{4A6A8F}
+\definecolor{BleuClair}{HTML}{9DB2C9}\definecolor{Fond}{HTML}{F2F4F7}\definecolor{Ocre}{HTML}{B07A26}
+\definecolor{Brique}{HTML}{A23B2A}\definecolor{Gris}{HTML}{5E6672}\definecolor{Filet}{HTML}{C5CCD6}
+\usepackage{multicol,enumitem,booktabs,array,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.17,trig format plots=rad}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=Bleu,bookmarksopen=true,bookmarksopenlevel=0]{hyperref}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.25em}
+\setlength{\columnsep}{0.55cm}\setlength{\columnseprule}{0.3pt}\renewcommand{\columnseprulecolor}{\color{Filet}}
+\setlist{itemsep=0.05em,topsep=0.15em,parsep=0pt,leftmargin=1.1em}
+\setlist[itemize]{label=\textcolor{BleuMoyen}{\scriptsize\textbullet}}
+\setlist[enumerate]{label=\textsf{\scriptsize\color{Bleu}\arabic*.},leftmargin=1.3em}
+\linespread{1.02}
+
+\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mn}[1]{\mathcal{M}_{n}(#1)}\newcommand{\rg}{\operatorname{rg}}\newcommand{\vect}{\operatorname{Vect}}
+\newcommand{\Mat}{\operatorname{Mat}}\newcommand{\Id}{\operatorname{Id}}\newcommand{\com}{\operatorname{com}}
+\newcommand{\vv}[1]{\overrightarrow{#1}}\newcommand{\ve}[1]{\vec{#1}}
+\newcommand{\dt}[1]{\left|\begin{matrix}#1\end{matrix}\right|}
+\newcommand{\HP}{{\sffamily\bfseries\scriptsize\textcolor{Brique}{[HP]}}}
+\newcommand{\livre}[1]{{\sffamily\scriptsize\color{Gris}[#1]}}
+
+% ---------- titres ----------
+\newcommand{\chapitre}[2]{\clearpage\phantomsection\pdfbookmark[0]{#1 --- #2}{chap#1}\markboth{#1 --- #2}{}%
+  \noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\color{white}\sffamily\bfseries\Large\strut #1\quad
+  {\normalsize\mdseries #2}}}\par\vspace{0.4em}}
+\newcommand{\notion}[1]{\par\needspace{9\baselineskip}\vspace{0.5em}\phantomsection\pdfbookmark[1]{#1}{\detokenize{#1}}\noindent{\sffamily\bfseries\color{Bleu}\large #1}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{0.1em}}
+\newcommand{\sous}[1]{\par\needspace{6\baselineskip}\vspace{0.25em}\noindent{\sffamily\bfseries\small\color{BleuMoyen}#1}\par\nobreak}
+
+% ---------- encadrés ----------
+\tcbset{base/.style={enhanced,arc=0pt,boxrule=0pt,left=4pt,right=3pt,top=2pt,bottom=2pt,before skip=0.35em,after skip=0.35em,
+  fontupper=\small}}
+\newtcolorbox{DEF}[1][]{base,colback=white,borderline west={1.4pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}DÉFINITION\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newtcolorbox{PROP}[1][]{base,colback=Fond,borderline west={2pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\color{Bleu}\ifx\relax#1\relax PROPRIÉTÉ\else #1\fi}\par}}
+\newtcolorbox{FORM}[1][]{base,colback=white,colframe=BleuMoyen,boxrule=0.5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}\ifx\relax#1\relax FORMULES\else #1\fi}\par}}
+\newtcolorbox{METH}[1]{base,colback=white,borderline north={0.8pt}{0pt}{Bleu},borderline south={0.8pt}{0pt}{Bleu},
+  before upper={{\sffamily\bfseries\scriptsize\colorbox{Bleu}{\color{white}MÉTHODE}\ \color{Bleu}#1}\par\smallskip}}
+\newtcolorbox{PIEGE}{base,colback=Brique!5,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}PIÈGES}\par}}
+\newtcolorbox{ASTU}{base,colback=Ocre!7,borderline west={1.4pt}{0pt}{Ocre},
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}ASTUCES}\par}}
+\newtcolorbox{REFL}{base,colback=Bleu!4,borderline west={2pt}{0pt}{BleuMoyen},
+  before upper={{\sffamily\bfseries\scriptsize\color{BleuMoyen}RÉFLEXES AVANT DE RENDRE}\par}}
+\tikzset{q/.style={draw=Bleu,fill=Fond,rounded corners=2pt,font=\scriptsize\sffamily,align=center,inner sep=3pt},
+  oui/.style={draw=Bleu,fill=Bleu,text=white,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  non/.style={draw=Brique,fill=Brique!8,text=Brique,rounded corners=2pt,font=\scriptsize\sffamily\bfseries,align=center,inner sep=3pt},
+  fl/.style={-{Stealth[length=4pt]},Gris,thin},lab/.style={font=\tiny\sffamily,text=Gris}}
+\newtcolorbox{HPBOX}{base,colback=white,borderline west={1.4pt}{0pt}{Brique},
+  before upper={{\sffamily\bfseries\scriptsize\color{Brique}HORS PROGRAMME}\par}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\scriptsize\sffamily\color{Gris}\leftmark}
+\fancyhead[R]{\scriptsize\sffamily\scshape\color{Gris}Le Collé PT --- fiche de remédiation}
+\fancyfoot[C]{\scriptsize\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\pgfplotsset{mini/.style={axis lines=middle,axis line style={Filet},xtick=\empty,ytick=\empty,width=3.2cm,height=3.2cm,
+  xmin=-1.15,xmax=1.15,ymin=-1.15,ymax=1.15,title style={font=\scriptsize\sffamily,yshift=-0.15cm},samples=80}}
+
+
+\newcommand{\Ker}{\operatorname{Ker}}\renewcommand{\Im}{\operatorname{Im}}\newcommand{\tr}{\operatorname{tr}}\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\GLn}[1]{\mathrm{GL}_n(#1)}
+\hypersetup{pdftitle={Le Collé — fiche de remédiation : séries, équivalents, croissances comparées}}
+\newcommand{\N}{\mathbb{N}}
+\newtcolorbox{EXO}[1][]{base,colback=white,colframe=Ocre,boxrule=0.5pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}À TOI\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newtcolorbox{REDAC}[1][]{base,colback=Fond,borderline west={2pt}{0pt}{Ocre},
+  before upper={{\sffamily\bfseries\scriptsize\color{Ocre}RÉDACTION MODÈLE\ifx\relax#1\relax\else\ --- #1\fi}\par}}
+\newcounter{nnot}
+\renewcommand{\notion}[1]{\par\needspace{9\baselineskip}\vspace{0.5em}\stepcounter{nnot}\phantomsection\pdfbookmark[1]{#1}{notion\thennot}\noindent{\sffamily\bfseries\color{Bleu}\large #1}\par\nobreak
+  \noindent{\color{Ocre}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{0.1em}}
+\begin{document}
+\thispagestyle{empty}
+\noindent\colorbox{Bleu}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{0.4em}
+{\color{white}\sffamily\scriptsize\textls[200]{LE COLLÉ\ \ ·\ \ MATHÉMATIQUES PT\ \ ·\ \ AVANT LE DS DU 30 NOVEMBRE}}\par\smallskip
+{\color{white}\sffamily\bfseries\LARGE Fiche de remédiation}\par\smallskip
+{\color{white!85!Bleu}\sffamily croissances comparées, $o$ et équivalents, nature d'une série, séries alternées, $(1+\frac1n)^n$, calculs de sommes, rayon et DSE}\vspace{0.4em}}}
+
+\vspace{0.6em}
+{\small Cette fiche reprend, un par un, les points qui ont bloqué pendant la séance du 28 novembre. Chaque partie suit le même plan :
+ce qu'il faut savoir, la méthode, une rédaction modèle, puis des exercices courts \textbf{à faire sans regarder les réponses} (réponses
+en dernière page). Les parties sont classées par priorité : commencer par la 1 et la 2.}
+
+\vspace{0.4em}
+{\small\sffamily\noindent\begin{tabular}{@{}p{0.62\linewidth}@{}}
+1. Croissances comparées \dotfill\pageref{p1}\\
+2. Petits $o$ et équivalents \dotfill\pageref{p2}\\
+3. Application : la question 3.(a) du DS 3 \dotfill\pageref{p3}\\
+4. Savoir si une série converge : la méthode \dotfill\pageref{p4}\\
+5. Séries alternées et critère spécial \dotfill\pageref{p5}\\
+6. La limite de $\left(1+\frac1n\right)^n$ \dotfill\pageref{p6}\\
+7. Calculs : changement d'indice, sommes géométriques, télescopage \dotfill\pageref{p7}\\
+8. Rayon de convergence et fonctions DSE \dotfill\pageref{p8}\\
+Réponses des exercices \dotfill\pageref{rep}\\
+\end{tabular}}
+
+% ======================================================================
+\notion{1. Croissances comparées}\label{p1}
+
+\begin{FORM}[LES QUATRE RÈGLES À SAVOIR PAR C\OE UR]
+Pour $\alpha>0$, $\beta>0$ et $a>1$ :
+\[\lim_{n\to+\infty}\frac{(\ln n)^\alpha}{n^\beta}=0,\qquad\lim_{n\to+\infty}\frac{n^\alpha}{a^n}=0,\qquad\lim_{n\to+\infty}\frac{a^n}{n!}=0,\qquad\lim_{n\to+\infty}\frac{n!}{n^n}=0.\]
+Version fonctions : $\displaystyle\lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta}=0$,\quad $\displaystyle\lim_{x\to+\infty}x^\alpha e^{-\beta x}=0$,\quad
+$\displaystyle\lim_{x\to0^+}x^\beta|\ln x|^\alpha=0$.
+\end{FORM}
+
+\textbf{Le classement à visualiser} (chacun est négligeable devant le suivant) :
+\[(\ln n)^\alpha\ \ll\ n^\beta\ \ll\ a^n\ (a>1)\ \ll\ n!\ \ll\ n^n.\]
+En une phrase : \emph{l'exponentielle l'emporte sur la puissance, la puissance l'emporte sur le logarithme}, quels que soient les
+exposants. Par exemple $n^{100}e^{-n}\to0$ et $\frac{(\ln n)^{50}}{\sqrt n}\to0$, même si les premiers termes sont énormes.
+
+\begin{METH}{Calculer une limite « $\infty\times0$ » ou « $\frac\infty\infty$ »}
+\begin{enumerate}
+\item Repérer le terme \textbf{le plus fort} de chaque type (log, puissance, exponentielle, factorielle).
+\item Écrire le quotient « faible / fort » et reconnaître une des quatre limites ci-dessus.
+\item Si l'exposant est une racine ou un multiple, \textbf{poser une variable} : pour $\frac{\ln n}{\sqrt n}$, rien à faire ($\beta=\frac12$) ;
+pour $n^3e^{-\sqrt n}$, poser $t=\sqrt n\to+\infty$ : $n^3e^{-\sqrt n}=t^6e^{-t}\to0$.
+\item Si un exposant dépend de $n$, \textbf{passer à l'exponentielle} : $n^{\ln n}=e^{(\ln n)^2}$, puis comparer les exposants.
+\end{enumerate}
+\end{METH}
+
+\begin{METH}{Le réflexe pour les séries et les intégrales : « multiplier par $n^\alpha$ »}
+Pour montrer que $\sum u_n$ converge (avec $u_n\geq0$), il suffit de trouver $\alpha>1$ tel que $n^\alpha u_n\to0$ : alors
+$u_n=o\left(\frac1{n^\alpha}\right)$ et la série converge par comparaison à une série de Riemann. \textbf{On prend en général $\alpha=2$.}
+
+Exemple : $u_n=n^5e^{-n}$. On calcule $n^2u_n=n^7e^{-n}\to0$ (croissances comparées), donc $u_n=o\left(\frac1{n^2}\right)$ : $\sum u_n$
+converge. Même chose pour les intégrales en $+\infty$ avec $x^2f(x)\to0$.
+\end{METH}
+
+\begin{PIEGE}
+\begin{itemize}
+\item « $n^{100}$ est plus grand que $e^n$ » : vrai pour les premiers $n$, faux à la limite. On parle toujours de la limite.
+\item $\frac{\ln n}{n}\to0$ mais $\sum\frac{\ln n}n$ \textbf{diverge} (car $\frac{\ln n}n\geq\frac1n$ pour $n\geq3$). Un terme qui tend vers $0$ ne
+suffit pas.
+\item En $0$, c'est le contraire : $x\ln x\to0$ (la puissance l'emporte), mais $\frac{\ln x}x\to-\infty$ (pas de forme indéterminée).
+\end{itemize}
+\end{PIEGE}
+
+\begin{EXO}[1.\ Limites]
+Déterminer la limite :\quad
+(a) $n^5e^{-n}$\quad (b) $\dfrac{(\ln n)^3}{\sqrt n}$\quad (c) $\dfrac{2^n}{n^{10}}$\quad (d) $\dfrac{n!}{3^n}$\quad (e) $\dfrac{n^n}{n!}$\quad
+(f) $x^3e^{-x}$ en $+\infty$\quad (g) $x\ln x$ en $0^+$\quad (h) $\sqrt x(\ln x)^2$ en $0^+$\quad (i) $\dfrac{e^{\sqrt n}}{n^{10}}$\quad
+(j) $\dfrac{n^{\ln n}}{2^n}$.
+\end{EXO}
+
+% ======================================================================
+\notion{2. Petits \texorpdfstring{$o$}{o} et équivalents}\label{p2}
+
+\begin{DEF}[LES TROIS NOTATIONS]
+Pour $v_n\neq0$ à partir d'un certain rang :
+\begin{itemize}
+\item $u_n=o(v_n)$ (« $u_n$ est négligeable devant $v_n$ ») si $\dfrac{u_n}{v_n}\to0$ ;
+\item $u_n\sim v_n$ (« $u_n$ est équivalent à $v_n$ ») si $\dfrac{u_n}{v_n}\to1$, c'est-à-dire $u_n=v_n+o(v_n)$ ;
+\item $u_n=O(v_n)$ si $\dfrac{u_n}{v_n}$ est bornée.
+\end{itemize}
+\textbf{Pour démontrer un $o$ ou un $\sim$, on calcule toujours la limite du quotient.}
+\end{DEF}
+
+\begin{PROP}[CE QUI EST AUTORISÉ]
+\begin{itemize}
+\item \textbf{Produit, quotient} : si $u_n\sim a_n$ et $v_n\sim b_n$, alors $u_nv_n\sim a_nb_n$ et $\frac{u_n}{v_n}\sim\frac{a_n}{b_n}$.
+\item \textbf{Puissance fixe} : $u_n\sim a_n\Rightarrow u_n^\alpha\sim a_n^\alpha$ ($\alpha$ ne dépend pas de $n$).
+\item \textbf{Remplacer dans une limite} : si $u_n\sim v_n$, alors $u_n$ et $v_n$ ont la même limite et le même signe à partir d'un certain rang.
+\item \textbf{Le terme dominant} : un polynôme ou une somme est équivalent à son terme le plus fort, $3n^2-5n+\ln n\sim3n^2$.
+\item \textbf{Mélanger $o$ et $\sim$} : si $u_n\sim v_n$ et $v_n=o(w_n)$, alors $u_n=o(w_n)$.
+\end{itemize}
+\end{PROP}
+
+\begin{PIEGE}
+\begin{itemize}
+\item \textbf{Pas de somme d'équivalents} : $n^2+n\sim n^2$ et $-n^2\sim-n^2$, mais $(n^2+n)-n^2=n\not\sim0$. On ne soustrait
+jamais deux équivalents : on fait un \textbf{développement limité} et on garde le premier terme non nul.
+\item \textbf{Pas de composition par $\exp$} : $n+1\sim n$ mais $e^{n+1}=e\cdot e^n\not\sim e^n$.
+\item \textbf{Jamais « $\sim0$ »} : écrire $u_n\sim0$ n'a pas de sens.
+\end{itemize}
+\end{PIEGE}
+
+\begin{FORM}[ÉQUIVALENTS USUELS EN $0$ (avec $\varepsilon_n\to0$)]
+$\sin\varepsilon_n\sim\varepsilon_n$,\quad $\tan\varepsilon_n\sim\varepsilon_n$,\quad $\ln(1+\varepsilon_n)\sim\varepsilon_n$,\quad $e^{\varepsilon_n}-1\sim\varepsilon_n$,\quad
+$1-\cos\varepsilon_n\sim\frac{\varepsilon_n^2}2$,\quad $(1+\varepsilon_n)^\alpha-1\sim\alpha\varepsilon_n$,\quad $\arctan\varepsilon_n\sim\varepsilon_n$.
+
+\textbf{Attention} : il faut $\varepsilon_n\to0$. Avec $\varepsilon_n=\frac1n$ : $\sin\frac1n\sim\frac1n$. Mais $\sin n\not\sim n$.
+\end{FORM}
+
+\begin{METH}{Trouver un équivalent d'une différence}
+Pour $\sin\frac1n-\frac1n$ : les équivalents donnent « $\frac1n-\frac1n=0$ », c'est interdit. On écrit le DL :
+$\sin\frac1n=\frac1n-\frac1{6n^3}+o\left(\frac1{n^3}\right)$, donc $\sin\frac1n-\frac1n=-\frac1{6n^3}+o\left(\frac1{n^3}\right)\sim-\frac1{6n^3}$.
+
+Pour $\sqrt{n+1}-\sqrt n$ : on multiplie par la quantité conjuguée, $\sqrt{n+1}-\sqrt n=\frac1{\sqrt{n+1}+\sqrt n}\sim\frac1{2\sqrt n}$.
+\end{METH}
+
+\begin{PROP}[POURQUOI ÇA SERT POUR LES SÉRIES (et les intégrales)]
+Si $u_n\geq0$ et $v_n\geq0$ :
+\begin{itemize}
+\item $u_n\sim v_n$ $\Rightarrow$ $\sum u_n$ et $\sum v_n$ ont \textbf{la même nature} ;
+\item $u_n=o(v_n)$ ou $u_n=O(v_n)$, et $\sum v_n$ converge $\Rightarrow$ $\sum u_n$ converge.
+\end{itemize}
+Les deux résultats exigent des termes \textbf{positifs} (au moins à partir d'un certain rang). Même chose pour les intégrales de fonctions positives.
+\end{PROP}
+
+\begin{EXO}[2.\ Équivalents]
+Donner un équivalent simple :\quad
+(a) $\dfrac{n^2+3n}{2n^4-1}$\quad (b) $\sin\dfrac1n-\dfrac1n$\quad (c) $\sqrt{n+1}-\sqrt n$\quad (d) $\ln(n+1)-\ln n$\quad (e) $e^{1/n}-1$\quad
+(f) $1-\cos\dfrac1{\sqrt n}$\quad (g) $e^x-1$ en $+\infty$\quad (h) $\dfrac{x^2}{e^x-1}$ en $0$.
+\end{EXO}
+
+% ======================================================================
+\notion{3. Application : la question 3.(a) de l'exercice 2 du DS 3}\label{p3}
+
+On veut montrer que $I=\displaystyle\int_0^{+\infty}\frac{x^2}{e^x-1}\,dx$ converge. Il y a \textbf{deux problèmes}, en $0$ (le dénominateur
+s'annule) et en $+\infty$ (borne infinie) : on les traite \textbf{séparément}.
+
+\begin{METH}{Convergence d'une intégrale généralisée d'une fonction positive}
+\begin{enumerate}
+\item Vérifier que $f$ est \textbf{continue} sur l'intervalle ouvert, et \textbf{positive}.
+\item En chaque borne problématique, trouver un \textbf{équivalent simple} de $f$.
+\item En une borne finie : si $f$ a une limite finie, elle est prolongeable par continuité et il n'y a pas de problème.
+\item En $+\infty$ : comparer à $\frac1{x^\alpha}$ avec $\alpha>1$ ; le plus souvent, montrer que $x^2f(x)\to0$ (croissances comparées).
+\end{enumerate}
+\end{METH}
+
+\begin{REDAC}[DS 3, exercice 2, question 3.(a)]
+La fonction $f:x\mapsto\dfrac{x^2}{e^x-1}$ est continue et positive sur $]0,+\infty[$.
+
+\emph{En $0$.} $e^x-1\sim x$, donc $f(x)\sim\dfrac{x^2}x=x\to0$. La fonction $f$ se prolonge par continuité en $0$ : $\int_0^1f(x)\,dx$
+converge.
+
+\emph{En $+\infty$.} $e^x-1\sim e^x$ (car $1=o(e^x)$), donc $f(x)\sim x^2e^{-x}$. Par croissances comparées,
+$x^2\cdot x^2e^{-x}=x^4e^{-x}\to0$, donc $x^2e^{-x}=o\left(\dfrac1{x^2}\right)$, et par suite $f(x)=o\left(\dfrac1{x^2}\right)$.
+Comme $\int_1^{+\infty}\frac{dx}{x^2}$ converge (Riemann, $2>1$) et $f\geq0$, $\int_1^{+\infty}f(x)\,dx$ converge.
+
+\emph{Conclusion.} $I=\int_0^1f+\int_1^{+\infty}f$ converge.
+\end{REDAC}
+
+\begin{ASTU}
+\begin{itemize}
+\item Ce qui bloquait : l'équivalent $e^x-1\sim e^x$ en $+\infty$ (le $1$ est négligeable) et le passage de $x^2e^{-x}$ à « $o(\frac1{x^2})$ » :
+c'est exactement le réflexe « multiplier par $x^2$ » de la partie 1.
+\item Pourquoi $\frac1{x^2}$ ? N'importe quel $\frac1{x^\alpha}$ avec $\alpha>1$ marche. On choisit $\alpha=2$ parce que c'est le plus simple.
+\item Ne pas oublier de \textbf{couper en $1$} (ou en n'importe quel point de $]0,+\infty[$) quand il y a deux problèmes.
+\end{itemize}
+\end{ASTU}
+
+% ======================================================================
+\notion{4. Savoir si une série converge : la méthode}\label{p4}
+
+\begin{FORM}[LES SÉRIES DE RÉFÉRENCE]
+\begin{itemize}
+\item \textbf{Riemann} : $\sum\frac1{n^\alpha}$ converge $\iff\alpha>1$. ($\sum\frac1n$ diverge, $\sum\frac1{n^2}$ converge, $\sum\frac1{\sqrt n}$ diverge.)
+\item \textbf{Géométrique} : $\sum q^n$ converge $\iff|q|<1$, et alors $\sum_{n=0}^{+\infty}q^n=\frac1{1-q}$.
+\item \textbf{Exponentielle} : $\sum\frac{x^n}{n!}$ converge pour tout $x$, de somme $e^x$.
+\end{itemize}
+\end{FORM}
+
+\begin{METH}{L'ordre des questions à se poser}
+\begin{enumerate}
+\item \textbf{$u_n\to0$ ?} Si non : la série \textbf{diverge grossièrement}, c'est fini. (Si oui, on ne peut encore rien conclure.)
+\item \textbf{Le signe de $u_n$ est-il constant} (à partir d'un certain rang) ?
+\begin{itemize}
+\item \textbf{Oui} (cas le plus fréquent) : chercher un \textbf{équivalent} simple de $u_n$ et comparer à Riemann ou à une série géométrique.
+Si l'équivalent n'est pas une puissance de $n$ (exponentielle, logarithme) : \textbf{multiplier par $n^2$} et montrer que $n^2u_n\to0$.
+\item Termes avec des \textbf{factorielles} ou des \textbf{puissances $n$-ièmes} ($n!$, $3^n$, $n^n$) : \textbf{règle de d'Alembert}, on calcule
+$\frac{u_{n+1}}{u_n}\to\ell$ : convergence si $\ell<1$, divergence si $\ell>1$, \textbf{on ne peut pas conclure si $\ell=1$}.
+\item Terme de la forme $f(n)$ avec $f$ décroissante et une primitive connue (par exemple $\frac1{n\ln n}$) : \textbf{comparaison série-intégrale}.
+\end{itemize}
+\item \textbf{Non} (signe qui change) :
+\begin{itemize}
+\item tester d'abord la \textbf{convergence absolue} : si $\sum|u_n|$ converge, $\sum u_n$ converge ;
+\item sinon, si $u_n=(-1)^na_n$ : \textbf{critère spécial des séries alternées} (partie 5) ;
+\item sinon (ou si $a_n$ n'est pas décroissante) : \textbf{développement asymptotique} de $u_n$ jusqu'à un reste absolument convergent.
+\end{itemize}
+\end{enumerate}
+\end{METH}
+
+\begin{REDAC}[UNE NATURE PAR ÉQUIVALENT]
+$u_n=\ln\left(1+\dfrac1{n^2}\right)$. Comme $\frac1{n^2}\to0$, $u_n\sim\frac1{n^2}$. Les termes sont positifs et $\sum\frac1{n^2}$ converge (Riemann,
+$2>1$) : $\sum u_n$ converge.
+\end{REDAC}
+
+\begin{REDAC}[UNE NATURE PAR D'ALEMBERT]
+$u_n=\dfrac{n^2}{2^n}>0$. $\dfrac{u_{n+1}}{u_n}=\dfrac{(n+1)^2}{2^{n+1}}\cdot\dfrac{2^n}{n^2}=\dfrac12\left(1+\dfrac1n\right)^2\to\dfrac12<1$.
+Par la règle de d'Alembert, $\sum u_n$ converge.
+\end{REDAC}
+
+\begin{PIEGE}
+\begin{itemize}
+\item $u_n\to0$ ne prouve \textbf{jamais} la convergence ($\frac1n\to0$ et $\sum\frac1n$ diverge).
+\item Équivalents et $o$ : seulement pour des termes \textbf{de signe constant}.
+\item D'Alembert avec $\ell=1$ (par exemple pour $\frac1{n^2}$ et $\frac1n$) : on ne peut rien dire, il faut une autre méthode.
+\item Toujours \textbf{citer} la série de référence et son paramètre : « Riemann, $2>1$ ».
+\end{itemize}
+\end{PIEGE}
+
+\begin{EXO}[3.\ Natures]
+Nature de $\sum u_n$ :\quad
+(a) $ne^{-\sqrt n}$\quad (b) $\dfrac{(\ln n)^2}{n^{3/2}}$\quad (c) $\dfrac1{\sqrt n}\sin\dfrac1{\sqrt n}$\quad (d) $\dfrac{n!}{n^n}$\quad
+(e) $\left(1-\dfrac1n\right)^{n^2}$\quad (f) $\left(1+\dfrac1n\right)^n$\quad (g) $\dfrac{3^n}{n!}$\quad (h) $\dfrac{n+\ln n}{n^3+1}$.
+\end{EXO}
+
+% ======================================================================
+\notion{5. Séries alternées et critère spécial}\label{p5}
+
+\begin{PROP}[CRITÈRE SPÉCIAL DES SÉRIES ALTERNÉES (CSSA)]
+Soit $u_n=(-1)^na_n$. Si les \textbf{trois} hypothèses sont vérifiées :
+\begin{enumerate}
+\item $a_n\geq0$ (la série est alternée) ;
+\item $(a_n)$ est \textbf{décroissante} ;
+\item $a_n\to0$ ;
+\end{enumerate}
+alors $\sum u_n$ \textbf{converge}. De plus le reste $R_n=\sum_{k=n+1}^{+\infty}u_k$ est du signe de son premier terme $u_{n+1}$, et
+\[|R_n|\leq|u_{n+1}|=a_{n+1}.\]
+\end{PROP}
+
+\textbf{Pourquoi ça marche} : les sommes partielles d'indices pairs et impairs, $(S_{2n})$ et $(S_{2n+1})$, sont \textbf{adjacentes}. La somme $S$
+est donc toujours coincée entre deux sommes partielles consécutives, d'où la majoration du reste.
+
+\begin{REDAC}[DS 3, EXERCICE 2, QUESTION 1.(a) : DEUX MÉTHODES]
+\emph{Méthode 1 (convergence absolue).} $\left|\frac{(-1)^{n-1}}{n^3}\right|=\frac1{n^3}$ et $\sum\frac1{n^3}$ converge (Riemann, $3>1$) : la série
+converge absolument, donc elle converge.
+
+\emph{Méthode 2 (CSSA).} $u_n=(-1)^{n-1}a_n$ avec $a_n=\frac1{n^3}\geq0$ ; $(a_n)$ est décroissante (car $n\mapsto n^3$ est croissante) et
+$a_n\to0$. Par le critère spécial des séries alternées, $\sum u_n$ converge.
+\end{REDAC}
+
+\begin{METH}{Montrer que $(a_n)$ est décroissante}
+\begin{itemize}
+\item Si $a_n=f(n)$ : étudier le signe de $f'$. Exemple : $a_n=\frac{\ln n}n$, $f(x)=\frac{\ln x}x$, $f'(x)=\frac{1-\ln x}{x^2}<0$ pour $x>e$ :
+$(a_n)$ décroît à partir de $n=3$ (suffisant : le critère vaut à partir d'un certain rang).
+\item Sinon, comparer $a_{n+1}$ et $a_n$ (différence ou quotient).
+\end{itemize}
+\end{METH}
+
+\begin{PIEGE}
+\begin{itemize}
+\item \textbf{Ne pas oublier la décroissance}, c'est l'hypothèse que tout le monde oublie et celle que le correcteur vérifie.
+\item \textbf{Pas d'équivalent pour une série alternée} : $\frac{(-1)^n}{\sqrt n+(-1)^n}\sim\frac{(-1)^n}{\sqrt n}$, et pourtant la première diverge alors
+que la seconde converge (DS blanc, exercice 2, question 10.(e)).
+\item Convergence par le CSSA $\neq$ convergence absolue : $\sum\frac{(-1)^n}n$ converge, mais $\sum\frac1n$ diverge.
+\end{itemize}
+\end{PIEGE}
+
+\begin{EXO}[4.\ Séries alternées]
+(a) Montrer que $\sum\frac{(-1)^n\ln n}n$ converge. Converge-t-elle absolument ?\quad
+(b) Montrer que $\sum\frac{(-1)^n}{\sqrt n}$ converge et majorer $\left|\sum_{k=n+1}^{+\infty}\frac{(-1)^k}{\sqrt k}\right|$.\quad
+(c) Combien de termes faut-il sommer pour avoir $\sum_{n\geq1}\frac{(-1)^{n-1}}{n^3}$ à $10^{-6}$ près ?
+\end{EXO}
+
+% ======================================================================
+\notion{6. La limite de \texorpdfstring{$(1+\frac1n)^n$}{(1+1/n)^n}}\label{p6}
+
+\begin{METH}{Une puissance dont l'exposant dépend de $n$ : toujours passer à l'exponentielle}
+$a_n^{b_n}=e^{b_n\ln a_n}$ (pour $a_n>0$). On étudie la limite de l'exposant $b_n\ln a_n$, puis on compose par $\exp$, qui est continue.
+\end{METH}
+
+\begin{REDAC}[$\left(1+\frac1n\right)^n\to e$]
+$\left(1+\dfrac1n\right)^n=\exp\left(n\ln\left(1+\dfrac1n\right)\right)$. Comme $\frac1n\to0$, $\ln\left(1+\frac1n\right)\sim\frac1n$, donc
+$n\ln\left(1+\frac1n\right)\sim n\cdot\frac1n=1$ : l'exposant tend vers $1$. Par continuité de $\exp$, $\left(1+\dfrac1n\right)^n\to e$.
+\end{REDAC}
+
+\begin{PIEGE}
+« $1+\frac1n\to1$ et $1^n=1$, donc la limite vaut $1$ » est \textbf{faux} : $1^\infty$ est une forme indéterminée. On passe toujours par
+$\exp(b_n\ln a_n)$.
+\end{PIEGE}
+
+\begin{FORM}[LES VARIANTES]
+\begin{itemize}
+\item $\left(1+\frac an\right)^n\to e^a$ ;\quad $\left(1-\frac1n\right)^n\to\frac1e$ ;\quad $\left(1+\frac1{n^2}\right)^n\to1$ (exposant $\sim\frac1n\to0$).
+\item $\left(1+\frac1n\right)^{n^2}=\exp\left(n^2\ln\left(1+\frac1n\right)\right)$ : ici l'équivalent ne suffit plus à donner un équivalent de la
+suite (on ne compose pas un équivalent par $\exp$). On fait un DL :
+$n^2\left(\frac1n-\frac1{2n^2}+O\left(\frac1{n^3}\right)\right)=n-\frac12+O\left(\frac1n\right)$, donc $\left(1+\frac1n\right)^{n^2}=e^ne^{-1/2}e^{O(1/n)}\sim\frac{e^n}{\sqrt e}\to+\infty$.
+\end{itemize}
+\end{FORM}
+
+\begin{EXO}[5.\ Limites de puissances]
+Limite de :\quad (a) $\left(1+\dfrac2n\right)^n$\quad (b) $\left(1-\dfrac3n\right)^{2n}$\quad (c) $\left(1+\dfrac1n\right)^{\sqrt n}$\quad
+(d) $n^{1/n}$\quad (e) un équivalent de $\left(1-\dfrac1n\right)^{n^2}$.
+\end{EXO}
+
+% ======================================================================
+\notion{7. Calculs : changement d'indice, sommes géométriques, télescopage}\label{p7}
+
+\begin{FORM}[SOMMES GÉOMÉTRIQUES (à connaître sans hésiter)]
+Pour $q\neq1$ :
+\[\sum_{k=0}^nq^k=\frac{1-q^{n+1}}{1-q},\qquad\sum_{k=p}^nq^k=q^p\,\frac{1-q^{n-p+1}}{1-q}=\frac{\text{premier terme}-\text{terme suivant le dernier}}{1-q}.\]
+Pour $|q|<1$ :\quad $\displaystyle\sum_{k=0}^{+\infty}q^k=\frac1{1-q}$,\quad $\displaystyle\sum_{k=p}^{+\infty}q^k=\frac{q^p}{1-q}=\frac{\text{premier terme}}{1-\text{raison}}$.
+\end{FORM}
+
+\begin{METH}{Changement d'indice}
+On remplace l'indice $k$ par $j=k+1$ (ou $j=k-1$, $j=2k$\dots) en faisant \textbf{trois} choses :
+\begin{enumerate}
+\item remplacer $k$ par son expression en $j$ \textbf{partout} dans le terme ;
+\item changer les \textbf{deux bornes} : si $k$ va de $1$ à $n$ et $j=k+1$, alors $j$ va de $2$ à $n+1$ ;
+\item vérifier sur le \textbf{premier terme} que les deux écritures donnent la même chose.
+\end{enumerate}
+Exemple : $\displaystyle\sum_{k=1}^nkx^{k-1}=\sum_{j=0}^{n-1}(j+1)x^j$ (avec $j=k-1$) ; premier terme : $1\cdot x^0$ des deux côtés.
+
+Pour les séries entières : $\displaystyle\sum_{n\geq1}na_nx^{n-1}=\sum_{n\geq0}(n+1)a_{n+1}x^n$ et $\displaystyle x\sum_{n\geq0}a_nx^n=\sum_{n\geq1}a_{n-1}x^n$.
+\end{METH}
+
+\begin{METH}{Télescopage}
+Si $u_k=v_{k+1}-v_k$, alors $\displaystyle\sum_{k=p}^nu_k=v_{n+1}-v_p$ (tout se simplifie sauf le dernier et le premier). Pour
+$\frac1{k(k+1)}=\frac1k-\frac1{k+1}$ : $\displaystyle\sum_{k=1}^n\frac1{k(k+1)}=1-\frac1{n+1}$.
+Conséquence à retenir : $\sum u_k$ converge si et seulement si la suite $(v_n)$ converge.
+\end{METH}
+
+\begin{ASTU}
+\begin{itemize}
+\item \textbf{Séparer les indices pairs et impairs} : $\sum_{k=1}^{2n}u_k=\sum_{j=1}^nu_{2j}+\sum_{j=0}^{n-1}u_{2j+1}$.
+\item Dans une somme, ce qui ne dépend pas de l'indice \textbf{sort} : $\sum_{k=0}^n\frac{2^k}{3^{k+1}}=\frac13\sum_{k=0}^n\left(\frac23\right)^k$.
+\item Pour aller plus vite : écrire les trois premiers termes et le dernier avant de calculer, on voit tout de suite la structure.
+\end{itemize}
+\end{ASTU}
+
+\begin{EXO}[6.\ Calculs (chronométrer : 10 min pour tout)]
+Calculer :\quad (a) $\displaystyle\sum_{k=0}^n2^k$\quad (b) $\displaystyle\sum_{k=2}^n\frac1{3^k}$\quad (c) $\displaystyle\sum_{k=1}^{+\infty}\left(-\frac12\right)^k$\quad
+(d) $\displaystyle\sum_{k=0}^n\frac{2^k}{3^{k+1}}$\quad (e) $\displaystyle\sum_{k=0}^{+\infty}x^{2k}$ pour $|x|<1$\quad (f) $\displaystyle\sum_{k=1}^n\ln\left(1+\frac1k\right)$.
+
+Réécrire avec un indice commençant à $0$ :\quad (g) $\displaystyle\sum_{n=2}^{+\infty}a_{n-2}x^n$\quad (h) $\displaystyle\sum_{n=1}^{+\infty}\frac{x^{n+1}}{n}$.
+\end{EXO}
+
+% ======================================================================
+\notion{8. Rayon de convergence et fonctions développables en série entière}\label{p8}
+
+\begin{DEF}[RAYON DE CONVERGENCE]
+Le rayon $R\in[0,+\infty]$ de $\sum a_nz^n$ est le nombre tel que :
+\begin{itemize}
+\item si $|z|<R$ : la série $\sum a_nz^n$ \textbf{converge absolument} ;
+\item si $|z|>R$ : la série \textbf{diverge grossièrement} (son terme ne tend pas vers $0$) ;
+\item si $|z|=R$ : \textbf{on ne peut rien dire} en général, il faut étudier chaque point à la main.
+\end{itemize}
+\end{DEF}
+
+\begin{PROP}[CE QUE ÇA DONNE POUR $|x|<R$]
+Sur $]-R,R[$, la somme $S(x)=\sum_{n=0}^{+\infty}a_nx^n$ :
+\begin{itemize}
+\item existe (la série converge absolument en chaque point) ;
+\item est \textbf{continue} et même de classe $\mathcal C^\infty$ ;
+\item se \textbf{dérive terme à terme} : $S'(x)=\sum_{n\geq1}na_nx^{n-1}$, avec \textbf{le même rayon} $R$ ;
+\item s'\textbf{intègre terme à terme} : $\int_0^xS(t)\,dt=\sum_{n\geq0}\frac{a_n}{n+1}x^{n+1}$, même rayon ;
+\item a pour coefficients $a_n=\frac{S^{(n)}(0)}{n!}$ (unicité du développement).
+\end{itemize}
+Donc évaluer la série en un $x$ avec $|x|<R$ est \textbf{toujours} légitime : la somme existe, et on peut dériver, intégrer, identifier.
+\end{PROP}
+
+\begin{METH}{Trouver le rayon}
+\begin{enumerate}
+\item \textbf{D'Alembert sur la série numérique} $\sum|a_nx^n|$, pour $x\neq0$ fixé : on calcule
+$\left|\frac{a_{n+1}x^{n+1}}{a_nx^n}\right|\to L|x|$. Si $L|x|<1$, convergence ; si $L|x|>1$, divergence. Donc $R=\frac1L$
+($R=+\infty$ si $L=0$, $R=0$ si $L=+\infty$).
+\item \textbf{Par équivalent} : si $|a_n|\sim|b_n|$, les deux séries ont le même rayon. $\sin\frac1n\sim\frac1n$ : même rayon que $\sum\frac{x^n}n$, $R=1$.
+Et $n^\alpha a_n$ a le même rayon que $a_n$.
+\item \textbf{Avec un point} : si la série converge en $z_0$, alors $R\geq|z_0|$ ; si elle diverge en $z_1$, alors $R\leq|z_1|$.
+\item \textbf{Série lacunaire} ($x^{2n}$, $x^{3n}$\dots) : ne pas appliquer d'Alembert aux coefficients. On l'applique au terme entier
+$\left|\frac{a_{n+1}x^{2n+2}}{a_nx^{2n}}\right|\to L|x|^2$, ou on reconnaît une série géométrique en $x^2$.
+\end{enumerate}
+\end{METH}
+
+\begin{REDAC}[RAYON PAR D'ALEMBERT]
+$\sum\frac{2^n}n x^n$. Pour $x\neq0$ : $\left|\frac{2^{n+1}x^{n+1}/(n+1)}{2^nx^n/n}\right|=\frac{2n}{n+1}|x|\to2|x|$. La série converge absolument si
+$2|x|<1$ et diverge si $2|x|>1$ : $R=\frac12$.
+\end{REDAC}
+
+\begin{DEF}[FONCTION DÉVELOPPABLE EN SÉRIE ENTIÈRE (DSE)]
+$f$ est \textbf{DSE sur $]-r,r[$} s'il existe une série entière $\sum a_nx^n$ de rayon $R\geq r$ telle que
+$f(x)=\sum_{n=0}^{+\infty}a_nx^n$ pour tout $x\in\,]-r,r[$. Autrement dit : $f$ s'écrit comme un « polynôme de degré infini » sur cet intervalle.
+\end{DEF}
+
+\begin{PROP}[LIEN AVEC TAYLOR]
+Si $f$ est DSE, son développement est \textbf{forcément} sa série de Taylor : $a_n=\frac{f^{(n)}(0)}{n!}$. La réciproque est fausse :
+$f(x)=e^{-1/x^2}$ (et $f(0)=0$) est $\mathcal C^\infty$ mais pas DSE.
+\end{PROP}
+
+\begin{METH}{Montrer qu'une fonction est DSE}
+\begin{enumerate}
+\item \textbf{Le plus souvent} : à partir des DSE usuels (table de la fiche Séries entières), par somme, produit, substitution $x\to ax$ ou $x\to x^2$,
+dérivation ou intégration. Toujours donner l'intervalle de validité.
+\item Par une \textbf{équation différentielle} : chercher une solution $\sum a_nx^n$, trouver la récurrence et le rayon, puis conclure par unicité de la
+solution du problème de Cauchy.
+\end{enumerate}
+\end{METH}
+
+\begin{EXO}[7.\ Rayons]
+Rayon de :\quad (a) $\sum n^2x^n$\quad (b) $\sum\frac{2^n}nx^n$\quad (c) $\sum\frac{x^n}{n!}$\quad (d) $\sum n!\,x^n$\quad (e) $\sum\frac{x^{3n}}{8^n}$\quad
+(f) $\sum(\ln n)x^n$\quad (g) $\sum\frac{n+1}{n^2+1}3^nx^n$.
+
+(h) $\sum a_nx^n$ a pour rayon $2$. Que peut-on dire en $x=1$ ? en $x=-3$ ? en $x=2$ ?\quad
+(i) $\sum a_n3^n$ converge et $\sum a_n(-5)^n$ diverge. Que peut-on dire du rayon ?
+\end{EXO}
+
+% ======================================================================
+\clearpage
+\notion{Réponses des exercices}\label{rep}
+{\small
+\sous{1. Limites}
+(a) $0$\quad (b) $0$\quad (c) $+\infty$\quad (d) $+\infty$ ($3^n=o(n!)$)\quad (e) $+\infty$ ($n!=o(n^n)$)\quad (f) $0$\quad (g) $0$\quad (h) $0$\quad
+(i) $+\infty$ : $e^{\sqrt n}/n^{10}=\exp(\sqrt n-10\ln n)$ et $\sqrt n-10\ln n=\sqrt n\left(1-\frac{10\ln n}{\sqrt n}\right)\to+\infty$\quad
+(j) $0$ : $\exp\big((\ln n)^2-n\ln2\big)$ et $(\ln n)^2-n\ln2=-n\left(\ln2-\frac{(\ln n)^2}n\right)\to-\infty$.
+
+\sous{2. Équivalents}
+(a) $\frac1{2n^2}$\quad (b) $-\frac1{6n^3}$\quad (c) $\frac1{2\sqrt n}$\quad (d) $\frac1n$\quad (e) $\frac1n$\quad (f) $\frac1{2n}$\quad (g) $e^x$\quad (h) $x$.
+
+\sous{3. Natures}
+(a) converge : $n^2\cdot ne^{-\sqrt n}=t^6e^{-t}\to0$ avec $t=\sqrt n$, donc $u_n=o\left(\frac1{n^2}\right)$.\quad
+(b) converge : $n^{5/4}u_n=\frac{(\ln n)^2}{n^{1/4}}\to0$, donc $u_n=o\left(\frac1{n^{5/4}}\right)$, Riemann $\frac54>1$.\quad
+(c) diverge : $u_n\sim\frac1n$.\quad
+(d) converge : d'Alembert, $\frac{u_{n+1}}{u_n}=\left(\frac n{n+1}\right)^n\to\frac1e<1$.\quad
+(e) converge : $u_n=\exp\left(n^2\ln\left(1-\frac1n\right)\right)=\exp\left(-n-\frac12+o(1)\right)\sim e^{-1/2}e^{-n}$, géométrique de raison $\frac1e$.\quad
+(f) diverge grossièrement : $u_n\to e\neq0$.\quad
+(g) converge : $\frac{u_{n+1}}{u_n}=\frac3{n+1}\to0<1$ (et $\sum\frac{3^n}{n!}=e^3$).\quad
+(h) converge : $u_n\sim\frac1{n^2}$.
+
+\sous{4. Séries alternées}
+(a) $a_n=\frac{\ln n}n\geq0$, décroissante pour $n\geq3$ (étude de $\frac{\ln x}x$), tend vers $0$ : converge par le CSSA. Pas absolument :
+$\frac{\ln n}n\geq\frac1n$ pour $n\geq3$, et $\sum\frac1n$ diverge.\quad
+(b) $a_n=\frac1{\sqrt n}$ décroît vers $0$ : converge, et $|R_n|\leq\frac1{\sqrt{n+1}}$.\quad
+(c) $|R_N|\leq\frac1{(N+1)^3}\leq10^{-6}$ dès que $N+1\geq100$ : $N=99$ termes suffisent.
+
+\sous{5. Limites de puissances}
+(a) $e^2$\quad (b) $e^{-6}$ (exposant $2n\ln\left(1-\frac3n\right)\sim-6$)\quad (c) $1$ (exposant $\sqrt n\ln\left(1+\frac1n\right)\sim\frac1{\sqrt n}\to0$)\quad
+(d) $1$ ($n^{1/n}=e^{\ln n/n}$ et $\frac{\ln n}n\to0$)\quad (e) $\left(1-\frac1n\right)^{n^2}\sim\frac{e^{-n}}{\sqrt e}$.
+
+\sous{6. Calculs}
+(a) $2^{n+1}-1$\quad (b) $\frac16\left(1-\frac1{3^{n-1}}\right)$\quad (c) $-\frac13$\quad (d) $1-\left(\frac23\right)^{n+1}$\quad (e) $\frac1{1-x^2}$\quad
+(f) télescopage : $\ln\left(1+\frac1k\right)=\ln(k+1)-\ln k$, somme $\ln(n+1)$\quad
+(g) $\sum_{n=0}^{+\infty}a_nx^{n+2}$\quad (h) $\sum_{n=0}^{+\infty}\frac{x^{n+2}}{n+1}$.
+
+\sous{7. Rayons}
+(a) $1$\quad (b) $\frac12$\quad (c) $+\infty$\quad (d) $0$\quad (e) $2$ (série géométrique en $\frac{x^3}8$ : $|x|^3<8$)\quad
+(f) $1$ ($\frac{\ln(n+1)}{\ln n}\to1$)\quad (g) $\frac13$ (coefficient $\sim\frac{3^n}n$)\quad
+(h) en $x=1$ : convergence absolue ($1<2$) ; en $x=-3$ : divergence grossière ($3>2$) ; en $x=2$ : on ne sait pas.\quad
+(i) $3\leq R\leq5$.
+}
+\end{document}

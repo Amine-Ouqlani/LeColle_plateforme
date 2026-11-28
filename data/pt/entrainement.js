@@ -15,6 +15,23 @@ window.LC = window.LC || {};
 
 LC.entrainement = [
   {
+    id: "remed-2026-11-28", type: "devoir", typeTexte: "Fiche de remédiation", theme: "Séries numériques · séries entières · calcul",
+    titre: "Fiche de remédiation – les points à reprendre avant le DS",
+    seance: "Samedi 28 novembre 2026", objectif: "Reprendre un par un les points qui ont bloqué pendant la séance : croissances comparées, petits o et équivalents, méthode pour la nature d'une série, séries alternées, calculs de sommes, rayon de convergence et DSE.",
+    chapitres: ["series", "se"], duree: 120, niveau: 2,
+    origine: "Fiche Le Collé, écrite à partir des difficultés de la séance du 28 novembre",
+    description: "Huit parties, classées par priorité : commencer par les croissances comparées et les équivalents. Chaque partie donne ce qu'il faut savoir, la méthode, une rédaction modèle et des exercices courts. On y trouve notamment la rédaction complète de la question 3.(a) du DS 3 (convergence de $\\int_0^{+\\infty}\\frac{x^2}{e^x-1}dx$ par équivalents et croissances comparées), le critère spécial des séries alternées avec ses trois hypothèses, la limite de $\\left(1+\\frac1n\\right)^n$ et ses variantes, et ce que le rayon de convergence garantit pour $|x|<R$. Faire les exercices sans regarder les réponses (page 8), puis vérifier.",
+    liens: [
+      { label: "Fiche de remédiation", doc: "remed-1128", page: 1 },
+      { label: "Réponses des exercices", doc: "remed-1128", page: 8 }
+    ],
+    ressources: [
+      { label: "Rédaction de la question 3.(a) du DS 3", doc: "remed-1128", page: 3, detail: "intégrale généralisée, équivalents" },
+      { label: "Fiche — Séries numériques", doc: "fiche-series", page: 1, detail: "tout le cours du chapitre" },
+      { label: "Fiche — Séries entières", doc: "fiche-se", page: 1, detail: "rayon, sommes, DSE usuels" }
+    ]
+  },
+  {
     id: "ent-series-2026-11-28", type: "devoir", typeTexte: "DS blanc et séance d'entraînement", theme: "Séries numériques · séries entières · réduction",
     titre: "Préparation au DS du 30 novembre – DS blanc d'après la Banque PT",
     seance: "Samedi 28 novembre 2026", objectif: "Se préparer au DS du lundi 30 novembre (réduction, séries numériques, équations différentielles, un peu de séries entières) sur des questions de concours, dans la forme du DS 3 de l'an dernier.",

@@ -861,5 +861,16 @@ LC.documents = {
     "version": "v1",
     "maj": "2026-11-26",
     "description": "Les corrections détaillées des 33 exercices du TD, dans le même ordre et avec les mêmes numéros."
+  },
+  "remed-1128": {
+    "titre": "Fiche de remédiation — séries, équivalents, croissances comparées",
+    "sousTitre": "Les points à reprendre après la séance du 28 novembre · 8 pages",
+    "type": "devoir",
+    "fichier": "docs/pt/examens/fiche-remediation-2026-11-28.pdf",
+    "source": "docs/pt/sources/fiche-remediation-2026-11-28.tex",
+    "pages": 8,
+    "version": "v1",
+    "maj": "2026-11-28",
+    "description": "Fiche Le Collé ciblée sur les difficultés de la séance du 28 novembre : croissances comparées (p. 1), petits o et équivalents (p. 2), convergence de l'intégrale de la question 3.(a) du DS 3 (p. 3), méthode pour la nature d'une série (p. 4), séries alternées et critère spécial (p. 5), limite de (1+1/n)^n (p. 5), changement d'indice, sommes géométriques et télescopage (p. 6), rayon de convergence et fonctions DSE (p. 7). Exercices courts dans chaque partie, réponses page 8."
   }
 };

@@ -77,6 +77,10 @@ nouveau('dsb-corrige', { titre: "DS blanc — d'après la Banque PT : corrigé L
   fichier: 'docs/pt/examens/ds-blanc-corrige.pdf', source: 'docs/pt/sources/ds-blanc-banque-pt-corrige.tex',
   description: "Corrigé complet du DS blanc : exercice 1 page 1, exercice 2 page 2, exercice 3 page 4, exercice 4 page 5, exercice 5 page 6. Résultats vérifiés par calcul formel." });
 ['dsb-sujet', 'dsb-corrige'].forEach(i => { D[i].maj = '2026-11-26'; });
+nouveau('remed-1128', { titre: 'Fiche de remédiation — séries, équivalents, croissances comparées', sousTitre: 'Les points à reprendre après la séance du 28 novembre · 8 pages', type: 'devoir',
+  fichier: 'docs/pt/examens/fiche-remediation-2026-11-28.pdf', source: 'docs/pt/sources/fiche-remediation-2026-11-28.tex',
+  description: "Fiche Le Collé ciblée sur les difficultés de la séance du 28 novembre : croissances comparées (p. 1), petits o et équivalents (p. 2), convergence de l'intégrale de la question 3.(a) du DS 3 (p. 3), méthode pour la nature d'une série (p. 4), séries alternées et critère spécial (p. 5), limite de (1+1/n)^n (p. 5), changement d'indice, sommes géométriques et télescopage (p. 6), rayon de convergence et fonctions DSE (p. 7). Exercices courts dans chaque partie, réponses page 8." });
+D['remed-1128'].maj = '2026-11-28';
 nouveau('ds3-2025-sujet', { titre: "Sujet de l'année dernière — DS 3 (1er décembre 2025)", sousTitre: 'Énoncé · sous-espaces stables, constante d\'Apéry', type: 'devoir',
   fichier: 'docs/pt/examens/ds3-2025-sujet.pdf', source: 'docs/pt/examens/ds3-2025-sujet.pdf',
   description: "Le devoir surveillé n° 3 de la classe, l'an dernier (lundi 1er décembre 2025). Exercice 1 : plans et droites stables d'un endomorphisme de R³. Exercice 2 : ζ(3), séries, intégrales généralisées, équation différentielle et séries entières." });
