@@ -864,13 +864,13 @@ LC.documents = {
   },
   "remed-1128": {
     "titre": "Fiche de remédiation — séries, équivalents, croissances comparées",
-    "sousTitre": "Les points à reprendre après la séance du 28 novembre · 8 pages",
+    "sousTitre": "Les points à reprendre après la séance du 28 novembre · 9 pages",
     "type": "devoir",
     "fichier": "docs/pt/examens/fiche-remediation-2026-11-28.pdf",
     "source": "docs/pt/sources/fiche-remediation-2026-11-28.tex",
-    "pages": 8,
-    "version": "v1",
+    "pages": 9,
+    "version": "v2",
     "maj": "2026-11-28",
-    "description": "Fiche Le Collé ciblée sur les difficultés de la séance du 28 novembre : croissances comparées (p. 1), petits o et équivalents (p. 2), convergence de l'intégrale de la question 3.(a) du DS 3 (p. 3), méthode pour la nature d'une série (p. 4), séries alternées et critère spécial (p. 5), limite de (1+1/n)^n (p. 5), changement d'indice, sommes géométriques et télescopage (p. 6), rayon de convergence et fonctions DSE (p. 7). Exercices courts dans chaque partie, réponses page 8."
+    "description": "Fiche Le Collé ciblée sur les difficultés de la séance du 28 novembre : croissances comparées (p. 1), petits o et équivalents (p. 2), convergence de l'intégrale de la question 3.(a) du DS 3 (p. 3), méthode pour la nature d'une série (p. 4), séries alternées et critère spécial (p. 5), limite de (1+1/n)^n (p. 5), changement d'indice, sommes géométriques et télescopage (p. 6), rayon de convergence et fonctions DSE (p. 7), équations différentielles : théorème de Cauchy linéaire et raccordement (p. 8). Exercices courts dans chaque partie, réponses page 9."
   }
 };

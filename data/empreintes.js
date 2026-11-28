@@ -24,7 +24,7 @@ LC.empreintes = {
  "docs/pt/examens/ent-red-corrige.pdf": "28693dd619",
  "docs/pt/examens/ent-series-corrige.pdf": "14f2cdf25f",
  "docs/pt/examens/ent-series-sujet.pdf": "8c64d548d3",
- "docs/pt/examens/fiche-remediation-2026-11-28.pdf": "27123402a7",
+ "docs/pt/examens/fiche-remediation-2026-11-28.pdf": "bf20382e2d",
  "docs/pt/fiches/dl3-bases-familles-cycliques.pdf": "1a281e00cd",
  "docs/pt/fiches/fiche-algebre-lineaire.pdf": "7169753f5e",
  "docs/pt/fiches/fiche-courbes-parametrees.pdf": "2dfc64bed6",
